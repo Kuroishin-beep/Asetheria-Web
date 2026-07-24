@@ -1,0 +1,471 @@
+@import "tailwindcss";
+
+/* Manual theme switching — the toggle stamps `data-theme` on <html>. */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+@theme {
+  --font-display: var(--font-cinzel), Georgia, serif;
+  --font-prose: var(--font-garamond), Georgia, serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  /* Obsidian and ash — the dark base. */
+  --color-ink-950: #0a0908;
+  --color-ink-900: #12100e;
+  --color-ink-850: #1a1715;
+  --color-ink-800: #221e1a;
+  --color-ink-700: #322b25;
+  --color-ink-600: #4a4038;
+
+  /* Aged parchment — the light base. */
+  --color-vellum-50: #faf6ee;
+  --color-vellum-100: #f3ecdd;
+  --color-vellum-200: #e8dcc4;
+  --color-vellum-300: #d8c7a5;
+
+  /* Imperial gold. */
+  --color-gold-200: #f0dda8;
+  --color-gold-300: #e2c47c;
+  --color-gold-400: #d4a94e;
+  --color-gold-500: #b98c34;
+  --color-gold-600: #8f6a24;
+
+  /* Verdigris — aged bronze, used for secondary accents. */
+  --color-patina-300: #8fc4b4;
+  --color-patina-400: #5fa38f;
+  --color-patina-500: #3f7d6b;
+
+  /* Imperial purple, for the "secret" state. */
+  --color-tyrian-300: #c99bd4;
+  --color-tyrian-400: #a06bb0;
+  --color-tyrian-500: #7a4a8a;
+
+  --color-blood-400: #c05a4a;
+  --color-blood-500: #9c3f31;
+}
+
+/* ---------------------------------------------------------------------------
+   Semantic tokens. Everything in the app references these, so the two themes
+   stay in sync automatically.
+   --------------------------------------------------------------------------- */
+:root,
+[data-theme="light"] {
+  --bg: var(--color-vellum-50);
+  --bg-raised: #fffdf8;
+  --bg-sunken: var(--color-vellum-100);
+  --border: var(--color-vellum-300);
+  --border-soft: var(--color-vellum-200);
+  --text: #241d14;
+  --text-muted: #6b5c48;
+  --text-faint: #94836c;
+  --accent: var(--color-gold-600);
+  --accent-soft: var(--color-gold-500);
+  --on-accent: #fffdf8;
+  --secret: var(--color-tyrian-500);
+  --link: #7a5a1d;
+  --shadow: 0 1px 2px rgb(36 29 20 / 0.06), 0 8px 24px -12px rgb(36 29 20 / 0.18);
+}
+
+[data-theme="dark"] {
+  --bg: var(--color-ink-950);
+  --bg-raised: var(--color-ink-850);
+  --bg-sunken: var(--color-ink-900);
+  --border: var(--color-ink-700);
+  --border-soft: var(--color-ink-800);
+  --text: #ede4d5;
+  --text-muted: #a2917c;
+  --text-faint: #7a6a58;
+  --accent: var(--color-gold-400);
+  --accent-soft: var(--color-gold-300);
+  --on-accent: var(--color-ink-950);
+  --secret: var(--color-tyrian-300);
+  --link: var(--color-gold-300);
+  --shadow: 0 1px 2px rgb(0 0 0 / 0.4), 0 12px 32px -16px rgb(0 0 0 / 0.7);
+}
+
+* {
+  border-color: var(--border-soft);
+}
+
+html {
+  color-scheme: light;
+  -webkit-text-size-adjust: 100%;
+}
+[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  /* A faint woven texture keeps large dark areas from looking flat. */
+  background-image:
+    radial-gradient(
+      ellipse 80% 50% at 50% -10%,
+      color-mix(in srgb, var(--accent) 7%, transparent),
+      transparent
+    );
+  background-attachment: fixed;
+  min-height: 100dvh;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--accent) 35%, transparent);
+  color: var(--text);
+}
+
+/* Focus rings: visible for keyboard users, invisible for mouse users. */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
+/* Thin, themed scrollbars. */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+*::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 99px;
+  border: 3px solid transparent;
+  background-clip: content-box;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: var(--text-faint);
+  background-clip: content-box;
+}
+
+/* ---------------------------------------------------------------------------
+   Reusable pieces
+   --------------------------------------------------------------------------- */
+
+.font-display {
+  font-family: var(--font-display);
+  letter-spacing: 0.02em;
+}
+
+/* A hairline rule that fades at both ends, used under section headings. */
+.rule-fade {
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--border),
+    var(--border),
+    transparent
+  );
+}
+
+.card {
+  background: var(--bg-raised);
+  border: 1px solid var(--border-soft);
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg-raised);
+  color: var(--text);
+  padding: 0.5rem 0.9rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.2;
+  cursor: pointer;
+  transition:
+    background-color 0.15s,
+    border-color 0.15s,
+    color 0.15s,
+    transform 0.06s;
+  white-space: nowrap;
+}
+.btn:hover:not(:disabled) {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.btn:active:not(:disabled) {
+  transform: translateY(1px);
+}
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--on-accent);
+  font-weight: 600;
+}
+.btn-primary:hover:not(:disabled) {
+  background: var(--accent-soft);
+  border-color: var(--accent-soft);
+  color: var(--on-accent);
+}
+
+.btn-danger:hover:not(:disabled) {
+  border-color: var(--color-blood-400);
+  color: var(--color-blood-400);
+}
+
+.input,
+.textarea,
+.select {
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.55rem 0.75rem;
+  color: var(--text);
+  font-size: 0.9375rem;
+  font-family: inherit;
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s;
+}
+.input:focus,
+.textarea:focus,
+.select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 18%, transparent);
+}
+.input::placeholder,
+.textarea::placeholder {
+  color: var(--text-faint);
+}
+.textarea {
+  resize: vertical;
+  min-height: 7rem;
+  line-height: 1.6;
+}
+
+.label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-muted);
+  margin-bottom: 0.35rem;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  border: 1px solid var(--border);
+  background: var(--bg-sunken);
+  border-radius: 99px;
+  padding: 0.15rem 0.6rem;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+a.chip:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.chip-secret {
+  border-color: color-mix(in srgb, var(--secret) 45%, transparent);
+  color: var(--secret);
+  background: color-mix(in srgb, var(--secret) 10%, transparent);
+}
+
+/* ---------------------------------------------------------------------------
+   Rendered markdown
+   --------------------------------------------------------------------------- */
+.prose-codex {
+  font-family: var(--font-prose);
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  color: var(--text);
+  overflow-wrap: break-word;
+}
+.prose-codex > * + * {
+  margin-top: 1em;
+}
+.prose-codex h1,
+.prose-codex h2,
+.prose-codex h3,
+.prose-codex h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.25;
+  margin-top: 1.8em;
+  margin-bottom: 0.6em;
+  color: var(--text);
+}
+.prose-codex h1 {
+  font-size: 1.7rem;
+}
+.prose-codex h2 {
+  font-size: 1.4rem;
+  padding-bottom: 0.3em;
+  border-bottom: 1px solid var(--border-soft);
+}
+.prose-codex h3 {
+  font-size: 1.15rem;
+  color: var(--accent);
+}
+.prose-codex h4 {
+  font-size: 1rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.prose-codex a {
+  color: var(--link);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-thickness: 1px;
+  text-decoration-color: color-mix(in srgb, var(--link) 40%, transparent);
+}
+.prose-codex a:hover {
+  text-decoration-color: var(--link);
+}
+.prose-codex strong {
+  font-weight: 700;
+  color: var(--text);
+}
+.prose-codex em {
+  font-style: italic;
+}
+.prose-codex ul,
+.prose-codex ol {
+  padding-left: 1.5em;
+}
+.prose-codex ul {
+  list-style: disc;
+}
+.prose-codex ol {
+  list-style: decimal;
+}
+.prose-codex li + li {
+  margin-top: 0.35em;
+}
+.prose-codex li > ul,
+.prose-codex li > ol {
+  margin-top: 0.35em;
+}
+.prose-codex blockquote {
+  border-left: 3px solid var(--accent);
+  padding: 0.25em 0 0.25em 1.1em;
+  color: var(--text-muted);
+  font-style: italic;
+}
+.prose-codex hr {
+  border: 0;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--border),
+    transparent
+  );
+  margin: 2em 0;
+}
+.prose-codex code {
+  font-family: ui-monospace, "Cascadia Code", Menlo, monospace;
+  font-size: 0.875em;
+  background: var(--bg-sunken);
+  border: 1px solid var(--border-soft);
+  border-radius: 4px;
+  padding: 0.1em 0.35em;
+}
+.prose-codex pre {
+  background: var(--bg-sunken);
+  border: 1px solid var(--border-soft);
+  border-radius: 8px;
+  padding: 1em;
+  overflow-x: auto;
+}
+.prose-codex pre code {
+  background: none;
+  border: 0;
+  padding: 0;
+  font-size: 0.875rem;
+}
+/* Wide tables scroll inside their own box rather than the page. */
+.prose-codex .table-scroll {
+  overflow-x: auto;
+  border: 1px solid var(--border-soft);
+  border-radius: 8px;
+}
+.prose-codex table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+}
+.prose-codex th,
+.prose-codex td {
+  border-bottom: 1px solid var(--border-soft);
+  padding: 0.55rem 0.8rem;
+  text-align: left;
+  vertical-align: top;
+}
+.prose-codex th {
+  background: var(--bg-sunken);
+  font-weight: 600;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+}
+.prose-codex tr:last-child td {
+  border-bottom: 0;
+}
+.prose-codex mark {
+  background: color-mix(in srgb, var(--accent) 30%, transparent);
+  color: var(--text);
+  border-radius: 2px;
+  padding: 0 0.15em;
+}
+
+/* Entry pages become two columns once there's room for a connections rail. */
+@media (min-width: 1100px) {
+  .entry-layout {
+    grid-template-columns: minmax(0, 1fr) 21rem !important;
+    gap: 2.5rem !important;
+  }
+}
+
+/* A wiki-link pointing at a page that doesn't exist yet. */
+.wikilink-missing {
+  color: var(--text-faint);
+  text-decoration: underline dotted;
+  cursor: help;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: #fff;
+    color: #000;
+  }
+}

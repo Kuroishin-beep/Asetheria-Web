@@ -5,24 +5,16 @@ import {
   timestamp,
   uuid,
   jsonb,
-  boolean,
   integer,
   index,
   uniqueIndex,
   pgEnum,
-  customType,
 } from "drizzle-orm/pg-core";
 
-/**
- * Postgres `tsvector`, kept in sync by a generated column (see drizzle/0001_fts.sql).
- * Drizzle has no first-class tsvector type, so we declare it here to be able to
- * index and query it.
- */
-const tsvector = customType<{ data: string }>({
-  dataType() {
-    return "tsvector";
-  },
-});
+// Note: full-text search is implemented with a generated `search_vector`
+// tsvector column plus GIN/trigram indexes. Those are created by
+// `scripts/sql/setup.sql` rather than declared here, because generated columns
+// and `gin_trgm_ops` are not expressible in Drizzle's push workflow.
 
 // ---------------------------------------------------------------------------
 // Enums
@@ -130,8 +122,6 @@ export const entries = pgTable(
     updatedAt: timestamp("updated_at", { withTimezone: true })
       .notNull()
       .defaultNow(),
-    /** Maintained by a generated column; see the FTS migration. */
-    searchVector: tsvector("search_vector"),
   },
   (t) => [
     uniqueIndex("entries_slug_idx").on(t.slug),
@@ -140,9 +130,6 @@ export const entries = pgTable(
     index("entries_name_idx").on(t.name),
     index("entries_parent_idx").on(t.parentId),
     index("entries_tags_idx").using("gin", t.tags),
-    index("entries_search_idx").using("gin", t.searchVector),
-    // Powers fast fuzzy/prefix matching in the command palette.
-    index("entries_name_trgm_idx").using("gin", sql`${t.name} gin_trgm_ops`),
   ],
 );
 
