@@ -1,19 +1,65 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { getCurrentUser } from "@/lib/auth";
-import { countByKind, getRecentlyUpdated, listAllTags } from "@/lib/entries";
-import { KINDS } from "@/lib/kinds";
+import {
+  countByKind,
+  getRecentlyUpdated,
+  listAllTags,
+  listEntriesBySlugs,
+  listLocationsByTier,
+  listLoreWithContent,
+} from "@/lib/entries";
+import { KINDS, STANDING_EMPIRE_SLUGS } from "@/lib/kinds";
 import { CardGrid, EntryCard, PageHeading } from "@/components/entry-card";
+
+/** Heading with an optional "see all" link, used by the front-page sections. */
+function SectionHeading({
+  id,
+  title,
+  href,
+  more,
+}: {
+  id: string;
+  title: string;
+  href?: string;
+  more?: string;
+}) {
+  return (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "baseline",
+        justifyContent: "space-between",
+        gap: "1rem",
+        flexWrap: "wrap",
+      }}
+    >
+      <h2 id={id} className="label">
+        {title}
+      </h2>
+      {href && (
+        <Link href={href} style={{ fontSize: "0.8125rem" }}>
+          {more} →
+        </Link>
+      )}
+    </div>
+  );
+}
 
 export default async function DashboardPage() {
   const user = await getCurrentUser();
   if (!user) redirect("/login");
 
-  const [counts, recent, tags] = await Promise.all([
-    countByKind(user.role),
-    getRecentlyUpdated(user.role, 6),
-    listAllTags(user.role),
-  ]);
+  const [counts, recent, tags, empires, lore, majorCities, minorCities] =
+    await Promise.all([
+      countByKind(user.role),
+      getRecentlyUpdated(user.role, 6),
+      listAllTags(user.role),
+      listEntriesBySlugs(user.role, STANDING_EMPIRE_SLUGS),
+      listLoreWithContent(user.role, 6),
+      listLocationsByTier(user.role, "major"),
+      listLocationsByTier(user.role, "minor"),
+    ]);
 
   const total = Object.values(counts).reduce((a, b) => a + (b ?? 0), 0);
   const populated = KINDS.filter((k) => (counts[k.kind] ?? 0) > 0);
@@ -28,6 +74,123 @@ export default async function DashboardPage() {
             : `${total} entries the party has uncovered.`
         }
       />
+
+      {/* ---- The three standing empires ---- */}
+      {empires.length > 0 && (
+        <section
+          aria-labelledby="empires-heading"
+          style={{ marginBottom: "2.5rem" }}
+        >
+          <SectionHeading
+            id="empires-heading"
+            title="The Three Empires"
+            href="/codex/empires"
+            more="All empires"
+          />
+          <CardGrid>
+            {empires.map((e) => (
+              <EntryCard
+                key={e.id}
+                slug={e.slug}
+                name={e.name}
+                kind={e.kind}
+                summary={e.summary}
+                tags={e.tags}
+                visibility={e.visibility}
+              />
+            ))}
+          </CardGrid>
+        </section>
+      )}
+
+      {/* ---- Lore of the Continent ---- */}
+      {lore.length > 0 && (
+        <section
+          aria-labelledby="lore-heading"
+          style={{ marginBottom: "2.5rem" }}
+        >
+          <SectionHeading
+            id="lore-heading"
+            title="Lore of the Continent"
+            href="/codex/lore"
+            more="All lore"
+          />
+          <CardGrid>
+            {lore.map((e) => (
+              <EntryCard
+                key={e.id}
+                slug={e.slug}
+                name={e.name}
+                kind={e.kind}
+                summary={e.summary}
+                tags={e.tags}
+                visibility={e.visibility}
+              />
+            ))}
+          </CardGrid>
+        </section>
+      )}
+
+      {/* ---- Major cities ---- */}
+      {majorCities.length > 0 && (
+        <section
+          aria-labelledby="major-heading"
+          style={{ marginBottom: "2.5rem" }}
+        >
+          <SectionHeading
+            id="major-heading"
+            title={`Major Cities (${majorCities.length})`}
+          />
+          <CardGrid>
+            {majorCities.map((e) => (
+              <EntryCard
+                key={e.id}
+                slug={e.slug}
+                name={e.name}
+                kind={e.kind}
+                summary={e.summary}
+                tags={e.tags}
+                visibility={e.visibility}
+              />
+            ))}
+          </CardGrid>
+        </section>
+      )}
+
+      {/* ---- Everything else on the map ---- */}
+      {minorCities.length > 0 && (
+        <section
+          aria-labelledby="minor-heading"
+          style={{ marginBottom: "2.5rem" }}
+        >
+          <SectionHeading
+            id="minor-heading"
+            title="Minor Cities & Towns"
+            href="/codex/locations"
+            more="All locations"
+          />
+          <CardGrid>
+            {minorCities.slice(0, 12).map((e) => (
+              <EntryCard
+                key={e.id}
+                slug={e.slug}
+                name={e.name}
+                kind={e.kind}
+                summary={e.summary}
+                tags={e.tags}
+                visibility={e.visibility}
+              />
+            ))}
+          </CardGrid>
+          {minorCities.length > 12 && (
+            <p style={{ marginTop: "0.75rem", fontSize: "0.8125rem" }}>
+              <Link href="/codex/locations">
+                {minorCities.length - 12} more locations →
+              </Link>
+            </p>
+          )}
+        </section>
+      )}
 
       {/* ---- Section tiles ---- */}
       <section aria-labelledby="sections-heading" style={{ marginBottom: "2.5rem" }}>

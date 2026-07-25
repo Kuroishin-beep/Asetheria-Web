@@ -95,6 +95,19 @@ function normalizeName(s: string): string {
 // Kind classification
 // ---------------------------------------------------------------------------
 
+/**
+ * Seats of the three standing empires sit directly in the "The 3 Empires"
+ * folder; everything else in the export is a lesser settlement or a wild place.
+ * This only seeds the value — the field is editable per entry afterwards, and
+ * `seed.ts` preserves whatever the app has set.
+ */
+function locationTier(rel: string): "major" | "minor" {
+  const dir = path.dirname(demojibake(rel)).split(/[\\/]/);
+  return stripNotionId(dir[dir.length - 1] ?? "") === "The 3 Empires"
+    ? "major"
+    : "minor";
+}
+
 /** Evaluated in order; first match wins, so put specific paths before general. */
 const KIND_RULES: [RegExp, Kind][] = [
   [/Pantheons[\\/].*(Gods|Titans|Ascended)[\\/]/i, "deity"],
@@ -484,6 +497,7 @@ function main() {
     }
 
     const kind = classify(rel, tags, fields);
+    if (kind === "location") fields.tier = locationTier(rel);
     const relNoExt = demojibake(
       path.join(path.dirname(rel), stripNotionId(path.basename(file))),
     );
@@ -631,6 +645,12 @@ function main() {
       const t = e.tags.find((x) => /Invictian|Hellenorian|Acheaorian|Titan|Ascended|Outer/i.test(x));
       if (t) e.fields.pantheon = t.replace(/\s*(Greater|Lesser)?\s*God$/i, "").trim();
     }
+  }
+
+  // Locations created from a CSV row never went through the markdown path, so
+  // backfill the default here rather than leaving the front page to guess.
+  for (const e of entries) {
+    if (e.kind === "location" && !e.fields.tier) e.fields.tier = "minor";
   }
 
   entries.sort((a, b) => a.kind.localeCompare(b.kind) || a.name.localeCompare(b.name));

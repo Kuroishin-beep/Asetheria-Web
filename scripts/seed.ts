@@ -186,7 +186,12 @@ async function seedEntries() {
   };
 
   const existing = await db
-    .select({ id: entries.id, slug: entries.slug, body: entries.body })
+    .select({
+      id: entries.id,
+      slug: entries.slug,
+      body: entries.body,
+      fields: entries.fields,
+    })
     .from(entries);
   const bySlug = new Map(existing.map((e) => [e.slug, e]));
 
@@ -196,7 +201,15 @@ async function seedEntries() {
   for (const e of payload.entries) {
     const found = bySlug.get(e.slug);
     if (found) {
-      // Never clobber prose you have written in the app: only fill a gap.
+      // Never clobber prose you have written in the app: only fill a gap. The
+      // same rule applies per-property — an imported value fills a field that is
+      // missing or blank, but anything edited in the app wins. Without this a
+      // re-import would silently revert edits such as a location's tier.
+      const mergedFields = { ...e.fields };
+      for (const [key, value] of Object.entries(found.fields ?? {})) {
+        if (typeof value === "string" && value.trim()) mergedFields[key] = value;
+      }
+
       await db
         .update(entries)
         .set({
@@ -204,7 +217,7 @@ async function seedEntries() {
           kind: e.kind,
           summary: e.summary,
           body: found.body?.trim() ? found.body : e.body,
-          fields: e.fields,
+          fields: mergedFields,
           tags: e.tags,
           sourcePath: e.sourcePath,
         })
@@ -225,7 +238,12 @@ async function seedEntries() {
           visibility: e.visibility,
           sourcePath: e.sourcePath,
         })
-        .returning({ id: entries.id, slug: entries.slug, body: entries.body });
+        .returning({
+          id: entries.id,
+          slug: entries.slug,
+          body: entries.body,
+          fields: entries.fields,
+        });
       bySlug.set(row.slug, row);
       created++;
     }

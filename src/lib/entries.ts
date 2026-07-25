@@ -1,5 +1,5 @@
 import "server-only";
-import { and, asc, desc, eq, isNull, isNotNull, ne, or, sql, count } from "drizzle-orm";
+import { and, asc, desc, eq, inArray, isNull, isNotNull, ne, or, sql, count } from "drizzle-orm";
 import { db } from "@/db";
 import { entries, links, revisions, type Entry, type EntryKind, type UserRole } from "@/db/schema";
 import { redactForPlayer } from "@/lib/auth";
@@ -83,6 +83,77 @@ export async function listEntries(
     .orderBy(asc(entries.name))
     .limit(opts.limit ?? PAGE_SIZE)
     .offset(opts.offset ?? 0);
+}
+
+/**
+ * Locations split by the `tier` seeded from the Notion hierarchy. Anything not
+ * explicitly `major` counts as minor, so a location that predates the field —
+ * or one whose tier was cleared in the editor — still appears somewhere rather
+ * than dropping off the front page entirely.
+ */
+export async function listLocationsByTier(
+  role: UserRole,
+  tier: "major" | "minor",
+  limit = PAGE_SIZE,
+): Promise<EntryListItem[]> {
+  const conditions = [
+    liveOnly(),
+    readable(role),
+    eq(entries.kind, "location"),
+    tier === "major"
+      ? sql`lower(${entries.fields}->>'tier') = 'major'`
+      : sql`lower(coalesce(${entries.fields}->>'tier', 'minor')) <> 'major'`,
+  ].filter(Boolean);
+
+  return db
+    .select(listColumns)
+    .from(entries)
+    .where(and(...(conditions as any[])))
+    .orderBy(asc(entries.name))
+    .limit(limit);
+}
+
+/** Specific entries by slug, returned in the order the slugs were given. */
+export async function listEntriesBySlugs(
+  role: UserRole,
+  slugs: readonly string[],
+): Promise<EntryListItem[]> {
+  if (slugs.length === 0) return [];
+  const conditions = [
+    liveOnly(),
+    readable(role),
+    inArray(entries.slug, [...slugs]),
+  ].filter(Boolean);
+
+  const rows = await db
+    .select(listColumns)
+    .from(entries)
+    .where(and(...(conditions as any[])));
+
+  const order = new Map(slugs.map((s, i) => [s, i]));
+  return rows.sort(
+    (a, b) => (order.get(a.slug) ?? 0) - (order.get(b.slug) ?? 0),
+  );
+}
+
+/** Lore pages that actually carry prose — the empty Notion stubs are noise. */
+export async function listLoreWithContent(
+  role: UserRole,
+  limit = 8,
+): Promise<EntryListItem[]> {
+  const conditions = [
+    liveOnly(),
+    readable(role),
+    eq(entries.kind, "lore"),
+    sql`length(trim(coalesce(${entries.body}, ''))) > 0`,
+  ].filter(Boolean);
+
+  return db
+    .select(listColumns)
+    .from(entries)
+    .where(and(...(conditions as any[])))
+    .orderBy(desc(sql`length(${entries.body})`), asc(entries.name))
+    .limit(limit);
 }
 
 /** Total matching `opts`, so a listing can page without silently truncating. */

@@ -30,6 +30,44 @@ export type KindDef = {
  */
 export const KINDS: KindDef[] = [
   {
+    kind: "empire",
+    label: "Empires",
+    singular: "Empire",
+    slug: "empires",
+    icon: "👑",
+    blurb: "The three great powers and the kingdoms that came before.",
+    fields: [
+      { key: "capital", label: "Capital" },
+      { key: "ruler", label: "Ruler" },
+      { key: "motto", label: "Motto" },
+      { key: "status", label: "Status", placeholder: "Standing / Fallen" },
+    ],
+  },
+  {
+    kind: "lore",
+    label: "Lore",
+    singular: "Lore Page",
+    slug: "lore",
+    icon: "📜",
+    blurb: "Histories, myths, and the shape of the world.",
+    fields: [{ key: "era", label: "Era" }],
+  },
+  {
+    kind: "location",
+    label: "Locations",
+    singular: "Location",
+    slug: "locations",
+    icon: "⛰",
+    blurb: "Cities, ruins, wilds, and the waters between them.",
+    fields: [
+      { key: "tier", label: "Tier", placeholder: "major or minor" },
+      { key: "type", label: "Type", placeholder: "City, Valley, Mountain Range…" },
+      { key: "region", label: "Region" },
+      { key: "ruler", label: "Ruler" },
+      { key: "population", label: "Population" },
+    ],
+  },
+  {
     kind: "deity",
     label: "Deities",
     singular: "Deity",
@@ -84,34 +122,6 @@ export const KINDS: KindDef[] = [
       { key: "alignment", label: "Alignment" },
       { key: "location", label: "Seat of Power" },
       { key: "currentGoal", label: "Current Goal", type: "textarea" },
-    ],
-  },
-  {
-    kind: "location",
-    label: "Locations",
-    singular: "Location",
-    slug: "locations",
-    icon: "⛰",
-    blurb: "Cities, ruins, wilds, and the waters between them.",
-    fields: [
-      { key: "type", label: "Type", placeholder: "City, Valley, Mountain Range…" },
-      { key: "region", label: "Region" },
-      { key: "ruler", label: "Ruler" },
-      { key: "population", label: "Population" },
-    ],
-  },
-  {
-    kind: "empire",
-    label: "Empires",
-    singular: "Empire",
-    slug: "empires",
-    icon: "👑",
-    blurb: "The three great powers and the kingdoms that came before.",
-    fields: [
-      { key: "capital", label: "Capital" },
-      { key: "ruler", label: "Ruler" },
-      { key: "motto", label: "Motto" },
-      { key: "status", label: "Status", placeholder: "Standing / Fallen" },
     ],
   },
   {
@@ -203,15 +213,6 @@ export const KINDS: KindDef[] = [
     ],
   },
   {
-    kind: "lore",
-    label: "Lore",
-    singular: "Lore Page",
-    slug: "lore",
-    icon: "📜",
-    blurb: "Histories, myths, and the shape of the world.",
-    fields: [{ key: "era", label: "Era" }],
-  },
-  {
     kind: "quest",
     label: "Quests",
     singular: "Quest",
@@ -266,6 +267,16 @@ export const KINDS: KindDef[] = [
     fields: [],
   },
 ];
+
+/**
+ * The three standing powers, in the order the front page leads with them. The
+ * other three `empire` entries are the kingdoms that came before.
+ */
+export const STANDING_EMPIRE_SLUGS = [
+  "imperium-invicta",
+  "hellenoria",
+  "acheaoria",
+] as const;
 
 export const KIND_BY_KEY: Record<EntryKind, KindDef> = Object.fromEntries(
   KINDS.map((k) => [k.kind, k]),
