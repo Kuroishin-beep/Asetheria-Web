@@ -191,6 +191,7 @@ async function seedEntries() {
       slug: entries.slug,
       body: entries.body,
       fields: entries.fields,
+      tags: entries.tags,
     })
     .from(entries);
   const bySlug = new Map(existing.map((e) => [e.slug, e]));
@@ -218,7 +219,11 @@ async function seedEntries() {
           summary: e.summary,
           body: found.body?.trim() ? found.body : e.body,
           fields: mergedFields,
-          tags: e.tags,
+          // Tags follow the same rule: they are curated in the app (derived
+          // from an entry's own properties, then hand-corrected), and the
+          // export carries none for most kinds. Replacing them on every seed
+          // would throw that away.
+          tags: found.tags?.length ? found.tags : e.tags,
           sourcePath: e.sourcePath,
         })
         .where(eq(entries.id, found.id));
@@ -243,6 +248,7 @@ async function seedEntries() {
           slug: entries.slug,
           body: entries.body,
           fields: entries.fields,
+          tags: entries.tags,
         });
       bySlug.set(row.slug, row);
       created++;

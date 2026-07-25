@@ -12,6 +12,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { deriveLocationTier } from "../src/lib/locations";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO = path.resolve(__dirname, "..");
@@ -96,16 +97,14 @@ function normalizeName(s: string): string {
 // ---------------------------------------------------------------------------
 
 /**
- * Seats of the three standing empires sit directly in the "The 3 Empires"
- * folder; everything else in the export is a lesser settlement or a wild place.
+ * The Notion database already says what every settlement is through its tags
+ * ("Invictian City", "Hellenorian Town", "Island Village"), so the tier comes
+ * from those rather than from where the page happens to sit in the folder tree.
  * This only seeds the value — the field is editable per entry afterwards, and
  * `seed.ts` preserves whatever the app has set.
  */
-function locationTier(rel: string): "major" | "minor" {
-  const dir = path.dirname(demojibake(rel)).split(/[\\/]/);
-  return stripNotionId(dir[dir.length - 1] ?? "") === "The 3 Empires"
-    ? "major"
-    : "minor";
+function locationTier(tags: string[], name: string): string | null {
+  return deriveLocationTier(tags, name);
 }
 
 /** Evaluated in order; first match wins, so put specific paths before general. */
@@ -497,7 +496,10 @@ function main() {
     }
 
     const kind = classify(rel, tags, fields);
-    if (kind === "location") fields.tier = locationTier(rel);
+    if (kind === "location") {
+      const t = locationTier(tags, name);
+      if (t) fields.tier = t;
+    }
     const relNoExt = demojibake(
       path.join(path.dirname(rel), stripNotionId(path.basename(file))),
     );
@@ -647,10 +649,14 @@ function main() {
     }
   }
 
-  // Locations created from a CSV row never went through the markdown path, so
-  // backfill the default here rather than leaving the front page to guess.
+  // Locations created from a CSV row never went through the markdown path, and
+  // a merge can add the tags after the tier was first computed, so settle the
+  // tier once here against the final tag set.
   for (const e of entries) {
-    if (e.kind === "location" && !e.fields.tier) e.fields.tier = "minor";
+    if (e.kind !== "location") continue;
+    const t = deriveLocationTier(e.tags, e.name);
+    if (t) e.fields.tier = t;
+    else delete e.fields.tier;
   }
 
   entries.sort((a, b) => a.kind.localeCompare(b.kind) || a.name.localeCompare(b.name));

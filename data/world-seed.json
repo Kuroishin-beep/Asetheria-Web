@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-25T04:08:55.454Z",
+  "generatedAt": "2026-07-25T05:49:50.127Z",
   "count": 482,
   "byKind": {
     "deity": 186,
@@ -4205,7 +4205,7 @@
       "body": "",
       "dmNotes": "",
       "fields": {
-        "tier": "minor"
+        "tier": "wild"
       },
       "tags": [
         "Seas"
@@ -4222,7 +4222,7 @@
       "body": "",
       "dmNotes": "",
       "fields": {
-        "tier": "minor"
+        "tier": "city"
       },
       "tags": [
         "Hellenorian City"
@@ -4238,9 +4238,7 @@
       "summary": "",
       "body": "",
       "dmNotes": "",
-      "fields": {
-        "tier": "major"
-      },
+      "fields": {},
       "tags": [],
       "visibility": "public",
       "sourcePath": "The Continent/The 3 Empires/Aeterna 11ff1754c40380439d42ebcb0f2db445.md",
@@ -4254,7 +4252,7 @@
       "body": "",
       "dmNotes": "",
       "fields": {
-        "tier": "minor"
+        "tier": "capital"
       },
       "tags": [
         "Capital",
@@ -4271,9 +4269,7 @@
       "summary": "",
       "body": "",
       "dmNotes": "",
-      "fields": {
-        "tier": "minor"
-      },
+      "fields": {},
       "tags": [],
       "visibility": "public",
       "sourcePath": "Asetherian Database/after this to delete for players 114f1754c4038065b1cec733a12f54d7.md",
@@ -4287,7 +4283,7 @@
       "body": "",
       "dmNotes": "",
       "fields": {
-        "tier": "minor"
+        "tier": "village"
       },
       "tags": [
         "Araucaria Village"
@@ -4304,7 +4300,7 @@
       "body": "",
       "dmNotes": "",
       "fields": {
-        "tier": "minor"
+        "tier": "site"
       },
       "tags": [
         "Library"
@@ -4321,7 +4317,7 @@
       "body": "",
       "dmNotes": "",
       "fields": {
-        "tier": "minor"
+        "tier": "site"
       },
       "tags": [
         "Temple"
@@ -4337,9 +4333,7 @@
       "summary": "",
       "body": "",
       "dmNotes": "",
-      "fields": {
-        "tier": "major"
-      },
+      "fields": {},
       "tags": [],
       "visibility": "public",
       "sourcePath": "The Continent/The 3 Empires/Anticasta 1d8f1754c403809f935aeff523d80124.md",
@@ -4353,7 +4347,7 @@
       "body": "",
       "dmNotes": "",
       "fields": {
-        "tier": "minor"
+        "tier": "town"
       },
       "tags": [
         "Invictian Town"
@@ -4370,7 +4364,7 @@
       "body": "",
       "dmNotes": "",
       "fields": {
-        "tier": "minor"
+        "tier": "town"
       },
       "tags": [
         "Hellenorian Town"
@@ -4387,7 +4381,7 @@
       "body": "",
       "dmNotes": "",
       "fields": {
-        "tier": "minor"
+        "tier": "town"
       },
       "tags": [
         "Hellenorian Town"
@@ -4403,9 +4397,7 @@
       "summary": "",
       "body": "",
       "dmNotes": "",
-      "fields": {
-        "tier": "major"
-      },
+      "fields": {},
       "tags": [],
       "visibility": "public",
       "sourcePath": "The Continent/The 3 Empires/Atarabad 1d8f1754c40380ac9da0f9a2ea7516c1.md",
@@ -4419,7 +4411,7 @@
       "body": "",
       "dmNotes": "",
       "fields": {
-        "tier": "minor"
+        "tier": "city"
       },
       "tags": [
         "Acheaorian City"
@@ -4436,7 +4428,7 @@
       "body": "",
       "dmNotes": "",
       "fields": {
-        "tier": "minor"
+        "tier": "town"
       },
       "tags": [
         "Hellenorian Town"
@@ -4453,7 +4445,7 @@
       "body": "",
       "dmNotes": "",
       "fields": {
-        "tier": "minor"
+        "tier": "village"
       },
       "tags": [
         "Island Village"
@@ -4470,7 +4462,7 @@
       "body": "",
       "dmNotes": "",
       "fields": {
-        "tier": "minor"
+        "tier": "village"
       },
       "tags": [
         "Island Village"
@@ -4487,7 +4479,7 @@
       "body": "",
       "dmNotes": "",
       "fields": {
-        "tier": "minor"
+        "tier": "wild"
       },
       "tags": [
         "Valley"
@@ -4503,9 +4495,7 @@
       "summary": "",
       "body": "",
       "dmNotes": "",
-      "fields": {
-        "tier": "major"
-      },
+      "fields": {},
       "tags": [],
       "visibility": "public",
       "sourcePath": "The Continent/The 3 Empires/Carianaea 1d8f1754c40380a7b49be665a30dfc53.md",
@@ -4519,7 +4509,7 @@
       "body": "",
       "dmNotes": "",
       "fields": {
-        "tier": "minor"
+        "tier": "town"
       },
       "tags": [
         "Hellenorian Town"
@@ -4536,7 +4526,7 @@
       "body": "",
       "dmNotes": "",
       "fields": {
-        "tier": "minor"
+        "tier": "city"
       },
       "tags": [
         "Hellenorian City"
@@ -4553,7 +4543,7 @@
       "body": "# **Dasht a Khaliq** *(The Divine Wastes)*\n\n**Biome**: High fantasy desert wasteland with divine-tainted zones\n\n**Continent**: Eastern third of Asetheria\n\n**Dominant Power**: **Acheaoria Empire** (Ancient Persian-inspired)\n\n**Primary Threats**: Environmental hazards, corrupted beings, undead, desert raiders, and spirit-beasts\n\n---\n\n## 💡 GM Overview\n\n**Use this desert as:**\n\n- A crucible for survival-based campaigns\n- A high-stakes setting for political intrigue between empires\n- A divine or cosmic horror-infused sandbox\n- A gateway into ancient ruins and forgotten god-corpses\n\n**Core Themes**:\n\n☀ Divine aftermaths and corruption\n\n🌵 Harsh terrain and survival\n\n⚔ Imperial politics vs creeping entropy\n\n🌀 Hidden magic beneath ancient sands\n\n---\n\n## 🗺️ Regional Breakdown for GMs\n\n### 🜁 REGION I: **Zahr al-Mawt** – *“Blossom of Death”*\n\n**(Northeast - Border of the Dead Realms)**\n\n- **Primary Tone**: Survival horror / Cosmic corruption\n- **Biome**: Tainted dunes, dark sands, rotting winds\n- **Environmental Effect**: *All healing spells halve their effectiveness unless divine (e.g., from gods of life or purity)*\n\n### 🔥 Threats\n\n- **Rot-Beasts**: Mutated animals and divine leftovers\n- **Death-Marches**: Undead processions heading aimlessly into the dunes\n- **Blight Titans**: Semi-sentient decaying god-husks\n- **Blasphemous Weather**: Acid winds, bone storms, voice-tempests (whispering storms)\n\n### 🧭 Adventure Hooks\n\n- A cult seeks to awaken a forgotten deity buried in the sands\n- An imperial fort has gone dark — overrun or converted?\n- A god’s ribcage now serves as the lair of a crystal dracolich\n\n### 🎲 Encounter Types\n\n| Encounter | CR Range | Notes |\n| --- | --- | --- |\n| Rot-Lions | 3–5 | Pack hunters, bone-covered beasts |\n| Titanspawn | 7–10 | Aberrant giants with memory echo attacks |\n| Wandering Legion | Variable | Undead soldiers in full Acheaorian gear |\n\n---\n\n### 🜂 REGION II: **Ruhaniin Vale** – *“Spirits’ Rest”*\n\n**(Central / Eastern – Civilized Desert Core)**\n\n- **Primary Tone**: Political intrigue / survival civilization\n- **Biome**: Semi-arid zones, oases, underground cities\n- **Environmental Effect**: *Random mirage effects trigger every long rest without a Sahari guide*\n\n### 🏛 Points of Interest\n\n- **Kharnesh** – Capital city atop the Eye of Havar, layered, vertical city with water-based caste politics\n- **The Under-Sands** – Series of sunken towns connected by tunnels and whispering passageways\n- **Vault of Silt** – Magical aqueduct hub and leyline stabilizer guarded by mages\n\n### 🧭 Adventure Hooks\n\n- Tensions rise between water-rich and water-starved towns: spark of civil conflict\n- A noble house has secretly made a pact with desert elementals to overthrow the ruling Shah\n- An underground city has broken contact – recent tremors awakened something beneath\n\n### 🎲 Encounter Types\n\n| Encounter | CR Range | Notes |\n| --- | --- | --- |\n| Sand Raiders (Sandsworn) | 2–6 | Ride dune-serpents, use mirage illusions |\n| Mirage Beasts | 5–8 | Phantasmal predators that only become real when seen |\n| Political intrigue | N/A | Espionage, assassination attempts, court trials |\n\n---\n\n### 🜃 REGION III: **Khamsin’s Reach** – *“Breath of the Desert”*\n\n**(Southeast – Wild Frontier)**\n\n- **Primary Tone**: Frontier mystery / expansion tension\n- **Biome**: Rocky desert, petrified forests, creeping sands\n- **Environmental Effect**: *Every dawn roll 1d6 – on a 1, a new 10-mile stretch is swallowed by sand*\n\n### 🏛 Points of Interest\n\n- **Petra of the South** – City carved into living rock, oasis slowly drying\n- **The Shifting Pines** – Petrified woodlands with dryad-lich remnants\n- **Stone Choir** – Desert obelisks that sing in wind, ancient weather-control relics\n\n### 🧭 Adventure Hooks\n\n- A region of forest disappears overnight, buried by sudden dunes\n- A druidic circle battles a sand elemental titan that awakens each solstice\n- A ruined observatory atop a plateau hides weather-warping rituals\n\nScattered across the southern sands are **floating obelisks** and **half-sunken monoliths**, covered in glyphs that no scholar can fully decipher. Every few years, a new one appears. None have seen them rise. But those who touch them… change. Some speak in tongues not heard since the First Epoch. Others disappear into the dunes without a trace.\n\nWorst of all, Khamsin’s Edge feels like it’s pushing forward. The dunes inch farther into neighboring lands with each season. Trees turn to salt. The air grows heavier. The Empire sends sandbreakers to stop the drift, but the desert always reclaims.\n\n### 🎲 Encounter Types\n\n| Encounter | CR Range | Notes |\n| --- | --- | --- |\n| Bonewood Dryads | 5–7 | Vengeful, use petrification and sandvine snares |\n| Sandwights | 6–8 | Undead that swim beneath sand and whisper truths |\n| Weather Elementals | 8+ | Manifest from broken obelisks or storm rites gone wrong |\n\n---\n\n## ⚖️ Faction Hooks\n\n### **The Acheaorian Empire**\n\n- Seeks to reclaim ancient cities buried beneath the sands\n- Employs Sahari (elite desert rangers) to guard trade and patrol desert zones\n- Water control is political power\n- Hosts multiple **noble houses** vying for influence over water rights and border defense\n\n### **The Sahari**\n\n- Elite desertborn nomads, mystical guides, and survivalists\n- Neutral in politics but hold spiritual and logistical power\n- Have knowledge of \"The Sand Beneath the Sand\" — secret tunnels to ancient epochs\n\n### **Cult of the Pale Sun**\n\n- Worship a dead solar god buried in the Zahr al-Mawt\n- Believe the desert is the only “pure” land unspoiled by civilization\n- Plot to cause droughts and awaken god-corpses for purification\n\n---\n\n## 🔧 Mechanical Features to Use\n\n- **Travel Fatigue Tables**: Include dehydration rolls, mirage hallucination checks, and sandstorm navigational DCs.\n- **Mirage Encounters**: At any moment, roll for a false oasis or a projected village. A DC 15 Wisdom (Survival) or (Insight) may detect the illusion.\n- **Living Sands**: Treat desert terrain as potentially mobile. Use shifting battle maps or random terrain changes.\n- **Sand Rot**: Curse/disease spread by touching divine-corrupted sands (WIS saves, permanent mutations or delusions).\n\n---\n\n## 🧩 Magic and Relics\n\n- **The Obsidian Compass** – Points not to north, but to the last source of divine tears (used to find hidden oases or holy relics)\n- **Scrolls of Sand-Tongue** – Let casters speak to the wind, revealing buried ruins or avoiding storms\n- **Sunforged Glassblade** – Created from godlight-scorched sand; glows when undead or titanic remnants are near",
       "dmNotes": "",
       "fields": {
-        "tier": "minor"
+        "tier": "wild"
       },
       "tags": [
         "Great Desert"
@@ -4570,7 +4560,7 @@
       "body": "",
       "dmNotes": "",
       "fields": {
-        "tier": "minor"
+        "tier": "town"
       },
       "tags": [
         "Acheaorian Underground Town"
@@ -4587,7 +4577,7 @@
       "body": "",
       "dmNotes": "",
       "fields": {
-        "tier": "minor"
+        "tier": "city"
       },
       "tags": [
         "Neutral Hub City"
@@ -4603,9 +4593,7 @@
       "summary": "",
       "body": "",
       "dmNotes": "",
-      "fields": {
-        "tier": "major"
-      },
+      "fields": {},
       "tags": [],
       "visibility": "public",
       "sourcePath": "The Continent/The 3 Empires/Delphara 134f1754c40380fcb35dfc341d78e428.md",
@@ -4619,7 +4607,7 @@
       "body": "",
       "dmNotes": "",
       "fields": {
-        "tier": "minor"
+        "tier": "city"
       },
       "tags": [
         "Hellenorian City"
@@ -4637,7 +4625,7 @@
       "dmNotes": "",
       "fields": {
         "createdNote": "April 18, 2025 3:26 PM",
-        "tier": "minor"
+        "tier": "district"
       },
       "tags": [
         "Middle City"
@@ -4654,7 +4642,7 @@
       "body": "[Families](Duneforged%20Citadel/Families%201d8f1754c40380b9802ee881281d4cb0.csv)\n\n[Locations](Duneforged%20Citadel/Locations%201d8f1754c4038000b992c3f94665755c.csv)\n\n[Citadel Cathedral](Duneforged%20Citadel/Citadel%20Cathedral%201d8f1754c40380b3aaa4f2777d32ac6f.csv)\n\n[Forbidden Zone](Duneforged%20Citadel/Forbidden%20Zone%201e4f1754c40380569393f8c231674a4c.csv)\n\n[Military](Duneforged%20Citadel/Military%20230f1754c40380979d19dcf532f1971d.csv)",
       "dmNotes": "",
       "fields": {
-        "tier": "minor"
+        "tier": "city"
       },
       "tags": [
         "Invictian City"
@@ -4671,7 +4659,7 @@
       "body": "",
       "dmNotes": "",
       "fields": {
-        "tier": "minor"
+        "tier": "wild"
       },
       "tags": [
         "Plains"
@@ -4688,7 +4676,7 @@
       "body": "",
       "dmNotes": "",
       "fields": {
-        "tier": "minor"
+        "tier": "city"
       },
       "tags": [
         "Invictian City"
@@ -4705,7 +4693,7 @@
       "body": "",
       "dmNotes": "",
       "fields": {
-        "tier": "minor"
+        "tier": "town"
       },
       "tags": [
         "Invictian Town"
@@ -4722,7 +4710,7 @@
       "body": "### GM Summary: **Foloicaria, the Living Wilds**\n\nFoloicaria is a vast, ancient forest untouched by the millennium-long Continental War. Its thick canopies and dense undergrowth pulse with pure, unfiltered Nature Magic, often called \"Vitalous Energy.\" This saturation has caused rampant, often unpredictable mutations among flora and fauna—creatures twisted not into abominations, but into avatars of nature’s primal will. The forest is very much alive, and many believe it to be sentient.\n\nThree regions define Foloicaria:\n\n1. **The Eastern Peaks – Mount Vaeltheruun:** A lone, fog-shrouded mountain visible from afar. Whispers say its summit reveals a colossal serpentine silhouette. Here reside **Echidna and Typhon**, progenitors of all monsters. They rule the eastern wilds, and their monstrous descendants roam freely under their watchful gaze.\n2. **The Heartgrove – Wild Elf Domain:** In the central region lies a single city, founded by Elven clans who braved the unknown ages ago. Over centuries, their forms have adapted—some growing fur, feathers, or bark-like skin—blending into the ecosystem. They are now known as **Wild Elves**, protectors and stewards of the forest’s middle domain.\n3. **The Western Wilds – Medusan Territory:** The west is home to **Medusa**, who formed an alliance with fierce **Amazonian tribes**. These warrior-women and serpentine guardians live in harmony, mastering the land’s dangers and reshaping it into a domain of trial, challenge, and survival.\n\nEven the strongest warlords and archmages of the empires avoid Foloicaria. Its creatures are beyond cataloging, its geography seems to shift, and ancient, slumbering powers lie dormant—or watchful.",
       "dmNotes": "",
       "fields": {
-        "tier": "minor"
+        "tier": "wild"
       },
       "tags": [
         "Great Forest"
@@ -4740,7 +4728,7 @@
       "dmNotes": "",
       "fields": {
         "createdNote": "April 18, 2025 10:57 PM",
-        "tier": "minor"
+        "tier": "site"
       },
       "tags": [],
       "visibility": "public",
@@ -4755,7 +4743,7 @@
       "body": "",
       "dmNotes": "",
       "fields": {
-        "tier": "minor"
+        "tier": "town"
       },
       "tags": [
         "Invictian Town"
@@ -4773,7 +4761,7 @@
       "dmNotes": "",
       "fields": {
         "createdNote": "April 18, 2025 3:25 PM",
-        "tier": "minor"
+        "tier": "district"
       },
       "tags": [
         "Upper Streets"
@@ -4791,7 +4779,7 @@
       "dmNotes": "",
       "fields": {
         "createdNote": "April 17, 2025 11:15 PM",
-        "tier": "minor"
+        "tier": "site"
       },
       "tags": [],
       "visibility": "public",
@@ -4805,9 +4793,7 @@
       "summary": "",
       "body": "",
       "dmNotes": "",
-      "fields": {
-        "tier": "major"
-      },
+      "fields": {},
       "tags": [],
       "visibility": "public",
       "sourcePath": "The Continent/The 3 Empires/Helarchon 11ff1754c40380cba6d7e9b1ed85470d.md",
@@ -4821,7 +4807,7 @@
       "body": "",
       "dmNotes": "",
       "fields": {
-        "tier": "minor"
+        "tier": "city"
       },
       "tags": [
         "Hellenorian City"
@@ -4838,7 +4824,7 @@
       "body": "",
       "dmNotes": "",
       "fields": {
-        "tier": "minor"
+        "tier": "capital"
       },
       "tags": [
         "Capital",
@@ -4856,8 +4842,7 @@
       "body": "",
       "dmNotes": "",
       "fields": {
-        "createdNote": "April 18, 2025 5:33 PM",
-        "tier": "minor"
+        "createdNote": "April 18, 2025 5:33 PM"
       },
       "tags": [],
       "visibility": "public",
@@ -4872,7 +4857,7 @@
       "body": "",
       "dmNotes": "",
       "fields": {
-        "tier": "minor"
+        "tier": "wild"
       },
       "tags": [
         "Seas"
@@ -4889,7 +4874,7 @@
       "body": "",
       "dmNotes": "",
       "fields": {
-        "tier": "minor"
+        "tier": "town"
       },
       "tags": [
         "Hellenorian Town"
@@ -4906,7 +4891,7 @@
       "body": "",
       "dmNotes": "",
       "fields": {
-        "tier": "minor"
+        "tier": "wild"
       },
       "tags": [
         "Mountain Range"
@@ -4923,7 +4908,7 @@
       "body": "## **“Praetor’s Fall” – The Field That Knelt**\n\n*As documented by Scribe Pellion Meraquas, Aeterna Lexicon*\n\n*Entry filed under: Topographies of Significance, Imperial Censure Tier II*\n\n---\n\n> “The wind still bows when it passes here. Something greater once stood upon this soil… and something older made it kneel.”\n> \n> \n> — *From the banned chronicle “Whispers of the Earth”*\n> \n\nTo the **east of Campania Veta**, past vineyards too well-tended to be natural and orchards whose fruits never rot, lies a vast depression in the earth—**a field that slopes inward like a bowl**, unnaturally smooth, unnervingly quiet. Locals call it **Praetor’s Fall**, though no records confirm which praetor—if any—ever commanded legions there.\n\nThe plain dips for nearly a mile, forming a **shallow crater** too symmetrical to be natural, too clean to be accidental. Some scholars argue that it is the remains of an arcane bombardment, or a ritual collapse. Others—namely the few who have spent the night there—claim the land itself moved, as if **kneeling in submission** to an unseen force.\n\n---\n\n- **The Heretic-Praetor Thesis:** One school of thought states that **Praetor Lurentius Varro**, a proud and reckless general, attempted to declare himself **\"Imperator-Aeternum\"** during a military campaign in the outer provinces. As he performed a forbidden rite meant to elevate his soul into godhood, the land rejected him. The very ground beneath his army bowed—and then swallowed them.\n    - *Only their banners were recovered, half-buried in obsidian dust.*\n- **The Sleeping Titan Theory:** A conflicting myth claims no man ever caused the Fall. Instead, the depression is the **resting place of a colossal being**—a god, a giant, a primordial engine of war. The slope is simply the curve of its back beneath the earth. Nightmares suffered by travelers seem to depict a ribcage beneath soil.\n- **Architectural Anomaly:** Some claim the land below is **hollow**, and that ruins—perfectly preserved and older than the Imperium—sit beneath layers of soft earth. The **obsidian monolith** at the crater’s heart, called simply **“The Witness”**, is believed to be a keystone, anchor, or eye.\n\n---\n\n### **Physical Traits of the Region**\n\nThe wind within Praetor’s Fall never follows the direction of the larger plains. It moves in **gentle spirals**, as though circling an absent drain.\n\n**The Soil:** Some report that footprints vanish seconds after being made—others that they deepen over time until they resemble grave markers.\n\n**The Witness (Obsidian Pillar):**\n\n- 12 feet tall. Smooth. Warm.\n- Emits a low hum when touched with a bare hand, particularly during eclipses or storms.\n- Some claim it **records thoughts**, offering visions not of the past or future, but **possibilities never chosen**.\n- One scholar, **Archivist Doria Vem**, reported seeing herself kneeling before an altar. She disappeared three days later. Her sandals were found beside the pillar, filled with dry ash.\n\n---\n\n> “We measured the Fall by day. By nightfall, the measurements had doubled. The next morning, the field was back to its old shape. But our shadows were still long.”\n> \n> \n> — *Excerpt from the journal of Legion Surveyor Valcis Grane*\n> \n\n> “I heard chanting from beneath my feet. And I was alone.”\n> \n> \n> — *Campfire tale, attributed to an unnamed merchant*\n> \n\n> “No birds fly over it. No worms burrow through it. And when you sleep in Praetor’s Fall, your dreams are not your own.”\n> \n> \n> — *Old soldier’s warning, scratched into a barracks wall near Campania’s eastern road*\n> \n\n---\n\n A fringe sect worships the Fall itself, believing it is a **place of rebirth**. Most who enter seeking enlightenment return broken… or don’t return at all.\n\nTime moves strangely here. One traveler reports spending “an hour” within the Fall—yet emerged five days later, with a beard and memory gaps.\n\nThe Empire denies all anomalies in the region. A legion detachment once stationed nearby was quietly reassigned and the road redirected to bypass it. Scribes accessing historical documents about Praetor’s Fall require a Ciphered Seal of Red Marble, issued only to members of the 4th Circle or higher.\n\n---\n\n> “If the land could pray, this is what the prayer would look like.”\n> \n> \n> — *Scribe Pellion Meraquas, after returning from the Fall, never to write again*\n> \n\n## **“Praetor’s Fall” – The Field That Knelt**\n\n*As documented by Scribe Pellion Meraquas, Fourth Circle of Mirrors*\n\n*Entry filed under: Topographies of Significance, Imperial Censure Tier II*\n\n---\n\n> “The wind still bows when it passes here. Something greater once stood upon this soil… and something older made it kneel.”\n> \n> \n> — *From the banned chronicle “Whispers of the Earth”*\n> \n\nTo the **east of Campania Veta**, past vineyards too well-tended to be natural and orchards whose fruits never rot, lies a vast depression in the earth—**a field that slopes inward like a bowl**, unnaturally smooth, unnervingly quiet. Locals call it **Praetor’s Fall**, though no records confirm which praetor—if any—ever commanded legions there.\n\nThe plain dips for nearly a mile, forming a **shallow crater** too symmetrical to be natural, too clean to be accidental. Some scholars argue that it is the remains of an arcane bombardment, or a ritual collapse. Others—namely the few who have spent the night there—claim the land itself moved, as if **kneeling in submission** to an unseen force.\n\n---\n\n### **Legends and Conflicts in the Record**\n\n- **The Heretic-Praetor Thesis:** One school of thought states that **Praetor Lurentius Varro**, a proud and reckless general, attempted to declare himself **\"Imperator-Aeternum\"** during a military campaign in the outer provinces. As he performed a forbidden rite meant to elevate his soul into godhood, the land rejected him. The very ground beneath his army bowed—and then swallowed them.\n    - *Only their banners were recovered, half-buried in obsidian dust.*\n- **The Sleeping Titan Theory:** A conflicting myth claims no man ever caused the Fall. Instead, the depression is the **resting place of a colossal being**—a god, a giant, a primordial engine of war. The slope is simply the curve of its back beneath the earth. Nightmares suffered by travelers seem to depict a ribcage beneath soil.\n- **Architectural Anomaly:** Some claim the land below is **hollow**, and that ruins—perfectly preserved and older than the Imperium—sit beneath layers of soft earth. The **obsidian monolith** at the crater’s heart, called simply **“The Witness”**, is believed to be a keystone, anchor, or eye.\n\n---\n\n### **Physical Traits of the Region**\n\n- **Wind Patterns:** The wind within Praetor’s Fall never follows the direction of the larger plains. It moves in **gentle spirals**, as though circling an absent drain.\n- **The Soil:** The soil here is warm, even at night, and emits faint reddish flecks. Some report that footprints vanish seconds after being made—others that they deepen over time until they resemble grave markers.\n- **The Witness (Obsidian Pillar):**\n    - 12 feet tall. Smooth. Warm.\n    - Emits a low hum when touched with a bare hand, particularly during eclipses or storms.\n    - Some claim it **records thoughts**, offering visions not of the past or future, but **possibilities never chosen**.\n    - One scholar, **Archivist Doria Vem**, reported seeing herself kneeling before an altar. She disappeared three days later. Her sandals were found beside the pillar, filled with dry ash.\n\n---\n\n### **Quotes and Unreliable Testimony**\n\n> “We measured the Fall by day. By nightfall, the measurements had doubled. The next morning, the field was back to its old shape. But our shadows were still long.”\n> \n> \n> — *Excerpt from the journal of Legion Surveyor Valcis Grane*\n> \n\n> “I heard chanting from beneath my feet. And I was alone.”\n> \n> \n> — *Campfire tale, attributed to an unnamed merchant*\n> \n\n> “No birds fly over it. No worms burrow through it. And when you sleep in Praetor’s Fall, your dreams are not your own.”\n> \n> \n> — *Old soldier’s warning, scratched into a barracks wall near Campania’s eastern road*\n> \n\n---\n\n### **Rumored Hazards & Adventure Hooks**\n\n- **Missing Pilgrims:** A fringe sect worships the Fall itself, believing it is a **place of rebirth**. Most who enter seeking enlightenment return broken… or don’t return at all.\n- **Temporal Distortion:** Time moves strangely here. One traveler reports spending “an hour” within the Fall—yet emerged five days later, with a beard and memory gaps.\n- **Imperial Secrecy:** The Empire denies all anomalies in the region. A **legion detachment once stationed nearby was quietly reassigned** and the road redirected to bypass it. Scribes accessing historical documents about Praetor’s Fall require a **Ciphered Seal of Red Marble**, issued only to members of the 4th Circle or higher.\n\n---\n\n> “If the land could pray, this is what the prayer would look like.”\n> \n> \n> — *Scribe Pellion Meraquas, after returning from the Fall, never to write again*\n>",
       "dmNotes": "",
       "fields": {
-        "tier": "minor"
+        "tier": "wild"
       },
       "tags": [
         "Plains"
@@ -4940,8 +4925,7 @@
       "body": "[Untitled](Location/Untitled%20210f1754c40380debebffcf01cf38e8d.csv)",
       "dmNotes": "",
       "fields": {
-        "createdNote": "October 3, 2024 3:40 PM",
-        "tier": "minor"
+        "createdNote": "October 3, 2024 3:40 PM"
       },
       "tags": [],
       "visibility": "public",
@@ -4956,7 +4940,7 @@
       "body": "",
       "dmNotes": "",
       "fields": {
-        "tier": "minor"
+        "tier": "town"
       },
       "tags": [
         "Hellenorian Town"
@@ -4973,8 +4957,7 @@
       "body": "[City Streets Locations](Lower%20City%20Streets/City%20Streets%20Locations%201d9f1754c40380f7b999dbd3c0f7f42d.csv)",
       "dmNotes": "",
       "fields": {
-        "createdNote": "April 17, 2025 11:09 PM",
-        "tier": "minor"
+        "createdNote": "April 17, 2025 11:09 PM"
       },
       "tags": [],
       "visibility": "public",
@@ -4989,7 +4972,7 @@
       "body": "",
       "dmNotes": "",
       "fields": {
-        "tier": "minor"
+        "tier": "wild"
       },
       "tags": [
         "Swamp"
@@ -5006,7 +4989,7 @@
       "body": "",
       "dmNotes": "",
       "fields": {
-        "tier": "minor"
+        "tier": "wild"
       },
       "tags": [
         "Plains"
@@ -5023,7 +5006,7 @@
       "body": "",
       "dmNotes": "",
       "fields": {
-        "tier": "minor"
+        "tier": "village"
       },
       "tags": [
         "Swamp Village"
@@ -5040,7 +5023,7 @@
       "body": "",
       "dmNotes": "",
       "fields": {
-        "tier": "minor"
+        "tier": "city"
       },
       "tags": [
         "Invictian City"
@@ -5057,8 +5040,7 @@
       "body": "[Untitled](Middle%20City%20Streets/Untitled%201d9f1754c4038075aedac1d8491e98c6.csv)",
       "dmNotes": "",
       "fields": {
-        "createdNote": "April 17, 2025 11:14 PM",
-        "tier": "minor"
+        "createdNote": "April 17, 2025 11:14 PM"
       },
       "tags": [],
       "visibility": "public",
@@ -5072,9 +5054,7 @@
       "summary": "",
       "body": "",
       "dmNotes": "",
-      "fields": {
-        "tier": "major"
-      },
+      "fields": {},
       "tags": [],
       "visibility": "public",
       "sourcePath": "The Continent/The 3 Empires/Mithratal 134f1754c40380e79e72cfba01afd5a4.md",
@@ -5088,7 +5068,7 @@
       "body": "",
       "dmNotes": "",
       "fields": {
-        "tier": "minor"
+        "tier": "city"
       },
       "tags": [
         "Acheaorian City"
@@ -5105,7 +5085,7 @@
       "body": "",
       "dmNotes": "",
       "fields": {
-        "tier": "minor"
+        "tier": "wild"
       },
       "tags": [
         "Mountain Range"
@@ -5122,7 +5102,7 @@
       "body": "",
       "dmNotes": "",
       "fields": {
-        "tier": "minor"
+        "tier": "town"
       },
       "tags": [
         "Invictian Town"
@@ -5139,7 +5119,7 @@
       "body": "",
       "dmNotes": "",
       "fields": {
-        "tier": "minor"
+        "tier": "town"
       },
       "tags": [
         "Invictian Town"
@@ -5156,7 +5136,7 @@
       "body": "",
       "dmNotes": "",
       "fields": {
-        "tier": "minor"
+        "tier": "village"
       },
       "tags": [
         "Araucaria Village"
@@ -5173,7 +5153,7 @@
       "body": "",
       "dmNotes": "",
       "fields": {
-        "tier": "minor"
+        "tier": "wild"
       },
       "tags": [
         "Seas"
@@ -5190,8 +5170,7 @@
       "body": "[Untitled](Noble%20Districts/Untitled%201d9f1754c40380dfb220f505411a12e5.csv)",
       "dmNotes": "",
       "fields": {
-        "createdNote": "April 17, 2025 11:14 PM",
-        "tier": "minor"
+        "createdNote": "April 17, 2025 11:14 PM"
       },
       "tags": [],
       "visibility": "public",
@@ -5206,7 +5185,7 @@
       "body": "",
       "dmNotes": "",
       "fields": {
-        "tier": "minor"
+        "tier": "wild"
       },
       "tags": [
         "Mountain Range"
@@ -5223,7 +5202,7 @@
       "body": "",
       "dmNotes": "",
       "fields": {
-        "tier": "minor"
+        "tier": "wild"
       },
       "tags": [
         "Mountain Range"
@@ -5240,7 +5219,7 @@
       "body": "",
       "dmNotes": "",
       "fields": {
-        "tier": "minor"
+        "tier": "wild"
       },
       "tags": [
         "Valley"
@@ -5257,7 +5236,7 @@
       "body": "",
       "dmNotes": "",
       "fields": {
-        "tier": "minor"
+        "tier": "village"
       },
       "tags": [
         "Island Village"
@@ -5273,9 +5252,7 @@
       "summary": "",
       "body": "",
       "dmNotes": "",
-      "fields": {
-        "tier": "major"
-      },
+      "fields": {},
       "tags": [],
       "visibility": "public",
       "sourcePath": "The Continent/The 3 Empires/Persemenid 11ff1754c40380f4a0e1ffe862886b37.md",
@@ -5289,7 +5266,7 @@
       "body": "",
       "dmNotes": "",
       "fields": {
-        "tier": "minor"
+        "tier": "capital"
       },
       "tags": [
         "Acheaorian City",
@@ -5306,9 +5283,7 @@
       "summary": "",
       "body": "",
       "dmNotes": "",
-      "fields": {
-        "tier": "major"
-      },
+      "fields": {},
       "tags": [],
       "visibility": "public",
       "sourcePath": "The Continent/The 3 Empires/Persevalis 1d8f1754c403808b9503c2b3fe5cf32f.md",
@@ -5322,7 +5297,7 @@
       "body": "",
       "dmNotes": "",
       "fields": {
-        "tier": "minor"
+        "tier": "city"
       },
       "tags": [
         "Acheaorian City"
@@ -5338,9 +5313,7 @@
       "summary": "",
       "body": "",
       "dmNotes": "",
-      "fields": {
-        "tier": "major"
-      },
+      "fields": {},
       "tags": [],
       "visibility": "public",
       "sourcePath": "The Continent/The 3 Empires/QaÔÇÖzshahrÔÇÖin 1d8f1754c40380389e2fc3246179d046.md",
@@ -5354,7 +5327,7 @@
       "body": "",
       "dmNotes": "",
       "fields": {
-        "tier": "minor"
+        "tier": "town"
       },
       "tags": [
         "Acheaorian Town"
@@ -5371,7 +5344,7 @@
       "body": "",
       "dmNotes": "",
       "fields": {
-        "tier": "minor"
+        "tier": "town"
       },
       "tags": [
         "Acheaorian Town"
@@ -5388,7 +5361,7 @@
       "body": "",
       "dmNotes": "",
       "fields": {
-        "tier": "minor"
+        "tier": "wild"
       },
       "tags": [
         "River"
@@ -5405,7 +5378,7 @@
       "body": "",
       "dmNotes": "",
       "fields": {
-        "tier": "minor"
+        "tier": "city"
       },
       "tags": [
         "Invictian City"
@@ -5423,7 +5396,7 @@
       "dmNotes": "",
       "fields": {
         "createdNote": "April 18, 2025 10:57 PM",
-        "tier": "minor"
+        "tier": "site"
       },
       "tags": [],
       "visibility": "public",
@@ -5438,7 +5411,7 @@
       "body": "",
       "dmNotes": "",
       "fields": {
-        "tier": "minor"
+        "tier": "wild"
       },
       "tags": [
         "Valley"
@@ -5455,7 +5428,7 @@
       "body": "",
       "dmNotes": "",
       "fields": {
-        "tier": "minor"
+        "tier": "town"
       },
       "tags": [
         "Acheaorian Town"
@@ -5473,7 +5446,7 @@
       "dmNotes": "",
       "fields": {
         "createdNote": "April 18, 2025 10:57 PM",
-        "tier": "minor"
+        "tier": "site"
       },
       "tags": [],
       "visibility": "public",
@@ -5488,7 +5461,7 @@
       "body": "",
       "dmNotes": "",
       "fields": {
-        "tier": "minor"
+        "tier": "village"
       },
       "tags": [
         "Araucaria Village"
@@ -5505,7 +5478,7 @@
       "body": "",
       "dmNotes": "",
       "fields": {
-        "tier": "minor"
+        "tier": "town"
       },
       "tags": [
         "Acheaorian Town"
@@ -5523,7 +5496,7 @@
       "dmNotes": "",
       "fields": {
         "createdNote": "April 18, 2025 10:57 PM",
-        "tier": "minor"
+        "tier": "site"
       },
       "tags": [],
       "visibility": "public",
@@ -5539,7 +5512,7 @@
       "dmNotes": "",
       "fields": {
         "createdNote": "April 18, 2025 2:48 PM",
-        "tier": "minor"
+        "tier": "district"
       },
       "tags": [
         "Lower City",
@@ -5557,8 +5530,7 @@
       "body": "> **Note:** Each account of the Empire’s history is written by its own scholars. Some narratives may be exaggerated to the point of portraying events or figures as supernatural. Others may reflect truths that align with popular legends, oral traditions, or folklore. In some cases, certain accounts may even contain deliberate falsehoods.\n> \n\n[Untitled](The%203%20Empires/Untitled%20eafa63162b174efb9d86fd062fa34588.csv)\n\n## Capital\n\n[Aeterna](The%203%20Empires/Aeterna%2011ff1754c40380439d42ebcb0f2db445.md)\n\n## Cities\n\n[Romulo City](The%203%20Empires/Romulo%20City%20114f1754c40380c4a7d9c21323eeea0f.md)\n\n[Mavelon City](The%203%20Empires/Mavelon%20City%20162f1754c40380f4bbf5eeb7fdd8a0ff.md)\n\n[Duneforged Citadel](The%203%20Empires/Duneforged%20Citadel%20162f1754c40380e09595fb5da59dd969.md)\n\n[Ephelanum City](The%203%20Empires/Ephelanum%20City%20162f1754c40380c9b108c2107294ea24.md)\n\n[Thessalonikan](The%203%20Empires/Thessalonikan%20162f1754c403802bb00bfbad4d3e3885.md)\n\n### Towns\n\n[Napplesia](The%203%20Empires/Napplesia%20114f1754c403805e8174d2816afe9e24.md)\n\n[Nemibano](The%203%20Empires/Nemibano%201d8f1754c40380218750c1d6c51edbb9.md)\n\n[Anticasta](The%203%20Empires/Anticasta%201d8f1754c403809f935aeff523d80124.md)\n\n[Fucostia](The%203%20Empires/Fucostia%201d8f1754c40380e38e0ce39f12094243.md)\n\n[Falecosa](The%203%20Empires/Falecosa%201d8f1754c40380028ef2c6f1b896a592.md)\n\n[Untitled](The%203%20Empires/Untitled%20114f1754c40380ca9b99d0a3e62d2dd4.csv)\n\n## Capital\n\n[Helarchon](The%203%20Empires/Helarchon%2011ff1754c40380cba6d7e9b1ed85470d.md)\n\n## Cities\n\n[ Delphara](The%203%20Empires/Delphara%20134f1754c40380fcb35dfc341d78e428.md)\n\n[Thebeseieas City](The%203%20Empires/Thebeseieas%20City%201d8f1754c403804dbbaff035e8e9b185.md)\n\n[Aepistra City](The%203%20Empires/Aepistra%20City%201d8f1754c403800ca107f075099bb4ef.md)\n\n[Corinth City](The%203%20Empires/Corinth%20City%201d8f1754c40380d788f5f7530725977c.md)\n\n[Helionyx City](The%203%20Empires/Helionyx%20City%201d8f1754c403805e9ee9ebc993e6bc32.md)\n\n### Towns\n\n[Loutrokleion](The%203%20Empires/Loutrokleion%20134f1754c40380c19a01eb615d5650fb.md)\n\n[Carianaea](The%203%20Empires/Carianaea%201d8f1754c40380a7b49be665a30dfc53.md)\n\n[Kirimitsana](The%203%20Empires/Kirimitsana%201d8f1754c40380fb9a28cfbcf737a626.md)\n\n[Araavyna](The%203%20Empires/Araavyna%201d8f1754c403808a9a87d84e68c4576b.md)\n\n[Argotiko](The%203%20Empires/Argotiko%201d8f1754c40380098aedd66046a22f7d.md)\n\n[Atticenea](The%203%20Empires/Atticenea%201d8f1754c403808d8f9ee9c6ec73b8ae.md)\n\n[Untitled](The%203%20Empires/Untitled%20114f1754c403804eb564f395cc06b829.csv)\n\n## Capital\n\n[Persemenid](The%203%20Empires/Persemenid%2011ff1754c40380f4a0e1ffe862886b37.md)\n\n## Cities\n\n[Mithratal](The%203%20Empires/Mithratal%20134f1754c40380e79e72cfba01afd5a4.md)\n\n[Atarabad](The%203%20Empires/Atarabad%201d8f1754c40380ac9da0f9a2ea7516c1.md)\n\n[Persevalis](The%203%20Empires/Persevalis%201d8f1754c403808b9503c2b3fe5cf32f.md)\n\n[Xerastir](The%203%20Empires/Xerastir%201d8f1754c40380748fd5cb0e4cc0c999.md)\n\n### Towns\n\n[De’rakhtak Bon](The%203%20Empires/De%E2%80%99rakhtak%20Bon%20134f1754c40380019a36d5d601223301.md)\n\n[Zi’rzamin Dar’a](The%203%20Empires/Zi%E2%80%99rzamin%20Dar%E2%80%99a%201d8f1754c4038095a021d2e3f97e9b1b.md)\n\n[R’eyshar](The%203%20Empires/R%E2%80%99eyshar%201d8f1754c4038016b876d013aeaa0bbf.md)\n\n[Tabrishi’ir](The%203%20Empires/Tabrishi%E2%80%99ir%201d8f1754c4038024bb31dfeb337030d8.md)\n\n[Shir’abad D’ar](The%203%20Empires/Shir%E2%80%99abad%20D%E2%80%99ar%201d8f1754c40380a791f1d1300ea77596.md)\n\n[Qa’zshahr’in](The%203%20Empires/Qa%E2%80%99zshahr%E2%80%99in%201d8f1754c40380389e2fc3246179d046.md)\n\n[Untitled](The%203%20Empires/Untitled%20207f1754c403800d835bd43964f75a92.csv)\n\n[Untitled](The%203%20Empires/Untitled%20207f1754c403804c913cd855891e60a0.csv)",
       "dmNotes": "",
       "fields": {
-        "createdNote": "September 28, 2024 11:15 AM",
-        "tier": "minor"
+        "createdNote": "September 28, 2024 11:15 AM"
       },
       "tags": [],
       "visibility": "public",
@@ -5574,7 +5546,7 @@
       "dmNotes": "",
       "fields": {
         "createdNote": "April 17, 2025 11:24 PM",
-        "tier": "minor"
+        "tier": "site"
       },
       "tags": [],
       "visibility": "public",
@@ -5590,7 +5562,7 @@
       "dmNotes": "",
       "fields": {
         "createdNote": "April 30, 2025 9:14 PM",
-        "tier": "minor"
+        "tier": "site"
       },
       "tags": [],
       "visibility": "public",
@@ -5606,7 +5578,7 @@
       "dmNotes": "",
       "fields": {
         "createdNote": "April 18, 2025 3:53 PM",
-        "tier": "minor"
+        "tier": "district"
       },
       "tags": [
         "Middle City"
@@ -5624,7 +5596,7 @@
       "dmNotes": "",
       "fields": {
         "createdNote": "April 18, 2025 3:53 PM",
-        "tier": "minor"
+        "tier": "district"
       },
       "tags": [
         "Middle City"
@@ -5642,7 +5614,7 @@
       "dmNotes": "",
       "fields": {
         "createdNote": "July 5, 2025 1:25 AM",
-        "tier": "minor"
+        "tier": "site"
       },
       "tags": [],
       "visibility": "public",
@@ -5658,7 +5630,7 @@
       "dmNotes": "",
       "fields": {
         "createdNote": "April 18, 2025 2:48 PM",
-        "tier": "minor"
+        "tier": "district"
       },
       "tags": [
         "Lower City",
@@ -5677,7 +5649,7 @@
       "dmNotes": "",
       "fields": {
         "createdNote": "April 18, 2025 2:47 PM",
-        "tier": "minor"
+        "tier": "district"
       },
       "tags": [
         "Lower City",
@@ -5696,7 +5668,7 @@
       "dmNotes": "",
       "fields": {
         "createdNote": "April 18, 2025 2:49 PM",
-        "tier": "minor"
+        "tier": "district"
       },
       "tags": [
         "Lower City",
@@ -5715,7 +5687,7 @@
       "dmNotes": "",
       "fields": {
         "createdNote": "April 29, 2025 9:58 AM",
-        "tier": "minor"
+        "tier": "site"
       },
       "tags": [],
       "visibility": "secret",
@@ -5730,8 +5702,7 @@
       "body": "# Introduction\n\n[Untitled](The%20Temples/Untitled%201d9f1754c4038026b22ee7339f584f29.csv)",
       "dmNotes": "",
       "fields": {
-        "createdNote": "April 18, 2025 5:40 PM",
-        "tier": "minor"
+        "createdNote": "April 18, 2025 5:40 PM"
       },
       "tags": [],
       "visibility": "public",
@@ -5746,7 +5717,7 @@
       "body": "",
       "dmNotes": "",
       "fields": {
-        "tier": "major"
+        "tier": "city"
       },
       "tags": [],
       "visibility": "public",
@@ -5761,7 +5732,7 @@
       "body": "",
       "dmNotes": "",
       "fields": {
-        "tier": "minor"
+        "tier": "city"
       },
       "tags": [
         "Hellenorian City"
@@ -5778,7 +5749,7 @@
       "body": "",
       "dmNotes": "",
       "fields": {
-        "tier": "minor"
+        "tier": "city"
       },
       "tags": [
         "Invictian City"
@@ -5794,9 +5765,7 @@
       "summary": "",
       "body": "",
       "dmNotes": "",
-      "fields": {
-        "tier": "major"
-      },
+      "fields": {},
       "tags": [],
       "visibility": "public",
       "sourcePath": "The Continent/The 3 Empires/Thessalonikan 162f1754c403802bb00bfbad4d3e3885.md",
@@ -5810,7 +5779,7 @@
       "body": "",
       "dmNotes": "",
       "fields": {
-        "tier": "minor"
+        "tier": "wild"
       },
       "tags": [
         "Araucaria Citadel Mountain"
@@ -5827,7 +5796,7 @@
       "body": "## **GM Summary: Varathros Lake**\n\n**Overview:**\n\nVarathros Lake is a massive, mysterious inland sea forged from destruction. Once a small, serene lake, it was catastrophically reshaped during the **Continental War of Asetheria**, a conflict of immense magical and martial devastation. A massive sinkhole tore the land asunder, filling over centuries with rainwater and flooding subterranean caverns. It is now a deep, unpredictable, and dangerous body of water, whose very tides seem to remember the war that birthed it.\n\n---\n\n## REGION I: **Northern Crest – The Neutral City**\n\n### Overview:\n\nThis is the most *civilized* and *stable* part of Varathros Lake. From the coast up to 50 nautical miles, the waters remain relatively safe. Past that distance, however, the lake becomes unpredictable with rough currents and spiraling wave troughs. This buffer zone allowed ancient civilizations to thrive—now reduced to coastal outposts and submerged ruins.\n\n### Points of Interest:\n\n- **Deiperdeum, the Neutral City-State**\n    \n    Once a naval power before the Continental War, now an autonomous fortress-city ruled by a Senate of Mages and Admirals. They regulate lake travel with iron-handed bureaucracy.\n    \n    **Quirk**: A glowing dome of gray fog covers the city’s harbor, never dissipating, rumored to be the lingering breath of a drowned god.\n    \n- **Alexandria Sanctum**\n    \n    A small, rocky islet with a titanic lighthouse said to be carved from sky-glass. It hums during certain lunar alignments. Sailors say it sings to the stars.\n    \n    Some claim it was never built—only revealed.\n    \n- **Kindred Depths**\n    \n    An underwater reef and cave system home to a confederation of aquatic races (e.g., Sea Elves, Tritons, Water Genasi). They speak of **the Scaled Accord**, a pact made with peaceful dragons.\n    \n    These **dragon guardians**—ancient and wise—rest coiled around ancient ruins, keeping secrets of the war locked away.\n    \n\n### Mystical Element:\n\nThe waters here remember battle. When the moon is high, **phantoms of ancient naval clashes** appear, replaying in silent, spectral reenactments. Interacting with them could unveil hidden truths… or draw attention from something older.\n\n---\n\n## REGION II: **The Arcane Maw – Middle Expanse**\n\n### Overview:\n\nThe true heart of the lake. Calm one day, writhing the next. Storms swirl without wind, and currents shift as if aware of the ships that ride them. Magic here is *amplified*, but so too is unpredictability.\n\n### The Lone Isle:\n\n- **Isle of Oracles** (also known as *Mount Zharion*)\n    \n    A towering, rocky island with a spired mountain. Atop stands a **“lighthouse”** whose light pulses in strange colors—actually the **Arcane Sanctum of Archmage Vaelithar**.\n    \n    Vaelithar is rarely seen, but their apprentices speak in riddles and make offerings to the lake.\n    \n- Temporal Rifts\n    \n    Sometimes, ships that enter this region return aged decades… or arrive before they left.\n    \n    Some wizards believe the lake’s waters contain fragments of time, suspended like silt.\n    \n- Eddies of Memory\n    \n    Swirling water vortexes that can steal or implant *memories* of people, locations, or even forgotten spells. They may also reveal glimpses of the war or of the creature below.\n    \n- The Silver Reefs\n    \n    Submerged spires of magical crystal known to warp spells cast nearby. Arcane items brought near them sometimes *speak* or pulse. Some believe the reefs are the fossilized remains of fallen war titans.\n    \n\n### Mystical Element:\n\nThe air buzzes with unseen runes. Spells cast here may backfire—or evolve into greater forms. *Magic itself seems curious here.*\n\n---\n\n## 🕊️ REGION III: **Abssal Ring – Nemegrath’s Halo**\n\n### Overview:\n\nA ring-shaped trench around the central deeps, home to sunken ruins, overgrown cities, and **temples to drowned gods**. The water grows darker, colder. Some say the sea gods reside here—not just in presence, but in **architecture**.\n\n### Notable Locales:\n\n- **The Vaulted Deepdomes**\n    \n    Crystalline ruins of a forgotten empire that once worshipped the **gods of tides, moons, and secrets**.\n    \n    Creatures of divine heritage—sea celestial hybrids, forgotten demigods—guard the thresholds.\n    \n- **Temple of the Undrowned King**\n    \n    A spiraling column of coral and petrified bone. Only those who **hold their breath for an hour** may enter. Inside, **liquid gravity** flows upward, and **statues weep brine** that induces visions.\n    \n- **Nemegrath’s Eye**\n    \n    A vast obsidian iris embedded in the lakebed, always open. If stared into, players might witness flashes of **divine betrayal**, **war crimes**, or **the forging of the chains of Ezerantheil**.\n    \n\n### Mystical Element:\n\nThe water here **rejects divination** and **alters language**. Prayers spoken aloud turn to foreign tongues. Writing in journals becomes jumbled, often referencing **things the writer doesn’t remember knowing**.\n\n---\n\n### REGION IV: **The Hadal Deeps – The Ebon Delve**\n\n### Overview:\n\nThe bottomless trench at the lake’s heart. Not even the gods claim this depth. A void in magic and time, where light drowns, and reality becomes brittle.\n\n### Anchored Horror:\n\n- **Ezerantheil the Unblinking**\n    \n    Once a prophetic titan or godlike entity that saw the *threads of fate* as one sees branches in a forest. Feared by all sides in the Continental War, for he predicted the end of empires and the fall of gods.\n    \n    **Bound in chains of star-iron**, left to rot in silence. He is said to speak now only through dreams, rain patterns, or broken machinery.\n    \n    Legends claim:\n    \n    - He has **no eyes**, but sees all.\n    - He cannot move, yet **his presence deepens** every year.\n    - He speaks only in **truths, but twisted by madness**.\n\n### Points of Dread:\n\n- **The Silt Cathedral**\n    \n    A buried structure flickering between existence and not. Those who enter vanish or return weeks later, *with pale eyes and new names*.\n    \n- **Chainfall**\n    \n    The location where **the star-iron chains breach the trench ceiling**, glowing with dim divine energy. Some adventurers seek these for their unbreakable power. Few return.\n    \n- **Echoing Abyss**\n    \n    Even speaking here is strange. Words stretch for minutes. Sound loops. Voices return altered.\n    \n\n### Mystical Element:\n\nThis is not just the lake’s depth. It is its **soul**—its **prison**—its **origin**. The war didn’t make this trench. The trench *was always there*, waiting.\n\n### **Imperium Invicta** (Roman-themed)\n\n> “We tamed the lake. And where we did not, we chained it.”\n> \n> \n> — Imperial Historian Braccus Valente\n> \n\n### Their Claim:\n\n- The Imperium insists **they won the Battle of the Broken Masts**, the greatest naval battle during the war, held on Varathros’ northern tides.\n- They built **floating fortresses** and **subaquatic legions** to subdue deep creatures.\n- Tiberus, the mighty river that runs from Varathros to their heartlands, is “blessed by Mars, the god of war.”\n\n### The Hidden Truths:\n\n- Archaeological logs mention they *lost* the Battle of the Broken Masts horrifically—half the fleet vanished into a whirlpool.\n- Their famed “floating fortresses” were unfinished prototypes. One capsized. Survivors were *erased* from record.\n- The Tiberius sometimes runs *red with algae* after storms—interpreted as a sign from “gods,” but it’s likely environmental runoff.\n\n### What They Claim:\n\n- **\"We crushed the Hellenorian fleet at the Battle of the Broken Masts.\"**\n    \n    *Official doctrine.* Monuments in Aquae Redavia show a victorious Imperial general standing atop a shattered trireme.\n    \n- **\"Our ironclad 'Tritonis-class' galleons never sank—invincible even to the storms.\"**\n    \n    Mentioned in military treatises as technological marvels. No verified wreckage ever found.\n    \n\n### 🤫 What Others Whisper:\n\n- The **Battle of the Broken Masts** was a **disastrous loss** — their admiral reportedly **went mad**, and the flagship *Domina Aeternum* was **swallowed whole** by a rogue wave.\n- **Half the fleet was sabotaged internally**—by a now-expunged house that worshipped “the thing beneath.”\n- The \"invincible\" ironclads? **One caught fire on launch. One rusted through. The third was never finished.** The name was reused on merchant logs to give the illusion of deployment.\n\n### **Hellenoria** (Greek-themed)\n\n> “Varathros is not a lake. It is a living myth. A divine labyrinth made of salt and sorrow.”\n> \n> \n> — Priestess Odyma, Oracle of Crythonis\n> \n\n### Their Claim:\n\n- Hellenoria tells of **the Isles of Prophecy**, floating islands where demigods were born from lake foam.\n- Their **navy of triremes** once “pushed back the dark,” banishing the storm-mages of Acheaoria.\n- **Crythonis River**, flowing from the lake, is “the last breath of Thalassene, goddess of deep truths.”\n\n### The Hidden Truths:\n\n- The “Isles of Prophecy” may have been **illusions** caused by arcane interference.\n- Their trireme fleet was indeed formidable—but **a Hellenorian general defected** during the war and helped create the chain that bound the creature below.\n- Crythonis was once used as a waste channel for failed divination rites.\n\n- **\"We brought the storm down ourselves and swept the Invictans from the lake!\"**\n    \n    Their war hymns celebrate the Stormcallers of Crythonis, said to have conjured a divine tempest to break the Imperium line.\n    \n- **\"Our Seafather-General rode a hippocampus across the lake and never lost a battle.\"**\n    \n    There's even a fresco in the Amphitheater of Echoes depicting it.\n    \n\n### **Acheaoria** (Persian-themed, distant empire)\n\n> “Varathros is the cradle of secrets. We do not conquer it. We observe it.”\n> \n> \n> — Namazahrin, the Mirror-Binder of the Sapphire Archive\n> \n\n### Their Claim:\n\n- Acheaoria claims they never sought to control the lake, only study it.\n- They possess maps that accurately predict every storm and current (they don’t share them).\n- The river Zaremesh flows *backwards* during eclipses—interpreted as divine alignment.\n\n### The Hidden Truths:\n\n- Some say Acheaoria tried to **raise the creature beneath Varathros** as a weapon—but lost control.\n- Their maps may be **forgeries**, made to appear prophetic after the fact.\n- Zaremesh’s reversal is not divine—it may be a **subterranean backflow** from a massive sinkhole network.\n\n### What They Claim:\n\n- **\"We had no interest in conquest. We merely observed. The others fought blindly.\"**\n    \n    Imperial scholars state they remained neutral and used the chaos to **map leyline shifts**.\n    \n- **\"Our ships could outpace all others using windless sails—divine cloth that harnessed memory.\"**\n    \n    Allegedly blessed by the Moon-Binders of the Sapphire Archive.\n    \n\n### 🕳️ What Lurks Beneath:\n\n- They fielded a **secret navy of obsidian hulls**—stealth ships that vanished in daylight. **None were ever seen again.**\n- Their \"neutrality\" may have been a **cover** for a failed attempt to **summon or awaken** the being chained in the Hadal Deep.\n- The **windless sails** did exist, but were unstable — reports claim the **memories stored in them corrupted the minds of their crews**, causing mutinies and drownings mid-lake.",
       "dmNotes": "",
       "fields": {
-        "tier": "minor"
+        "tier": "wild"
       },
       "tags": [
         "Great Lake"
@@ -5845,7 +5814,7 @@
       "dmNotes": "",
       "fields": {
         "createdNote": "April 18, 2025 10:58 PM",
-        "tier": "minor"
+        "tier": "site"
       },
       "tags": [],
       "visibility": "public",
@@ -5860,7 +5829,7 @@
       "body": "",
       "dmNotes": "",
       "fields": {
-        "tier": "minor"
+        "tier": "village"
       },
       "tags": [
         "Swamp Village"
@@ -5876,9 +5845,7 @@
       "summary": "",
       "body": "",
       "dmNotes": "",
-      "fields": {
-        "tier": "major"
-      },
+      "fields": {},
       "tags": [],
       "visibility": "public",
       "sourcePath": "The Continent/The 3 Empires/Xerastir 1d8f1754c40380748fd5cb0e4cc0c999.md",
@@ -5892,7 +5859,7 @@
       "body": "",
       "dmNotes": "",
       "fields": {
-        "tier": "minor"
+        "tier": "city"
       },
       "tags": [
         "Acheaorian City"
@@ -5909,7 +5876,7 @@
       "body": "",
       "dmNotes": "",
       "fields": {
-        "tier": "minor"
+        "tier": "wild"
       },
       "tags": [
         "River"
@@ -5926,7 +5893,7 @@
       "body": "",
       "dmNotes": "",
       "fields": {
-        "tier": "minor"
+        "tier": "village"
       },
       "tags": [
         "Island Village"
@@ -5943,7 +5910,7 @@
       "body": "",
       "dmNotes": "",
       "fields": {
-        "tier": "minor"
+        "tier": "wild"
       },
       "tags": [
         "Mountain Range",
@@ -5961,7 +5928,7 @@
       "body": "",
       "dmNotes": "",
       "fields": {
-        "tier": "minor"
+        "tier": "town"
       },
       "tags": [
         "Acheaorian Underground Town"

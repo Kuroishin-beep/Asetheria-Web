@@ -3,6 +3,7 @@ import { and, asc, desc, eq, inArray, isNull, isNotNull, ne, or, sql, count } fr
 import { db } from "@/db";
 import { entries, links, revisions, type Entry, type EntryKind, type UserRole } from "@/db/schema";
 import { redactForPlayer } from "@/lib/auth";
+import type { LocationTier } from "@/lib/locations";
 
 /**
  * Every read goes through here so that a player can never receive a secret
@@ -21,6 +22,8 @@ function readable(role: UserRole) {
 export type ListOptions = {
   kind?: EntryKind;
   tag?: string;
+  /** Narrows a location listing to one tier (capital, city, town, …). */
+  tier?: LocationTier;
   limit?: number;
   offset?: number;
   includeArchived?: boolean;
@@ -65,6 +68,7 @@ function listConditions(role: UserRole, opts: ListOptions) {
     readable(role),
     opts.kind ? eq(entries.kind, opts.kind) : undefined,
     opts.tag ? sql`${opts.tag} = ANY(${entries.tags})` : undefined,
+    opts.tier ? sql`${entries.fields}->>'tier' = ${opts.tier}` : undefined,
   ].filter(Boolean);
 }
 
@@ -85,32 +89,37 @@ export async function listEntries(
     .offset(opts.offset ?? 0);
 }
 
-/**
- * Locations split by the `tier` seeded from the Notion hierarchy. Anything not
- * explicitly `major` counts as minor, so a location that predates the field —
- * or one whose tier was cleared in the editor — still appears somewhere rather
- * than dropping off the front page entirely.
- */
+/** Locations of one tier, for the front page and the per-tier sections. */
 export async function listLocationsByTier(
   role: UserRole,
-  tier: "major" | "minor",
+  tier: LocationTier,
   limit = PAGE_SIZE,
 ): Promise<EntryListItem[]> {
+  return listEntries(role, { kind: "location", tier, limit });
+}
+
+/** Live count per location tier, keyed by tier. */
+export async function countLocationsByTier(
+  role: UserRole,
+): Promise<Record<string, number>> {
   const conditions = [
     liveOnly(),
     readable(role),
     eq(entries.kind, "location"),
-    tier === "major"
-      ? sql`lower(${entries.fields}->>'tier') = 'major'`
-      : sql`lower(coalesce(${entries.fields}->>'tier', 'minor')) <> 'major'`,
   ].filter(Boolean);
 
-  return db
-    .select(listColumns)
+  const rows = await db
+    .select({
+      tier: sql<string>`coalesce(${entries.fields}->>'tier', '')`,
+      total: count(),
+    })
     .from(entries)
     .where(and(...(conditions as any[])))
-    .orderBy(asc(entries.name))
-    .limit(limit);
+    .groupBy(sql`coalesce(${entries.fields}->>'tier', '')`);
+
+  const out: Record<string, number> = {};
+  for (const r of rows) if (r.tier) out[r.tier] = r.total;
+  return out;
 }
 
 /** Specific entries by slug, returned in the order the slugs were given. */

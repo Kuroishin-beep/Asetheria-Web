@@ -1,4 +1,5 @@
 import type { EntryKind } from "@/db/schema";
+import { LOCATION_TIERS, type LocationTier } from "@/lib/locations";
 
 export type FieldDef = {
   key: string;
@@ -60,7 +61,11 @@ export const KINDS: KindDef[] = [
     icon: "⛰",
     blurb: "Cities, ruins, wilds, and the waters between them.",
     fields: [
-      { key: "tier", label: "Tier", placeholder: "major or minor" },
+      {
+        key: "tier",
+        label: "Tier",
+        placeholder: "capital, city, town, village, district, site, wild",
+      },
       { key: "type", label: "Type", placeholder: "City, Valley, Mountain Range…" },
       { key: "region", label: "Region" },
       { key: "ruler", label: "Ruler" },
@@ -297,3 +302,55 @@ export function kindIcon(kind: EntryKind): string {
 export function kindSlug(kind: EntryKind): string {
   return KIND_BY_KEY[kind]?.slug ?? "notes";
 }
+
+// ---------------------------------------------------------------------------
+// Sections
+// ---------------------------------------------------------------------------
+
+/**
+ * A section is what the reader sees as a tab: nav item, browse tile, and a
+ * `/codex/<slug>` listing.
+ *
+ * Sections are mostly one per kind, but "Locations" would otherwise pile
+ * capitals, cities, towns, villages, city districts and open wilderness into a
+ * single list of 106. Locations therefore expand into one section per tier,
+ * and the flat Locations tab is dropped rather than duplicating all of them.
+ */
+export type SectionDef = {
+  slug: string;
+  label: string;
+  singular: string;
+  icon: string;
+  blurb: string;
+  kind: EntryKind;
+  /** Present only on the location tier sections. */
+  tier?: LocationTier;
+};
+
+export const SECTIONS: SectionDef[] = KINDS.flatMap((k): SectionDef[] => {
+  if (k.kind !== "location") {
+    return [
+      {
+        slug: k.slug,
+        label: k.label,
+        singular: k.singular,
+        icon: k.icon,
+        blurb: k.blurb,
+        kind: k.kind,
+      },
+    ];
+  }
+  return LOCATION_TIERS.map((t) => ({
+    slug: t.slug,
+    label: t.label,
+    singular: t.singular,
+    icon: t.icon,
+    blurb: t.blurb,
+    kind: "location" as const,
+    tier: t.tier,
+  }));
+});
+
+export const SECTION_BY_SLUG: Record<string, SectionDef> = Object.fromEntries(
+  SECTIONS.map((s) => [s.slug, s]),
+);
