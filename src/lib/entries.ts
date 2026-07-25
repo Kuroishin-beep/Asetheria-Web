@@ -2,7 +2,7 @@ import "server-only";
 import { and, asc, desc, eq, isNull, isNotNull, ne, or, sql, count } from "drizzle-orm";
 import { db } from "@/db";
 import { entries, links, revisions, type Entry, type EntryKind, type UserRole } from "@/db/schema";
-import { redactForPlayer, redactManyForPlayer } from "@/lib/auth";
+import { redactForPlayer } from "@/lib/auth";
 
 /**
  * Every read goes through here so that a player can never receive a secret
@@ -26,23 +26,76 @@ export type ListOptions = {
   includeArchived?: boolean;
 };
 
-export async function listEntries(role: UserRole, opts: ListOptions = {}) {
-  const conditions = [
+/** Entries shown on one page of a section listing. */
+export const PAGE_SIZE = 200;
+
+/**
+ * Columns the card and list views actually render.
+ *
+ * `body` and `dmNotes` are deliberately absent. Lists never display either, and
+ * leaving them out means the DM's private notes are never read out of Postgres
+ * at all — a stronger guarantee than fetching and then redacting them, and it
+ * keeps a few hundred KB of prose off the wire on every section page.
+ */
+const listColumns = {
+  id: entries.id,
+  slug: entries.slug,
+  name: entries.name,
+  kind: entries.kind,
+  summary: entries.summary,
+  fields: entries.fields,
+  tags: entries.tags,
+  visibility: entries.visibility,
+} as const;
+
+export type EntryListItem = {
+  id: string;
+  slug: string;
+  name: string;
+  kind: EntryKind;
+  summary: string;
+  fields: Record<string, string>;
+  tags: string[];
+  visibility: Entry["visibility"];
+};
+
+function listConditions(role: UserRole, opts: ListOptions) {
+  return [
     opts.includeArchived && role === "dm" ? undefined : liveOnly(),
     readable(role),
     opts.kind ? eq(entries.kind, opts.kind) : undefined,
     opts.tag ? sql`${opts.tag} = ANY(${entries.tags})` : undefined,
   ].filter(Boolean);
+}
 
-  const rows = await db
-    .select()
+export async function listEntries(
+  role: UserRole,
+  opts: ListOptions = {},
+): Promise<EntryListItem[]> {
+  const conditions = listConditions(role, opts);
+
+  // No redaction pass is needed on the way out: `readable()` filters secret
+  // entries in SQL, and `listColumns` never selects a DM-only column.
+  return db
+    .select(listColumns)
     .from(entries)
     .where(conditions.length ? and(...(conditions as any[])) : undefined)
     .orderBy(asc(entries.name))
-    .limit(opts.limit ?? 500)
+    .limit(opts.limit ?? PAGE_SIZE)
     .offset(opts.offset ?? 0);
+}
 
-  return role === "dm" ? rows : redactManyForPlayer(rows);
+/** Total matching `opts`, so a listing can page without silently truncating. */
+export async function countEntries(
+  role: UserRole,
+  opts: ListOptions = {},
+): Promise<number> {
+  const conditions = listConditions(role, opts);
+  const [row] = await db
+    .select({ total: count() })
+    .from(entries)
+    .where(conditions.length ? and(...(conditions as any[])) : undefined);
+  return row?.total ?? 0;
 }
 
 export async function countByKind(role: UserRole) {

@@ -2,7 +2,7 @@ import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import type { Metadata } from "next";
 import { getCurrentUser } from "@/lib/auth";
-import { listEntries } from "@/lib/entries";
+import { countEntries, listEntries, PAGE_SIZE } from "@/lib/entries";
 import { KIND_BY_SLUG } from "@/lib/kinds";
 import {
   CardGrid,
@@ -26,8 +26,10 @@ export async function generateMetadata({
 
 export default async function KindPage({
   params,
+  searchParams,
 }: {
   params: Promise<Params>;
+  searchParams: Promise<{ page?: string }>;
 }) {
   const { kindSlug } = await params;
   const def = KIND_BY_SLUG[kindSlug];
@@ -36,7 +38,20 @@ export default async function KindPage({
   const user = await getCurrentUser();
   if (!user) redirect("/login");
 
-  const rows = await listEntries(user.role, { kind: def.kind, limit: 1000 });
+  const total = await countEntries(user.role, { kind: def.kind });
+  const pageCount = Math.max(1, Math.ceil(total / PAGE_SIZE));
+  // Clamp rather than 404: a stale bookmark should land on a real page.
+  const requested = Number((await searchParams).page);
+  const page = Math.min(
+    Math.max(1, Number.isFinite(requested) ? Math.trunc(requested) : 1),
+    pageCount,
+  );
+
+  const rows = await listEntries(user.role, {
+    kind: def.kind,
+    limit: PAGE_SIZE,
+    offset: (page - 1) * PAGE_SIZE,
+  });
 
   return (
     <>
@@ -77,8 +92,11 @@ export default async function KindPage({
         />
       ) : (
         <KindFilter
-          total={rows.length}
+          total={total}
           noun={def.label.toLowerCase()}
+          page={page}
+          pageCount={pageCount}
+          basePath={`/codex/${kindSlug}`}
           items={rows.map((e) => ({
             id: e.id,
             slug: e.slug,
