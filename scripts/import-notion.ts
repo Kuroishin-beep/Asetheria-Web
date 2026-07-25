@@ -215,6 +215,24 @@ type ParsedMd = {
   body: string;
 };
 
+const PROP_LINE = /^([A-Z][A-Za-z0-9 &'\/-]{0,40}):\s*(.*)$/;
+
+/** Notion renders the bullets of a multi-line property value with these glyphs. */
+const BULLET_LINE = /^\s*[•◦]/;
+
+/**
+ * True when another `Key: value` line appears before the property block ends,
+ * which means the lines in between are a wrapped property value rather than
+ * the start of the body.
+ */
+function continuesPropertyBlock(lines: string[], from: number): boolean {
+  for (let j = from; j < lines.length; j++) {
+    if (lines[j].trim() === "") return false;
+    if (PROP_LINE.test(lines[j])) return true;
+  }
+  return false;
+}
+
 function parseMarkdown(text: string): ParsedMd {
   // Strip BOM and normalise newlines.
   const lines = text.replace(/^﻿/, "").replace(/\r\n?/g, "\n").split("\n");
@@ -228,6 +246,9 @@ function parseMarkdown(text: string): ParsedMd {
 
   const fields: Record<string, string> = {};
   let tags: string[] = [];
+  // The field a wrapped value belongs to, so continuation lines append to it
+  // instead of ending the block.
+  let lastKey: string | null = null;
 
   // Notion emits `Key: value` property lines immediately after the H1.
   for (; i < lines.length; i++) {
@@ -235,13 +256,29 @@ function parseMarkdown(text: string): ParsedMd {
     if (line.trim() === "") {
       // Allow a single blank line inside the property block.
       const next = lines[i + 1] ?? "";
-      if (/^[A-Z][A-Za-z0-9 &'\/-]{0,40}:\s/.test(next)) continue;
+      if (PROP_LINE.test(next)) continue;
+      // Notion also emits stray whitespace-only lines between the bullets of a
+      // single value; those do not end the block.
+      if (lastKey && BULLET_LINE.test(next)) continue;
       i++;
       break;
     }
-    const m = line.match(/^([A-Z][A-Za-z0-9 &'\/-]{0,40}):\s*(.*)$/);
-    if (!m) break;
+    const m = line.match(PROP_LINE);
+    if (!m) {
+      // Notion wraps bulleted property values onto their own lines. Treat one
+      // as a continuation when it carries a property bullet glyph, or when
+      // another property follows before the block ends — otherwise it is body
+      // prose that started without a blank line.
+      if (lastKey && (BULLET_LINE.test(line) || continuesPropertyBlock(lines, i + 1))) {
+        fields[lastKey] = [fields[lastKey], cleanValue(line)]
+          .filter(Boolean)
+          .join("\n");
+        continue;
+      }
+      break;
+    }
     const [, label, rawValue] = m;
+    lastKey = null;
     if (/^tags$/i.test(label)) {
       tags = splitTags(rawValue);
       continue;
@@ -250,6 +287,7 @@ function parseMarkdown(text: string): ParsedMd {
     if (!key) continue;
     const value = cleanValue(rawValue);
     if (value) fields[key] = value;
+    lastKey = key;
   }
 
   const body = lines.slice(i).join("\n").trim();

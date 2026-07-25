@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-24T23:53:15.612Z",
+  "generatedAt": "2026-07-25T02:39:55.669Z",
   "count": 482,
   "byKind": {
     "deity": 186,
@@ -4116,11 +4116,11 @@
       "kind": "flora",
       "name": "Embergill Bloom (Beneficial Mushroom)",
       "summary": "A golden-orange mushroom with frilled gills that radiate soft warmth. Found in geothermal caves near lava vents or hot springs.",
-      "body": "• Has mild healing properties when turned into a salve.\nLore: Revered by deep gnomes (Svirfneblin) as a gift from the earth's heart. Often used in healing rituals or given as offerings to earth spirits.\nScientific Name: Luminomyces vitalis",
+      "body": "",
       "dmNotes": "",
       "fields": {
         "description": "A golden-orange mushroom with frilled gills that radiate soft warmth. Found in geothermal caves near lava vents or hot springs.",
-        "effects": "• When brewed into a tea or eaten raw, it grants 1d4 temporary hit points and advantage on saving throws against disease for 24 hours.",
+        "effects": "• When brewed into a tea or eaten raw, it grants 1d4 temporary hit points and advantage on saving throws against disease for 24 hours.\n• Has mild healing properties when turned into a salve.",
         "lore": "Revered by deep gnomes (Svirfneblin) as a gift from the earth's heart. Often used in healing rituals or given as offerings to earth spirits.",
         "scientificName": "Luminomyces vitalis"
       },
@@ -4134,11 +4134,11 @@
       "kind": "flora",
       "name": "Nullcap (Neutral Mushroom)",
       "summary": "A small, grayish-white mushroom with a translucent cap that glows faintly in total darkness. Found in clusters along damp cave walls and abandoned mines.",
-      "body": "• Creatures sometimes use them as markers in dark environments due to their faint bioluminescence.\nLore: Some say the Nullcap is the \"ghost\" of once-powerful fungi, drained of purpose but still clinging to the Underdark.\nScientific Name: Mycena obscura",
+      "body": "",
       "dmNotes": "",
       "fields": {
         "description": "A small, grayish-white mushroom with a translucent cap that glows faintly in total darkness. Found in clusters along damp cave walls and abandoned mines.",
-        "effects": "• Neutral — no known magical or alchemical properties.",
+        "effects": "• Neutral — no known magical or alchemical properties.\n• Creatures sometimes use them as markers in dark environments due to their faint bioluminescence.",
         "lore": "Some say the Nullcap is the \"ghost\" of once-powerful fungi, drained of purpose but still clinging to the Underdark.",
         "scientificName": "Mycena obscura"
       },
@@ -4152,11 +4152,11 @@
       "kind": "flora",
       "name": "Widow’s Bell (Harmful Mushroom)",
       "summary": "A dark purple, bell-shaped mushroom that releases faint melodic chimes when disturbed. The sound is eerie and hypnotic.",
-      "body": "• Handling it unprotected exposes one to the spores.\nLore: Believed to grow where widows have wept or where mournful songs have echoed in the deep. Drow sometimes use it in poisons.\nScientific Name: Bellamyces mortifera",
+      "body": "",
       "dmNotes": "",
       "fields": {
         "description": "A dark purple, bell-shaped mushroom that releases faint melodic chimes when disturbed. The sound is eerie and hypnotic.",
-        "effects": "• Inhalation of spores causes a mild hallucinogenic effect followed by paralysis within 1 minute (DC 14 CON save or paralyzed for 1d4 hours).",
+        "effects": "• Inhalation of spores causes a mild hallucinogenic effect followed by paralysis within 1 minute (DC 14 CON save or paralyzed for 1d4 hours).\n• Handling it unprotected exposes one to the spores.",
         "lore": "Believed to grow where widows have wept or where mournful songs have echoed in the deep. Drow sometimes use it in poisons.",
         "scientificName": "Bellamyces mortifera"
       },
@@ -4170,11 +4170,11 @@
       "kind": "item",
       "name": "Drachmae",
       "summary": "A Golden Coin that has been made with gold that has been transmuted by Quasi/Demi Deity injected with their Divinity that is used for some sorts of communication to anyone if throiwn onna rainbow.",
-      "body": "500gp(Market value w/ divinity)\n1000gp(To the temple with the deity depicted to the coin) but is negotiable\nType: Divine, Item",
+      "body": "",
       "dmNotes": "",
       "fields": {
         "description": "A Golden Coin that has been made with gold that has been transmuted by Quasi/Demi Deity injected with their Divinity that is used for some sorts of communication to anyone if throiwn onna rainbow.",
-        "price": "100 gp (Market value w/o divinity)",
+        "price": "100 gp (Market value w/o divinity)\n500gp(Market value w/ divinity)\n1000gp(To the temple with the deity depicted to the coin) but is negotiable",
         "type": "Divine, Item"
       },
       "tags": [],
@@ -6026,13 +6026,13 @@
       "kind": "ore",
       "name": "Adamantium",
       "summary": "The hardest known substance, appearing as a deep blue-black metal with an almost mirror-like polish. Its surface shows intricate natural patterns resembling flowing water frozen in time.",
-      "body": "Disrupts magical effects on contact\nRemains perpetually cold, never warming\nCauses painful burns to creatures of pure magic\nUses: Reserved for the most critical applications - vault doors, prison bars for the most dangerous criminals, and weapons meant to last forever. Master enchanters use adamantium focuses that never lose their potency.",
+      "body": "",
       "dmNotes": "",
       "fields": {
         "description": "The hardest known substance, appearing as a deep blue-black metal with an almost mirror-like polish. Its surface shows intricate natural patterns resembling flowing water frozen in time.",
         "location": "Forms only in the hearts of volcanoes where elemental fire and earth energies reach perfect equilibrium. These rare nodes exist deep within active volcanic chambers, making extraction extraordinarily dangerous.",
         "lore": "Said to be fragments of the world's original foundation, adamantium represents absolute permanence. Ancient kings would commission single adamantium items as symbols of their eternal dynasties, though ironically, most of these kingdoms have long since fallen to dust.",
-        "properties": "Naturally anathema to fey and fiendish creatures",
+        "properties": "Naturally anathema to fey and fiendish creatures\nDisrupts magical effects on contact\nRemains perpetually cold, never warming\nCauses painful burns to creatures of pure magic",
         "uses": "Reserved for the most critical applications - vault doors, prison bars for the most dangerous criminals, and weapons meant to last forever. Master enchanters use adamantium focuses that never lose their potency."
       },
       "tags": [],
@@ -6062,13 +6062,13 @@
       "kind": "ore",
       "name": "Arcanaite",
       "summary": "A crystalline material that shifts through the spectrum of colors, never settling on any single hue for long. It pulses with inner radiance and seems to hum with barely contained magical energy.",
-      "body": "Changes properties based on the type of magic it absorbs\nResonates with nearby spellcasting\nUnstable in large quantities\nUses: Ground into powder for the most potent spell components, carved into focuses and spell gems, and used as currency among the most powerful mages. Artificers embed small arcanaite crystals in magical items to boost their effectiveness.",
+      "body": "",
       "dmNotes": "",
       "fields": {
         "description": "A crystalline material that shifts through the spectrum of colors, never settling on any single hue for long. It pulses with inner radiance and seems to hum with barely contained magical energy.",
         "location": "Crystallizes naturally in areas of intense magical activity - wizard towers, sites of great battles between spellcasters, and nexuses where multiple ley lines converge. It grows like living crystal, forming geometric patterns of breathtaking beauty.",
         "lore": "Scholars debate whether arcanaite is magic given physical form or matter transformed by pure magical energy. What is certain is that large deposits can become self-aware, leading to the terrifying phenomenon known as \"living dungeons.”",
-        "properties": "Stores and amplifies magical energy",
+        "properties": "Stores and amplifies magical energy\nChanges properties based on the type of magic it absorbs\nResonates with nearby spellcasting\nUnstable in large quantities",
         "uses": "Ground into powder for the most potent spell components, carved into focuses and spell gems, and used as currency among the most powerful mages. Artificers embed small arcanaite crystals in magical items to boost their effectiveness."
       },
       "tags": [],
@@ -6081,13 +6081,13 @@
       "kind": "ore",
       "name": "Cold Iron",
       "summary": "A dark, almost black metal with a matte finish that seems to absorb light rather than reflect it. Its surface is always cool to the touch, regardless of ambient temperature, and frost often forms on its edges in humid conditions.",
-      "body": "Disrupts magical effects on contact\nRemains perpetually cold, never warming\nCauses painful burns to creatures of pure magic\nUses: Forged into weapons and restraints specifically designed to combat supernatural threats. Templars and witch hunters prize cold iron blades, while scholars use cold iron implements to safely handle cursed artifacts.",
+      "body": "",
       "dmNotes": "",
       "fields": {
         "description": "A dark, almost black metal with a matte finish that seems to absorb light rather than reflect it. Its surface is always cool to the touch, regardless of ambient temperature, and frost often forms on its edges in humid conditions.",
         "location": "Mined from regions where the boundary between the material world and otherworldly realms grows thin. These deposits are typically found in forgotten battlefields, ancient burial grounds, and places where powerful magic has been violently disrupted.",
         "lore": "Born from the primordial conflict between order and chaos, cold iron represents the world's natural resistance to otherworldly influence. Blacksmiths who work with it must wear thick gloves, as prolonged contact can numb the soul itself",
-        "properties": "Naturally anathema to fey and fiendish creatures",
+        "properties": "Naturally anathema to fey and fiendish creatures\nDisrupts magical effects on contact\nRemains perpetually cold, never warming\nCauses painful burns to creatures of pure magic",
         "uses": "Forged into weapons and restraints specifically designed to combat supernatural threats. Templars and witch hunters prize cold iron blades, while scholars use cold iron implements to safely handle cursed artifacts."
       },
       "tags": [],
@@ -6100,13 +6100,13 @@
       "kind": "ore",
       "name": "Embersteel",
       "summary": "A warm, orange-red metal that glows with the steady light of a forge's heart. Tiny sparks occasionally dance across its surface, and it radiates comfortable warmth without ever becoming too hot to handle safely.",
-      "body": "Becomes more powerful when exposed to flame\nGradually repairs itself over time\nInspires courage and determination in its wielder\nUses: Forged into weapons that never cool, armor that protects against cold, and hearths that burn without fuel. Warriors value embersteel blades for their ability to cauterize wounds and their morale-boosting properties in battle.",
+      "body": "",
       "dmNotes": "",
       "fields": {
         "description": "A warm, orange-red metal that glows with the steady light of a forge's heart. Tiny sparks occasionally dance across its surface, and it radiates comfortable warmth without ever becoming too hot to handle safely.",
         "location": "Forms in the aftermath of great fires - not mere flames, but conflagrations of legendary proportions that burn with passion and purpose. Dragon lairs, sites of phoenix rebirth, and battlefields where fire elementals have fallen all eventually yield embersteel deposits.",
         "lore": "Embersteel is said to hold the memory of every fire that contributed to its creation. Weapons made from it carry the courage of heroes and the fury of dragons, inspiring their wielders to acts of legendary bravery. Some believe that embersteel items grow stronger with each heroic deed performed with them",
-        "properties": "Maintains constant warmth without external heat",
+        "properties": "Maintains constant warmth without external heat\nBecomes more powerful when exposed to flame\nGradually repairs itself over time\nInspires courage and determination in its wielder",
         "uses": "Forged into weapons that never cool, armor that protects against cold, and hearths that burn without fuel. Warriors value embersteel blades for their ability to cauterize wounds and their morale-boosting properties in battle."
       },
       "tags": [],
@@ -6119,13 +6119,13 @@
       "kind": "ore",
       "name": "Mithril",
       "summary": "A silvery-white metal that gleams with an inner light, as if moonbeams were trapped within its crystalline structure. Mithril appears almost translucent in thin sheets, yet maintains incredible strength and durability.",
-      "body": "Naturally resistant to corrosion and tarnish\nConducts magical energy with minimal loss\nSelf-repairing when exposed to moonlight\nUses: Favored by elven smiths for crafting armor that moves like cloth, weapons that never dull, and jewelry that enhances spellcasting. Mages weave thin mithril wire into their robes to improve spell focus.",
+      "body": "",
       "dmNotes": "",
       "fields": {
         "description": "A silvery-white metal that gleams with an inner light, as if moonbeams were trapped within its crystalline structure. Mithril appears almost translucent in thin sheets, yet maintains incredible strength and durability.",
         "location": "Found exclusively in the deepest mountain caverns where underground rivers have flowed for millennia. The ore forms in veins that follow ancient ley lines, appearing as shimmering threads in the rock face.",
         "lore": "Legend speaks of the first mithril being tears of the moon goddess, shed for mortal heroes who fought valiantly in her name. Ancient texts claim that armor made of pure mithril can turn aside even death itself, though such pieces are beyond rare.",
-        "properties": "Lighter than silk yet stronger than steel",
+        "properties": "Lighter than silk yet stronger than steel\nNaturally resistant to corrosion and tarnish\nConducts magical energy with minimal loss\nSelf-repairing when exposed to moonlight",
         "uses": "Favored by elven smiths for crafting armor that moves like cloth, weapons that never dull, and jewelry that enhances spellcasting. Mages weave thin mithril wire into their robes to improve spell focus."
       },
       "tags": [],
@@ -6138,13 +6138,13 @@
       "kind": "ore",
       "name": "Nullstone",
       "summary": "A completely matte gray stone that seems to exist in a state of absolute stillness. No light reflects from its surface, no sound echoes off it, and even the air around it appears motionless.",
-      "body": "Creates dead magic zones in its vicinity\nSuppresses magical abilities in living beings\nUnaffected by any form of energy\nUses: Carved into cells and restraints for captured spellcasters, ground into powder to create anti-magic barriers, and fashioned into armor by those who hunt mages. Some desperate rulers line their throne rooms with nullstone to prevent magical assassination.",
+      "body": "",
       "dmNotes": "",
       "fields": {
         "description": "A completely matte gray stone that seems to exist in a state of absolute stillness. No light reflects from its surface, no sound echoes off it, and even the air around it appears motionless.",
         "location": "Found in areas where magic has been catastrophically drained or destroyed. These dead zones appear as perfectly circular clearings where nothing grows and no magic functions, with nullstone forming at their centers like scabs over reality's wounds.",
         "lore": "Nullstone is absence given form - not merely resistant to magic, but its complete antithesis. Mages speak of it in hushed tones, as prolonged exposure can permanently drain one's magical abilities, leaving them forever cut off from the arcane arts.",
-        "properties": "Completely immune to all magical effects",
+        "properties": "Completely immune to all magical effects\nCreates dead magic zones in its vicinity\nSuppresses magical abilities in living beings\nUnaffected by any form of energy",
         "uses": "Carved into cells and restraints for captured spellcasters, ground into powder to create anti-magic barriers, and fashioned into armor by those who hunt mages. Some desperate rulers line their throne rooms with nullstone to prevent magical assassination."
       },
       "tags": [],
@@ -6156,14 +6156,14 @@
       "slug": "shattergleam-crystal",
       "kind": "ore",
       "name": "Shattergleam Crystal",
-      "summary": "Appears like a natural geode split open—filled with needle-thin, translucent spikes of shimmering crystal. These crystals radiate a faint, cold-blue glow, making them easily mistaken for magical or alchemical materials.",
-      "body": "The outer structure is silvery-gray and flaked, like dried clay, crumbling if disturbed.\nLocation: Found underground in isolated caves undistrubed for years, or in magic rich areas\nLore: • Dwarves call it “Mhalaz-dur” or “Earth’s Cruel Joke,” and leave it untouched as a superstition—bad luck befalls miners who try to collect it.\n• The drow sometimes carve cave warnings near it, believing it to be a “false star” laid by trickster gods to lure the greedy.\n• Some sages speculate that Shattergleam is the fossilized light of an ancient divine event, frozen in time—but the truth remains unknown.\nProperties: • Brittle Beyond Use:\n    ◦ Shatters into dangerous splinters at heavy physical touch.\n   \n• Illusory Potential (non-magical):\n    ◦ Reflects light strangely, sometimes creating ghostly shapes or halos in darkness, which some explorers misinterpret as magical or spiritual signs.\n    ◦ Attempts to analyze or use it in magic, smithing, or alchemy have all failed—the dust evaporates within hours of exposure to air.",
+      "summary": "Appears like a natural geode split open—filled with needle-thin, translucent spikes of shimmering crystal. These crystals radiate a faint, cold-blue glow, making them easily mistaken for magical or alchemical materials.\nThe outer structure is silvery-gray and flaked, like dried clay, crumbling if di",
+      "body": "",
       "dmNotes": "",
       "fields": {
-        "description": "Appears like a natural geode split open—filled with needle-thin, translucent spikes of shimmering crystal. These crystals radiate a faint, cold-blue glow, making them easily mistaken for magical or alchemical materials.",
+        "description": "Appears like a natural geode split open—filled with needle-thin, translucent spikes of shimmering crystal. These crystals radiate a faint, cold-blue glow, making them easily mistaken for magical or alchemical materials.\nThe outer structure is silvery-gray and flaked, like dried clay, crumbling if disturbed.",
         "location": "Found underground in isolated caves undistrubed for years, or in magic rich areas",
         "lore": "• Dwarves call it “Mhalaz-dur” or “Earth’s Cruel Joke,” and leave it untouched as a superstition—bad luck befalls miners who try to collect it.\n• The drow sometimes carve cave warnings near it, believing it to be a “false star” laid by trickster gods to lure the greedy.\n• Some sages speculate that Shattergleam is the fossilized light of an ancient divine event, frozen in time—but the truth remains unknown.",
-        "properties": "• Brittle Beyond Use: ◦ Shatters into dangerous splinters at heavy physical touch. • Illusory Potential (non-magical): ◦ Reflects light strangely, sometimes creating ghostly shapes or halos in darkness, which some explorers misinterpret as magical or spiritual signs. ◦ Attempts to analyze or use it in magic, smithing, or alchemy have all failed—the dust evaporates within hours of exposure to air."
+        "properties": "• Brittle Beyond Use:\n◦ Shatters into dangerous splinters at heavy physical touch.\n• Illusory Potential (non-magical):\n◦ Reflects light strangely, sometimes creating ghostly shapes or halos in darkness, which some explorers misinterpret as magical or spiritual signs.\n◦ Attempts to analyze or use it in magic, smithing, or alchemy have all failed—the dust evaporates within hours of exposure to air."
       },
       "tags": [],
       "visibility": "public",
@@ -6175,13 +6175,13 @@
       "kind": "ore",
       "name": "Tethtrium",
       "summary": "A peculiar metal that exists in a state of constant, subtle motion. Its surface ripples like liquid mercury while maintaining solid form, and it seems to bend light around itself, creating rainbow halos at its edges.",
-      "body": "Allows limited passage through solid matter\nDisrupts dimensional barriers\nUnpredictable in its behavior\nUses: Crafted into tools for planar researchers, locks that exist in multiple dimensions simultaneously, and weapons that can strike incorporeal foes. Thieves prize tethtrium lockpicks that can reach through solid doors.",
+      "body": "",
       "dmNotes": "",
       "fields": {
         "description": "A peculiar metal that exists in a state of constant, subtle motion. Its surface ripples like liquid mercury while maintaining solid form, and it seems to bend light around itself, creating rainbow halos at its edges.",
         "location": "Forms in areas where the barriers between dimensions have worn thin, typically near ancient portals or sites where planar magic has been extensively practiced. It appears to seep through reality itself, crystallizing into metal as it enters the material plane.",
         "lore": "Named after the first planar scholar to successfully study it, tethtrium is believed to be matter from the space between worlds. Working with it requires great skill, as inexperienced smiths have been known to phase partially out of existence, becoming trapped between dimensions.",
-        "properties": "Phases in and out of reality unpredictably",
+        "properties": "Phases in and out of reality unpredictably\nAllows limited passage through solid matter\nDisrupts dimensional barriers\nUnpredictable in its behavior",
         "uses": "Crafted into tools for planar researchers, locks that exist in multiple dimensions simultaneously, and weapons that can strike incorporeal foes. Thieves prize tethtrium lockpicks that can reach through solid doors."
       },
       "tags": [],
