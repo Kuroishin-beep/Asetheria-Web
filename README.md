@@ -258,9 +258,25 @@ If you keep editing in Notion and want to pull changes across, replace
 npm run import:notion && npm run db:seed
 ```
 
-The seed matches on slug and **will not overwrite work done in the app** — a
-description you have written, a property you have set, or tags you have curated
-are all left alone. Imported values only ever fill a gap.
+The seed matches on slug and **will not overwrite work done in the app**. A
+description you have written, a summary, a property you have set, tags you have
+curated, and the section an entry was re-filed into are all left alone —
+imported values only ever fill a gap.
+
+That last one matters because the importer classifies from the export's folder
+tree, which cannot know that a page was deliberately moved. "The 3 Empires" is
+empire history filed under a location folder in Notion and belongs in Lore here,
+so the seed keeps it there and says so:
+
+```
+· kept 1 kind set in the app (pass --reclassify to take the export's)
+```
+
+If you reorganise in Notion and *do* want the export's classification to win:
+
+```bash
+npm run db:seed -- --reclassify
+```
 
 One caveat worth knowing: Notion's Markdown export silently drops the contents
 of column layouts and some toggle blocks. Its HTML export does not. If a page

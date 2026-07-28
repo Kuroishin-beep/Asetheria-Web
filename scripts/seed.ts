@@ -27,6 +27,12 @@ const REPO = path.resolve(__dirname, "..");
 
 loadEnv();
 
+/**
+ * Let the export's classification overwrite a kind that was changed in the app.
+ * Off by default so re-filing a page here survives the next re-import.
+ */
+const RECLASSIFY = process.argv.includes("--reclassify");
+
 const url = process.env.DATABASE_URL ?? process.env.POSTGRES_URL;
 if (!url) {
   console.error(
@@ -189,6 +195,8 @@ async function seedEntries() {
     .select({
       id: entries.id,
       slug: entries.slug,
+      kind: entries.kind,
+      summary: entries.summary,
       body: entries.body,
       fields: entries.fields,
       tags: entries.tags,
@@ -198,6 +206,7 @@ async function seedEntries() {
 
   let created = 0;
   let updated = 0;
+  let keptKind = 0;
 
   for (const e of payload.entries) {
     const found = bySlug.get(e.slug);
@@ -211,12 +220,24 @@ async function seedEntries() {
         if (typeof value === "string" && value.trim()) mergedFields[key] = value;
       }
 
+      // Kind follows the same rule, with one difference: every entry always
+      // has one, so there is no blank to fill. The import classifies from the
+      // export's folder tree, which cannot know that a page was deliberately
+      // re-filed here — "The 3 Empires" is 3,769 characters of empire history
+      // that lives under a location folder but belongs in Lore. So the stored
+      // kind wins, and `--reclassify` is the way to take the import's instead.
+      const keepKind = !RECLASSIFY && found.kind !== e.kind;
+      if (keepKind) keptKind++;
+
       await db
         .update(entries)
         .set({
           name: e.name,
-          kind: e.kind,
-          summary: e.summary,
+          kind: keepKind ? found.kind : e.kind,
+          // A summary written here is the one-liner shown in every list and
+          // search result; the export's is often blank or the child database's
+          // name, so it fills a gap rather than replacing one.
+          summary: found.summary?.trim() ? found.summary : e.summary,
           body: found.body?.trim() ? found.body : e.body,
           fields: mergedFields,
           // Tags follow the same rule: they are curated in the app (derived
@@ -246,6 +267,8 @@ async function seedEntries() {
         .returning({
           id: entries.id,
           slug: entries.slug,
+          kind: entries.kind,
+          summary: entries.summary,
           body: entries.body,
           fields: entries.fields,
           tags: entries.tags,
@@ -255,6 +278,11 @@ async function seedEntries() {
     }
   }
   console.log(`  ✓ entries: ${created} created, ${updated} updated`);
+  if (keptKind) {
+    console.log(
+      `  · kept ${keptKind} kind${keptKind === 1 ? "" : "s"} set in the app (pass --reclassify to take the export's)`,
+    );
+  }
 
   // -- parents --------------------------------------------------------------
   let parented = 0;
