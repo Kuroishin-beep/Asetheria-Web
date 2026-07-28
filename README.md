@@ -29,6 +29,11 @@ something, that folder is the world, untouched.
 | Quests | 10 | | Factions | 4 |
 | | | | Flora, Notes, Sessions | 7 |
 
+Locations don't sit in one flat list — they're split by tier, so the nav and the
+front page go **Capitals → Major Cities → Towns → Villages → City Districts →
+Sites → The Wilds**. A settlement's tier lives in its `tier` property, derived on
+import and correctable by hand.
+
 The import threw away exactly two things: 478 blank placeholder rows (empty rows
 in my Notion databases, which export as untitled pages with nothing in them) and
 213 duplicate pages, because the Godatabase is a roll-up that re-exports every
@@ -141,6 +146,10 @@ updated or added, and anything not in the file is left alone.
 ---
 
 ## How I actually use it
+
+**The front page** leads with the three standing empires, then continental lore,
+then settlements by tier — capitals first, then major cities, then towns. It's
+the order I actually think in when I'm prepping.
 
 **Finding things.** `Ctrl/⌘ K` or `/` from anywhere. Arrows and Enter to jump.
 Enter with no result runs a full-text search across everything, including

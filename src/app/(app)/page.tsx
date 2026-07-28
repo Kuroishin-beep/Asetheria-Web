@@ -1,22 +1,73 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { getCurrentUser } from "@/lib/auth";
-import { countByKind, getRecentlyUpdated, listAllTags } from "@/lib/entries";
-import { KINDS } from "@/lib/kinds";
+import {
+  countByKind,
+  countLocationsByTier,
+  getRecentlyUpdated,
+  listAllTags,
+  listEntriesBySlugs,
+  listLocationsByTier,
+  listLoreWithContent,
+} from "@/lib/entries";
+import { SECTIONS, STANDING_EMPIRE_SLUGS } from "@/lib/kinds";
 import { CardGrid, EntryCard, PageHeading } from "@/components/entry-card";
+
+/** Heading with an optional "see all" link, used by the front-page sections. */
+function SectionHeading({
+  id,
+  title,
+  href,
+  more,
+}: {
+  id: string;
+  title: string;
+  href?: string;
+  more?: string;
+}) {
+  return (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "baseline",
+        justifyContent: "space-between",
+        gap: "1rem",
+        flexWrap: "wrap",
+      }}
+    >
+      <h2 id={id} className="label">
+        {title}
+      </h2>
+      {href && (
+        <Link href={href} style={{ fontSize: "0.8125rem" }}>
+          {more} →
+        </Link>
+      )}
+    </div>
+  );
+}
 
 export default async function DashboardPage() {
   const user = await getCurrentUser();
   if (!user) redirect("/login");
 
-  const [counts, recent, tags] = await Promise.all([
-    countByKind(user.role),
-    getRecentlyUpdated(user.role, 6),
-    listAllTags(user.role),
-  ]);
+  const [counts, tierCounts, recent, tags, empires, lore, capitals, majorCities, towns] =
+    await Promise.all([
+      countByKind(user.role),
+      countLocationsByTier(user.role),
+      getRecentlyUpdated(user.role, 6),
+      listAllTags(user.role),
+      listEntriesBySlugs(user.role, STANDING_EMPIRE_SLUGS),
+      listLoreWithContent(user.role, 6),
+      listLocationsByTier(user.role, "capital"),
+      listLocationsByTier(user.role, "city"),
+      listLocationsByTier(user.role, "town"),
+    ]);
 
   const total = Object.values(counts).reduce((a, b) => a + (b ?? 0), 0);
-  const populated = KINDS.filter((k) => (counts[k.kind] ?? 0) > 0);
+  const sectionCount = (s: (typeof SECTIONS)[number]) =>
+    s.tier ? (tierCounts[s.tier] ?? 0) : (counts[s.kind] ?? 0);
+  const populated = SECTIONS.filter((s) => sectionCount(s) > 0);
 
   return (
     <>
@@ -28,6 +79,158 @@ export default async function DashboardPage() {
             : `${total} entries the party has uncovered.`
         }
       />
+
+      {/* ---- The three standing empires ---- */}
+      {empires.length > 0 && (
+        <section
+          aria-labelledby="empires-heading"
+          style={{ marginBottom: "2.5rem" }}
+        >
+          <SectionHeading
+            id="empires-heading"
+            title="The Three Empires"
+            href="/codex/empires"
+            more="All empires"
+          />
+          <CardGrid>
+            {empires.map((e) => (
+              <EntryCard
+                key={e.id}
+                slug={e.slug}
+                name={e.name}
+                kind={e.kind}
+                summary={e.summary}
+                tags={e.tags}
+                visibility={e.visibility}
+              />
+            ))}
+          </CardGrid>
+        </section>
+      )}
+
+      {/* ---- Lore of the Continent ---- */}
+      {lore.length > 0 && (
+        <section
+          aria-labelledby="lore-heading"
+          style={{ marginBottom: "2.5rem" }}
+        >
+          <SectionHeading
+            id="lore-heading"
+            title="Lore of the Continent"
+            href="/codex/lore"
+            more="All lore"
+          />
+          <CardGrid>
+            {lore.map((e) => (
+              <EntryCard
+                key={e.id}
+                slug={e.slug}
+                name={e.name}
+                kind={e.kind}
+                summary={e.summary}
+                tags={e.tags}
+                visibility={e.visibility}
+              />
+            ))}
+          </CardGrid>
+        </section>
+      )}
+
+      {/* ---- Capitals ---- */}
+      {capitals.length > 0 && (
+        <section
+          aria-labelledby="capitals-heading"
+          style={{ marginBottom: "2.5rem" }}
+        >
+          <SectionHeading
+            id="capitals-heading"
+            title={`Capitals (${capitals.length})`}
+            href="/codex/capitals"
+            more="All capitals"
+          />
+          <CardGrid>
+            {capitals.map((e) => (
+              <EntryCard
+                key={e.id}
+                slug={e.slug}
+                name={e.name}
+                kind={e.kind}
+                summary={e.summary}
+                tags={e.tags}
+                visibility={e.visibility}
+              />
+            ))}
+          </CardGrid>
+        </section>
+      )}
+
+      {/* ---- Major cities ---- */}
+      {majorCities.length > 0 && (
+        <section
+          aria-labelledby="major-heading"
+          style={{ marginBottom: "2.5rem" }}
+        >
+          <SectionHeading
+            id="major-heading"
+            title={`Major Cities (${majorCities.length})`}
+            href="/codex/cities"
+            more="All cities"
+          />
+          <CardGrid>
+            {majorCities.slice(0, 12).map((e) => (
+              <EntryCard
+                key={e.id}
+                slug={e.slug}
+                name={e.name}
+                kind={e.kind}
+                summary={e.summary}
+                tags={e.tags}
+                visibility={e.visibility}
+              />
+            ))}
+          </CardGrid>
+          {majorCities.length > 12 && (
+            <p style={{ marginTop: "0.75rem", fontSize: "0.8125rem" }}>
+              <Link href="/codex/cities">
+                {majorCities.length - 12} more cities →
+              </Link>
+            </p>
+          )}
+        </section>
+      )}
+
+      {/* ---- Towns ---- */}
+      {towns.length > 0 && (
+        <section
+          aria-labelledby="towns-heading"
+          style={{ marginBottom: "2.5rem" }}
+        >
+          <SectionHeading
+            id="towns-heading"
+            title={`Towns (${towns.length})`}
+            href="/codex/towns"
+            more="All towns"
+          />
+          <CardGrid>
+            {towns.slice(0, 12).map((e) => (
+              <EntryCard
+                key={e.id}
+                slug={e.slug}
+                name={e.name}
+                kind={e.kind}
+                summary={e.summary}
+                tags={e.tags}
+                visibility={e.visibility}
+              />
+            ))}
+          </CardGrid>
+          {towns.length > 12 && (
+            <p style={{ marginTop: "0.75rem", fontSize: "0.8125rem" }}>
+              <Link href="/codex/towns">{towns.length - 12} more towns →</Link>
+            </p>
+          )}
+        </section>
+      )}
 
       {/* ---- Section tiles ---- */}
       <section aria-labelledby="sections-heading" style={{ marginBottom: "2.5rem" }}>
@@ -44,7 +247,7 @@ export default async function DashboardPage() {
         >
           {populated.map((k) => (
             <Link
-              key={k.kind}
+              key={k.slug}
               href={`/codex/${k.slug}`}
               className="card"
               style={{
@@ -69,7 +272,7 @@ export default async function DashboardPage() {
                 {k.label}
               </span>
               <span style={{ fontSize: "0.8125rem", color: "var(--text-muted)" }}>
-                {counts[k.kind]} {counts[k.kind] === 1 ? "entry" : "entries"}
+                {sectionCount(k)} {sectionCount(k) === 1 ? "entry" : "entries"}
               </span>
             </Link>
           ))}

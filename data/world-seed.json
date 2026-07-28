@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-24T23:53:15.612Z",
+  "generatedAt": "2026-07-25T05:49:50.127Z",
   "count": 482,
   "byKind": {
     "deity": 186,
@@ -4116,11 +4116,11 @@
       "kind": "flora",
       "name": "Embergill Bloom (Beneficial Mushroom)",
       "summary": "A golden-orange mushroom with frilled gills that radiate soft warmth. Found in geothermal caves near lava vents or hot springs.",
-      "body": "• Has mild healing properties when turned into a salve.\nLore: Revered by deep gnomes (Svirfneblin) as a gift from the earth's heart. Often used in healing rituals or given as offerings to earth spirits.\nScientific Name: Luminomyces vitalis",
+      "body": "",
       "dmNotes": "",
       "fields": {
         "description": "A golden-orange mushroom with frilled gills that radiate soft warmth. Found in geothermal caves near lava vents or hot springs.",
-        "effects": "• When brewed into a tea or eaten raw, it grants 1d4 temporary hit points and advantage on saving throws against disease for 24 hours.",
+        "effects": "• When brewed into a tea or eaten raw, it grants 1d4 temporary hit points and advantage on saving throws against disease for 24 hours.\n• Has mild healing properties when turned into a salve.",
         "lore": "Revered by deep gnomes (Svirfneblin) as a gift from the earth's heart. Often used in healing rituals or given as offerings to earth spirits.",
         "scientificName": "Luminomyces vitalis"
       },
@@ -4134,11 +4134,11 @@
       "kind": "flora",
       "name": "Nullcap (Neutral Mushroom)",
       "summary": "A small, grayish-white mushroom with a translucent cap that glows faintly in total darkness. Found in clusters along damp cave walls and abandoned mines.",
-      "body": "• Creatures sometimes use them as markers in dark environments due to their faint bioluminescence.\nLore: Some say the Nullcap is the \"ghost\" of once-powerful fungi, drained of purpose but still clinging to the Underdark.\nScientific Name: Mycena obscura",
+      "body": "",
       "dmNotes": "",
       "fields": {
         "description": "A small, grayish-white mushroom with a translucent cap that glows faintly in total darkness. Found in clusters along damp cave walls and abandoned mines.",
-        "effects": "• Neutral — no known magical or alchemical properties.",
+        "effects": "• Neutral — no known magical or alchemical properties.\n• Creatures sometimes use them as markers in dark environments due to their faint bioluminescence.",
         "lore": "Some say the Nullcap is the \"ghost\" of once-powerful fungi, drained of purpose but still clinging to the Underdark.",
         "scientificName": "Mycena obscura"
       },
@@ -4152,11 +4152,11 @@
       "kind": "flora",
       "name": "Widow’s Bell (Harmful Mushroom)",
       "summary": "A dark purple, bell-shaped mushroom that releases faint melodic chimes when disturbed. The sound is eerie and hypnotic.",
-      "body": "• Handling it unprotected exposes one to the spores.\nLore: Believed to grow where widows have wept or where mournful songs have echoed in the deep. Drow sometimes use it in poisons.\nScientific Name: Bellamyces mortifera",
+      "body": "",
       "dmNotes": "",
       "fields": {
         "description": "A dark purple, bell-shaped mushroom that releases faint melodic chimes when disturbed. The sound is eerie and hypnotic.",
-        "effects": "• Inhalation of spores causes a mild hallucinogenic effect followed by paralysis within 1 minute (DC 14 CON save or paralyzed for 1d4 hours).",
+        "effects": "• Inhalation of spores causes a mild hallucinogenic effect followed by paralysis within 1 minute (DC 14 CON save or paralyzed for 1d4 hours).\n• Handling it unprotected exposes one to the spores.",
         "lore": "Believed to grow where widows have wept or where mournful songs have echoed in the deep. Drow sometimes use it in poisons.",
         "scientificName": "Bellamyces mortifera"
       },
@@ -4170,11 +4170,11 @@
       "kind": "item",
       "name": "Drachmae",
       "summary": "A Golden Coin that has been made with gold that has been transmuted by Quasi/Demi Deity injected with their Divinity that is used for some sorts of communication to anyone if throiwn onna rainbow.",
-      "body": "500gp(Market value w/ divinity)\n1000gp(To the temple with the deity depicted to the coin) but is negotiable\nType: Divine, Item",
+      "body": "",
       "dmNotes": "",
       "fields": {
         "description": "A Golden Coin that has been made with gold that has been transmuted by Quasi/Demi Deity injected with their Divinity that is used for some sorts of communication to anyone if throiwn onna rainbow.",
-        "price": "100 gp (Market value w/o divinity)",
+        "price": "100 gp (Market value w/o divinity)\n500gp(Market value w/ divinity)\n1000gp(To the temple with the deity depicted to the coin) but is negotiable",
         "type": "Divine, Item"
       },
       "tags": [],
@@ -4204,7 +4204,9 @@
       "summary": "",
       "body": "",
       "dmNotes": "",
-      "fields": {},
+      "fields": {
+        "tier": "wild"
+      },
       "tags": [
         "Seas"
       ],
@@ -4219,7 +4221,9 @@
       "summary": "",
       "body": "",
       "dmNotes": "",
-      "fields": {},
+      "fields": {
+        "tier": "city"
+      },
       "tags": [
         "Hellenorian City"
       ],
@@ -4247,7 +4251,9 @@
       "summary": "",
       "body": "",
       "dmNotes": "",
-      "fields": {},
+      "fields": {
+        "tier": "capital"
+      },
       "tags": [
         "Capital",
         "Invictian City"
@@ -4276,7 +4282,9 @@
       "summary": "",
       "body": "",
       "dmNotes": "",
-      "fields": {},
+      "fields": {
+        "tier": "village"
+      },
       "tags": [
         "Araucaria Village"
       ],
@@ -4291,7 +4299,9 @@
       "summary": "",
       "body": "",
       "dmNotes": "",
-      "fields": {},
+      "fields": {
+        "tier": "site"
+      },
       "tags": [
         "Library"
       ],
@@ -4306,7 +4316,9 @@
       "summary": "",
       "body": "",
       "dmNotes": "",
-      "fields": {},
+      "fields": {
+        "tier": "site"
+      },
       "tags": [
         "Temple"
       ],
@@ -4334,7 +4346,9 @@
       "summary": "",
       "body": "",
       "dmNotes": "",
-      "fields": {},
+      "fields": {
+        "tier": "town"
+      },
       "tags": [
         "Invictian Town"
       ],
@@ -4349,7 +4363,9 @@
       "summary": "",
       "body": "",
       "dmNotes": "",
-      "fields": {},
+      "fields": {
+        "tier": "town"
+      },
       "tags": [
         "Hellenorian Town"
       ],
@@ -4364,7 +4380,9 @@
       "summary": "",
       "body": "",
       "dmNotes": "",
-      "fields": {},
+      "fields": {
+        "tier": "town"
+      },
       "tags": [
         "Hellenorian Town"
       ],
@@ -4392,7 +4410,9 @@
       "summary": "",
       "body": "",
       "dmNotes": "",
-      "fields": {},
+      "fields": {
+        "tier": "city"
+      },
       "tags": [
         "Acheaorian City"
       ],
@@ -4407,7 +4427,9 @@
       "summary": "",
       "body": "",
       "dmNotes": "",
-      "fields": {},
+      "fields": {
+        "tier": "town"
+      },
       "tags": [
         "Hellenorian Town"
       ],
@@ -4422,7 +4444,9 @@
       "summary": "",
       "body": "",
       "dmNotes": "",
-      "fields": {},
+      "fields": {
+        "tier": "village"
+      },
       "tags": [
         "Island Village"
       ],
@@ -4437,7 +4461,9 @@
       "summary": "",
       "body": "",
       "dmNotes": "",
-      "fields": {},
+      "fields": {
+        "tier": "village"
+      },
       "tags": [
         "Island Village"
       ],
@@ -4452,7 +4478,9 @@
       "summary": "",
       "body": "",
       "dmNotes": "",
-      "fields": {},
+      "fields": {
+        "tier": "wild"
+      },
       "tags": [
         "Valley"
       ],
@@ -4480,7 +4508,9 @@
       "summary": "",
       "body": "",
       "dmNotes": "",
-      "fields": {},
+      "fields": {
+        "tier": "town"
+      },
       "tags": [
         "Hellenorian Town"
       ],
@@ -4495,7 +4525,9 @@
       "summary": "",
       "body": "",
       "dmNotes": "",
-      "fields": {},
+      "fields": {
+        "tier": "city"
+      },
       "tags": [
         "Hellenorian City"
       ],
@@ -4510,7 +4542,9 @@
       "summary": "Biome: High fantasy desert wasteland with divine-tainted zones",
       "body": "# **Dasht a Khaliq** *(The Divine Wastes)*\n\n**Biome**: High fantasy desert wasteland with divine-tainted zones\n\n**Continent**: Eastern third of Asetheria\n\n**Dominant Power**: **Acheaoria Empire** (Ancient Persian-inspired)\n\n**Primary Threats**: Environmental hazards, corrupted beings, undead, desert raiders, and spirit-beasts\n\n---\n\n## 💡 GM Overview\n\n**Use this desert as:**\n\n- A crucible for survival-based campaigns\n- A high-stakes setting for political intrigue between empires\n- A divine or cosmic horror-infused sandbox\n- A gateway into ancient ruins and forgotten god-corpses\n\n**Core Themes**:\n\n☀ Divine aftermaths and corruption\n\n🌵 Harsh terrain and survival\n\n⚔ Imperial politics vs creeping entropy\n\n🌀 Hidden magic beneath ancient sands\n\n---\n\n## 🗺️ Regional Breakdown for GMs\n\n### 🜁 REGION I: **Zahr al-Mawt** – *“Blossom of Death”*\n\n**(Northeast - Border of the Dead Realms)**\n\n- **Primary Tone**: Survival horror / Cosmic corruption\n- **Biome**: Tainted dunes, dark sands, rotting winds\n- **Environmental Effect**: *All healing spells halve their effectiveness unless divine (e.g., from gods of life or purity)*\n\n### 🔥 Threats\n\n- **Rot-Beasts**: Mutated animals and divine leftovers\n- **Death-Marches**: Undead processions heading aimlessly into the dunes\n- **Blight Titans**: Semi-sentient decaying god-husks\n- **Blasphemous Weather**: Acid winds, bone storms, voice-tempests (whispering storms)\n\n### 🧭 Adventure Hooks\n\n- A cult seeks to awaken a forgotten deity buried in the sands\n- An imperial fort has gone dark — overrun or converted?\n- A god’s ribcage now serves as the lair of a crystal dracolich\n\n### 🎲 Encounter Types\n\n| Encounter | CR Range | Notes |\n| --- | --- | --- |\n| Rot-Lions | 3–5 | Pack hunters, bone-covered beasts |\n| Titanspawn | 7–10 | Aberrant giants with memory echo attacks |\n| Wandering Legion | Variable | Undead soldiers in full Acheaorian gear |\n\n---\n\n### 🜂 REGION II: **Ruhaniin Vale** – *“Spirits’ Rest”*\n\n**(Central / Eastern – Civilized Desert Core)**\n\n- **Primary Tone**: Political intrigue / survival civilization\n- **Biome**: Semi-arid zones, oases, underground cities\n- **Environmental Effect**: *Random mirage effects trigger every long rest without a Sahari guide*\n\n### 🏛 Points of Interest\n\n- **Kharnesh** – Capital city atop the Eye of Havar, layered, vertical city with water-based caste politics\n- **The Under-Sands** – Series of sunken towns connected by tunnels and whispering passageways\n- **Vault of Silt** – Magical aqueduct hub and leyline stabilizer guarded by mages\n\n### 🧭 Adventure Hooks\n\n- Tensions rise between water-rich and water-starved towns: spark of civil conflict\n- A noble house has secretly made a pact with desert elementals to overthrow the ruling Shah\n- An underground city has broken contact – recent tremors awakened something beneath\n\n### 🎲 Encounter Types\n\n| Encounter | CR Range | Notes |\n| --- | --- | --- |\n| Sand Raiders (Sandsworn) | 2–6 | Ride dune-serpents, use mirage illusions |\n| Mirage Beasts | 5–8 | Phantasmal predators that only become real when seen |\n| Political intrigue | N/A | Espionage, assassination attempts, court trials |\n\n---\n\n### 🜃 REGION III: **Khamsin’s Reach** – *“Breath of the Desert”*\n\n**(Southeast – Wild Frontier)**\n\n- **Primary Tone**: Frontier mystery / expansion tension\n- **Biome**: Rocky desert, petrified forests, creeping sands\n- **Environmental Effect**: *Every dawn roll 1d6 – on a 1, a new 10-mile stretch is swallowed by sand*\n\n### 🏛 Points of Interest\n\n- **Petra of the South** – City carved into living rock, oasis slowly drying\n- **The Shifting Pines** – Petrified woodlands with dryad-lich remnants\n- **Stone Choir** – Desert obelisks that sing in wind, ancient weather-control relics\n\n### 🧭 Adventure Hooks\n\n- A region of forest disappears overnight, buried by sudden dunes\n- A druidic circle battles a sand elemental titan that awakens each solstice\n- A ruined observatory atop a plateau hides weather-warping rituals\n\nScattered across the southern sands are **floating obelisks** and **half-sunken monoliths**, covered in glyphs that no scholar can fully decipher. Every few years, a new one appears. None have seen them rise. But those who touch them… change. Some speak in tongues not heard since the First Epoch. Others disappear into the dunes without a trace.\n\nWorst of all, Khamsin’s Edge feels like it’s pushing forward. The dunes inch farther into neighboring lands with each season. Trees turn to salt. The air grows heavier. The Empire sends sandbreakers to stop the drift, but the desert always reclaims.\n\n### 🎲 Encounter Types\n\n| Encounter | CR Range | Notes |\n| --- | --- | --- |\n| Bonewood Dryads | 5–7 | Vengeful, use petrification and sandvine snares |\n| Sandwights | 6–8 | Undead that swim beneath sand and whisper truths |\n| Weather Elementals | 8+ | Manifest from broken obelisks or storm rites gone wrong |\n\n---\n\n## ⚖️ Faction Hooks\n\n### **The Acheaorian Empire**\n\n- Seeks to reclaim ancient cities buried beneath the sands\n- Employs Sahari (elite desert rangers) to guard trade and patrol desert zones\n- Water control is political power\n- Hosts multiple **noble houses** vying for influence over water rights and border defense\n\n### **The Sahari**\n\n- Elite desertborn nomads, mystical guides, and survivalists\n- Neutral in politics but hold spiritual and logistical power\n- Have knowledge of \"The Sand Beneath the Sand\" — secret tunnels to ancient epochs\n\n### **Cult of the Pale Sun**\n\n- Worship a dead solar god buried in the Zahr al-Mawt\n- Believe the desert is the only “pure” land unspoiled by civilization\n- Plot to cause droughts and awaken god-corpses for purification\n\n---\n\n## 🔧 Mechanical Features to Use\n\n- **Travel Fatigue Tables**: Include dehydration rolls, mirage hallucination checks, and sandstorm navigational DCs.\n- **Mirage Encounters**: At any moment, roll for a false oasis or a projected village. A DC 15 Wisdom (Survival) or (Insight) may detect the illusion.\n- **Living Sands**: Treat desert terrain as potentially mobile. Use shifting battle maps or random terrain changes.\n- **Sand Rot**: Curse/disease spread by touching divine-corrupted sands (WIS saves, permanent mutations or delusions).\n\n---\n\n## 🧩 Magic and Relics\n\n- **The Obsidian Compass** – Points not to north, but to the last source of divine tears (used to find hidden oases or holy relics)\n- **Scrolls of Sand-Tongue** – Let casters speak to the wind, revealing buried ruins or avoiding storms\n- **Sunforged Glassblade** – Created from godlight-scorched sand; glows when undead or titanic remnants are near",
       "dmNotes": "",
-      "fields": {},
+      "fields": {
+        "tier": "wild"
+      },
       "tags": [
         "Great Desert"
       ],
@@ -4525,7 +4559,9 @@
       "summary": "",
       "body": "",
       "dmNotes": "",
-      "fields": {},
+      "fields": {
+        "tier": "town"
+      },
       "tags": [
         "Acheaorian Underground Town"
       ],
@@ -4540,7 +4576,9 @@
       "summary": "",
       "body": "",
       "dmNotes": "",
-      "fields": {},
+      "fields": {
+        "tier": "city"
+      },
       "tags": [
         "Neutral Hub City"
       ],
@@ -4568,7 +4606,9 @@
       "summary": "",
       "body": "",
       "dmNotes": "",
-      "fields": {},
+      "fields": {
+        "tier": "city"
+      },
       "tags": [
         "Hellenorian City"
       ],
@@ -4584,7 +4624,8 @@
       "body": "",
       "dmNotes": "",
       "fields": {
-        "createdNote": "April 18, 2025 3:26 PM"
+        "createdNote": "April 18, 2025 3:26 PM",
+        "tier": "district"
       },
       "tags": [
         "Middle City"
@@ -4600,7 +4641,9 @@
       "summary": "Families",
       "body": "[Families](Duneforged%20Citadel/Families%201d8f1754c40380b9802ee881281d4cb0.csv)\n\n[Locations](Duneforged%20Citadel/Locations%201d8f1754c4038000b992c3f94665755c.csv)\n\n[Citadel Cathedral](Duneforged%20Citadel/Citadel%20Cathedral%201d8f1754c40380b3aaa4f2777d32ac6f.csv)\n\n[Forbidden Zone](Duneforged%20Citadel/Forbidden%20Zone%201e4f1754c40380569393f8c231674a4c.csv)\n\n[Military](Duneforged%20Citadel/Military%20230f1754c40380979d19dcf532f1971d.csv)",
       "dmNotes": "",
-      "fields": {},
+      "fields": {
+        "tier": "city"
+      },
       "tags": [
         "Invictian City"
       ],
@@ -4615,7 +4658,9 @@
       "summary": "",
       "body": "",
       "dmNotes": "",
-      "fields": {},
+      "fields": {
+        "tier": "wild"
+      },
       "tags": [
         "Plains"
       ],
@@ -4630,7 +4675,9 @@
       "summary": "",
       "body": "",
       "dmNotes": "",
-      "fields": {},
+      "fields": {
+        "tier": "city"
+      },
       "tags": [
         "Invictian City"
       ],
@@ -4645,7 +4692,9 @@
       "summary": "",
       "body": "",
       "dmNotes": "",
-      "fields": {},
+      "fields": {
+        "tier": "town"
+      },
       "tags": [
         "Invictian Town"
       ],
@@ -4660,7 +4709,9 @@
       "summary": "Foloicaria is a vast, ancient forest untouched by the millennium-long Continental War. Its thick canopies and dense undergrowth pulse with pure, unfiltered Nature Magic, often called \"Vitalous Energy.\" This saturation has caused rampant, often unpredictable mutations among flora and fauna—creatur…",
       "body": "### GM Summary: **Foloicaria, the Living Wilds**\n\nFoloicaria is a vast, ancient forest untouched by the millennium-long Continental War. Its thick canopies and dense undergrowth pulse with pure, unfiltered Nature Magic, often called \"Vitalous Energy.\" This saturation has caused rampant, often unpredictable mutations among flora and fauna—creatures twisted not into abominations, but into avatars of nature’s primal will. The forest is very much alive, and many believe it to be sentient.\n\nThree regions define Foloicaria:\n\n1. **The Eastern Peaks – Mount Vaeltheruun:** A lone, fog-shrouded mountain visible from afar. Whispers say its summit reveals a colossal serpentine silhouette. Here reside **Echidna and Typhon**, progenitors of all monsters. They rule the eastern wilds, and their monstrous descendants roam freely under their watchful gaze.\n2. **The Heartgrove – Wild Elf Domain:** In the central region lies a single city, founded by Elven clans who braved the unknown ages ago. Over centuries, their forms have adapted—some growing fur, feathers, or bark-like skin—blending into the ecosystem. They are now known as **Wild Elves**, protectors and stewards of the forest’s middle domain.\n3. **The Western Wilds – Medusan Territory:** The west is home to **Medusa**, who formed an alliance with fierce **Amazonian tribes**. These warrior-women and serpentine guardians live in harmony, mastering the land’s dangers and reshaping it into a domain of trial, challenge, and survival.\n\nEven the strongest warlords and archmages of the empires avoid Foloicaria. Its creatures are beyond cataloging, its geography seems to shift, and ancient, slumbering powers lie dormant—or watchful.",
       "dmNotes": "",
-      "fields": {},
+      "fields": {
+        "tier": "wild"
+      },
       "tags": [
         "Great Forest"
       ],
@@ -4676,7 +4727,8 @@
       "body": "",
       "dmNotes": "",
       "fields": {
-        "createdNote": "April 18, 2025 10:57 PM"
+        "createdNote": "April 18, 2025 10:57 PM",
+        "tier": "site"
       },
       "tags": [],
       "visibility": "public",
@@ -4690,7 +4742,9 @@
       "summary": "",
       "body": "",
       "dmNotes": "",
-      "fields": {},
+      "fields": {
+        "tier": "town"
+      },
       "tags": [
         "Invictian Town"
       ],
@@ -4706,7 +4760,8 @@
       "body": "Rather than a single grand forge, a series of smaller specialized foundries are arrayed across the citadel's plateaus. Each one harnesses a different natural geomantic energy source - from geothermal vents to arid wind tunnels.",
       "dmNotes": "",
       "fields": {
-        "createdNote": "April 18, 2025 3:25 PM"
+        "createdNote": "April 18, 2025 3:25 PM",
+        "tier": "district"
       },
       "tags": [
         "Upper Streets"
@@ -4723,7 +4778,8 @@
       "body": "",
       "dmNotes": "",
       "fields": {
-        "createdNote": "April 17, 2025 11:15 PM"
+        "createdNote": "April 17, 2025 11:15 PM",
+        "tier": "site"
       },
       "tags": [],
       "visibility": "public",
@@ -4750,7 +4806,9 @@
       "summary": "",
       "body": "",
       "dmNotes": "",
-      "fields": {},
+      "fields": {
+        "tier": "city"
+      },
       "tags": [
         "Hellenorian City"
       ],
@@ -4765,7 +4823,9 @@
       "summary": "",
       "body": "",
       "dmNotes": "",
-      "fields": {},
+      "fields": {
+        "tier": "capital"
+      },
       "tags": [
         "Capital",
         "Hellenorian City"
@@ -4796,7 +4856,9 @@
       "summary": "",
       "body": "",
       "dmNotes": "",
-      "fields": {},
+      "fields": {
+        "tier": "wild"
+      },
       "tags": [
         "Seas"
       ],
@@ -4811,7 +4873,9 @@
       "summary": "",
       "body": "",
       "dmNotes": "",
-      "fields": {},
+      "fields": {
+        "tier": "town"
+      },
       "tags": [
         "Hellenorian Town"
       ],
@@ -4826,7 +4890,9 @@
       "summary": "",
       "body": "",
       "dmNotes": "",
-      "fields": {},
+      "fields": {
+        "tier": "wild"
+      },
       "tags": [
         "Mountain Range"
       ],
@@ -4841,7 +4907,9 @@
       "summary": "“The wind still bows when it passes here. Something greater once stood upon this soil… and something older made it kneel.”",
       "body": "## **“Praetor’s Fall” – The Field That Knelt**\n\n*As documented by Scribe Pellion Meraquas, Aeterna Lexicon*\n\n*Entry filed under: Topographies of Significance, Imperial Censure Tier II*\n\n---\n\n> “The wind still bows when it passes here. Something greater once stood upon this soil… and something older made it kneel.”\n> \n> \n> — *From the banned chronicle “Whispers of the Earth”*\n> \n\nTo the **east of Campania Veta**, past vineyards too well-tended to be natural and orchards whose fruits never rot, lies a vast depression in the earth—**a field that slopes inward like a bowl**, unnaturally smooth, unnervingly quiet. Locals call it **Praetor’s Fall**, though no records confirm which praetor—if any—ever commanded legions there.\n\nThe plain dips for nearly a mile, forming a **shallow crater** too symmetrical to be natural, too clean to be accidental. Some scholars argue that it is the remains of an arcane bombardment, or a ritual collapse. Others—namely the few who have spent the night there—claim the land itself moved, as if **kneeling in submission** to an unseen force.\n\n---\n\n- **The Heretic-Praetor Thesis:** One school of thought states that **Praetor Lurentius Varro**, a proud and reckless general, attempted to declare himself **\"Imperator-Aeternum\"** during a military campaign in the outer provinces. As he performed a forbidden rite meant to elevate his soul into godhood, the land rejected him. The very ground beneath his army bowed—and then swallowed them.\n    - *Only their banners were recovered, half-buried in obsidian dust.*\n- **The Sleeping Titan Theory:** A conflicting myth claims no man ever caused the Fall. Instead, the depression is the **resting place of a colossal being**—a god, a giant, a primordial engine of war. The slope is simply the curve of its back beneath the earth. Nightmares suffered by travelers seem to depict a ribcage beneath soil.\n- **Architectural Anomaly:** Some claim the land below is **hollow**, and that ruins—perfectly preserved and older than the Imperium—sit beneath layers of soft earth. The **obsidian monolith** at the crater’s heart, called simply **“The Witness”**, is believed to be a keystone, anchor, or eye.\n\n---\n\n### **Physical Traits of the Region**\n\nThe wind within Praetor’s Fall never follows the direction of the larger plains. It moves in **gentle spirals**, as though circling an absent drain.\n\n**The Soil:** Some report that footprints vanish seconds after being made—others that they deepen over time until they resemble grave markers.\n\n**The Witness (Obsidian Pillar):**\n\n- 12 feet tall. Smooth. Warm.\n- Emits a low hum when touched with a bare hand, particularly during eclipses or storms.\n- Some claim it **records thoughts**, offering visions not of the past or future, but **possibilities never chosen**.\n- One scholar, **Archivist Doria Vem**, reported seeing herself kneeling before an altar. She disappeared three days later. Her sandals were found beside the pillar, filled with dry ash.\n\n---\n\n> “We measured the Fall by day. By nightfall, the measurements had doubled. The next morning, the field was back to its old shape. But our shadows were still long.”\n> \n> \n> — *Excerpt from the journal of Legion Surveyor Valcis Grane*\n> \n\n> “I heard chanting from beneath my feet. And I was alone.”\n> \n> \n> — *Campfire tale, attributed to an unnamed merchant*\n> \n\n> “No birds fly over it. No worms burrow through it. And when you sleep in Praetor’s Fall, your dreams are not your own.”\n> \n> \n> — *Old soldier’s warning, scratched into a barracks wall near Campania’s eastern road*\n> \n\n---\n\n A fringe sect worships the Fall itself, believing it is a **place of rebirth**. Most who enter seeking enlightenment return broken… or don’t return at all.\n\nTime moves strangely here. One traveler reports spending “an hour” within the Fall—yet emerged five days later, with a beard and memory gaps.\n\nThe Empire denies all anomalies in the region. A legion detachment once stationed nearby was quietly reassigned and the road redirected to bypass it. Scribes accessing historical documents about Praetor’s Fall require a Ciphered Seal of Red Marble, issued only to members of the 4th Circle or higher.\n\n---\n\n> “If the land could pray, this is what the prayer would look like.”\n> \n> \n> — *Scribe Pellion Meraquas, after returning from the Fall, never to write again*\n> \n\n## **“Praetor’s Fall” – The Field That Knelt**\n\n*As documented by Scribe Pellion Meraquas, Fourth Circle of Mirrors*\n\n*Entry filed under: Topographies of Significance, Imperial Censure Tier II*\n\n---\n\n> “The wind still bows when it passes here. Something greater once stood upon this soil… and something older made it kneel.”\n> \n> \n> — *From the banned chronicle “Whispers of the Earth”*\n> \n\nTo the **east of Campania Veta**, past vineyards too well-tended to be natural and orchards whose fruits never rot, lies a vast depression in the earth—**a field that slopes inward like a bowl**, unnaturally smooth, unnervingly quiet. Locals call it **Praetor’s Fall**, though no records confirm which praetor—if any—ever commanded legions there.\n\nThe plain dips for nearly a mile, forming a **shallow crater** too symmetrical to be natural, too clean to be accidental. Some scholars argue that it is the remains of an arcane bombardment, or a ritual collapse. Others—namely the few who have spent the night there—claim the land itself moved, as if **kneeling in submission** to an unseen force.\n\n---\n\n### **Legends and Conflicts in the Record**\n\n- **The Heretic-Praetor Thesis:** One school of thought states that **Praetor Lurentius Varro**, a proud and reckless general, attempted to declare himself **\"Imperator-Aeternum\"** during a military campaign in the outer provinces. As he performed a forbidden rite meant to elevate his soul into godhood, the land rejected him. The very ground beneath his army bowed—and then swallowed them.\n    - *Only their banners were recovered, half-buried in obsidian dust.*\n- **The Sleeping Titan Theory:** A conflicting myth claims no man ever caused the Fall. Instead, the depression is the **resting place of a colossal being**—a god, a giant, a primordial engine of war. The slope is simply the curve of its back beneath the earth. Nightmares suffered by travelers seem to depict a ribcage beneath soil.\n- **Architectural Anomaly:** Some claim the land below is **hollow**, and that ruins—perfectly preserved and older than the Imperium—sit beneath layers of soft earth. The **obsidian monolith** at the crater’s heart, called simply **“The Witness”**, is believed to be a keystone, anchor, or eye.\n\n---\n\n### **Physical Traits of the Region**\n\n- **Wind Patterns:** The wind within Praetor’s Fall never follows the direction of the larger plains. It moves in **gentle spirals**, as though circling an absent drain.\n- **The Soil:** The soil here is warm, even at night, and emits faint reddish flecks. Some report that footprints vanish seconds after being made—others that they deepen over time until they resemble grave markers.\n- **The Witness (Obsidian Pillar):**\n    - 12 feet tall. Smooth. Warm.\n    - Emits a low hum when touched with a bare hand, particularly during eclipses or storms.\n    - Some claim it **records thoughts**, offering visions not of the past or future, but **possibilities never chosen**.\n    - One scholar, **Archivist Doria Vem**, reported seeing herself kneeling before an altar. She disappeared three days later. Her sandals were found beside the pillar, filled with dry ash.\n\n---\n\n### **Quotes and Unreliable Testimony**\n\n> “We measured the Fall by day. By nightfall, the measurements had doubled. The next morning, the field was back to its old shape. But our shadows were still long.”\n> \n> \n> — *Excerpt from the journal of Legion Surveyor Valcis Grane*\n> \n\n> “I heard chanting from beneath my feet. And I was alone.”\n> \n> \n> — *Campfire tale, attributed to an unnamed merchant*\n> \n\n> “No birds fly over it. No worms burrow through it. And when you sleep in Praetor’s Fall, your dreams are not your own.”\n> \n> \n> — *Old soldier’s warning, scratched into a barracks wall near Campania’s eastern road*\n> \n\n---\n\n### **Rumored Hazards & Adventure Hooks**\n\n- **Missing Pilgrims:** A fringe sect worships the Fall itself, believing it is a **place of rebirth**. Most who enter seeking enlightenment return broken… or don’t return at all.\n- **Temporal Distortion:** Time moves strangely here. One traveler reports spending “an hour” within the Fall—yet emerged five days later, with a beard and memory gaps.\n- **Imperial Secrecy:** The Empire denies all anomalies in the region. A **legion detachment once stationed nearby was quietly reassigned** and the road redirected to bypass it. Scribes accessing historical documents about Praetor’s Fall require a **Ciphered Seal of Red Marble**, issued only to members of the 4th Circle or higher.\n\n---\n\n> “If the land could pray, this is what the prayer would look like.”\n> \n> \n> — *Scribe Pellion Meraquas, after returning from the Fall, never to write again*\n>",
       "dmNotes": "",
-      "fields": {},
+      "fields": {
+        "tier": "wild"
+      },
       "tags": [
         "Plains"
       ],
@@ -4871,7 +4939,9 @@
       "summary": "",
       "body": "",
       "dmNotes": "",
-      "fields": {},
+      "fields": {
+        "tier": "town"
+      },
       "tags": [
         "Hellenorian Town"
       ],
@@ -4901,7 +4971,9 @@
       "summary": "",
       "body": "",
       "dmNotes": "",
-      "fields": {},
+      "fields": {
+        "tier": "wild"
+      },
       "tags": [
         "Swamp"
       ],
@@ -4916,7 +4988,9 @@
       "summary": "",
       "body": "",
       "dmNotes": "",
-      "fields": {},
+      "fields": {
+        "tier": "wild"
+      },
       "tags": [
         "Plains"
       ],
@@ -4931,7 +5005,9 @@
       "summary": "",
       "body": "",
       "dmNotes": "",
-      "fields": {},
+      "fields": {
+        "tier": "village"
+      },
       "tags": [
         "Swamp Village"
       ],
@@ -4946,7 +5022,9 @@
       "summary": "",
       "body": "",
       "dmNotes": "",
-      "fields": {},
+      "fields": {
+        "tier": "city"
+      },
       "tags": [
         "Invictian City"
       ],
@@ -4989,7 +5067,9 @@
       "summary": "",
       "body": "",
       "dmNotes": "",
-      "fields": {},
+      "fields": {
+        "tier": "city"
+      },
       "tags": [
         "Acheaorian City"
       ],
@@ -5004,7 +5084,9 @@
       "summary": "",
       "body": "",
       "dmNotes": "",
-      "fields": {},
+      "fields": {
+        "tier": "wild"
+      },
       "tags": [
         "Mountain Range"
       ],
@@ -5019,7 +5101,9 @@
       "summary": "",
       "body": "",
       "dmNotes": "",
-      "fields": {},
+      "fields": {
+        "tier": "town"
+      },
       "tags": [
         "Invictian Town"
       ],
@@ -5034,7 +5118,9 @@
       "summary": "",
       "body": "",
       "dmNotes": "",
-      "fields": {},
+      "fields": {
+        "tier": "town"
+      },
       "tags": [
         "Invictian Town"
       ],
@@ -5049,7 +5135,9 @@
       "summary": "",
       "body": "",
       "dmNotes": "",
-      "fields": {},
+      "fields": {
+        "tier": "village"
+      },
       "tags": [
         "Araucaria Village"
       ],
@@ -5064,7 +5152,9 @@
       "summary": "",
       "body": "",
       "dmNotes": "",
-      "fields": {},
+      "fields": {
+        "tier": "wild"
+      },
       "tags": [
         "Seas"
       ],
@@ -5094,7 +5184,9 @@
       "summary": "",
       "body": "",
       "dmNotes": "",
-      "fields": {},
+      "fields": {
+        "tier": "wild"
+      },
       "tags": [
         "Mountain Range"
       ],
@@ -5109,7 +5201,9 @@
       "summary": "",
       "body": "",
       "dmNotes": "",
-      "fields": {},
+      "fields": {
+        "tier": "wild"
+      },
       "tags": [
         "Mountain Range"
       ],
@@ -5124,7 +5218,9 @@
       "summary": "",
       "body": "",
       "dmNotes": "",
-      "fields": {},
+      "fields": {
+        "tier": "wild"
+      },
       "tags": [
         "Valley"
       ],
@@ -5139,7 +5235,9 @@
       "summary": "",
       "body": "",
       "dmNotes": "",
-      "fields": {},
+      "fields": {
+        "tier": "village"
+      },
       "tags": [
         "Island Village"
       ],
@@ -5167,7 +5265,9 @@
       "summary": "",
       "body": "",
       "dmNotes": "",
-      "fields": {},
+      "fields": {
+        "tier": "capital"
+      },
       "tags": [
         "Acheaorian City",
         "Capital"
@@ -5196,7 +5296,9 @@
       "summary": "",
       "body": "",
       "dmNotes": "",
-      "fields": {},
+      "fields": {
+        "tier": "city"
+      },
       "tags": [
         "Acheaorian City"
       ],
@@ -5224,7 +5326,9 @@
       "summary": "",
       "body": "",
       "dmNotes": "",
-      "fields": {},
+      "fields": {
+        "tier": "town"
+      },
       "tags": [
         "Acheaorian Town"
       ],
@@ -5239,7 +5343,9 @@
       "summary": "",
       "body": "",
       "dmNotes": "",
-      "fields": {},
+      "fields": {
+        "tier": "town"
+      },
       "tags": [
         "Acheaorian Town"
       ],
@@ -5254,7 +5360,9 @@
       "summary": "",
       "body": "",
       "dmNotes": "",
-      "fields": {},
+      "fields": {
+        "tier": "wild"
+      },
       "tags": [
         "River"
       ],
@@ -5269,7 +5377,9 @@
       "summary": "",
       "body": "",
       "dmNotes": "",
-      "fields": {},
+      "fields": {
+        "tier": "city"
+      },
       "tags": [
         "Invictian City"
       ],
@@ -5285,7 +5395,8 @@
       "body": "",
       "dmNotes": "",
       "fields": {
-        "createdNote": "April 18, 2025 10:57 PM"
+        "createdNote": "April 18, 2025 10:57 PM",
+        "tier": "site"
       },
       "tags": [],
       "visibility": "public",
@@ -5299,7 +5410,9 @@
       "summary": "",
       "body": "",
       "dmNotes": "",
-      "fields": {},
+      "fields": {
+        "tier": "wild"
+      },
       "tags": [
         "Valley"
       ],
@@ -5314,7 +5427,9 @@
       "summary": "",
       "body": "",
       "dmNotes": "",
-      "fields": {},
+      "fields": {
+        "tier": "town"
+      },
       "tags": [
         "Acheaorian Town"
       ],
@@ -5330,7 +5445,8 @@
       "body": "",
       "dmNotes": "",
       "fields": {
-        "createdNote": "April 18, 2025 10:57 PM"
+        "createdNote": "April 18, 2025 10:57 PM",
+        "tier": "site"
       },
       "tags": [],
       "visibility": "public",
@@ -5344,7 +5460,9 @@
       "summary": "",
       "body": "",
       "dmNotes": "",
-      "fields": {},
+      "fields": {
+        "tier": "village"
+      },
       "tags": [
         "Araucaria Village"
       ],
@@ -5359,7 +5477,9 @@
       "summary": "",
       "body": "",
       "dmNotes": "",
-      "fields": {},
+      "fields": {
+        "tier": "town"
+      },
       "tags": [
         "Acheaorian Town"
       ],
@@ -5375,7 +5495,8 @@
       "body": "",
       "dmNotes": "",
       "fields": {
-        "createdNote": "April 18, 2025 10:57 PM"
+        "createdNote": "April 18, 2025 10:57 PM",
+        "tier": "site"
       },
       "tags": [],
       "visibility": "public",
@@ -5390,7 +5511,8 @@
       "body": "",
       "dmNotes": "",
       "fields": {
-        "createdNote": "April 18, 2025 2:48 PM"
+        "createdNote": "April 18, 2025 2:48 PM",
+        "tier": "district"
       },
       "tags": [
         "Lower City",
@@ -5423,7 +5545,8 @@
       "body": "",
       "dmNotes": "",
       "fields": {
-        "createdNote": "April 17, 2025 11:24 PM"
+        "createdNote": "April 17, 2025 11:24 PM",
+        "tier": "site"
       },
       "tags": [],
       "visibility": "public",
@@ -5438,7 +5561,8 @@
       "body": "This Grounds houses the legion of DuneForged Citadel called The Adamantine Line\n\nTheir Commander  Daud nicknamed the “The Royal Protector” under him the Vice-Commander Meagan Foster\n\nThe Adamintine Line\n\na legion made even ebdore the primordial brood and has their reputation and prowess has been tempered through decades of war. their histroy outdates some cities in the imperium",
       "dmNotes": "",
       "fields": {
-        "createdNote": "April 30, 2025 9:14 PM"
+        "createdNote": "April 30, 2025 9:14 PM",
+        "tier": "site"
       },
       "tags": [],
       "visibility": "public",
@@ -5453,7 +5577,8 @@
       "body": "> There are no actors. No scripts. No enchantments.\n> \n> \n> Only the pit, the blade, and the crowd’s roar.\n> \n\nThe **Ju Colosseum** honors the old ways: **steel over spectacle**, **blood over dramatics**.\n\nHere, death is real, pain is worshipped, and glory is earned only through survival.\n\n---\n\n## 🩸 **Types of Fights**\n\n### 1. **Death Matches (Sanguinis Fati)**\n\n- Fighters battle **to the death**, with no surrender.\n- Reserved for **criminals**, **traitors**, or **sworn-bond debtors**.\n- Sometimes used to execute nobility without formal beheading.\n- Considered sacred trials before Hoplodamus—those who fight well may be granted divine mercy through a fast, clean death.\n\n### 2. **Yield Duels (Ordon Challenges)**\n\n- Fought until one yields or is incapacitated.\n- Typically between **free warriors**, **noble champions**, or **foreign duelists** seeking to prove themselves.\n- Public shame if a fighter yields too early—called *“kneeling before the flame.”*\n\n### 3. **Chain Fights**\n\n- Two or more fighters **bound together** at the wrist, forced into close-range combat.\n- No escape, no running. Raw brutality.\n- Often used for **feuds**, **blood debts**, or for entertainment during executions.\n\n### 4. **Mass Pits**\n\n- Up to **6–10 fighters**, dropped into the arena at once.\n- Common for **prison-clearing events** or during festivals.\n- Last one standing walks free—or earns their next fight.\n\n---\n\n## 🧱 **Gladiators of the Ju Colosseum**\n\n### 🩶 **Bonded Fighters**\n\n- Criminals, debtors, or prisoners of war.\n- Fight under contract until death, release, or five consecutive victories (rare).\n- Branded with an **obsidian chain-mark** on the shoulder.\n\n### 🛡 **Freemen Gladiators**\n\n- Volunteer fighters or mercenaries.\n- Fight for coin, glory, or future title.\n- May be backed by noble houses, temples, or even crime syndicates.\n\n### ⚖ **Judgment Champions**\n\n- Chosen to represent nobles, families, or causes in **trial by combat**.\n- Not always trained fighters—but driven by duty, revenge, or desperation.\n\n---\n\n## 🪙 **Betting & Tokens**\n\n> No drama, just wagering and war.\n> \n\n### 🎲 **The House Ring**\n\n- A section near the arena where nobles and wealthy sponsors place massive bets.\n    \n    Token stakes may include:\n    \n    - **Land grants**\n    - **Favor tokens**\n    - **Marriage pacts**\n    - **Military support promises**\n\n### 🦴 **The Circle of Bone**\n\n- Lower ring for common folk to bet in coins, goods, or services.\n- Known for riotous reactions when underdogs win.\n\n### 🏅 **Favor Tokens**\n\n- Carved from bone, iron, or fire-glass.\n- Spectators throw them to fighters who display:\n    - Great skill\n    - Mercy to fallen foes\n    - Victory against impossible odds\n- Collected favor tokens can be traded for:\n    - Better weapons\n    - Lighter armor\n    - Medical care between bouts\n    - Entry into more prestigious matches\n\n---\n\n## 🏆 **Rites of Victory & Death**\n\n- **Victory Mark**: A slash across the chest with ceremonial glass, poured with ash-oil. Marks a fighter as *“flame-tested.”*\n- **Death Rite**: The slain are stripped, and their blood mixed with iron dust to mark the sand. Their names are recorded only if they fought with honor.\n- **Five Wins**: A gladiator who wins five sanctioned fights may petition the **Marquis Zayida** for:\n    - A pardon\n    - A coin bounty\n    - A contract as an elite retainer\n\n---\n\n## 🎉 **The Great Martial Festival**\n\n> Held once every five years, this is the greatest martial festival in the Duneforged Citadel, known across the continent.\n> \n\nFighters from all major realms—desert kings, tundra lords, island spearmaidens, and even Caerthein warpriests—are **invited or sponsored** to compete.\n\n### 🌟 **Festival Highlights**\n\n### 1. **The Trials of the Five Gods**\n\nEach god is represented in a symbolic fight. Fighters must embody the aspect of their patron:\n\n- *Juno*: Justice & restraint.\n- *Vulcan*: Power & endurance.\n- *Hoplodamus*: Strategy & honor.\n- *Anchiale*: Adaptability & cunning.\n- *Mercury*: Speed & deception.\n\n### 2. **Champion’s Gauntlet**\n\nA multi-stage, multi-terrain arena set over 3 days.\n\nOnly one victor is crowned *Bladesoul of the Convergence* and granted:\n\n- A wish of favor from the House Zayida\n- A custom weapon forged by House Vulkrim\n- Their name carved into the **Flame Arch**, never to be forgotten\n\n### 3. **Night of the Ember Crown**\n\nAn invitation-only **royal duel**, where nobles or their champions fight for honor, rivalry, or spectacle.\n\nIt’s a bloodless but brutal contest where losing costs status—and sometimes marriage rights, property, or ancient debts.\n\n---\n\n## ⚔ **The Fight Experience**\n\nBefore each match, fighters are led through the **Ember Gate**, where they perform a short invocation.\n\nSome leave hair, teeth, or blood in the **Bowl of Judgment**, depending on which god they invoke.\n\n### 🎭 **Fight Formats**\n\n- **Standard Duels** – Weapon vs. weapon, one-on-one. Lasts until yield, incapacitation, or death.\n- **Beast Hunts** – Sand-floor opens to release desert beasts, often starved or maddened. Gladiators are given limited gear.\n- **Wyrm Trials** – Elite matches involving coordinated groups. High honor but high casualty rates.\n- **Chain Duels** – Fighters are bound at the wrist or ankle. Rare and symbolic.",
       "dmNotes": "",
       "fields": {
-        "createdNote": "April 18, 2025 3:53 PM"
+        "createdNote": "April 18, 2025 3:53 PM",
+        "tier": "district"
       },
       "tags": [
         "Middle City"
@@ -5470,7 +5595,8 @@
       "body": "",
       "dmNotes": "",
       "fields": {
-        "createdNote": "April 18, 2025 3:53 PM"
+        "createdNote": "April 18, 2025 3:53 PM",
+        "tier": "district"
       },
       "tags": [
         "Middle City"
@@ -5487,7 +5613,8 @@
       "body": "Manage by a Vulkrim and Virellarion Family\n\nUpscale alchemist and artificer",
       "dmNotes": "",
       "fields": {
-        "createdNote": "July 5, 2025 1:25 AM"
+        "createdNote": "July 5, 2025 1:25 AM",
+        "tier": "site"
       },
       "tags": [],
       "visibility": "public",
@@ -5502,7 +5629,8 @@
       "body": "",
       "dmNotes": "",
       "fields": {
-        "createdNote": "April 18, 2025 2:48 PM"
+        "createdNote": "April 18, 2025 2:48 PM",
+        "tier": "district"
       },
       "tags": [
         "Lower City",
@@ -5520,7 +5648,8 @@
       "body": "",
       "dmNotes": "",
       "fields": {
-        "createdNote": "April 18, 2025 2:47 PM"
+        "createdNote": "April 18, 2025 2:47 PM",
+        "tier": "district"
       },
       "tags": [
         "Lower City",
@@ -5538,7 +5667,8 @@
       "body": "",
       "dmNotes": "",
       "fields": {
-        "createdNote": "April 18, 2025 2:49 PM"
+        "createdNote": "April 18, 2025 2:49 PM",
+        "tier": "district"
       },
       "tags": [
         "Lower City",
@@ -5556,7 +5686,8 @@
       "body": "Northeast ridge of the Duneforeged Citadel, beyond the [insert mountain name.]\n\n**Description:**\nNestled high among jagged peaks and shadowed cliffs, the **Shattered Pass** is a treacherous and secluded region that has been declared a **forbidden zone** by the ruling council of the mountain citadel. Ancient rockfalls, crumbling bridges, and sudden snowstorms make it nearly impassable even for seasoned climbers. Rumors claim the pass is cursed—haunted by spirits of outcast warriors and guarded by sentient winds that whisper secrets and threats in the dead of night.\n\n**Boundaries:**\n\n- **North:** The Edge of Echoes — a sheer cliff that falls into endless mist.\n- **East:** The Maw of Thorns — a gorge filled with razor-sharp, naturally forming rock spires.\n- **South:** Sentinel’s Watch — a collapsed outpost marked by broken banners and warning sigils.\n- **West:** Sealed Gate — a reinforced stone barrier with ancient runes that glow faintly when approached.",
       "dmNotes": "",
       "fields": {
-        "createdNote": "April 29, 2025 9:58 AM"
+        "createdNote": "April 29, 2025 9:58 AM",
+        "tier": "site"
       },
       "tags": [],
       "visibility": "secret",
@@ -5585,7 +5716,9 @@
       "summary": "",
       "body": "",
       "dmNotes": "",
-      "fields": {},
+      "fields": {
+        "tier": "city"
+      },
       "tags": [],
       "visibility": "public",
       "sourcePath": "The Continent/The 3 Empires/Thebeseieas City 1d8f1754c403804dbbaff035e8e9b185.md",
@@ -5598,7 +5731,9 @@
       "summary": "",
       "body": "",
       "dmNotes": "",
-      "fields": {},
+      "fields": {
+        "tier": "city"
+      },
       "tags": [
         "Hellenorian City"
       ],
@@ -5613,7 +5748,9 @@
       "summary": "",
       "body": "",
       "dmNotes": "",
-      "fields": {},
+      "fields": {
+        "tier": "city"
+      },
       "tags": [
         "Invictian City"
       ],
@@ -5641,7 +5778,9 @@
       "summary": "",
       "body": "",
       "dmNotes": "",
-      "fields": {},
+      "fields": {
+        "tier": "wild"
+      },
       "tags": [
         "Araucaria Citadel Mountain"
       ],
@@ -5656,7 +5795,9 @@
       "summary": "Overview:",
       "body": "## **GM Summary: Varathros Lake**\n\n**Overview:**\n\nVarathros Lake is a massive, mysterious inland sea forged from destruction. Once a small, serene lake, it was catastrophically reshaped during the **Continental War of Asetheria**, a conflict of immense magical and martial devastation. A massive sinkhole tore the land asunder, filling over centuries with rainwater and flooding subterranean caverns. It is now a deep, unpredictable, and dangerous body of water, whose very tides seem to remember the war that birthed it.\n\n---\n\n## REGION I: **Northern Crest – The Neutral City**\n\n### Overview:\n\nThis is the most *civilized* and *stable* part of Varathros Lake. From the coast up to 50 nautical miles, the waters remain relatively safe. Past that distance, however, the lake becomes unpredictable with rough currents and spiraling wave troughs. This buffer zone allowed ancient civilizations to thrive—now reduced to coastal outposts and submerged ruins.\n\n### Points of Interest:\n\n- **Deiperdeum, the Neutral City-State**\n    \n    Once a naval power before the Continental War, now an autonomous fortress-city ruled by a Senate of Mages and Admirals. They regulate lake travel with iron-handed bureaucracy.\n    \n    **Quirk**: A glowing dome of gray fog covers the city’s harbor, never dissipating, rumored to be the lingering breath of a drowned god.\n    \n- **Alexandria Sanctum**\n    \n    A small, rocky islet with a titanic lighthouse said to be carved from sky-glass. It hums during certain lunar alignments. Sailors say it sings to the stars.\n    \n    Some claim it was never built—only revealed.\n    \n- **Kindred Depths**\n    \n    An underwater reef and cave system home to a confederation of aquatic races (e.g., Sea Elves, Tritons, Water Genasi). They speak of **the Scaled Accord**, a pact made with peaceful dragons.\n    \n    These **dragon guardians**—ancient and wise—rest coiled around ancient ruins, keeping secrets of the war locked away.\n    \n\n### Mystical Element:\n\nThe waters here remember battle. When the moon is high, **phantoms of ancient naval clashes** appear, replaying in silent, spectral reenactments. Interacting with them could unveil hidden truths… or draw attention from something older.\n\n---\n\n## REGION II: **The Arcane Maw – Middle Expanse**\n\n### Overview:\n\nThe true heart of the lake. Calm one day, writhing the next. Storms swirl without wind, and currents shift as if aware of the ships that ride them. Magic here is *amplified*, but so too is unpredictability.\n\n### The Lone Isle:\n\n- **Isle of Oracles** (also known as *Mount Zharion*)\n    \n    A towering, rocky island with a spired mountain. Atop stands a **“lighthouse”** whose light pulses in strange colors—actually the **Arcane Sanctum of Archmage Vaelithar**.\n    \n    Vaelithar is rarely seen, but their apprentices speak in riddles and make offerings to the lake.\n    \n- Temporal Rifts\n    \n    Sometimes, ships that enter this region return aged decades… or arrive before they left.\n    \n    Some wizards believe the lake’s waters contain fragments of time, suspended like silt.\n    \n- Eddies of Memory\n    \n    Swirling water vortexes that can steal or implant *memories* of people, locations, or even forgotten spells. They may also reveal glimpses of the war or of the creature below.\n    \n- The Silver Reefs\n    \n    Submerged spires of magical crystal known to warp spells cast nearby. Arcane items brought near them sometimes *speak* or pulse. Some believe the reefs are the fossilized remains of fallen war titans.\n    \n\n### Mystical Element:\n\nThe air buzzes with unseen runes. Spells cast here may backfire—or evolve into greater forms. *Magic itself seems curious here.*\n\n---\n\n## 🕊️ REGION III: **Abssal Ring – Nemegrath’s Halo**\n\n### Overview:\n\nA ring-shaped trench around the central deeps, home to sunken ruins, overgrown cities, and **temples to drowned gods**. The water grows darker, colder. Some say the sea gods reside here—not just in presence, but in **architecture**.\n\n### Notable Locales:\n\n- **The Vaulted Deepdomes**\n    \n    Crystalline ruins of a forgotten empire that once worshipped the **gods of tides, moons, and secrets**.\n    \n    Creatures of divine heritage—sea celestial hybrids, forgotten demigods—guard the thresholds.\n    \n- **Temple of the Undrowned King**\n    \n    A spiraling column of coral and petrified bone. Only those who **hold their breath for an hour** may enter. Inside, **liquid gravity** flows upward, and **statues weep brine** that induces visions.\n    \n- **Nemegrath’s Eye**\n    \n    A vast obsidian iris embedded in the lakebed, always open. If stared into, players might witness flashes of **divine betrayal**, **war crimes**, or **the forging of the chains of Ezerantheil**.\n    \n\n### Mystical Element:\n\nThe water here **rejects divination** and **alters language**. Prayers spoken aloud turn to foreign tongues. Writing in journals becomes jumbled, often referencing **things the writer doesn’t remember knowing**.\n\n---\n\n### REGION IV: **The Hadal Deeps – The Ebon Delve**\n\n### Overview:\n\nThe bottomless trench at the lake’s heart. Not even the gods claim this depth. A void in magic and time, where light drowns, and reality becomes brittle.\n\n### Anchored Horror:\n\n- **Ezerantheil the Unblinking**\n    \n    Once a prophetic titan or godlike entity that saw the *threads of fate* as one sees branches in a forest. Feared by all sides in the Continental War, for he predicted the end of empires and the fall of gods.\n    \n    **Bound in chains of star-iron**, left to rot in silence. He is said to speak now only through dreams, rain patterns, or broken machinery.\n    \n    Legends claim:\n    \n    - He has **no eyes**, but sees all.\n    - He cannot move, yet **his presence deepens** every year.\n    - He speaks only in **truths, but twisted by madness**.\n\n### Points of Dread:\n\n- **The Silt Cathedral**\n    \n    A buried structure flickering between existence and not. Those who enter vanish or return weeks later, *with pale eyes and new names*.\n    \n- **Chainfall**\n    \n    The location where **the star-iron chains breach the trench ceiling**, glowing with dim divine energy. Some adventurers seek these for their unbreakable power. Few return.\n    \n- **Echoing Abyss**\n    \n    Even speaking here is strange. Words stretch for minutes. Sound loops. Voices return altered.\n    \n\n### Mystical Element:\n\nThis is not just the lake’s depth. It is its **soul**—its **prison**—its **origin**. The war didn’t make this trench. The trench *was always there*, waiting.\n\n### **Imperium Invicta** (Roman-themed)\n\n> “We tamed the lake. And where we did not, we chained it.”\n> \n> \n> — Imperial Historian Braccus Valente\n> \n\n### Their Claim:\n\n- The Imperium insists **they won the Battle of the Broken Masts**, the greatest naval battle during the war, held on Varathros’ northern tides.\n- They built **floating fortresses** and **subaquatic legions** to subdue deep creatures.\n- Tiberus, the mighty river that runs from Varathros to their heartlands, is “blessed by Mars, the god of war.”\n\n### The Hidden Truths:\n\n- Archaeological logs mention they *lost* the Battle of the Broken Masts horrifically—half the fleet vanished into a whirlpool.\n- Their famed “floating fortresses” were unfinished prototypes. One capsized. Survivors were *erased* from record.\n- The Tiberius sometimes runs *red with algae* after storms—interpreted as a sign from “gods,” but it’s likely environmental runoff.\n\n### What They Claim:\n\n- **\"We crushed the Hellenorian fleet at the Battle of the Broken Masts.\"**\n    \n    *Official doctrine.* Monuments in Aquae Redavia show a victorious Imperial general standing atop a shattered trireme.\n    \n- **\"Our ironclad 'Tritonis-class' galleons never sank—invincible even to the storms.\"**\n    \n    Mentioned in military treatises as technological marvels. No verified wreckage ever found.\n    \n\n### 🤫 What Others Whisper:\n\n- The **Battle of the Broken Masts** was a **disastrous loss** — their admiral reportedly **went mad**, and the flagship *Domina Aeternum* was **swallowed whole** by a rogue wave.\n- **Half the fleet was sabotaged internally**—by a now-expunged house that worshipped “the thing beneath.”\n- The \"invincible\" ironclads? **One caught fire on launch. One rusted through. The third was never finished.** The name was reused on merchant logs to give the illusion of deployment.\n\n### **Hellenoria** (Greek-themed)\n\n> “Varathros is not a lake. It is a living myth. A divine labyrinth made of salt and sorrow.”\n> \n> \n> — Priestess Odyma, Oracle of Crythonis\n> \n\n### Their Claim:\n\n- Hellenoria tells of **the Isles of Prophecy**, floating islands where demigods were born from lake foam.\n- Their **navy of triremes** once “pushed back the dark,” banishing the storm-mages of Acheaoria.\n- **Crythonis River**, flowing from the lake, is “the last breath of Thalassene, goddess of deep truths.”\n\n### The Hidden Truths:\n\n- The “Isles of Prophecy” may have been **illusions** caused by arcane interference.\n- Their trireme fleet was indeed formidable—but **a Hellenorian general defected** during the war and helped create the chain that bound the creature below.\n- Crythonis was once used as a waste channel for failed divination rites.\n\n- **\"We brought the storm down ourselves and swept the Invictans from the lake!\"**\n    \n    Their war hymns celebrate the Stormcallers of Crythonis, said to have conjured a divine tempest to break the Imperium line.\n    \n- **\"Our Seafather-General rode a hippocampus across the lake and never lost a battle.\"**\n    \n    There's even a fresco in the Amphitheater of Echoes depicting it.\n    \n\n### **Acheaoria** (Persian-themed, distant empire)\n\n> “Varathros is the cradle of secrets. We do not conquer it. We observe it.”\n> \n> \n> — Namazahrin, the Mirror-Binder of the Sapphire Archive\n> \n\n### Their Claim:\n\n- Acheaoria claims they never sought to control the lake, only study it.\n- They possess maps that accurately predict every storm and current (they don’t share them).\n- The river Zaremesh flows *backwards* during eclipses—interpreted as divine alignment.\n\n### The Hidden Truths:\n\n- Some say Acheaoria tried to **raise the creature beneath Varathros** as a weapon—but lost control.\n- Their maps may be **forgeries**, made to appear prophetic after the fact.\n- Zaremesh’s reversal is not divine—it may be a **subterranean backflow** from a massive sinkhole network.\n\n### What They Claim:\n\n- **\"We had no interest in conquest. We merely observed. The others fought blindly.\"**\n    \n    Imperial scholars state they remained neutral and used the chaos to **map leyline shifts**.\n    \n- **\"Our ships could outpace all others using windless sails—divine cloth that harnessed memory.\"**\n    \n    Allegedly blessed by the Moon-Binders of the Sapphire Archive.\n    \n\n### 🕳️ What Lurks Beneath:\n\n- They fielded a **secret navy of obsidian hulls**—stealth ships that vanished in daylight. **None were ever seen again.**\n- Their \"neutrality\" may have been a **cover** for a failed attempt to **summon or awaken** the being chained in the Hadal Deep.\n- The **windless sails** did exist, but were unstable — reports claim the **memories stored in them corrupted the minds of their crews**, causing mutinies and drownings mid-lake.",
       "dmNotes": "",
-      "fields": {},
+      "fields": {
+        "tier": "wild"
+      },
       "tags": [
         "Great Lake"
       ],
@@ -5672,7 +5813,8 @@
       "body": "",
       "dmNotes": "",
       "fields": {
-        "createdNote": "April 18, 2025 10:58 PM"
+        "createdNote": "April 18, 2025 10:58 PM",
+        "tier": "site"
       },
       "tags": [],
       "visibility": "public",
@@ -5686,7 +5828,9 @@
       "summary": "",
       "body": "",
       "dmNotes": "",
-      "fields": {},
+      "fields": {
+        "tier": "village"
+      },
       "tags": [
         "Swamp Village"
       ],
@@ -5714,7 +5858,9 @@
       "summary": "",
       "body": "",
       "dmNotes": "",
-      "fields": {},
+      "fields": {
+        "tier": "city"
+      },
       "tags": [
         "Acheaorian City"
       ],
@@ -5729,7 +5875,9 @@
       "summary": "",
       "body": "",
       "dmNotes": "",
-      "fields": {},
+      "fields": {
+        "tier": "wild"
+      },
       "tags": [
         "River"
       ],
@@ -5744,7 +5892,9 @@
       "summary": "",
       "body": "",
       "dmNotes": "",
-      "fields": {},
+      "fields": {
+        "tier": "village"
+      },
       "tags": [
         "Island Village"
       ],
@@ -5759,7 +5909,9 @@
       "summary": "",
       "body": "",
       "dmNotes": "",
-      "fields": {},
+      "fields": {
+        "tier": "wild"
+      },
       "tags": [
         "Mountain Range",
         "South"
@@ -5775,7 +5927,9 @@
       "summary": "",
       "body": "",
       "dmNotes": "",
-      "fields": {},
+      "fields": {
+        "tier": "town"
+      },
       "tags": [
         "Acheaorian Underground Town"
       ],
@@ -6026,13 +6180,13 @@
       "kind": "ore",
       "name": "Adamantium",
       "summary": "The hardest known substance, appearing as a deep blue-black metal with an almost mirror-like polish. Its surface shows intricate natural patterns resembling flowing water frozen in time.",
-      "body": "Disrupts magical effects on contact\nRemains perpetually cold, never warming\nCauses painful burns to creatures of pure magic\nUses: Reserved for the most critical applications - vault doors, prison bars for the most dangerous criminals, and weapons meant to last forever. Master enchanters use adamantium focuses that never lose their potency.",
+      "body": "",
       "dmNotes": "",
       "fields": {
         "description": "The hardest known substance, appearing as a deep blue-black metal with an almost mirror-like polish. Its surface shows intricate natural patterns resembling flowing water frozen in time.",
         "location": "Forms only in the hearts of volcanoes where elemental fire and earth energies reach perfect equilibrium. These rare nodes exist deep within active volcanic chambers, making extraction extraordinarily dangerous.",
         "lore": "Said to be fragments of the world's original foundation, adamantium represents absolute permanence. Ancient kings would commission single adamantium items as symbols of their eternal dynasties, though ironically, most of these kingdoms have long since fallen to dust.",
-        "properties": "Naturally anathema to fey and fiendish creatures",
+        "properties": "Naturally anathema to fey and fiendish creatures\nDisrupts magical effects on contact\nRemains perpetually cold, never warming\nCauses painful burns to creatures of pure magic",
         "uses": "Reserved for the most critical applications - vault doors, prison bars for the most dangerous criminals, and weapons meant to last forever. Master enchanters use adamantium focuses that never lose their potency."
       },
       "tags": [],
@@ -6062,13 +6216,13 @@
       "kind": "ore",
       "name": "Arcanaite",
       "summary": "A crystalline material that shifts through the spectrum of colors, never settling on any single hue for long. It pulses with inner radiance and seems to hum with barely contained magical energy.",
-      "body": "Changes properties based on the type of magic it absorbs\nResonates with nearby spellcasting\nUnstable in large quantities\nUses: Ground into powder for the most potent spell components, carved into focuses and spell gems, and used as currency among the most powerful mages. Artificers embed small arcanaite crystals in magical items to boost their effectiveness.",
+      "body": "",
       "dmNotes": "",
       "fields": {
         "description": "A crystalline material that shifts through the spectrum of colors, never settling on any single hue for long. It pulses with inner radiance and seems to hum with barely contained magical energy.",
         "location": "Crystallizes naturally in areas of intense magical activity - wizard towers, sites of great battles between spellcasters, and nexuses where multiple ley lines converge. It grows like living crystal, forming geometric patterns of breathtaking beauty.",
         "lore": "Scholars debate whether arcanaite is magic given physical form or matter transformed by pure magical energy. What is certain is that large deposits can become self-aware, leading to the terrifying phenomenon known as \"living dungeons.”",
-        "properties": "Stores and amplifies magical energy",
+        "properties": "Stores and amplifies magical energy\nChanges properties based on the type of magic it absorbs\nResonates with nearby spellcasting\nUnstable in large quantities",
         "uses": "Ground into powder for the most potent spell components, carved into focuses and spell gems, and used as currency among the most powerful mages. Artificers embed small arcanaite crystals in magical items to boost their effectiveness."
       },
       "tags": [],
@@ -6081,13 +6235,13 @@
       "kind": "ore",
       "name": "Cold Iron",
       "summary": "A dark, almost black metal with a matte finish that seems to absorb light rather than reflect it. Its surface is always cool to the touch, regardless of ambient temperature, and frost often forms on its edges in humid conditions.",
-      "body": "Disrupts magical effects on contact\nRemains perpetually cold, never warming\nCauses painful burns to creatures of pure magic\nUses: Forged into weapons and restraints specifically designed to combat supernatural threats. Templars and witch hunters prize cold iron blades, while scholars use cold iron implements to safely handle cursed artifacts.",
+      "body": "",
       "dmNotes": "",
       "fields": {
         "description": "A dark, almost black metal with a matte finish that seems to absorb light rather than reflect it. Its surface is always cool to the touch, regardless of ambient temperature, and frost often forms on its edges in humid conditions.",
         "location": "Mined from regions where the boundary between the material world and otherworldly realms grows thin. These deposits are typically found in forgotten battlefields, ancient burial grounds, and places where powerful magic has been violently disrupted.",
         "lore": "Born from the primordial conflict between order and chaos, cold iron represents the world's natural resistance to otherworldly influence. Blacksmiths who work with it must wear thick gloves, as prolonged contact can numb the soul itself",
-        "properties": "Naturally anathema to fey and fiendish creatures",
+        "properties": "Naturally anathema to fey and fiendish creatures\nDisrupts magical effects on contact\nRemains perpetually cold, never warming\nCauses painful burns to creatures of pure magic",
         "uses": "Forged into weapons and restraints specifically designed to combat supernatural threats. Templars and witch hunters prize cold iron blades, while scholars use cold iron implements to safely handle cursed artifacts."
       },
       "tags": [],
@@ -6100,13 +6254,13 @@
       "kind": "ore",
       "name": "Embersteel",
       "summary": "A warm, orange-red metal that glows with the steady light of a forge's heart. Tiny sparks occasionally dance across its surface, and it radiates comfortable warmth without ever becoming too hot to handle safely.",
-      "body": "Becomes more powerful when exposed to flame\nGradually repairs itself over time\nInspires courage and determination in its wielder\nUses: Forged into weapons that never cool, armor that protects against cold, and hearths that burn without fuel. Warriors value embersteel blades for their ability to cauterize wounds and their morale-boosting properties in battle.",
+      "body": "",
       "dmNotes": "",
       "fields": {
         "description": "A warm, orange-red metal that glows with the steady light of a forge's heart. Tiny sparks occasionally dance across its surface, and it radiates comfortable warmth without ever becoming too hot to handle safely.",
         "location": "Forms in the aftermath of great fires - not mere flames, but conflagrations of legendary proportions that burn with passion and purpose. Dragon lairs, sites of phoenix rebirth, and battlefields where fire elementals have fallen all eventually yield embersteel deposits.",
         "lore": "Embersteel is said to hold the memory of every fire that contributed to its creation. Weapons made from it carry the courage of heroes and the fury of dragons, inspiring their wielders to acts of legendary bravery. Some believe that embersteel items grow stronger with each heroic deed performed with them",
-        "properties": "Maintains constant warmth without external heat",
+        "properties": "Maintains constant warmth without external heat\nBecomes more powerful when exposed to flame\nGradually repairs itself over time\nInspires courage and determination in its wielder",
         "uses": "Forged into weapons that never cool, armor that protects against cold, and hearths that burn without fuel. Warriors value embersteel blades for their ability to cauterize wounds and their morale-boosting properties in battle."
       },
       "tags": [],
@@ -6119,13 +6273,13 @@
       "kind": "ore",
       "name": "Mithril",
       "summary": "A silvery-white metal that gleams with an inner light, as if moonbeams were trapped within its crystalline structure. Mithril appears almost translucent in thin sheets, yet maintains incredible strength and durability.",
-      "body": "Naturally resistant to corrosion and tarnish\nConducts magical energy with minimal loss\nSelf-repairing when exposed to moonlight\nUses: Favored by elven smiths for crafting armor that moves like cloth, weapons that never dull, and jewelry that enhances spellcasting. Mages weave thin mithril wire into their robes to improve spell focus.",
+      "body": "",
       "dmNotes": "",
       "fields": {
         "description": "A silvery-white metal that gleams with an inner light, as if moonbeams were trapped within its crystalline structure. Mithril appears almost translucent in thin sheets, yet maintains incredible strength and durability.",
         "location": "Found exclusively in the deepest mountain caverns where underground rivers have flowed for millennia. The ore forms in veins that follow ancient ley lines, appearing as shimmering threads in the rock face.",
         "lore": "Legend speaks of the first mithril being tears of the moon goddess, shed for mortal heroes who fought valiantly in her name. Ancient texts claim that armor made of pure mithril can turn aside even death itself, though such pieces are beyond rare.",
-        "properties": "Lighter than silk yet stronger than steel",
+        "properties": "Lighter than silk yet stronger than steel\nNaturally resistant to corrosion and tarnish\nConducts magical energy with minimal loss\nSelf-repairing when exposed to moonlight",
         "uses": "Favored by elven smiths for crafting armor that moves like cloth, weapons that never dull, and jewelry that enhances spellcasting. Mages weave thin mithril wire into their robes to improve spell focus."
       },
       "tags": [],
@@ -6138,13 +6292,13 @@
       "kind": "ore",
       "name": "Nullstone",
       "summary": "A completely matte gray stone that seems to exist in a state of absolute stillness. No light reflects from its surface, no sound echoes off it, and even the air around it appears motionless.",
-      "body": "Creates dead magic zones in its vicinity\nSuppresses magical abilities in living beings\nUnaffected by any form of energy\nUses: Carved into cells and restraints for captured spellcasters, ground into powder to create anti-magic barriers, and fashioned into armor by those who hunt mages. Some desperate rulers line their throne rooms with nullstone to prevent magical assassination.",
+      "body": "",
       "dmNotes": "",
       "fields": {
         "description": "A completely matte gray stone that seems to exist in a state of absolute stillness. No light reflects from its surface, no sound echoes off it, and even the air around it appears motionless.",
         "location": "Found in areas where magic has been catastrophically drained or destroyed. These dead zones appear as perfectly circular clearings where nothing grows and no magic functions, with nullstone forming at their centers like scabs over reality's wounds.",
         "lore": "Nullstone is absence given form - not merely resistant to magic, but its complete antithesis. Mages speak of it in hushed tones, as prolonged exposure can permanently drain one's magical abilities, leaving them forever cut off from the arcane arts.",
-        "properties": "Completely immune to all magical effects",
+        "properties": "Completely immune to all magical effects\nCreates dead magic zones in its vicinity\nSuppresses magical abilities in living beings\nUnaffected by any form of energy",
         "uses": "Carved into cells and restraints for captured spellcasters, ground into powder to create anti-magic barriers, and fashioned into armor by those who hunt mages. Some desperate rulers line their throne rooms with nullstone to prevent magical assassination."
       },
       "tags": [],
@@ -6156,14 +6310,14 @@
       "slug": "shattergleam-crystal",
       "kind": "ore",
       "name": "Shattergleam Crystal",
-      "summary": "Appears like a natural geode split open—filled with needle-thin, translucent spikes of shimmering crystal. These crystals radiate a faint, cold-blue glow, making them easily mistaken for magical or alchemical materials.",
-      "body": "The outer structure is silvery-gray and flaked, like dried clay, crumbling if disturbed.\nLocation: Found underground in isolated caves undistrubed for years, or in magic rich areas\nLore: • Dwarves call it “Mhalaz-dur” or “Earth’s Cruel Joke,” and leave it untouched as a superstition—bad luck befalls miners who try to collect it.\n• The drow sometimes carve cave warnings near it, believing it to be a “false star” laid by trickster gods to lure the greedy.\n• Some sages speculate that Shattergleam is the fossilized light of an ancient divine event, frozen in time—but the truth remains unknown.\nProperties: • Brittle Beyond Use:\n    ◦ Shatters into dangerous splinters at heavy physical touch.\n   \n• Illusory Potential (non-magical):\n    ◦ Reflects light strangely, sometimes creating ghostly shapes or halos in darkness, which some explorers misinterpret as magical or spiritual signs.\n    ◦ Attempts to analyze or use it in magic, smithing, or alchemy have all failed—the dust evaporates within hours of exposure to air.",
+      "summary": "Appears like a natural geode split open—filled with needle-thin, translucent spikes of shimmering crystal. These crystals radiate a faint, cold-blue glow, making them easily mistaken for magical or alchemical materials.\nThe outer structure is silvery-gray and flaked, like dried clay, crumbling if di",
+      "body": "",
       "dmNotes": "",
       "fields": {
-        "description": "Appears like a natural geode split open—filled with needle-thin, translucent spikes of shimmering crystal. These crystals radiate a faint, cold-blue glow, making them easily mistaken for magical or alchemical materials.",
+        "description": "Appears like a natural geode split open—filled with needle-thin, translucent spikes of shimmering crystal. These crystals radiate a faint, cold-blue glow, making them easily mistaken for magical or alchemical materials.\nThe outer structure is silvery-gray and flaked, like dried clay, crumbling if disturbed.",
         "location": "Found underground in isolated caves undistrubed for years, or in magic rich areas",
         "lore": "• Dwarves call it “Mhalaz-dur” or “Earth’s Cruel Joke,” and leave it untouched as a superstition—bad luck befalls miners who try to collect it.\n• The drow sometimes carve cave warnings near it, believing it to be a “false star” laid by trickster gods to lure the greedy.\n• Some sages speculate that Shattergleam is the fossilized light of an ancient divine event, frozen in time—but the truth remains unknown.",
-        "properties": "• Brittle Beyond Use: ◦ Shatters into dangerous splinters at heavy physical touch. • Illusory Potential (non-magical): ◦ Reflects light strangely, sometimes creating ghostly shapes or halos in darkness, which some explorers misinterpret as magical or spiritual signs. ◦ Attempts to analyze or use it in magic, smithing, or alchemy have all failed—the dust evaporates within hours of exposure to air."
+        "properties": "• Brittle Beyond Use:\n◦ Shatters into dangerous splinters at heavy physical touch.\n• Illusory Potential (non-magical):\n◦ Reflects light strangely, sometimes creating ghostly shapes or halos in darkness, which some explorers misinterpret as magical or spiritual signs.\n◦ Attempts to analyze or use it in magic, smithing, or alchemy have all failed—the dust evaporates within hours of exposure to air."
       },
       "tags": [],
       "visibility": "public",
@@ -6175,13 +6329,13 @@
       "kind": "ore",
       "name": "Tethtrium",
       "summary": "A peculiar metal that exists in a state of constant, subtle motion. Its surface ripples like liquid mercury while maintaining solid form, and it seems to bend light around itself, creating rainbow halos at its edges.",
-      "body": "Allows limited passage through solid matter\nDisrupts dimensional barriers\nUnpredictable in its behavior\nUses: Crafted into tools for planar researchers, locks that exist in multiple dimensions simultaneously, and weapons that can strike incorporeal foes. Thieves prize tethtrium lockpicks that can reach through solid doors.",
+      "body": "",
       "dmNotes": "",
       "fields": {
         "description": "A peculiar metal that exists in a state of constant, subtle motion. Its surface ripples like liquid mercury while maintaining solid form, and it seems to bend light around itself, creating rainbow halos at its edges.",
         "location": "Forms in areas where the barriers between dimensions have worn thin, typically near ancient portals or sites where planar magic has been extensively practiced. It appears to seep through reality itself, crystallizing into metal as it enters the material plane.",
         "lore": "Named after the first planar scholar to successfully study it, tethtrium is believed to be matter from the space between worlds. Working with it requires great skill, as inexperienced smiths have been known to phase partially out of existence, becoming trapped between dimensions.",
-        "properties": "Phases in and out of reality unpredictably",
+        "properties": "Phases in and out of reality unpredictably\nAllows limited passage through solid matter\nDisrupts dimensional barriers\nUnpredictable in its behavior",
         "uses": "Crafted into tools for planar researchers, locks that exist in multiple dimensions simultaneously, and weapons that can strike incorporeal foes. Thieves prize tethtrium lockpicks that can reach through solid doors."
       },
       "tags": [],

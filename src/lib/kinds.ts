@@ -1,4 +1,5 @@
 import type { EntryKind } from "@/db/schema";
+import { LOCATION_TIERS, type LocationTier } from "@/lib/locations";
 
 export type FieldDef = {
   key: string;
@@ -29,6 +30,48 @@ export type KindDef = {
  * Adding a kind here surfaces it everywhere: nav, browse, editor, search.
  */
 export const KINDS: KindDef[] = [
+  {
+    kind: "empire",
+    label: "Empires",
+    singular: "Empire",
+    slug: "empires",
+    icon: "👑",
+    blurb: "The three great powers and the kingdoms that came before.",
+    fields: [
+      { key: "capital", label: "Capital" },
+      { key: "ruler", label: "Ruler" },
+      { key: "motto", label: "Motto" },
+      { key: "status", label: "Status", placeholder: "Standing / Fallen" },
+    ],
+  },
+  {
+    kind: "lore",
+    label: "Lore",
+    singular: "Lore Page",
+    slug: "lore",
+    icon: "📜",
+    blurb: "Histories, myths, and the shape of the world.",
+    fields: [{ key: "era", label: "Era" }],
+  },
+  {
+    kind: "location",
+    label: "Locations",
+    singular: "Location",
+    slug: "locations",
+    icon: "⛰",
+    blurb: "Cities, ruins, wilds, and the waters between them.",
+    fields: [
+      {
+        key: "tier",
+        label: "Tier",
+        placeholder: "capital, city, town, village, district, site, wild",
+      },
+      { key: "type", label: "Type", placeholder: "City, Valley, Mountain Range…" },
+      { key: "region", label: "Region" },
+      { key: "ruler", label: "Ruler" },
+      { key: "population", label: "Population" },
+    ],
+  },
   {
     kind: "deity",
     label: "Deities",
@@ -84,34 +127,6 @@ export const KINDS: KindDef[] = [
       { key: "alignment", label: "Alignment" },
       { key: "location", label: "Seat of Power" },
       { key: "currentGoal", label: "Current Goal", type: "textarea" },
-    ],
-  },
-  {
-    kind: "location",
-    label: "Locations",
-    singular: "Location",
-    slug: "locations",
-    icon: "⛰",
-    blurb: "Cities, ruins, wilds, and the waters between them.",
-    fields: [
-      { key: "type", label: "Type", placeholder: "City, Valley, Mountain Range…" },
-      { key: "region", label: "Region" },
-      { key: "ruler", label: "Ruler" },
-      { key: "population", label: "Population" },
-    ],
-  },
-  {
-    kind: "empire",
-    label: "Empires",
-    singular: "Empire",
-    slug: "empires",
-    icon: "👑",
-    blurb: "The three great powers and the kingdoms that came before.",
-    fields: [
-      { key: "capital", label: "Capital" },
-      { key: "ruler", label: "Ruler" },
-      { key: "motto", label: "Motto" },
-      { key: "status", label: "Status", placeholder: "Standing / Fallen" },
     ],
   },
   {
@@ -203,15 +218,6 @@ export const KINDS: KindDef[] = [
     ],
   },
   {
-    kind: "lore",
-    label: "Lore",
-    singular: "Lore Page",
-    slug: "lore",
-    icon: "📜",
-    blurb: "Histories, myths, and the shape of the world.",
-    fields: [{ key: "era", label: "Era" }],
-  },
-  {
     kind: "quest",
     label: "Quests",
     singular: "Quest",
@@ -267,6 +273,16 @@ export const KINDS: KindDef[] = [
   },
 ];
 
+/**
+ * The three standing powers, in the order the front page leads with them. The
+ * other three `empire` entries are the kingdoms that came before.
+ */
+export const STANDING_EMPIRE_SLUGS = [
+  "imperium-invicta",
+  "hellenoria",
+  "acheaoria",
+] as const;
+
 export const KIND_BY_KEY: Record<EntryKind, KindDef> = Object.fromEntries(
   KINDS.map((k) => [k.kind, k]),
 ) as Record<EntryKind, KindDef>;
@@ -286,3 +302,55 @@ export function kindIcon(kind: EntryKind): string {
 export function kindSlug(kind: EntryKind): string {
   return KIND_BY_KEY[kind]?.slug ?? "notes";
 }
+
+// ---------------------------------------------------------------------------
+// Sections
+// ---------------------------------------------------------------------------
+
+/**
+ * A section is what the reader sees as a tab: nav item, browse tile, and a
+ * `/codex/<slug>` listing.
+ *
+ * Sections are mostly one per kind, but "Locations" would otherwise pile
+ * capitals, cities, towns, villages, city districts and open wilderness into a
+ * single list of 106. Locations therefore expand into one section per tier,
+ * and the flat Locations tab is dropped rather than duplicating all of them.
+ */
+export type SectionDef = {
+  slug: string;
+  label: string;
+  singular: string;
+  icon: string;
+  blurb: string;
+  kind: EntryKind;
+  /** Present only on the location tier sections. */
+  tier?: LocationTier;
+};
+
+export const SECTIONS: SectionDef[] = KINDS.flatMap((k): SectionDef[] => {
+  if (k.kind !== "location") {
+    return [
+      {
+        slug: k.slug,
+        label: k.label,
+        singular: k.singular,
+        icon: k.icon,
+        blurb: k.blurb,
+        kind: k.kind,
+      },
+    ];
+  }
+  return LOCATION_TIERS.map((t) => ({
+    slug: t.slug,
+    label: t.label,
+    singular: t.singular,
+    icon: t.icon,
+    blurb: t.blurb,
+    kind: "location" as const,
+    tier: t.tier,
+  }));
+});
+
+export const SECTION_BY_SLUG: Record<string, SectionDef> = Object.fromEntries(
+  SECTIONS.map((s) => [s.slug, s]),
+);
