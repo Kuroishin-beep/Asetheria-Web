@@ -88,6 +88,8 @@ export type RelatedEntry = {
   kind: EntryKind;
   summary: string;
   relation: string;
+  /** The sentence in the linking entry where this reference appears. */
+  context: string | null;
 };
 
 /** Outgoing edges: things this entry refers to. */
@@ -109,6 +111,7 @@ export async function getOutgoingLinks(
       kind: entries.kind,
       summary: entries.summary,
       relation: links.relation,
+      context: links.context,
     })
     .from(links)
     .innerJoin(entries, eq(entries.id, links.targetId))
@@ -136,6 +139,7 @@ export async function getBacklinks(
       kind: entries.kind,
       summary: entries.summary,
       relation: links.relation,
+      context: links.context,
     })
     .from(links)
     .innerJoin(entries, eq(entries.id, links.sourceId))

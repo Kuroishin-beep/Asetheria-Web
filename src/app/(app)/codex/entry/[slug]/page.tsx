@@ -233,6 +233,32 @@ export default async function EntryPage({
           )}
 
           {/* ---- Body ---- */}
+          {/* Generated text is labelled wherever it appears, so it is never
+              mistaken for something you wrote. */}
+          {entry.bodySource === "generated" && isDM && (
+            <p
+              style={{
+                display: "flex",
+                gap: "0.5rem",
+                alignItems: "baseline",
+                flexWrap: "wrap",
+                fontSize: "0.8125rem",
+                color: "var(--text-muted)",
+                border: "1px dashed var(--border)",
+                borderRadius: 8,
+                padding: "0.6rem 0.85rem",
+                marginBottom: "1rem",
+              }}
+            >
+              <span aria-hidden="true">✎</span>
+              <span style={{ flex: 1, minWidth: "14rem" }}>
+                Written from this entry&rsquo;s properties, not by you. Edit it
+                and it becomes yours.
+              </span>
+              <Link href={`/codex/entry/${entry.slug}/edit`}>Rewrite →</Link>
+            </p>
+          )}
+
           {bodyHtml ? (
             <div
               className="prose-codex"
@@ -246,7 +272,9 @@ export default async function EntryPage({
                 padding: "1rem 0",
               }}
             >
-              No description written yet.
+              {backlinks.length > 0
+                ? "No description written yet — but this is referenced elsewhere; see the linked mentions below."
+                : "No description written yet."}
               {isDM && (
                 <>
                   {" "}
@@ -326,6 +354,7 @@ export default async function EntryPage({
                     name={c.name}
                     kind={c.kind}
                     summary={c.summary}
+                    context={c.context}
                   />
                 ))}
               </CardGrid>

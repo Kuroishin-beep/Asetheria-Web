@@ -24,9 +24,25 @@ AS $fn$
 $fn$;
 
 -- ---------------------------------------------------------------------------
+-- Most entries carry their meaning in properties rather than prose: a deity
+-- row is Alignment + Domains + Race and nothing else. Flattening the jsonb to
+-- its values makes those searchable, so "satyr" or "revelry" finds Bacchus.
+-- ---------------------------------------------------------------------------
+CREATE OR REPLACE FUNCTION asetheria_fields_text(jsonb)
+  RETURNS text
+  LANGUAGE sql
+  IMMUTABLE
+  PARALLEL SAFE
+AS $fn$
+  SELECT coalesce(string_agg(value, ' ' ORDER BY key), '')
+  FROM jsonb_each_text(coalesce($1, '{}'::jsonb))
+$fn$;
+
+-- ---------------------------------------------------------------------------
 -- Full-text search vector.
--- Weighting: name (A) > summary + tags (B) > body (C) > DM notes (D), so an
--- entry titled "Leto" outranks one that merely mentions Leto in passing.
+-- Weighting: name (A) > summary + tags + properties (B) > body (C) >
+-- DM notes (D), so an entry titled "Leto" outranks one that merely mentions
+-- Leto in passing.
 -- ---------------------------------------------------------------------------
 ALTER TABLE entries DROP COLUMN IF EXISTS search_vector;
 
@@ -36,6 +52,7 @@ ALTER TABLE entries
     setweight(to_tsvector('english', coalesce(name, '')), 'A') ||
     setweight(to_tsvector('english', coalesce(summary, '')), 'B') ||
     setweight(to_tsvector('english', coalesce(asetheria_tags_text(tags), '')), 'B') ||
+    setweight(to_tsvector('english', coalesce(asetheria_fields_text(fields), '')), 'B') ||
     setweight(to_tsvector('english', coalesce(body, '')), 'C') ||
     setweight(to_tsvector('english', coalesce(dm_notes, '')), 'D')
   ) STORED;

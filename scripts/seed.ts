@@ -250,6 +250,85 @@ async function seedEntries() {
   return payload.entries;
 }
 
+/**
+ * Entries written for names that appear in the source material but never got a
+ * page of their own. Kept in a separate file from the Notion import so the
+ * authored content stays clearly distinguishable, and marked
+ * `body_source = 'generated'` so `npm run describe -- --revert` clears it.
+ */
+async function seedExpansion() {
+  const file = path.join(REPO, "data", "expansion.json");
+  if (!fs.existsSync(file)) return;
+
+  const payload = JSON.parse(fs.readFileSync(file, "utf8")) as {
+    entries: (SeedEntry & { sourceNote?: string })[];
+  };
+
+  const existing = await db
+    .select({
+      id: entries.id,
+      slug: entries.slug,
+      body: entries.body,
+      bodySource: entries.bodySource,
+    })
+    .from(entries);
+  const bySlug = new Map(existing.map((e) => [e.slug, e]));
+
+  let created = 0;
+  let refreshed = 0;
+  let untouched = 0;
+
+  for (const e of payload.entries) {
+    const found = bySlug.get(e.slug);
+    if (found) {
+      // Some authored entries fill an imported stub rather than adding a new
+      // page. Write into it only while it is still empty — or while it holds
+      // text we generated. Anything you have written by hand is left alone.
+      const isEmpty = !found.body.trim();
+      if (!isEmpty && found.bodySource !== "generated") {
+        untouched++;
+        continue;
+      }
+      await db
+        .update(entries)
+        .set({
+          name: e.name,
+          kind: e.kind,
+          summary: e.summary,
+          body: e.body,
+          // Merge rather than replace: keep any properties the import captured.
+          fields: { ...(e.fields ?? {}) },
+          tags: e.tags ?? [],
+          visibility: e.visibility ?? "public",
+          bodySource: "generated",
+        })
+        .where(eq(entries.id, found.id));
+      refreshed++;
+      continue;
+    }
+
+    await db.insert(entries).values({
+      slug: e.slug,
+      kind: e.kind,
+      name: e.name,
+      summary: e.summary ?? "",
+      body: e.body ?? "",
+      dmNotes: "",
+      fields: e.fields ?? {},
+      tags: e.tags ?? [],
+      visibility: e.visibility ?? "public",
+      bodySource: "generated",
+      sourcePath: e.sourceNote ? `authored: ${e.sourceNote}` : "authored",
+    });
+    created++;
+  }
+
+  console.log(
+    `  ✓ expansion: ${created} added, ${refreshed} refreshed` +
+      (untouched ? `, ${untouched} left alone (edited by you)` : ""),
+  );
+}
+
 async function buildLinkGraph() {
   const all = await db
     .select({
@@ -264,17 +343,32 @@ async function buildLinkGraph() {
 
   await db.delete(links);
 
-  const rows: { sourceId: string; targetId: string; relation: string }[] = [];
+  const rows: {
+    sourceId: string;
+    targetId: string;
+    relation: string;
+    context: string | null;
+  }[] = [];
   for (const e of all) {
     const seen = new Set<string>();
     const explicit = resolveLinks(e.id, e.body, e.fields ?? {}, nameIndex);
     for (const l of explicit) {
       seen.add(`${l.targetId}:${l.relation}`);
-      rows.push({ sourceId: e.id, targetId: l.targetId, relation: l.relation });
+      rows.push({
+        sourceId: e.id,
+        targetId: l.targetId,
+        relation: l.relation,
+        context: l.context ?? null,
+      });
     }
     const prose = resolveProseMentions(e.id, e.body, all, seen);
     for (const l of prose) {
-      rows.push({ sourceId: e.id, targetId: l.targetId, relation: l.relation });
+      rows.push({
+        sourceId: e.id,
+        targetId: l.targetId,
+        relation: l.relation,
+        context: l.context ?? null,
+      });
     }
   }
 
@@ -301,6 +395,7 @@ async function main() {
   await runSetupSql();
   await seedUsers();
   await seedEntries();
+  await seedExpansion();
   await buildLinkGraph();
 
   const [{ count }] = await db

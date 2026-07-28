@@ -10,6 +10,7 @@ export function EntryCard({
   tags,
   visibility,
   relation,
+  context,
 }: {
   slug: string;
   name: string;
@@ -18,6 +19,8 @@ export function EntryCard({
   tags?: string[];
   visibility?: string;
   relation?: string;
+  /** Quoted sentence from the linking entry, shown instead of the summary. */
+  context?: string | null;
 }) {
   return (
     <Link
@@ -69,20 +72,38 @@ export function EntryCard({
         </p>
       )}
 
-      {summary && (
+      {/* A quoted mention is more useful than a generic summary — it says what
+          the other page actually claims about this entry. */}
+      {context ? (
         <p
           style={{
             fontSize: "0.8125rem",
             color: "var(--text-muted)",
             lineHeight: 1.5,
-            display: "-webkit-box",
-            WebkitLineClamp: 2,
-            WebkitBoxOrient: "vertical",
-            overflow: "hidden",
+            fontFamily: "var(--font-prose)",
+            fontStyle: "italic",
+            borderLeft: "2px solid var(--border)",
+            paddingLeft: "0.6rem",
           }}
         >
-          {summary}
+          “{context}”
         </p>
+      ) : (
+        summary && (
+          <p
+            style={{
+              fontSize: "0.8125rem",
+              color: "var(--text-muted)",
+              lineHeight: 1.5,
+              display: "-webkit-box",
+              WebkitLineClamp: 2,
+              WebkitBoxOrient: "vertical",
+              overflow: "hidden",
+            }}
+          >
+            {summary}
+          </p>
+        )
       )}
 
       {tags && tags.length > 0 && (

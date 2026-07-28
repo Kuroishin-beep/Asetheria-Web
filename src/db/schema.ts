@@ -94,6 +94,13 @@ export const entries = pgTable(
     /** Main body, Markdown. Visible to whoever can see the entry. */
     body: text("body").notNull().default(""),
     /**
+     * Provenance of `body`. Null means a human wrote it. "generated" means it
+     * was derived from this entry's own properties by `scripts/generate-
+     * descriptions.ts`, and is shown with a banner offering to clear it.
+     * Editing an entry by hand always clears this back to null.
+     */
+    bodySource: text("body_source"),
+    /**
      * DM-only notes. Never serialised to a player, even on a `public` entry —
      * this is where "the innkeeper is actually a doppelganger" goes.
      */
@@ -149,6 +156,12 @@ export const links = pgTable(
       .references(() => entries.id, { onDelete: "cascade" }),
     /** e.g. "mentions", "worships", "located-in", "member-of". */
     relation: text("relation").notNull().default("mentions"),
+    /**
+     * The sentence from the source entry where this reference occurs, so a
+     * backlink can show *what was said* rather than just which page said it.
+     * Null for links derived from a structured property rather than prose.
+     */
+    context: text("context"),
     createdAt: timestamp("created_at", { withTimezone: true })
       .notNull()
       .defaultNow(),

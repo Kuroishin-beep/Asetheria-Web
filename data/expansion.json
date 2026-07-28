@@ -1,0 +1,572 @@
+{
+  "note": "Entries written from names and details that appear in the Asetheria source material but never received a page of their own. Every entry cites the page it was drawn from in `sourceNote`. Loaded by `npm run db:seed` and marked body_source='generated', so `npm run describe -- --revert` removes them.",
+  "entries": [
+    {
+      "slug": "iovianus-sandarion",
+      "kind": "npc",
+      "name": "Iovianus Sandarion",
+      "summary": "The legendary hero who first united the Imperium Invicta against chaos.",
+      "sourceNote": "Named in the Imperium Invicta chronicle.",
+      "tags": ["Founder", "Legend", "Invictian"],
+      "fields": {
+        "role": "Founder of the Imperium",
+        "location": "Aeterna City",
+        "attitude": "Revered"
+      },
+      "body": "At the heart of [[Aeterna City]] lies the memory of Iovianus Sandarion, the hero who first gathered the scattered peoples of the plains and bound them into a single empire against the chaos of the age.\n\nWhat the Imperium remembers of him is inseparable from what it believes about itself. The marble temples, the triumphal arches, the aqueducts that still carry water into the capital — every one is raised as a monument to the order he is said to have imposed on a world that had none. The imperial motto, *Vincit qui se vincit*, is attributed to his example as often as to any senator.\n\nWhether the man matched the monument is a question the [[Imperium Invicta]] does not encourage."
+    },
+    {
+      "slug": "quintus-arminius",
+      "kind": "npc",
+      "name": "Quintus Arminius",
+      "summary": "Imperial Archivist and Fourth Scribe of the Aeterna Lexicon.",
+      "sourceNote": "Credited as transcriber of the Imperium Invicta chronicle.",
+      "tags": ["Scribe", "Invictian"],
+      "fields": {
+        "role": "Imperial Archivist, Fourth Scribe of the Aeterna Lexicon",
+        "location": "Aeterna City",
+        "attitude": "Neutral"
+      },
+      "body": "Fourth Scribe of the Aeterna Lexicon, and the hand behind the official transcription of the [[Imperium Invicta]] record.\n\nAn archivist of his rank does not write history so much as decide which version of it is filed. Arminius transcribes; he does not annotate, and he does not argue. Where [[Senator Aurelius Varric]] composed and [[Inquisitor Marcellus Falco]] corrected, Arminius simply set the agreed text down in a fair hand and sealed it into the Lexicon.\n\nThat makes him, depending on who is asked, either the most honest man in the archive or the most useful."
+    },
+    {
+      "slug": "senator-aurelius-varric",
+      "kind": "npc",
+      "name": "Senator Aurelius Varric",
+      "summary": "Senator and original author of the Imperium Invicta chronicle.",
+      "sourceNote": "Credited as original author; his Final Speech is quoted in the chronicle.",
+      "tags": ["Senator", "Invictian"],
+      "fields": {
+        "role": "Senator of the Imperium",
+        "location": "Aeterna City",
+        "attitude": "Unresolved"
+      },
+      "body": "Author of the original chronicle of the [[Imperium Invicta]], and the source of the line the empire quotes most readily about itself:\n\n> \"A civilization that conquers itself holds dominion over the cosmos.\"\n> — Sen. Varric, Final Speech\n\nThat a speech should be described as *final* is the detail the Imperium prefers not to expand upon. The manuscript that survives him did not survive unedited: [[Inquisitor Marcellus Falco]] annotated it in a precise hand, and a second, hurried hand rebutted him in the margins.\n\nA DM should decide what happened to Varric before the party finds a copy."
+    },
+    {
+      "slug": "inquisitor-marcellus-falco",
+      "kind": "npc",
+      "name": "Inquisitor Marcellus Falco",
+      "summary": "Imperial Inquisitor whose annotations correct the official record.",
+      "sourceNote": "Credited with the Imperial Annotations on the Imperium Invicta chronicle.",
+      "tags": ["Inquisitor", "Invictian"],
+      "fields": {
+        "role": "Imperial Inquisitor",
+        "location": "Aeterna City",
+        "attitude": "Hostile to dissent"
+      },
+      "body": "The precise hand in the margins of the [[Imperium Invicta]] chronicle belongs to Marcellus Falco, Inquisitor, whose office is to ensure that what the empire remembers and what the empire wrote down remain the same document.\n\nHis annotations do not shout. They qualify, they contextualise, and occasionally they strike through. Set beside the hurried scrawl of [[R. — the Rebel Historian]] on the same pages, the contrast is the whole argument of the Imperium in miniature: one hand certain and unhurried, the other running out of time.\n\nFalco has read every seditious document in the archive. That is the problem with inquisitors."
+    },
+    {
+      "slug": "r-the-rebel-historian",
+      "kind": "npc",
+      "name": "R. — the Rebel Historian",
+      "summary": "An active cell leader who rebuts the imperial record in its own margins.",
+      "sourceNote": "Credited as \"R.\" (Rebel Historian, active cell leader) in the chronicle's margins.",
+      "tags": ["Rebel", "Unknown"],
+      "fields": {
+        "role": "Rebel historian and cell leader",
+        "attitude": "Hostile to the Imperium"
+      },
+      "visibility": "secret",
+      "body": "Known only by an initial. The hurried second hand in the margins of the [[Imperium Invicta]] chronicle, answering [[Inquisitor Marcellus Falco]] line for line — and, unlike Falco, writing in a copy that was never meant to leave imperial hands.\n\nThat the rebuttals exist at all means a cell leader had access to a sealed archive text and returned it. Someone inside the Lexicon either failed to notice or chose not to.\n\n**For the DM:** R.'s identity is deliberately unfixed. The most useful answer is usually the one that implicates a character the party already trusts."
+    },
+    {
+      "slug": "selenarion-of-helarchon",
+      "kind": "npc",
+      "name": "Selenarion of Helarchon",
+      "summary": "Court Scribe of the 4th Circle of Mirrors, who penned the record of Hellenoria.",
+      "sourceNote": "Credited as author of the Hellenoria record.",
+      "tags": ["Scribe", "Hellenorian"],
+      "fields": {
+        "role": "Court Scribe of the 4th Circle of Mirrors",
+        "location": "Helarchon",
+        "attitude": "Neutral"
+      },
+      "body": "Court Scribe of the Fourth Circle of Mirrors, and the voice in which [[Hellenoria]] describes itself to outsiders.\n\nSelenarion writes of the empire as a constellation scattered across the land — rugged mountains, endless islands, a people who rebuilt after the [[Continental War]] by pooling what little they carried into the capital. It is a generous account, and a careful one.\n\nA scribe of the Circles of Mirrors is trained to record what is reflected. What that leaves out is the thing itself."
+    },
+    {
+      "slug": "pellion-meraquas",
+      "kind": "npc",
+      "name": "Scribe Pellion Meraquas",
+      "summary": "Scribe of the Aeterna Lexicon who documented Praetor's Fall.",
+      "sourceNote": "Credited as documenting Praetor's Fall in the Latium Plains record.",
+      "tags": ["Scribe", "Invictian"],
+      "fields": {
+        "role": "Scribe of the Aeterna Lexicon",
+        "location": "Latium Plains",
+        "attitude": "Neutral"
+      },
+      "body": "The scribe who filed [[Praetor's Fall]] under *Topographies of Significance, Imperial Censure Tier II* — a classification that says more about the Imperium than about the field.\n\nMeraquas walked the [[Latium Plains]] and wrote down what the ground looked like and what the wind still sounded like there. The Lexicon accepted the record and then restricted it.\n\nA scribe who earns a censure tier has usually written something true."
+    },
+    {
+      "slug": "astraphael",
+      "kind": "npc",
+      "name": "Astraphael, the Destructive Star",
+      "summary": "The leader who united a fractured Hellenoria after the Continental War.",
+      "sourceNote": "Named in the Hellenoria record as \"the destructive star\".",
+      "tags": ["Leader", "Hellenorian", "Legend"],
+      "fields": {
+        "role": "Unifier of Hellenoria",
+        "location": "Hellenoria",
+        "attitude": "Revered"
+      },
+      "body": "Out of the ruin that the [[Continental War]] made of [[Hellenoria]], one figure rose above the rest: Astraphael, called the *destructive star*.\n\nHe took a population that had been scattered and broken — survivors who had abandoned their homes and converged on the capital with nothing but what they could carry — and made them one people again. The chronicles record the unification. They are noticeably quieter about the method.\n\nA man is not named for destruction because he rebuilt gently."
+    },
+    {
+      "slug": "elira-citadel-archives",
+      "kind": "npc",
+      "name": "Elira",
+      "summary": "A bright but inexperienced junior scholar of the Citadel Archives.",
+      "sourceNote": "Named as a quest client in the Quests document.",
+      "tags": ["Scholar", "Quest Giver", "Ally"],
+      "fields": {
+        "role": "Junior scholar, Citadel Archives",
+        "location": "The shifting plains",
+        "attitude": "Ally"
+      },
+      "body": "A junior scholar out of the Citadel Archives, bright and badly under-supervised, currently buzzing about an unusual reading from a region of plains that will not hold still.\n\nElira is the kind of client who has done the reading and none of the walking. She will pay honestly, brief the party thoroughly, and have no idea what she is sending them into.\n\n**Hook:** she wants an escort to the shifting plains and a second set of observations. She does not want to be talked out of going herself."
+    },
+    {
+      "slug": "kaelen-caerthain-the-stormwall",
+      "kind": "npc",
+      "name": "Caesar Kaelen Caerthain, The Stormwall",
+      "summary": "Ancestor of House Caerthain who led 500 against 50,000 and shattered the pass.",
+      "sourceNote": "Listed among the Notable Ancestors of The Duke's Family.",
+      "tags": ["Ancestor", "Caerthain", "Legend"],
+      "fields": {
+        "role": "Ancestor of House Caerthain",
+        "location": "Duneforged Citadel",
+        "attitude": "Revered"
+      },
+      "body": "Called the Stormwall for the reason the name suggests. He led five hundred against fifty thousand, broke an Acheaorian advance, and shattered the pass behind him so that nothing could follow.\n\nHis is the deed that earned [[The Duke's Family|House Caerthain]] its nobility and the south its guardians. Every Caesar since has been measured against a man who chose to end a road rather than lose it."
+    },
+    {
+      "slug": "vaelis-caerthain",
+      "kind": "npc",
+      "name": "Empress-Lady Vaelis Caerthain",
+      "summary": "Founder of the navy, said to have walked on air during her final campaign.",
+      "sourceNote": "Listed among the Notable Ancestors of The Duke's Family.",
+      "tags": ["Ancestor", "Caerthain", "Legend"],
+      "fields": {
+        "role": "Ancestor of House Caerthain; founder of the navy",
+        "location": "Duneforged Citadel",
+        "attitude": "Revered"
+      },
+      "body": "She founded the navy and invented it in the same breath — the mountain-borne fleet that became [[The Serathian Fleet]], and with it the airship tradition that made [[The Duke's Family|House Caerthain]] pioneers rather than merely defenders.\n\nOf her final campaign it is said that she walked on air. The house does not treat this as metaphor, and given what is whispered about [[Lake Serathal]] and the Caerthain bloodline, it may not be one."
+    },
+    {
+      "slug": "prince-deyric-caerthain",
+      "kind": "npc",
+      "name": "Prince Deyric Caerthain",
+      "summary": "Vanished into the lake aboard a ship of starlight and was never seen again.",
+      "sourceNote": "Listed among the Notable Ancestors of The Duke's Family.",
+      "tags": ["Ancestor", "Caerthain", "Missing"],
+      "fields": {
+        "role": "Ancestor of House Caerthain",
+        "location": "Lake Serathal",
+        "attitude": "Unknown"
+      },
+      "body": "He sailed onto [[Lake Serathal]] in a ship of starlight and did not come back.\n\nThat much [[The Duke's Family|House Caerthain]] will say aloud. What it says less openly is that Deyric is held to speak to the current rulers in dreams — which would mean he is neither dead nor entirely gone, and that whatever waits under the lake has kept him.\n\n**For the DM:** the most useful version of Deyric is the one who is still trying to warn someone."
+    },
+    {
+      "slug": "velothis",
+      "kind": "location",
+      "name": "Velothis",
+      "summary": "The island said to have been reshaped by magic, on which Nethrana stood.",
+      "sourceNote": "Named in the Mycairos and Nethrana records.",
+      "tags": ["Island", "Ruin"],
+      "fields": { "type": "Island", "region": "The Old Empires" },
+      "body": "An island whose shape is not agreed to be natural. One account holds that [[Nethrana: The Kingdom of Mirrors and Mist|Nethrana]] was a gift from an unknown god; another, that it was an accident of powerful magic that reshaped Velothis itself and left an empire standing on the result.\n\nVelothis is also where the fall of [[Mycairos: The Kingdom of Bronze and Blood|Mycairos]] stopped. Their armies stood poised to take it — and then their own cities were empty, their halls silent, and the campaign was simply over.\n\nTwo dead empires, one island, and no surviving explanation."
+    },
+    {
+      "slug": "eronis",
+      "kind": "location",
+      "name": "Eronis",
+      "summary": "Capital city of Nethrana, seat of the dream-walkers.",
+      "sourceNote": "Named as Nethrana's capital in The Truth — Notable.",
+      "tags": ["Capital", "Ruin", "Nethranan"],
+      "fields": { "type": "Capital City", "region": "Velothis" },
+      "visibility": "secret",
+      "body": "The capital of [[Nethrana: The Kingdom of Mirrors and Mist|Nethrana]], and the seat of [[The Council of Eronis]] — dream-walkers and illusionists whose reach is said to have run past the empire's own borders.\n\nWhat stands there now is walls lined with shimmering murals that change when looked at too long, and the [[Palace of Eronis]] at the centre of it.\n\nRuins do not usually keep working. Eronis appears to be an exception."
+    },
+    {
+      "slug": "palace-of-eronis",
+      "kind": "location",
+      "name": "Palace of Eronis",
+      "summary": "A labyrinth of enchanted glass and stone whose corridors defeated its own architects.",
+      "sourceNote": "Described in the Nethrana record and The Truth — Notable.",
+      "tags": ["Ruin", "Labyrinth", "Nethranan"],
+      "fields": { "type": "Palace", "region": "Eronis" },
+      "visibility": "secret",
+      "body": "A labyrinth of enchanted glass and stone so intricate that its own architects are said to have been lost inside it. The corridors do not stay where they are put.\n\nSome legends hold that these halls contained portals — gates leading not merely across the continent but into dreamscapes. Given what [[The Council of Eronis]] was, that is not the least likely claim in the record.\n\n**For the DM:** a dungeon that rearranges is only frightening if the party can tell that it has. Give them a landmark first."
+    },
+    {
+      "slug": "irelas",
+      "kind": "location",
+      "name": "Irelas",
+      "summary": "Nethranan port city, famed for enchanted vessels and magnificent docks.",
+      "sourceNote": "Named in The Truth — Notable as a port city of trade.",
+      "tags": ["Ruin", "Port", "Nethranan"],
+      "fields": { "type": "Port City", "region": "Velothis" },
+      "visibility": "secret",
+      "body": "The trade city of [[Nethrana: The Kingdom of Mirrors and Mist|Nethrana]], known for magnificent docks and for the enchanted vessels that put out from them carrying illusions, textiles, and magic.\n\nA kingdom of mirrors and mist still had to sell something. Irelas is where it did."
+    },
+    {
+      "slug": "praetors-fall",
+      "kind": "location",
+      "name": "Praetor's Fall",
+      "summary": "The field that knelt — filed under Imperial Censure Tier II.",
+      "sourceNote": "Documented in the Latium Plains record by Scribe Pellion Meraquas.",
+      "tags": ["Battlefield", "Invictian", "Censured"],
+      "fields": { "type": "Battlefield", "region": "Latium Plains" },
+      "body": "A stretch of the [[Latium Plains]] that the Lexicon calls *The Field That Knelt*, recorded by [[Scribe Pellion Meraquas]] and then filed under **Topographies of Significance, Imperial Censure Tier II**.\n\nThe censure is the interesting part. The [[Imperium Invicta]] does not restrict a field because of what happened on it; it restricts a field because of what is still happening there, or because of who lost.\n\nMeraquas noted that the wind still carries sound across it."
+    },
+    {
+      "slug": "cloudspine-ridge",
+      "kind": "location",
+      "name": "Cloudspine Ridge",
+      "summary": "The chain of mountain fortresses House Caerthain held against a coalition of empires.",
+      "sourceNote": "Named in The Duke's Family record.",
+      "tags": ["Mountain Range", "Fortress"],
+      "fields": { "type": "Mountain Range", "ruler": "House Caerthain" },
+      "body": "A chain of mountain fortresses running above the [[Duneforged Citadel]], and the ground on which [[The Duke's Family|House Caerthain]] earned its nobility during the [[Continental War]].\n\nThey held it against a coalition of invading empires — land, sea, and sky-borne forces at once — and did not yield the line. The [[Skyward Bastions]] that still watch from the cliffs date from that defence.\n\nThe south calls them its guardians because of this ridge."
+    },
+    {
+      "slug": "lake-serathal",
+      "kind": "location",
+      "name": "Lake Serathal",
+      "summary": "The sacred lake atop the highest peak, and the Caerthain family's deepest secret.",
+      "sourceNote": "Named in The Duke's Family record, including its Family Secrets section.",
+      "tags": ["Lake", "Sacred", "Caerthain"],
+      "fields": { "type": "Sacred Lake", "region": "Cloudspine Ridge" },
+      "visibility": "secret",
+      "body": "A sacred and mysterious lake at the top of the highest peak, held by [[The Duke's Family|House Caerthain]] through the [[Continental War]] against forces coming by land, sea, and air alike.\n\nThe house's public account ends there. It does not end there.\n\n**DM only.** The creatures in the lake are not merely guarded — factions within the family worship them. The water is said to hold a time-anchored being that grants visions, power, or madness, and House Caerthain may no longer be entirely human after centuries beside it. [[Prince Deyric Caerthain]] sailed onto this lake and never returned, and is said to speak to the current rulers in their sleep."
+    },
+    {
+      "slug": "skyward-bastions",
+      "kind": "location",
+      "name": "Skyward Bastions",
+      "summary": "Armored watch-fortresses mounted on cliffs, repositioned by levitation crystals.",
+      "sourceNote": "Listed under Legacy of Craft & Power in The Duke's Family record.",
+      "tags": ["Fortress", "Caerthain"],
+      "fields": { "type": "Fortresses", "region": "Cloudspine Ridge" },
+      "body": "Armored watch-fortresses mounted along the cliffs of the [[Cloudspine Ridge]], built to be moved. Early levitation crystals let a bastion be repositioned for tactical advantage — a fortification that does not have to stay where the enemy last saw it.\n\nThey are the first of the Caerthain crafts, and the reason the house's later work on airships surprised nobody who had seen the walls fly."
+    },
+    {
+      "slug": "the-vaulted-court",
+      "kind": "location",
+      "name": "The Vaulted Court",
+      "summary": "The Merca seat — part palace, part high-security financial centre.",
+      "sourceNote": "Named as the Seat of Power in The Merca Family record.",
+      "tags": ["Estate", "Banking"],
+      "fields": { "type": "Estate", "ruler": "The Merca Family" },
+      "body": "An opulent estate built above and within the [[Mithril Reserve]] itself: part palace, part vault, and entirely deliberate.\n\nThe [[The Merca Family - Marquis”|Merca]] did not build beside the bank. They built into it, so that reaching the family and reaching the money became the same problem."
+    },
+    {
+      "slug": "the-immortals",
+      "kind": "organization",
+      "name": "The Immortals",
+      "summary": "Acheaoria's elite unit — for every warrior fallen, two were said to rise.",
+      "sourceNote": "Named in the Acheaoria record.",
+      "tags": ["Military", "Acheaorian", "Elite"],
+      "fields": {
+        "type": "Military Order",
+        "organization": "Acheaorian Organization",
+        "subcategory": "The Impartial",
+        "category": "KNOWN"
+      },
+      "body": "The elite unit of the [[Acheaoria]] army, and the reason the empire's territorial losses in the [[Continental War]] never became a collapse.\n\nThey were trained to embody unwavering resolve and likened to a hydra: for every warrior who fell, two were said to rise in his place. Acheaoria lost vast ground in that war and paid a heavy toll in its people. The Immortals are what it did not lose.\n\nWhether the comparison describes discipline, numbers, or something less ordinary is not settled in the record."
+    },
+    {
+      "slug": "the-argentar",
+      "kind": "organization",
+      "name": "The Argentar",
+      "summary": "The licensed, public-facing bankers of the Mithril Reserve.",
+      "sourceNote": "Described under Core Concepts in the Mithril Reserve record.",
+      "tags": ["Banking", "Guild"],
+      "fields": {
+        "type": "Guild (Bankers)",
+        "subcategory": "The Impartial",
+        "category": "KNOWN",
+        "location": "Mithril Reserve"
+      },
+      "body": "An Argentar is the face the [[Mithril Reserve]] shows the world: licensed, public, and answerable to the bank rather than to the client.\n\nThey are not tellers. An Argentar advises, assesses, and decides — a financial adviser and an agent of the Reserve in the same person, which are not always compatible roles.\n\nEvery major city has a stone branch, and every branch has its Argentar. They remember debts."
+    },
+    {
+      "slug": "the-serathian-fleet",
+      "kind": "organization",
+      "name": "The Serathian Fleet",
+      "summary": "Magically-augmented airships that descend into battle like hawks.",
+      "sourceNote": "Listed under Legacy of Craft & Power in The Duke's Family record.",
+      "tags": ["Military", "Caerthain", "Airships"],
+      "fields": {
+        "type": "Military Order",
+        "subcategory": "The Impartial",
+        "category": "KNOWN",
+        "location": "Duneforged Citadel"
+      },
+      "body": "Sleek, magically-augmented airships that sail the winds and drop into battle like hawks — founded, by the house's own account, by [[Empress-Lady Vaelis Caerthain]].\n\nThe Serathian Fleet is what turned [[The Duke's Family|House Caerthain]] from a house that held mountains into a house that commanded the sky above them. Their command of naval mountain craft and aerial engineering has kept them pioneers ever since.\n\nSomewhere in the citadel there is a prototype called [[The Sovereign Star]]."
+    },
+    {
+      "slug": "the-council-of-eronis",
+      "kind": "organization",
+      "name": "The Council of Eronis",
+      "summary": "Dream-walkers and illusionists believed to have ruled Nethrana.",
+      "sourceNote": "Named in The Truth — Notable as the believed rulers of Eronis.",
+      "tags": ["Nethranan", "Occult", "Fallen"],
+      "fields": {
+        "type": "Council",
+        "subcategory": "The Occult",
+        "category": "UNKNOWN",
+        "location": "Eronis"
+      },
+      "visibility": "secret",
+      "body": "Dream-walkers and illusionists, believed to have ruled from [[Eronis]] with an influence that ran well past the borders of [[Nethrana: The Kingdom of Mirrors and Mist|Nethrana]].\n\n*Believed* is doing considerable work in that sentence. Nothing about the Council is attested directly — only inferred from the [[Palace of Eronis]], from portals rumoured to open onto dreamscapes, and from the fact that an empire of mirrors and mist must have been governed by someone.\n\n**For the DM:** a council of dream-walkers does not necessarily stop governing just because its city fell."
+    },
+    {
+      "slug": "the-scholars",
+      "kind": "organization",
+      "name": "The Scholars",
+      "summary": "The body that classified the rifts into Bound, Shifting, and Anchored.",
+      "sourceNote": "Referenced in the Phenomenon record.",
+      "tags": ["Academic", "Continental"],
+      "fields": {
+        "type": "Philosophical Circle",
+        "subcategory": "The Impartial",
+        "category": "KNOWN"
+      },
+      "body": "The Scholars are the authority that divided the rifts into three kinds — [[Bound Rifts]], [[Shifting Rifts]], and [[Anchored Rifts]] — and the reason anyone speaks about the [[Phenomenon]] in an orderly way at all.\n\nTheir records are also, in places, redacted. A body that catalogues holes in reality tends to accumulate findings it would rather not publish, and the gaps in the Scholars' own documents are as informative as the entries around them."
+    },
+    {
+      "slug": "the-pact-caerthain",
+      "kind": "lore",
+      "name": "The Pact",
+      "summary": "A treaty signed in enchanted water binding allied houses to eternal defence.",
+      "sourceNote": "Listed under Legacy of Craft & Power in The Duke's Family record.",
+      "tags": ["Treaty", "Caerthain"],
+      "fields": { "era": "Post-Continental War" },
+      "body": "A treaty signed in enchanted water, binding every allied house to the eternal defence of the empire and of its secrets.\n\nThe second clause is the one that matters. A pact that protects an empire is a military arrangement; a pact that protects an empire's *secrets* is something a party can be prosecuted under without ever having heard of it.\n\nSigned in water, and therefore — the houses insist — not revocable by ink."
+    },
+    {
+      "slug": "the-continental-war",
+      "kind": "lore",
+      "name": "The Continental War",
+      "summary": "The war that broke the old order and made the three empires what they are.",
+      "sourceNote": "Named across the Acheaoria, Hellenoria, and Duke's Family records (also called the War of the Continent).",
+      "tags": ["War", "Continental", "Founding Era"],
+      "fields": { "era": "The Continental War" },
+      "body": "The war every surviving empire dates itself from, and the one none of them describes the same way.\n\n[[Acheaoria]] began it. Their conquests had carried them across nearly seventy percent of the continent before ambition ignited the war that cost them most of it — vast territories lost, a heavy toll on their people, and the [[The Immortals|Immortals]] left as proof that the army itself never broke.\n\n[[Hellenoria]] was ravaged by it. Towns were destroyed, survivors abandoned their homes and converged on the capital, and what they pooled there became the basis of the empire that followed. [[Astraphael]] rose out of that convergence.\n\nIn the south, [[The Duke's Family|House Caerthain]] held the [[Cloudspine Ridge]] against a coalition of invading empires and earned its nobility doing it.\n\nThe records also call it *the War of the Continent*. Which name a source uses is often a reliable indication of where it was written."
+    },
+    {
+      "slug": "bound-rifts",
+      "kind": "lore",
+      "name": "Bound Rifts",
+      "summary": "Rifts stable enough to cross safely — for as long as they last.",
+      "sourceNote": "Classified in the Phenomenon record.",
+      "tags": ["Phenomenon", "Rift"],
+      "fields": { "era": "Ongoing" },
+      "body": "The first of the three classifications made by [[The Scholars]]. A Bound Rift is stable enough that creatures pass freely between worlds with no apparent repercussion.\n\n*Apparent* is the operative word, and *stable* is not the same as permanent — the lifespan of a Bound Rift varies enormously, and nothing in the record explains what sets it.\n\nSee also [[Shifting Rifts]], [[Anchored Rifts]], and the wider [[Phenomenon]]."
+    },
+    {
+      "slug": "shifting-rifts",
+      "kind": "lore",
+      "name": "Shifting Rifts",
+      "summary": "Unpredictable rifts that cannot be entered and do not forgive the attempt.",
+      "sourceNote": "Classified in the Phenomenon record.",
+      "tags": ["Phenomenon", "Rift", "Hazard"],
+      "fields": { "era": "Ongoing" },
+      "body": "The second classification made by [[The Scholars]], and the one that killed people to establish.\n\nShifting Rifts appear suddenly and without warning. Unlike [[Bound Rifts]], no living creature of this world can enter one: those who have tried escaped barely, and came back marked in ways no scholar has been able to account for.\n\nThe marks are the part worth remembering. Something on the other side reached back."
+    },
+    {
+      "slug": "anchored-rifts",
+      "kind": "lore",
+      "name": "Anchored Rifts",
+      "summary": "The third classification of rift recognised by the Scholars.",
+      "sourceNote": "Named as the third rift type in the Phenomenon record.",
+      "tags": ["Phenomenon", "Rift"],
+      "fields": { "era": "Ongoing" },
+      "body": "The third of the classifications made by [[The Scholars]], alongside [[Bound Rifts]] and [[Shifting Rifts]].\n\nThe surviving record names the category and then says markedly less about it than about the other two — a silence that sits oddly next to the redactions elsewhere in the [[Phenomenon]] file.\n\n**For the DM:** the source material leaves Anchored Rifts open. The name suggests something fixed in place, and fixed things can be found, guarded, or owned."
+    },
+    {
+      "slug": "runes-of-trust",
+      "kind": "item",
+      "name": "Runes of Trust",
+      "summary": "Magical contracts that burn away when broken and cannot be forged.",
+      "sourceNote": "Listed under Legacy of Craft in The Merca Family record.",
+      "tags": ["Banking", "Merca", "Contract"],
+      "fields": {
+        "type": "Contract",
+        "properties": "Cannot be forged; burns away on breach",
+        "rarity": "Restricted"
+      },
+      "body": "A contract written in runes that cannot be forged and will not survive its own violation — break the terms and the document burns away.\n\nThe [[The Merca Family - Marquis”|Merca]] made their name on this craft. A Rune of Trust does not enforce a debt; it simply removes any argument about whether the debt was agreed.\n\n**At the table:** the destruction is the notification. Everyone holding a counterpart knows the moment a party breaches."
+    },
+    {
+      "slug": "ledgerlocks",
+      "kind": "item",
+      "name": "Ledgerlocks",
+      "summary": "Enchanted ledgers that open only to blood-bound members and verified heirs.",
+      "sourceNote": "Listed under Legacy of Craft in The Merca Family record.",
+      "tags": ["Banking", "Merca"],
+      "fields": {
+        "type": "Ledger",
+        "properties": "Legible only to blood-bound members and verified heirs",
+        "rarity": "Restricted"
+      },
+      "body": "Enchanted ledgers that reveal their contents to blood-bound members of the house and to verified heirs, and to nobody else. Stolen, a Ledgerlock is a blank book.\n\nIt follows that the [[The Merca Family - Marquis”|Merca]] can be robbed of their records without being robbed of their secrets — and that an heir is worth considerably more to a thief than a vault is."
+    },
+    {
+      "slug": "the-sovereign-star",
+      "kind": "item",
+      "name": "The Sovereign Star",
+      "summary": "A prototype airship held among House Caerthain's family secrets.",
+      "sourceNote": "Named under Family Secrets in The Duke's Family record.",
+      "tags": ["Airship", "Caerthain", "Prototype"],
+      "fields": { "type": "Airship", "rarity": "Unique" },
+      "visibility": "secret",
+      "body": "A prototype airship, listed among the things [[The Duke's Family|House Caerthain]] does not discuss.\n\nThe house built [[The Serathian Fleet]] in the open and was celebrated for it. The Sovereign Star is filed with the lake, the worship, and the question of whether the bloodline is still human — which suggests it is not simply a faster vessel.\n\n**For the DM:** the source gives you a name and a category and nothing else. That is a gift; decide what it does when the party needs it to matter."
+    },
+
+    {
+      "slug": "commander-daud",
+      "kind": "npc",
+      "name": "Commander Daud, The Royal Protector",
+      "summary": "Commander of the Adamantine Line, the legion of the Duneforged Citadel.",
+      "sourceNote": "Named in The Iron Parade Grounds record.",
+      "tags": ["Military", "Commander", "Duneforged"],
+      "fields": {
+        "role": "Commander of the Adamantine Line",
+        "location": "Duneforged Citadel",
+        "factions": "The Adamantine Line",
+        "attitude": "Loyal to the Citadel"
+      },
+      "body": "Commander of [[The Adamantine Line]] and nicknamed *the Royal Protector* — a title that says plainly whose person, rather than whose walls, he is expected to keep.\n\nHe holds the [[The Iron Parade Grounds|Iron Parade Grounds]] and a legion older than the primordial brood, whose reputation has been tempered by decades of war. Beneath him serves [[Vice-Commander Meagan Foster]].\n\nA commander given a nickname by the ranks is usually one they would follow. A commander given one by the court is a different matter."
+    },
+    {
+      "slug": "vice-commander-meagan-foster",
+      "kind": "npc",
+      "name": "Vice-Commander Meagan Foster",
+      "summary": "Second in command of the Adamantine Line.",
+      "sourceNote": "Named in The Iron Parade Grounds record.",
+      "tags": ["Military", "Duneforged"],
+      "fields": {
+        "role": "Vice-Commander of the Adamantine Line",
+        "location": "Duneforged Citadel",
+        "factions": "The Adamantine Line",
+        "attitude": "Neutral"
+      },
+      "body": "Second to [[Commander Daud, The Royal Protector|Commander Daud]] in [[The Adamantine Line]], and the officer who actually runs a legion whose commander is occupied with protecting a royal person.\n\nThe record gives her the rank and nothing else, which in a legion of this age is its own kind of statement: the Line has outlasted every commander it ever had, and it did so because someone was minding it."
+    },
+    {
+      "slug": "overseer-tarnak",
+      "kind": "npc",
+      "name": "Overseer Tarnak",
+      "summary": "Foreman of the Lower Mines, and a man with a problem underground.",
+      "sourceNote": "Named as a quest client in the Quests document.",
+      "tags": ["Quest Giver", "Duneforged"],
+      "fields": {
+        "role": "Foreman of the Lower Mines",
+        "location": "The Dune Mines",
+        "attitude": "Ally"
+      },
+      "body": "Foreman of the lower shafts of [[The Dune Mines]], and currently the man responsible for an operation that has stopped.\n\nDeep tremors and a low, unsettling hum have brought work in the lower levels to a halt. Tarnak needs it explained and he needs it explained quietly, because a mine that stays shut stops paying wages.\n\n**Hook:** he will hire the party to go down and find the source of the hum. He would prefer they came back."
+    },
+
+    {
+      "slug": "the-adamantine-line",
+      "kind": "organization",
+      "name": "The Adamantine Line",
+      "summary": "The legion of the Duneforged Citadel, older than the primordial brood.",
+      "sourceNote": "Fills an existing entry; described in The Iron Parade Grounds record.",
+      "tags": ["Military", "Duneforged", "Legion"],
+      "fields": {
+        "type": "Military Order",
+        "subcategory": "The Impartial",
+        "category": "KNOWN",
+        "location": "Duneforged Citadel"
+      },
+      "body": "The legion of the [[Duneforged Citadel]], quartered at [[The Iron Parade Grounds]].\n\nThe Line was raised before the primordial brood, and its reputation and prowess have been tempered across decades of war since. It is commanded by [[Commander Daud, The Royal Protector|Commander Daud]], with [[Vice-Commander Meagan Foster]] beneath him.\n\nA formation that predates the brood has, by definition, survived whatever the brood was."
+    },
+    {
+      "slug": "the-dune-mines",
+      "kind": "location",
+      "name": "The Dune Mines",
+      "summary": "Workings beneath the eastern slopes, where the lower shafts have fallen silent.",
+      "sourceNote": "Fills an existing entry; described in the Quests document.",
+      "tags": ["Mine", "Duneforged"],
+      "fields": { "type": "Mine", "region": "Duneforged Citadel" },
+      "body": "Mine workings beneath the eastern slopes, outside the walls of the [[Duneforged Citadel]].\n\nThe upper levels run as they always have. The lower shafts do not: deep tremors and a low, continuous hum have stopped work entirely, and [[Overseer Tarnak]] has been unable to get anyone to go back down.\n\nA hum is not a collapse. Collapses stop."
+    },
+    {
+      "slug": "citadel-cathedral",
+      "kind": "location",
+      "name": "Citadel Cathedral",
+      "summary": "The cathedral of the Duneforged Citadel, housing its temples.",
+      "sourceNote": "Exists in the export only as a database heading with no page of its own; its temples are its child records.",
+      "tags": ["Cathedral", "Duneforged", "Temple"],
+      "fields": { "type": "Cathedral", "region": "Duneforged Citadel" },
+      "body": "The cathedral of the [[Duneforged Citadel]], and the roof under which the citadel keeps its gods.\n\nIts temples are held separately rather than as altars in a single nave — [[Forge of Vulcan]], [[Temple of Juno]], [[Vault of Mercury]], [[Shrine of Anchiale]], and the [[Sanctum of Hoplodamus]]. Between them they cover craft, oath, trade, fire, and the guardianship owed to those who fight at [[The Ju Colliseum]].\n\nThat a citadel ruled by [[The Duke's Family|House Caerthain]] should honour a god of creation and a god of binding oaths in the same building is not an accident of architecture."
+    },
+    {
+      "slug": "forge-of-vulcan",
+      "kind": "location",
+      "name": "Forge of Vulcan",
+      "summary": "A temple of the Citadel Cathedral, kept for the Artisan of Creation.",
+      "sourceNote": "Fills an existing entry; filed under Citadel Cathedral / The Temples.",
+      "tags": ["Temple", "Duneforged"],
+      "fields": { "type": "Temple", "region": "Citadel Cathedral" },
+      "body": "One of the temples of the [[Citadel Cathedral]] in the [[Duneforged Citadel]], kept for [[Vulcan, The Artisan of Creation|Vulcan]].\n\nA house given to a god of creation, in a citadel whose nobility made its name on levitation crystals and airships, is not a quiet corner of the Cathedral. It is where the work is blessed."
+    },
+    {
+      "slug": "temple-of-juno",
+      "kind": "location",
+      "name": "Temple of Juno",
+      "summary": "A temple of the Citadel Cathedral, kept for the Protector of Bonds.",
+      "sourceNote": "Fills an existing entry; filed under Citadel Cathedral / The Temples.",
+      "tags": ["Temple", "Duneforged"],
+      "fields": { "type": "Temple", "region": "Citadel Cathedral" },
+      "body": "One of the temples of the [[Citadel Cathedral]] in the [[Duneforged Citadel]], kept for [[Juno, The Protector of Bonds|Juno]].\n\nOaths sworn here bind. In a citadel ruled by a house whose alliances rest on [[The Pact]] — a treaty signed in enchanted water — that is not a ceremonial function."
+    },
+    {
+      "slug": "vault-of-mercury",
+      "kind": "location",
+      "name": "Vault of Mercury",
+      "summary": "A temple of the Citadel Cathedral, kept for the Trickster of Trade.",
+      "sourceNote": "Fills an existing entry; filed under Citadel Cathedral / The Temples.",
+      "tags": ["Temple", "Duneforged"],
+      "fields": { "type": "Temple", "region": "Citadel Cathedral" },
+      "body": "One of the temples of the [[Citadel Cathedral]] in the [[Duneforged Citadel]], kept for [[Mercury, The Trickster of Trade|Mercury]].\n\nIt is called a vault rather than a shrine, which for a god of both trade and trickery is either an act of devotion or a precaution."
+    },
+    {
+      "slug": "shrine-of-anchiale",
+      "kind": "location",
+      "name": "Shrine of Anchiale",
+      "summary": "A temple of the Citadel Cathedral, kept for the Flame Artisan.",
+      "sourceNote": "Fills an existing entry; filed under Citadel Cathedral / The Temples.",
+      "tags": ["Temple", "Duneforged"],
+      "fields": { "type": "Shrine", "region": "Citadel Cathedral" },
+      "body": "One of the temples of the [[Citadel Cathedral]] in the [[Duneforged Citadel]], kept for [[Anchiale, The Flame Artisan|Anchiale]].\n\nThe Ju Colliseum names Anchiale for adaptability and cunning. A titan of fire and craft honoured in a mountain citadel of smiths is an obvious patron — the cunning is the part worth watching."
+    },
+    {
+      "slug": "sanctum-of-hoplodamus",
+      "kind": "location",
+      "name": "Sanctum of Hoplodamus",
+      "summary": "A temple of the Citadel Cathedral, kept for the Titan of Guardianship.",
+      "sourceNote": "Fills an existing entry; filed under Citadel Cathedral / The Temples.",
+      "tags": ["Temple", "Duneforged"],
+      "fields": { "type": "Sanctum", "region": "Citadel Cathedral" },
+      "body": "One of the temples of the [[Citadel Cathedral]] in the [[Duneforged Citadel]], kept for [[Hoplodamus, Titan of Guardianship|Hoplodamus]].\n\nThe trials fought at [[The Ju Colliseum]] are held sacred before Hoplodamus, and those who fight well there may be granted divine mercy — which the record defines as a fast, clean death.\n\nThe guardianship offered in this sanctum is of that kind."
+    },
+    {
+      "slug": "healers-sanctuary",
+      "kind": "location",
+      "name": "Healer's Sanctuary",
+      "summary": "The house of healing within the Duneforged Citadel.",
+      "sourceNote": "Fills an existing entry; filed under Duneforged Citadel / Locations.",
+      "tags": ["Sanctuary", "Duneforged"],
+      "fields": { "type": "Sanctuary", "region": "Duneforged Citadel" },
+      "body": "The house of healing of the [[Duneforged Citadel]], standing among its named locations rather than among the temples of the [[Citadel Cathedral]].\n\nA citadel that keeps [[The Adamantine Line]] and runs [[The Ju Colliseum]] generates a steady supply of the wounded. The Sanctuary is where they are brought."
+    }
+  ]
+}

@@ -147,6 +147,34 @@ Enter to jump. Enter on no result runs a full-text search across every entry.
 The link appears on that entry's page too, under *Linked mentions* — so opening
 a god shows every organization dedicated to them without you maintaining a list.
 
+Linked mentions **quote the sentence** they came from. Most of your entries have
+no description of their own, so opening *Persemenid* shows you what your notes
+actually say about it:
+
+> "At the heart of this empire lies Persemenid, a magnificent city born from the
+> discovery of a sprawling oasis by the first leaders." — Acheaoria
+
+See [docs/content-review.md](docs/content-review.md) for a full account of what
+your source material contains and what was extracted from it.
+
+**Generated descriptions.** 345 entries that had no prose now carry one, built
+from their own properties — a deity's pantheon, domains, alignment and race; an
+organization's type, patron and allegiance.
+
+**New entries.** Your writing names dozens of people and places that never got a
+page: the four voices behind the Imperium's chronicle, House Caerthain's three
+named ancestors and the lake they will not discuss, the fallen cities of
+Velothis, the Scholars' three kinds of rift. **38 new entries** were written for
+them and 8 more fill imported stubs, taking the codex to **520 entries** with
+117 cross-links between them.
+
+Each carries a note recording which of your pages it came from, is labelled on
+its page, becomes yours the moment you edit it, and
+`npm run describe -- --revert` clears the lot.
+
+See [docs/content-review.md](docs/content-review.md) for the full inventory,
+including 13 near-duplicate locations that want merging.
+
 **Secrets.** Each entry is Everyone / DM only / Revealed. Separately, the
 **DM notes** field on any entry is never sent to a player, even when the entry
 itself is public — that's where "the innkeeper is a doppelganger" goes.
@@ -181,6 +209,11 @@ stored HTML can't execute.
 | `npm run db:seed` | Re-seed; updates existing entries, never deletes |
 | `npm run db:studio` | Browse the database in Drizzle Studio |
 | `npm run import:notion` | Re-run the Notion import into `data/world-seed.json` |
+| `npm run verify:links` | Preview the link graph and quoted mentions, no database needed |
+| `npm run verify:expansion` | Check the authored entries and that every wiki-link resolves |
+| `npm run describe` | Write descriptions for empty entries from their properties |
+| `npm run describe -- --preview` | Show what that would write, without touching anything |
+| `npm run describe -- --revert` | Remove every generated description |
 | `npm run user:add` | Add or update an account |
 | `npm run typecheck` | Type check |
 
