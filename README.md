@@ -1,58 +1,64 @@
 # The Continent of Asetheria
 
-A private codex and campaign manager for the world of Asetheria — built to add,
-edit, search, and cross-reference everything in the setting, from a phone at the
-table or a laptop while prepping.
+This is my D&D world, and this is the app I run it from.
 
-Your original Notion export lives in [`data/notion-export/`](data/notion-export)
-and is never modified. It is the permanent fallback copy of the world.
+Everything I've written about Asetheria used to live in Notion, which was fine
+for writing and miserable at the table — too slow to search, too easy to spoil
+myself, and no way to hand my players a version with the secrets stripped out.
+So I moved the whole thing here: my own codex, on my own database, that I can
+add to and edit from my phone mid-session or from a laptop while I prep.
+
+My original Notion export is kept in
+[`data/notion-export/`](data/notion-export) and never modified. If I ever break
+something, that folder is the world, untouched.
 
 ---
 
-## What's in here
+## What's in it
 
-The importer turned 1,102 Notion pages and 44 databases into **482 entries**:
+520 entries, built from 1,102 Notion pages and 44 databases:
 
-| Section | Count |  | Section | Count |
+| | | | | |
 | --- | --- | --- | --- | --- |
 | Deities | 186 | | Ores & Materials | 9 |
-| Organizations | 107 | | Pantheons | 7 |
-| Locations | 106 | | Empires | 6 |
-| Families | 14 | | Systems | 6 |
-| Lore | 11 | | House Rules | 5 |
+| Locations | 116 | | Pantheons | 7 |
+| Organizations | 112 | | Empires | 6 |
+| NPCs | 17 | | Systems | 6 |
+| Lore | 16 | | Items | 5 |
+| Families | 14 | | House Rules | 5 |
 | Quests | 10 | | Factions | 4 |
-| | | | Flora, Items, NPCs, Notes, Sessions | 13 |
+| | | | Flora, Notes, Sessions | 7 |
 
-Nothing was thrown away except **478 genuinely blank placeholder rows** (empty
-rows in Notion databases, which export as untitled pages with no content) and
-**213 duplicate pages** — the Godatabase is a Notion roll-up that re-exports
-every god already present in its pantheon folder, so those were merged rather
-than imported twice.
+The import threw away exactly two things: 478 blank placeholder rows (empty rows
+in my Notion databases, which export as untitled pages with nothing in them) and
+213 duplicate pages, because the Godatabase is a roll-up that re-exports every
+god already sitting in its pantheon folder. Those got merged, not dropped.
 
-The importer ends with an integrity check that fails the run if any source page
-containing prose is missing from the output.
+The importer finishes with an integrity check that fails the run if any page of
+mine with actual prose in it didn't make it across. It passes.
 
 ---
 
-## Getting it running
+## Setting it up again
 
-### 1. Create the database
+Notes to myself, for when I'm on a new machine or rebuilding.
 
-In your Vercel dashboard: **Storage → Create Database → Neon**. Vercel injects
-`DATABASE_URL` into the project automatically.
+### 1. Database
 
-For local work, copy the connection string from the Neon dashboard.
+Vercel dashboard → **Storage → Create Database → Neon**. That injects
+`DATABASE_URL` into the project on its own. For local work I copy the connection
+string out of the Neon dashboard.
 
-### 2. Configure
+### 2. Config
 
 ```bash
 cp .env.example .env.local
 ```
 
-Fill in `.env.local`:
+Then fill in:
 
 - `DATABASE_URL` — from Neon
-- `AUTH_SECRET` — generate one:
+- `AUTH_SECRET` — generate with:
 
 ```bash
 node -e "console.log(require('crypto').randomBytes(48).toString('base64url'))"
@@ -60,144 +66,134 @@ node -e "console.log(require('crypto').randomBytes(48).toString('base64url'))"
 
 - `DM_PASSWORD` and `PLAYER_PASSWORD` — **change both before deploying**
 
-### 3. Create the schema and load the world
+### 3. Schema and content
 
 ```bash
 npm install
 npm run db:setup
 ```
 
-That pushes the schema, installs the search extensions, creates your two
-accounts, loads all 482 entries, and builds the link graph.
+Pushes the schema, installs the search extensions, creates my two accounts,
+loads every entry, and builds the link graph.
 
-### 4. Run it
+### 4. Go
 
 ```bash
 npm run dev
 ```
 
-Open http://localhost:3000 and sign in with your DM username and password.
+http://localhost:3000, sign in as the DM.
 
----
-
-## Deploying to Vercel
+### Deploying
 
 ```bash
 vercel
 ```
 
-Then in **Project → Settings → Environment Variables**, add `AUTH_SECRET`
-(`DATABASE_URL` is already there from the Neon integration). Redeploy.
-
-Run the seed once against the production database from your machine — set
-`DATABASE_URL` in `.env.local` to the production string and run `npm run db:setup`.
+Then **Project → Settings → Environment Variables** → add `AUTH_SECRET`
+(`DATABASE_URL` is already there from the Neon integration) and redeploy. I seed
+production once from my own machine by pointing `.env.local` at the production
+connection string and running `npm run db:setup`.
 
 ---
 
-## Two kinds of account
+## Me and my players
 
-| | DM | Player |
+| | Me (DM) | Players |
 | --- | --- | --- |
 | Read public entries | ✅ | ✅ |
 | Read secret entries | ✅ | ❌ |
-| See DM notes | ✅ | ❌ *(never, on any entry)* |
+| See my DM notes | ✅ | ❌ *(never, on any entry)* |
 | Create / edit / archive | ✅ | ❌ |
-| Archive, backup, import | ✅ | ❌ |
+| Backup and import | ✅ | ❌ |
 
-Redaction happens in the data layer (`src/lib/entries.ts`), not in the UI, so a
-missed check in a component can't leak a secret. Every query a player makes is
-filtered in SQL before rows leave the database.
+The redaction happens in the data layer (`src/lib/entries.ts`), not in the
+templates — a player's query is filtered in SQL before any row leaves the
+database, so I can't leak a secret by forgetting a check in a component.
 
-Add more accounts:
+New player account:
 
 ```bash
 npm run user:add -- --username alice --password "a long passphrase" --role player
 ```
 
-Re-running it for an existing name resets the password and signs that account
-out everywhere.
+Running it again on an existing name resets that password and kicks the account
+out of every session it had open.
 
 ---
 
-## Nothing is ever deleted
+## Nothing gets deleted
 
-This was a hard requirement, so it's enforced in three places:
+This was the whole reason I stopped trusting my old setup, so it's enforced in
+three places:
 
-1. **Archive, not delete.** The Archive button sets a timestamp. The row stays
-   in the table and can be restored from `/archive` at any time.
-2. **Full revision history.** Every edit writes a complete snapshot of the
-   previous version first. Any of them can be restored from the entry's edit
-   page.
+1. **Archive instead of delete.** The Archive button just sets a timestamp. The
+   row stays in the table and I can restore it from `/archive` whenever.
+2. **Full history.** Every edit snapshots the previous version first. I can roll
+   any entry back from its edit page.
 3. **Permanent deletion is gated.** The one code path that actually removes a
-   row (`purgeBlankEntryAction`) checks the entry first and refuses if it has a
-   body, summary, DM notes, tags, or any property. Only genuinely empty entries
-   can be purged, and only from the archive.
+   row refuses if the entry has a body, summary, DM note, tag, or any property.
+   Only genuinely empty entries can go, and only from the archive.
 
-Importing a backup never deletes either — entries in the file are updated or
-added, and anything not in the file is left untouched.
+Restoring a backup can't delete anything either — entries in the file get
+updated or added, and anything not in the file is left alone.
 
 ---
 
-## Using it
+## How I actually use it
 
-**Finding things.** `Ctrl/⌘ K` or `/` opens search from anywhere. Arrow keys and
-Enter to jump. Enter on no result runs a full-text search across every entry.
+**Finding things.** `Ctrl/⌘ K` or `/` from anywhere. Arrows and Enter to jump.
+Enter with no result runs a full-text search across everything, including
+properties — so `satyr` or `chaotic neutral` finds the right gods.
 
-**Linking.** Type `[[Aeterna City]]` in any description to link another entry.
-The link appears on that entry's page too, under *Linked mentions* — so opening
-a god shows every organization dedicated to them without you maintaining a list.
+**Linking.** `[[Aeterna City]]` in any description links it. The link shows up on
+*that* entry's page too, under Linked mentions, so opening a god shows me every
+organization dedicated to them without my ever maintaining a list.
 
-Linked mentions **quote the sentence** they came from. Most of your entries have
-no description of their own, so opening *Persemenid* shows you what your notes
-actually say about it:
+Mentions quote the sentence they came from, which matters because a lot of my
+entries have no description of their own. Opening *Persemenid* shows me what my
+own notes say about it:
 
 > "At the heart of this empire lies Persemenid, a magnificent city born from the
 > discovery of a sprawling oasis by the first leaders." — Acheaoria
 
-See [docs/content-review.md](docs/content-review.md) for a full account of what
-your source material contains and what was extracted from it.
+**Filled-in descriptions.** 345 entries that I'd never written prose for now have
+a description built from their own properties — pantheon, domains, alignment,
+race for a god; type, patron, allegiance for an order. There are also 38 new
+entries for people and places my writing names but never gave a page: the four
+voices arguing in the margins of the Imperium chronicle, House Caerthain's
+ancestors and the lake they won't talk about, the ruined cities on Velothis, the
+Scholars' three kinds of rift.
 
-**Generated descriptions.** 345 entries that had no prose now carry one, built
-from their own properties — a deity's pantheon, domains, alignment and race; an
-organization's type, patron and allegiance.
+All of it is labelled as generated, becomes mine the moment I edit it, and
+`npm run describe -- --revert` wipes it if I decide I'd rather write my own.
+[`docs/content-review.md`](docs/content-review.md) has the full inventory,
+including 13 near-duplicate locations I should probably merge.
 
-**New entries.** Your writing names dozens of people and places that never got a
-page: the four voices behind the Imperium's chronicle, House Caerthain's three
-named ancestors and the lake they will not discuss, the fallen cities of
-Velothis, the Scholars' three kinds of rift. **38 new entries** were written for
-them and 8 more fill imported stubs, taking the codex to **520 entries** with
-117 cross-links between them.
+**Secrets.** Every entry is Everyone / DM only / Revealed. Separately, the
+**DM notes** field is never sent to a player even on a public entry — that's
+where "the innkeeper is a doppelganger" goes.
 
-Each carries a note recording which of your pages it came from, is labelled on
-its page, becomes yours the moment you edit it, and
-`npm run describe -- --revert` clears the lot.
-
-See [docs/content-review.md](docs/content-review.md) for the full inventory,
-including 13 near-duplicate locations that want merging.
-
-**Secrets.** Each entry is Everyone / DM only / Revealed. Separately, the
-**DM notes** field on any entry is never sent to a player, even when the entry
-itself is public — that's where "the innkeeper is a doppelganger" goes.
-
-**Dice.** `/tools/dice` takes full notation: `4d6kh3`, `1d20adv`, `3d6!`,
+**Dice.** `/tools/dice` takes real notation: `4d6kh3`, `1d20adv`, `3d6!`,
 `6x4d6kh3`, `1d8+2d6-1`.
 
-**Backups.** `/admin` downloads a complete JSON copy — every entry, secret, note,
-link, and table. Worth doing before a big session.
+**Backups.** `/admin` gives me a complete JSON copy — every entry, secret, note,
+link and table. Worth grabbing before a big session.
 
 ---
 
-## Tech
+## Under the hood
 
 Next.js 15 (App Router) · TypeScript · Neon Postgres · Drizzle ORM ·
-Tailwind CSS v4 · `jose` sessions
+Tailwind CSS v4 · `jose` sessions.
 
-**Security:** scrypt password hashing, httpOnly `SameSite=Lax` JWT cookies,
-DB-backed session revocation, rate-limited login (8 attempts / 15 min, with
-hashed identifiers so no raw IPs are stored), constant-time password comparison
-with a dummy hash for unknown users, Zod validation on every write, CSP and
-security headers, and a Markdown renderer that escapes input before parsing so
-stored HTML can't execute.
+Security, since this is on the public internet with my players' spoilers in it:
+scrypt password hashing, httpOnly `SameSite=Lax` JWT cookies, DB-backed session
+revocation, login throttling (8 attempts / 15 min, identifiers hashed so no raw
+IPs are stored), constant-time password comparison against a dummy hash for
+unknown users, Zod validation on every write, CSP and security headers, and a
+Markdown renderer that escapes input before parsing so nothing stored in an
+entry can execute.
 
 ### Commands
 
@@ -205,26 +201,26 @@ stored HTML can't execute.
 | --- | --- |
 | `npm run dev` | Development server |
 | `npm run build` | Production build |
-| `npm run db:setup` | Push schema + extensions + seed (first-time setup) |
-| `npm run db:seed` | Re-seed; updates existing entries, never deletes |
-| `npm run db:studio` | Browse the database in Drizzle Studio |
+| `npm run db:setup` | Schema + extensions + seed (first-time setup) |
+| `npm run db:seed` | Re-seed; updates entries, never deletes |
+| `npm run db:studio` | Poke at the database directly |
 | `npm run import:notion` | Re-run the Notion import into `data/world-seed.json` |
-| `npm run verify:links` | Preview the link graph and quoted mentions, no database needed |
-| `npm run verify:expansion` | Check the authored entries and that every wiki-link resolves |
-| `npm run describe` | Write descriptions for empty entries from their properties |
-| `npm run describe -- --preview` | Show what that would write, without touching anything |
+| `npm run describe` | Fill empty entries from their properties |
+| `npm run describe -- --preview` | Show what that would write, change nothing |
 | `npm run describe -- --revert` | Remove every generated description |
-| `npm run user:add` | Add or update an account |
+| `npm run verify:links` | Preview the link graph and quoted mentions, no DB needed |
+| `npm run verify:expansion` | Check my authored entries and that every link resolves |
+| `npm run user:add` | Add or reset an account |
 | `npm run typecheck` | Type check |
 
-### Re-importing from Notion
+### Pulling changes back from Notion
 
-If you keep editing in Notion and want to pull changes across, replace
-`data/notion-export/` with a fresh export and run:
+If I keep writing in Notion and want it here, I drop a fresh export into
+`data/notion-export/` and run:
 
 ```bash
 npm run import:notion && npm run db:seed
 ```
 
-The seed matches on slug and **won't overwrite a description you've written in
-the app** — it only fills one in where the entry's body is empty.
+The seed matches on slug and **won't overwrite anything I've written in the
+app** — it only fills in a description where the entry's body is still empty.
