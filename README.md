@@ -106,6 +106,8 @@ node -e "console.log(require('crypto').randomBytes(48).toString('base64url'))"
 ```
 
 - `DM_PASSWORD` and `PLAYER_PASSWORD` — **change both before deploying**
+- `SIGNUP_CODE` — optional; leave blank unless you want players to be able to
+  create their own accounts (see [below](#letting-players-create-their-own-account))
 
 ### 3. Create the schema and load the world
 
@@ -173,6 +175,26 @@ npm run user:add -- --username alice --password "a long passphrase" --role playe
 Re-running it for an existing name resets the password and signs that account
 out everywhere.
 
+### Letting players create their own account
+
+Set `SIGNUP_CODE` in `.env.local` (and in Vercel, for production) to open
+`/register`:
+
+```bash
+SIGNUP_CODE="a phrase you'd say out loud at the table"
+```
+
+Leave it unset and `/register` stays closed — that is the default, so a
+deployment nobody has configured for this stays sealed. Whoever knows the
+phrase can create their own account, and the account it creates is **always a
+player**: the role is written by the server, not read from the form, so there
+is no field to tamper with and no path from this form to a DM account. Change
+the phrase if it gets passed around further than you meant it to.
+
+Registration is throttled per address — 10 accounts per 15 minutes — looser
+than login's limit because a whole table registering from one house shares an
+address and every attempt counts, including a mistyped code.
+
 ---
 
 ## Nothing is ever deleted
@@ -222,11 +244,12 @@ Next.js 15 (App Router) · TypeScript · Neon Postgres · Drizzle ORM ·
 Tailwind CSS v4 · `jose` sessions
 
 **Security:** scrypt password hashing, httpOnly `SameSite=Lax` JWT cookies,
-DB-backed session revocation, rate-limited login (8 attempts / 15 min, with
-hashed identifiers so no raw IPs are stored), constant-time password comparison
-with a dummy hash for unknown users, Zod validation on every write, CSP and
-security headers, and a Markdown renderer that escapes input before parsing so
-stored HTML cannot execute.
+DB-backed session revocation, rate-limited login and registration (hashed
+identifiers so no raw IPs are stored), constant-time comparison for both
+passwords and the invite code, self-registration closed by default and role
+always written server-side, Zod validation on every write, CSP and security
+headers, and a Markdown renderer that escapes input before parsing so stored
+HTML cannot execute.
 
 ### Commands
 
