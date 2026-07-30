@@ -47,12 +47,12 @@ and is never modified. It is the permanent fallback copy of the world.
 
 ## What's in here
 
-The Notion import is the core of the world — **824 live entries** and 1,065
-cross-references:
+The Notion import is the core of the world, and the Bestiary has grown well
+beyond it — **836 live entries** and 1,084 cross-references:
 
 | Section | Count |  | Section | Count |
 | --- | --- | --- | --- | --- |
-| Bestiary | 334 | | Systems | 8 |
+| Bestiary | 346 | | Systems | 8 |
 | Deities | 186 | | Empires | 6 |
 | Organizations | 110 | | House Rules | 6 |
 | Locations | 87 | | Pantheons | 6 |
@@ -83,19 +83,30 @@ run if any source page containing prose is missing from the output.
 
 ### The Bestiary
 
-334 of those entries are not from Notion. They're the full monster list from
-the D&D 5th Edition **System Reference Document** (SRD 5.1) — the specific
-subset of official content Wizards of the Coast releases under a Creative
-Commons license for exactly this kind of reuse. It's mechanics, not flavour:
-full stat blocks, no narrative text, and none of the named creatures WotC
-holds as brand-specific Product Identity (beholders, mind flayers, displacer
-beasts). Every entry links to the **System Reference Document (SRD 5.1)** note
-in the codex, which carries the full attribution and license text.
+346 of those entries are not from Notion, and they're two different layers.
+
+**334 are the full monster list** from the D&D 5th Edition **System Reference
+Document** (SRD 5.1) — the specific subset of official content Wizards of the
+Coast releases under a Creative Commons license for exactly this kind of
+reuse. It's mechanics, not flavour: full stat blocks, no narrative text, and
+none of the named creatures WotC holds as brand-specific Product Identity
+(beholders, mind flayers, displacer beasts). Every one of these links to the
+**System Reference Document (SRD 5.1)** note in the codex, which carries the
+full attribution and license text.
+
+**The other 12 are named and unique to Asetheria** — the Simurgh of
+Vael'Tharan, Talos of Duneforged, Charybdis of the Reach, and others — written
+from real, ancient, public-domain mythology (Persian, Greek, Roman) rather
+than from any modern book. A specific creator's homebrew is still that
+creator's copyrighted work no matter how freely it's shared for reading, so
+none of it — official sourcebook or fan homebrew alike — was used as source
+material here. Only these carry real narrative bodies; the SRD layer is
+deliberately mechanics-only.
 
 Everything else added past the original Notion import — the fauna, the extra
 flora, the extra ores, and the imperial-institution entries under Systems and
-Organizations — is original, written for Asetheria and grounded in real
-history or mythology rather than copied from any book.
+Organizations — follows the same rule: original, grounded in real history or
+mythology, never copied from another book.
 
 ---
 
@@ -292,6 +303,7 @@ Maintenance scripts, all dry-run by default — pass `--apply` to write:
 | `npx tsx scripts/add-srd-attribution-note.ts` | Create the public attribution note the Bestiary's SRD entries link to. Run once, before the import below |
 | `npx tsx scripts/import-srd-monsters.ts` | Import the D&D 5e SRD 5.1 monster list (CC BY 4.0) as the Bestiary base layer |
 | `npx tsx scripts/add-flora-fauna-ores.ts` | Add original fauna, flora, and minerals grounded in real biology and history |
+| `npx tsx scripts/add-named-creatures.ts` | Add named creatures unique to Asetheria, grounded in real mythology rather than any book |
 
 ### Re-importing from Notion
 
