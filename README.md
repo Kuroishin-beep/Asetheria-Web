@@ -47,18 +47,20 @@ and is never modified. It is the permanent fallback copy of the world.
 
 ## What's in here
 
-The importer turned 1,102 Notion pages and 44 databases into **462 live
-entries** and 317 cross-references:
+The Notion import is the core of the world — **824 live entries** and 1,065
+cross-references:
 
 | Section | Count |  | Section | Count |
 | --- | --- | --- | --- | --- |
-| Deities | 186 | | Pantheons | 7 |
-| Organizations | 107 | | Empires | 6 |
-| Locations | 86 | | Systems | 5 |
-| Families | 14 | | House Rules | 5 |
-| Lore | 12 | | Factions | 4 |
-| Quests | 10 | | Flora & Fauna | 3 |
-| Ores & Materials | 9 | | Items, NPCs, Notes, Sessions | 8 |
+| Bestiary | 334 | | Systems | 8 |
+| Deities | 186 | | Empires | 6 |
+| Organizations | 110 | | House Rules | 6 |
+| Locations | 87 | | Pantheons | 6 |
+| Flora & Fauna | 19 | | Factions | 4 |
+| Ores & Materials | 16 | | Items | 2 |
+| Families | 14 | | Session Logs | 1 |
+| Lore | 12 | | NPCs | 1 |
+| Quests | 8 | | Notes | 4 |
 
 Locations are not one list. The Notion database already classified every
 settlement through its tags — "Invictian City", "Hellenorian Town", "Island
@@ -67,17 +69,33 @@ Village" — so each tier gets its own section:
 | Tier | Count | | Tier | Count |
 | --- | --- | --- | --- | --- |
 | Capitals | 3 | | City Districts | 8 |
-| Major Cities | 16 | | Sites | 12 |
+| Major Cities | 16 | | Sites | 14 |
 | Towns | 17 | | The Wilds | 21 |
 | Villages | 9 | | | |
 
-20 further entries are archived rather than deleted — empty Notion index pages
+25 further entries are archived rather than deleted — empty Notion index pages
 and duplicate roll-up rows. They are all restorable from `/archive`.
 
 Nothing else was thrown away. The Godatabase is a Notion roll-up that re-exports
 every god already present in its pantheon folder, so those were merged rather
 than imported twice. The importer ends with an integrity check that fails the
 run if any source page containing prose is missing from the output.
+
+### The Bestiary
+
+334 of those entries are not from Notion. They're the full monster list from
+the D&D 5th Edition **System Reference Document** (SRD 5.1) — the specific
+subset of official content Wizards of the Coast releases under a Creative
+Commons license for exactly this kind of reuse. It's mechanics, not flavour:
+full stat blocks, no narrative text, and none of the named creatures WotC
+holds as brand-specific Product Identity (beholders, mind flayers, displacer
+beasts). Every entry links to the **System Reference Document (SRD 5.1)** note
+in the codex, which carries the full attribution and license text.
+
+Everything else added past the original Notion import — the fauna, the extra
+flora, the extra ores, and the imperial-institution entries under Systems and
+Organizations — is original, written for Asetheria and grounded in real
+history or mythology rather than copied from any book.
 
 ---
 
@@ -271,6 +289,9 @@ Maintenance scripts, all dry-run by default — pass `--apply` to write:
 | `npx tsx scripts/reclassify-locations.ts` | Re-derive location tiers from tags; archive empty Notion index and duplicate pages |
 | `npx tsx scripts/populate-tags.ts` | Fill in tags for entries that have none, derived from each entry's own properties |
 | `npx tsx scripts/enrich-from-html.ts` | Recover page bodies from a Notion **HTML** export where the Markdown export dropped them |
+| `npx tsx scripts/add-srd-attribution-note.ts` | Create the public attribution note the Bestiary's SRD entries link to. Run once, before the import below |
+| `npx tsx scripts/import-srd-monsters.ts` | Import the D&D 5e SRD 5.1 monster list (CC BY 4.0) as the Bestiary base layer |
+| `npx tsx scripts/add-flora-fauna-ores.ts` | Add original fauna, flora, and minerals grounded in real biology and history |
 
 ### Re-importing from Notion
 
