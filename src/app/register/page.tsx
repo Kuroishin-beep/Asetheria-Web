@@ -1,13 +1,18 @@
-import { Suspense } from "react";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import type { Metadata } from "next";
-import { LoginForm } from "./login-form";
+import { getCurrentUser } from "@/lib/auth";
+import { RegisterForm } from "./register-form";
 
-export const metadata: Metadata = { title: "Sign in" };
+export const metadata: Metadata = { title: "Join the party" };
 
-export default function LoginPage() {
-  // Only advertise registration when the DM has actually opened it.
-  const signupOpen = Boolean(process.env.SIGNUP_CODE?.trim());
+export default async function RegisterPage() {
+  // Someone already signed in has no business here.
+  const user = await getCurrentUser();
+  if (user) redirect("/");
+
+  // The API is the real gate; this only avoids showing a form that cannot work.
+  const open = Boolean(process.env.SIGNUP_CODE?.trim());
 
   return (
     <main
@@ -44,38 +49,31 @@ export default function LoginPage() {
               marginTop: "0.35rem",
             }}
           >
-            The codex is sealed to strangers.
+            {open
+              ? "Take an oath and the codex opens — as far as the party is allowed."
+              : "The codex is sealed to strangers."}
           </p>
         </div>
 
         <div className="card" style={{ padding: "1.5rem" }}>
-          <Suspense fallback={null}>
-            <LoginForm />
-          </Suspense>
+          {open ? (
+            <RegisterForm />
+          ) : (
+            <p style={{ fontSize: "0.875rem", color: "var(--text-muted)" }}>
+              Registration is closed. Ask the DM for an account.
+            </p>
+          )}
         </div>
-
-        {signupOpen && (
-          <p
-            style={{
-              textAlign: "center",
-              marginTop: "1.25rem",
-              fontSize: "0.8125rem",
-              color: "var(--text-muted)",
-            }}
-          >
-            Given an invite code? <Link href="/register">Join the party</Link>
-          </p>
-        )}
 
         <p
           style={{
             textAlign: "center",
             marginTop: "1.25rem",
-            fontSize: "0.75rem",
-            color: "var(--text-faint)",
+            fontSize: "0.8125rem",
+            color: "var(--text-muted)",
           }}
         >
-          Vincit qui se vincit
+          Already sworn? <Link href="/login">Sign in</Link>
         </p>
       </div>
     </main>

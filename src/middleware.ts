@@ -6,7 +6,13 @@ import { SESSION_COOKIE, verifySessionToken } from "@/lib/session";
  * JWT signature only — the database-backed check (revocation, role) happens in
  * `getCurrentUser()`. Treat this as a fast first filter, not the sole guard.
  */
-const PUBLIC_PATHS = ["/login", "/api/auth/login", "/api/health"];
+const PUBLIC_PATHS = [
+  "/login",
+  "/register",
+  "/api/auth/login",
+  "/api/auth/register",
+  "/api/health",
+];
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
@@ -18,8 +24,8 @@ export async function middleware(request: NextRequest) {
   const token = request.cookies.get(SESSION_COOKIE)?.value;
   const session = token ? await verifySessionToken(token) : null;
 
-  // Signed-in users have no reason to sit on the login page.
-  if (session && pathname === "/login") {
+  // Signed-in users have no reason to sit on the login or registration page.
+  if (session && (pathname === "/login" || pathname === "/register")) {
     return NextResponse.redirect(new URL("/", request.url));
   }
 
