@@ -93,7 +93,60 @@ export function extractWikiLinks(body: string): string[] {
   return out;
 }
 
-export type LinkTarget = { targetId: string; relation: string };
+export type LinkTarget = {
+  targetId: string;
+  relation: string;
+  /** The sentence the reference appeared in, when it came from prose. */
+  context?: string | null;
+};
+
+/**
+ * Pulls the sentence around a match so a backlink can quote the source.
+ * Markdown syntax is stripped — this is read, not re-rendered.
+ */
+export function extractContext(
+  body: string,
+  index: number,
+  length: number,
+  max = 260,
+): string | null {
+  const before = body.slice(0, index);
+  const after = body.slice(index + length);
+
+  const startBreak = Math.max(
+    before.lastIndexOf(". "),
+    before.lastIndexOf("\n"),
+    before.lastIndexOf("! "),
+    before.lastIndexOf("? "),
+  );
+  const start = startBreak === -1 ? 0 : startBreak + 1;
+
+  const endCandidates = [
+    after.indexOf(". "),
+    after.indexOf("\n"),
+    after.indexOf("! "),
+    after.indexOf("? "),
+  ].filter((n) => n !== -1);
+  const end =
+    index + length + (endCandidates.length ? Math.min(...endCandidates) + 1 : after.length);
+
+  let snippet = body.slice(start, end).trim();
+  snippet = snippet
+    .replace(/^[#>\-*\s]+/, "")
+    .replace(/\[\[([^\]|]+)(?:\|([^\]]*))?\]\]/g, (_m, a, b) => b || a)
+    .replace(/\[([^\]]+)\]\([^)]*\)/g, "$1")
+    .replace(/[*_`]/g, "")
+    .replace(/^["“”'‘’]+|["“”'‘’]+$/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+
+  // A page that is just a list of names yields a "quote" that repeats the name
+  // and says nothing. Only keep context that adds surrounding sentence.
+  if (snippet.length < length + 20) return null;
+
+  if (snippet.length > max) snippet = snippet.slice(0, max - 1).trimEnd() + "…";
+  return snippet;
+}
 
 /**
  * Resolves every outgoing edge for one entry.
@@ -108,17 +161,20 @@ export function resolveLinks(
   const seen = new Set<string>();
   const out: LinkTarget[] = [];
 
-  const push = (targetId: string, relation: string) => {
+  const push = (targetId: string, relation: string, context?: string | null) => {
     if (targetId === selfId) return;
     const key = `${targetId}:${relation}`;
     if (seen.has(key)) return;
     seen.add(key);
-    out.push({ targetId, relation });
+    out.push({ targetId, relation, context: context ?? null });
   };
 
-  for (const raw of extractWikiLinks(body)) {
-    const id = nameIndex.get(normalizeName(raw));
-    if (id) push(id, "mentions");
+  // Walk the wiki-links with positions so each one can quote its sentence.
+  const wikiRe = /\[\[([^\]|]+)(?:\|[^\]]*)?\]\]/g;
+  let wm: RegExpExecArray | null;
+  while ((wm = wikiRe.exec(body)) !== null) {
+    const id = nameIndex.get(normalizeName(wm[1].trim()));
+    if (id) push(id, "mentions", extractContext(body, wm.index, wm[0].length));
   }
 
   for (const [key, relation] of Object.entries(RELATION_FIELDS)) {
@@ -138,6 +194,18 @@ export function resolveLinks(
  * Scans a body for plain-text mentions of other entries. Used at seed time to
  * bootstrap the graph from prose that predates wiki-link syntax.
  */
+/**
+ * Names too generic to auto-link on. Matching these against every body produces
+ * noise that buries real connections.
+ */
+const STOP_NAMES = new Set([
+  "introduction", "information", "notable", "notables", "triggers", "overview",
+  "summary", "details", "background", "history", "general", "military",
+  "location", "locations", "lore", "quests", "books", "games", "loots",
+  "systems", "factions", "pantheons", "tools", "banking", "banks", "nomad",
+  "the truth", "the continent", "middle city", "lower city", "upper streets",
+]);
+
 export function resolveProseMentions(
   selfId: string,
   body: string,
@@ -151,15 +219,36 @@ export function resolveProseMentions(
   for (const e of entries) {
     if (e.id === selfId) continue;
     if (e.name.length < MIN_AUTO_LINK_LENGTH) continue;
-    const needle = e.name.toLowerCase();
-    if (!haystack.includes(needle)) continue;
-    // Require a word boundary so "Aeterna" doesn't match inside "Aeternal".
-    const re = new RegExp(`(^|[^\\p{L}\\p{N}])${escapeRegExp(needle)}([^\\p{L}\\p{N}]|$)`, "u");
-    if (!re.test(haystack)) continue;
-    const key = `${e.id}:mentions`;
-    if (existing.has(key)) continue;
-    existing.add(key);
-    out.push({ targetId: e.id, relation: "mentions" });
+    if (STOP_NAMES.has(normalizeName(e.name))) continue;
+
+    // Try the full title first, then its short form ("Bacchus" for
+    // "Bacchus, The Bountiful Spirit"), so prose that uses the familiar name
+    // still connects.
+    const candidates = [e.name, ...nameAliases(e.name)].filter(
+      (c) => c.length >= MIN_AUTO_LINK_LENGTH && !STOP_NAMES.has(normalizeName(c)),
+    );
+
+    for (const candidate of candidates) {
+      const needle = candidate.toLowerCase();
+      if (!haystack.includes(needle)) continue;
+      // Require word boundaries so "Aeterna" doesn't match inside "Aeternal".
+      const re = new RegExp(
+        `(^|[^\\p{L}\\p{N}])(${escapeRegExp(needle)})([^\\p{L}\\p{N}]|$)`,
+        "u",
+      );
+      const m = re.exec(haystack);
+      if (!m) continue;
+      const key = `${e.id}:mentions`;
+      if (existing.has(key)) break;
+      existing.add(key);
+      const at = m.index + m[1].length;
+      out.push({
+        targetId: e.id,
+        relation: "mentions",
+        context: extractContext(body, at, candidate.length),
+      });
+      break;
+    }
   }
   return out;
 }

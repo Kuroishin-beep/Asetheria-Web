@@ -67,7 +67,14 @@ async function rebuildLinks(
   if (resolved.length) {
     await db
       .insert(links)
-      .values(resolved.map((l) => ({ sourceId: entryId, ...l })))
+      .values(
+        resolved.map((l) => ({
+          sourceId: entryId,
+          targetId: l.targetId,
+          relation: l.relation,
+          context: l.context ?? null,
+        })),
+      )
       .onConflictDoNothing();
   }
 }
@@ -154,6 +161,9 @@ export async function updateEntryAction(
       tags: input.tags,
       visibility: input.visibility,
       parentId: input.parentId,
+      // Once the body has been edited by hand it is no longer generated text,
+      // so the banner disappears and the revert command leaves it alone.
+      bodySource: input.body === current.body ? current.bodySource : null,
       updatedAt: new Date(),
     })
     .where(eq(entries.id, entryId))

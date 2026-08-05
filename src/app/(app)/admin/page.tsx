@@ -14,17 +14,27 @@ export default async function AdminPage() {
   if (!user) redirect("/login");
   if (user.role !== "dm") redirect("/");
 
-  const [[entryCount], [linkCount], [revCount], [tableCount], [archivedCount]] =
-    await Promise.all([
-      db.select({ n: sql<number>`count(*)::int` }).from(entries),
-      db.select({ n: sql<number>`count(*)::int` }).from(links),
-      db.select({ n: sql<number>`count(*)::int` }).from(revisions),
-      db.select({ n: sql<number>`count(*)::int` }).from(rollTables),
-      db
-        .select({ n: sql<number>`count(*)::int` })
-        .from(entries)
-        .where(sql`archived_at IS NOT NULL`),
-    ]);
+  const [
+    [entryCount],
+    [linkCount],
+    [revCount],
+    [tableCount],
+    [archivedCount],
+    [generatedCount],
+  ] = await Promise.all([
+    db.select({ n: sql<number>`count(*)::int` }).from(entries),
+    db.select({ n: sql<number>`count(*)::int` }).from(links),
+    db.select({ n: sql<number>`count(*)::int` }).from(revisions),
+    db.select({ n: sql<number>`count(*)::int` }).from(rollTables),
+    db
+      .select({ n: sql<number>`count(*)::int` })
+      .from(entries)
+      .where(sql`archived_at IS NOT NULL`),
+    db
+      .select({ n: sql<number>`count(*)::int` })
+      .from(entries)
+      .where(sql`body_source = 'generated'`),
+  ]);
 
   const stats = [
     { label: "Entries", value: entryCount.n },
@@ -93,6 +103,35 @@ export default async function AdminPage() {
           </a>
         </div>
       </section>
+
+      {generatedCount.n > 0 && (
+        <section style={{ marginBottom: "2.5rem" }}>
+          <h2 className="label">Generated descriptions</h2>
+          <p
+            style={{
+              fontSize: "0.875rem",
+              color: "var(--text-muted)",
+              marginBottom: "0.85rem",
+            }}
+          >
+            {generatedCount.n.toLocaleString()}{" "}
+            {generatedCount.n === 1 ? "entry has" : "entries have"} a description
+            written from its own properties rather than by you. Each one is
+            labelled on its page, and editing it by hand makes it yours. To clear
+            them all and go back to empty entries, run{" "}
+            <code
+              style={{
+                background: "var(--bg-sunken)",
+                padding: "0.05rem 0.35rem",
+                borderRadius: 4,
+              }}
+            >
+              npm run describe -- --revert
+            </code>
+            .
+          </p>
+        </section>
+      )}
 
       <section>
         <h2 className="label">Restore from a backup</h2>
