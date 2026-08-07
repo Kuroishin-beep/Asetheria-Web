@@ -212,7 +212,13 @@ Everything from the Thalos Ridge dig too dangerous or too true for upstairs: run
 
 ## The Map
 
-SVG floor plan: [`the-aletheion-museum-map.svg`](the-aletheion-museum-map.svg) — three levels, entrances A/B/C, patrol routes, and the vault. Quick reference:
+**Player-facing battle maps** (5-ft grid, secrets stripped — no patrol routes, no pressure plates, no hidden niche; safe to drop straight into a VTT or print):
+
+- [`the-aletheion-battlemap-ground.svg`](the-aletheion-battlemap-ground.svg) — 34×26 squares: portico, Rotunda of the Concord (hoplite plinths, mosaic), both exhibit wings with cases, north offices, service dock
+- [`the-aletheion-battlemap-upper.svg`](the-aletheion-battlemap-upper.svg) — gallery ring around the 30-ft drop to the rotunda, Sealed Annex, Label Room, and the wing rooftops (the skylight approach)
+- [`the-aletheion-battlemap-undercroft.svg`](the-aletheion-battlemap-undercroft.svg) — storage rows, flooded passage with the cistern grate, and the Bronze Vault with the sealed plinth and the colossus head
+
+**DM schematic** (annotated — entrances A/B/C with DCs, patrol routes, wards, secret niche): [`the-aletheion-museum-map.svg`](the-aletheion-museum-map.svg). Quick reference:
 
 ```
 UPPER FLOOR                      GROUND FLOOR                     UNDERCROFT
