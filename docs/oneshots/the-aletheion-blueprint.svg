@@ -1,13 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1700 1080" font-family="Georgia, 'Times New Roman', serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1700 1020" font-family="Georgia, 'Times New Roman', serif">
   <!-- ================= THE SHEET: aged vellum ================= -->
-  <rect width="1700" height="1080" fill="#e8d9b0"/>
-  <ellipse cx="330" cy="880" rx="250" ry="120" fill="#c9a96e" opacity="0.13"/>
+  <rect width="1700" height="1020" fill="#e8d9b0"/>
+  <ellipse cx="330" cy="840" rx="250" ry="120" fill="#c9a96e" opacity="0.13"/>
   <ellipse cx="1420" cy="260" rx="190" ry="95" fill="#c9a96e" opacity="0.11"/>
   <ellipse cx="900" cy="70" rx="280" ry="60" fill="#d8c491" opacity="0.22"/>
   <ellipse cx="130" cy="140" rx="95" ry="75" fill="#b98d5f" opacity="0.09"/>
-  <ellipse cx="1180" cy="1000" rx="200" ry="70" fill="#b98d5f" opacity="0.07"/>
-  <rect x="18" y="18" width="1664" height="1044" fill="none" stroke="#4a3222" stroke-width="2.5"/>
-  <rect x="26" y="26" width="1648" height="1028" fill="none" stroke="#4a3222" stroke-width="1" opacity="0.5"/>
+  <ellipse cx="1180" cy="950" rx="200" ry="70" fill="#b98d5f" opacity="0.07"/>
+  <rect x="18" y="18" width="1664" height="984" fill="none" stroke="#4a3222" stroke-width="2.5"/>
+  <rect x="26" y="26" width="1648" height="968" fill="none" stroke="#4a3222" stroke-width="1" opacity="0.5"/>
 
   <text x="60" y="72" font-size="27" fill="#4a3222" letter-spacing="6">THE ALETHEION &#8212; MOUSEION OF THE CONCORD</text>
   <text x="60" y="98" font-size="13" fill="#6a4a2f" letter-spacing="3">&#932;&#927; &#913;&#923;&#919;&#920;&#917;&#921;&#927;&#925; &#183; SURVEYED FOR THE OFFICE OF WORKS AT HELARCHON &#183; THE THIRD SHEET OF SEVEN</text>
@@ -120,72 +120,41 @@
     <text x="300" y="486" font-size="10.5" fill="#4a3222" text-anchor="middle" letter-spacing="2">TWO HUNDRED &#38; TEN FEET</text>
   </g>
 
-  <!-- ============================================ II. THE CELLAR ==== -->
-  <g transform="translate(60,686)">
-    <text x="0" y="0" font-size="16" fill="#4a3222" letter-spacing="3">II. THE CELLAR</text>
-    <g fill="none" stroke="#4a3222" stroke-width="3.5">
-      <rect x="20" y="20" width="180" height="106"/>
-      <rect x="230" y="26" width="72" height="86"/>
-      <rect x="118" y="150" width="72" height="98"/>
-      <rect x="20" y="162" width="82" height="78"/>
-      <rect x="206" y="162" width="90" height="78"/>
-    </g>
-    <!-- door openings -->
-    <g fill="#e8d9b0">
-      <rect x="128" y="144" width="30" height="12"/>
-      <rect x="194" y="54" width="12" height="26"/>
-      <rect x="224" y="54" width="12" height="26"/>
-      <rect x="96" y="184" width="12" height="26"/>
-      <rect x="184" y="184" width="12" height="26"/>
-      <rect x="132" y="242" width="28" height="12"/>
-    </g>
-    <!-- pillars of the lower hall -->
-    <g fill="#4a3222" opacity="0.85">
-      <circle cx="134" cy="170" r="3.5"/><circle cx="174" cy="170" r="3.5"/>
-      <circle cx="134" cy="200" r="3.5"/><circle cx="174" cy="200" r="3.5"/>
-      <circle cx="134" cy="230" r="3.5"/><circle cx="174" cy="230" r="3.5"/>
-    </g>
-    <!-- culvert grate at the north wall -->
-    <g stroke="#4a3222" stroke-width="1.5">
-      <line x1="34" y1="13" x2="34" y2="27"/><line x1="42" y1="13" x2="42" y2="27"/>
-      <line x1="50" y1="13" x2="50" y2="27"/><line x1="58" y1="13" x2="58" y2="27"/>
-    </g>
-    <!-- stair up -->
-    <g stroke="#4a3222" stroke-width="1.3" fill="none">
-      <path d="M130 256 h30 M130 266 h30 M130 276 h30"/>
-    </g>
-    <!-- labels -->
-    <g fill="#4a3222" letter-spacing="1">
-      <text x="110" y="66" font-size="10.5" text-anchor="middle">CONSERVATION</text>
-      <text x="110" y="82" font-size="10.5" text-anchor="middle">STORE B</text>
-      <text x="110" y="98" font-size="9" text-anchor="middle" opacity="0.9">&#8212; SEE NOTE IV &#8212;</text>
-      <text x="70" y="8" font-size="8" text-anchor="middle" opacity="0.85">CULVERT &#8212; NOTE III</text>
-      <text x="266" y="74" font-size="10" text-anchor="middle">STORE</text>
-      <text x="154" y="140" font-size="9" text-anchor="middle">PILLARED HALL</text>
-      <text x="61" y="198" font-size="9.5" text-anchor="middle">SPECIMEN</text>
-      <text x="61" y="212" font-size="9.5" text-anchor="middle">ROOM</text>
-      <text x="251" y="205" font-size="9.5" text-anchor="middle">ARCHIVIST</text>
-      <text x="172" y="272" font-size="8.5" opacity="0.85">STAIR, UP &#8212; TO THE CLERKS&#8217; ROOM</text>
-    </g>
+  <!-- ============================================ KEY &amp; SCALE ==== -->
+  <g transform="translate(60,668)">
+    <rect x="0" y="0" width="290" height="126" fill="none" stroke="#4a3222" stroke-width="1.4"/>
+    <text x="18" y="28" font-size="12.5" fill="#4a3222" letter-spacing="2">THE KEY</text>
+    <line x1="18" y1="52" x2="62" y2="52" stroke="#4a3222" stroke-width="3.5"/>
+    <text x="76" y="56" font-size="10.5" fill="#4a3222">WALL, MEASURED</text>
+    <line x1="18" y1="78" x2="62" y2="78" stroke="#4a3222" stroke-width="1.8" stroke-dasharray="8 5"/>
+    <text x="76" y="82" font-size="10.5" fill="#4a3222">OPEN TO THE SKY</text>
+    <circle cx="40" cy="104" r="3.5" fill="#4a3222"/>
+    <text x="76" y="108" font-size="10.5" fill="#4a3222">PILLAR OR STATVE</text>
   </g>
 
-  <!-- ============================================ KEY ==== -->
-  <g transform="translate(430,724)">
-    <rect x="0" y="0" width="250" height="118" fill="none" stroke="#4a3222" stroke-width="1.4"/>
-    <text x="16" y="26" font-size="12" fill="#4a3222" letter-spacing="2">THE KEY</text>
-    <line x1="16" y1="48" x2="58" y2="48" stroke="#4a3222" stroke-width="3.5"/>
-    <text x="70" y="52" font-size="10" fill="#4a3222">WALL, MEASURED</text>
-    <line x1="16" y1="72" x2="58" y2="72" stroke="#4a3222" stroke-width="1.8" stroke-dasharray="8 5"/>
-    <text x="70" y="76" font-size="10" fill="#4a3222">OPEN TO THE SKY</text>
-    <circle cx="37" cy="96" r="3.5" fill="#4a3222"/>
-    <text x="70" y="100" font-size="10" fill="#4a3222">PILLAR OR STATVE</text>
+  <!-- the scale bar -->
+  <g transform="translate(60,822)">
+    <g stroke="#4a3222" stroke-width="1.2">
+      <rect x="0" y="0" width="72" height="13" fill="#4a3222"/>
+      <rect x="72" y="0" width="72" height="13" fill="none"/>
+      <rect x="144" y="0" width="72" height="13" fill="#4a3222"/>
+      <rect x="216" y="0" width="72" height="13" fill="none"/>
+    </g>
+    <g fill="#4a3222" font-size="9.5" text-anchor="middle">
+      <text x="0" y="30">0</text>
+      <text x="72" y="30">25</text>
+      <text x="144" y="30">50</text>
+      <text x="216" y="30">75</text>
+      <text x="288" y="30">100</text>
+      <text x="330" y="30" text-anchor="start">FEET</text>
+    </g>
+    <text x="0" y="58" font-size="10.5" fill="#6a4a2f" font-style="italic">One square of the survey stands for five feet;</text>
+    <text x="0" y="76" font-size="10.5" fill="#6a4a2f" font-style="italic">all measures taken by rod and chain.</text>
   </g>
-  <text x="430" y="878" font-size="10.5" fill="#6a4a2f" font-style="italic">One square of the survey stands for five feet;</text>
-  <text x="430" y="896" font-size="10.5" fill="#6a4a2f" font-style="italic">all measures taken by rod and chain.</text>
 
-  <!-- ============================================ III. THE UPPER FLOOR ==== -->
-  <g transform="translate(740,150)">
-    <text x="0" y="0" font-size="16" fill="#4a3222" letter-spacing="3">III. THE UPPER FLOOR</text>
+  <!-- ============================================ II. THE UPPER FLOOR ==== -->
+  <g transform="translate(760,150)">
+    <text x="0" y="0" font-size="16" fill="#4a3222" letter-spacing="3">II. THE UPPER FLOOR</text>
     <g fill="none" stroke="#4a3222" stroke-width="3.5">
       <rect x="20" y="70" width="175" height="185"/>
       <rect x="240" y="34" width="125" height="88"/>
@@ -239,7 +208,7 @@
       <text x="262" y="196" font-size="9.5" text-anchor="middle">GARDEN</text>
       <text x="262" y="210" font-size="9" text-anchor="middle" opacity="0.85">BELOW</text>
       <text x="343" y="215" font-size="8" text-anchor="middle" transform="rotate(-90 343 215)">PASSAGE</text>
-      <text x="396" y="220" font-size="8.5" text-anchor="middle">STATVE COURT</text>
+      <text x="390" y="216" font-size="8" text-anchor="middle">STATVE COURT</text>
       <text x="492" y="96" font-size="11" text-anchor="middle">THE LONG GALLERY</text>
       <text x="505" y="212" font-size="10" text-anchor="middle">RECORDS</text>
       <text x="505" y="228" font-size="9" text-anchor="middle">&#8212; RESTRICTED &#8212;</text>
@@ -248,9 +217,9 @@
     </g>
   </g>
 
-  <!-- ============================================ IV. THE ROOFS ==== -->
-  <g transform="translate(740,614)">
-    <text x="0" y="0" font-size="16" fill="#4a3222" letter-spacing="3">IV. THE ROOFS &#38; THE LIGHTS</text>
+  <!-- ============================================ III. THE ROOFS ==== -->
+  <g transform="translate(760,560)">
+    <text x="0" y="0" font-size="16" fill="#4a3222" letter-spacing="3">III. THE ROOFS &#38; THE LIGHTS</text>
     <g fill="none" stroke="#4a3222" stroke-width="2.8">
       <rect x="20" y="34" width="170" height="162"/>
       <rect x="235" y="20" width="120" height="44"/>
@@ -305,40 +274,47 @@
     <text x="0" y="0" font-size="15" fill="#4a3222" letter-spacing="3">THE SURVEYOR&#8217;S NOTES</text>
     <line x1="0" y1="12" x2="256" y2="12" stroke="#4a3222" stroke-width="1"/>
     <g fill="#4a3222" font-size="11.5" opacity="0.92">
-      <text x="0" y="42">I. ONE SQUARE OF THE SURVEY</text>
-      <text x="16" y="58">STANDS FOR FIVE FEET.</text>
+      <text x="0" y="40">I. ONE SQUARE OF THE SURVEY</text>
+      <text x="16" y="56">STANDS FOR FIVE FEET.</text>
 
-      <text x="0" y="90">II. THE LEVIATHAN&#8217;S HALL IS LIT</text>
-      <text x="16" y="106">BY A GREAT GLAZED ROOF-</text>
-      <text x="16" y="122">LIGHT. IT IS SERVICED FROM</text>
-      <text x="16" y="138">ABOVE, NOT FROM WITHIN.</text>
+      <text x="0" y="86">II. THE LEVIATHAN&#8217;S HALL IS LIT</text>
+      <text x="16" y="102">BY A GREAT GLAZED ROOF-</text>
+      <text x="16" y="118">LIGHT. IT IS SERVICED FROM</text>
+      <text x="16" y="134">ABOVE, NOT FROM WITHIN.</text>
 
-      <text x="0" y="170">III. A DRAIN CULVERT QUITS THE</text>
-      <text x="16" y="186">NORTH CELLAR FOR THE OLD</text>
-      <text x="16" y="202">RAIN-CISTERN BENEATH THE</text>
-      <text x="16" y="218">HILL. ITS GRATE IS REPORTED</text>
-      <text x="16" y="234">RUSTED FAST.</text>
+      <text x="0" y="164">III. THE GARDEN, THE STATVE</text>
+      <text x="16" y="180">COURT AND THE TERRACE ALL</text>
+      <text x="16" y="196">STAND OPEN TO THE SKY.</text>
 
-      <text x="0" y="266">IV. THE NORTH CELLAR IS NEWLY</text>
-      <text x="16" y="282">RELABELED BY DECREE. OF ITS</text>
-      <text x="16" y="298">CONTENTS, ASK THE CURATOR.</text>
+      <text x="0" y="244">IV. A DRAIN CULVERT QUITS THE</text>
+      <text x="16" y="260">CELLARS FOR THE OLD RAIN-</text>
+      <text x="16" y="276">CISTERN BENEATH THE HILL.</text>
+      <text x="16" y="292">ITS GRATE IS REPORTED</text>
+      <text x="16" y="308">RUSTED FAST.</text>
 
-      <text x="0" y="330">V. THE GARDEN, THE STATVE</text>
-      <text x="16" y="346">COURT AND THE TERRACE ALL</text>
-      <text x="16" y="362">STAND OPEN TO THE SKY.</text>
+      <text x="0" y="338">V. THE CELLARS ARE NOT</text>
+      <text x="16" y="354">COMPRISED IN THIS SHEET.</text>
+      <text x="16" y="370">SEE THE FIFTH SHEET, HELD</text>
+      <text x="16" y="386">BY THIS OFFICE.</text>
 
-      <text x="0" y="394">VI. THE RECORDS ROOM ABOVE</text>
-      <text x="16" y="410">IS HELD BY WRIT. THIS OFFICE</text>
-      <text x="16" y="426">DID NOT MEASURE WITHIN.</text>
+      <text x="0" y="434">VI. THE LOWER STORES WERE</text>
+      <text x="16" y="450">NEWLY RELABELED BY DECREE.</text>
+      <text x="16" y="466">OF THEIR CONTENTS, ASK THE</text>
+      <text x="16" y="482">CURATOR.</text>
+
+      <text x="0" y="530">VII. THE RECORDS ROOM ABOVE</text>
+      <text x="16" y="546">IS HELD BY WRIT. THIS OFFICE</text>
+      <text x="16" y="562">DID NOT MEASURE WITHIN.</text>
     </g>
     <!-- a later, unofficial hand -->
     <g fill="#5a4a3a" font-size="12.5" font-style="italic">
-      <text x="26" y="316" transform="rotate(-2 26 316)">&#8220;of its contents&#8221; &#8212; ask Eupraxia</text>
-      <text x="26" y="380" transform="rotate(-1 26 380)">open to the sky &#8212; and to whatever climbs</text>
-      <text x="26" y="444" transform="rotate(-1.5 26 444)">did not measure, or was not permitted? &#8212; D.</text>
+      <text x="26" y="216" transform="rotate(-1 26 216)">open to the sky &#8212; and to whatever climbs</text>
+      <text x="26" y="410" transform="rotate(-1.5 26 410)">the fifth sheet is not in the archive. &#8212; D.</text>
+      <text x="26" y="502" transform="rotate(-2 26 502)">&#8220;of their contents&#8221; &#8212; ask Eupraxia</text>
+      <text x="26" y="582" transform="rotate(-1 26 582)">did not measure, or was not permitted?</text>
     </g>
     <!-- the archive seal -->
-    <g transform="translate(20,486)">
+    <g transform="translate(20,616)">
       <circle cx="26" cy="26" r="24" fill="#9c3d2a" opacity="0.85"/>
       <circle cx="26" cy="26" r="16" fill="none" stroke="#e8d9b0" stroke-width="1.5" opacity="0.7"/>
       <path d="M26 13 L30.5 24 L42 24 L33 31 L36 43 L26 36 L16 43 L19 31 L10 24 L21.5 24 Z" fill="#e8d9b0" opacity="0.35"/>
@@ -351,7 +327,7 @@
   </g>
 
   <!-- ============================================ TITLE BLOCK ==== -->
-  <g transform="translate(60,982)">
+  <g transform="translate(60,922)">
     <rect x="0" y="0" width="1580" height="56" fill="none" stroke="#4a3222" stroke-width="2"/>
     <line x1="530" y1="0" x2="530" y2="56" stroke="#4a3222" stroke-width="1.2"/>
     <line x1="960" y1="0" x2="960" y2="56" stroke="#4a3222" stroke-width="1.2"/>
@@ -362,7 +338,7 @@
       <text x="548" y="23" font-size="12" letter-spacing="2">DRAWN BY P. DEXAMENOS</text>
       <text x="548" y="44" font-size="10.5" opacity="0.8">OF THE GUILD OF MASONS, THE FOURTH CHAIR</text>
       <text x="978" y="23" font-size="12" letter-spacing="2">THE THIRD SHEET OF SEVEN</text>
-      <text x="978" y="44" font-size="10.5" opacity="0.8">GROUND &#183; CELLAR &#183; UPPER &#183; ROOFS</text>
+      <text x="978" y="44" font-size="10.5" opacity="0.8">GROUND &#183; UPPER &#183; ROOFS</text>
       <text x="1298" y="23" font-size="12" letter-spacing="2">ONE SQUARE = FIVE FEET</text>
       <text x="1298" y="44" font-size="10.5" opacity="0.8">MEASURED BY ROD &#38; CHAIN</text>
     </g>
