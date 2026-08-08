@@ -253,7 +253,7 @@ The SVG above is the DM's schematic. For a fully illustrated map, these professi
 
 ### Player prop — the stolen survey
 
-[`the-aletheion-blueprint.svg`](the-aletheion-blueprint.svg) — an in-world **blueprint sheet** of the museum (Imperial Office of Works, "Sheet III of VII"), drawn to hand to the players when they start planning. It matches the Knight at the Museum floors, and it is honest about structure and *dishonest about contents*, exactly as a censored survey would be:
+[`the-aletheion-blueprint.svg`](the-aletheion-blueprint.svg) (also as [PNG](the-aletheion-blueprint.png) and [printable PDF](the-aletheion-blueprint.pdf)) — an in-world **survey sheet** of the museum (Office of Works, "the third sheet of seven"), drawn to hand to the players when they start planning. It follows *this module's* floor plan, not Tom Cartos's — it shares his set's three levels (lower, upper, roof access), so the two work side by side, but room-for-room they differ; treat the survey as "old and slightly out of date" if players compare it against whatever battle map you run. It is honest about structure and *dishonest about contents*, exactly as a censored survey would be:
 
 - The Bronze Vault appears only as **"Conservation Store B — see Note 4"**, an empty room; the Seal, the plinth, and the colossus head are nowhere on the sheet. *Where the artifact sits is deliberately not on this map.*
 - The Sealed Annex is just **"Archive — Restricted."** No pressure plates, no wards, no ossuary niche.
