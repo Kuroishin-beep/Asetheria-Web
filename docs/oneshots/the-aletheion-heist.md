@@ -253,13 +253,18 @@ The SVG above is the DM's schematic. For a fully illustrated map, these professi
 
 ### Player prop — the stolen survey
 
-[`the-aletheion-blueprint.svg`](the-aletheion-blueprint.svg) (also as [PNG](the-aletheion-blueprint.png) and [printable PDF](the-aletheion-blueprint.pdf)) — an in-world **survey sheet** of the museum (Office of Works, "the third sheet of seven"), drawn to hand to the players when they start planning. It follows *this module's* floor plan, not Tom Cartos's — it shares his set's three levels (lower, upper, roof access), so the two work side by side, but room-for-room they differ; treat the survey as "old and slightly out of date" if players compare it against whatever battle map you run. It is honest about structure and *dishonest about contents*, exactly as a censored survey would be:
+[`the-aletheion-blueprint.svg`](the-aletheion-blueprint.svg) (also as [PNG](the-aletheion-blueprint.png) and [printable PDF](the-aletheion-blueprint.pdf)) — an in-world **survey sheet** of the museum (Office of Works, "the third sheet of seven"), to hand the players when they start planning.
 
-- The Bronze Vault appears only as **"Conservation Store B — see Note 4"**, an empty room; the Seal, the plinth, and the colossus head are nowhere on the sheet. *Where the artifact sits is deliberately not on this map.*
-- The Sealed Annex is just **"Archive — Restricted."** No pressure plates, no wards, no ossuary niche.
-- The useful truths are in the margins: the oculus is serviced *from the roof*, the cistern grate is "rusted fast," the statues' plinths are "re-set at dawn, daily" — and a dissident hand has scrawled *"re-set daily? why — D."*
+**It is traced from the Knight at the Museum layout**, so it matches the battle maps you'll actually run — all four levels: cellar, ground floor, upper floor, and the roofs. Hand it over and the plan they make is a plan that *works* on the table. It is honest about structure and **dishonest about contents**, exactly as a censored survey would be:
+
+- The vault room is only **"Conservation Store B — see Note IV,"** an empty rectangle in the north cellar. The Seal, the plinth, and the Weeping Bronze appear nowhere. *Where the artifact sits is deliberately not on this sheet.*
+- The upper Records room is **"Restricted — by writ only,"** and Note VI admits the surveyor never measured inside it.
+- The useful truths are all there, in the margins: the Leviathan hall's **great glazed roof-light** is "serviced from above, not from within" (that's route C, and it's drawn in full on the roofs plan); a **drain culvert** quits the north cellar for the old rain-cistern, its grate "rusted fast" (route B); and the garden, statue court, and terrace all "stand open to the sky."
+- A later hand has scrawled the rest: *"of its contents" — ask Eupraxia*, *open to the sky — and to whatever climbs*, and against Note VI: *did not measure, or was not permitted? — D.*
 
 **How they get it:** Old Kyros sells the sheet at the Night Agora for 75 gp (it's where the Tenebral Covenant's floor plans come from); Dexios can be talked into "losing" it for an evening; or it's sitting in Curator Eupraxia's office drawer next to the uncensored labels.
+
+*The sheet is original linework drawn to match Tom Cartos's floor plan — his maps stay the ones you show at the table.*
 
 ---
 
