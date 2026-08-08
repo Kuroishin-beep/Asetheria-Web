@@ -46,9 +46,8 @@
       <rect x="588" y="358" width="22" height="52"/>
       <rect x="382" y="562" width="52" height="26"/>
     </g>
-    <!-- door swings -->
+    <!-- door swing -->
     <g stroke="#4a3222" stroke-width="1.2" fill="none" opacity="0.6">
-      <path d="M46 120 A50 50 0 0 1 96 170"/>
       <path d="M274 120 A50 50 0 0 1 324 170"/>
     </g>
     <!-- stairs -->
@@ -87,7 +86,7 @@
       <text x="12" y="214">GALLERY I &#8212; FOUNDERS&#8217; HALL</text>
       <text x="608" y="214">GALLERY II &#8212; STORM-STAR</text>
       <text x="408" y="420" text-anchor="middle">ROTUNDA OF THE CONCORD</text>
-      <text x="408" y="614" text-anchor="middle" font-size="11">PORTICO &#183; BRONZE DOORS</text>
+      <text x="408" y="621" text-anchor="middle" font-size="11">PORTICO &#183; BRONZE DOORS</text>
     </g>
     <!-- dimension line -->
     <g stroke="#4a3222" stroke-width="1" opacity="0.8">
