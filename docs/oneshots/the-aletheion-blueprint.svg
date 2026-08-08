@@ -1,0 +1,216 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" font-family="Georgia, 'Times New Roman', serif">
+  <!-- ============ SHEET ============ -->
+  <rect width="1600" height="1000" fill="#17395c"/>
+  <rect x="18" y="18" width="1564" height="964" fill="none" stroke="#dcebff" stroke-width="2.5"/>
+  <rect x="26" y="26" width="1548" height="948" fill="none" stroke="#dcebff" stroke-width="1" opacity="0.6"/>
+
+  <text x="60" y="70" font-size="26" fill="#dcebff" letter-spacing="6">THE ALETHEION &#8212; MOUSEION OF THE CONCORD</text>
+  <text x="60" y="94" font-size="13" fill="#dcebff" opacity="0.75" letter-spacing="3">IMPERIAL OFFICE OF WORKS, HELARCHON &#183; SURVEY SHEET III OF VII &#183; FLOOR PLANS</text>
+
+  <!-- ============ GROUND PLAN (left, scale .78) ============ -->
+  <g transform="translate(60,150) scale(0.78)">
+    <text x="0" y="-16" font-size="17" fill="#dcebff" letter-spacing="3">GROUND FLOOR</text>
+    <g fill="none" stroke="#dcebff" stroke-width="4">
+      <rect x="0" y="0" width="144" height="120"/>
+      <rect x="144" y="0" width="96" height="120"/>
+      <rect x="240" y="0" width="120" height="120"/>
+      <rect x="360" y="0" width="168" height="120"/>
+      <rect x="0" y="120" width="528" height="72"/>
+      <rect x="528" y="72" width="144" height="120"/>
+      <rect x="0" y="192" width="216" height="384"/>
+      <rect x="600" y="192" width="216" height="384"/>
+      <circle cx="408" cy="384" r="192"/>
+      <rect x="264" y="576" width="288" height="48"/>
+    </g>
+    <!-- door gaps -->
+    <g fill="#17395c">
+      <rect x="46" y="112" width="50" height="16"/><rect x="166" y="112" width="50" height="16"/>
+      <rect x="274" y="112" width="50" height="16"/><rect x="418" y="112" width="50" height="16"/>
+      <rect x="46" y="184" width="50" height="16"/>
+      <rect x="520" y="142" width="16" height="44"/>
+      <rect x="664" y="106" width="16" height="50"/>
+      <rect x="610" y="184" width="50" height="16"/>
+      <rect x="382" y="178" width="52" height="26"/>
+      <rect x="206" y="358" width="22" height="52"/>
+      <rect x="588" y="358" width="22" height="52"/>
+      <rect x="382" y="562" width="52" height="26"/>
+    </g>
+    <!-- door swing marks -->
+    <g stroke="#dcebff" stroke-width="1.2" fill="none" opacity="0.7">
+      <path d="M46 120 A50 50 0 0 1 96 170"/>
+      <path d="M274 120 A50 50 0 0 1 324 170"/>
+    </g>
+    <!-- stairs -->
+    <g stroke="#dcebff" stroke-width="1.4" fill="none">
+      <path d="M150 30 h84 M150 44 h84 M150 58 h84 M150 72 h84 M150 86 h84 M150 100 h84"/>
+      <path d="M12 12 h60 M12 24 h60 M12 36 h60 M12 48 h60"/>
+    </g>
+    <text x="187" y="22" font-size="10.5" fill="#dcebff" opacity="0.8" text-anchor="middle">STAIR, UP</text>
+    <text x="42" y="66" font-size="10.5" fill="#dcebff" opacity="0.8" text-anchor="middle">STAIR, DN</text>
+    <!-- oculus -->
+    <circle cx="408" cy="384" r="72" fill="none" stroke="#dcebff" stroke-width="1.4" stroke-dasharray="8 6"/>
+    <text x="408" y="380" font-size="11" fill="#dcebff" opacity="0.8" text-anchor="middle">GLAZED OCULUS ABOVE</text>
+    <!-- statue plinths -->
+    <g fill="none" stroke="#dcebff" stroke-width="1.6">
+      <rect x="299" y="275" width="24" height="24"/><rect x="493" y="275" width="24" height="24"/>
+      <rect x="299" y="469" width="24" height="24"/><rect x="493" y="469" width="24" height="24"/>
+    </g>
+    <text x="408" y="332" font-size="10" fill="#dcebff" opacity="0.75" text-anchor="middle">STATVARY (4) &#8212; SEE NOTE 5</text>
+    <!-- casework, dashed -->
+    <g fill="none" stroke="#dcebff" stroke-width="1.2" stroke-dasharray="5 4" opacity="0.65">
+      <rect x="12" y="222" width="18" height="336"/><rect x="786" y="222" width="18" height="336"/>
+      <rect x="96" y="270" width="36" height="120"/><rect x="648" y="270" width="36" height="96"/>
+    </g>
+    <!-- portico columns -->
+    <g fill="none" stroke="#dcebff" stroke-width="1.6">
+      <circle cx="276" cy="600" r="7"/><circle cx="324" cy="600" r="7"/><circle cx="372" cy="600" r="7"/>
+      <circle cx="444" cy="600" r="7"/><circle cx="492" cy="600" r="7"/><circle cx="540" cy="600" r="7"/>
+    </g>
+    <!-- labels -->
+    <g fill="#dcebff" font-size="13" letter-spacing="2">
+      <text x="14" y="20">GUARD RM.</text>
+      <text x="248" y="20">CURATOR</text>
+      <text x="368" y="20">WORKSHOP</text>
+      <text x="540" y="96">SERVICE DOCK</text>
+      <text x="12" y="142">CORRIDOR</text>
+      <text x="12" y="214">GALLERY I &#8212; FOUNDERS&#8217; HALL</text>
+      <text x="608" y="214">GALLERY II &#8212; STORM-STAR</text>
+      <text x="408" y="420" text-anchor="middle">ROTUNDA OF THE CONCORD</text>
+      <text x="408" y="614" text-anchor="middle" font-size="11">PORTICO &#183; BRONZE DOORS</text>
+    </g>
+    <!-- dimension line -->
+    <g stroke="#dcebff" stroke-width="1" opacity="0.8">
+      <line x1="0" y1="648" x2="816" y2="648"/>
+      <line x1="0" y1="640" x2="0" y2="656"/><line x1="816" y1="640" x2="816" y2="656"/>
+    </g>
+    <text x="408" y="668" font-size="11" fill="#dcebff" text-anchor="middle" letter-spacing="2">170 IMPERIAL FEET</text>
+  </g>
+
+  <!-- ============ UPPER PLAN (right top, scale .62) ============ -->
+  <g transform="translate(770,150) scale(0.62)">
+    <text x="0" y="-16" font-size="17" fill="#dcebff" letter-spacing="3">UPPER FLOOR</text>
+    <g fill="none" stroke="#dcebff" stroke-width="4">
+      <rect x="0" y="0" width="192" height="120"/>
+      <rect x="192" y="0" width="336" height="120"/>
+      <rect x="0" y="120" width="528" height="72"/>
+      <circle cx="408" cy="384" r="192"/>
+    </g>
+    <circle cx="408" cy="384" r="120" fill="none" stroke="#dcebff" stroke-width="1.6" stroke-dasharray="9 6"/>
+    <text x="408" y="380" font-size="12" fill="#dcebff" opacity="0.8" text-anchor="middle">OPEN TO ROTUNDA</text>
+    <circle cx="408" cy="384" r="72" fill="none" stroke="#dcebff" stroke-width="1.2" stroke-dasharray="5 5" opacity="0.7"/>
+    <text x="408" y="470" font-size="10.5" fill="#dcebff" opacity="0.7" text-anchor="middle">OCULUS</text>
+    <!-- roofs dashed -->
+    <g fill="none" stroke="#dcebff" stroke-width="1.4" stroke-dasharray="10 7" opacity="0.6">
+      <rect x="0" y="192" width="216" height="384"/>
+      <rect x="600" y="192" width="216" height="384"/>
+      <rect x="264" y="576" width="288" height="48"/>
+    </g>
+    <g fill="#17395c">
+      <rect x="46" y="112" width="50" height="16"/>
+      <rect x="274" y="112" width="50" height="16"/>
+      <rect x="382" y="178" width="52" height="26"/>
+    </g>
+    <g stroke="#dcebff" stroke-width="1.4" fill="none">
+      <path d="M150 132 h84 M150 144 h84 M150 156 h84 M150 168 h84 M150 180 h84"/>
+    </g>
+    <text x="192" y="128" font-size="10.5" fill="#dcebff" opacity="0.8" text-anchor="middle">STAIR, DN</text>
+    <g fill="#dcebff" font-size="13" letter-spacing="2">
+      <text x="14" y="20">LABEL RM.</text>
+      <text x="200" y="20">ARCHIVE &#8212; RESTRICTED</text>
+      <text x="204" y="40" font-size="10" opacity="0.75">(ADMITTANCE BY WRIT ONLY)</text>
+      <text x="408" y="240" text-anchor="middle">GALLERY III &#8212; VIOLET DUSK</text>
+      <text x="20" y="220" font-size="10.5" opacity="0.7">ROOF, WEST WING</text>
+      <text x="620" y="220" font-size="10.5" opacity="0.7">ROOF, EAST WING</text>
+    </g>
+  </g>
+
+  <!-- ============ UNDERCROFT PLAN (right bottom, scale .62) ============ -->
+  <g transform="translate(770,600) scale(0.62)">
+    <text x="0" y="-16" font-size="17" fill="#dcebff" letter-spacing="3">UNDERCROFT</text>
+    <g fill="none" stroke="#dcebff" stroke-width="4">
+      <rect x="0" y="0" width="240" height="192"/>
+      <rect x="264" y="0" width="72" height="96"/>
+      <rect x="240" y="96" width="48" height="144"/>
+      <rect x="0" y="192" width="96" height="48"/>
+      <rect x="0" y="240" width="96" height="288"/>
+      <rect x="192" y="240" width="384" height="240"/>
+    </g>
+    <g fill="#17395c">
+      <rect x="22" y="184" width="50" height="16"/>
+      <rect x="22" y="232" width="50" height="16"/>
+      <rect x="264" y="88" width="24" height="16"/>
+      <rect x="242" y="232" width="44" height="16"/>
+    </g>
+    <g stroke="#dcebff" stroke-width="1.4" fill="none">
+      <path d="M270 18 h60 M270 32 h60 M270 46 h60 M270 60 h60 M270 74 h60"/>
+    </g>
+    <text x="300" y="12" font-size="10.5" fill="#dcebff" opacity="0.8" text-anchor="middle">STAIR, UP</text>
+    <!-- casework dashed, room otherwise EMPTY on the survey -->
+    <g fill="none" stroke="#dcebff" stroke-width="1.2" stroke-dasharray="5 4" opacity="0.6">
+      <rect x="204" y="258" width="18" height="120"/><rect x="546" y="258" width="18" height="120"/>
+    </g>
+    <!-- grate -->
+    <g stroke="#dcebff" stroke-width="1.6">
+      <line x1="24" y1="514" x2="24" y2="528"/><line x1="36" y1="514" x2="36" y2="528"/>
+      <line x1="48" y1="514" x2="48" y2="528"/><line x1="60" y1="514" x2="60" y2="528"/>
+    </g>
+    <g fill="#dcebff" font-size="13" letter-spacing="2">
+      <text x="14" y="22">STORES</text>
+      <text x="10" y="278" font-size="10.5" opacity="0.8">CISTERN</text>
+      <text x="10" y="292" font-size="10.5" opacity="0.8">OVERFLOW</text>
+      <text x="10" y="306" font-size="10.5" opacity="0.8">(DISUSED)</text>
+      <text x="14" y="546" font-size="10" opacity="0.8">IRON GRATE &#8212; NOTE 3</text>
+      <text x="384" y="268" text-anchor="middle">CONSERVATION STORE B &#8212; SEE NOTE 4</text>
+    </g>
+  </g>
+
+  <!-- ============ NOTES ============ -->
+  <g transform="translate(1300,150)">
+    <text x="0" y="0" font-size="15" fill="#dcebff" letter-spacing="3">GENERAL NOTES</text>
+    <line x1="0" y1="10" x2="240" y2="10" stroke="#dcebff" stroke-width="1"/>
+    <g fill="#dcebff" font-size="11.5" opacity="0.9">
+      <text x="0" y="34">1. SCALE: ONE SQUARE OF THE</text>
+      <text x="14" y="49">SURVEY = FIVE IMPERIAL FEET.</text>
+      <text x="0" y="76">2. GLAZED OCULUS OVER ROTUNDA;</text>
+      <text x="14" y="91">LANTERN SERVICED FROM ROOF.</text>
+      <text x="0" y="118">3. CISTERN OVERFLOW DISUSED</text>
+      <text x="14" y="133">SINCE SURVEY YR. 43. GRATE</text>
+      <text x="14" y="148">REPORTED RUSTED FAST.</text>
+      <text x="0" y="175">4. LOWER STORE B RELABELED</text>
+      <text x="14" y="190">PER DIRECTIVE 42-&#947;. CONTENTS:</text>
+      <text x="14" y="205">REFER TO CURATOR.</text>
+      <text x="0" y="232">5. ROTUNDA STATUARY (4):</text>
+      <text x="14" y="247">PLINTHS TO BE RE-SET AT DAWN,</text>
+      <text x="14" y="262">DAILY, PER CUSTODIAN&#8217;S LOG.</text>
+    </g>
+    <!-- marginalia in another hand -->
+    <g fill="#ffe9a8" font-size="12.5" font-style="italic">
+      <text x="26" y="285">re-set daily? why &#8212; D.</text>
+      <text x="26" y="222" transform="rotate(-2 26 222)">&#8220;contents&#8221; &#8212; ask Eupraxia</text>
+    </g>
+    <!-- archive stamp -->
+    <g transform="translate(6,330) rotate(-6)">
+      <rect x="0" y="0" width="228" height="64" fill="none" stroke="#ffe9a8" stroke-width="2.5" opacity="0.85"/>
+      <text x="114" y="26" font-size="14" fill="#ffe9a8" text-anchor="middle" letter-spacing="2" opacity="0.9">COPY &#8212; SCHOLARS&#8217; ARCHIVE</text>
+      <text x="114" y="47" font-size="11" fill="#ffe9a8" text-anchor="middle" letter-spacing="1.5" opacity="0.9">NOT FOR CIRCULATION</text>
+    </g>
+  </g>
+
+  <!-- ============ TITLE BLOCK ============ -->
+  <g transform="translate(60,906)">
+    <rect x="0" y="0" width="1480" height="56" fill="none" stroke="#dcebff" stroke-width="2"/>
+    <line x1="500" y1="0" x2="500" y2="56" stroke="#dcebff" stroke-width="1.2"/>
+    <line x1="900" y1="0" x2="900" y2="56" stroke="#dcebff" stroke-width="1.2"/>
+    <line x1="1200" y1="0" x2="1200" y2="56" stroke="#dcebff" stroke-width="1.2"/>
+    <g fill="#dcebff">
+      <text x="16" y="23" font-size="12" letter-spacing="2">IMPERIAL OFFICE OF WORKS &#8212; HELARCHON</text>
+      <text x="16" y="43" font-size="10.5" opacity="0.75">SCHOLARS&#8217; DISTRICT &#183; MUSEUM HILL</text>
+      <text x="516" y="23" font-size="12" letter-spacing="2">SURVEYED: P. DEXAMENOS</text>
+      <text x="516" y="43" font-size="10.5" opacity="0.75">GUILD OF MASONS, FOURTH CHAIR</text>
+      <text x="916" y="23" font-size="12" letter-spacing="2">SHEET III OF VII</text>
+      <text x="916" y="43" font-size="10.5" opacity="0.75">PLANS: GROUND &#183; UPPER &#183; UNDERCROFT</text>
+      <text x="1216" y="23" font-size="12" letter-spacing="2">SCALE 1:100</text>
+      <text x="1216" y="43" font-size="10.5" opacity="0.75">ONE SQUARE = FIVE FEET</text>
+    </g>
+  </g>
+</svg>

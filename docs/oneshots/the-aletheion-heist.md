@@ -245,6 +245,22 @@ The SVG above is the DM's schematic. For a fully illustrated map, these professi
 - **[Silvarn Museum — Venatus Maps](https://www.venatusmaps.com/product-page/silvarn-museum)** — an "eclectic, yet academic collection of oddities," made with heist one-shots in mind.
 - **[Eden Art Gallery — Frag Maps](https://www.patreon.com/posts/eden-art-gallery-122749112)** — gallery heist map with exhibition rooms, **skylight panels**, and an air vent into the curator's room, if you'd rather run the museum as a lighter gallery.
 
+### Scene maps for the rest of the night (artist-made)
+
+- **The hiring — a harbor taverna.** [Skull Cove Pirate Tavern — Tom Cartos](https://www.tomcartos.com/skull-cove-pirate-tavern) (harbor-mouth tavern, same artist as the museum) or his [Floating Tavern — free version](https://www.patreon.com/posts/floating-tavern-150919769); the [free master post](https://www.patreon.com/posts/master-post-free-54516413) has the whole Inns & Taverns series.
+- **The Night Agora — a sea-cave black market.** [Smuggler Cave — Manea](https://manea.itch.io/smuggler-cave-battlemaps) is the exact premise (coastal caves turned into a black-market warehouse); [Black Market Streets — Czepeku](https://www.czepeku.com/fantasy/maps/black-market-streets) (22 variations) if you'd rather run the market as masked street stalls; [Pirate's Cove — 2-Minute Tabletop](https://2minutetabletop.com/product/pirates-cove/) or [Smugglers' Hideout — Nic's Atlas](https://nicsatlas.itch.io/smugglers-hideout) as cave alternatives.
+- **The city — Helarchon itself.** [City of Mytros — SirInkman (DeviantArt)](https://www.deviantart.com/sirinkman/art/City-of-Mytros-Odyssey-of-the-Dragonlords-797498263) — a hand-drawn Greek-fantasy capital wedged between mountains and a great harbor, which is Helarchon almost exactly; the [official Thylea & Mytros double-sided poster map (Modiphius)](https://modiphius.net/en-us/products/odyssey-of-the-dragonlords-odyssey-of-the-dragonlords-double-sided-map-of-thylea-mytros) if you want it in print.
+
+### Player prop — the stolen survey
+
+[`the-aletheion-blueprint.svg`](the-aletheion-blueprint.svg) — an in-world **blueprint sheet** of the museum (Imperial Office of Works, "Sheet III of VII"), drawn to hand to the players when they start planning. It matches the Knight at the Museum floors, and it is honest about structure and *dishonest about contents*, exactly as a censored survey would be:
+
+- The Bronze Vault appears only as **"Conservation Store B — see Note 4"**, an empty room; the Seal, the plinth, and the colossus head are nowhere on the sheet. *Where the artifact sits is deliberately not on this map.*
+- The Sealed Annex is just **"Archive — Restricted."** No pressure plates, no wards, no ossuary niche.
+- The useful truths are in the margins: the oculus is serviced *from the roof*, the cistern grate is "rusted fast," the statues' plinths are "re-set at dawn, daily" — and a dissident hand has scrawled *"re-set daily? why — D."*
+
+**How they get it:** Old Kyros sells the sheet at the Night Agora for 75 gp (it's where the Tenebral Covenant's floor plans come from); Dexios can be talked into "losing" it for an evening; or it's sitting in Curator Eupraxia's office drawer next to the uncensored labels.
+
 ---
 
 ## NPCs
