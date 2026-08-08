@@ -28,7 +28,7 @@ export default async function EditEntryPage({
 }) {
   const { slug } = await params;
   const user = await getCurrentUser();
-  if (!user) redirect("/login");
+  if (!user) redirect("/welcome");
   if (user.role !== "dm") redirect(`/codex/entry/${slug}`);
 
   const entry = await getEntryBySlug(user.role, slug);

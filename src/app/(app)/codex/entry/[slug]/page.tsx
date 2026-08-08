@@ -38,7 +38,7 @@ export default async function EntryPage({
 }) {
   const { slug } = await params;
   const user = await getCurrentUser();
-  if (!user) redirect("/login");
+  if (!user) redirect("/welcome");
 
   const entry = await getEntryBySlug(user.role, slug);
   if (!entry) notFound();

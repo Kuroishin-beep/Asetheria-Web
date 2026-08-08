@@ -1,13 +1,15 @@
 import { Suspense } from "react";
-import Link from "next/link";
 import type { Metadata } from "next";
-import { LoginForm } from "./login-form";
+import { redirect } from "next/navigation";
+import { getSession } from "@/lib/session-cookie";
+import { EnterButtons } from "./enter-buttons";
 
-export const metadata: Metadata = { title: "Sign in" };
+export const metadata: Metadata = { title: "Welcome" };
 
-export default function LoginPage() {
-  // Only advertise registration when the DM has actually opened it.
-  const signupOpen = Boolean(process.env.SIGNUP_CODE?.trim());
+export default async function WelcomePage() {
+  // Anyone already holding a session goes straight to the codex.
+  const session = await getSession();
+  if (session) redirect("/");
 
   return (
     <main
@@ -18,7 +20,7 @@ export default function LoginPage() {
         padding: "2rem 1rem",
       }}
     >
-      <div style={{ width: "min(24rem, 100%)" }}>
+      <div style={{ width: "min(34rem, 100%)" }}>
         <div style={{ textAlign: "center", marginBottom: "1.75rem" }}>
           <p
             aria-hidden="true"
@@ -44,29 +46,13 @@ export default function LoginPage() {
               marginTop: "0.35rem",
             }}
           >
-            The Dungeon Master&rsquo;s door. Players can{" "}
-            <Link href="/welcome">enter without a key</Link>.
+            Two doors into the codex. Choose yours.
           </p>
         </div>
 
-        <div className="card" style={{ padding: "1.5rem" }}>
-          <Suspense fallback={null}>
-            <LoginForm />
-          </Suspense>
-        </div>
-
-        {signupOpen && (
-          <p
-            style={{
-              textAlign: "center",
-              marginTop: "1.25rem",
-              fontSize: "0.8125rem",
-              color: "var(--text-muted)",
-            }}
-          >
-            Given an invite code? <Link href="/register">Join the party</Link>
-          </p>
-        )}
+        <Suspense fallback={null}>
+          <EnterButtons />
+        </Suspense>
 
         <p
           style={{

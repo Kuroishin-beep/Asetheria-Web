@@ -36,7 +36,7 @@ export default async function KindPage({
   if (!def) notFound();
 
   const user = await getCurrentUser();
-  if (!user) redirect("/login");
+  if (!user) redirect("/welcome");
 
   const total = await countEntries(user.role, {
     kind: def.kind,

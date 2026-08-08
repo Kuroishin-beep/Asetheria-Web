@@ -12,6 +12,7 @@ import {
 } from "@/lib/entries";
 import { SECTIONS, STANDING_EMPIRE_SLUGS } from "@/lib/kinds";
 import { CardGrid, EntryCard, PageHeading } from "@/components/entry-card";
+import { Prologue } from "@/components/prologue";
 
 /** Heading with an optional "see all" link, used by the front-page sections. */
 function SectionHeading({
@@ -49,7 +50,7 @@ function SectionHeading({
 
 export default async function DashboardPage() {
   const user = await getCurrentUser();
-  if (!user) redirect("/login");
+  if (!user) redirect("/welcome");
 
   const [counts, tierCounts, recent, tags, empires, lore, capitals, majorCities, towns] =
     await Promise.all([
@@ -79,6 +80,9 @@ export default async function DashboardPage() {
             : `${total} entries the party has uncovered.`
         }
       />
+
+      {/* ---- The story so far ---- */}
+      <Prologue />
 
       {/* ---- The three standing empires ---- */}
       {empires.length > 0 && (

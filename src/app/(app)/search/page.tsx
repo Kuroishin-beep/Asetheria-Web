@@ -14,7 +14,7 @@ export default async function SearchPage({
   searchParams: Promise<{ q?: string; tag?: string }>;
 }) {
   const user = await getCurrentUser();
-  if (!user) redirect("/login");
+  if (!user) redirect("/welcome");
 
   const { q, tag } = await searchParams;
 

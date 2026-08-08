@@ -10,7 +10,7 @@ export default async function AppLayout({
   children: React.ReactNode;
 }) {
   const user = await getCurrentUser();
-  if (!user) redirect("/login");
+  if (!user) redirect("/welcome");
 
   const [counts, tierCounts] = await Promise.all([
     countByKind(user.role),
