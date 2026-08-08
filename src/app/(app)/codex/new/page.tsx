@@ -17,7 +17,7 @@ export default async function NewEntryPage({
   searchParams: Promise<{ kind?: string }>;
 }) {
   const user = await getCurrentUser();
-  if (!user) redirect("/login");
+  if (!user) redirect("/welcome");
   if (user.role !== "dm") redirect("/");
 
   const { kind: kindParam } = await searchParams;

@@ -212,7 +212,9 @@ Everything from the Thalos Ridge dig too dangerous or too true for upstairs: run
 
 ## The Map
 
-SVG floor plan: [`the-aletheion-museum-map.svg`](the-aletheion-museum-map.svg) — three levels, entrances A/B/C, patrol routes, and the vault. Quick reference:
+**For the table, use an artist-drawn battle map** — see *Artist-drawn battle maps* below. Tom Cartos's free **Knight at the Museum** set is a near one-to-one fit for the Aletheion: lower floor, upper floor, and a roof sheet that runs the skylight entrance as a playable map.
+
+**DM schematic** (annotated — entrances A/B/C with DCs, patrol routes, wards, secret niche): [`the-aletheion-museum-map.svg`](the-aletheion-museum-map.svg). Quick reference:
 
 ```
 UPPER FLOOR                      GROUND FLOOR                     UNDERCROFT
