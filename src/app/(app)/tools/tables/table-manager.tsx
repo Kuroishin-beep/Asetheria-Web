@@ -2,7 +2,11 @@
 
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
-import { archiveRollTableAction, saveRollTableAction } from "@/lib/actions";
+import {
+  archiveRollTableAction,
+  restoreRollTableAction,
+  saveRollTableAction,
+} from "@/lib/actions";
 import { DiceError, rollOnTable } from "@/lib/dice";
 
 type Item = { min: number; max: number; result: string };
@@ -14,13 +18,16 @@ type Table = {
   items: Item[];
   visibility: string;
 };
+type ArchivedTable = { id: string; name: string };
 
 export function TableManager({
   tables,
   isDM,
+  archivedTables = [],
 }: {
   tables: Table[];
   isDM: boolean;
+  archivedTables?: ArchivedTable[];
 }) {
   const [editing, setEditing] = useState<Table | "new" | null>(null);
 
@@ -61,7 +68,67 @@ export function TableManager({
           ))}
         </div>
       )}
+
+      {isDM && archivedTables.length > 0 && (
+        <ArchivedTablesSection tables={archivedTables} />
+      )}
     </>
+  );
+}
+
+/**
+ * Archived tables have no browse page of their own the way entries do
+ * (/archive) — this is the only place a DM can see, or restore, one they've
+ * archived. `restoreRollTableAction` existed server-side with no caller
+ * before this; this is that caller.
+ */
+function ArchivedTablesSection({ tables }: { tables: ArchivedTable[] }) {
+  const router = useRouter();
+  const [pending, startTransition] = useTransition();
+  const [busyId, setBusyId] = useState<string | null>(null);
+
+  return (
+    <details style={{ marginTop: "2rem" }}>
+      <summary
+        className="label"
+        style={{ cursor: "pointer" }}
+      >
+        Archived tables ({tables.length})
+      </summary>
+      <div style={{ display: "grid", gap: "0.5rem", marginTop: "0.75rem" }}>
+        {tables.map((t) => (
+          <div
+            key={t.id}
+            className="card"
+            style={{
+              padding: "0.6rem 0.85rem",
+              display: "flex",
+              alignItems: "center",
+              gap: "0.75rem",
+              flexWrap: "wrap",
+            }}
+          >
+            <span style={{ flex: 1, minWidth: "10rem" }}>{t.name}</span>
+            <button
+              type="button"
+              className="btn"
+              disabled={pending}
+              aria-label={`Restore ${t.name}`}
+              onClick={() => {
+                setBusyId(t.id);
+                startTransition(async () => {
+                  await restoreRollTableAction(t.id);
+                  setBusyId(null);
+                  router.refresh();
+                });
+              }}
+            >
+              {busyId === t.id ? "Restoring…" : "↩ Restore"}
+            </button>
+          </div>
+        ))}
+      </div>
+    </details>
   );
 }
 
@@ -122,13 +189,20 @@ function TableCard({
         </button>
         {isDM && (
           <>
-            <button type="button" className="btn" onClick={onEdit}>
+            <button
+              type="button"
+              className="btn"
+              onClick={onEdit}
+              aria-label={`Edit ${table.name}`}
+              title="Edit this table"
+            >
               ✎
             </button>
             <button
               type="button"
               className="btn btn-danger"
               disabled={pending}
+              aria-label={`Archive ${table.name}`}
               title="Archive this table"
               onClick={() =>
                 startTransition(async () => {

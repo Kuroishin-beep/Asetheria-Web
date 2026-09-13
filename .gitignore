@@ -19,3 +19,9 @@ npm-debug.log*
 
 # Local backup exports produced from the admin panel
 backups/
+
+# Playwright
+/test-results/
+/playwright-report/
+/tests/.auth/
+/.playwright-mcp/

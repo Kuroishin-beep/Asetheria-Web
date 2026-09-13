@@ -6,6 +6,7 @@ import { entries, revisions } from "@/db/schema";
 import { getCurrentUser } from "@/lib/auth";
 import { entryInputSchema } from "@/lib/validation";
 import { slugify } from "@/lib/links";
+import { rebuildLinksForEntry } from "@/lib/link-graph";
 
 export const runtime = "nodejs";
 export const maxDuration = 60;
@@ -78,29 +79,38 @@ export async function POST(request: Request) {
         .from(entries)
         .where(eq(entries.id, foundId))
         .limit(1);
-      if (current) {
-        await db.insert(revisions).values({
-          entryId: current.id,
-          snapshot: current as unknown as Record<string, unknown>,
-          action: "import",
-          authorId: user.id,
-          authorName: user.username,
-        });
+      // The row this import file matched by slug was removed (e.g. purged)
+      // between the initial slug lookup and now — skip it rather than throw,
+      // so one concurrent edit can't fail an entire import.
+      if (!current) {
+        skipped++;
+        continue;
       }
-      await db
+
+      await db.insert(revisions).values({
+        entryId: current.id,
+        snapshot: current as unknown as Record<string, unknown>,
+        action: "import",
+        authorId: user.id,
+        authorName: user.username,
+      });
+
+      const [row] = await db
         .update(entries)
         .set({
-          name: name ?? current!.name,
-          kind: item.kind ?? current!.kind,
-          summary: item.summary ?? current!.summary,
-          body: item.body ?? current!.body,
-          dmNotes: item.dmNotes ?? current!.dmNotes,
-          fields: item.fields ?? current!.fields,
-          tags: item.tags ?? current!.tags,
-          visibility: item.visibility ?? current!.visibility,
+          name: name ?? current.name,
+          kind: item.kind ?? current.kind,
+          summary: item.summary ?? current.summary,
+          body: item.body ?? current.body,
+          dmNotes: item.dmNotes ?? current.dmNotes,
+          fields: item.fields ?? current.fields,
+          tags: item.tags ?? current.tags,
+          visibility: item.visibility ?? current.visibility,
           updatedAt: new Date(),
         })
-        .where(eq(entries.id, foundId));
+        .where(eq(entries.id, foundId))
+        .returning();
+      await rebuildLinksForEntry(row.id, row.body, row.fields);
       updated++;
     } else {
       const [row] = await db
@@ -117,8 +127,9 @@ export async function POST(request: Request) {
           visibility: item.visibility ?? "public",
           sourcePath: item.sourcePath ?? null,
         })
-        .returning({ id: entries.id, slug: entries.slug });
+        .returning();
       bySlug.set(row.slug, row.id);
+      await rebuildLinksForEntry(row.id, row.body, row.fields);
       created++;
     }
   }

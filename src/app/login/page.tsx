@@ -14,7 +14,26 @@ export default function LoginPage() {
         padding: "2rem 1rem",
       }}
     >
-      <div style={{ width: "min(24rem, 100%)" }}>
+      {/* A subtle entrance rather than a hard cut when the page mounts.
+          `@starting-style` degrades to no transition at all on browsers
+          that don't support it yet — no animation library, no @keyframes. */}
+      <style>{`
+        .login-card-enter {
+          transition: opacity 260ms ease, transform 260ms ease;
+        }
+        @starting-style {
+          .login-card-enter {
+            opacity: 0;
+            transform: translateY(6px);
+          }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .login-card-enter {
+            transition: none;
+          }
+        }
+      `}</style>
+      <div className="login-card-enter" style={{ width: "min(24rem, 100%)" }}>
         <div style={{ textAlign: "center", marginBottom: "1.75rem" }}>
           <p
             aria-hidden="true"

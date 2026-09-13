@@ -1,13 +1,14 @@
-"use server";
+﻿"use server";
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { and, eq, ne } from "drizzle-orm";
 import { db } from "@/db";
-import { entries, links, revisions, rollTables, type Entry } from "@/db/schema";
+import { entries, revisions, rollTables, type Entry } from "@/db/schema";
 import { requireDM } from "@/lib/auth";
 import { kindSlug } from "@/lib/kinds";
-import { buildNameIndex, resolveLinks, slugify } from "@/lib/links";
+import { slugify } from "@/lib/links";
+import { rebuildLinksForEntry } from "@/lib/link-graph";
 import {
   parseEntryForm,
   rollTableInputSchema,
@@ -53,32 +54,6 @@ async function uniqueSlug(base: string, excludeId?: string): Promise<string> {
   return `${root}-${Date.now()}`;
 }
 
-/** Recomputes this entry's outgoing edges after its text or fields change. */
-async function rebuildLinks(
-  entryId: string,
-  body: string,
-  fields: Record<string, string>,
-) {
-  const all = await db.select({ id: entries.id, name: entries.name }).from(entries);
-  const nameIndex = buildNameIndex(all);
-
-  await db.delete(links).where(eq(links.sourceId, entryId));
-  const resolved = resolveLinks(entryId, body, fields, nameIndex);
-  if (resolved.length) {
-    await db
-      .insert(links)
-      .values(
-        resolved.map((l) => ({
-          sourceId: entryId,
-          targetId: l.targetId,
-          relation: l.relation,
-          context: l.context ?? null,
-        })),
-      )
-      .onConflictDoNothing();
-  }
-}
-
 function revalidateEntry(slug?: string, kind?: Entry["kind"]) {
   revalidatePath("/");
   if (kind) revalidatePath(`/codex/${kindSlug(kind)}`);
@@ -115,7 +90,7 @@ export async function createEntryAction(_prev: unknown, formData: FormData) {
     .returning();
 
   await snapshot(row, "create", user);
-  await rebuildLinks(row.id, row.body, row.fields);
+  await rebuildLinksForEntry(row.id, row.body, row.fields);
   revalidateEntry(row.slug, row.kind);
   redirect(`/codex/entry/${row.slug}`);
 }
@@ -169,7 +144,7 @@ export async function updateEntryAction(
     .where(eq(entries.id, entryId))
     .returning();
 
-  await rebuildLinks(row.id, row.body, row.fields);
+  await rebuildLinksForEntry(row.id, row.body, row.fields);
   revalidateEntry(row.slug, row.kind);
   redirect(`/codex/entry/${row.slug}`);
 }
@@ -288,7 +263,7 @@ export async function revertToRevisionAction(revisionId: string) {
     .where(eq(entries.id, rev.entryId))
     .returning();
 
-  await rebuildLinks(row.id, row.body, row.fields);
+  await rebuildLinksForEntry(row.id, row.body, row.fields);
   revalidateEntry(row.slug, row.kind);
   return { ok: true };
 }

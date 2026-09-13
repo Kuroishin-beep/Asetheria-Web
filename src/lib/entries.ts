@@ -58,8 +58,23 @@ export async function countByKind(role: UserRole) {
   return out;
 }
 
-export async function getEntryBySlug(role: UserRole, slug: string) {
-  const conditions = [eq(entries.slug, slug), readable(role)].filter(Boolean);
+/**
+ * `includeArchived` defaults to false: an archived entry is meant to be out
+ * of the way until restored, so its detail/edit pages must 404 the same way
+ * it already disappears from lists and search — for the DM too, not just
+ * players. Pass `includeArchived: true` only from a future flow that
+ * explicitly needs to preview an archived entry (none does today).
+ */
+export async function getEntryBySlug(
+  role: UserRole,
+  slug: string,
+  opts: { includeArchived?: boolean } = {},
+) {
+  const conditions = [
+    eq(entries.slug, slug),
+    opts.includeArchived ? undefined : liveOnly(),
+    readable(role),
+  ].filter(Boolean);
   const [row] = await db
     .select()
     .from(entries)
@@ -70,8 +85,16 @@ export async function getEntryBySlug(role: UserRole, slug: string) {
   return role === "dm" ? row : redactForPlayer(row);
 }
 
-export async function getEntryById(role: UserRole, id: string) {
-  const conditions = [eq(entries.id, id), readable(role)].filter(Boolean);
+export async function getEntryById(
+  role: UserRole,
+  id: string,
+  opts: { includeArchived?: boolean } = {},
+) {
+  const conditions = [
+    eq(entries.id, id),
+    opts.includeArchived ? undefined : liveOnly(),
+    readable(role),
+  ].filter(Boolean);
   const [row] = await db
     .select()
     .from(entries)

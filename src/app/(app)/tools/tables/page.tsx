@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 import type { Metadata } from "next";
-import { asc, isNull, and, ne, or } from "drizzle-orm";
+import { asc, desc, isNull, isNotNull, and, ne } from "drizzle-orm";
 import { db } from "@/db";
 import { rollTables } from "@/db/schema";
 import { getCurrentUser } from "@/lib/auth";
@@ -25,6 +25,16 @@ export default async function TablesPage() {
     )
     .orderBy(asc(rollTables.name));
 
+  // Archived tables have no browse view of their own (unlike entries'
+  // /archive) — only the DM can see and restore them, from right here.
+  const archivedRows = isDM
+    ? await db
+        .select()
+        .from(rollTables)
+        .where(isNotNull(rollTables.archivedAt))
+        .orderBy(desc(rollTables.updatedAt))
+    : [];
+
   return (
     <div style={{ maxWidth: "52rem" }}>
       <PageHeading
@@ -42,6 +52,7 @@ export default async function TablesPage() {
           items: t.items,
           visibility: t.visibility,
         }))}
+        archivedTables={archivedRows.map((t) => ({ id: t.id, name: t.name }))}
       />
     </div>
   );
