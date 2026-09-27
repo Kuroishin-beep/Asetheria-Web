@@ -10,6 +10,7 @@
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
     "import:notion": "tsx scripts/import-notion.ts",
+    "import:homebrew": "tsx scripts/import-homebrew.ts",
     "verify:links": "tsx scripts/verify-links.ts",
     "verify:expansion": "tsx scripts/verify-expansion.ts",
     "describe": "tsx scripts/generate-descriptions.ts",

@@ -1,0 +1,243 @@
+{
+  "note": "Player-supplied herbalism/alchemy reference material, laid into the existing `flora` kind. All new pages — no existing flora entries overlap these names.",
+  "entries": [
+    {
+      "slug": "adders-tongue",
+      "kind": "flora",
+      "name": "Adder's-Tongue",
+      "summary": "A single-leafed herb of moist meadows; its tea sharpens recovery from a short rest.",
+      "body": "A single-leafed plant with a long, thin stalk that sprouts small, yellow-green flowers, thriving in moist meadows and shady clearings in late spring. Often overlooked for its simple appearance, it can promote recovery when its leaves are crushed and boiled into tea.",
+      "fields": { "effects": "When you take a short rest immediately after drinking Adder's-Tongue tea, add +2 to the total of each Hit Die you spend to regain hit points." },
+      "tags": ["herb", "healing"],
+      "visibility": "public",
+      "sourcePath": "homebrew: herbalism reference"
+    },
+    {
+      "slug": "birthwort",
+      "kind": "flora",
+      "name": "Birthwort",
+      "summary": "A climbing vine whose crushed leaves, drunk as juice, neutralize poison.",
+      "body": "A climbing vine with heart-shaped leaves and thin, tubular yellow flowers that grow along hedges and shrubs in sunlit areas, flowering in mid-summer. Renowned for its ability to neutralize toxins.",
+      "fields": { "effects": "Drinking the juice of the crushed leaves removes the poisoned condition." },
+      "tags": ["herb", "antidote"],
+      "visibility": "public",
+      "sourcePath": "homebrew: herbalism reference"
+    },
+    {
+      "slug": "calendula",
+      "kind": "flora",
+      "name": "Calendula",
+      "summary": "Vibrant orange-yellow flowers whose petals treat necrotic wounds.",
+      "body": "Vibrant orange and yellow flowers with lush green leaves, blooming from early summer through fall in sunny, well-drained soil. Its petals possess anti-inflammatory and purifying properties, effective against necrotic wounds and for promoting tissue regeneration.",
+      "fields": { "effects": "Applied to a creature suffering necrotic damage, a poultice of crushed petals restores 1d8 hit points." },
+      "tags": ["herb", "healing"],
+      "visibility": "public",
+      "sourcePath": "homebrew: herbalism reference"
+    },
+    {
+      "slug": "comfrey",
+      "kind": "flora",
+      "name": "Comfrey",
+      "summary": "A large, hairy-leaved plant whose crushed root treats open wounds.",
+      "body": "Large, hairy leaves and hollow stalks growing up to three feet high, with violet or white bell-shaped flowers, found in damp fields, ditches, and near water, blooming mid-summer. Its crushed root is especially effective for open wounds.",
+      "fields": { "effects": "Applied to a creature suffering slashing or piercing damage, the crushed root immediately restores 1d6 hit points." },
+      "tags": ["herb", "healing"],
+      "visibility": "public",
+      "sourcePath": "homebrew: herbalism reference"
+    },
+    {
+      "slug": "garlic",
+      "kind": "flora",
+      "name": "Garlic",
+      "summary": "A pungent culinary herb and potent antiseptic against infection.",
+      "body": "Tall green stalks with pungent, white flower clusters, found in meadows, gardens, and forests. While well known as a culinary herb, garlic is also a potent antiseptic — its crushed cloves are especially useful for preventing infection in wounds.",
+      "fields": { "effects": "If you have contracted a disease from a wound, applying a garlic poultice to the wound lets you repeat the saving throw you made against contracting it." },
+      "tags": ["herb", "antiseptic"],
+      "visibility": "public",
+      "sourcePath": "homebrew: herbalism reference"
+    },
+    {
+      "slug": "heartberry",
+      "kind": "flora",
+      "name": "Heartberry",
+      "summary": "A small four-leaved plant whose berries neutralize poison and heal wounds.",
+      "body": "A small, four-leaved plant of woods and field edges, bearing either a single white flower or a dark berry, prized greatly by herbalists. Ingested, the berries neutralize poisons; used to wash open wounds, they prevent infection.",
+      "fields": { "effects": "Consuming the berries removes the poisoned condition from you. Washing a slashing or piercing wound with the berry juice restores 1d6 hit points." },
+      "tags": ["herb", "healing", "antidote"],
+      "visibility": "public",
+      "sourcePath": "homebrew: herbalism reference"
+    },
+    {
+      "slug": "juniper",
+      "kind": "flora",
+      "name": "Juniper",
+      "summary": "A fragrant bush whose berries are a stimulant strong enough to revive the dying.",
+      "body": "A fragrant bush with rough bark and short, needle-like leaves, its dark purple berries ripening after a year, growing in sparse forests and heathlands. Juniper berries are a stimulant — consumed, they can revive those near death.",
+      "fields": { "effects": "If you are at 0 hit points and consume several juniper berries (someone can assist even while you are unconscious), you regain 1 hit point." },
+      "tags": ["herb", "healing"],
+      "visibility": "public",
+      "sourcePath": "homebrew: herbalism reference"
+    },
+    {
+      "slug": "kings-candle",
+      "kind": "flora",
+      "name": "King's Candle",
+      "summary": "A tall plant whose faintly glowing yellow flowers numb pain when made into a wound poultice.",
+      "body": "A tall, striking plant with soft, silvery-green leaves surrounding a thick stalk rising to five feet, its bright yellow flowers glowing faintly like a candle, blooming in rocky soils or sunny slopes near cliffs and quarries. The flowers, crushed and mixed with water or wine, numb pain and speed healing when applied to wounds.",
+      "fields": { "effects": "Applied to an injury, the mixture grants 1d6 temporary hit points, which disappear at the end of your next short or long rest." },
+      "tags": ["herb", "healing"],
+      "visibility": "public",
+      "sourcePath": "homebrew: herbalism reference"
+    },
+    {
+      "slug": "moorroot",
+      "kind": "flora",
+      "name": "Moorroot",
+      "summary": "A salt-marsh plant whose crushed root soothes fresh burns.",
+      "body": "A tall plant with soft, white stalks and broad, hairy leaves growing in salt marshes and damp meadows by the sea. Its long, pliant roots, smashed into a poultice, soothe fresh burns.",
+      "fields": { "effects": "Applied to a creature suffering fire, lightning, or acid damage, the poultice restores 1d8 hit points." },
+      "tags": ["herb", "healing"],
+      "visibility": "public",
+      "sourcePath": "homebrew: herbalism reference"
+    },
+    {
+      "slug": "stinking-nightshade",
+      "kind": "flora",
+      "name": "Stinking Nightshade",
+      "summary": "A foul-smelling but potent painkiller — one that risks brief intoxication.",
+      "body": "A low-growing plant with thick, deeply cut leaves and hollow yellow flowers veined with purple, with a strong, offensive smell, thriving in clearings and along paths through summer. Its boiled leaves form a powerful painkiller that deadens the discomfort of severe wounds, though it can also cause intoxication.",
+      "fields": { "effects": "Ingested, the mixture grants 2d6 temporary hit points (gone at the end of your next short or long rest). You must also succeed on a DC 10 Constitution saving throw or be poisoned for one hour." },
+      "tags": ["herb", "poison"],
+      "visibility": "public",
+      "sourcePath": "homebrew: herbalism reference"
+    },
+    {
+      "slug": "witch-hazel",
+      "kind": "flora",
+      "name": "Witch Hazel",
+      "summary": "A late-autumn shrub whose leaves treat bruises and contusions.",
+      "body": "Glossy, dark green leaves and striking, spidery yellow flowers blooming in late autumn and early winter, typically along riverbanks, wetlands, and shaded woodlands in moist, fertile soil. Its astringent, anti-inflammatory leaves promote the healing of bruises and contusions.",
+      "fields": { "effects": "Applied to a creature suffering bludgeoning or thunder damage, a poultice from the crushed leaves immediately restores 1d6 hit points." },
+      "tags": ["herb", "healing"],
+      "visibility": "public",
+      "sourcePath": "homebrew: herbalism reference"
+    },
+    {
+      "slug": "woundwort",
+      "kind": "flora",
+      "name": "Woundwort",
+      "summary": "A slender marsh plant whose poultice makes a short rest's healing maximal.",
+      "body": "A slender, green-stalked plant with long, jagged leaves and large purplish-red flowers, found in fields, ditches, and marshes, thriving in mid-summer. Its acrid-smelling leaves, mashed into a poultice, are a potent remedy for deep cuts.",
+      "fields": { "effects": "If, at the start of a short rest, you apply the poultice to a creature suffering slashing or piercing damage, any Hit Dice they spend during that rest restore the maximum number of hit points possible." },
+      "tags": ["herb", "healing"],
+      "visibility": "public",
+      "sourcePath": "homebrew: herbalism reference"
+    },
+    {
+      "slug": "vital-mauveroot",
+      "kind": "flora",
+      "name": "Vital Mauveroot",
+      "summary": "A plain green shoot with hair-like mauve roots, brewed into high-quality healing potions.",
+      "body": "A plain-looking green shoot with hair-like mauve roots. Herbalists and alchemists brew it into high-quality healing potions — its unremarkable appearance belies real potency.",
+      "fields": { "effects": "Key ingredient in high-quality potions of healing." },
+      "tags": ["herb", "alchemical", "healing"],
+      "visibility": "public",
+      "sourcePath": "homebrew: herbalism reference"
+    },
+    {
+      "slug": "nightsbane",
+      "kind": "flora",
+      "name": "Nightsbane",
+      "summary": "A small bush of glowing white flowers, brewed into a radiant-immunity tea that makes the drinker glow.",
+      "body": "A small bush with glowing white flowers. Brewing the blossoms creates a tea that grants temporary immunity to radiant damage — at the cost of making the drinker glow brightly, impossible to hide.",
+      "fields": { "effects": "Tea grants radiant damage immunity while the drinker glows brightly (no darkvision/stealth benefit while affected)." },
+      "tags": ["herb", "alchemical"],
+      "visibility": "public",
+      "sourcePath": "homebrew: herbalism reference"
+    },
+    {
+      "slug": "charybdis-tears",
+      "kind": "flora",
+      "name": "Charybdis' Tears",
+      "summary": "Carnivorous blue lily-pads that yield water-breathing potions — if harvested without being bitten.",
+      "body": "Carnivorous blue lily-pad hybrids that snap at small fish. Harvested carefully, they yield the key ingredient for water-breathing potions; harvested carelessly, they bite.",
+      "fields": { "effects": "Key ingredient in potions of water breathing; harvesting risks a bite from the plant." },
+      "tags": ["herb", "alchemical", "carnivorous"],
+      "visibility": "public",
+      "sourcePath": "homebrew: herbalism reference"
+    },
+    {
+      "slug": "phasegrass",
+      "kind": "flora",
+      "name": "Phasegrass",
+      "summary": "Dense off-white grass that limits visibility and obscures movement through it.",
+      "body": "An off-white, dense grass that limits surrounding visibility to just 10 feet and can obscure movement through a field of it — useful cover, and a hazard to anyone trying to track through it.",
+      "fields": { "effects": "A field of phasegrass limits visibility within it to 10 feet." },
+      "tags": ["hazard", "terrain"],
+      "visibility": "public",
+      "sourcePath": "homebrew: herbalism reference"
+    },
+    {
+      "slug": "assassin-vines",
+      "kind": "flora",
+      "name": "Assassin Vines",
+      "summary": "Semi-sentient creeping plants that disguise themselves as thickets before strangling prey.",
+      "body": "Semi-sentient creeping plants that disguise themselves as normal thickets before lashing out and strangling unsuspecting prey — a common ambush hazard along old roads and forest edges.",
+      "fields": { "effects": "Disguised as thickets; lashes out to strangle creatures that come within reach." },
+      "tags": ["monster-flora", "hazard"],
+      "visibility": "public",
+      "sourcePath": "homebrew: herbalism reference"
+    },
+    {
+      "slug": "creeping-kudzu",
+      "kind": "flora",
+      "name": "Creeping Kudzu",
+      "summary": "A magical, self-propagating invasive vine that splits into two when struck with slashing damage.",
+      "body": "A magical, self-propagating invasive vine that aggressively drags and chokes its targets. Strike it with a slashing weapon and it doesn't die cleanly — it splits into two independent, still-hostile vines.",
+      "fields": { "effects": "Drags and chokes targets; splits into two independent entities when struck with slashing damage." },
+      "tags": ["monster-flora", "hazard", "invasive"],
+      "visibility": "public",
+      "sourcePath": "homebrew: herbalism reference"
+    },
+    {
+      "slug": "ordeal-trees",
+      "kind": "flora",
+      "name": "Ordeal Trees",
+      "summary": "Subverted 'sacred trees' that grant dark blessings only to those with evil intent.",
+      "body": "Subverted \"sacred trees\" that appear holy or wise, testing those who bind themselves to their roots — offering dark blessings, but only to souls with evil intent. A trap for the faithful, a boon for the wicked.",
+      "fields": { "effects": "Grants a dark blessing to anyone who binds themselves to its roots with evil intent; withholds it from anyone else." },
+      "tags": ["monster-flora", "corrupted"],
+      "visibility": "public",
+      "sourcePath": "homebrew: herbalism reference"
+    }
+  ],
+  "rollTable": {
+    "name": "The Herbalist's Field Guide (d20)",
+    "slug": "herbalists-field-guide-d20",
+    "description": "d20 table of plants and their alchemical/poison uses, for a herbalism check or a wandering-forage encounter.",
+    "dice": "1d20",
+    "visibility": "secret",
+    "items": [
+      { "min": 1, "max": 1, "result": "Nightshade — the key ingredient in the assassin's blood poison." },
+      { "min": 2, "max": 2, "result": "Silverthorn — brewed under moonlight for 8 hours, gives advantage on Con saves against lycanthropy for 24 hours." },
+      { "min": 3, "max": 3, "result": "Bloodroot — boiled and muddled, makes convincing fake blood." },
+      { "min": 4, "max": 4, "result": "Dragon's Tongue — cooked 1d4 hours, deals 2d8 fire damage to the eater and grants one free 1st-level burning hands (DC 13) cast from their mouth." },
+      { "min": 5, "max": 5, "result": "Winter's Bite — a blue leafy tundra plant, brews into a potion of resistance to cold damage." },
+      { "min": 6, "max": 6, "result": "Dreamleaf — the main ingredient of essence of ether poison." },
+      { "min": 7, "max": 7, "result": "Bloomlotus — a beautiful flower found on remote ponds; preserved, a highly coveted decorative item." },
+      { "min": 8, "max": 8, "result": "Firethorn — rare and dangerous to harvest; provides a flame tongue dagger that breaks after 1d4 successful attacks." },
+      { "min": 9, "max": 9, "result": "Weavegrass — the plant of choice for making cloaks of elvenkind." },
+      { "min": 10, "max": 10, "result": "Liferoot — the key ingredient for potions of healing." },
+      { "min": 11, "max": 11, "result": "Starbloom — distilled under starlight for 8 hours, splashed over a 20-foot cube applies faerie fire for 1 minute (DC 13), no concentration needed." },
+      { "min": 12, "max": 12, "result": "Rotshroom — found only in the Underdark; combined with spider venom, makes drow poison." },
+      { "min": 13, "max": 13, "result": "Mindthorn — the main ingredient of truth serum poison." },
+      { "min": 14, "max": 14, "result": "Gravedust — a thorny graveyard plant, brews into a potion of resistance to necrotic damage." },
+      { "min": 15, "max": 15, "result": "Zapthistle — a tall, wispy mountain plant, brews into a potion of resistance to lightning damage." },
+      { "min": 16, "max": 16, "result": "Siren's Call — the main ingredient in the philter of love." },
+      { "min": 17, "max": 17, "result": "Death's Beckon — a pale deep-forest plant, the main ingredient in midnight tears poison." },
+      { "min": 18, "max": 18, "result": "Shadowleaf — extremely rare; the main ingredient of potions of invisibility." },
+      { "min": 19, "max": 19, "result": "Cinderroot — native to volcanic regions, brews into a potion of resistance to fire damage." },
+      { "min": 20, "max": 20, "result": "Graveflower — brewed and buried for 1d6 days, then poured into a corpse's mouth to cast speak with dead." }
+    ]
+  }
+}

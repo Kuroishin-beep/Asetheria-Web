@@ -183,6 +183,9 @@ export const KINDS: KindDef[] = [
     icon: "⛏",
     blurb: "What the smiths of the Continent work with.",
     fields: [
+      { key: "costPerLb", label: "Cost per lb.", placeholder: "5,000 gp" },
+      { key: "ferrous", label: "Ferrous?", placeholder: "Ferrous / Non-ferrous" },
+      { key: "armorClass", label: "Armor Class", placeholder: "23" },
       { key: "location", label: "Found In" },
       { key: "properties", label: "Properties", type: "textarea" },
       { key: "uses", label: "Uses", type: "textarea" },

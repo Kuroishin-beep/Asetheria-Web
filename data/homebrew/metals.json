@@ -1,0 +1,227 @@
+{
+  "note": "Player-supplied metals/materials reference table plus source lore, laid into the existing `ore` kind. `entries` are brand-new pages; `enrichments` add cost/ferrous/AC stats to ore entries the setting already has under its own name, without touching their existing hand-written lore.",
+  "enrichments": [
+    {
+      "slug": "cold-iron",
+      "fields": { "costPerLb": "4 sp", "ferrous": "Ferrous", "armorClass": "20" }
+    },
+    {
+      "slug": "mithril",
+      "fields": { "costPerLb": "2,500 gp", "ferrous": "Non-ferrous", "armorClass": "21" }
+    },
+    {
+      "slug": "adamantium",
+      "fields": { "costPerLb": "5,000 gp", "ferrous": "Ferrous", "armorClass": "23" }
+    }
+  ],
+  "entries": [
+    {
+      "slug": "brass",
+      "kind": "ore",
+      "name": "Brass",
+      "summary": "A yellow-ish metal that somewhat resembles gold — an alloy of copper and zinc.",
+      "body": "A yellow-ish metal that somewhat resembles gold. An alloy of copper and zinc, valued more for its look than its strength.",
+      "fields": { "costPerLb": "3 sp", "ferrous": "Non-ferrous", "armorClass": "16" },
+      "tags": ["metal", "alloy"],
+      "visibility": "public",
+      "sourcePath": "homebrew: metals & materials reference"
+    },
+    {
+      "slug": "bronze",
+      "kind": "ore",
+      "name": "Bronze",
+      "summary": "A red-ish brown metal — an alloy of copper and tin.",
+      "body": "A red-ish brown metal. An alloy of copper and tin, one of the oldest worked alloys known to smiths of the Continent.",
+      "fields": { "costPerLb": "4 sp", "ferrous": "Non-ferrous", "armorClass": "18" },
+      "tags": ["metal", "alloy"],
+      "visibility": "public",
+      "sourcePath": "homebrew: metals & materials reference"
+    },
+    {
+      "slug": "copper",
+      "kind": "ore",
+      "name": "Copper",
+      "summary": "This well-known pure metal has a distinctive pinkish sheen.",
+      "body": "This well-known pure metal has a distinctive pinkish sheen — the best widely available purifier and amalgamator among metals, soft and easily worked.\n\nA wizard or priest seeking to work with a substance or item not suited to their faith or purpose can make the offending item usable by adding at least half the item's weight of copper to it. Holy or unholy water should not be stored in copper vessels for any length of time, as the metal neutralizes either in a few months.",
+      "fields": { "costPerLb": "5 sp", "ferrous": "Non-ferrous", "armorClass": "16" },
+      "tags": ["metal"],
+      "visibility": "public",
+      "sourcePath": "homebrew: metals & materials reference"
+    },
+    {
+      "slug": "electrum",
+      "kind": "ore",
+      "name": "Electrum",
+      "summary": "A natural alloy of silver and gold.",
+      "body": "A natural alloy of silver and gold, prized in coinage and ornamentation across the Continent.",
+      "fields": { "costPerLb": "25 gp", "ferrous": "Non-ferrous", "armorClass": "20" },
+      "tags": ["metal", "alloy"],
+      "visibility": "public",
+      "sourcePath": "homebrew: metals & materials reference"
+    },
+    {
+      "slug": "gold",
+      "kind": "ore",
+      "name": "Gold",
+      "summary": "The softest of workable metallic substances, and one of the best conductors of magic.",
+      "body": "This well-known pure metal is the softest of workable metallic substances, and one of the best conductors among them. Despite its high value, it is relatively common and favored for ornamentation in the making of magical items, often used as an inlay in graven runes or inscriptions where meld magics keep it from being damaged or falling out through rough handling.\n\nGold has the important ability to hold multiple enchantments, even conflicting ones, and keep them from affecting each other or the stability of the gold-adorned item.",
+      "fields": { "costPerLb": "50 gp", "ferrous": "Non-ferrous", "armorClass": "15" },
+      "tags": ["metal", "enchanting"],
+      "visibility": "public",
+      "sourcePath": "homebrew: metals & materials reference"
+    },
+    {
+      "slug": "iron",
+      "kind": "ore",
+      "name": "Iron",
+      "summary": "A silver-white malleable metal that readily rusts in moist air — the most used of metals.",
+      "body": "Iron is a silver-white malleable metal that readily rusts in moist air, occurs native in meteorites, and combined in most igneous rocks. It is the most used of metals across the Continent's forges.",
+      "fields": { "costPerLb": "1 sp", "ferrous": "Ferrous", "armorClass": "19" },
+      "tags": ["metal"],
+      "visibility": "public",
+      "sourcePath": "homebrew: metals & materials reference"
+    },
+    {
+      "slug": "lead",
+      "kind": "ore",
+      "name": "Lead",
+      "summary": "A heavy, grey, soft, malleable metal.",
+      "body": "Lead is a heavy, grey, soft, malleable metal, prized less for weapons or armor than for weighting, sealing, and shielding.",
+      "fields": { "costPerLb": "2 sp", "ferrous": "Non-ferrous", "armorClass": "14" },
+      "tags": ["metal"],
+      "visibility": "public",
+      "sourcePath": "homebrew: metals & materials reference"
+    },
+    {
+      "slug": "platinum",
+      "kind": "ore",
+      "name": "Platinum",
+      "summary": "A light grey metal with a slight bluish tinge, strong and resistant to most chemicals.",
+      "body": "This light grey metal with a very slight bluish tinge is strong, difficult to melt, and resistant to most chemicals — favored where durability against corrosion matters more than weight.",
+      "fields": { "costPerLb": "500 gp", "ferrous": "Non-ferrous", "armorClass": "20" },
+      "tags": ["metal"],
+      "visibility": "public",
+      "sourcePath": "homebrew: metals & materials reference"
+    },
+    {
+      "slug": "silver",
+      "kind": "ore",
+      "name": "Silver",
+      "summary": "A relatively common valuable metal, the most associated with and suitable for magic.",
+      "body": "This relatively common valuable metal is known among mages as the sheath and shield of Art, because of all metals it is the most associated with and suitable for magic. Many smiths use silver in various alloy formulae of their own devising or handed down through their lines for generations. Most of the beauty of metalwork down through the ages has been associated with the gleam and hue of mirror-polished, untarnished silver, and it has always been associated with the adornment of magical items.",
+      "fields": { "costPerLb": "5 gp", "ferrous": "Non-ferrous", "armorClass": "17" },
+      "tags": ["metal", "enchanting"],
+      "visibility": "public",
+      "sourcePath": "homebrew: metals & materials reference"
+    },
+    {
+      "slug": "steel",
+      "kind": "ore",
+      "name": "Steel",
+      "summary": "An alloy made out of Iron and Carbon.",
+      "body": "Steel is an alloy made out of Iron and Carbon — the standard for military-grade arms and armor across every empire of the Continent.",
+      "fields": { "costPerLb": "4 gp", "ferrous": "Ferrous", "armorClass": "19" },
+      "tags": ["metal", "alloy"],
+      "visibility": "public",
+      "sourcePath": "homebrew: metals & materials reference"
+    },
+    {
+      "slug": "tin",
+      "kind": "ore",
+      "name": "Tin",
+      "summary": "A soft, silvery-white metal often combined with other metals or used as a protective layer.",
+      "body": "A soft, silvery-white metal that is often combined with other metals or used as a layer to protect various metals from corrosion.",
+      "fields": { "costPerLb": "3 sp", "ferrous": "Non-ferrous", "armorClass": "12" },
+      "tags": ["metal", "alloy"],
+      "visibility": "public",
+      "sourcePath": "homebrew: metals & materials reference"
+    },
+    {
+      "slug": "celestium",
+      "kind": "ore",
+      "name": "Celestium",
+      "summary": "A whitish, highly reflective metal from the Celestial realms, sometimes glowing with its own inner light.",
+      "body": "Celestium comes only from the Celestial or Supernal Realms, however they are defined in this campaign. Mortals may find and use it, sometimes with restrictions, but cannot yet manufacture it. It is a whitish, highly reflective metal, sometimes with its own inner glow — angels and other divine beings bearing celestium weapons and armor are an intimidating sight, especially to evildoers.\n\n**Weapons:** bypass the bludgeoning, piercing, and slashing resistance or immunity of Outsiders, Undead, and other unholy creatures.\n\n**Armor:** resists the spells and spell-like powers of Outsiders, Undead, and other unholy creatures — such spells suffer disadvantage to hit, and the wearer has advantage to resist.",
+      "fields": {
+        "location": "The Celestial/Supernal Realms; found, not mined, by mortals",
+        "properties": "Bypasses unholy creatures' physical damage resistance/immunity; armor resists unholy spells",
+        "uses": "Weapons and armor for divine servants and their mortal champions"
+      },
+      "tags": ["metal", "celestial", "exotic"],
+      "visibility": "public",
+      "sourcePath": "homebrew: metals & materials reference"
+    },
+    {
+      "slug": "orichalcum",
+      "kind": "ore",
+      "name": "Orichalcum",
+      "summary": "A magical metal, typically reddish-gold, that channels or blocks magical power depending on its alloy.",
+      "body": "In magical realms, orichalcum (a.k.a. orichalk) is a reddish-gold metal, slightly less malleable than bronze — raw ore can appear black or dark brown. It has the paradoxical property of channelling magical power and blocking it, depending on the specific alloy with other metals. Its many uses include instruments to focus magical energies at a point, armor to dissipate magical energies or direct them away harmlessly, reliquaries to direct the magical properties of their contents, and containers to shield contents from magical detection or scrying.\n\n**Armor:** properly built orichalcum armor protects against all magic — if the wearer is targeted by a spell, the caster rolls any attack roll with disadvantage, and the wearer may roll saving throws with advantage.",
+      "fields": {
+        "properties": "Channels or blocks magical power depending on alloy",
+        "uses": "Foci, anti-scrying containers, reliquaries, anti-magic armor"
+      },
+      "tags": ["metal", "arcane", "exotic"],
+      "visibility": "public",
+      "sourcePath": "homebrew: metals & materials reference"
+    },
+    {
+      "slug": "tenebrium",
+      "kind": "ore",
+      "name": "Tenebrium",
+      "summary": "A dark, light-swallowing metal that poisons Supernal and Divine creatures and corrupts mortals who covet it.",
+      "body": "Tenebrium is to Infernal, Chaotic, or evil beings what celestium is to Supernal, Lawful, or good beings. Unlike celestium, tenebrium is primarily a spiritual and physical poison that can also be forged into weapons. Both as a powder and as a solid weapon, tenebrium is so dark as to swallow light; forged weapons sometimes possess an eerie glint, or reflect light as though from another realm.\n\n**Weapons:** bypass all resistances of Outsiders aligned with Law, Good, Light, or Divinity — any such creature damaged by a tenebrium weapon is Poisoned until it can take a long rest.\n\n**Armor:** never imposes disadvantage on Dexterity (Stealth) checks, due to its strange sound-muffling properties.\n\n**Corruption:** a mortal who beholds or touches tenebrium must succeed on a Wisdom save or become obsessed with possessing it (and more besides); success negates the corrupting effect of that item only.\n\n**Tenebrium dust:** a virulent poison often coating tenebrium weapons. Celestial/Supernal/Divine entities struck are Poisoned as above, and the wound resists natural or common-magic healing — long, involved rituals are required to purge it. Mortals struck instead take 1d12 poison damage and are Poisoned; their own bodies can eventually purge the toxin if they survive.",
+      "fields": {
+        "properties": "Poisons Supernal/Divine creatures; corrupts mortals who covet it",
+        "uses": "Weapons and dust used against celestial/divine foes — dangerous even to wield"
+      },
+      "tags": ["metal", "infernal", "exotic", "poison"],
+      "visibility": "public",
+      "sourcePath": "homebrew: metals & materials reference"
+    },
+    {
+      "slug": "ironfell",
+      "kind": "ore",
+      "name": "Ironfell",
+      "summary": "Named in the setting's material list; lore not yet written.",
+      "body": "",
+      "fields": {},
+      "tags": ["metal", "stub"],
+      "visibility": "public",
+      "sourcePath": "homebrew: metals & materials reference (name only)"
+    },
+    {
+      "slug": "darksteel",
+      "kind": "ore",
+      "name": "Darksteel",
+      "summary": "Named in the setting's material list; lore not yet written.",
+      "body": "",
+      "fields": {},
+      "tags": ["metal", "stub"],
+      "visibility": "public",
+      "sourcePath": "homebrew: metals & materials reference (name only)"
+    },
+    {
+      "slug": "infernal-iron",
+      "kind": "ore",
+      "name": "Infernal Iron",
+      "summary": "Named in the setting's material list; lore not yet written.",
+      "body": "",
+      "fields": {},
+      "tags": ["metal", "stub"],
+      "visibility": "public",
+      "sourcePath": "homebrew: metals & materials reference (name only)"
+    },
+    {
+      "slug": "star-metal",
+      "kind": "ore",
+      "name": "Star Metal",
+      "summary": "Named in the setting's material list; lore not yet written.",
+      "body": "",
+      "fields": {},
+      "tags": ["metal", "stub"],
+      "visibility": "public",
+      "sourcePath": "homebrew: metals & materials reference (name only)"
+    }
+  ]
+}
