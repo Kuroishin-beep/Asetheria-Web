@@ -209,6 +209,17 @@
       "tags": ["monster-flora", "corrupted"],
       "visibility": "public",
       "sourcePath": "homebrew: herbalism reference"
+    },
+    {
+      "slug": "foraging-and-herbalism-checks",
+      "kind": "rule",
+      "name": "Foraging & Herbalism Checks",
+      "summary": "House ruling for finding, identifying, and learning about magical/alchemical plants.",
+      "body": "**Finding plants.** DC 15 check (Herbalism kit proficiency, or Wisdom (Survival)/Intelligence (Nature) without one) to locate a useful plant while foraging.\n\n**Identifying a found plant's properties.** DC 20 check to identify whether an unfamiliar plant is poisonous or has a notable magical/alchemical property, using the same skills as above.\n\n**Using a plant.** Consuming or otherwise using any of the herbs or alchemical plants in this codex is a Use an Object action.\n\n**Learning about a specific named plant** (where to find it, how to prepare it) — pick whichever fits the scene:\n- **Apothecary:** the more sensitive the information, the more they charge. Acquire with gold.\n- **Library:** hit the books. Research with a Nature or Investigation check.\n- **A nearby druid circle:** appeal to their love of nature and desire for its protection. Negotiate with Persuasion or a quest.\n- **A witch or hag:** make a dangerous bargain. Complete a quest or make a trade.\n- **The black market:** costly, but useful for forbidden plants. Acquire with Intimidation, Deception, or gold.",
+      "fields": { "category": "Herbalism & Foraging" },
+      "tags": ["herbalism", "procedure"],
+      "visibility": "public",
+      "sourcePath": "homebrew: herbalism reference (external GM Binder page)"
     }
   ],
   "rollTable": {

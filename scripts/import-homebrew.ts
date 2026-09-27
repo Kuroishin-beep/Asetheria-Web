@@ -152,6 +152,7 @@ async function importFile(fileName: string) {
 async function main() {
   console.log("\n  Importing homebrew content\n");
   await importFile("metals.json");
+  await importFile("planar-metals.json");
   await importFile("flora.json");
   const [{ count }] = await db
     .select({ count: sql<number>`count(*)::int` })
