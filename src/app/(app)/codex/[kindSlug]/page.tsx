@@ -79,6 +79,7 @@ export default async function KindPage({
         <KindFilter
           total={rows.length}
           noun={def.label.toLowerCase()}
+          fieldDefs={def.fields.map((f) => ({ key: f.key, label: f.label }))}
           items={rows.map((e) => ({
             id: e.id,
             slug: e.slug,
@@ -87,6 +88,7 @@ export default async function KindPage({
             summary: e.summary,
             tags: e.tags,
             visibility: e.visibility,
+            fields: e.fields ?? {},
             // Values are searched client-side so filtering feels instant.
             haystack: [e.name, e.summary, ...e.tags, ...Object.values(e.fields ?? {})]
               .join(" ")

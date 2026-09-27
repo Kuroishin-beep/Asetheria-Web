@@ -378,3 +378,33 @@ export async function getRecentlyUpdated(user: SessionUser, limit = 8) {
     .orderBy(desc(entries.updatedAt))
     .limit(limit);
 }
+
+export type GraphNode = { id: string; slug: string; name: string; kind: EntryKind };
+export type GraphEdge = { source: string; target: string; relation: string };
+
+/**
+ * The continent-wide backlink graph, filtered to exactly what this user may
+ * see. An edge is included only when *both* endpoints are visible — an edge
+ * to a node the player can't see would otherwise leak that node's existence
+ * (and its name, via the edge's own metadata) even with the node itself
+ * hidden.
+ */
+export async function getGraphData(
+  user: SessionUser,
+): Promise<{ nodes: GraphNode[]; edges: GraphEdge[] }> {
+  const conditions = [liveOnly(), readable(user)].filter(Boolean);
+  const nodes = await db
+    .select({ id: entries.id, slug: entries.slug, name: entries.name, kind: entries.kind })
+    .from(entries)
+    .where(and(...(conditions as any[])))
+    .limit(5000);
+
+  const visible = new Set(nodes.map((n) => n.id));
+  const rawEdges = await db
+    .select({ source: links.sourceId, target: links.targetId, relation: links.relation })
+    .from(links)
+    .limit(20000);
+
+  const edges = rawEdges.filter((e) => visible.has(e.source) && visible.has(e.target));
+  return { nodes, edges };
+}

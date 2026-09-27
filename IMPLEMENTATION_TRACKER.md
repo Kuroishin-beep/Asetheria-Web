@@ -9,7 +9,7 @@ Test DB: local disposable `asetheria-test-pg` (docker, port 55432) — never the
 | 0 | Multi-player identity & RBAC data model | ENH-01 | `src/db/schema.ts`, `src/lib/auth.ts`, `src/lib/rbac.ts` (new), `src/lib/entries.ts`, `src/lib/session.ts`, `src/app/welcome/*` (new), `src/app/login/login-form.tsx`, `src/app/api/auth/login/route.ts`, `src/app/(app)/layout.tsx`, `src/components/app-shell.tsx`, `scripts/migrate-legacy-players.ts` (new) | none | **DONE** |
 | 1 | Content ingestion pipeline | ENH-05/06/07/08 | `scripts/import-foundry.ts` (new), `scripts/import-homebrew.ts` (new), `data/homebrew/*`, `src/lib/kinds.ts` | Phase 0 (soft) | **DONE** |
 | 2 | GM RBAC control panel UI | ENH-02 | `src/app/(app)/admin/rbac/page.tsx` (new), `src/components/rbac-panel.tsx` (new), `src/app/api/rbac/route.ts` (new), `src/components/app-shell.tsx` | Phase 0 | **DONE** |
-| 3 | Notion/Obsidian UX: graph, tables, history | ENH-03 | `src/components/graph-view.tsx` (new), `src/components/entry-table.tsx` (new), history panel | Phase 0, Phase 1 | NOT STARTED |
+| 3 | Notion/Obsidian UX: graph, tables, history | ENH-03 | `src/components/graph-view.tsx` (new), `src/app/(app)/graph/page.tsx` (new), `kind-filter.tsx` (table view) | Phase 0, Phase 1 | **DONE** |
 | 4 | RBAC-scoped + semantic search | ENH-04 | `src/lib/embeddings.ts` (new), `scripts/generate-embeddings.ts` (new), `scripts/sql/setup.sql` | Phase 0, Phase 1 | NOT STARTED |
 | 5 | Hardening pass | ENH-09 | full suite re-run, security pass on `rate-limit.ts`/login | all prior | NOT STARTED |
 
@@ -84,3 +84,19 @@ New `Players & Access` page at `/admin/rbac` (nav link added to the sidebar's "K
 - A literal fixed tab bar pinned to the bottom of the viewport — used the existing sidebar's DM-only "Keeper" section instead (where Archive and Backup & Import already live). Functionally in the same place a DM already looks for admin tools; a true bottom tab bar would be a broader nav redesign affecting every page, out of proportion to this feature. Flagged in case the literal placement matters to you.
 - Bulk actions currently operate within one kind at a time (e.g., "select all locations"), not across kinds at once — matches how the original ask described it ("a toggle for what towns they can see... select all") but doesn't support a single "grant everything" button across the whole codex. Easy to add if wanted.
 - No UI yet for creating a new player account from this panel — still `npm run user:add` from the command line. Not requested explicitly, noted as a likely next ask.
+
+### Phase 3 — DONE (2026-09-27)
+
+**Correction to PLAN.md's audit:** revision history (one of Phase 3's three planned pieces) **already existed** before this session — `src/app/(app)/codex/entry/[slug]/edit/page.tsx` and its `revision-list.tsx` already list every revision with revert, using the `revisions` table and `revertToRevisionAction` that were already in the codebase. The original audit's read of `admin/page.tsx` (aggregate counts only) missed that the per-entry UI existed elsewhere. Nothing built for this piece — verified it's real by reading the code, not re-audited via a fresh screenshot.
+
+**Built new — table/database views** (`src/app/(app)/codex/[kindSlug]/kind-filter.tsx`): a Cards/Table toggle on every codex section that has structured fields. Table mode shows Name plus every field the kind defines as sortable columns (click a header to sort, click again to reverse) — the Notion "database view" piece of the ask.
+
+**Built new — backlink graph** (`src/app/(app)/graph/page.tsx`, `src/components/graph-view.tsx`, `getGraphData()` in `entries.ts`): a `/graph` page rendering every entry the current user can see as an SVG node, colored by kind, with edges from the existing `links` table. Hovering a node highlights its direct neighbors and dims the rest (the core Obsidian interaction); clicking navigates to the entry.
+- **RBAC-correct by construction, not by afterthought:** `getGraphData` reuses the exact same `readable(user)` predicate Phase 0 built, and an edge is only included when *both* endpoints are visible — otherwise a hidden node's existence and name would leak through a dangling edge even with the node itself absent. Verified directly: a test creates a secret entry as DM, confirms a fresh player's `/graph` page contains no trace of it.
+- **Layout is a hand-rolled force simulation** (repulsion + spring attraction + centering, ~90 fixed iterations on mount, no animation loop) rather than a charting library — kept the app's existing zero-heavy-dependency approach rather than adding d3-force or similar. Capped to 40 iterations above 400 nodes to bound the O(n²) repulsion cost; not load-tested beyond the current ~587-entry corpus.
+
+**Verified:** `tests/graph-and-table-view.spec.ts` (3 tests, all against a real browser + real DB) — table view sorts and shows the right columns; the graph renders as an accessible SVG (`role="img"`) with clickable nodes that navigate; and the RBAC-leak check above. Full suite 58/58 (same one pre-existing unrelated failure), clean build.
+
+**Not built / scoped down:**
+- No true Notion-style block editor — as decided in PLAN.md, `body` stays Markdown. Table view is read-only (sort only, no inline editing of cells from the table).
+- The graph is continent-wide only; PLAN.md's Phase 3 also mentioned a per-entry "mini-graph" on the entry page itself — not added. The full `/graph` page with hover-highlight covers the same need less redundantly, but flagging the omission from the letter of the original plan.

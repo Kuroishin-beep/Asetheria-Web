@@ -20,6 +20,7 @@ export type ShellUser = {
 };
 
 const TOOL_LINKS = [
+  { href: "/graph", label: "Graph", icon: "🕸" },
   { href: "/tools/dice", label: "Dice", icon: "🎲" },
   { href: "/tools/tables", label: "Random Tables", icon: "🎰" },
 ];
