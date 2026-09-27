@@ -47,9 +47,13 @@ See PLAN.md §3 for the full criteria text per phase. Evidence goes here per ite
 - `npm run typecheck` clean, `npm run build` succeeds, full existing Playwright suite still 49/49 (same one pre-existing unrelated failure as Phase 0).
 - New `tests/homebrew-content.spec.ts` (2 tests) — both pass: a new metal renders with its stat, the enriched Cold Iron page shows both its original lore and its new Armor Class field, a new herb page renders, the new roll table appears in `/tools/tables`.
 
+**ENH-05 (Foundry import) — done, but narrower than the compendium folder as a whole.** `scripts/import-foundry.ts`, run via `npm run import:foundry`.
+- Inspected the actual pack with `classic-level` before writing any import logic: `asetheira-compendium` (the one **custom** pack in `E:\FoundryVTT\Data\worlds\asetheria\packs\`) contains exactly 5 `character`-type actors (player characters) and their embedded items (spells/feats/equipment as inventory, not separate lore pages) — not journals, locations, or lore entries as I'd assumed while planning. There was nothing else in it to import.
+- All 5 imported as `npc` entries: race and background resolved from their embedded-item IDs (not plain strings in Foundry's data model — required cross-referencing the actor's own item list), class+level, HP/AC into a `statblock` field, and biography HTML converted to plain paragraphs (stripped, not escaped-and-shown-as-literal-tags).
+- **Deliberately did not import** `ddb-asetheria-ddb-*` (D&D Beyond content) or `beneos_module_*` (third-party module content) — both are licensed/commercial, and PLAN.md's ENH-05 decision was to leave those out pending your explicit confirmation (see Open Questions #2 in PLAN.md). `--path`/`FOUNDRY_COMPENDIUM_PATH` let you point the script at a different pack if you want one of those imported later, once you've decided.
+- Verified: ran the importer twice — first run creates 5, second run reports "already exists" for all 5 and creates 0 (confirmed idempotent by direct re-execution, not just by reading the code). New `tests/foundry-import.spec.ts` confirms an imported character's race/class render as real fields and the biography shows as readable text, not literal `<p>` tags.
+
 **Not started yet:**
-- **ENH-05 (Foundry import):** `E:\FoundryVTT\Data\worlds\asetheria\packs\asetheira-compendium` is LevelDB and needs the `classic-level` npm package to read — not yet added as a dependency, no `scripts/import-foundry.ts` written. This is the largest remaining piece of Phase 1.
-- **ENH-08 (GM Binder scrape):** the 3 GM Binder URLs have not been fetched yet.
-- Re-running `npm run import:homebrew` a second time to positively confirm idempotency (script logic guarantees it via slug-existence checks, but hasn't been re-executed to observe it directly).
+- **ENH-08 (GM Binder scrape):** the 3 GM Binder URLs have not been fetched yet — the next piece of Phase 1.
 
 **Open follow-up for you:** once ENH-05/ENH-08 land, `npm run import:homebrew` (or its equivalent) plus `npm run migrate:legacy-players` both still need to run once against the **production Neon database** — nothing in Phase 0 or Phase 1 has touched production yet, only the local disposable test Postgres.

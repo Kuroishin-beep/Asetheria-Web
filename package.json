@@ -11,6 +11,7 @@
     "typecheck": "tsc --noEmit",
     "import:notion": "tsx scripts/import-notion.ts",
     "import:homebrew": "tsx scripts/import-homebrew.ts",
+    "import:foundry": "tsx scripts/import-foundry.ts",
     "verify:links": "tsx scripts/verify-links.ts",
     "verify:expansion": "tsx scripts/verify-expansion.ts",
     "describe": "tsx scripts/generate-descriptions.ts",
@@ -24,6 +25,7 @@
   },
   "dependencies": {
     "@neondatabase/serverless": "^0.10.4",
+    "classic-level": "^3.0.0",
     "drizzle-orm": "^0.38.3",
     "jose": "^5.9.6",
     "next": "^15.1.6",
