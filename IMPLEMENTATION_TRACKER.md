@@ -8,7 +8,7 @@ Test DB: local disposable `asetheria-test-pg` (docker, port 55432) — never the
 |---|---|---|---|---|---|
 | 0 | Multi-player identity & RBAC data model | ENH-01 | `src/db/schema.ts`, `src/lib/auth.ts`, `src/lib/rbac.ts` (new), `src/lib/entries.ts`, `src/lib/session.ts`, `src/app/welcome/*` (new), `src/app/login/login-form.tsx`, `src/app/api/auth/login/route.ts`, `src/app/(app)/layout.tsx`, `src/components/app-shell.tsx`, `scripts/migrate-legacy-players.ts` (new) | none | **DONE** |
 | 1 | Content ingestion pipeline | ENH-05/06/07/08 | `scripts/import-foundry.ts` (new), `scripts/import-homebrew.ts` (new), `data/homebrew/*`, `src/lib/kinds.ts` | Phase 0 (soft) | **DONE** |
-| 2 | GM RBAC control panel UI | ENH-02 | `src/app/(app)/admin/rbac/page.tsx` (new), `src/components/rbac-panel.tsx` (new), `src/components/app-shell.tsx` | Phase 0 | NOT STARTED |
+| 2 | GM RBAC control panel UI | ENH-02 | `src/app/(app)/admin/rbac/page.tsx` (new), `src/components/rbac-panel.tsx` (new), `src/app/api/rbac/route.ts` (new), `src/components/app-shell.tsx` | Phase 0 | **DONE** |
 | 3 | Notion/Obsidian UX: graph, tables, history | ENH-03 | `src/components/graph-view.tsx` (new), `src/components/entry-table.tsx` (new), history panel | Phase 0, Phase 1 | NOT STARTED |
 | 4 | RBAC-scoped + semantic search | ENH-04 | `src/lib/embeddings.ts` (new), `scripts/generate-embeddings.ts` (new), `scripts/sql/setup.sql` | Phase 0, Phase 1 | NOT STARTED |
 | 5 | Hardening pass | ENH-09 | full suite re-run, security pass on `rate-limit.ts`/login | all prior | NOT STARTED |
@@ -63,3 +63,24 @@ See PLAN.md §3 for the full criteria text per phase. Evidence goes here per ite
 **Phase 1 total new content:** 18 + 24 = 42 new `ore` entries (3 enriched, not duplicated), 20 new `flora`/`rule` entries, 5 new `npc` entries from Foundry, 1 new roll table — **68 new/enriched entries**, taking the codex from 520 to 587.
 
 **Open follow-up for you:** all of Phase 0 and Phase 1 has only run against the local disposable test Postgres. Before this ships, run once against the **production Neon database**: `npm run db:setup` (picks up the `entry_grants` migration), `npm run migrate:legacy-players`, then `npm run import:homebrew` and `npm run import:foundry` (the latter needs Foundry closed, since it holds the pack's LevelDB lock while running).
+
+### Phase 2 — DONE (2026-09-27)
+
+New `Players & Access` page at `/admin/rbac` (nav link added to the sidebar's "Keeper" section, DM-only — see Open Questions #4 below on the literal "tab at the bottom" wording), backed by a new `POST /api/rbac` route and `src/components/rbac-panel.tsx`.
+
+**What it does:**
+- Player dropdown (switches which player's grants you're editing — URL-addressable via `?player=<id>`, so it's linkable/bookmarkable).
+- One row per entry kind (Deities, Locations, Empires, …) with a single toggle: "Hidden from player" / "Visible to player ✓" — this is the coarse-grained control from the original ask ("a toggle for what towns they can see").
+- Each kind with entries can expand into a checklist of every entry in that kind, with **select all**, **Approve selected**, **Reject selected**, and **Clear override** (removes the per-entry row, falling back to the kind-level toggle) — covers "select all filters, bulk add bulk remove approve and reject" from the original ask directly.
+- A per-entry approve/reject always overrides the kind-level toggle for that one entry (same precedence rule as Phase 0's `grantCondition`), shown as a "granted"/"denied" chip next to the entry.
+- Server-side: `requireDM()` on every mutation, not just a hidden UI — verified by a test that a player's direct `POST /api/rbac` call 403s even though it isn't linked from their nav.
+
+**Acceptance criteria verified (PLAN.md Phase 2, all via `tests/rbac-panel.spec.ts`, real browser + real DB, not mocked):**
+1. Toggling "Locations" off/on for a player changes what that player can load immediately (checked via a second, already-logged-in browser context reloading the entry mid-test — no re-login, no cache clear).
+2. Explicitly rejecting one specific location for a player hides only that one, while its sibling (same kind, same kind-level "on" toggle) stays visible — proves the override precedence, not just that *something* got hidden.
+3. A non-GM redirects away from `/admin/rbac` and gets 403 from the API directly.
+
+**Not built (scoped down from the original ask, flagged rather than silently dropped):**
+- A literal fixed tab bar pinned to the bottom of the viewport — used the existing sidebar's DM-only "Keeper" section instead (where Archive and Backup & Import already live). Functionally in the same place a DM already looks for admin tools; a true bottom tab bar would be a broader nav redesign affecting every page, out of proportion to this feature. Flagged in case the literal placement matters to you.
+- Bulk actions currently operate within one kind at a time (e.g., "select all locations"), not across kinds at once — matches how the original ask described it ("a toggle for what towns they can see... select all") but doesn't support a single "grant everything" button across the whole codex. Easy to add if wanted.
+- No UI yet for creating a new player account from this panel — still `npm run user:add` from the command line. Not requested explicitly, noted as a likely next ask.

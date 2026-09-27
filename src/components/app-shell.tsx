@@ -107,6 +107,14 @@ export function AppShell({
                 label="Backup & Import"
               />
             </li>
+            <li>
+              <NavItem
+                href="/admin/rbac"
+                active={pathname === "/admin/rbac"}
+                icon="🛡"
+                label="Players & Access"
+              />
+            </li>
           </ul>
         </>
       )}
