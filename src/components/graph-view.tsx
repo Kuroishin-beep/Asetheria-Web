@@ -30,10 +30,36 @@ function layout(nodes: Node[], edges: Edge[]): Map<string, Point> {
   const pos = new Map<string, Point>();
   const cx = WIDTH / 2;
   const cy = HEIGHT / 2;
-  const n = nodes.length || 1;
-  nodes.forEach((node, i) => {
+
+  const degree = new Map<string, number>();
+  for (const e of edges) {
+    degree.set(e.source, (degree.get(e.source) ?? 0) + 1);
+    degree.set(e.target, (degree.get(e.target) ?? 0) + 1);
+  }
+  const connectedNodes = nodes.filter((n) => degree.has(n.id));
+  const isolatedNodes = nodes.filter((n) => !degree.has(n.id));
+
+  // Isolated nodes get a fixed, evenly-spaced outer ring rather than
+  // participating in the simulation below — with no edge pulling them
+  // anywhere, repulsion alone can (and did) push several of them into the
+  // same clamped corner, stacking unclickable nodes on top of each other.
+  // A ring guarantees distinct positions and mirrors how Obsidian itself
+  // renders unconnected notes at the graph's edge.
+  const ringRadius = Math.min(WIDTH, HEIGHT) * 0.48;
+  isolatedNodes.forEach((node, i) => {
+    const angle = (i / Math.max(isolatedNodes.length, 1)) * Math.PI * 2;
+    pos.set(node.id, {
+      x: cx + Math.cos(angle) * ringRadius,
+      y: cy + Math.sin(angle) * ringRadius,
+      vx: 0,
+      vy: 0,
+    });
+  });
+
+  const n = connectedNodes.length || 1;
+  connectedNodes.forEach((node, i) => {
     const angle = (i / n) * Math.PI * 2;
-    const r = Math.min(WIDTH, HEIGHT) * 0.35;
+    const r = Math.min(WIDTH, HEIGHT) * 0.28;
     pos.set(node.id, {
       x: cx + Math.cos(angle) * r,
       y: cy + Math.sin(angle) * r,
@@ -42,20 +68,22 @@ function layout(nodes: Node[], edges: Edge[]): Map<string, Point> {
     });
   });
 
-  const iterations = nodes.length > 400 ? 40 : 90;
+  const iterations = connectedNodes.length > 400 ? 40 : 90;
   const repulsion = 2200;
   const springLength = 90;
   const springStrength = 0.02;
   const damping = 0.85;
   const centerPull = 0.01;
+  const bound = ringRadius - 30;
 
   for (let iter = 0; iter < iterations; iter++) {
-    // Repulsion between every pair — the O(n^2) term, capped by `iterations`
-    // scaling down as the node count grows.
-    for (let i = 0; i < nodes.length; i++) {
-      const a = pos.get(nodes[i].id)!;
-      for (let j = i + 1; j < nodes.length; j++) {
-        const b = pos.get(nodes[j].id)!;
+    // Repulsion between every connected-node pair — the O(n^2) term, capped
+    // by `iterations` scaling down as the node count grows. Isolated nodes
+    // are fixed and excluded from this entirely.
+    for (let i = 0; i < connectedNodes.length; i++) {
+      const a = pos.get(connectedNodes[i].id)!;
+      for (let j = i + 1; j < connectedNodes.length; j++) {
+        const b = pos.get(connectedNodes[j].id)!;
         let dx = a.x - b.x;
         let dy = a.y - b.y;
         let distSq = dx * dx + dy * dy || 0.01;
@@ -87,7 +115,7 @@ function layout(nodes: Node[], edges: Edge[]): Map<string, Point> {
       b.vy -= fy;
     }
 
-    for (const node of nodes) {
+    for (const node of connectedNodes) {
       const p = pos.get(node.id)!;
       p.vx += (cx - p.x) * centerPull;
       p.vy += (cy - p.y) * centerPull;
@@ -95,8 +123,16 @@ function layout(nodes: Node[], edges: Edge[]): Map<string, Point> {
       p.vy *= damping;
       p.x += p.vx;
       p.y += p.vy;
-      p.x = Math.max(20, Math.min(WIDTH - 20, p.x));
-      p.y = Math.max(20, Math.min(HEIGHT - 20, p.y));
+      // Keep the connected cluster inside the isolated-node ring, rather
+      // than clamping to the viewport edge — that's what let two nodes
+      // land on the exact same coordinate in the first place.
+      const dx = p.x - cx;
+      const dy = p.y - cy;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist > bound) {
+        p.x = cx + (dx / dist) * bound;
+        p.y = cy + (dy / dist) * bound;
+      }
     }
   }
 
