@@ -10,7 +10,7 @@ Test DB: local disposable `asetheria-test-pg` (docker, port 55432) — never the
 | 1 | Content ingestion pipeline | ENH-05/06/07/08 | `scripts/import-foundry.ts` (new), `scripts/import-homebrew.ts` (new), `data/homebrew/*`, `src/lib/kinds.ts` | Phase 0 (soft) | **DONE** |
 | 2 | GM RBAC control panel UI | ENH-02 | `src/app/(app)/admin/rbac/page.tsx` (new), `src/components/rbac-panel.tsx` (new), `src/app/api/rbac/route.ts` (new), `src/components/app-shell.tsx` | Phase 0 | **DONE** |
 | 3 | Notion/Obsidian UX: graph, tables, history | ENH-03 | `src/components/graph-view.tsx` (new), `src/app/(app)/graph/page.tsx` (new), `kind-filter.tsx` (table view) | Phase 0, Phase 1 | **DONE** |
-| 4 | RBAC-scoped + semantic search | ENH-04 | `src/lib/embeddings.ts` (new), `scripts/generate-embeddings.ts` (new), `scripts/sql/setup.sql` | Phase 0, Phase 1 | NOT STARTED |
+| 4 | RBAC-scoped + semantic search | ENH-04 | `src/lib/embeddings.ts` (new), `scripts/generate-embeddings.ts` (new), `scripts/sql/setup.sql`, `src/lib/entries.ts` (semanticSearch) | Phase 0, Phase 1 | **DONE** |
 | 5 | Hardening pass | ENH-09 | full suite re-run, security pass on `rate-limit.ts`/login | all prior | NOT STARTED |
 
 ## Acceptance criteria (copied from PLAN.md, checked off with evidence as each phase completes)
@@ -100,3 +100,25 @@ New `Players & Access` page at `/admin/rbac` (nav link added to the sidebar's "K
 **Not built / scoped down:**
 - No true Notion-style block editor — as decided in PLAN.md, `body` stays Markdown. Table view is read-only (sort only, no inline editing of cells from the table).
 - The graph is continent-wide only; PLAN.md's Phase 3 also mentioned a per-entry "mini-graph" on the entry page itself — not added. The full `/graph` page with hover-highlight covers the same need less redundantly, but flagging the omission from the letter of the original plan.
+
+### Phase 4 — DONE (2026-09-27)
+
+**Correction to PLAN.md's own risk assessment:** "player search filtered by RBAC" (half of ENH-04) turned out to already be done as a side effect of Phase 0 — `searchEntries`/`quickFind`/`listAllTags` all got `grantConditionRaw` wired into their secret-clause when I rewrote `entries.ts` for RBAC. What remained for this phase was specifically the semantic layer.
+
+**Embedding provider decision, revised mid-implementation:** PLAN.md named `@xenova/transformers` as the no-API-key default. Installing it pulled in `protobufjs` at a version with an unpatched **critical** RCE advisory (via its own `onnxruntime-web` dependency), with no non-breaking fix available — `npm audit fix --force` would only downgrade to an *older, more vulnerable* release of the same package. Refused to ship that for a nice-to-have feature; switched to `@huggingface/transformers` (the actively maintained successor, same model weights, same API) instead, which introduced zero new advisories. Verified with `npm audit` before and after.
+
+**Local test DB had to be rebuilt to add pgvector.** The disposable `asetheria-test-pg` container was plain `postgres:16-alpine`, which doesn't ship the `vector` extension — no image has it compiled in by default. Rebuilt the same container from `pgvector/pgvector:pg16` (same user/password/db/port, fresh volume) and reseeded everything (`db:setup` + `import:homebrew` + `import:foundry` + `migrate:legacy-players`) — the same commands you'll need to run once against the **production Neon database** (Neon supports `pgvector` natively, so this rebuild step is local-only).
+
+**What's built:**
+- `entries.embedding vector(384)` column + pgvector `vector` extension + HNSW index (`scripts/sql/setup.sql`).
+- `src/lib/embeddings.ts` — local, no-API-key embedding via `all-MiniLM-L6-v2` (~30MB, WASM). Cold model load measured at ~9.5s, warm calls ~5ms in this environment.
+- `scripts/generate-embeddings.ts` (`npm run embeddings:generate`) — offline batch embedding, run once for all 587 entries in under a minute. **Never runs on a request path** — the one hard boundary PLAN.md set for this phase.
+- `searchEntries()` now supplements full-text results with a semantic pass: only triggers when FTS didn't already fill the result limit, embeds the query with a **1200ms timeout** that falls back to FTS-only on timeout/failure (a cold model load must never make a search request hang), and filters by the same per-user RBAC grant condition as every other read path — verified by creating a secret entry with content designed to match a player's exact query semantically, and confirming it never appears for that player.
+
+**A real bug found and fixed during verification, not by inspection:** the first version had no similarity floor, so a query with zero genuine match still returned the K nearest entries regardless of relevance — caught by an *existing* test (`search-safety.spec.ts`'s DM-notes-leak check) failing for an unexpected reason: the results page's "N matches for '{query}'" message started rendering the query text back once irrelevant semantic hits padded the result count above zero. Not a data leak — the query was always the player's own input — but a real quality bug (a gibberish query should say "No matches," not fabricate 60 unrelated ones). Fixed with a similarity floor, which itself needed recalibrating once: 0.3 was too low for this setting's own fantasy-name conventions, since a purely random string can score up to ~0.45 against invented names like "Zi'rzamin" on subword pattern alone, unrelated to meaning. Settled on 0.5 after directly measuring the actual similarity distribution against this corpus, not guessing.
+
+**Verified:** `tests/semantic-search.spec.ts` (functional: a natural-language query finds a relevant deity with zero literal keyword overlap; security: a secret entry engineered to match a player's query semantically still never appears, checked via both `/search` and `/api/find`). Full suite 60/60. Clean build.
+
+**Not built / scoped down:**
+- No UI distinction between an FTS hit and a semantic hit on the results page — they render identically. Could add a "semantic match" badge if wanted.
+- No re-embedding hook on entry create/update — a newly created or edited entry has no embedding until `npm run embeddings:generate` runs again. Fine for this app's edit cadence (a GM authoring session, not a live multi-writer service) but worth automating later (e.g., a cheap "needs embedding" flag set on write, consumed by a periodic job) rather than a live embed-on-save call, which would reintroduce the exact request-path cost this phase was designed to avoid.

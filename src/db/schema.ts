@@ -11,6 +11,7 @@ import {
   uniqueIndex,
   pgEnum,
   check,
+  vector,
 } from "drizzle-orm/pg-core";
 
 // Note: full-text search is implemented with a generated `search_vector`
@@ -131,6 +132,13 @@ export const entries = pgTable(
     updatedAt: timestamp("updated_at", { withTimezone: true })
       .notNull()
       .defaultNow(),
+    /**
+     * Semantic search vector (all-MiniLM-L6-v2, 384 dims), populated offline
+     * by `scripts/generate-embeddings.ts` — never computed on a request
+     * path. Null until that script has run for a given entry; searches must
+     * treat a null embedding as "not yet indexed", not as an error.
+     */
+    embedding: vector("embedding", { dimensions: 384 }),
   },
   (t) => [
     uniqueIndex("entries_slug_idx").on(t.slug),

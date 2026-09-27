@@ -29,11 +29,14 @@ test.describe("graph view", () => {
     await page.goto("/graph");
     await expect(page.getByRole("img", { name: /Backlink graph/ })).toBeVisible();
 
-    const aterna = page.getByRole("button", { name: /Aeterna City/ });
-    if (await aterna.count()) {
-      await aterna.first().click();
-      await expect(page).toHaveURL(/\/codex\/entry\//);
-    }
+    // Any node proves the acceptance criterion (nodes are clickable and
+    // navigate) — picking one specific node risks hitting the rare case
+    // where two nodes with very similar connectivity land close enough
+    // together that one occludes the other's click target.
+    const anyNode = page.locator('g[role="button"]').first();
+    await expect(anyNode).toBeVisible();
+    await anyNode.click();
+    await expect(page).toHaveURL(/\/codex\/entry\//);
   });
 
   test("a player's graph never includes a node they cannot see", async ({ browser }) => {

@@ -6,6 +6,15 @@
 -- Trigram matching powers the "did you mean" behaviour in the command palette.
 CREATE EXTENSION IF NOT EXISTS pg_trgm;
 
+-- Semantic search: cosine-similarity lookup over the `embedding` column
+-- populated offline by scripts/generate-embeddings.ts. HNSW over an empty or
+-- partially-populated column is fine — it just returns fewer/no hits until
+-- that script has run.
+CREATE EXTENSION IF NOT EXISTS vector;
+
+CREATE INDEX IF NOT EXISTS entries_embedding_idx
+  ON entries USING hnsw (embedding vector_cosine_ops);
+
 -- ---------------------------------------------------------------------------
 -- Postgres marks array_to_string() STABLE rather than IMMUTABLE, because for
 -- most element types it depends on that type's output function. A generated
@@ -58,6 +67,25 @@ ALTER TABLE entries
   ) STORED;
 
 CREATE INDEX IF NOT EXISTS entries_search_idx ON entries USING gin (search_vector);
+
+-- ---------------------------------------------------------------------------
+-- Player-safe search vector: identical weighting minus DM notes. Players must
+-- query this one — matching against `search_vector` would let a player detect
+-- words that only appear in an entry's DM notes, even with the snippet hidden.
+-- ---------------------------------------------------------------------------
+ALTER TABLE entries DROP COLUMN IF EXISTS player_search_vector;
+
+ALTER TABLE entries
+  ADD COLUMN player_search_vector tsvector
+  GENERATED ALWAYS AS (
+    setweight(to_tsvector('english', coalesce(name, '')), 'A') ||
+    setweight(to_tsvector('english', coalesce(summary, '')), 'B') ||
+    setweight(to_tsvector('english', coalesce(asetheria_tags_text(tags), '')), 'B') ||
+    setweight(to_tsvector('english', coalesce(asetheria_fields_text(fields), '')), 'B') ||
+    setweight(to_tsvector('english', coalesce(body, '')), 'C')
+  ) STORED;
+
+CREATE INDEX IF NOT EXISTS entries_player_search_idx ON entries USING gin (player_search_vector);
 
 CREATE INDEX IF NOT EXISTS entries_name_trgm_idx ON entries USING gin (name gin_trgm_ops);
 

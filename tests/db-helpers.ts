@@ -66,3 +66,18 @@ export async function countGrantsForUser(userId: string) {
   );
   return rows[0]?.n ?? 0;
 }
+
+/** Computes and writes a real embedding for one entry, for semantic-search tests. */
+export async function embedEntryForTest(slug: string) {
+  const { embed } = await import("../src/lib/embeddings");
+  const rows = await query<{ id: string; name: string; summary: string; body: string }>(
+    `SELECT id, name, summary, body FROM entries WHERE slug = $1`,
+    [slug],
+  );
+  const row = rows[0];
+  const vector = await embed([row.name, row.summary, row.body].filter(Boolean).join("\n"));
+  await query(`UPDATE entries SET embedding = $1::vector WHERE id = $2`, [
+    `[${vector.join(",")}]`,
+    row.id,
+  ]);
+}

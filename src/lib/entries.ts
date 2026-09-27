@@ -293,10 +293,86 @@ export async function searchEntries(
     LIMIT ${limit}
   `);
 
-  return (rows.rows as SearchHit[]).map((hit) => ({
+  const ftsHits = (rows.rows as SearchHit[]).map((hit) => ({
     ...hit,
     snippet: toSafeSnippet(hit.snippet),
   }));
+
+  if (ftsHits.length >= limit) return ftsHits;
+
+  // Semantic fallback/supplement: only for entries the full-text pass
+  // missed, and only if the local embedding model responds within budget —
+  // slow or unavailable (e.g. a cold model load) degrades silently to the
+  // FTS-only results above rather than blocking the search response.
+  const semanticHits = await semanticSearch(user, q, limit - ftsHits.length, isDM).catch(
+    () => [],
+  );
+  const seen = new Set(ftsHits.map((h) => h.id));
+  const merged = [...ftsHits];
+  for (const hit of semanticHits) {
+    if (seen.has(hit.id)) continue;
+    seen.add(hit.id);
+    merged.push(hit);
+  }
+  return merged;
+}
+
+const SEMANTIC_SEARCH_TIMEOUT_MS = 1200;
+/**
+ * Minimum cosine similarity for a semantic hit to count at all. Calibrated
+ * against this corpus's actual embeddings, including a check this floor
+ * hadn't originally covered: this setting's abundant apostrophe'd fantasy
+ * names (Zi'rzamin, Qa'zshahr'in, ...) share enough surface/subword pattern
+ * with an arbitrary random string that a naive low floor (0.3) let pure
+ * gibberish score up to ~0.45 against them by coincidence, not meaning.
+ * 0.5 clears that noise band while still keeping genuine topical matches
+ * (e.g. "a storm god who rules the sky" scores 0.54-0.59 against this
+ * corpus's actual storm deities).
+ */
+const SEMANTIC_SIMILARITY_FLOOR = 0.5;
+
+/**
+ * Finds entries by meaning rather than literal keyword overlap — "storm god"
+ * finds Zeus even without that exact word in his page. Bounded by a short
+ * timeout: this only ever supplements full-text search, and a slow/cold
+ * model must never make the whole search request slow.
+ */
+async function semanticSearch(
+  user: SessionUser,
+  query: string,
+  limit: number,
+  isDM: boolean,
+): Promise<SearchHit[]> {
+  if (limit <= 0) return [];
+  const { embed } = await import("@/lib/embeddings");
+  const vector = await Promise.race([
+    embed(query),
+    new Promise<never>((_, reject) =>
+      setTimeout(() => reject(new Error("semantic search timed out")), SEMANTIC_SEARCH_TIMEOUT_MS),
+    ),
+  ]);
+  const vecLiteral = `[${vector.join(",")}]`;
+  const secretClause = isDM
+    ? sql`true`
+    : sql`e.visibility <> 'secret' AND ${grantConditionRaw(user, sql`e.id`, sql`e.kind`)}`;
+
+  const rows = await db.execute<SearchHit>(sql`
+    SELECT e.id, e.slug, e.name, e.kind, e.summary, e.visibility,
+      (1 - (e.embedding <=> ${vecLiteral}::vector)) AS rank,
+      '' AS snippet
+    FROM entries e
+    WHERE e.archived_at IS NULL
+      AND e.embedding IS NOT NULL
+      AND ${secretClause}
+      -- A pure nearest-K lookup with no cutoff would always return
+      -- something, even for a query unrelated to anything in the codex —
+      -- this floor keeps "no real match" honestly empty instead of padding
+      -- results with noise.
+      AND (1 - (e.embedding <=> ${vecLiteral}::vector)) > ${SEMANTIC_SIMILARITY_FLOOR}
+    ORDER BY e.embedding <=> ${vecLiteral}::vector ASC
+    LIMIT ${limit}
+  `);
+  return rows.rows as SearchHit[];
 }
 
 /** Lightweight name-only lookup that powers the command palette. */

@@ -12,6 +12,7 @@
     "import:notion": "tsx scripts/import-notion.ts",
     "import:homebrew": "tsx scripts/import-homebrew.ts",
     "import:foundry": "tsx scripts/import-foundry.ts",
+    "embeddings:generate": "tsx scripts/generate-embeddings.ts",
     "verify:links": "tsx scripts/verify-links.ts",
     "verify:expansion": "tsx scripts/verify-expansion.ts",
     "describe": "tsx scripts/generate-descriptions.ts",
@@ -24,6 +25,7 @@
     "migrate:legacy-players": "tsx scripts/migrate-legacy-players.ts"
   },
   "dependencies": {
+    "@huggingface/transformers": "^4.3.0",
     "@neondatabase/serverless": "^0.10.4",
     "classic-level": "^3.0.0",
     "drizzle-orm": "^0.38.3",

@@ -136,6 +136,34 @@ function layout(nodes: Node[], edges: Edge[]): Map<string, Point> {
     }
   }
 
+  // Two nodes with near-identical neighbor sets (e.g. sibling cities in the
+  // same empire) can converge to almost the same point — repulsion between
+  // just that pair is too weak, at typical simulation distances, to be the
+  // thing that separates them. One extra pass nudges any pair still closer
+  // than a usable click target apart, so the graph stays fully clickable
+  // even in a dense, highly-symmetric cluster.
+  const MIN_SEPARATION = 14;
+  for (let i = 0; i < connectedNodes.length; i++) {
+    const a = pos.get(connectedNodes[i].id)!;
+    for (let j = i + 1; j < connectedNodes.length; j++) {
+      const b = pos.get(connectedNodes[j].id)!;
+      const dx = b.x - a.x;
+      const dy = b.y - a.y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist < MIN_SEPARATION) {
+        // Coincident points have no direction to push along — fall back to
+        // a deterministic one derived from the pair's index so they don't
+        // stay stacked.
+        const angle = dist > 0.001 ? Math.atan2(dy, dx) : (i * 2.399963 + j) % (Math.PI * 2);
+        const push = (MIN_SEPARATION - dist) / 2 + 0.5;
+        a.x -= Math.cos(angle) * push;
+        a.y -= Math.sin(angle) * push;
+        b.x += Math.cos(angle) * push;
+        b.y += Math.sin(angle) * push;
+      }
+    }
+  }
+
   return pos;
 }
 
