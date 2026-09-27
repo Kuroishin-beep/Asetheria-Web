@@ -11,7 +11,7 @@ Test DB: local disposable `asetheria-test-pg` (docker, port 55432) — never the
 | 2 | GM RBAC control panel UI | ENH-02 | `src/app/(app)/admin/rbac/page.tsx` (new), `src/components/rbac-panel.tsx` (new), `src/app/api/rbac/route.ts` (new), `src/components/app-shell.tsx` | Phase 0 | **DONE** |
 | 3 | Notion/Obsidian UX: graph, tables, history | ENH-03 | `src/components/graph-view.tsx` (new), `src/app/(app)/graph/page.tsx` (new), `kind-filter.tsx` (table view) | Phase 0, Phase 1 | **DONE** |
 | 4 | RBAC-scoped + semantic search | ENH-04 | `src/lib/embeddings.ts` (new), `scripts/generate-embeddings.ts` (new), `scripts/sql/setup.sql`, `src/lib/entries.ts` (semanticSearch) | Phase 0, Phase 1 | **DONE** |
-| 5 | Hardening pass | ENH-09 | full suite re-run, security pass on `rate-limit.ts`/login | all prior | NOT STARTED |
+| 5 | Hardening pass | ENH-09 | full suite re-run, security pass on `rate-limit.ts`/login, README updates | all prior | **DONE** |
 
 ## Acceptance criteria (copied from PLAN.md, checked off with evidence as each phase completes)
 
@@ -122,3 +122,21 @@ New `Players & Access` page at `/admin/rbac` (nav link added to the sidebar's "K
 **Not built / scoped down:**
 - No UI distinction between an FTS hit and a semantic hit on the results page — they render identically. Could add a "semantic match" badge if wanted.
 - No re-embedding hook on entry create/update — a newly created or edited entry has no embedding until `npm run embeddings:generate` runs again. Fine for this app's edit cadence (a GM authoring session, not a live multi-writer service) but worth automating later (e.g., a cheap "needs embedding" flag set on write, consumed by a periodic job) rather than a live embed-on-save call, which would reintroduce the exact request-path cost this phase was designed to avoid.
+
+### Phase 5 — DONE (2026-09-27)
+
+See `TEST-REPORT.md` for the full write-up: final suite run (60/60), every bug found and fixed this session with its root cause (five total, none caught by static review — all five surfaced by a real test against a real database), the dependency-security review (one provider swap forced by a critical unpatched RCE, one pre-existing critical Next.js RCE left as a flagged, unfixed finding since its only fix is a major-version framework upgrade out of scope for this session), and what still needs a human pass (visual review, the production database, concurrent multi-player load).
+
+README.md updated: a new "Since the original import" section (the original 482-entry table is a historical record of the Notion import specifically and wasn't rewritten — misleading to retcon it), and the "Two kinds of account" section rewritten to describe per-player RBAC instead of the old two-shared-accounts model, including the `migrate:legacy-players` requirement for any account that predates this feature.
+
+**Deliberately not produced:** the standalone `test-cases.html` manual-QA matrix the generic implementation playbook calls for. This is a one-developer personal tool with a real automated suite already in place before this session — a parallel manual-test artifact would duplicate that coverage, not add independent verification. Flagged rather than silently skipped — say if you want it built anyway.
+
+## Summary across all five phases
+
+- **9 findings resolved** (ENH-01 through ENH-08 fully; ENH-09's bug-scan folded into every phase rather than deferred to the end).
+- **520 → 587 entries** (68 new: metals, planar metals, flora, Foundry NPCs, one roll table), plus 3 existing entries enriched with new structured fields without touching their hand-written lore.
+- **5 real bugs found and fixed**, all by test failures, none by inspection alone (full list in `TEST-REPORT.md`).
+- **1 provider swap** forced by a supply-chain security finding (`@xenova/transformers` → `@huggingface/transformers`).
+- **1 pre-existing critical vulnerability** (Next.js RCE) surfaced and deliberately left unfixed, flagged for your decision rather than a same-session major-version upgrade.
+- **60/60 passing tests**, one pre-existing unrelated failure left as-is and documented, not hidden.
+- **Nothing has touched the production Neon database.** Every verification in this tracker and in TEST-REPORT.md ran against the local disposable test Postgres. The production deployment steps are listed at the end of the Phase 1 and Phase 4 sections above.

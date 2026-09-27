@@ -32,6 +32,21 @@ than imported twice.
 The importer ends with an integrity check that fails the run if any source page
 containing prose is missing from the output.
 
+### Since the original import
+
+Later passes added player accounts with per-player access control (see
+"Two kinds of account" below), a backlink graph at `/graph`, table views on
+codex sections, semantic search, and 68 new entries from the metals/flora
+reference material, the Foundry VTT world, and three scanned GM Binder pages
+— bringing the total to **587**. See `PLAN.md` and `IMPLEMENTATION_TRACKER.md`
+for exactly what changed, why, and what's still pending a production deploy.
+
+```bash
+npm run import:homebrew   # metals, planar metals, flora, one roll table
+npm run import:foundry    # the custom asetheira-compendium (5 characters)
+npm run embeddings:generate  # required once for semantic search to return anything
+```
+
 ---
 
 ## Getting it running
@@ -106,7 +121,17 @@ Run the seed once against the production database from your machine — set
 
 Redaction happens in the data layer (`src/lib/entries.ts`), not in the UI, so a
 missed check in a component can't leak a secret. Every query a player makes is
-filtered in SQL before rows leave the database.
+filtered in SQL before rows leave the database. This is a hard ceiling: a
+`secret` entry is never shown to a player, no matter what the per-player
+access controls below say.
+
+**Per-player access.** Every player account is its own login now, not one
+shared party account. A new player is asked their name the first time they
+sign in, and starts with only the continent's empires and any location the
+GM has tagged `major-city` — everything else needs an explicit grant. As the
+GM, `/admin/rbac` (linked from the sidebar as "Players & Access") lets you
+toggle whole categories on or off per player, or drill into one category to
+approve/reject specific entries, with select-all and bulk actions.
 
 Add more accounts:
 
@@ -115,7 +140,9 @@ npm run user:add -- --username alice --password "a long passphrase" --role playe
 ```
 
 Re-running it for an existing name resets the password and signs that account
-out everywhere.
+out everywhere. A pre-existing player account (created before this feature)
+needs `npm run migrate:legacy-players` run once, or it will have lost access
+to everything it could previously see — see `IMPLEMENTATION_TRACKER.md`.
 
 ---
 
