@@ -15,6 +15,6 @@ export async function GET(request: Request) {
   const q = new URL(request.url).searchParams.get("q") ?? "";
   if (q.trim().length < 2) return NextResponse.json({ results: [] });
 
-  const results = await quickFind(user.role, q, 12);
+  const results = await quickFind(user, q, 12);
   return NextResponse.json({ results });
 }

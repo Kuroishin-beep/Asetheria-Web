@@ -1,8 +1,11 @@
 import "server-only";
 import { and, asc, desc, eq, isNull, isNotNull, ne, or, sql, count } from "drizzle-orm";
 import { db } from "@/db";
-import { entries, links, revisions, type Entry, type EntryKind, type UserRole } from "@/db/schema";
+import { entries, links, revisions, type Entry, type EntryKind } from "@/db/schema";
 import { redactForPlayer, redactManyForPlayer } from "@/lib/auth";
+import { escapeHtml } from "@/lib/markdown";
+import type { SessionUser } from "@/lib/session";
+import { grantCondition, grantConditionRaw } from "@/lib/rbac";
 
 /**
  * Every read goes through here so that a player can never receive a secret
@@ -14,8 +17,9 @@ function liveOnly() {
   return isNull(entries.archivedAt);
 }
 
-function readable(role: UserRole) {
-  return role === "dm" ? undefined : ne(entries.visibility, "secret");
+function readable(user: SessionUser) {
+  if (user.role === "dm") return undefined;
+  return and(ne(entries.visibility, "secret"), grantCondition(user));
 }
 
 export type ListOptions = {
@@ -26,10 +30,10 @@ export type ListOptions = {
   includeArchived?: boolean;
 };
 
-export async function listEntries(role: UserRole, opts: ListOptions = {}) {
+export async function listEntries(user: SessionUser, opts: ListOptions = {}) {
   const conditions = [
-    opts.includeArchived && role === "dm" ? undefined : liveOnly(),
-    readable(role),
+    opts.includeArchived && user.role === "dm" ? undefined : liveOnly(),
+    readable(user),
     opts.kind ? eq(entries.kind, opts.kind) : undefined,
     opts.tag ? sql`${opts.tag} = ANY(${entries.tags})` : undefined,
   ].filter(Boolean);
@@ -42,11 +46,11 @@ export async function listEntries(role: UserRole, opts: ListOptions = {}) {
     .limit(opts.limit ?? 500)
     .offset(opts.offset ?? 0);
 
-  return role === "dm" ? rows : redactManyForPlayer(rows);
+  return user.role === "dm" ? rows : redactManyForPlayer(rows);
 }
 
-export async function countByKind(role: UserRole) {
-  const conditions = [liveOnly(), readable(role)].filter(Boolean);
+export async function countByKind(user: SessionUser) {
+  const conditions = [liveOnly(), readable(user)].filter(Boolean);
   const rows = await db
     .select({ kind: entries.kind, total: count() })
     .from(entries)
@@ -66,14 +70,14 @@ export async function countByKind(role: UserRole) {
  * explicitly needs to preview an archived entry (none does today).
  */
 export async function getEntryBySlug(
-  role: UserRole,
+  user: SessionUser,
   slug: string,
   opts: { includeArchived?: boolean } = {},
 ) {
   const conditions = [
     eq(entries.slug, slug),
     opts.includeArchived ? undefined : liveOnly(),
-    readable(role),
+    readable(user),
   ].filter(Boolean);
   const [row] = await db
     .select()
@@ -82,18 +86,18 @@ export async function getEntryBySlug(
     .limit(1);
 
   if (!row) return null;
-  return role === "dm" ? row : redactForPlayer(row);
+  return user.role === "dm" ? row : redactForPlayer(row);
 }
 
 export async function getEntryById(
-  role: UserRole,
+  user: SessionUser,
   id: string,
   opts: { includeArchived?: boolean } = {},
 ) {
   const conditions = [
     eq(entries.id, id),
     opts.includeArchived ? undefined : liveOnly(),
-    readable(role),
+    readable(user),
   ].filter(Boolean);
   const [row] = await db
     .select()
@@ -101,7 +105,7 @@ export async function getEntryById(
     .where(and(...(conditions as any[])))
     .limit(1);
   if (!row) return null;
-  return role === "dm" ? row : redactForPlayer(row);
+  return user.role === "dm" ? row : redactForPlayer(row);
 }
 
 export type RelatedEntry = {
@@ -117,13 +121,13 @@ export type RelatedEntry = {
 
 /** Outgoing edges: things this entry refers to. */
 export async function getOutgoingLinks(
-  role: UserRole,
+  user: SessionUser,
   entryId: string,
 ): Promise<RelatedEntry[]> {
   const conditions = [
     eq(links.sourceId, entryId),
     isNull(entries.archivedAt),
-    readable(role),
+    readable(user),
   ].filter(Boolean);
 
   return db
@@ -145,13 +149,13 @@ export async function getOutgoingLinks(
 
 /** Incoming edges: "Linked mentions" — what refers to this entry. */
 export async function getBacklinks(
-  role: UserRole,
+  user: SessionUser,
   entryId: string,
 ): Promise<RelatedEntry[]> {
   const conditions = [
     eq(links.targetId, entryId),
     isNull(entries.archivedAt),
-    readable(role),
+    readable(user),
   ].filter(Boolean);
 
   return db
@@ -171,11 +175,11 @@ export async function getBacklinks(
     .limit(200);
 }
 
-export async function getChildren(role: UserRole, parentId: string) {
+export async function getChildren(user: SessionUser, parentId: string) {
   const conditions = [
     eq(entries.parentId, parentId),
     liveOnly(),
-    readable(role),
+    readable(user),
   ].filter(Boolean);
 
   return db
@@ -192,9 +196,9 @@ export async function getChildren(role: UserRole, parentId: string) {
     .limit(200);
 }
 
-export async function getParent(role: UserRole, parentId: string | null) {
+export async function getParent(user: SessionUser, parentId: string | null) {
   if (!parentId) return null;
-  const conditions = [eq(entries.id, parentId), readable(role)].filter(Boolean);
+  const conditions = [eq(entries.id, parentId), readable(user)].filter(Boolean);
   const [row] = await db
     .select({
       id: entries.id,
@@ -224,24 +228,44 @@ export type SearchHit = {
 };
 
 /**
+ * ts_headline does NOT HTML-escape the document — it returns the raw text with
+ * StartSel/StopSel inserted. So highlight with private-use sentinels, escape
+ * the whole snippet, then swap the sentinels for <mark> tags.
+ */
+const HL_START = "";
+const HL_STOP = "";
+const HEADLINE_OPTIONS = `MaxWords=28, MinWords=12, ShortWord=3, MaxFragments=1, StartSel=${HL_START}, StopSel=${HL_STOP}`;
+
+function toSafeSnippet(raw: string | null): string {
+  if (!raw) return "";
+  return escapeHtml(raw)
+    .replaceAll(HL_START, "<mark>")
+    .replaceAll(HL_STOP, "</mark>");
+}
+
+/**
  * Full-text search with a trigram fallback, so a misspelled or partial name
  * ("aeterna cty") still finds the page.
  */
 export async function searchEntries(
-  role: UserRole,
+  user: SessionUser,
   query: string,
   limit = 40,
 ): Promise<SearchHit[]> {
   const q = query.trim();
   if (!q) return [];
 
-  const secretClause =
-    role === "dm" ? sql`true` : sql`e.visibility <> 'secret'`;
+  const isDM = user.role === "dm";
+  const secretClause = isDM
+    ? sql`true`
+    : sql`e.visibility <> 'secret' AND ${grantConditionRaw(user, sql`e.id`, sql`e.kind`)}`;
+  // Players match against a vector built without DM notes — otherwise a hit
+  // on a public entry would reveal what its notes say, even with no snippet.
+  const vector = isDM ? sql`e.search_vector` : sql`e.player_search_vector`;
   // Players must not have DM notes surface inside a search snippet either.
-  const snippetSource =
-    role === "dm"
-      ? sql`coalesce(e.body, '') || ' ' || coalesce(e.dm_notes, '')`
-      : sql`coalesce(e.body, '')`;
+  const snippetSource = isDM
+    ? sql`coalesce(e.body, '') || ' ' || coalesce(e.dm_notes, '')`
+    : sql`coalesce(e.body, '')`;
 
   const rows = await db.execute<SearchHit>(sql`
     WITH q AS (SELECT websearch_to_tsquery('english', ${q}) AS tsq)
@@ -253,20 +277,15 @@ export async function searchEntries(
       e.summary,
       e.visibility,
       GREATEST(
-        ts_rank(e.search_vector, q.tsq),
+        ts_rank(${vector}, q.tsq),
         similarity(e.name, ${q}) * 0.6
       )::float AS rank,
-      ts_headline(
-        'english',
-        ${snippetSource},
-        q.tsq,
-        'MaxWords=28, MinWords=12, ShortWord=3, MaxFragments=1, StartSel=<mark>, StopSel=</mark>'
-      ) AS snippet
+      ts_headline('english', ${snippetSource}, q.tsq, ${HEADLINE_OPTIONS}) AS snippet
     FROM entries e, q
     WHERE e.archived_at IS NULL
       AND ${secretClause}
       AND (
-        e.search_vector @@ q.tsq
+        ${vector} @@ q.tsq
         OR e.name % ${q}
         OR e.name ILIKE ${"%" + q + "%"}
       )
@@ -274,14 +293,20 @@ export async function searchEntries(
     LIMIT ${limit}
   `);
 
-  return rows.rows as SearchHit[];
+  return (rows.rows as SearchHit[]).map((hit) => ({
+    ...hit,
+    snippet: toSafeSnippet(hit.snippet),
+  }));
 }
 
 /** Lightweight name-only lookup that powers the command palette. */
-export async function quickFind(role: UserRole, query: string, limit = 12) {
+export async function quickFind(user: SessionUser, query: string, limit = 12) {
   const q = query.trim();
   if (!q) return [];
-  const secretClause = role === "dm" ? sql`true` : sql`visibility <> 'secret'`;
+  const secretClause =
+    user.role === "dm"
+      ? sql`true`
+      : sql`visibility <> 'secret' AND ${grantConditionRaw(user, sql`entries.id`, sql`entries.kind`)}`;
   const rows = await db.execute<{
     id: string;
     slug: string;
@@ -303,8 +328,11 @@ export async function quickFind(role: UserRole, query: string, limit = 12) {
   return rows.rows;
 }
 
-export async function listAllTags(role: UserRole) {
-  const secretClause = role === "dm" ? sql`true` : sql`visibility <> 'secret'`;
+export async function listAllTags(user: SessionUser) {
+  const secretClause =
+    user.role === "dm"
+      ? sql`true`
+      : sql`visibility <> 'secret' AND ${grantConditionRaw(user, sql`entries.id`, sql`entries.kind`)}`;
   const rows = await db.execute<{ tag: string; total: number }>(sql`
     SELECT unnest(tags) AS tag, count(*)::int AS total
     FROM entries
@@ -334,8 +362,8 @@ export async function getRevisions(entryId: string) {
     .limit(50);
 }
 
-export async function getRecentlyUpdated(role: UserRole, limit = 8) {
-  const conditions = [liveOnly(), readable(role)].filter(Boolean);
+export async function getRecentlyUpdated(user: SessionUser, limit = 8) {
+  const conditions = [liveOnly(), readable(user)].filter(Boolean);
   return db
     .select({
       id: entries.id,

@@ -11,8 +11,9 @@ export default async function AppLayout({
 }) {
   const user = await getCurrentUser();
   if (!user) redirect("/login");
+  if (user.role === "player" && !user.displayName) redirect("/welcome");
 
-  const counts = await countByKind(user.role);
+  const counts = await countByKind(user);
 
   // Hide empty sections from players so their nav isn't full of dead ends,
   // but always show everything to the DM so new kinds are reachable.
@@ -26,7 +27,10 @@ export default async function AppLayout({
   }));
 
   return (
-    <AppShell user={{ username: user.username, role: user.role }} kinds={kinds}>
+    <AppShell
+      user={{ username: user.username, role: user.role, displayName: user.displayName }}
+      kinds={kinds}
+    >
       {children}
     </AppShell>
   );

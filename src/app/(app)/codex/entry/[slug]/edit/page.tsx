@@ -31,7 +31,7 @@ export default async function EditEntryPage({
   if (!user) redirect("/login");
   if (user.role !== "dm") redirect(`/codex/entry/${slug}`);
 
-  const entry = await getEntryBySlug(user.role, slug);
+  const entry = await getEntryBySlug(user, slug);
   if (!entry) notFound();
 
   const [parents, revisions] = await Promise.all([

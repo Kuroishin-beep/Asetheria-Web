@@ -27,7 +27,7 @@ export async function generateMetadata({
   const { slug } = await params;
   const user = await getCurrentUser();
   if (!user) return { title: "Codex" };
-  const entry = await getEntryBySlug(user.role, slug);
+  const entry = await getEntryBySlug(user, slug);
   return { title: entry?.name ?? "Not found" };
 }
 
@@ -40,17 +40,17 @@ export default async function EntryPage({
   const user = await getCurrentUser();
   if (!user) redirect("/login");
 
-  const entry = await getEntryBySlug(user.role, slug);
+  const entry = await getEntryBySlug(user, slug);
   if (!entry) notFound();
 
   const isDM = user.role === "dm";
   const def = KIND_BY_KEY[entry.kind];
 
   const [backlinks, outgoing, children, parent, nameRows] = await Promise.all([
-    getBacklinks(user.role, entry.id),
-    getOutgoingLinks(user.role, entry.id),
-    getChildren(user.role, entry.id),
-    getParent(user.role, entry.parentId),
+    getBacklinks(user, entry.id),
+    getOutgoingLinks(user, entry.id),
+    getChildren(user, entry.id),
+    getParent(user, entry.parentId),
     db.select({ name: entries.name, slug: entries.slug }).from(entries),
   ]);
 

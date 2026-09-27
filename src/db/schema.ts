@@ -6,9 +6,11 @@ import {
   uuid,
   jsonb,
   integer,
+  boolean,
   index,
   uniqueIndex,
   pgEnum,
+  check,
 } from "drizzle-orm/pg-core";
 
 // Note: full-text search is implemented with a generated `search_vector`
@@ -137,6 +139,44 @@ export const entries = pgTable(
     index("entries_name_idx").on(t.name),
     index("entries_parent_idx").on(t.parentId),
     index("entries_tags_idx").using("gin", t.tags),
+  ],
+);
+
+// ---------------------------------------------------------------------------
+// Entry grants — per-player RBAC on top of the DM/secret wall
+// ---------------------------------------------------------------------------
+
+/**
+ * Grants (or explicit denials) of visibility to one player, either for a
+ * whole `kind` or for one specific `entryId`. Exactly one of `kind`/`entryId`
+ * is set per row (enforced by a check constraint) — an entry-level row always
+ * overrides a kind-level row for that same entry and player.
+ *
+ * This is strictly additive on top of `entries.visibility`: a `secret` entry
+ * is never shown to a player no matter what row exists here. See
+ * `src/lib/rbac.ts` for the resolution logic.
+ */
+export const entryGrants = pgTable(
+  "entry_grants",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    userId: uuid("user_id")
+      .notNull()
+      .references(() => users.id, { onDelete: "cascade" }),
+    kind: entryKind("kind"),
+    entryId: uuid("entry_id").references(() => entries.id, { onDelete: "cascade" }),
+    granted: boolean("granted").notNull().default(true),
+    grantedBy: uuid("granted_by").references(() => users.id, { onDelete: "set null" }),
+    grantedAt: timestamp("granted_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [
+    uniqueIndex("entry_grants_user_kind_idx").on(t.userId, t.kind),
+    uniqueIndex("entry_grants_user_entry_idx").on(t.userId, t.entryId),
+    index("entry_grants_user_idx").on(t.userId),
+    check(
+      "entry_grants_kind_xor_entry",
+      sql`(${t.kind} IS NULL) <> (${t.entryId} IS NULL)`,
+    ),
   ],
 );
 
@@ -298,6 +338,7 @@ export type User = typeof users.$inferSelect;
 export type Link = typeof links.$inferSelect;
 export type Revision = typeof revisions.$inferSelect;
 export type RollTable = typeof rollTables.$inferSelect;
+export type EntryGrant = typeof entryGrants.$inferSelect;
 export type EntryKind = (typeof entryKind.enumValues)[number];
 export type Visibility = (typeof visibility.enumValues)[number];
 export type UserRole = (typeof userRole.enumValues)[number];

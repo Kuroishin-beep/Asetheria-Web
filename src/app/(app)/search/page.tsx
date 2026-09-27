@@ -20,7 +20,7 @@ export default async function SearchPage({
 
   // Tag browsing and full-text search share this page.
   if (tag) {
-    const rows = await listEntries(user.role, { tag, limit: 500 });
+    const rows = await listEntries(user, { tag, limit: 500 });
     return (
       <>
         <PageHeading
@@ -49,7 +49,7 @@ export default async function SearchPage({
   }
 
   const query = (q ?? "").trim();
-  const hits = query ? await searchEntries(user.role, query, 60) : [];
+  const hits = query ? await searchEntries(user, query, 60) : [];
 
   return (
     <>
@@ -153,8 +153,7 @@ export default async function SearchPage({
                   marginTop: "0.4rem",
                   lineHeight: 1.5,
                 }}
-                // ts_headline output: Postgres escapes the text and only ever
-                // inserts the <mark> tags we asked for.
+                // Escaped in searchEntries(); only <mark> tags survive.
                 dangerouslySetInnerHTML={{ __html: hit.snippet }}
               />
             )}

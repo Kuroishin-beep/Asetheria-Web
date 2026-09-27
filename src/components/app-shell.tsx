@@ -13,7 +13,11 @@ export type NavKind = {
   count: number;
 };
 
-export type ShellUser = { username: string; role: "dm" | "player" };
+export type ShellUser = {
+  username: string;
+  role: "dm" | "player";
+  displayName?: string | null;
+};
 
 const TOOL_LINKS = [
   { href: "/tools/dice", label: "Dice", icon: "🎲" },
@@ -193,8 +197,8 @@ export function AppShell({
               onClick={signOut}
               className="btn"
               style={{ padding: "0.4rem 0.6rem" }}
-              title={`Sign out (${user.username})`}
-              aria-label={`Sign out, signed in as ${user.username}`}
+              title={`Sign out (${user.displayName || user.username})`}
+              aria-label={`Sign out, signed in as ${user.displayName || user.username}`}
             >
               <span aria-hidden="true">⏻</span>
             </button>

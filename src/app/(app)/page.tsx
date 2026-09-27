@@ -10,9 +10,9 @@ export default async function DashboardPage() {
   if (!user) redirect("/login");
 
   const [counts, recent, tags] = await Promise.all([
-    countByKind(user.role),
-    getRecentlyUpdated(user.role, 6),
-    listAllTags(user.role),
+    countByKind(user),
+    getRecentlyUpdated(user, 6),
+    listAllTags(user),
   ]);
 
   const total = Object.values(counts).reduce((a, b) => a + (b ?? 0), 0);

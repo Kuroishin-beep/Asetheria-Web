@@ -36,7 +36,7 @@ export default async function KindPage({
   const user = await getCurrentUser();
   if (!user) redirect("/login");
 
-  const rows = await listEntries(user.role, { kind: def.kind, limit: 1000 });
+  const rows = await listEntries(user, { kind: def.kind, limit: 1000 });
 
   return (
     <>

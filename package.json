@@ -18,7 +18,8 @@
     "db:studio": "drizzle-kit studio",
     "db:seed": "tsx scripts/seed.ts",
     "db:setup": "tsx scripts/seed.ts --push",
-    "user:add": "tsx scripts/create-user.ts"
+    "user:add": "tsx scripts/create-user.ts",
+    "migrate:legacy-players": "tsx scripts/migrate-legacy-players.ts"
   },
   "dependencies": {
     "@neondatabase/serverless": "^0.10.4",

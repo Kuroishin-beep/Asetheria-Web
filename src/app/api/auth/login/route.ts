@@ -76,11 +76,13 @@ export async function POST(request: Request) {
     username: user.username,
     role: user.role,
     epoch: user.sessionEpoch,
+    displayName: user.displayName,
   });
   await setSessionCookie(token);
 
   return NextResponse.json({
     ok: true,
     user: { username: user.username, role: user.role },
+    needsName: user.role === "player" && !user.displayName,
   });
 }

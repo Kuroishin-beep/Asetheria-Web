@@ -1,4 +1,4 @@
-import { eq, sql } from "drizzle-orm";
+import { eq } from "drizzle-orm";
 import { db } from "@/db";
 import { users, type Entry, type UserRole } from "@/db/schema";
 import { getSession } from "@/lib/session-cookie";
@@ -18,6 +18,7 @@ export async function getCurrentUser(): Promise<SessionUser | null> {
       username: users.username,
       role: users.role,
       sessionEpoch: users.sessionEpoch,
+      displayName: users.displayName,
     })
     .from(users)
     .where(eq(users.id, session.id))
@@ -31,6 +32,7 @@ export async function getCurrentUser(): Promise<SessionUser | null> {
     username: row.username,
     role: row.role,
     epoch: row.sessionEpoch,
+    displayName: row.displayName,
   };
 }
 
@@ -80,14 +82,4 @@ export function redactForPlayer<T extends Partial<Entry>>(entry: T): T {
 
 export function redactManyForPlayer<T extends Partial<Entry>>(entries: T[]): T[] {
   return entries.map(redactForPlayer);
-}
-
-/**
- * SQL predicate limiting a query to what the given role may read.
- * Players see non-archived, non-secret entries only.
- */
-export function visibilityFilter(role: UserRole) {
-  return role === "dm"
-    ? sql`true`
-    : sql`visibility <> 'secret'`;
 }

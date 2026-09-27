@@ -46,6 +46,11 @@ export function LoginForm() {
         }
         return;
       }
+      if (data.needsName) {
+        router.push("/welcome");
+        router.refresh();
+        return;
+      }
       // `next` is validated to be a same-site path so it can't be used for an
       // open redirect.
       router.push(next.startsWith("/") && !next.startsWith("//") ? next : "/");
