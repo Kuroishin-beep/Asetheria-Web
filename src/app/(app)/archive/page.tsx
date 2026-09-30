@@ -9,7 +9,7 @@ export const metadata: Metadata = { title: "Archive" };
 
 export default async function ArchivePage() {
   const user = await getCurrentUser();
-  if (!user) redirect("/login");
+  if (!user) redirect("/welcome");
   if (user.role !== "dm") redirect("/");
 
   const rows = await listArchived();

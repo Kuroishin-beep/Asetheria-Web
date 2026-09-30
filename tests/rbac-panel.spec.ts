@@ -51,11 +51,11 @@ test.describe("RBAC control panel (GM)", () => {
         visibility: "public",
       });
 
-      // Onboard the player so it has a name and passes the /welcome gate.
+      // Onboard the player so it has a name and passes the /onboarding gate.
       playerContext = await browser.newContext();
       const playerPage = await playerContext.newPage();
       await playerPage.request.post("/api/auth/login", { data: { username, password } });
-      await playerPage.goto("/welcome");
+      await playerPage.goto("/onboarding");
       await playerPage.fill("#displayName", "Panel Tester");
       await playerPage.getByRole("button", { name: "Enter the codex" }).click();
       await playerPage.waitForURL("/");

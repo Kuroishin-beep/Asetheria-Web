@@ -47,7 +47,7 @@ export function LoginForm() {
         return;
       }
       if (data.needsName) {
-        router.push("/welcome");
+        router.push("/onboarding");
         router.refresh();
         return;
       }

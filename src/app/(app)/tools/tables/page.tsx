@@ -11,7 +11,7 @@ export const metadata: Metadata = { title: "Random Tables" };
 
 export default async function TablesPage() {
   const user = await getCurrentUser();
-  if (!user) redirect("/login");
+  if (!user) redirect("/welcome");
 
   const isDM = user.role === "dm";
 

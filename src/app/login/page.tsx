@@ -1,10 +1,14 @@
 import { Suspense } from "react";
+import Link from "next/link";
 import type { Metadata } from "next";
 import { LoginForm } from "./login-form";
 
 export const metadata: Metadata = { title: "Sign in" };
 
 export default function LoginPage() {
+  // Only advertise registration when the DM has actually opened it.
+  const signupOpen = Boolean(process.env.SIGNUP_CODE?.trim());
+
   return (
     <main
       style={{
@@ -59,7 +63,8 @@ export default function LoginPage() {
               marginTop: "0.35rem",
             }}
           >
-            The codex is sealed to strangers.
+            The Dungeon Master&rsquo;s door. Players can{" "}
+            <Link href="/welcome">enter without a key</Link>.
           </p>
         </div>
 
@@ -68,6 +73,19 @@ export default function LoginPage() {
             <LoginForm />
           </Suspense>
         </div>
+
+        {signupOpen && (
+          <p
+            style={{
+              textAlign: "center",
+              marginTop: "1.25rem",
+              fontSize: "0.8125rem",
+              color: "var(--text-muted)",
+            }}
+          >
+            Given an invite code? <Link href="/register">Join the party</Link>
+          </p>
+        )}
 
         <p
           style={{

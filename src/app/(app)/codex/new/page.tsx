@@ -5,7 +5,7 @@ import { db } from "@/db";
 import { entries, type EntryKind } from "@/db/schema";
 import { getCurrentUser } from "@/lib/auth";
 import { createEntryAction } from "@/lib/actions";
-import { KIND_BY_KEY } from "@/lib/kinds";
+import { KIND_BY_KEY, sectionPath } from "@/lib/kinds";
 import { EntryForm } from "@/components/entry-form";
 import { PageHeading } from "@/components/entry-card";
 
@@ -17,7 +17,7 @@ export default async function NewEntryPage({
   searchParams: Promise<{ kind?: string }>;
 }) {
   const user = await getCurrentUser();
-  if (!user) redirect("/login");
+  if (!user) redirect("/welcome");
   if (user.role !== "dm") redirect("/");
 
   const { kind: kindParam } = await searchParams;
@@ -40,7 +40,7 @@ export default async function NewEntryPage({
       />
       <EntryForm
         action={createEntryAction}
-        cancelHref={`/codex/${KIND_BY_KEY[kind].slug}`}
+        cancelHref={sectionPath(kind)}
         submitLabel="Create entry"
         parents={parents}
         initial={{

@@ -1,0 +1,205 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 860" font-family="Georgia, 'Times New Roman', serif">
+  <defs>
+    <pattern id="crates" width="16" height="16" patternUnits="userSpaceOnUse">
+      <rect width="16" height="16" fill="#f9f1e0"/>
+      <rect x="2" y="2" width="12" height="12" fill="none" stroke="#c9b48c" stroke-width="1"/>
+    </pattern>
+    <pattern id="plates" width="14" height="14" patternUnits="userSpaceOnUse">
+      <rect width="14" height="14" fill="#f3e6c8"/>
+      <path d="M0 14 L14 0" stroke="#b98d5f" stroke-width="1"/>
+    </pattern>
+    <pattern id="water" width="26" height="12" patternUnits="userSpaceOnUse">
+      <rect width="26" height="12" fill="#d7e6ea"/>
+      <path d="M0 8 Q6.5 3 13 8 T26 8" stroke="#7da7b8" stroke-width="1.4" fill="none"/>
+    </pattern>
+  </defs>
+
+  <!-- background -->
+  <rect width="1500" height="860" fill="#f6ecd9"/>
+  <text x="750" y="42" text-anchor="middle" font-size="27" fill="#4a3a28" letter-spacing="3">THE ALETHEION</text>
+  <text x="750" y="66" text-anchor="middle" font-size="14" fill="#7a6748" font-style="italic">Imperial Mouseion of Helarchon &#8212; &#8220;the House of Un-forgetting&#8221; &#8212; Museum Hill, Scholars&#8217; District</text>
+
+  <!-- ================= UNDERCROFT ================= -->
+  <g>
+    <rect x="40" y="90" width="400" height="560" fill="#efe2c6" stroke="#4a3a28" stroke-width="2"/>
+    <text x="240" y="115" text-anchor="middle" font-size="16" fill="#4a3a28" letter-spacing="2">UNDERCROFT</text>
+
+    <!-- storage rows -->
+    <rect x="60" y="130" width="200" height="150" fill="url(#crates)" stroke="#4a3a28" stroke-width="1.5"/>
+    <text x="160" y="200" text-anchor="middle" font-size="12.5" fill="#4a3a28">Storage Rows</text>
+    <text x="160" y="216" text-anchor="middle" font-size="10.5" fill="#7a6748" font-style="italic">Thalos Ridge crates</text>
+
+    <!-- ossuary niche (secret) -->
+    <rect x="280" y="130" width="140" height="90" fill="#f9f1e0" stroke="#4a3a28" stroke-width="1.5" stroke-dasharray="5 4"/>
+    <text x="350" y="170" text-anchor="middle" font-size="12" fill="#4a3a28">Ossuary Niche</text>
+    <text x="350" y="186" text-anchor="middle" font-size="10.5" fill="#7a6748" font-style="italic">(secret &#8212; DC 15)</text>
+
+    <!-- stair up -->
+    <rect x="290" y="235" width="70" height="50" fill="#f9f1e0" stroke="#4a3a28" stroke-width="1.5"/>
+    <path d="M296 279 h58 M296 271 h58 M296 263 h58 M296 255 h58 M296 247 h58" stroke="#a08b64" stroke-width="1.2"/>
+    <text x="325" y="230" text-anchor="middle" font-size="10.5" fill="#4a3a28">stair &#8593; guard room</text>
+
+    <!-- flooded passage -->
+    <rect x="60" y="300" width="90" height="300" fill="url(#water)" stroke="#4a3a28" stroke-width="1.5"/>
+    <text x="105" y="430" text-anchor="middle" font-size="12" fill="#33586b" transform="rotate(-90 105 430)">Flooded Passage &#8212; chest-deep, 60 ft</text>
+    <!-- ward glyph -->
+    <circle cx="105" cy="500" r="9" fill="none" stroke="#6b5b95" stroke-width="2"/>
+    <path d="M99 500 h12 M105 494 v12" stroke="#6b5b95" stroke-width="1.6"/>
+    <text x="122" y="504" font-size="10.5" fill="#6b5b95">drowned ward</text>
+
+    <!-- entrance B -->
+    <rect x="88" y="596" width="34" height="10" fill="#a04a3a"/>
+    <circle cx="105" cy="626" r="12" fill="#a04a3a"/>
+    <text x="105" y="631" text-anchor="middle" font-size="13" fill="#f6ecd9">B</text>
+    <text x="128" y="630" font-size="11" fill="#a04a3a">cistern grate (rusted)</text>
+
+    <!-- bronze vault -->
+    <rect x="180" y="310" width="240" height="290" fill="#f3e6c8" stroke="#4a3a28" stroke-width="2.5"/>
+    <text x="300" y="332" text-anchor="middle" font-size="13.5" fill="#4a3a28" letter-spacing="1">THE BRONZE VAULT</text>
+    <!-- pressure plate aisle -->
+    <rect x="255" y="345" width="90" height="230" fill="url(#plates)" stroke="#b98d5f" stroke-width="1" stroke-dasharray="3 3"/>
+    <text x="300" y="590" text-anchor="middle" font-size="10" fill="#8a6d3b">pressure plates (center aisle)</text>
+    <!-- the seal -->
+    <circle cx="300" cy="450" r="46" fill="none" stroke="#6b5b95" stroke-width="1.6"/>
+    <circle cx="300" cy="450" r="36" fill="none" stroke="#6b5b95" stroke-width="1.6"/>
+    <circle cx="300" cy="450" r="26" fill="none" stroke="#6b5b95" stroke-width="1.6"/>
+    <circle cx="300" cy="450" r="16" fill="none" stroke="#6b5b95" stroke-width="1.6"/>
+    <circle cx="300" cy="450" r="5" fill="#8a6d3b"/>
+    <text x="300" y="515" text-anchor="middle" font-size="11.5" fill="#6b5b95">Seal of the Fourth Mirror</text>
+    <text x="300" y="529" text-anchor="middle" font-size="11.5" fill="#8a6d3b" font-weight="bold">KLEIS MYCARION</text>
+    <!-- weeping bronze -->
+    <rect x="368" y="545" width="46" height="46" fill="#e4d3ae" stroke="#8a6d3b" stroke-width="1.6"/>
+    <circle cx="391" cy="568" r="13" fill="#8a6d3b"/>
+    <text x="391" y="606" text-anchor="middle" font-size="10" fill="#8a6d3b">Weeping Bronze</text>
+    <!-- vault door -->
+    <rect x="240" y="304" width="26" height="12" fill="#8a6d3b"/>
+    <text x="228" y="300" font-size="10.5" fill="#4a3a28">bronze-faced door</text>
+  </g>
+
+  <!-- ================= GROUND FLOOR ================= -->
+  <g>
+    <rect x="490" y="90" width="500" height="560" fill="#efe2c6" stroke="#4a3a28" stroke-width="2"/>
+    <text x="740" y="115" text-anchor="middle" font-size="16" fill="#4a3a28" letter-spacing="2">GROUND FLOOR</text>
+
+    <!-- north row -->
+    <rect x="505" y="130" width="115" height="95" fill="#f9f1e0" stroke="#4a3a28" stroke-width="1.5"/>
+    <text x="562" y="172" text-anchor="middle" font-size="12" fill="#4a3a28">Guard Room</text>
+    <text x="562" y="188" text-anchor="middle" font-size="10.5" fill="#7a6748" font-style="italic">stair &#8595; undercroft</text>
+
+    <rect x="620" y="130" width="90" height="95" fill="#f9f1e0" stroke="#4a3a28" stroke-width="1.5"/>
+    <path d="M628 218 h74 M628 208 h74 M628 198 h74 M628 188 h74 M628 178 h74" stroke="#a08b64" stroke-width="1.2"/>
+    <text x="665" y="152" text-anchor="middle" font-size="11.5" fill="#4a3a28">Grand Stair</text>
+
+    <rect x="710" y="130" width="120" height="95" fill="#f9f1e0" stroke="#4a3a28" stroke-width="1.5"/>
+    <text x="770" y="172" text-anchor="middle" font-size="12" fill="#4a3a28">Curator&#8217;s Office</text>
+    <text x="770" y="188" text-anchor="middle" font-size="10.5" fill="#7a6748" font-style="italic">desk: true labels</text>
+
+    <rect x="830" y="130" width="145" height="95" fill="#f9f1e0" stroke="#4a3a28" stroke-width="1.5"/>
+    <text x="902" y="172" text-anchor="middle" font-size="12" fill="#4a3a28">Conservators&#8217;</text>
+    <text x="902" y="188" text-anchor="middle" font-size="12" fill="#4a3a28">Workshop</text>
+
+    <!-- service dock -->
+    <rect x="855" y="245" width="120" height="85" fill="#f9f1e0" stroke="#4a3a28" stroke-width="1.5"/>
+    <text x="915" y="282" text-anchor="middle" font-size="12" fill="#4a3a28">Service Dock</text>
+    <text x="915" y="298" text-anchor="middle" font-size="10.5" fill="#7a6748" font-style="italic">credentials checked</text>
+    <rect x="971" y="270" width="10" height="34" fill="#a04a3a"/>
+    <circle cx="1004" cy="287" r="12" fill="#a04a3a"/>
+    <text x="1004" y="292" text-anchor="middle" font-size="13" fill="#f6ecd9">A</text>
+
+    <!-- west wing -->
+    <rect x="505" y="340" width="140" height="200" fill="#f9f1e0" stroke="#4a3a28" stroke-width="1.5"/>
+    <text x="575" y="425" text-anchor="middle" font-size="12.5" fill="#4a3a28">Founders&#8217; Hall</text>
+    <text x="575" y="442" text-anchor="middle" font-size="10.5" fill="#7a6748" font-style="italic">Oath-Prow &#183; Thalos Stele</text>
+
+    <!-- east wing -->
+    <rect x="835" y="340" width="140" height="200" fill="#f9f1e0" stroke="#4a3a28" stroke-width="1.5"/>
+    <text x="905" y="418" text-anchor="middle" font-size="12.5" fill="#4a3a28">Hall of the</text>
+    <text x="905" y="434" text-anchor="middle" font-size="12.5" fill="#4a3a28">Storm-Star</text>
+    <text x="905" y="451" text-anchor="middle" font-size="10.5" fill="#7a6748" font-style="italic">Half-Mantle &#183; Silent Sail</text>
+
+    <!-- rotunda -->
+    <circle cx="740" cy="440" r="100" fill="#f9f1e0" stroke="#4a3a28" stroke-width="2"/>
+    <circle cx="740" cy="440" r="42" fill="none" stroke="#6b5b95" stroke-width="1.4" stroke-dasharray="6 4"/>
+    <text x="740" y="420" text-anchor="middle" font-size="13" fill="#4a3a28" letter-spacing="1">ROTUNDA</text>
+    <text x="740" y="436" text-anchor="middle" font-size="10.5" fill="#7a6748" font-style="italic">of the Concord</text>
+    <text x="740" y="452" text-anchor="middle" font-size="10" fill="#6b5b95">skylight above &#8594; C</text>
+    <!-- hoplites -->
+    <circle cx="676" cy="376" r="7" fill="#8a6d3b"/>
+    <circle cx="804" cy="376" r="7" fill="#8a6d3b"/>
+    <circle cx="676" cy="504" r="7" fill="#8a6d3b"/>
+    <circle cx="804" cy="504" r="7" fill="#8a6d3b"/>
+    <!-- wing doors -->
+    <rect x="634" y="428" width="14" height="24" fill="#8a6d3b"/>
+    <rect x="832" y="428" width="14" height="24" fill="#8a6d3b"/>
+
+    <!-- portico -->
+    <rect x="620" y="560" width="240" height="42" fill="#f3e6c8" stroke="#4a3a28" stroke-width="1.5"/>
+    <path d="M632 560 v42 M664 560 v42 M696 560 v42 M728 560 v42 M760 560 v42 M792 560 v42 M824 560 v42 M856 560 v42" stroke="#c9b48c" stroke-width="2"/>
+    <text x="740" y="620" text-anchor="middle" font-size="11.5" fill="#4a3a28">Portico &#183; Bronze Doors (barred tonight)</text>
+    <rect x="726" y="534" width="28" height="10" fill="#8a6d3b"/>
+
+    <!-- patrol route -->
+    <path d="M740 552 Q740 500 740 480 M740 400 Q740 340 665 300 Q575 260 562 230 M740 400 Q740 340 830 300 Q905 270 905 245"
+          fill="none" stroke="#4a6d8c" stroke-width="1.6" stroke-dasharray="2 5"/>
+    <circle cx="562" cy="248" r="6" fill="#4a6d8c"/>
+    <circle cx="740" cy="520" r="6" fill="#4a6d8c"/>
+    <text x="700" y="308" text-anchor="middle" font-size="10" fill="#4a6d8c" font-style="italic">Dexios&#8217;s hourly loop</text>
+  </g>
+
+  <!-- ================= UPPER FLOOR ================= -->
+  <g>
+    <rect x="1040" y="90" width="400" height="560" fill="#efe2c6" stroke="#4a3a28" stroke-width="2"/>
+    <text x="1240" y="115" text-anchor="middle" font-size="16" fill="#4a3a28" letter-spacing="2">UPPER FLOOR</text>
+
+    <rect x="1060" y="130" width="120" height="110" fill="#f9f1e0" stroke="#4a3a28" stroke-width="1.5"/>
+    <text x="1120" y="180" text-anchor="middle" font-size="12" fill="#4a3a28">Label Room</text>
+    <text x="1120" y="196" text-anchor="middle" font-size="10.5" fill="#7a6748" font-style="italic">stencils &#38; ink</text>
+
+    <rect x="1200" y="130" width="220" height="110" fill="#f9f1e0" stroke="#a04a3a" stroke-width="2"/>
+    <text x="1310" y="172" text-anchor="middle" font-size="12.5" fill="#a04a3a">SEALED ANNEX</text>
+    <text x="1310" y="189" text-anchor="middle" font-size="10.5" fill="#a04a3a" font-style="italic">Truth-Flame custody &#8212; Inquisitor Vireon tonight</text>
+    <path d="M1310 208 q-7 12 0 20 q7 -8 0 -20 M1303 218 q-4 7 7 12 q11 -5 7 -12" stroke="#a04a3a" stroke-width="1.4" fill="none"/>
+
+    <!-- gallery ring -->
+    <rect x="1060" y="270" width="360" height="330" fill="#f9f1e0" stroke="#4a3a28" stroke-width="1.5"/>
+    <circle cx="1240" cy="440" r="88" fill="#efe2c6" stroke="#4a3a28" stroke-width="1.5" stroke-dasharray="7 5"/>
+    <text x="1240" y="430" text-anchor="middle" font-size="10.5" fill="#7a6748" font-style="italic">open to rotunda</text>
+    <text x="1240" y="446" text-anchor="middle" font-size="10.5" fill="#7a6748" font-style="italic">below &#8212; 60 ft</text>
+    <circle cx="1240" cy="470" r="30" fill="none" stroke="#6b5b95" stroke-width="1.4" stroke-dasharray="4 4"/>
+    <text x="1240" y="516" text-anchor="middle" font-size="10" fill="#6b5b95">skylight in roof above</text>
+    <circle cx="1240" cy="470" r="11" fill="#a04a3a"/>
+    <text x="1240" y="475" text-anchor="middle" font-size="12" fill="#f6ecd9">C</text>
+    <text x="1132" y="300" font-size="12.5" fill="#6b5b95">Gallery of the Violet Dusk</text>
+    <text x="1132" y="316" font-size="10.5" fill="#7a6748" font-style="italic">aetherglass &#183; dusk prisms (mezzanine ring)</text>
+    <!-- stair landing -->
+    <rect x="1060" y="270" width="60" height="60" fill="#f3e6c8" stroke="#4a3a28" stroke-width="1.2"/>
+    <path d="M1066 322 h48 M1066 312 h48 M1066 302 h48 M1066 292 h48" stroke="#a08b64" stroke-width="1.1"/>
+    <text x="1090" y="344" text-anchor="middle" font-size="10" fill="#4a3a28">stair &#8595;</text>
+  </g>
+
+  <!-- ================= LEGEND ================= -->
+  <g font-size="12" fill="#4a3a28">
+    <rect x="40" y="672" width="1400" height="150" fill="#efe2c6" stroke="#4a3a28" stroke-width="1.5"/>
+    <text x="60" y="698" font-size="13.5" letter-spacing="2">LEGEND</text>
+
+    <circle cx="72" cy="722" r="10" fill="#a04a3a"/><text x="72" y="726" text-anchor="middle" font-size="11" fill="#f6ecd9">A</text>
+    <text x="92" y="726">Service dock &#8212; forged/stolen credentials (Deception DC 13&#8211;15)</text>
+    <circle cx="72" cy="750" r="10" fill="#a04a3a"/><text x="72" y="754" text-anchor="middle" font-size="11" fill="#f6ecd9">B</text>
+    <text x="92" y="754">Rain-cistern grate &#8212; flooded passage, drowned ward (Athletics/tools DC 15)</text>
+    <circle cx="72" cy="778" r="10" fill="#a04a3a"/><text x="72" y="782" text-anchor="middle" font-size="11" fill="#f6ecd9">C</text>
+    <text x="92" y="782">Rooftop skylight &#8212; via Academy viaduct; 60 ft rope to rotunda floor</text>
+
+    <circle cx="600" cy="722" r="7" fill="#8a6d3b"/>
+    <text x="616" y="726">Bronze hoplite (animated at Heat 3+, or when the Seal falls)</text>
+    <circle cx="600" cy="750" r="6" fill="#4a6d8c"/>
+    <text x="616" y="754">Guard post &#183; dashed blue line: patrol route (hourly)</text>
+    <rect x="592" y="770" width="16" height="16" fill="url(#plates)" stroke="#b98d5f"/>
+    <text x="616" y="782">Pressure plates &#8212; Perception DC 14, wall-lip Acrobatics DC 12</text>
+
+    <circle cx="1120" cy="722" r="8" fill="none" stroke="#6b5b95" stroke-width="2"/>
+    <text x="1140" y="726">Arcane ward / seal &#8212; the Lysikleis learns it in 1 minute</text>
+    <rect x="1112" y="742" width="16" height="14" fill="#f9f1e0" stroke="#4a3a28" stroke-dasharray="4 3"/>
+    <text x="1140" y="754">Secret or concealed feature</text>
+    <text x="1112" y="782" font-style="italic" fill="#7a6748">Rooms are 40&#8211;60 ft across; the rotunda is 80 ft wide. Undercroft sits below the west half.</text>
+  </g>
+</svg>

@@ -17,7 +17,7 @@ export type SessionUser = {
   /** Must match the user's `sessionEpoch`, so sessions can be revoked. */
   epoch: number;
   /**
-   * Set once at first login via the `/welcome` onboarding flow. Not part of
+   * Set once at first login via the `/onboarding` flow. Not part of
    * the signed JWT — always read fresh from the database by `getCurrentUser`
    * so a name change takes effect immediately, without a new token.
    */

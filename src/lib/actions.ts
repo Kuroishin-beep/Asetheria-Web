@@ -6,7 +6,7 @@ import { and, eq, ne } from "drizzle-orm";
 import { db } from "@/db";
 import { entries, revisions, rollTables, type Entry } from "@/db/schema";
 import { requireDM } from "@/lib/auth";
-import { kindSlug } from "@/lib/kinds";
+import { sectionPath, sectionPaths } from "@/lib/kinds";
 import { slugify } from "@/lib/links";
 import { rebuildLinksForEntry } from "@/lib/link-graph";
 import {
@@ -56,7 +56,7 @@ async function uniqueSlug(base: string, excludeId?: string): Promise<string> {
 
 function revalidateEntry(slug?: string, kind?: Entry["kind"]) {
   revalidatePath("/");
-  if (kind) revalidatePath(`/codex/${kindSlug(kind)}`);
+  if (kind) for (const path of sectionPaths(kind)) revalidatePath(path);
   if (slug) revalidatePath(`/codex/entry/${slug}`);
 }
 
@@ -171,7 +171,7 @@ export async function archiveEntryAction(entryId: string) {
 
   revalidateEntry(current.slug, current.kind);
   revalidatePath("/archive");
-  redirect(`/codex/${kindSlug(current.kind)}`);
+  redirect(sectionPath(current.kind, current.fields?.tier));
 }
 
 export async function restoreEntryAction(entryId: string) {

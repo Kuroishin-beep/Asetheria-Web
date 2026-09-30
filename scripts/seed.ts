@@ -27,6 +27,12 @@ const REPO = path.resolve(__dirname, "..");
 
 loadEnv();
 
+/**
+ * Let the export's classification overwrite a kind that was changed in the app.
+ * Off by default so re-filing a page here survives the next re-import.
+ */
+const RECLASSIFY = process.argv.includes("--reclassify");
+
 const url = process.env.DATABASE_URL ?? process.env.POSTGRES_URL;
 if (!url) {
   console.error(
@@ -186,26 +192,59 @@ async function seedEntries() {
   };
 
   const existing = await db
-    .select({ id: entries.id, slug: entries.slug, body: entries.body })
+    .select({
+      id: entries.id,
+      slug: entries.slug,
+      kind: entries.kind,
+      summary: entries.summary,
+      body: entries.body,
+      fields: entries.fields,
+      tags: entries.tags,
+    })
     .from(entries);
   const bySlug = new Map(existing.map((e) => [e.slug, e]));
 
   let created = 0;
   let updated = 0;
+  let keptKind = 0;
 
   for (const e of payload.entries) {
     const found = bySlug.get(e.slug);
     if (found) {
-      // Never clobber prose you have written in the app: only fill a gap.
+      // Never clobber prose you have written in the app: only fill a gap. The
+      // same rule applies per-property — an imported value fills a field that is
+      // missing or blank, but anything edited in the app wins. Without this a
+      // re-import would silently revert edits such as a location's tier.
+      const mergedFields = { ...e.fields };
+      for (const [key, value] of Object.entries(found.fields ?? {})) {
+        if (typeof value === "string" && value.trim()) mergedFields[key] = value;
+      }
+
+      // Kind follows the same rule, with one difference: every entry always
+      // has one, so there is no blank to fill. The import classifies from the
+      // export's folder tree, which cannot know that a page was deliberately
+      // re-filed here — "The 3 Empires" is 3,769 characters of empire history
+      // that lives under a location folder but belongs in Lore. So the stored
+      // kind wins, and `--reclassify` is the way to take the import's instead.
+      const keepKind = !RECLASSIFY && found.kind !== e.kind;
+      if (keepKind) keptKind++;
+
       await db
         .update(entries)
         .set({
           name: e.name,
-          kind: e.kind,
-          summary: e.summary,
+          kind: keepKind ? found.kind : e.kind,
+          // A summary written here is the one-liner shown in every list and
+          // search result; the export's is often blank or the child database's
+          // name, so it fills a gap rather than replacing one.
+          summary: found.summary?.trim() ? found.summary : e.summary,
           body: found.body?.trim() ? found.body : e.body,
-          fields: e.fields,
-          tags: e.tags,
+          fields: mergedFields,
+          // Tags follow the same rule: they are curated in the app (derived
+          // from an entry's own properties, then hand-corrected), and the
+          // export carries none for most kinds. Replacing them on every seed
+          // would throw that away.
+          tags: found.tags?.length ? found.tags : e.tags,
           sourcePath: e.sourcePath,
         })
         .where(eq(entries.id, found.id));
@@ -225,12 +264,25 @@ async function seedEntries() {
           visibility: e.visibility,
           sourcePath: e.sourcePath,
         })
-        .returning({ id: entries.id, slug: entries.slug, body: entries.body });
+        .returning({
+          id: entries.id,
+          slug: entries.slug,
+          kind: entries.kind,
+          summary: entries.summary,
+          body: entries.body,
+          fields: entries.fields,
+          tags: entries.tags,
+        });
       bySlug.set(row.slug, row);
       created++;
     }
   }
   console.log(`  ✓ entries: ${created} created, ${updated} updated`);
+  if (keptKind) {
+    console.log(
+      `  · kept ${keptKind} kind${keptKind === 1 ? "" : "s"} set in the app (pass --reclassify to take the export's)`,
+    );
+  }
 
   // -- parents --------------------------------------------------------------
   let parented = 0;

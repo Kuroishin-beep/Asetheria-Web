@@ -567,6 +567,102 @@
       "tags": ["Sanctuary", "Duneforged"],
       "fields": { "type": "Sanctuary", "region": "Duneforged Citadel" },
       "body": "The house of healing of the [[Duneforged Citadel]], standing among its named locations rather than among the temples of the [[Citadel Cathedral]].\n\nA citadel that keeps [[The Adamantine Line]] and runs [[The Ju Colliseum]] generates a steady supply of the wounded. The Sanctuary is where they are brought."
+    },
+    {
+      "slug": "the-aletheion",
+      "kind": "location",
+      "name": "The Aletheion",
+      "summary": "The Imperial Mouseion of Helarchon — the history of the city in five rooms, told the way the censors allow.",
+      "sourceNote": "Authored for the one-shot 'The Aletheion Heist' (docs/oneshots/the-aletheion-heist.md); grounded in the Hellenoria chronicle and the Mycairos record.",
+      "tags": ["Hellenorian", "Museum", "Scholars' District"],
+      "fields": {
+        "tier": "site",
+        "type": "Museum",
+        "region": "Hellarchon City",
+        "ruler": "Curator Eupraxia"
+      },
+      "body": "On Museum Hill in the Scholars' District of [[Hellarchon City]], in the violet shadow of the Arcane Academy, stands the Imperial Mouseion: **the Aletheion**, from the old tongue's *alētheia* — truth, literally *un-forgetting*. The wags of the city call it the *Lētheion*, the House of Forgetting, because every label in the building has been through the censors. Both names are truer than the curators would like.\n\nIt is the history of [[Hellenoria]]'s capital told in five rooms — the approved version. [[Selenarion of Helarchon]] drafted the labels; the Truth-Flame rewrote them.\n\n**Rotunda of the Concord.** The founding mosaic — settlers of every trade laying down tools together — beneath a domed skylight, watched by four Mycairan bronze hoplites the staff quietly re-pose every dawn.\n\n**Founders' Hall.** The Oath-Prow of the first settler ship, votive nets and mining lamps of the first trades, and the Thalos Stele, labelled a *ceremonial ossuary marker*.\n\n**Hall of the Storm-Star.** [[The Continental War]], and the man who ended Hellenoria's part in it: the storm-scored half-mantle of [[Astraphael, the Destructive Star]], an illuminated facsimile of the Treaty of Myrianth, the Silent Sail — cut from a ship of the fleet, damp and cold to this day — and a shattered blade whose plinth has had a name chiseled out of it.\n\n**Gallery of the Violet Dusk.** Aetherglass panes from \"the old harbor fire\" that show yesterday's sky rather than today's, and the Academy's dusk prisms.\n\n**The Bronze Vault.** Everything raised from the Thalos Ridge dig into the ruins of [[Mycairos: The Kingdom of Bronze and Blood]] that is too dangerous or too true for upstairs — rune tablets repeating *the gift beneath stone*, a weeping colossus head, and the museum's star exhibit: the [[Kleis Mycarion]], suspended inside the Academy's Seal of the Fourth Mirror.\n\nA Sealed Annex on the upper floor holds the proscribed manuscripts, in Truth-Flame custody. Museum staff do not go up there."
+    },
+    {
+      "slug": "kleis-mycarion",
+      "kind": "item",
+      "name": "Kleis Mycarion",
+      "summary": "The Key of Mycarion — bronze wound around bone, warm, with something like a heartbeat — raised from the ruins beneath Thalos Ridge.",
+      "sourceNote": "Authored for the one-shot 'The Aletheion Heist'; extends the 'gift beneath stone' thread in the Mycairos record.",
+      "tags": ["Mycairan", "Relic"],
+      "fields": {
+        "type": "Relic — Divine? Infernal? The runes decline to say",
+        "rarity": "Unique",
+        "price": "No listed value; there is exactly one buyer",
+        "attunement": "None — and the Academy advises against bare-skin contact",
+        "properties": "Forearm-long key of layered bronze wound around what is probably bone. Warm to the touch; a slow pulse, roughly one beat per breath. Anyone who holds it skin-to-skin dreams of Thalos Ridge that night and must succeed on a DC 12 Wisdom save each dawn or spend the day knowing exactly which direction the ridge lies."
+      },
+      "body": "Three years ago an Academy dig beneath **Thalos Ridge** broke into an under-citadel of [[Mycairos: The Kingdom of Bronze and Blood]], and among the bronze they raised was a key.\n\nThe runes of Mycairos repeat one phrase scholars still cannot close the book on: *the gift beneath stone*. The Kleis Mycarion is, as far as anyone can prove, a key without a lock — but two conservators who handled it began sleepwalking toward the ridge, and the Arcane Academy does not seal exhibits for nothing. It now hangs suspended inside the **Seal of the Fourth Mirror** in the Bronze Vault of [[The Aletheion]]: four counter-rotating rings of mirrored glass in which the reflected room is always slightly wrong.\n\nWhat it opens is the question. The Academy files say nothing. The occult societies of [[Hellenoria]] — [[The Eclipsed Mirror]] loudest among them, in the whispers where such societies are loud — believe the gift beneath stone is a door, and that doors of that kind belong to [[Hecate, The Mistress of the Arcane]].\n\nWhatever emptied Mycairos in a single generation was beneath stone the whole time."
+    },
+    {
+      "slug": "the-lysikleis",
+      "kind": "item",
+      "name": "The Lysikleis",
+      "summary": "A handleless memorysteel key that learns the shape of any lock or seal pressed against it — Virellarion work, bought through the black market.",
+      "sourceNote": "Authored for the one-shot 'The Aletheion Heist'; the memorysteel is Virellarion craft per the family record.",
+      "tags": ["Memorysteel", "Virellarion Work"],
+      "fields": {
+        "type": "Wondrous item",
+        "rarity": "Rare",
+        "price": "Already paid for",
+        "attunement": "None",
+        "properties": "Pressed against a lock, glyph, or seal for 1 minute, the Lysikleis learns its shape. Expend 1 charge to open that lock or suppress that seal or glyph for 1 hour. 2 charges remain; it does not recharge. It hums, very slightly, like it is thinking."
+      },
+      "body": "*Lysikleis* — \"the loosening key\" — is a handleless key of **memorysteel**, the metal that remembers its last shape, and unmistakably the work of [[The Virellarion Family - Count]]: no one else's steel *thinks*.\n\nIt was commissioned quietly, paid for in full, and left waiting at a fence's stall in the Night Agora — the masked black market [[The Obsidian Masquerade]] throws beneath the Old Harbor of [[Hellarchon City]], where the [[Tenebral Covenant]] honors purchases and [[The Nightweaver Syndicate]] watches who collects them.\n\nThe buyer was [[The Eclipsed Mirror]], and the shape the key was born to learn is the Arcane Academy's Seal of the Fourth Mirror — the four rings of mirrored glass around the [[Kleis Mycarion]] in [[The Aletheion]]. A tool built a year in advance, for a theft that would take one night."
+    },
+    {
+      "slug": "madame-trioditis",
+      "kind": "npc",
+      "name": "Madame Trioditis",
+      "summary": "Broker of the Eclipsed Mirror — a changeling who is three people, and counts the questions you ask her on her fingers.",
+      "sourceNote": "Authored for the one-shot 'The Aletheion Heist'; named for Hecate's epithet of the three roads.",
+      "tags": ["Occult", "Broker", "Changeling"],
+      "fields": {
+        "race": "Changeling",
+        "gender": "She/her (all three of her)",
+        "role": "Broker of the Eclipsed Mirror",
+        "location": "Hellarchon City",
+        "factions": "The Eclipsed Mirror",
+        "gods": "Hecate",
+        "attitude": "Neutral"
+      },
+      "body": "The veiled widow in the harbor taverna, the fishmonger at the dead-drop, and the lamplighter on Museum Hill's lower stair are the same person. Madame Trioditis — named for the three roads of [[Hecate, The Mistress of the Arcane]] — is the public hand of [[The Eclipsed Mirror]], insofar as a society like the Mirror can be said to have one.\n\nShe speaks in threes. She answers exactly three questions honestly per meeting, and counts them on her fingers. She wears a silver ring set with a disc of black mirror, smells of myrrh and rain, and pays what she promises to the coin — her circle's credit is good from the Night Agora to the [[Tenebral Covenant]]'s ledgers, which in [[Hellarchon City]]'s underworld is worth more than a temple oath.\n\nWhen she hires a crew she tells them three rules: don't kill anyone, don't be seen taking it, and don't — under any circumstances — touch the [[Kleis Mycarion]] with bare skin. She would prefer not to break her tools. She has others."
+    },
+    {
+      "slug": "inquisitor-callixta-vireon",
+      "kind": "npc",
+      "name": "Inquisitor Callixta Vireon",
+      "summary": "Truth-Flame inquisitor, blood-heir to the Third Seat, who audits the Aletheion's labels until they say what is required.",
+      "sourceNote": "Authored for the one-shot 'The Aletheion Heist'; continues the line of the Inquisitor Vireon who annotated Selenarion's chronicle.",
+      "tags": ["Truth-Flame", "Inquisitor", "Hellenorian"],
+      "fields": {
+        "role": "Inquisitor of the Truth-Flame, blood-heir to the Third Seat",
+        "location": "Hellarchon City",
+        "attitude": "Neutral",
+        "statblock": "Priest (flame-flavored). HP 38, AC 13 (16 with shield of faith). Sacred flame 2d8 (DC 13 Dex); mace +2 (1d6). Truth-Flame Brand: bonus action, one creature she can see, DC 13 Wis or it cannot hide from her for 10 minutes. Attended by two templars (guards, HP 22, AC 16, flame-tipped maces 1d6+1 plus 2 fire)."
+      },
+      "body": "The margins of the chronicle [[Selenarion of Helarchon]] left behind carry the annotations of an Inquisitor Vireon, Third Seat of the Truth-Flame — *this passage is to be struck from all Temple copies*. Callixta Vireon is that line's blood-heir, and the family trade has not changed: history in [[Hellenoria]] says what the Truth-Flame requires it to say.\n\nShe works out of the Sealed Annex of [[The Aletheion]], where the proscribed manuscripts are kept, and on the eve of any exhibition she audits every label in the building until dawn. She is ash-grey, precise, and carries a brand-iron the way a priest carries a holy symbol.\n\nShe wants arrests and confessions, not corpses — a dead thief confesses nothing. But she holds one hatred above her hatred of thieves: unsanctioned bronze walking the halls is *heresy*, and the night the Bronze Vault's exhibits remember what they were for, every flame she has turns that way first."
+    },
+    {
+      "slug": "the-aletheion-heist",
+      "kind": "quest",
+      "name": "The Aletheion Heist",
+      "summary": "An occult society hires a deniable crew to steal the sealed Kleis Mycarion from the Imperial Mouseion — on the one night it can be done.",
+      "sourceNote": "Authored one-shot; the full module with map, timelines, and stat blocks lives in docs/oneshots/the-aletheion-heist.md.",
+      "tags": ["One-Shot", "Heist", "Hellenorian"],
+      "fields": {
+        "status": "Available",
+        "questGiver": "Madame Trioditis",
+        "reward": "1,500 gp total (300 gp each — a fair 1,000 gp rate plus a 50% hazard premium for the seal): 600 gp advance, 900 gp on delivery, or swap the 900 for two divinity-infused Drachmae stamped with Hecate's triple face. The crew keeps the Lysikleis if a charge remains.",
+        "location": "Hellarchon City"
+      },
+      "visibility": "secret",
+      "body": "A one-shot for five 4th-level characters, roughly four hours. The full module — museum map, Lantern Clock, patrol schedules, exhibits with fence values, stat blocks — lives in `docs/oneshots/the-aletheion-heist.md`.\n\n**The job.** [[The Eclipsed Mirror]] believes the [[Kleis Mycarion]] opens *the gift beneath stone* — the door the runes of [[Mycairos: The Kingdom of Bronze and Blood]] would not name — and that doors of that kind belong to [[Hecate, The Mistress of the Arcane]]. Their broker, [[Madame Trioditis]], hires the crew with three rules: no killing, no witnesses to the taking, and no bare skin on the key.\n\n**Act I — the Night Agora.** The seal-breaker is already bought and paid for: [[The Lysikleis]], waiting at a [[Tenebral Covenant]] stall inside the masked revel [[The Obsidian Masquerade]] throws beneath the Old Harbor. Entry costs a truth spoken aloud at the door. A moth-masked broker of [[The Nightweaver Syndicate]] offers double to walk the key elsewhere — and picks pockets when refused.\n\n**Act II — casing the Aletheion.** [[The Aletheion]] is closed for re-labeling on the eve of its Treaty of Myrianth anniversary exhibition; at dawn the Kleis moves to the Academy deep-vaults forever. Skeleton watch, a bribeable warden with dice debts, [[Inquisitor Callixta Vireon]] auditing the Sealed Annex all night — and three ways in: forged credentials at the service dock, the flooded rain-cistern beneath Museum Hill, or the rotunda skylight.\n\n**Act III — the heist.** The Seal of the Fourth Mirror marks anyone who reaches through it for Academy scrying; the Lysikleis unwinds it clean. But the moment the key leaves its plinth, every Mycairan bronze in the building remembers what it was for — and the escape matters more than the fight. A [[Tenebral Covenant]] crew is robbing the Founders' Hall the same night; the [[Crimson Pact]] is who the Mirror sends if the crew keeps the key.\n\n**Delivery.** Trioditis pays in coin or [[Drachmae]], takes the wrapped key, and asks one question she means: *\"Did it whisper to any of you?\"* The road to Thalos Ridge is the sequel."
     }
   ]
 }

@@ -61,7 +61,7 @@ test.describe("graph view", () => {
       playerContext = await browser.newContext();
       const playerPage = await playerContext.newPage();
       await playerPage.request.post("/api/auth/login", { data: { username, password } });
-      await playerPage.goto("/welcome");
+      await playerPage.goto("/onboarding");
       await playerPage.fill("#displayName", "Graph Tester");
       await playerPage.getByRole("button", { name: "Enter the codex" }).click();
       await playerPage.waitForURL("/");

@@ -5,6 +5,19 @@ import { loginAttempts } from "@/db/schema";
 
 const WINDOW_MINUTES = 15;
 const MAX_ATTEMPTS = 8;
+// Deliberately looser than the login limit. A whole party registering from one
+// table shares an address, and every attempt is counted — including mistyped
+// invite codes — so a tight cap would lock out the people it is meant to serve.
+// The invite code is the gate; this only stops bulk creation.
+const MAX_SIGNUPS = 10;
+
+/**
+ * Sign-ups are counted per address only. Keying them the way logins are keyed —
+ * on address *and* name — would count nothing, because someone creating
+ * accounts in bulk supplies a different name every time. The NUL prefix keeps
+ * this bucket from colliding with a real username.
+ */
+const SIGNUP_BUCKET = "\u0000signup";
 
 /**
  * Identifiers are hashed with the server secret so the table never holds raw
@@ -62,4 +75,32 @@ export async function clearLoginThrottle(ip: string, username: string) {
     .where(sql`${loginAttempts.attemptedAt} < ${cutoff.toISOString()}`);
 }
 
+/**
+ * Throttles account creation from one address. Counted on every attempt rather
+ * than only on failures, since a successful sign-up is the thing being abused.
+ */
+export async function checkSignupThrottle(ip: string): Promise<ThrottleResult> {
+  const identifier = identify(ip, SIGNUP_BUCKET);
+  const since = new Date(Date.now() - WINDOW_MINUTES * 60_000);
+
+  const [row] = await db
+    .select({ count: sql<number>`count(*)::int` })
+    .from(loginAttempts)
+    .where(
+      and(
+        eq(loginAttempts.identifier, identifier),
+        gte(loginAttempts.attemptedAt, since),
+      ),
+    );
+
+  const used = row?.count ?? 0;
+  return { allowed: used < MAX_SIGNUPS, remaining: Math.max(0, MAX_SIGNUPS - used) };
+}
+
+export async function recordSignupAttempt(ip: string) {
+  await db.insert(loginAttempts).values({ identifier: identify(ip, SIGNUP_BUCKET) });
+}
+
 export const LOGIN_WINDOW_MINUTES = WINDOW_MINUTES;
+export const SIGNUP_WINDOW_MINUTES = WINDOW_MINUTES;
+export const MAX_SIGNUPS_PER_WINDOW = MAX_SIGNUPS;

@@ -59,7 +59,7 @@ test.describe("player onboarding + default RBAC grants", () => {
       // Cookie set by the API call belongs to this context's cookie jar
       // already (Playwright's page.request shares the browser context).
       await playerPage.goto("/");
-      await expect(playerPage).toHaveURL("/welcome");
+      await expect(playerPage).toHaveURL("/onboarding");
 
       await playerPage.fill("#displayName", "Kestra");
       await playerPage.getByRole("button", { name: "Enter the codex" }).click();
@@ -127,7 +127,7 @@ test.describe("secret visibility always overrides a grant", () => {
 
       // Clear onboarding out of the way first — this test is about the
       // secret/grant interaction, not the welcome flow (covered above).
-      await playerPage.goto("/welcome");
+      await playerPage.goto("/onboarding");
       await playerPage.fill("#displayName", "Test Rogue");
       await playerPage.getByRole("button", { name: "Enter the codex" }).click();
       await playerPage.waitForURL("/");

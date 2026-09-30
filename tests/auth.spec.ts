@@ -82,9 +82,9 @@ test.describe("login form", () => {
     await expect(page.locator('p[role="alert"]')).toHaveText(/incorrect username or password/i);
   });
 
-  test("unauthenticated visit to a protected page redirects to /login with ?next=", async ({ page }) => {
+  test("unauthenticated visit to a protected page redirects to /welcome with ?next=", async ({ page }) => {
     await page.goto("/admin");
-    await expect(page).toHaveURL(/\/login\?next=%2Fadmin/);
+    await expect(page).toHaveURL(/\/welcome\?next=%2Fadmin/);
   });
 
   test("open-redirect guard: a cross-site next param is not honored", async ({ page }) => {
@@ -117,9 +117,9 @@ test.describe("login form", () => {
     await page.getByRole("button", { name: "Enter" }).click();
     await page.waitForURL("/");
     await page.getByRole("button", { name: /sign out/i }).click();
-    await page.waitForURL(/\/login/);
+    await page.waitForURL(/\/welcome/);
     await page.goto("/admin");
-    await expect(page).toHaveURL(/\/login/);
+    await expect(page).toHaveURL(/\/welcome/);
   });
 });
 

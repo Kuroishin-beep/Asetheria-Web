@@ -1,17 +1,15 @@
-import { redirect } from "next/navigation";
+import { Suspense } from "react";
 import type { Metadata } from "next";
-import { getCurrentUser } from "@/lib/auth";
-import { setDisplayName } from "./actions";
+import { redirect } from "next/navigation";
+import { getSession } from "@/lib/session-cookie";
+import { EnterButtons } from "./enter-buttons";
 
 export const metadata: Metadata = { title: "Welcome" };
 
 export default async function WelcomePage() {
-  const user = await getCurrentUser();
-  if (!user) redirect("/login");
-  // Only players are onboarded this way; the DM's account is created and
-  // named directly by `scripts/seed.ts`. A player who already has a name
-  // (or a DM who lands here by URL) has nothing to do here.
-  if (user.role !== "player" || user.displayName) redirect("/");
+  // Anyone already holding a session goes straight to the codex.
+  const session = await getSession();
+  if (session) redirect("/");
 
   return (
     <main
@@ -22,7 +20,7 @@ export default async function WelcomePage() {
         padding: "2rem 1rem",
       }}
     >
-      <div style={{ width: "min(24rem, 100%)" }}>
+      <div style={{ width: "min(34rem, 100%)" }}>
         <div style={{ textAlign: "center", marginBottom: "1.75rem" }}>
           <p
             aria-hidden="true"
@@ -39,7 +37,7 @@ export default async function WelcomePage() {
               color: "var(--text)",
             }}
           >
-            Welcome to the Continent
+            The Continent of Asetheria
           </h1>
           <p
             style={{
@@ -48,33 +46,24 @@ export default async function WelcomePage() {
               marginTop: "0.35rem",
             }}
           >
-            What should we call you at the table?
+            Two doors into the codex. Choose yours.
           </p>
         </div>
 
-        <form action={setDisplayName} className="card" style={{ padding: "1.5rem", display: "grid", gap: "1rem" }}>
-          <div>
-            <label className="label" htmlFor="displayName">
-              Your name
-            </label>
-            <input
-              id="displayName"
-              name="displayName"
-              className="input"
-              autoFocus
-              required
-              maxLength={60}
-              placeholder="e.g. Kestra"
-            />
-          </div>
-          <p style={{ fontSize: "0.75rem", color: "var(--text-faint)" }}>
-            The GM decides what you can see from here — you&rsquo;ll start with
-            the continent&rsquo;s empires and its major cities.
-          </p>
-          <button type="submit" className="btn btn-primary">
-            Enter the codex
-          </button>
-        </form>
+        <Suspense fallback={null}>
+          <EnterButtons />
+        </Suspense>
+
+        <p
+          style={{
+            textAlign: "center",
+            marginTop: "1.25rem",
+            fontSize: "0.75rem",
+            color: "var(--text-faint)",
+          }}
+        >
+          Vincit qui se vincit
+        </p>
       </div>
     </main>
   );

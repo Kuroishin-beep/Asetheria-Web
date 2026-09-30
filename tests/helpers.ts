@@ -91,7 +91,7 @@ export async function deleteEphemeralEntry(page: Page, slug: string) {
     res = await page.goto(`/codex/entry/${slug}/edit`);
   }
 
-  if (page.url().includes("/login") || !page.url().includes("/edit") || res?.status() === 404) {
+  if (page.url().includes("/welcome") || page.url().includes("/login") || !page.url().includes("/edit") || res?.status() === 404) {
     // Already gone or inaccessible — nothing to clean up.
     return;
   }
@@ -134,7 +134,7 @@ export async function deleteEphemeralEntry(page: Page, slug: string) {
   }
 }
 
-export async function expectRedirectedToLogin(page: Page, path: string) {
+export async function expectRedirectedToWelcome(page: Page, path: string) {
   await page.goto(path);
-  await expect(page).toHaveURL(/\/login/);
+  await expect(page).toHaveURL(/\/welcome/);
 }

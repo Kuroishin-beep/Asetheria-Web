@@ -52,13 +52,16 @@ test.describe("search snippets", () => {
   test("HTML in an entry body is escaped, highlighting survives", async ({ page }) => {
     const name = testName("snippet-xss");
     const word = uniqueWord("snip");
-    const payload = `<img src="x" id="${word}" onerror="window.__snippetXss=1">`;
+    // ts_headline drops well-formed tags from fragment snippets, but an
+    // unterminated one survives verbatim, and a browser would still parse it
+    // as an <img> element if the snippet were inserted unescaped.
+    const payload = `<img src=x id=${word} onerror=window.__snippetXss=1//`;
     let slug: string | undefined;
     try {
       slug = await createEntryViaUI(page, {
         kind: "note",
         name,
-        body: `${payload} the ${word} was here`,
+        body: `the ${word} ${payload} was here`,
         visibility: "public",
       });
 
@@ -67,13 +70,13 @@ test.describe("search snippets", () => {
 
       // Rendered as text, never as an element.
       await expect(page.locator(`img#${word}`)).toHaveCount(0);
-      await expect(page.getByText('<img src="x"', { exact: false })).toBeVisible();
+      await expect(page.getByText("<img src=x", { exact: false })).toBeVisible();
       const fired = await page.evaluate(
         () => (window as { __snippetXss?: number }).__snippetXss,
       );
       expect(fired).toBeUndefined();
       // Highlighting still works.
-      await expect(page.locator("mark", { hasText: word })).toBeVisible();
+      await expect(page.locator("mark", { hasText: word }).first()).toBeVisible();
     } finally {
       await deleteEphemeralEntry(page, slug ?? name).catch(() => {});
     }

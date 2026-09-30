@@ -12,7 +12,7 @@
  *   npx tsx scripts/migrate-legacy-players.ts
  *
  * Do NOT run this for brand-new player accounts — they should go through
- * the normal `/welcome` onboarding flow instead, which grants only the
+ * the normal `/onboarding` flow instead, which grants only the
  * default subset (empires + major cities), not everything.
  */
 import fs from "node:fs";

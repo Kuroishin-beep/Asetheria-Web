@@ -12,6 +12,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { deriveLocationTier } from "../src/lib/locations";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO = path.resolve(__dirname, "..");
@@ -94,6 +95,17 @@ function normalizeName(s: string): string {
 // ---------------------------------------------------------------------------
 // Kind classification
 // ---------------------------------------------------------------------------
+
+/**
+ * The Notion database already says what every settlement is through its tags
+ * ("Invictian City", "Hellenorian Town", "Island Village"), so the tier comes
+ * from those rather than from where the page happens to sit in the folder tree.
+ * This only seeds the value — the field is editable per entry afterwards, and
+ * `seed.ts` preserves whatever the app has set.
+ */
+function locationTier(tags: string[], name: string): string | null {
+  return deriveLocationTier(tags, name);
+}
 
 /** Evaluated in order; first match wins, so put specific paths before general. */
 const KIND_RULES: [RegExp, Kind][] = [
@@ -215,6 +227,24 @@ type ParsedMd = {
   body: string;
 };
 
+const PROP_LINE = /^([A-Z][A-Za-z0-9 &'\/-]{0,40}):\s*(.*)$/;
+
+/** Notion renders the bullets of a multi-line property value with these glyphs. */
+const BULLET_LINE = /^\s*[•◦]/;
+
+/**
+ * True when another `Key: value` line appears before the property block ends,
+ * which means the lines in between are a wrapped property value rather than
+ * the start of the body.
+ */
+function continuesPropertyBlock(lines: string[], from: number): boolean {
+  for (let j = from; j < lines.length; j++) {
+    if (lines[j].trim() === "") return false;
+    if (PROP_LINE.test(lines[j])) return true;
+  }
+  return false;
+}
+
 function parseMarkdown(text: string): ParsedMd {
   // Strip BOM and normalise newlines.
   const lines = text.replace(/^﻿/, "").replace(/\r\n?/g, "\n").split("\n");
@@ -228,6 +258,9 @@ function parseMarkdown(text: string): ParsedMd {
 
   const fields: Record<string, string> = {};
   let tags: string[] = [];
+  // The field a wrapped value belongs to, so continuation lines append to it
+  // instead of ending the block.
+  let lastKey: string | null = null;
 
   // Notion emits `Key: value` property lines immediately after the H1.
   for (; i < lines.length; i++) {
@@ -235,13 +268,29 @@ function parseMarkdown(text: string): ParsedMd {
     if (line.trim() === "") {
       // Allow a single blank line inside the property block.
       const next = lines[i + 1] ?? "";
-      if (/^[A-Z][A-Za-z0-9 &'\/-]{0,40}:\s/.test(next)) continue;
+      if (PROP_LINE.test(next)) continue;
+      // Notion also emits stray whitespace-only lines between the bullets of a
+      // single value; those do not end the block.
+      if (lastKey && BULLET_LINE.test(next)) continue;
       i++;
       break;
     }
-    const m = line.match(/^([A-Z][A-Za-z0-9 &'\/-]{0,40}):\s*(.*)$/);
-    if (!m) break;
+    const m = line.match(PROP_LINE);
+    if (!m) {
+      // Notion wraps bulleted property values onto their own lines. Treat one
+      // as a continuation when it carries a property bullet glyph, or when
+      // another property follows before the block ends — otherwise it is body
+      // prose that started without a blank line.
+      if (lastKey && (BULLET_LINE.test(line) || continuesPropertyBlock(lines, i + 1))) {
+        fields[lastKey] = [fields[lastKey], cleanValue(line)]
+          .filter(Boolean)
+          .join("\n");
+        continue;
+      }
+      break;
+    }
     const [, label, rawValue] = m;
+    lastKey = null;
     if (/^tags$/i.test(label)) {
       tags = splitTags(rawValue);
       continue;
@@ -250,6 +299,7 @@ function parseMarkdown(text: string): ParsedMd {
     if (!key) continue;
     const value = cleanValue(rawValue);
     if (value) fields[key] = value;
+    lastKey = key;
   }
 
   const body = lines.slice(i).join("\n").trim();
@@ -446,6 +496,10 @@ function main() {
     }
 
     const kind = classify(rel, tags, fields);
+    if (kind === "location") {
+      const t = locationTier(tags, name);
+      if (t) fields.tier = t;
+    }
     const relNoExt = demojibake(
       path.join(path.dirname(rel), stripNotionId(path.basename(file))),
     );
@@ -593,6 +647,16 @@ function main() {
       const t = e.tags.find((x) => /Invictian|Hellenorian|Acheaorian|Titan|Ascended|Outer/i.test(x));
       if (t) e.fields.pantheon = t.replace(/\s*(Greater|Lesser)?\s*God$/i, "").trim();
     }
+  }
+
+  // Locations created from a CSV row never went through the markdown path, and
+  // a merge can add the tags after the tier was first computed, so settle the
+  // tier once here against the final tag set.
+  for (const e of entries) {
+    if (e.kind !== "location") continue;
+    const t = deriveLocationTier(e.tags, e.name);
+    if (t) e.fields.tier = t;
+    else delete e.fields.tier;
   }
 
   entries.sort((a, b) => a.kind.localeCompare(b.kind) || a.name.localeCompare(b.name));

@@ -136,7 +136,7 @@ export async function listPlayers() {
 }
 
 /**
- * Applied once, when a player finishes the `/welcome` onboarding flow.
+ * Applied once, when a player finishes the `/onboarding` flow.
  * Default access: the `empire` kind in full, plus every `location` entry the
  * DM has tagged `major-city`. Materialized as concrete rows (rather than a
  * dynamic tag rule) so a location tagged `major-city` *after* a player has

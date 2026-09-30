@@ -2,8 +2,8 @@ import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import type { Metadata } from "next";
 import { getCurrentUser } from "@/lib/auth";
-import { listEntries } from "@/lib/entries";
-import { KIND_BY_SLUG } from "@/lib/kinds";
+import { countEntries, listEntries, PAGE_SIZE } from "@/lib/entries";
+import { KIND_BY_KEY, SECTION_BY_SLUG } from "@/lib/kinds";
 import {
   CardGrid,
   EmptyState,
@@ -20,23 +20,42 @@ export async function generateMetadata({
   params: Promise<Params>;
 }): Promise<Metadata> {
   const { kindSlug } = await params;
-  const def = KIND_BY_SLUG[kindSlug];
+  const def = SECTION_BY_SLUG[kindSlug];
   return { title: def?.label ?? "Codex" };
 }
 
 export default async function KindPage({
   params,
+  searchParams,
 }: {
   params: Promise<Params>;
+  searchParams: Promise<{ page?: string }>;
 }) {
   const { kindSlug } = await params;
-  const def = KIND_BY_SLUG[kindSlug];
+  const def = SECTION_BY_SLUG[kindSlug];
   if (!def) notFound();
 
   const user = await getCurrentUser();
-  if (!user) redirect("/login");
+  if (!user) redirect("/welcome");
 
-  const rows = await listEntries(user, { kind: def.kind, limit: 1000 });
+  const total = await countEntries(user, {
+    kind: def.kind,
+    tier: def.tier,
+  });
+  const pageCount = Math.max(1, Math.ceil(total / PAGE_SIZE));
+  // Clamp rather than 404: a stale bookmark should land on a real page.
+  const requested = Number((await searchParams).page);
+  const page = Math.min(
+    Math.max(1, Number.isFinite(requested) ? Math.trunc(requested) : 1),
+    pageCount,
+  );
+
+  const rows = await listEntries(user, {
+    kind: def.kind,
+    tier: def.tier,
+    limit: PAGE_SIZE,
+    offset: (page - 1) * PAGE_SIZE,
+  });
 
   return (
     <>
@@ -77,9 +96,12 @@ export default async function KindPage({
         />
       ) : (
         <KindFilter
-          total={rows.length}
+          total={total}
           noun={def.label.toLowerCase()}
-          fieldDefs={def.fields.map((f) => ({ key: f.key, label: f.label }))}
+          fieldDefs={KIND_BY_KEY[def.kind].fields.map((f) => ({ key: f.key, label: f.label }))}
+          page={page}
+          pageCount={pageCount}
+          basePath={`/codex/${kindSlug}`}
           items={rows.map((e) => ({
             id: e.id,
             slug: e.slug,

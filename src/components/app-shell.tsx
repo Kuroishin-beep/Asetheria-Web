@@ -51,7 +51,7 @@ export function AppShell({
 
   async function signOut() {
     await fetch("/api/auth/logout", { method: "POST" });
-    router.push("/login");
+    router.push("/welcome");
     router.refresh();
   }
 

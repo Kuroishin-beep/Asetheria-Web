@@ -18,7 +18,7 @@ export async function setDisplayName(formData: FormData) {
   if (!parsed.success) {
     // The form has client-side `required`; a failure here means it was
     // bypassed. Send back to the same page rather than pretending success.
-    redirect("/welcome");
+    redirect("/onboarding");
   }
 
   await db
