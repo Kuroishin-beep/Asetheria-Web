@@ -64,7 +64,7 @@ export default function LoginPage() {
             }}
           >
             The Dungeon Master&rsquo;s door. Players can{" "}
-            <Link href="/welcome">enter without a key</Link>.
+            <Link href="/welcome">enter without a password</Link>.
           </p>
         </div>
 
