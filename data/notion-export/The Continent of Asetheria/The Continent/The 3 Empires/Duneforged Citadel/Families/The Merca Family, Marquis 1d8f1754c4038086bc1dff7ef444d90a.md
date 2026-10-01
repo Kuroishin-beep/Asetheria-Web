@@ -1,4 +1,4 @@
-# The Merca Family - Marquis”
+# The Merca Family, Marquis
 
 Created: April 17, 2025 9:05 PM
 Family Crest: A silver stag standing on a pile of coins, antlers tipped with scales — symbolizing wealth, strength, and balance.

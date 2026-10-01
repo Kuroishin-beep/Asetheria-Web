@@ -1,4 +1,4 @@
-# The Vulkrim Family - Marquis
+# The Vulkrim Family, Marquis
 
 Created: April 17, 2025 9:48 PM
 Family Crest: A molten hammer over crossed tongs, ringed by a crown of fire
@@ -54,4 +54,4 @@ The Duke’s original sword? **It wasn’t forged... it was repaired**—suggest
 
 ---
 
-[Untitled](The%20Vulkrim%20Family%20-%20Marquis/Untitled%2022ff1754c40380159f8ad11893a3ceb6.csv)
+[Untitled](The%20Vulkrim%20Family,%20Marquis/Untitled%2022ff1754c40380159f8ad11893a3ceb6.csv)
