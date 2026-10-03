@@ -1,6 +1,6 @@
 import { notFound, redirect } from "next/navigation";
 import type { Metadata } from "next";
-import { asc, ne } from "drizzle-orm";
+import { and, asc, isNull, ne } from "drizzle-orm";
 import { db } from "@/db";
 import { entries } from "@/db/schema";
 import { getCurrentUser } from "@/lib/auth";
@@ -38,7 +38,8 @@ export default async function EditEntryPage({
     db
       .select({ id: entries.id, name: entries.name, kind: entries.kind })
       .from(entries)
-      .where(ne(entries.id, entry.id))
+      // An archived page can't be a parent: its children would point at a 404.
+      .where(and(ne(entries.id, entry.id), isNull(entries.archivedAt)))
       .orderBy(asc(entries.name))
       .limit(1000),
     getRevisions(entry.id),

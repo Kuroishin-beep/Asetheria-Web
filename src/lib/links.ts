@@ -54,15 +54,58 @@ export function nameAliases(name: string): string[] {
   return [...new Set(out)];
 }
 
+/** Which kind a shared title should link to first — earlier wins. */
+const KIND_PRIORITY = [
+  "empire", "location", "organization", "faction", "family", "npc", "deity",
+  "creature", "item", "ore", "flora", "quest", "lore", "session", "system",
+  "rule", "pantheon", "note",
+];
+
+function kindRank(kind: string | undefined): number {
+  const i = kind ? KIND_PRIORITY.indexOf(kind) : -1;
+  return i === -1 ? -1 : KIND_PRIORITY.length - i;
+}
+
+/**
+ * Splits an entry's `aliases` property ("Helarchon, Aetherion") into names.
+ * Like Obsidian's aliases: other spellings a page should answer to.
+ */
+export function parseAliases(fields: Record<string, string> | null | undefined): string[] {
+  return (fields?.aliases ?? "")
+    .split(",")
+    .map((s) => s.trim())
+    .filter(Boolean);
+}
+
 /**
  * Maps every name and alias to an entry id. Full names are registered first so
- * an alias can never shadow a real entry title.
+ * an alias can never shadow a real entry title; explicit `aliases` come next,
+ * ahead of the automatically derived short forms.
  */
 export function buildNameIndex(
-  entries: { id: string; name: string }[],
+  entries: { id: string; name: string; kind?: string; aliases?: string[] }[],
 ): Map<string, string> {
   const index = new Map<string, string>();
-  for (const e of entries) index.set(normalizeName(e.name), e.id);
+  // Several pages can share a title — "Imperium Invicta" is an empire, a
+  // pantheon and a house-rules page. The link goes to the most specific kind
+  // (the empire), and ties break by id so the answer never changes between
+  // requests.
+  const ranked = [...entries].sort(
+    (a, b) => kindRank(b.kind) - kindRank(a.kind) || (a.id < b.id ? -1 : a.id > b.id ? 1 : 0),
+  );
+  for (const e of ranked) {
+    const key = normalizeName(e.name);
+    if (!index.has(key)) index.set(key, e.id); // first (highest-ranked) wins
+  }
+
+  // Explicit aliases are a deliberate choice, so they're kept even when the
+  // same spelling is also some other entry's derived short form.
+  for (const e of entries) {
+    for (const alias of e.aliases ?? []) {
+      const key = normalizeName(alias);
+      if (key && !index.has(key)) index.set(key, e.id);
+    }
+  }
 
   // Aliases claimed by more than one entry are ambiguous, so they're dropped
   // rather than guessed at.
@@ -209,7 +252,7 @@ const STOP_NAMES = new Set([
 export function resolveProseMentions(
   selfId: string,
   body: string,
-  entries: { id: string; name: string }[],
+  entries: { id: string; name: string; aliases?: string[] }[],
   existing: Set<string>,
 ): LinkTarget[] {
   if (!body.trim()) return [];
@@ -224,7 +267,7 @@ export function resolveProseMentions(
     // Try the full title first, then its short form ("Bacchus" for
     // "Bacchus, The Bountiful Spirit"), so prose that uses the familiar name
     // still connects.
-    const candidates = [e.name, ...nameAliases(e.name)].filter(
+    const candidates = [e.name, ...nameAliases(e.name), ...(e.aliases ?? [])].filter(
       (c) => c.length >= MIN_AUTO_LINK_LENGTH && !STOP_NAMES.has(normalizeName(c)),
     );
 
@@ -238,19 +281,38 @@ export function resolveProseMentions(
       );
       const m = re.exec(haystack);
       if (!m) continue;
-      const key = `${e.id}:mentions`;
-      if (existing.has(key)) break;
-      existing.add(key);
+      // An explicit [[link]] to the same page already covers this mention.
+      if (existing.has(`${e.id}:mentions`) || existing.has(`${e.id}:named`)) break;
+      existing.add(`${e.id}:named`);
       const at = m.index + m[1].length;
       out.push({
         targetId: e.id,
-        relation: "mentions",
+        // "named", not "mentions": the text names the page without linking it.
+        // Kept distinct so "unlinked mentions" can be told apart from links.
+        relation: "named",
         context: extractContext(body, at, candidate.length),
       });
       break;
     }
   }
   return out;
+}
+
+/**
+ * Every outgoing edge for one entry: explicit `[[links]]` and properties, plus
+ * plain-text mentions of other pages. Every write path uses this, so an edit
+ * keeps the same edges the initial seed gave the entry.
+ */
+export function resolveAllLinks(
+  selfId: string,
+  body: string,
+  fields: Record<string, string>,
+  nameIndex: Map<string, string>,
+  entries: { id: string; name: string; aliases?: string[] }[],
+): LinkTarget[] {
+  const explicit = resolveLinks(selfId, body, fields, nameIndex);
+  const seen = new Set(explicit.map((l) => `${l.targetId}:${l.relation}`));
+  return [...explicit, ...resolveProseMentions(selfId, body, entries, seen)];
 }
 
 function escapeRegExp(s: string): string {

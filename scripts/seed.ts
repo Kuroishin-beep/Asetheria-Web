@@ -386,6 +386,7 @@ async function buildLinkGraph() {
     .select({
       id: entries.id,
       name: entries.name,
+      kind: entries.kind,
       body: entries.body,
       fields: entries.fields,
     })

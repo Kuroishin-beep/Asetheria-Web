@@ -11,6 +11,8 @@ test.describe("export access control", () => {
     expect(body.format).toBe("asetheria-codex");
     expect(Array.isArray(body.entries)).toBe(true);
     expect(body.counts.entries).toBe(body.entries.length);
+    // Search vectors are derived data and must not bloat the backup.
+    expect(body.entries.some((e: Record<string, unknown>) => "embedding" in e)).toBe(false);
   });
 
   test("DM gets a readable Markdown export", async ({ page }) => {

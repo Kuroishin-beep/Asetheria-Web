@@ -7,6 +7,7 @@ import { getCurrentUser } from "@/lib/auth";
 import { entryInputSchema } from "@/lib/validation";
 import { slugify } from "@/lib/links";
 import { rebuildLinksForEntry } from "@/lib/link-graph";
+import { refreshEmbeddingsAfterResponse } from "@/lib/embedding-sync";
 
 export const runtime = "nodejs";
 export const maxDuration = 60;
@@ -60,6 +61,7 @@ export async function POST(request: Request) {
 
   let created = 0;
   let updated = 0;
+  const toEmbed: string[] = [];
   let skipped = 0;
 
   for (const item of parsed.data.entries) {
@@ -106,11 +108,13 @@ export async function POST(request: Request) {
           fields: item.fields ?? current.fields,
           tags: item.tags ?? current.tags,
           visibility: item.visibility ?? current.visibility,
+          embedding: null,
           updatedAt: new Date(),
         })
         .where(eq(entries.id, foundId))
         .returning();
       await rebuildLinksForEntry(row.id, row.body, row.fields);
+      toEmbed.push(row.id);
       updated++;
     } else {
       const [row] = await db
@@ -130,9 +134,11 @@ export async function POST(request: Request) {
         .returning();
       bySlug.set(row.slug, row.id);
       await rebuildLinksForEntry(row.id, row.body, row.fields);
+      toEmbed.push(row.id);
       created++;
     }
   }
 
+  refreshEmbeddingsAfterResponse(toEmbed);
   return NextResponse.json({ ok: true, created, updated, skipped });
 }

@@ -1,8 +1,6 @@
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import type { Metadata } from "next";
-import { db } from "@/db";
-import { entries } from "@/db/schema";
 import { getCurrentUser } from "@/lib/auth";
 import {
   getBacklinks,
@@ -10,10 +8,12 @@ import {
   getEntryBySlug,
   getOutgoingLinks,
   getParent,
+  getUnlinkedMentions,
+  getWikiLinkResolver,
 } from "@/lib/entries";
 import { KIND_BY_KEY, kindIcon } from "@/lib/kinds";
-import { renderMarkdown } from "@/lib/markdown";
-import { normalizeName } from "@/lib/links";
+import { extractHeadings, renderMarkdown } from "@/lib/markdown";
+import { parseAliases } from "@/lib/links";
 import { CardGrid, EntryCard } from "@/components/entry-card";
 import { ArchiveButton } from "./archive-button";
 
@@ -46,20 +46,21 @@ export default async function EntryPage({
   const isDM = user.role === "dm";
   const def = KIND_BY_KEY[entry.kind];
 
-  const [backlinks, outgoing, children, parent, nameRows] = await Promise.all([
+  const [backlinks, outgoing, children, parent, resolve, unlinked] = await Promise.all([
     getBacklinks(user, entry.id),
     getOutgoingLinks(user, entry.id),
     getChildren(user, entry.id),
     getParent(user, entry.parentId),
-    db.select({ name: entries.name, slug: entries.slug }).from(entries),
+    // Lets `[[Wiki Links]]` in the body resolve to pages this user can open.
+    getWikiLinkResolver(user),
+    user.role === "dm" ? getUnlinkedMentions(user, entry) : Promise.resolve([]),
   ]);
-
-  // Lets `[[Wiki Links]]` in the body resolve to real pages while rendering.
-  const nameIndex = new Map(nameRows.map((r) => [normalizeName(r.name), r.slug]));
-  const resolve = (name: string) => {
-    const hit = nameIndex.get(normalizeName(name));
-    return hit ? { slug: hit } : null;
-  };
+  const aliases = parseAliases(entry.fields);
+  // The DM gets Obsidian's split: explicit links here, names-without-links in
+  // "Unlinked mentions". Players have no unlinked panel, so they see both kinds.
+  const linkedBacklinks = isDM ? backlinks.filter((b) => b.relation !== "named") : backlinks;
+  // An outline only earns its space on a page long enough to need one.
+  const outline = extractHeadings(entry.body ?? "").filter((h) => h.level <= 3);
 
   const bodyHtml = renderMarkdown(entry.body, resolve);
   const dmHtml = isDM && entry.dmNotes ? renderMarkdown(entry.dmNotes, resolve) : "";
@@ -72,7 +73,7 @@ export default async function EntryPage({
   // so no property from Notion silently disappears.
   const knownKeys = new Set(fieldDefs.map((f) => f.key));
   const extraFields = Object.entries(entry.fields ?? {}).filter(
-    ([k, v]) => v && !knownKeys.has(k) && k !== "description",
+    ([k, v]) => v && !knownKeys.has(k) && k !== "description" && k !== "aliases",
   );
 
   return (
@@ -132,6 +133,11 @@ export default async function EntryPage({
               <span aria-hidden="true">{kindIcon(entry.kind)}</span>
               {entry.name}
             </h1>
+            {aliases.length > 0 && (
+              <p style={{ color: "var(--text-faint)", fontSize: "0.875rem", marginTop: "0.25rem" }}>
+                Also known as {aliases.join(", ")}
+              </p>
+            )}
             {entry.summary && (
               <p
                 style={{
@@ -152,7 +158,7 @@ export default async function EntryPage({
               className="no-print"
               style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}
             >
-              <Link href={`/codex/entry/${entry.slug}/edit`} className="btn">
+              <Link href={`/codex/entry/${entry.slug}/edit`} className="btn" data-shortcut="edit" title="Edit (e)">
                 ✎ Edit
               </Link>
               <ArchiveButton entryId={entry.id} name={entry.name} />
@@ -259,6 +265,25 @@ export default async function EntryPage({
             </p>
           )}
 
+          {outline.length >= 3 && (
+            <nav
+              aria-label="On this page"
+              className="no-print card"
+              style={{ padding: "0.75rem 1rem", marginBottom: "1.25rem", fontSize: "0.875rem" }}
+            >
+              <p className="label" style={{ marginBottom: "0.4rem" }}>
+                On this page
+              </p>
+              <ol style={{ listStyle: "none", margin: 0, padding: 0, display: "grid", gap: "0.2rem" }}>
+                {outline.map((h) => (
+                  <li key={h.id} style={{ paddingLeft: `${(h.level - Math.min(...outline.map((o) => o.level))) * 0.9}rem` }}>
+                    <a href={`#${h.id}`}>{h.text}</a>
+                  </li>
+                ))}
+              </ol>
+            </nav>
+          )}
+
           {bodyHtml ? (
             <div
               className="prose-codex"
@@ -344,10 +369,27 @@ export default async function EntryPage({
             </Section>
           )}
 
-          {backlinks.length > 0 && (
-            <Section title={`Linked mentions (${backlinks.length})`}>
+          {unlinked.length > 0 && (
+            <Section title={`Unlinked mentions (${unlinked.length})`}>
+              <p style={{ fontSize: "0.8125rem", color: "var(--text-muted)", marginBottom: "0.6rem" }}>
+                These pages name {entry.name} without linking it. Wrap the name in{" "}
+                <code>[[ ]]</code> there to connect them.
+              </p>
+              <ul style={{ margin: 0, paddingLeft: "1.1rem", display: "grid", gap: "0.25rem" }}>
+                {unlinked.map((u) => (
+                  <li key={u.id}>
+                    <Link href={`/codex/entry/${u.slug}/edit`}>{u.name}</Link>{" "}
+                    <span style={{ fontSize: "0.75rem", color: "var(--text-faint)" }}>{u.kind}</span>
+                  </li>
+                ))}
+              </ul>
+            </Section>
+          )}
+
+          {linkedBacklinks.length > 0 && (
+            <Section title={`Linked mentions (${linkedBacklinks.length})`}>
               <CardGrid>
-                {backlinks.map((c) => (
+                {linkedBacklinks.map((c) => (
                   <EntryCard
                     key={`${c.id}-${c.relation}`}
                     slug={c.slug}

@@ -1,10 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { useActionState, useMemo, useState } from "react";
+import { useActionState, useEffect, useMemo, useRef, useState } from "react";
 import { useFormStatus } from "react-dom";
 import { KINDS, KIND_BY_KEY } from "@/lib/kinds";
 import type { EntryKind } from "@/db/schema";
+import { MarkdownEditor, clearDraft } from "@/components/markdown-editor";
 
 export type EntryFormValues = {
   id?: string;
@@ -46,18 +47,38 @@ export function EntryForm({
   );
 
   const def = KIND_BY_KEY[kind];
+  const formRef = useRef<HTMLFormElement>(null);
+  const draftKey = initial.id ?? "new";
+
+  // Ctrl/Cmd+S saves, the way every editor people already use does.
+  useEffect(() => {
+    function onKey(e: KeyboardEvent) {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "s") {
+        e.preventDefault();
+        formRef.current?.requestSubmit();
+      }
+    }
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
 
   // Properties captured on import that this kind doesn't define — surfaced so
-  // they remain editable instead of being invisibly carried along.
+  // they remain editable instead of being invisibly carried along. `aliases`
+  // has its own input under Identity.
   const extraFieldKeys = useMemo(() => {
-    const known = new Set(def?.fields.map((f) => f.key) ?? []);
+    const known = new Set([...(def?.fields.map((f) => f.key) ?? []), "aliases"]);
     return Object.keys(initial.fields).filter(
       (k) => !known.has(k) && initial.fields[k],
     );
   }, [def, initial.fields]);
 
   return (
-    <form action={formAction} style={{ display: "grid", gap: "1.5rem" }}>
+    <form
+      ref={formRef}
+      action={formAction}
+      onSubmit={() => clearDraft(draftKey)}
+      style={{ display: "grid", gap: "1.5rem" }}
+    >
       {state?.error && (
         <p
           role="alert"
@@ -125,6 +146,20 @@ export function EntryForm({
               ))}
             </select>
           </div>
+        </div>
+
+        <div>
+          <label className="label" htmlFor="aliases">
+            Also known as
+          </label>
+          <input
+            id="aliases"
+            name="fields[aliases]"
+            className="input"
+            defaultValue={initial.fields.aliases ?? ""}
+            maxLength={600}
+            placeholder="Other spellings or names, comma separated — [[links]] to any of them resolve here"
+          />
         </div>
 
         <div>
@@ -325,14 +360,14 @@ export function EntryForm({
           >
             [[Aeterna City]]
           </code>{" "}
-          to link another entry — the link shows up on both pages.
+          to link another entry — suggestions appear as you type, and the link
+          shows up on both pages. Ctrl+S saves.
         </p>
-        <textarea
+        <MarkdownEditor
           id="body"
           name="body"
-          className="textarea"
-          style={{ minHeight: "22rem", fontFamily: "var(--font-prose)" }}
           defaultValue={initial.body}
+          draftKey={draftKey}
         />
       </fieldset>
 

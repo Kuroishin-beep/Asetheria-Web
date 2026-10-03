@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { CommandPalette } from "@/components/command-palette";
+import { KeyboardShortcuts } from "@/components/keyboard-shortcuts";
 import { ThemeToggle } from "@/components/theme-toggle";
 
 export type NavKind = {
@@ -175,7 +176,8 @@ export function AppShell({
 
           <div style={{ flex: 1 }} />
 
-          <CommandPalette />
+          <CommandPalette isDM={isDM} />
+          <KeyboardShortcuts isDM={isDM} />
 
           {isDM && (
             <Link href="/codex/new" className="btn btn-primary">

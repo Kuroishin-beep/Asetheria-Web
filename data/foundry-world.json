@@ -1,0 +1,1002 @@
+{
+  "format": "asetheria-codex",
+  "source": "Foundry VTT world 'asetheria' (+ 'the-aletheion-heist' handout)",
+  "note": "Asetheria-authored content only; licensed modules and SRD stat blocks are excluded by scripts/extract-foundry-world.ts.",
+  "entries": [
+    {
+      "slug": "the-letter-aletheion-heist",
+      "kind": "note",
+      "name": "The Letter (Aletheion Heist)",
+      "summary": "The anonymous letter that sets [[The Aletheion Heist]] in motion.",
+      "body": "You were named to me three times, by three mouths, and so I write. There is a house on Museum Hill where the city keeps its memory, and in that house one small thing that is mine by an older claim than any label. Tomorrow it goes where no claim can follow. Tonight, then.\n\nSix hundred gold when we speak. Nine hundred more when it rests in my hand, three hundred a head for five, half again a fair rate, because the house is careful and I am generous. Everything the work requires has already been bought and paid for; you will simply be collecting it. Come to the revel beneath the Old Harbor when the drums start. Wear a mask. Bring a truth you can bear to say aloud, the door charges one.\n\nMy circle asks three things. Kill no one. Be seen taking nothing. And whatever you find at the heart of that house, do not touch it with your skin. — T.",
+      "dmNotes": "",
+      "fields": {},
+      "tags": [
+        "foundry-import",
+        "handout",
+        "aletheion-heist"
+      ],
+      "visibility": "public",
+      "sourcePath": "Foundry VTT: worlds/the-aletheion-heist/journal/fFPfxTCBtWhxvYQP"
+    },
+    {
+      "slug": "the-runic-vault-puzzle",
+      "kind": "note",
+      "name": "The Runic Vault Puzzle",
+      "summary": "A three-layered runic lock on a vault door, worked by a wheel and three buttons.",
+      "body": "a pedestal with a wheel on top is and 3 buttons on the middle of the wheel placed in front of the vault door. It can be turned left or right,\n\nInfront of the vault door is a 3 layered circle with diffferent runic scripts on each layer, there are 4 runic scripts on each. the first button is lit up as well as the first layer of the vault door\n\nLayer 1:\n\nNorth: ᚺᚨᛗᛗᛖᚱ East: ᚳᛟᚡᛖᚾᚨᚾᛏ South: ᛊᚨᛒᛚᛖ West: ᛗᚨᛊᛩᚢᛖ\n\nLayer 2:\n\nNorth: ᛖᛏᛖᚱᚾᚨᛚ East: ᛟᚠ South: ᚳᛟᛞᛖᛊ West:ᛟᚠ\n\nLayer 3:\n\nNorth:ᛚᚢᛗᛁᚾᚨ East:ᛖᛩᚢᛁᚾᛟᛪ South:ᚳᛁᚱᚳᛚᛖ West:ᚱᛖᚡᛖᛚᚱᛇ",
+      "dmNotes": "**Solution (from Flind):**\n\nLayer 1:\n\nNorth: ᚺᚨᛗᛗᛖᚱ South: ᚳᛟᚡᛖᚾᚨᚾᛏ\n\nLayer 2:\n\nNorth: ᛟᚠ South: ᛟᚠ\n\nLayer 3:\n\nNorth: ᛚᚢᛗᛁᚾᚨ South: ᛖᛩᚢᛁᚾᛟᛪ",
+      "fields": {},
+      "tags": [
+        "foundry-import",
+        "puzzle"
+      ],
+      "visibility": "public",
+      "sourcePath": "Foundry VTT: worlds/asetheria/journal/YR5WN17y0VRIetUH"
+    },
+    {
+      "slug": "yinzhang",
+      "kind": "npc",
+      "name": "(印章) Yinzhang",
+      "summary": "Fairy Wizard 4",
+      "body": "Yinzhang is a medium-sized male fairy and a gifted wizard, born with a dangerous secret: he shares his body with a second, darker mind named Yangzhang. Where Yinzhang is anxious, kind, and bookish, Yangzhang is cold, calculating, and frighteningly composed. The two are not separate personalities—they are two minds trapped in one body, always conscious, always watching. When tensions rise, when voices raise, or even when fear creeps in, Yangzhang breaks through. He doesn’t possess; he overwhelms. Magic flares, words turn to blades, and those around Yinzhang often pay the price. After Yangzhang incinerated a ceremonial shrine in a fit of calm cruelty, their hometown exiled them both. Only one person remained kind—Zhangyin, his eccentric and battle-happy cousin. She never judged him, never flinched. But during their separate journeys to Asetheria, the two were split apart. She vanished somewhere along the way. Now, Yinzhang wanders alone, desperately searching for Zhangyin—not just to reunite with his only family, but because her presence is the only thing that’s ever truly quieted Yangzhang’s voice.\n\n6in dicc soft",
+      "dmNotes": "",
+      "fields": {
+        "race": "Fairy",
+        "role": "Party member · Wizard 4",
+        "statblock": "Class: Wizard 4"
+      },
+      "tags": [
+        "foundry-import",
+        "player-character"
+      ],
+      "visibility": "public",
+      "sourcePath": "Foundry VTT: worlds/asetheria/actors/mZTjO6aUsNEARja1"
+    },
+    {
+      "slug": "arthur-ramaris",
+      "kind": "npc",
+      "name": "Arthur Ramaris",
+      "summary": "Half-Elf Ranger 4 (fallen)",
+      "body": "He is a half-elf his mother is a human and his father is a wealthy noble elf who wants nothing to do with him. Essentially he is a mistake his mother died at a young age and with nobody to turn to, no family or friends this led him to the wilderness where he ended up essentially surviving by himself studying the wilderness around and growing up alone with not much contact with people. As he grew older he practiced being a hunter of sorts he's not that great with socializing with people but despite this, he wants to do good in the world by observing people at a distance. So he decided to go on an adventure with his animal companion and experience civilization after a long time being in the woods sometimes he is curious about his father since when he was younger his mother used to tell stories about how powerful his father was but he doesn't remember the name or what he looks like but he doesn't care because for him his father is merely a myth.",
+      "dmNotes": "",
+      "fields": {
+        "race": "Half-Elf",
+        "role": "Fallen party member · Ranger 4",
+        "statblock": "Class: Ranger 4"
+      },
+      "tags": [
+        "foundry-import",
+        "player-character",
+        "fallen"
+      ],
+      "visibility": "public",
+      "sourcePath": "Foundry VTT: worlds/asetheria/actors/A0U5a6t3jBPGQjJM"
+    },
+    {
+      "slug": "bobb-the-tree",
+      "kind": "npc",
+      "name": "Bobb the Tree",
+      "summary": "A named character from the campaign's Foundry roster, not yet written up.",
+      "body": "",
+      "dmNotes": "",
+      "fields": {},
+      "tags": [
+        "foundry-import",
+        "needs-writeup"
+      ],
+      "visibility": "public",
+      "sourcePath": "Foundry VTT: worlds/asetheria/actors/YS3ElCzZsvRZyAUZ"
+    },
+    {
+      "slug": "braggen-greysword",
+      "kind": "npc",
+      "name": "Braggen Greysword",
+      "summary": "A named character from the campaign's Foundry roster, not yet written up.",
+      "body": "",
+      "dmNotes": "",
+      "fields": {},
+      "tags": [
+        "foundry-import",
+        "needs-writeup"
+      ],
+      "visibility": "public",
+      "sourcePath": "Foundry VTT: worlds/asetheria/actors/JvJMTO1BHYODPAtF"
+    },
+    {
+      "slug": "braun-lodbrook-vii",
+      "kind": "npc",
+      "name": "Braun Lodbrook VII",
+      "summary": "A named character from the campaign's Foundry roster, not yet written up.",
+      "body": "",
+      "dmNotes": "",
+      "fields": {},
+      "tags": [
+        "foundry-import",
+        "needs-writeup"
+      ],
+      "visibility": "public",
+      "sourcePath": "Foundry VTT: worlds/asetheria/actors/FoxuxVO1ewXN88zG"
+    },
+    {
+      "slug": "cassia-vetra",
+      "kind": "npc",
+      "name": "Cassia Vetra",
+      "summary": "Human, Variant Tribuni Angusticlavii",
+      "body": "## Personality\n\nCassia is an embodiment of measured brilliance on the battlefield. She doesn’t shout; she calculates. Calm under pressure and known for surgical strikes and counteroffensives, she is a disciplined tactician who sees every soldier as part of a greater living war engine. She disdains reckless charges and values loyalty above all else.",
+      "dmNotes": "",
+      "fields": {
+        "race": "Human, Variant",
+        "role": "Tribuni Angusticlavii · Imperium Invicta legion",
+        "statblock": "HP: 112 | AC: 18 | CR: 7"
+      },
+      "tags": [
+        "foundry-import",
+        "legion"
+      ],
+      "visibility": "public",
+      "sourcePath": "Foundry VTT: worlds/asetheria/actors/Y5cuyzcMOoUgQYG7"
+    },
+    {
+      "slug": "cri-the-astronomer",
+      "kind": "npc",
+      "name": "Cri the Astronomer",
+      "summary": "A named character from the campaign's Foundry roster, not yet written up.",
+      "body": "",
+      "dmNotes": "",
+      "fields": {},
+      "tags": [
+        "foundry-import",
+        "needs-writeup"
+      ],
+      "visibility": "public",
+      "sourcePath": "Foundry VTT: worlds/asetheria/actors/l4EDRCCXjfIFtowd"
+    },
+    {
+      "slug": "davoth-hammerock",
+      "kind": "npc",
+      "name": "Davoth Hammerock",
+      "summary": "A named character from the campaign's Foundry roster, not yet written up.",
+      "body": "",
+      "dmNotes": "",
+      "fields": {},
+      "tags": [
+        "foundry-import",
+        "needs-writeup"
+      ],
+      "visibility": "public",
+      "sourcePath": "Foundry VTT: worlds/asetheria/actors/B4n7cmTPlWTB3xfB"
+    },
+    {
+      "slug": "drus-varn",
+      "kind": "npc",
+      "name": "Drus Varn",
+      "summary": "Half-Orc Centurio",
+      "body": "## Personality\n\nShe lets others talk and simply delivers results. Drusa believes silence and survival speak louder than orders. Many fear her—not for her temper, but because she never needs to raise her voice.",
+      "dmNotes": "",
+      "fields": {
+        "race": "Half-Orc",
+        "role": "Centurio · Imperium Invicta legion",
+        "statblock": "AC: 17 | CR: 5"
+      },
+      "tags": [
+        "foundry-import",
+        "legion"
+      ],
+      "visibility": "public",
+      "sourcePath": "Foundry VTT: worlds/asetheria/actors/217aLKbDFWVydg4N"
+    },
+    {
+      "slug": "elaris-the-mindbound-ascendant",
+      "kind": "npc",
+      "name": "Elaris, the Mindbound Ascendant",
+      "summary": "Human",
+      "body": "",
+      "dmNotes": "",
+      "fields": {
+        "race": "Human",
+        "statblock": "HP: 230 | AC: 17 | CR: 6"
+      },
+      "tags": [
+        "foundry-import",
+        "needs-writeup"
+      ],
+      "visibility": "public",
+      "sourcePath": "Foundry VTT: worlds/asetheria/actors/Au0TPRh5NUMV8mUX"
+    },
+    {
+      "slug": "elira-citadel-archives",
+      "kind": "npc",
+      "name": "Elira",
+      "summary": "Quest giver: A Remnant.",
+      "body": "Offers the quest [[A Remnant]]. She is desperate to recover these remnants before the relentless plains bury them again, or worse, before rival scholars or the dangers of the plains itself claim the site.",
+      "dmNotes": "",
+      "fields": {},
+      "tags": [
+        "foundry-import",
+        "guild-contact",
+        "quest-giver"
+      ],
+      "visibility": "public",
+      "sourcePath": "Foundry VTT: worlds/asetheria/actors/jeDsTmKyVbFjWe3h"
+    },
+    {
+      "slug": "fimulda-brightstone",
+      "kind": "npc",
+      "name": "Fimulda Brightstone",
+      "summary": "A named character from the campaign's Foundry roster, not yet written up.",
+      "body": "",
+      "dmNotes": "",
+      "fields": {},
+      "tags": [
+        "foundry-import",
+        "needs-writeup"
+      ],
+      "visibility": "public",
+      "sourcePath": "Foundry VTT: worlds/asetheria/actors/2aIPkbjODhBPjLyY"
+    },
+    {
+      "slug": "francis-almer-tauranis",
+      "kind": "npc",
+      "name": "Francis Almer Tauranis",
+      "summary": "High Elf Cleric 4",
+      "body": "He's a high elf noble that grew up in castle mostly by himself and their servants since his father is always away tending to his duties, When he was a little boy his mother went away searching a cure for her condition his father always tried everything city offered priests, potions, nothing worked because of this their financial situation was worsening desperation so instead his mother disappeared his last memory of his mother was, his telling him \"Mommy going away for a while don't worry I will comeback\" and years even a decade went by nothing his Mother never returned. Because of this memory of his mother being sick from a curse this lead him to pray and become a cleric that someday he will find his missing mother cure her of her sickness and help people along the way because he knew that what his mother would want.\n\n6in dicc soft",
+      "dmNotes": "",
+      "fields": {
+        "race": "High Elf",
+        "role": "Party member · Cleric 4",
+        "statblock": "Class: Cleric 4"
+      },
+      "tags": [
+        "foundry-import",
+        "player-character"
+      ],
+      "visibility": "public",
+      "sourcePath": "Foundry VTT: worlds/asetheria/actors/Eo2ruO2UGi81Wu9U"
+    },
+    {
+      "slug": "haver-de-fraudre",
+      "kind": "npc",
+      "name": "Haver de Fraudre",
+      "summary": "Reborn Paladin 4",
+      "body": "died with mercy on my blade — I rose with none in my chest.\"\n\nHaver de Fruadre was once known as Haver the Enlightened, a radiant noble prepared from birth to carry the sacred lineage of the Great Anubis — a divine bloodline said to bring peace to the dead and judgment to the wicked. She was poised to become the next Heir of the Jackal Crown, a living symbol of balance between life and death.\n\nBut in a world where power is coveted, legends become targets.\n\nA secret cabal, obsessed with immortality, spread the myth that drinking the blood of Anubis’s true descendantscould grant eternal youth or restore the dead to life. Though untrue, this belief led to centuries of hunting the bloodline — and Haver, the most visible heir, was always in their sights.\n\nWhat few knew was that Haver had a younger sister, Sca’meyr, hidden away by the family under the guise of being a distant relative. She bore the same divine blood — but not the public title, not the expectation. She was hidden to survive.\n\n---\n\n## 🐺 The Fall\n\nHaver was trained as a priestess of protection — a swordbearer sworn never to strike in hatred, only to shield. But that vow was broken when the enemies of their house launched a massacre disguised as a diplomatic gathering.\n\nIt was no parley — it was a slaughter.\n\nHaver held the gates. She held the line.\n\nBut she did not kill when she had the chance.\n\nAnd the man she spared murdered her younger brother.\n\nWracked with guilt and consumed by rage, Haver forsook her oath.\n\nShe broke the covenant of mercy.\n\nAnd in the chaos of the final defense, she was struck down — not as a saint, but as a sister weeping over her brother’s body.\n\nShe was declared dead.\n\nFive years passed.\n\n---\n\n## 🕯️ The Rebirth\n\nHaver awoke in stone and dust, her once-golden blood now cooled and still. Whatever force restored her — divine backlash, a shattered death pact, or her own hate — she did not come back whole.\n\nShe returned a Reborn, stripped of light, armored in memory, and armed with purpose.\n\nShe learned that Sca’meyr survived, hidden still, and untouched by the bloodhunt — for now. Their family, trying to protect Sca’meyr from both prophecy and politics, had cut ties and covered her origins.\n\nBut Haver remembers. She knows the truth.\n\nAnd now, with the patience of the grave and the vengeance of a knight, she walks again. She is death to the liars who hunt her kind.\n\n\"I’ll send them screaming to my grandsire’s gate —\n\nwhere jackals feast and sins await.\n\nNo crown, no coin will buy them grace;\n\ntheir souls will rot in Anubis’ face.\"\n\n​​⚖️ The Oath of the Jackal Gate (Broken)\n\n“I swear by the Gate and by the Judge beyond,\n\nto guard the innocent, speak no wrath, and draw no blade in hate.\n\nLet my strength be a shield, and my voice be a warning.\n\nMay those who cross the gate pass clean, or not at all.”\n\n---\n\n### 🩸 But now, twisted by death and grief, her new words are:\n\n“That oath is ash.\n\nNow I swear by bone, by silence, and by blood:\n\nI will shield what light remains by drowning out the dark.\n\nThe gate no longer judges — I do.”",
+      "dmNotes": "",
+      "fields": {
+        "race": "Reborn",
+        "role": "Party member · Paladin 4",
+        "statblock": "Class: Paladin 4"
+      },
+      "tags": [
+        "foundry-import",
+        "player-character"
+      ],
+      "visibility": "public",
+      "sourcePath": "Foundry VTT: worlds/asetheria/actors/jMmP3I5b6Oo3ax8T"
+    },
+    {
+      "slug": "kaelus",
+      "kind": "npc",
+      "name": "Kaelus",
+      "summary": "Human",
+      "body": "",
+      "dmNotes": "",
+      "fields": {
+        "race": "Human",
+        "statblock": "HP: 72 | AC: 15 | CR: 5"
+      },
+      "tags": [
+        "foundry-import",
+        "cave",
+        "needs-writeup"
+      ],
+      "visibility": "public",
+      "sourcePath": "Foundry VTT: worlds/asetheria/actors/eGcvWN8yVw7lH7pV"
+    },
+    {
+      "slug": "kelvar",
+      "kind": "npc",
+      "name": "Kelvar",
+      "summary": "Quest giver: Voices from the Far Grass.",
+      "body": "Offers the quest [[Voices from the Far Grass]]. Kelvar, a grizzled old scout with eyes that have seen too much, speaks of a phenomenon that chills him to the bone: voices carried on the winds from a place few have mapped and even fewer return from. He cannot pinpoint the exact location, only that it lies \"far beyond the outer plains.\" He urgently needs a team to journey into this desolate, unmapped territory, find the source of these ethereal voices, and determine their nature – are they a threat, a warning, or something even stranger?",
+      "dmNotes": "",
+      "fields": {},
+      "tags": [
+        "foundry-import",
+        "guild-contact",
+        "quest-giver"
+      ],
+      "visibility": "public",
+      "sourcePath": "Foundry VTT: worlds/asetheria/actors/G8ZypWnGRXYXHoBu"
+    },
+    {
+      "slug": "khavorex-vaerith",
+      "kind": "npc",
+      "name": "Khavorex Vaerith",
+      "summary": "A named character from the campaign's Foundry roster, not yet written up.",
+      "body": "",
+      "dmNotes": "",
+      "fields": {
+        "statblock": "HP: 110 | AC: 18 | CR: 5"
+      },
+      "tags": [
+        "foundry-import",
+        "bandit-quest",
+        "needs-writeup"
+      ],
+      "visibility": "public",
+      "sourcePath": "Foundry VTT: worlds/asetheria/actors/bxpG6hXuGXbdSyUg"
+    },
+    {
+      "slug": "lucan-mireleaf",
+      "kind": "npc",
+      "name": "Lucan Mireleaf",
+      "summary": "Wood Elf Centurio",
+      "body": "## Personality\n\nLucan rarely speaks above a whisper. A master of quiet killing, he has trained legion scouts in elven ambush techniques. He serves not for glory, but to repay a life debt to the Imperium.",
+      "dmNotes": "",
+      "fields": {
+        "race": "Wood Elf",
+        "role": "Centurio · Imperium Invicta legion",
+        "statblock": "AC: 17 | CR: 5"
+      },
+      "tags": [
+        "foundry-import",
+        "legion"
+      ],
+      "visibility": "public",
+      "sourcePath": "Foundry VTT: worlds/asetheria/actors/HeMEj32xJQIuIphO"
+    },
+    {
+      "slug": "luciano",
+      "kind": "npc",
+      "name": "Luciano",
+      "summary": "A named character from the campaign's Foundry roster, not yet written up.",
+      "body": "",
+      "dmNotes": "",
+      "fields": {},
+      "tags": [
+        "foundry-import",
+        "casino",
+        "needs-writeup"
+      ],
+      "visibility": "public",
+      "sourcePath": "Foundry VTT: worlds/asetheria/actors/cQVGb6oS3inY92QZ"
+    },
+    {
+      "slug": "marcus-ulpius",
+      "kind": "npc",
+      "name": "Marcus Ulpius",
+      "summary": "Mountain Dwarf Praefectus Castrorum",
+      "body": "## Personality\n\nGruff, utilitarian, and commanding without flair, Marcus is obsessed with logistics and engineering. A general who builds his victories like fortresses—brick by brick. He scoffs at idealistic war mages and is more comfortable with bricks and forge iron than with medals and politics. He sees war as a system that can be optimized.",
+      "dmNotes": "",
+      "fields": {
+        "race": "Mountain Dwarf",
+        "role": "Praefectus Castrorum · Imperium Invicta legion",
+        "statblock": "HP: 135 | AC: 19 | CR: 8"
+      },
+      "tags": [
+        "foundry-import",
+        "legion"
+      ],
+      "visibility": "public",
+      "sourcePath": "Foundry VTT: worlds/asetheria/actors/E0u9Wl8skkqfjfBa"
+    },
+    {
+      "slug": "markos-beornhardt",
+      "kind": "npc",
+      "name": "Markos Beornhardt",
+      "summary": "A named character from the campaign's Foundry roster, not yet written up.",
+      "body": "",
+      "dmNotes": "",
+      "fields": {},
+      "tags": [
+        "foundry-import",
+        "needs-writeup"
+      ],
+      "visibility": "public",
+      "sourcePath": "Foundry VTT: worlds/asetheria/actors/XTrb7dSpSkLxYybU"
+    },
+    {
+      "slug": "naratham-kulan",
+      "kind": "npc",
+      "name": "Naratham Kulan",
+      "summary": "Half-Orc Centurio",
+      "body": "## Personality\n\nShe lets others talk and simply delivers results. Drusa believes silence and survival speak louder than orders. Many fear her—not for her temper, but because she never needs to raise her voice.",
+      "dmNotes": "",
+      "fields": {
+        "race": "Half-Orc",
+        "role": "Centurio · Imperium Invicta legion",
+        "statblock": "AC: 17 | CR: 5"
+      },
+      "tags": [
+        "foundry-import",
+        "legion"
+      ],
+      "visibility": "public",
+      "sourcePath": "Foundry VTT: worlds/asetheria/actors/TjJ6XIp7qffILrw2"
+    },
+    {
+      "slug": "nasi-laguzol",
+      "kind": "npc",
+      "name": "Nasi Laguzol",
+      "summary": "A named character from the campaign's Foundry roster, not yet written up.",
+      "body": "",
+      "dmNotes": "",
+      "fields": {},
+      "tags": [
+        "foundry-import",
+        "needs-writeup"
+      ],
+      "visibility": "public",
+      "sourcePath": "Foundry VTT: worlds/asetheria/actors/M19YldnOp7E3fVuC"
+    },
+    {
+      "slug": "nilmates-wulasar",
+      "kind": "npc",
+      "name": "Nilmates Wulasar",
+      "summary": "A named character from the campaign's Foundry roster, not yet written up.",
+      "body": "",
+      "dmNotes": "",
+      "fields": {},
+      "tags": [
+        "foundry-import",
+        "oldtown",
+        "needs-writeup"
+      ],
+      "visibility": "public",
+      "sourcePath": "Foundry VTT: worlds/asetheria/actors/u0taYqujeBHNcBp7"
+    },
+    {
+      "slug": "noble-merca",
+      "kind": "npc",
+      "name": "Noble Merca",
+      "summary": "A noble of the Merca family, met at the Casino.",
+      "body": "A noble of [[The Merca Family, Marquis]], met at the Casino.",
+      "dmNotes": "",
+      "fields": {
+        "factions": "The Merca Family, Marquis"
+      },
+      "tags": [
+        "foundry-import",
+        "casino"
+      ],
+      "visibility": "public",
+      "sourcePath": "Foundry VTT: worlds/asetheria/actors/Mvyp4DIHqbf0xmMN"
+    },
+    {
+      "slug": "noble-virellarion",
+      "kind": "npc",
+      "name": "Noble Virellarion",
+      "summary": "A noble of the Virellarion family, met at the Casino.",
+      "body": "A noble of [[The Virellarion Family, Count]], met at the Casino.",
+      "dmNotes": "",
+      "fields": {
+        "factions": "The Virellarion Family, Count"
+      },
+      "tags": [
+        "foundry-import",
+        "casino"
+      ],
+      "visibility": "public",
+      "sourcePath": "Foundry VTT: worlds/asetheria/actors/xbbsezpIrXdzLib9"
+    },
+    {
+      "slug": "noble-vulkrim",
+      "kind": "npc",
+      "name": "Noble Vulkrim",
+      "summary": "A noble of the Vulkrim family, met at the Casino.",
+      "body": "A noble of [[The Vulkrim Family, Marquis]], met at the Casino.",
+      "dmNotes": "",
+      "fields": {
+        "factions": "The Vulkrim Family, Marquis"
+      },
+      "tags": [
+        "foundry-import",
+        "casino"
+      ],
+      "visibility": "public",
+      "sourcePath": "Foundry VTT: worlds/asetheria/actors/y6EjSsCT7gMr1TrP"
+    },
+    {
+      "slug": "noble-zayida",
+      "kind": "npc",
+      "name": "Noble Zayida",
+      "summary": "A noble of the Zayida family, met at the Casino.",
+      "body": "A noble of [[The Zayida Family, Count]], met at the Casino.",
+      "dmNotes": "",
+      "fields": {
+        "factions": "The Zayida Family, Count"
+      },
+      "tags": [
+        "foundry-import",
+        "casino"
+      ],
+      "visibility": "public",
+      "sourcePath": "Foundry VTT: worlds/asetheria/actors/MAKIFUqNnGkK7mPm"
+    },
+    {
+      "slug": "overseer-tarnak",
+      "kind": "npc",
+      "name": "Overseer Tarnak",
+      "summary": "Quest giver: Echoes in the Dune Mines.",
+      "body": "Offers the quest [[Echoes in the Dune Mines]]. The Overseer is growing desperate, his crew on edge, fearing an ancient evil has been awakened. He needs a competent group to descend into the depths, investigate the source of the disturbances, and neutralize whatever threat lies within, ensuring the mine can resume its vital operations.",
+      "dmNotes": "",
+      "fields": {},
+      "tags": [
+        "foundry-import",
+        "casino",
+        "quest-giver"
+      ],
+      "visibility": "public",
+      "sourcePath": "Foundry VTT: worlds/asetheria/actors/mjccQfj6cirIjrV1"
+    },
+    {
+      "slug": "scameyr-de-faudre",
+      "kind": "npc",
+      "name": "Sca’meyr de Faudre",
+      "summary": "Aasimar Cleric 4 (fallen)",
+      "body": "Backstory\n\nSca’meyr de Faudre is an Aasimar born of divine lineage—the daughter of the grandson of Anubis, god of the afterlife. Though blessed with celestial blood and healing power, her path is far from holy tradition. Chaotic and free-spirited, Sca’meyr sees life and death as cycles to be bent, not followed. Raised in a secluded temple, she studied ancient rites and divine balance, but always questioned authority and embraced unorthodox methods.\n\nShe now walks the world as a Life Cleric, wielding divine magic to heal allies, disrupt enemies, and challenge rigid truths with flexible faith. While she honors her ancestry, she does not worship it—she forges her own path with divine grace and a trickster’s touch.\n\nFun fact: Sca’meyr is a distant ancestor of Truth Danotfalse, a bard of some fame in Cindermore, known for blurring the lines between honesty and illusion—a trait clearly passed down.",
+      "dmNotes": "",
+      "fields": {
+        "race": "Aasimar",
+        "role": "Fallen party member · Cleric 4",
+        "statblock": "Class: Cleric 4"
+      },
+      "tags": [
+        "foundry-import",
+        "player-character",
+        "fallen"
+      ],
+      "visibility": "public",
+      "sourcePath": "Foundry VTT: worlds/asetheria/actors/tqzHAzFTw4iAq1nK"
+    },
+    {
+      "slug": "silvyre",
+      "kind": "npc",
+      "name": "Silvyre",
+      "summary": "Half-Elf Ranger 4",
+      "body": "Silvyre was born in a small forested village with an elven mother and a human father. While her mother was always seemingly away, according to her father, Silv learned to enjoy exploring the woods. Her father eventually taught her the ways of the bow to help him hunt. As she wandered around, she came across Pon, a human boy who always got himself into wacky hijinks. Despite this, the two grew close, even if Silv had to get Pon out of probably dangerous situations. While Silv was curious, Pon was more than that and always seemed eager about ancient artefacts.\n\nOne day, the two stumbled upon an old shrine, and Pon seemed too eager to invite Silv to inspect an artefact inside. Before Silv could have a moment to process anything, long, slithery creatures started wrapping around her chest, limbs, and neck, almost suffocating her. She hadn't realised that Pon had disappeared. After some time, she felt like she could move again, but the creatures did not leave her body. Silvyre returned to her village hoping to find Pon there, but she was only met with gasps and shouts, shuns and yelps at what surrounded her. Her father could only stare, and she knew then she couldn't stay any more.\n\nSilvyre is now left wandering and wondering. What had happened to her, or Pon? It almost seemed suspicious. But with nowhere to go, she could only try to survive for herself, and her newfound companions. Perhaps Silv will find clues, and maybe Pon himself, and see whether she'd take revenge or accept forgiveness.",
+      "dmNotes": "",
+      "fields": {
+        "race": "Half-Elf",
+        "role": "Party member · Ranger 4",
+        "statblock": "Class: Ranger 4"
+      },
+      "tags": [
+        "foundry-import",
+        "player-character"
+      ],
+      "visibility": "public",
+      "sourcePath": "Foundry VTT: worlds/asetheria/actors/QspSr9jipAsMxepq"
+    },
+    {
+      "slug": "sylprys-strongwater",
+      "kind": "npc",
+      "name": "Sylprys strongwater",
+      "summary": "A named character from the campaign's Foundry roster, not yet written up.",
+      "body": "",
+      "dmNotes": "",
+      "fields": {},
+      "tags": [
+        "foundry-import",
+        "oldtown",
+        "needs-writeup"
+      ],
+      "visibility": "public",
+      "sourcePath": "Foundry VTT: worlds/asetheria/actors/wJKzx74p02kVuPDt"
+    },
+    {
+      "slug": "tarkon-maximilian",
+      "kind": "npc",
+      "name": "Tarkon Maximilian",
+      "summary": "A named character from the campaign's Foundry roster, not yet written up.",
+      "body": "",
+      "dmNotes": "",
+      "fields": {},
+      "tags": [
+        "foundry-import",
+        "guild-contact",
+        "needs-writeup"
+      ],
+      "visibility": "public",
+      "sourcePath": "Foundry VTT: worlds/asetheria/actors/UAchRcjON8CEGxfs"
+    },
+    {
+      "slug": "thal",
+      "kind": "npc",
+      "name": "Thal",
+      "summary": "A named character from the campaign's Foundry roster, not yet written up.",
+      "body": "",
+      "dmNotes": "",
+      "fields": {
+        "statblock": "HP: 200 | AC: 17 | CR: 6"
+      },
+      "tags": [
+        "foundry-import",
+        "needs-writeup"
+      ],
+      "visibility": "public",
+      "sourcePath": "Foundry VTT: worlds/asetheria/actors/tVb2EelL7Rl5WqVv"
+    },
+    {
+      "slug": "thestun-vulkrim",
+      "kind": "npc",
+      "name": "Thestun Vulkrim",
+      "summary": "Quest giver: Bandits at the Broken Gate.",
+      "body": "Offers the quest [[Bandits at the Broken Gate]]. Quartermaster Thestun is fuming. Thestun needs a skilled team to reclaim the stolen goods, eliminate The Jackal and his crew, and re-secure the pass for future trade.",
+      "dmNotes": "",
+      "fields": {},
+      "tags": [
+        "foundry-import",
+        "guild-contact",
+        "quest-giver"
+      ],
+      "visibility": "public",
+      "sourcePath": "Foundry VTT: worlds/asetheria/actors/e2SaIuxn6Lef4uTR"
+    },
+    {
+      "slug": "thorfinn-hugrakkur",
+      "kind": "npc",
+      "name": "Thorfinn Hugrakkur",
+      "summary": "Mountain Dwarf Barbarian 4",
+      "body": "While not a royal member of a dwarven kingdom, you belonged to a once-prominent clan that lived deep within the mountain of Kharveth. During the great Continental War, the mountain was decimated—now nothing more than a broken remnant of its former glory. Many scholars have since tried to locate where Kharveth once stood, but it was destroyed beyond recognition, and those who knew its whereabouts perished long ago. Few even remember the clan Hugrakkur; only a handful remain.\n\nA clan heirloom—a mysterious slate of unknown stone, carved with a face that eerily resembles your own—has been passed down through your bloodline. The slate changes its visage with each new heir, yet always retains something familiar. You know, vaguely, the hidden truth: while the warriors of your clan were away, an 'allied' orc clan turned on you, invading and ravaging your mountain home.\n\nYour ancestors, once vassals to the Imperium, were never true citizens—nomads in allegiance, not in nation. Thorfinn Hugrakkur, one of the last of your blood, lived among the Bloodaxes for a time, but has now left for the [[Duneforged Citadel]].\n\n2in dicc soft",
+      "dmNotes": "",
+      "fields": {
+        "race": "Mountain Dwarf",
+        "role": "Party member · Barbarian 4",
+        "statblock": "Class: Barbarian 4 | HP: 56"
+      },
+      "tags": [
+        "foundry-import",
+        "player-character"
+      ],
+      "visibility": "public",
+      "sourcePath": "Foundry VTT: worlds/asetheria/actors/x4NshNQ1BwRlwb2R"
+    },
+    {
+      "slug": "tirian-arkwind",
+      "kind": "npc",
+      "name": "Tirian Arkwind",
+      "summary": "Aarakocra Centurio",
+      "body": "## Personality\n\nCalm and watchful, Tirian values clarity and initiative. As a sky-scout, he commands perspective and elevation—both literal and mental. He uses wind to find clarity in strategy.",
+      "dmNotes": "",
+      "fields": {
+        "race": "Aarakocra",
+        "role": "Centurio · Imperium Invicta legion",
+        "statblock": "AC: 17 | CR: 5"
+      },
+      "tags": [
+        "foundry-import",
+        "legion"
+      ],
+      "visibility": "public",
+      "sourcePath": "Foundry VTT: worlds/asetheria/actors/c8yhhUkuBJBGjkbA"
+    },
+    {
+      "slug": "vaelra",
+      "kind": "npc",
+      "name": "Vaelra",
+      "summary": "Human",
+      "body": "",
+      "dmNotes": "",
+      "fields": {
+        "race": "Human",
+        "statblock": "HP: 68 | AC: 15 | CR: 5"
+      },
+      "tags": [
+        "foundry-import",
+        "cave",
+        "needs-writeup"
+      ],
+      "visibility": "public",
+      "sourcePath": "Foundry VTT: worlds/asetheria/actors/rEZ9vHAtmnJDzisl"
+    },
+    {
+      "slug": "valeria-ironstride",
+      "kind": "npc",
+      "name": "Valeria “Ironstride”",
+      "summary": "Dragonborn(Brass) Centurio",
+      "body": "## Personality\n\nA bold and steadfast vanguard. Valeria has a burning sense of duty and literally charges into battle with her shield glowing from the heat of her breath. She views fire as purifying.",
+      "dmNotes": "",
+      "fields": {
+        "race": "Dragonborn(Brass)",
+        "role": "Centurio · Imperium Invicta legion",
+        "statblock": "HP: 200 | CR: 5"
+      },
+      "tags": [
+        "foundry-import",
+        "legion"
+      ],
+      "visibility": "public",
+      "sourcePath": "Foundry VTT: worlds/asetheria/actors/RtMuJKlouSh2b9mr"
+    },
+    {
+      "slug": "varus-decianus",
+      "kind": "npc",
+      "name": "Varus Decianus",
+      "summary": "Invictian Aasimar Legatus Legionis",
+      "body": "## Personality\n\nVarus is a living symbol of Imperium Invictian discipline and resolve. He is unyielding, noble, and speaks with divine conviction. His troops would follow him into the Hells and back. He values order and sacrifice and despises chaos and recklessness.",
+      "dmNotes": "",
+      "fields": {
+        "race": "Invictian Aasimar",
+        "role": "Legatus Legionis · Imperium Invicta legion",
+        "statblock": "HP: 250 | CR: 12"
+      },
+      "tags": [
+        "foundry-import",
+        "legion"
+      ],
+      "visibility": "public",
+      "sourcePath": "Foundry VTT: worlds/asetheria/actors/JmGuKLLxtDBsNmha"
+    },
+    {
+      "slug": "veris",
+      "kind": "npc",
+      "name": "Veris",
+      "summary": "Quest giver: A Shifting near Ephelanum.",
+      "body": "Offers the quest [[A Shifting near Ephelanum]]. Veris, a hooded figure, seeks an escort through the plains, A ruin near the cit of [[Ephelanum City|Ephelanum]].",
+      "dmNotes": "",
+      "fields": {},
+      "tags": [
+        "foundry-import",
+        "casino",
+        "quest-giver"
+      ],
+      "visibility": "public",
+      "sourcePath": "Foundry VTT: worlds/asetheria/actors/Ok6vOsJ8gZNcoR6p"
+    },
+    {
+      "slug": "vir",
+      "kind": "npc",
+      "name": "Vir",
+      "summary": "Mirrorborn Sorcerer",
+      "body": "",
+      "dmNotes": "",
+      "fields": {
+        "race": "Mirrorborn Sorcerer",
+        "statblock": "HP: 88 | AC: 15 | CR: 6"
+      },
+      "tags": [
+        "foundry-import",
+        "needs-writeup"
+      ],
+      "visibility": "public",
+      "sourcePath": "Foundry VTT: worlds/asetheria/actors/nGD7R2sOsfnlXb5B"
+    },
+    {
+      "slug": "ysgrid-twendall",
+      "kind": "npc",
+      "name": "Ysgrid Twendall",
+      "summary": "A named character from the campaign's Foundry roster, not yet written up.",
+      "body": "",
+      "dmNotes": "",
+      "fields": {},
+      "tags": [
+        "foundry-import",
+        "needs-writeup"
+      ],
+      "visibility": "public",
+      "sourcePath": "Foundry VTT: worlds/asetheria/actors/xqHlXFCMAikjBVZd"
+    },
+    {
+      "slug": "zhangyin",
+      "kind": "npc",
+      "name": "章音 (Zhāngyīn)",
+      "summary": "Fairy Monk 4 (fallen)",
+      "body": "Zhangyin was born beneath a still, silver moon in the high cradle of the Shenzhan Mountains, where the air grows thin and the wind carries no sound. There, in a world of stone and silence, the Hollow Wind Monastery stood—an ancient sanctuary where monks trained their bodies into scripture and their minds into mirrors. Zhangyin was the monastery’s only fairy initiate in centuries. Small, winged, and entirely too loud. While others meditated in stillness, she preferred movement—both of body and of mouth.\n\nThough trained to restrain her strikes, nothing ever restrained her speech. She spoke constantly, and always with a vocabulary that stretched far beyond her years. Her sentences bloomed with poetic structure and abstract comparison, drifting often into elaborate musings that sounded wise but led nowhere at all. It was not uncommon for Zhangyin to finish sparring an opponent only to launch into a three-minute monologue on how “the curvature of a wrist reflects the inevitability of collapse in all temporary things.” She spoke like a philosopher—but wasn’t one. Her wisdom was spontaneous, self-indulgent, and occasionally nonsensical. Still, her skill was undeniable.\n\nZhangyin fought with a dancer’s grace and a hammer’s resolve. Her hands could silence chaos. Her presence could soothe wild beasts. But it was her words—lavish, persistent, and laced with strange metaphors—that no one could escape. When war crept toward the mountain’s edge, she left the monastery with no fanfare. She served as a soldier in conflicts not of her making, delivering mercy and ruin in equal measure.\n\nThose who fought beside her either adored her or fled the sound of her approaching soliloquies. Now, with the fighting behind her and her fists at rest, Zhangyin has taken to wandering. With no divine vision, no purpose to fulfill, and certainly no war to fight, she set her sights on Asetheria. No one asked her why she was going.\n\nNo one needed to. “Even the stone must stretch eventually,” she said, packing her things. “Perhaps in movement I shall discover the vocabulary of stillness. Or maybe I’ll just enjoy a good pastry.” In truth, it may simply be a vacation. But for Asetheria, a land unprepared for her stream of verbose observations and piercing roundhouse kicks, nothing will ever be the same again.",
+      "dmNotes": "",
+      "fields": {
+        "race": "Fairy",
+        "role": "Fallen party member · Monk 4",
+        "statblock": "Class: Monk 4"
+      },
+      "tags": [
+        "foundry-import",
+        "player-character",
+        "fallen"
+      ],
+      "visibility": "public",
+      "sourcePath": "Foundry VTT: worlds/asetheria/actors/ruDssW4M7rQVKVlr"
+    },
+    {
+      "slug": "ember-anvil",
+      "kind": "organization",
+      "name": "Ember & Anvil",
+      "summary": "The Vulkrim family's blacksmith's foundry in the Citadel's Middle District: arms and armour for the royal guard.",
+      "body": "**🛠️ EMBER & ANVIL – Premier Blacksmith's Foundry Motto:** _“Steel forged in dragonfire, enchanted by the stars.”_\n\n**Owner:**[[The Vulkrim Family, Marquis|Vulkrim Family]]\n\n**Location:** Middle District,[[Duneforged Citadel]]\n\n**Reputation:** Weapon and armor supplier to royalty, war colleges, and monster slayers.\n\n---\n\n### 📜 Catalogue\n\n| Item Name | Description | Base Cost | -25% (Low Market) | -10% (Negotiated) | Standard | x10% (High Demand) | x25% (Rare Stock) |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n| Runed Longsword | Balanced longsword with dwarven runes (+1 to hit) | 300 gp | 225 gp | 270 gp | 300 gp | 330 gp | 375 gp |\n| Reinforced Shield | Mithral-lined; +1 AC vs ranged | 250 gp | 188 gp | 225 gp | 250 gp | 275 gp | 313 gp |\n| Engraved Weapon Set | Matching ceremonial weapons (e.g., rapier + dagger) | 500 gp | 375 gp | 450 gp | 500 gp | 550 gp | 625 gp |\n| Flamebrand Sword | Deals an extra 1d6 fire damage | 3,500 gp | 2,625 gp | 3,150 gp | 3,500 gp | 3,850 gp | 4,375 gp |\n| Stormpiercer Spear | Throws lightning bolt (60 ft, 4d6 lightning) | 7,500 gp | 5,625 gp | 6,750 gp | 7,500 gp | 8,250 gp | 9,375 gp |\n| Blade of Echoes | Once/day echoes second attack (half dmg) | 6,800 gp | 5,100 gp | 6,120 gp | 6,800 gp | 7,480 gp | 8,500 gp |\n| Mithral Plate | No stealth penalty, no STR requirement | 4,500 gp | 3,375 gp | 4,050 gp | 4,500 gp | 4,950 gp | 5,625 gp |\n| Celestial Chainmail | 1/day cast _Shield of Faith_ or _Lesser Restoration_ | 6,500 gp | 4,875 gp | 5,850 gp | 6,500 gp | 7,150 gp | 8,125 gp |\n| Sentinel’s Helm | Grants darkvision and immunity to surprise | 3,000 gp | 2,250 gp | 2,700 gp | 3,000 gp | 3,300 gp | 3,750 gp |\n| Godforged Blade | Sentient, custom weapon | 15,000+ gp | 11,250 gp | 13,500 gp | 15,000 gp | 16,500 gp | 18,750 gp |\n| Titan Gauntlets | STR 21, grapple Huge foes | 10,000 gp | 7,500 gp | 9,000 gp | 10,000 gp | 11,000 gp | 12,500 gp |\n| Aetherglass Shield | Reflects 1 spell/day | 12,000 gp | 9,000 gp | 10,800 gp | 12,000 gp | 13,200 gp | 15,000 gp |\n| Portable Forge | Magic foldable forge | 1,200 gp | 900 gp | 1,080 gp | 1,200 gp | 1,320 gp | 1,500 gp |\n| Spectral Armguard | Summons ghost smith for repairs | 2,500 gp | 1,875 gp | 2,250 gp | 2,500 gp | 2,750 gp | 3,125 gp |\n| Mithral Inlay | Removes stealth disadvantage | +800 gp | +600 gp | +720 gp | +800 gp | +880 gp | +1,000 gp |\n| Adamantine Reinforcement | Weapon: max crit; Armor: negates crits | +1,200 gp | +900 gp | +1,080 gp | +1,200 gp | +1,320 gp | +1,500 gp |\n| Rune of Warding | Resistance to chosen damage type | 1,000 gp | 750 gp | 900 gp | 1,000 gp | 1,100 gp | 1,250 gp |\n\n###",
+      "dmNotes": "",
+      "fields": {
+        "type": "Shop: Blacksmith's Foundry",
+        "location": "Middle District, Duneforged Citadel"
+      },
+      "tags": [
+        "foundry-import",
+        "shop",
+        "duneforged",
+        "vulkrim"
+      ],
+      "visibility": "public",
+      "sourcePath": "Foundry VTT: worlds/asetheria/journal/zdqcoMGPQnSxlN8E"
+    },
+    {
+      "slug": "the-gilded-crucible",
+      "kind": "organization",
+      "name": "The Gilded Crucible",
+      "summary": "The Virellarion family's alchemist's atelier in the Citadel's Middle District: elixirs for archmages, nobles and divine emissaries.",
+      "body": "**THE GILDED CRUCIBLE – Alchemist's Atelier of Wonders Motto:** _“Where essence meets excellence.”_\n\n**Owner:** [[The Virellarion Family, Count|Virellarion Family]]\n\n**Location:** Middle District, [[Duneforged Citadel]]\n\n**Reputation:** Elixirs for archmages, nobles, and divine emissaries\n\n---\n\n### 📜 Catalogue\n\n| Item Name | Description | Base Cost | -25% | -10% | Standard | x10% | x25% |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n| Healing Potion (2d4+2) | Standard healing | 50 gp | 38 gp | 45 gp | 50 gp | 55 gp | 63 gp |\n| Elixir of Clarity | Adv. Wis saves/checks (1 hr) | 300 gp | 225 gp | 270 gp | 300 gp | 330 gp | 375 gp |\n| Heroism Potion | 10 temp HP, _Bless_ effect | 750 gp | 563 gp | 675 gp | 750 gp | 825 gp | 938 gp |\n| Alchemist’s Fire | Burning flask | 100 gp | 75 gp | 90 gp | 100 gp | 110 gp | 125 gp |\n| Frost Capsule | Exploding ice, slows targets (DC 13) | 400 gp | 300 gp | 360 gp | 400 gp | 440 gp | 500 gp |\n| Flash Powder Grenade | Blinds in 15-ft cone (DC 15) | 500 gp | 375 gp | 450 gp | 500 gp | 550 gp | 625 gp |\n| Phoenix Ash | Used in fire/raise potions | 250 gp | 188 gp | 225 gp | 250 gp | 275 gp | 313 gp |\n| Troll Fat | Catalyst for regen brews | 400 gp | 300 gp | 360 gp | 400 gp | 440 gp | 500 gp |\n| Field Alchemist’s Kit | Portable brewing set | 250 gp | 188 gp | 225 gp | 250 gp | 275 gp | 313 gp |\n| Chromatic Distiller | Fuse two potions | 900 gp | 675 gp | 810 gp | 900 gp | 990 gp | 1,125 gp |\n| Potion of Draconic Fury | Breath + resist (1 hr) | 3,000 gp | 2,250 gp | 2,700 gp | 3,000 gp | 3,300 gp | 3,750 gp |\n| Dreamroot Serum | Shared dreams; espionage use | 1,200 gp | 900 gp | 1,080 gp | 1,200 gp | 1,320 gp | 1,500 gp |\n| Black Vial (Poison) | DC 17 Con or paralyzed | 2,800 gp | 2,100 gp | 2,520 gp | 2,800 gp | 3,080 gp | 3,500 gp |\n| Bargain Bin Potion | Random effect (see table below) | 25–100 gp | Varies | Varies | Varies | Varies | Varies |",
+      "dmNotes": "",
+      "fields": {
+        "type": "Shop: Alchemist's Atelier",
+        "location": "Middle District, Duneforged Citadel"
+      },
+      "tags": [
+        "foundry-import",
+        "shop",
+        "duneforged",
+        "virellarion"
+      ],
+      "visibility": "public",
+      "sourcePath": "Foundry VTT: worlds/asetheria/journal/1veOltly2I5c3rNB"
+    },
+    {
+      "slug": "a-remnant",
+      "kind": "quest",
+      "name": "A Remnant",
+      "summary": "A recent, unusually fierce storm in the ever-shifting plains has briefly uncovered fragments of an ancient monument – one previously known only through vague coordinates and obscure texts in the Citadel Archives. She…",
+      "body": "_Offered by [[Elira]]._\n\nA recent, unusually fierce storm in the ever-shifting plains has briefly uncovered fragments of an ancient monument – one previously known only through vague coordinates and obscure texts in the Citadel Archives. She is desperate to recover these remnants before the relentless plains bury them again, or worse, before rival scholars or the dangers of the plains itself claim the site.",
+      "dmNotes": "**Objectives not yet revealed to the party:**\n\n- [ ] Navigate the Plains: Traverse the unpredictable and dangerous plains to locate the ancient monument.\n- [ ] Navigate the Shifting Plains: Traverse the unpredictable and dangerous plains to locate the ancient monument.\n- [ ] Recover Monument Fragments: Gather as many pieces of the ancient structure as possible before they are reburied.\n- [ ] Secure the Monument's \"Heart\": Identify and recover the central or most significant piece of the monument.\n- [ ] Return to Elira: Deliver the recovered fragments and findings to the junior scholar at the Citadel.",
+      "fields": {
+        "status": "Available",
+        "questGiver": "Elira"
+      },
+      "tags": [
+        "foundry-import",
+        "quest-log"
+      ],
+      "visibility": "public",
+      "sourcePath": "Foundry VTT: worlds/asetheria/journal/xO52Y5sXTCiD8VsD"
+    },
+    {
+      "slug": "a-shifting-near-ephelanum",
+      "kind": "quest",
+      "name": "A Shifting near Ephelanum",
+      "summary": "Veris, a hooded figure, seeks an escort through the plains, A ruin near the cit of [[Ephelanum City|Ephelanum]]. The area is notorious for some hiddne predators and bandits lurking near the roadsides and lots of ruine…",
+      "body": "_Offered by [[Veris]]._\n\nVeris, a hooded figure, seeks an escort through the plains, A ruin near the cit of [[Ephelanum City|Ephelanum]]. The area is notorious for some hiddne predators and bandits lurking near the roadsides and lots of ruined villages/building.",
+      "dmNotes": "**Objectives not yet revealed to the party:**\n\n- [ ] Locate Veris's Rendezvous Point: Meet the hooded traveler at the agreed-upon location in the outskirts of Duneforged.\n- [ ] Escort Veris to Ephelanum: Guide Veris safely through the plains  and past plains predator/bandits.\n- [ ] Reach the Designated Point within the Ruins: Accompany Veris to his specific destination within the ancient ruins.\n- [ ] Ensure Veris's Objective is Met: Assist Veris in whatever task he needs to complete at the site, or ensure he is able to complete it\n- [ ] Return from the Ruins: Safely escort Veris, or yourselves if he departs, out of the perilous ruins.",
+      "fields": {
+        "status": "Available",
+        "questGiver": "Veris"
+      },
+      "tags": [
+        "foundry-import",
+        "quest-log"
+      ],
+      "visibility": "public",
+      "sourcePath": "Foundry VTT: worlds/asetheria/journal/Wbl5HdK8IIdNPfO0"
+    },
+    {
+      "slug": "bandits-at-the-broken-gate",
+      "kind": "quest",
+      "name": "Bandits at the Broken Gate",
+      "summary": "Quartermaster Thestun is fuming. A vital shipment of rare, iridescent metals intended for Citadel armories was ambushed at Broken Gate Pass, a notorious bottleneck several days' ride west. The bandits, led by a ruthle…",
+      "body": "_Offered by [[Thestun Vulkrim]]._\n\nQuartermaster Thestun is fuming. A vital shipment of rare, iridescent metals intended for Citadel armories was ambushed at Broken Gate Pass, a notorious bottleneck several days' ride west. The bandits, led by a ruthless individual known as \"The Jackal,\" have made the pass a no-go zone for honest merchants. Thestun needs a skilled team to reclaim the stolen goods, eliminate The Jackal and his crew, and re-secure the pass for future trade.",
+      "dmNotes": "**Objectives not yet revealed to the party:**\n\n- [ ] Reach Broken Gate Pass: Travel to the known ambush site several days northof the Citadel.\n- [ ] Eliminate The Jackal's Crew: Engage and defeat the bandit forces occupying the pass.\n- [ ] Confront and Defeat The Jackal: Neutralize the bandit leader.\n- [ ] Recover the Stolen Shipment: Locate and secure the crate of iridescent metals.\n- [ ] Return to Quartermaster Thestun: Deliver the recovered shipment and confirm the pass is clear.",
+      "fields": {
+        "status": "Active",
+        "questGiver": "Thestun Vulkrim"
+      },
+      "tags": [
+        "foundry-import",
+        "quest-log"
+      ],
+      "visibility": "public",
+      "sourcePath": "Foundry VTT: worlds/asetheria/journal/Qe3L85ky07ym62Ys"
+    },
+    {
+      "slug": "echoes-in-the-dune-mines",
+      "kind": "quest",
+      "name": "Echoes in the Dune Mines",
+      "summary": "Deep tremors and a low, unsettling hum have brought mining operations to a halt in the lower shafts of the [[The Dune Mines|Dune Mines]]. The Overseer is growing desperate, his crew on edge, fearing an ancient evil ha…",
+      "body": "_Offered by [[Overseer Tarnak]]._\n\nDeep tremors and a low, unsettling hum have brought mining operations to a halt in the lower shafts of the [[The Dune Mines|Dune Mines]]. The Overseer is growing desperate, his crew on edge, fearing an ancient evil has been awakened. He needs a competent group to descend into the depths, investigate the source of the disturbances, and neutralize whatever threat lies within, ensuring the mine can resume its vital operations. Tarnak believes the tremors are too profound for natural causes and worries about the integrity of the entire mine.",
+      "dmNotes": "**Objectives not yet revealed to the party:**\n\n- [ ] Descend to the Lower Shafts: Navigate the unstable mine tunnels to reach the source of the tremors.\n- [ ] Investigate the Disturbance: Determine the cause of the unsettling hum and tremors within the deep mines.\n- [ ] Neutralize the Threat: Confront and eliminate whatever entity or phenomenon is disrupting mining operations.\n- [ ] Report to Overseer: Return to Tarnak with findings and confirmation the mine is safe.",
+      "fields": {
+        "status": "Available",
+        "questGiver": "Overseer Tarnak"
+      },
+      "tags": [
+        "foundry-import",
+        "quest-log"
+      ],
+      "visibility": "public",
+      "sourcePath": "Foundry VTT: worlds/asetheria/journal/PxApCnCabOqy8qCm"
+    },
+    {
+      "slug": "the-unknown-signal",
+      "kind": "quest",
+      "name": "The Unknown Signal",
+      "summary": "Without warning, a colossal pillar of light, or perhaps a strange, pulsating beacon, has erupted far beyond known territory, illuminating the night sky even from the Citadel. No maps record what lies in that direction…",
+      "body": "_Offered by Beacon._\n\nWithout warning, a colossal pillar of light, or perhaps a strange, pulsating beacon, has erupted far beyond known territory, illuminating the night sky even from the Citadel. No maps record what lies in that direction, and no trade routes pass that way. The source is entirely unknown. The light or ebacon looks to be near or inside the [[The Shattered Pass|Shattered Pass]].",
+      "dmNotes": "**Objectives not yet revealed to the party:**\n\n- [ ] Journey into the Uncharted Pass: Travel towards the colossal pillar of light beyond known territories.\n- [ ] Locate the Signal's Source: Pinpoint the exact origin of the phenomenon.\n- [ ] Investigate the Phenomenon: Determine the nature of the signal – is it a relic, a living entity, a natural event, or something else entirely?\n- [ ] Gather Information/Samples: Collect any data, artifacts, or specimens related to the signal.\n- [ ] Report Findings to the Citadel: Return to the Citadel and relay your discoveries to interested scholars or authorities.",
+      "fields": {
+        "status": "Available",
+        "questGiver": "Beacon"
+      },
+      "tags": [
+        "foundry-import",
+        "quest-log"
+      ],
+      "visibility": "public",
+      "sourcePath": "Foundry VTT: worlds/asetheria/journal/cCcAOhH097XRotAB"
+    },
+    {
+      "slug": "time-gods-mission",
+      "kind": "quest",
+      "name": "Time God's Mission",
+      "summary": "You were approached—perhaps in a dream, perhaps in a moment the world forgot—with a message from a stranger cloaked in stillness. Their words were clear, urgent, and impossible to forget:",
+      "body": "You were approached—perhaps in a dream, perhaps in a moment the world forgot—with a message from a stranger cloaked in stillness. Their words were clear, urgent, and impossible to forget:\n\n> \"Time is bleeding. There are places that never were, yet still are. You must find them. Seal them. Before all that is becomes all that was.\"\n\nThey spoke of Timerifts—places lost in history, or perhaps torn out of it entirely. Ruins, temples, towns—sometimes spoken of in passing, sometimes remembered by no one at all. These places flicker in and out of reality, leaving behind only confusion and the faint sense that something is wrong.\n\nYou have been chosen—not by name, but by fate. Something, or someone, has tampered with the timeline, allowing echoes of forgotten or forbidden places to emerge. These rifts must be found and closed before the damage spreads.",
+      "dmNotes": "**Objectives not yet revealed to the party:**\n\n- [failed] Locate the a Timerift, a site that contradicts all known history\n- [ ]  Follow rumors and strange phenomena to track down other Timerifts\n- [ ] Uncover the origin and purpose of the Timerifts—and who opened them\n- [ ] Witness moments that were erased or rewritten, and decide whether they should remain\n- [ ] Choose between restoration and mercy—correct history, or allow peaceful lies to remain\n- [ ] Find the Root Rift, and confront the force that dares rewrite time itself",
+      "fields": {
+        "status": "Inactive"
+      },
+      "tags": [
+        "foundry-import",
+        "quest-log"
+      ],
+      "visibility": "secret",
+      "sourcePath": "Foundry VTT: worlds/asetheria/journal/TrDKwfrL43ZQfWbZ"
+    },
+    {
+      "slug": "voices-from-the-far-grass",
+      "kind": "quest",
+      "name": "Voices from the Far Grass",
+      "summary": "Kelvar, a grizzled old scout with eyes that have seen too much, speaks of a phenomenon that chills him to the bone: voices carried on the winds from a place few have mapped and even fewer return from. He cannot pinpoi…",
+      "body": "_Offered by [[Kelvar]]._\n\nKelvar, a grizzled old scout with eyes that have seen too much, speaks of a phenomenon that chills him to the bone: voices carried on the winds from a place few have mapped and even fewer return from. He cannot pinpoint the exact location, only that it lies \"far beyond the outer plains.\" He urgently needs a team to journey into this desolate, unmapped territory, find the source of these ethereal voices, and determine their nature – are they a threat, a warning, or something even stranger?",
+      "dmNotes": "**Objectives not yet revealed to the party:**\n\n- [ ] Venture Beyond the Outer Plains: Travel into the desolate, unmapped territory Kelvar described.\n- [ ] Locate the Source of the Voices: Pinpoint the origin of the ethereal whispers carried on the wind.\n- [ ] Determine the Nature of the Voices: Investigate whether the voices are a threat, a warning, or something else.\n- [ ] Collect Evidence/Information: Gather any tangible proof or understanding of the phenomenon.\n- [ ] Report Findings to Kelvar (and Scholars): Return to Kelvar with your discoveries, and potentially to Citadel scholars.",
+      "fields": {
+        "status": "Available",
+        "questGiver": "Kelvar"
+      },
+      "tags": [
+        "foundry-import",
+        "quest-log"
+      ],
+      "visibility": "public",
+      "sourcePath": "Foundry VTT: worlds/asetheria/journal/EA06zQpUssNMtlsg"
+    },
+    {
+      "slug": "martial-check",
+      "kind": "rule",
+      "name": "Martial Check",
+      "summary": "You have proven your worth as an adventurer. You are able to discern the martial prowess of your enemy. Once on each of your turns you are able to do a free martial check that will have to pass a certain dc. If you succe",
+      "body": "You have proven your worth as an adventurer. You are able to discern the martial prowess of your enemy. Once on each of your turns you are able to do a free martial check that will have to pass a certain dc. If you succeed, you will get certain benefits.\n\n-Figure out the different skillsets of your enemy\n\n-See if you can Identify its AC, HP or Movement Speed\n\n-Track its intentions next round\n\nHaving proficiency in investigation let's you add your investigation modifier to the roll",
+      "dmNotes": "",
+      "fields": {
+        "category": "Combat"
+      },
+      "tags": [
+        "foundry-import",
+        "combat",
+        "handout"
+      ],
+      "visibility": "public",
+      "sourcePath": "Foundry VTT: worlds/asetheria/journal/SciJWMFAvdV0aQ2p"
+    },
+    {
+      "slug": "precision-strike",
+      "kind": "rule",
+      "name": "Precision Strike",
+      "summary": "Adding Tactical Depth to Every Strike With Minor Crit Effects",
+      "body": "## ⚔️ Precision Strike Location Table ⚔️\n\n_Adding Tactical Depth to Every Strike With Minor Crit Effects_\n\n---\n\n## 📖 Introduction\n\nWhen a warrior finds the perfect opening on an archer's shot or a blade strike, the **location of impact** can dramatically alter the flow of battle. This system adds tactical depth to exceptional attacks without slowing down regular combat.\n\n## 🎲 How to Use This Table\n\n- Roll **4d10** on this table whenever an attack exceeds the target’s AC by 5 or more, or when you score a **critical hit**.\n- Optional: Also use this when monsters or NPCs score critical hits or use signature strikes.\n\n## 🎯 Why Precision Strikes Matter\n\nExceptional attacks deserve exceptional results. Rather than every hit feeling identical, this system ensures that **skillful strikes and lucky shots** create memorable tactical moments that shift the tide of battle.\n\n---\n\n## 📌 Enhanced Hit Location Table (4d10)\n\n| Roll | Location | Effect |\n| --- | --- | --- |\n| 4 | Achilles Tendon | The creature falls prone and their speed is reduced by 15 feet until they finish a short rest. |\n| 5 | Ankle | The creature’s speed is reduced by 15 feet until the end of their next turn. |\n| 6-7 | Shin/Knee | The creature must succeed on a DC 15 Constitution saving throw or fall prone. |\n| 8-9 | Lower Leg | The creature’s speed is reduced by 10 feet until the end of their next turn. |\n| 10 | Upper Leg | The creature must succeed on a DC 12 Dexterity saving throw or have their speed reduced by 5 feet until the end of their next turn. |\n| 12 | Hip | The creature has disadvantage on their next attack roll. |\n| 13 | Off-Hand | If the creature is holding something in their off-hand, they must succeed on a DC 12 Constitution saving throw or drop it. |\n| 15 | Weapon | The creature has disadvantage on their next attack roll. |\n| 16 | Hand | The creature cannot make opportunity attacks until the start of their next turn. |\n| 17 | Forearm | The creature cannot make opportunity attacks until the start of their next turn. |\n| 18 | Solid Hit | **No additional effect.** The strike lands decisively without complication. |\n| 27 | Lower Ribs | The creature cannot take the Dash action on their next turn. |\n| 28 | Side/Flank | The creature loses 5 feet of movement speed until the end of their next turn. |\n| 30 | Upper Torso | The creature cannot take reactions until the start of their next turn. |\n| 31 | Shoulder | The creature cannot make opportunity attacks until the start of their next turn. |\n| 33 | Throat/Neck | The creature cannot cast spells with verbal components until the start of their next turn. |\n| 36 | Jaw | The creature cannot speak until the start of their next turn. |\n| 37 | Face | The creature has disadvantage on Perception checks until the end of their next turn. |\n| 39 | Temple | The creature must succeed on a DC 15 Constitution saving throw or be stunned until the end of their next turn. |\n| 40 | Critical Skull | The creature must succeed on a DC 15 Constitution saving throw or fall unconscious until the start of their next turn. On a success, they are stunned until the start of their next turn. |\n\n_System by GS Grimoire |__Patreon__| TikTok @GSGrimoire_",
+      "dmNotes": "",
+      "fields": {
+        "category": "Combat"
+      },
+      "tags": [
+        "foundry-import",
+        "combat",
+        "critical-hits"
+      ],
+      "visibility": "public",
+      "sourcePath": "Foundry VTT: worlds/asetheria/journal/9LHn2Qp4P681PCtK"
+    }
+  ]
+}

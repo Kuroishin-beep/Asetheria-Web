@@ -8,7 +8,7 @@ test.describe("command palette", () => {
     await page.keyboard.press("Control+k");
     await expect(page.getByRole("dialog", { name: /search the codex/i })).toBeVisible();
 
-    await page.getByPlaceholder(/find a god, city, faction/i).fill("Bacchus");
+    await page.getByLabel("Search query").fill("Bacchus");
     await expect(page.getByText(/bacchus/i).first()).toBeVisible({ timeout: 5_000 });
 
     await page.keyboard.press("Enter");

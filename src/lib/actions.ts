@@ -9,6 +9,7 @@ import { requireDM } from "@/lib/auth";
 import { sectionPath, sectionPaths } from "@/lib/kinds";
 import { slugify } from "@/lib/links";
 import { rebuildLinksForEntry } from "@/lib/link-graph";
+import { refreshEmbeddingAfterResponse } from "@/lib/embedding-sync";
 import {
   parseEntryForm,
   rollTableInputSchema,
@@ -28,9 +29,11 @@ async function snapshot(
   action: string,
   author: { id: string; username: string },
 ) {
+  // The search vector is derived data — 384 floats per revision for nothing.
+  const { embedding: _vector, ...content } = entry;
   await db.insert(revisions).values({
     entryId: entry.id,
-    snapshot: entry as unknown as Record<string, unknown>,
+    snapshot: content as unknown as Record<string, unknown>,
     action,
     authorId: author.id,
     authorName: author.username,
@@ -91,6 +94,7 @@ export async function createEntryAction(_prev: unknown, formData: FormData) {
 
   await snapshot(row, "create", user);
   await rebuildLinksForEntry(row.id, row.body, row.fields);
+  refreshEmbeddingAfterResponse(row.id);
   revalidateEntry(row.slug, row.kind);
   redirect(`/codex/entry/${row.slug}`);
 }
@@ -139,12 +143,15 @@ export async function updateEntryAction(
       // Once the body has been edited by hand it is no longer generated text,
       // so the banner disappears and the revert command leaves it alone.
       bodySource: input.body === current.body ? current.bodySource : null,
+      // Recomputed after the response; until then the stale vector must not match.
+      embedding: null,
       updatedAt: new Date(),
     })
     .where(eq(entries.id, entryId))
     .returning();
 
   await rebuildLinksForEntry(row.id, row.body, row.fields);
+  refreshEmbeddingAfterResponse(row.id);
   revalidateEntry(row.slug, row.kind);
   redirect(`/codex/entry/${row.slug}`);
 }
@@ -258,12 +265,14 @@ export async function revertToRevisionAction(revisionId: string) {
       tags: snap.tags ?? current.tags,
       visibility: snap.visibility ?? current.visibility,
       kind: snap.kind ?? current.kind,
+      embedding: null,
       updatedAt: new Date(),
     })
     .where(eq(entries.id, rev.entryId))
     .returning();
 
   await rebuildLinksForEntry(row.id, row.body, row.fields);
+  refreshEmbeddingAfterResponse(row.id);
   revalidateEntry(row.slug, row.kind);
   return { ok: true };
 }

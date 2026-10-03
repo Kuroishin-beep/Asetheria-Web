@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 import type { Metadata } from "next";
-import { asc } from "drizzle-orm";
+import { asc, isNull } from "drizzle-orm";
 import { db } from "@/db";
 import { entries, type EntryKind } from "@/db/schema";
 import { getCurrentUser } from "@/lib/auth";
@@ -29,6 +29,8 @@ export default async function NewEntryPage({
   const parents = await db
     .select({ id: entries.id, name: entries.name, kind: entries.kind })
     .from(entries)
+    // An archived page can't be a parent: its children would point at a 404.
+    .where(isNull(entries.archivedAt))
     .orderBy(asc(entries.name))
     .limit(1000);
 

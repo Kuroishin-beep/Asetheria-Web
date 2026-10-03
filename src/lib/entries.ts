@@ -3,7 +3,8 @@ import { and, asc, desc, eq, inArray, isNull, isNotNull, ne, or, sql, count } fr
 import { db } from "@/db";
 import { entries, links, revisions, type Entry, type EntryKind } from "@/db/schema";
 import { redactForPlayer, redactManyForPlayer } from "@/lib/auth";
-import { escapeHtml } from "@/lib/markdown";
+import { escapeHtml, type WikiLinkResolver } from "@/lib/markdown";
+import { buildNameIndex, normalizeName, parseAliases } from "@/lib/links";
 import type { SessionUser } from "@/lib/session";
 import { grantCondition, grantConditionRaw } from "@/lib/rbac";
 import type { LocationTier } from "@/lib/locations";
@@ -616,4 +617,67 @@ export async function getGraphData(
 
   const edges = rawEdges.filter((e) => visible.has(e.source) && visible.has(e.target));
   return { nodes, edges };
+}
+
+/**
+ * Resolves `[[Wiki Links]]` while rendering a page, scoped to what this user
+ * may read: a player never gets a link to a secret, ungranted or archived
+ * entry (which would confirm it exists). Short forms ("Bacchus") and explicit
+ * `aliases` resolve the same way they do in the link graph.
+ */
+export async function getWikiLinkResolver(user: SessionUser): Promise<WikiLinkResolver> {
+  const conditions = [liveOnly(), readable(user)].filter(Boolean);
+  const rows = await db
+    .select({
+      id: entries.id,
+      name: entries.name,
+      slug: entries.slug,
+      summary: entries.summary,
+      kind: entries.kind,
+      fields: entries.fields,
+    })
+    .from(entries)
+    .where(and(...conditions));
+  const byId = new Map(rows.map((r) => [r.id, r]));
+  const index = buildNameIndex(
+    rows.map((r) => ({ id: r.id, name: r.name, kind: r.kind, aliases: parseAliases(r.fields) })),
+  );
+  return (name: string) => {
+    const id = index.get(normalizeName(name));
+    const hit = id ? byId.get(id) : undefined;
+    return hit ? { slug: hit.slug, summary: hit.summary || undefined } : null;
+  };
+}
+
+/**
+ * Entries that mention this one by name (or alias) in their text without
+ * linking it — Obsidian's "unlinked mentions". A DM tool: each one is a link
+ * waiting to be made. Names under four characters are skipped as too noisy.
+ */
+export async function getUnlinkedMentions(
+  user: SessionUser,
+  entry: { id: string; name: string; fields: Record<string, string> | null },
+  limit = 12,
+) {
+  const names = [entry.name, ...parseAliases(entry.fields)]
+    .map((n) => n.trim())
+    .filter((n) => n.length >= 4);
+  if (names.length === 0) return [];
+
+  const mentions = or(...names.map((n) => sql`${entries.body} ILIKE ${`%${n}%`}`));
+  const conditions = [
+    liveOnly(),
+    readable(user),
+    ne(entries.id, entry.id),
+    mentions,
+    // Only an explicit link counts; a "named" edge is exactly an unlinked mention.
+    sql`NOT EXISTS (SELECT 1 FROM links l WHERE l.source_id = ${entries.id} AND l.target_id = ${entry.id} AND l.relation <> 'named')`,
+  ].filter(Boolean);
+
+  return db
+    .select({ id: entries.id, slug: entries.slug, name: entries.name, kind: entries.kind, summary: entries.summary })
+    .from(entries)
+    .where(and(...conditions))
+    .orderBy(asc(entries.name))
+    .limit(limit);
 }

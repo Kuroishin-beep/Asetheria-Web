@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import { actionsFor, type AppAction } from "@/lib/shortcuts";
 
 type Hit = {
   id: string;
@@ -18,11 +19,23 @@ const ICONS: Record<string, string> = {
   note: "✎",
 };
 
+type Row = { type: "action"; action: AppAction } | { type: "entry"; hit: Hit };
+
+function matchesAction(a: AppAction, q: string): boolean {
+  const hay = `${a.label} ${a.keywords ?? ""}`.toLowerCase();
+  return q
+    .toLowerCase()
+    .split(/\s+/)
+    .filter(Boolean)
+    .every((w) => hay.includes(w));
+}
+
 /**
- * Ctrl/Cmd-K search. Deliberately keyboard-first: at the table you want to find
- * an NPC in two seconds without reaching for the mouse.
+ * Ctrl/Cmd-K: search entries and run commands from one box, Superhuman-style.
+ * Deliberately keyboard-first: at the table you want to find an NPC, or jump
+ * to the dice, in two seconds without reaching for the mouse.
  */
-export function CommandPalette() {
+export function CommandPalette({ isDM = false }: { isDM?: boolean }) {
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
@@ -92,10 +105,21 @@ export function CommandPalette() {
     return () => clearTimeout(timer);
   }, [query]);
 
-  const go = useCallback(
-    (hit: Hit) => {
+  // Commands first (all of them on an empty box, matching ones as you type),
+  // then entries.
+  const rows: Row[] = [
+    ...actionsFor(isDM)
+      .filter((a) => (query.trim() ? matchesAction(a, query.trim()) : true))
+      .slice(0, query.trim() ? 4 : 12)
+      .map((action) => ({ type: "action" as const, action })),
+    ...results.map((hit) => ({ type: "entry" as const, hit })),
+  ];
+
+  const run = useCallback(
+    (row: Row) => {
       setOpen(false);
-      router.push(`/codex/entry/${hit.slug}`);
+      if (row.type === "entry") router.push(`/codex/entry/${row.hit.slug}`);
+      else if (row.action.href) router.push(row.action.href);
     },
     [router],
   );
@@ -103,13 +127,13 @@ export function CommandPalette() {
   function onInputKey(e: React.KeyboardEvent<HTMLInputElement>) {
     if (e.key === "ArrowDown") {
       e.preventDefault();
-      setActive((i) => Math.min(i + 1, results.length - 1));
+      setActive((i) => Math.min(i + 1, rows.length - 1));
     } else if (e.key === "ArrowUp") {
       e.preventDefault();
       setActive((i) => Math.max(i - 1, 0));
     } else if (e.key === "Enter") {
       e.preventDefault();
-      if (results[active]) go(results[active]);
+      if (rows[active]) run(rows[active]);
       else if (query.trim()) {
         setOpen(false);
         router.push(`/search?q=${encodeURIComponent(query)}`);
@@ -125,6 +149,7 @@ export function CommandPalette() {
         className="btn"
         style={{ gap: "0.6rem", color: "var(--text-muted)" }}
         aria-label="Search the codex"
+        title="Search and commands (Ctrl K) — press ? for all shortcuts"
       >
         <span aria-hidden="true">⌕</span>
         <span className="hidden sm:inline">Search…</span>
@@ -189,7 +214,7 @@ export function CommandPalette() {
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 onKeyDown={onInputKey}
-                placeholder="Find a god, city, faction, NPC…"
+                placeholder="Find a god, city, NPC — or type a command…"
                 aria-label="Search query"
                 style={{
                   flex: 1,
@@ -208,7 +233,7 @@ export function CommandPalette() {
             </div>
 
             <div style={{ overflowY: "auto" }}>
-              {results.length === 0 && query.trim().length >= 2 && !loading && (
+              {rows.length === 0 && query.trim().length >= 2 && !loading && (
                 <p
                   style={{
                     padding: "1.25rem 1rem",
@@ -219,62 +244,64 @@ export function CommandPalette() {
                   Nothing found. Press Enter for a full-text search.
                 </p>
               )}
-              {results.map((hit, idx) => (
-                <button
-                  key={hit.id}
-                  type="button"
-                  onMouseEnter={() => setActive(idx)}
-                  onClick={() => go(hit)}
-                  style={{
-                    display: "flex",
-                    gap: "0.75rem",
-                    alignItems: "baseline",
-                    width: "100%",
-                    textAlign: "left",
-                    padding: "0.7rem 1rem",
-                    background:
-                      idx === active ? "var(--bg-sunken)" : "transparent",
-                    border: 0,
-                    borderLeft:
-                      idx === active
-                        ? "2px solid var(--accent)"
-                        : "2px solid transparent",
-                    cursor: "pointer",
-                    color: "var(--text)",
-                  }}
-                >
-                  <span aria-hidden="true">{ICONS[hit.kind] ?? "✦"}</span>
-                  <span style={{ flex: 1, minWidth: 0 }}>
-                    <span style={{ display: "block", fontWeight: 500 }}>
-                      {hit.name}
-                    </span>
-                    {hit.summary && (
-                      <span
-                        style={{
-                          display: "block",
-                          fontSize: "0.8125rem",
-                          color: "var(--text-muted)",
-                          overflow: "hidden",
-                          textOverflow: "ellipsis",
-                          whiteSpace: "nowrap",
-                        }}
-                      >
-                        {hit.summary}
-                      </span>
-                    )}
-                  </span>
-                  <span
+              {rows.map((row, idx) => {
+                const key = row.type === "entry" ? row.hit.id : `action-${row.action.id}`;
+                const icon = row.type === "entry" ? (ICONS[row.hit.kind] ?? "✦") : "↳";
+                const title = row.type === "entry" ? row.hit.name : row.action.label;
+                const subtitle = row.type === "entry" ? row.hit.summary : null;
+                const tag = row.type === "entry" ? row.hit.kind : row.action.keys.join(" then ");
+                return (
+                  <button
+                    key={key}
+                    type="button"
+                    onMouseEnter={() => setActive(idx)}
+                    onClick={() => run(row)}
+                    data-row-type={row.type}
                     style={{
-                      fontSize: "0.6875rem",
-                      color: "var(--text-faint)",
-                      textTransform: "uppercase",
-                      letterSpacing: "0.06em",
+                      display: "flex",
+                      gap: "0.75rem",
+                      alignItems: "baseline",
+                      width: "100%",
+                      textAlign: "left",
+                      padding: "0.7rem 1rem",
+                      background: idx === active ? "var(--bg-sunken)" : "transparent",
+                      border: 0,
+                      borderLeft: idx === active ? "2px solid var(--accent)" : "2px solid transparent",
+                      cursor: "pointer",
+                      color: "var(--text)",
                     }}
                   >
-                    {hit.kind}
-                  </span>
-                </button>
-              ))}
+                    <span aria-hidden="true">{icon}</span>
+                    <span style={{ flex: 1, minWidth: 0 }}>
+                      <span style={{ display: "block", fontWeight: 500 }}>{title}</span>
+                      {subtitle && (
+                        <span
+                          style={{
+                            display: "block",
+                            fontSize: "0.8125rem",
+                            color: "var(--text-muted)",
+                            overflow: "hidden",
+                            textOverflow: "ellipsis",
+                            whiteSpace: "nowrap",
+                          }}
+                        >
+                          {subtitle}
+                        </span>
+                      )}
+                    </span>
+                    <span
+                      style={{
+                        fontSize: "0.6875rem",
+                        color: "var(--text-faint)",
+                        textTransform: row.type === "entry" ? "uppercase" : "none",
+                        letterSpacing: "0.06em",
+                      }}
+                    >
+                      {tag}
+                    </span>
+                  </button>
+                );
+              })}
             </div>
 
             <div
@@ -291,6 +318,7 @@ export function CommandPalette() {
               <span>↑↓ navigate</span>
               <span>↵ open</span>
               <span>esc close</span>
+              <span>? all shortcuts</span>
             </div>
           </div>
         </div>

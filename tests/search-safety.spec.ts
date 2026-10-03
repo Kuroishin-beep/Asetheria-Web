@@ -2,9 +2,14 @@ import { randomUUID } from "node:crypto";
 import { expect, test } from "@playwright/test";
 import { createEntryViaUI, deleteEphemeralEntry, testName } from "./helpers";
 
-/** A single lowercase token no real codex entry will ever contain. */
+/**
+ * A single lowercase token no real codex entry will ever contain. No "zz"
+ * prefix: every test entry's *name* starts with "zz-playwright-", and the
+ * embedding model scores two zz-gibberish strings as similar enough to clear
+ * the semantic-search floor — which would look like a leak and is not one.
+ */
 function uniqueWord(label: string): string {
-  return `zz${label}${randomUUID().replace(/[^a-f]/g, "").slice(0, 10)}`;
+  return `${label}${randomUUID().replace(/[^a-f]/g, "").slice(0, 10)}`;
 }
 
 test.describe("search safety", () => {
@@ -17,8 +22,10 @@ test.describe("search safety", () => {
       storageState: "tests/.auth/player.json",
     });
     const playerPage = await playerContext.newPage();
-    const name = testName("dmnote-oracle");
-    const secretWord = uniqueWord("notes");
+    // Name and secret word share no stem, so semantic search on the name
+    // cannot be mistaken for a leak of the notes.
+    const name = testName("harbour-ledger");
+    const secretWord = uniqueWord("qv");
     let slug: string | undefined;
     try {
       slug = await createEntryViaUI(dmPage, {
