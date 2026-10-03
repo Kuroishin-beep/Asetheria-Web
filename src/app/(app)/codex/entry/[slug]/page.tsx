@@ -250,7 +250,7 @@ export default async function EntryPage({
                 flexWrap: "wrap",
                 fontSize: "0.8125rem",
                 color: "var(--text-muted)",
-                border: "1px dashed var(--border)",
+                border: "1px dashed var(--border-strong)",
                 borderRadius: 8,
                 padding: "0.6rem 0.85rem",
                 marginBottom: "1rem",

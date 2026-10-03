@@ -10,7 +10,7 @@ Status key: NOT STARTED / IN PROGRESS / IMPLEMENTED / TESTED / DONE / BLOCKED
 |---|---|---|---|---|
 | 0 | Prod catch-up (Neon) | none (ops only) | Neon `DATABASE_URL` from user | **BLOCKED: awaiting credential** (code phases proceed locally) |
 | 1 | Enum migration: `fauna` + `table`; retag fauna; roll_tables → table entries | `src/db/schema.ts`, `src/lib/kinds.ts`, `src/lib/rbac.ts`, `src/lib/validation.ts`, `scripts/import-codex-file.ts`, `scripts/migrate-fauna-and-tables.ts`, `scripts/sql/*`, drizzle migration, tests | none | **DONE** |
-| 2a | Design foundation: shadcn spike, tokens + refresh, next-themes, motion presets | `components.json`, `src/lib/utils.ts`, `src/lib/motion.ts`, `src/components/ui/*`, `src/app/globals.css`, `src/app/layout.tsx`, `docs/design-*.md` | 1 | NOT STARTED |
+| 2a | Design foundation: shadcn spike, tokens + refresh, next-themes, motion presets | `components.json`, `src/lib/utils.ts`, `src/lib/motion.ts`, `src/components/ui/*`, `src/app/globals.css`, `src/app/layout.tsx`, `docs/design-*.md` | 1 | **DONE** |
 | 2b | Shell + auth pages | `app-shell`, `theme-toggle`, login/register/welcome/onboarding | 2a | NOT STARTED |
 | 2c | Codex pages (+ loading/error/empty) | `entry-card`, `codex/**`, `loading.tsx`, `error.tsx` | 2b | NOT STARTED |
 | 2d | Editor, palette, graph, shortcuts | `entry-form`, `markdown-editor`, `command-palette`, `graph-view`, `keyboard-shortcuts` | 2c | NOT STARTED |
@@ -53,3 +53,22 @@ Rollback: `npx tsx scripts/migrate-fauna-and-tables.ts --revert --apply` (fauna 
 Prod rollout: pending Phase 0 credential. Steps: backup via `/api/export`; `psql -f scripts/sql/setup.sql`; `npx tsx scripts/migrate-fauna-and-tables.ts` (dry run), then `--apply`; `npm run embeddings:generate`.
 Known gap: `lint` is `tsc --noEmit` only (no ESLint configured); no separate lint step exists to run.
 Note: until Phase 3 replaces `/tools/tables`, tables created in the old tool after this migration are not entries; re-running the migration script copies them.
+
+### Phase 2a (design foundation): DONE (2026-10-04)
+
+Built: shadcn (radix, vega preset) with 24 UI components in `src/components/ui/`; `components.json`; `src/lib/utils.ts`; **refreshed token layer** `src/styles/design-tokens.css` (+ `docs/design-tokens.md`); `src/app/globals.css` now imports tokens + inlined vendor CSS `src/styles/shadcn.css`; `next-themes` (`ThemeProvider`, `attribute="data-theme"`, old storage key kept) and a pre-hydration sanitizer in `layout.tsx`; `MotionProvider` (`reducedMotion="user"`), `src/lib/motion.ts` presets, `FadeIn` / `SlideUp` / `StaggerContainer`; `scripts/lib/contrast.ts` + `scripts/check-contrast.ts`; `scripts/capture-design-shots.ts`; `docs/design-migration.md` (spike notes, go/no-go: **go**).
+
+Evidence (observed):
+1. No flash and persistence: `tests/theme.spec.ts` 5/5 pass. Default dark at DOMContentLoaded (body bg `rgb(11, 10, 9)`), a stored light theme paints `rgb(247, 241, 228)` at DOMContentLoaded before hydration, the toggle writes `localStorage["asetheria-theme"]` and a hard reload keeps the choice, a garbage stored value is discarded.
+2. Contrast: `tests/design-tokens.spec.ts` 4/4 pass; every text pair >= 4.5:1 and every control border / focus ring >= 3:1 in both themes (table in `docs/design-tokens.md`; lowest text ratio 4.76 meta-on-card dark, lowest control border 3.54 dark input on card).
+3. `tsc --noEmit` exit 0; `next build` compiled and generated 21 pages; full suite **120 passed** (111 + 4 + 5), 0 failed. `npm audit --omit=dev`: 0 vulnerabilities.
+4. `docs/design-migration.md` records the commands that worked.
+5. Before/after screenshots at 375/768/1280 in both themes: `test-results/design/before` and `test-results/design/after` (30 each; local, git-ignored). 2a changes tokens only; layout changes arrive with 2b to 2e.
+
+Bugs found and fixed in this phase (by tests):
+- Toggle label caused a React hydration mismatch (server cannot know the stored theme): label is generic until mounted.
+- next-themes accepted any stored string (`"neon"` became `data-theme="neon"`): added the sanitizer script.
+- `shadcn` as a runtime dependency added 7 high advisories to `npm audit --omit=dev` (baseline 0): ejected (`shadcn eject`), vendor CSS inlined.
+- shadcn init clashed with legacy `--accent` / `--border` meanings: legacy variables renamed (`--gold`, `--gold-soft`, `--border-strong`) before the new tokens were added.
+Known/pre-existing: hydration warning in `graph-view.tsx` (slice 2d). `lint` is still `tsc --noEmit` only.
+Plan adjustment (documented in `docs/design-migration.md`): the 2e grep gate exempts `src/styles/shadcn.css`, `src/components/ui/*`, and `src/app/(app)/tools/tables/*` (deleted in Phase 3).

@@ -79,7 +79,7 @@ export function Prologue() {
           style={{
             cursor: "pointer",
             fontSize: "0.875rem",
-            color: "var(--accent)",
+            color: "var(--gold)",
             marginBottom: "0.85rem",
           }}
         >

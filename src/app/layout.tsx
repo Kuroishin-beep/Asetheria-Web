@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Cinzel, EB_Garamond, Inter } from "next/font/google";
+import { MotionProvider } from "@/components/motion/motion-provider";
+import { ThemeProvider } from "@/components/theme-provider";
 import "./globals.css";
 
 const cinzel = Cinzel({
@@ -40,18 +42,16 @@ export const viewport: Viewport = {
 };
 
 /**
- * Applied before paint so the saved theme never flashes the wrong colours.
- * Defaults to dark — this gets used at the table, in dim rooms.
+ * next-themes trusts whatever is stored under its key. A corrupted value would
+ * stamp an unknown data-theme on <html>, which matches neither palette, so this
+ * runs first and discards anything that is not a real theme name.
  */
-const themeScript = `
+const sanitizeThemeScript = `
 (function(){
   try {
     var t = localStorage.getItem('asetheria-theme');
-    if (t !== 'light' && t !== 'dark') t = 'dark';
-    document.documentElement.setAttribute('data-theme', t);
-  } catch (e) {
-    document.documentElement.setAttribute('data-theme', 'dark');
-  }
+    if (t !== null && t !== 'light' && t !== 'dark') localStorage.removeItem('asetheria-theme');
+  } catch (e) {}
 })();
 `;
 
@@ -67,9 +67,13 @@ export default function RootLayout({
       className={`${cinzel.variable} ${garamond.variable} ${inter.variable}`}
     >
       <head>
-        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <script dangerouslySetInnerHTML={{ __html: sanitizeThemeScript }} />
       </head>
-      <body>{children}</body>
+      <body>
+        <ThemeProvider>
+          <MotionProvider>{children}</MotionProvider>
+        </ThemeProvider>
+      </body>
     </html>
   );
 }

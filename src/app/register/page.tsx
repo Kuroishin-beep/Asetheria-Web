@@ -27,7 +27,7 @@ export default async function RegisterPage() {
         <div style={{ textAlign: "center", marginBottom: "1.75rem" }}>
           <p
             aria-hidden="true"
-            style={{ fontSize: "2rem", color: "var(--accent)", lineHeight: 1 }}
+            style={{ fontSize: "2rem", color: "var(--gold)", lineHeight: 1 }}
           >
             ⚜
           </p>

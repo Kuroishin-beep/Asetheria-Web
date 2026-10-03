@@ -164,7 +164,7 @@ export function AppShell({
             style={{
               fontSize: "1.05rem",
               fontWeight: 700,
-              color: "var(--accent)",
+              color: "var(--gold)",
               textDecoration: "none",
               whiteSpace: "nowrap",
               overflow: "hidden",
@@ -263,7 +263,7 @@ export function AppShell({
                 height: "100%",
                 overflowY: "auto",
                 background: "var(--bg-raised)",
-                borderRight: "1px solid var(--border)",
+                borderRight: "1px solid var(--border-strong)",
               }}
             >
               {sidebar}
@@ -322,7 +322,7 @@ function NavItem({
         borderRadius: 7,
         textDecoration: "none",
         fontSize: "0.875rem",
-        color: active ? "var(--accent)" : "var(--text-muted)",
+        color: active ? "var(--gold)" : "var(--text-muted)",
         background: active ? "var(--bg-sunken)" : "transparent",
         fontWeight: active ? 600 : 400,
       }}

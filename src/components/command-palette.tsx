@@ -157,7 +157,7 @@ export function CommandPalette({ isDM = false }: { isDM?: boolean }) {
           className="hidden md:inline"
           style={{
             fontSize: "0.6875rem",
-            border: "1px solid var(--border)",
+            border: "1px solid var(--border-strong)",
             borderRadius: 4,
             padding: "0.05rem 0.3rem",
             color: "var(--text-faint)",
@@ -266,7 +266,7 @@ export function CommandPalette({ isDM = false }: { isDM?: boolean }) {
                       padding: "0.7rem 1rem",
                       background: idx === active ? "var(--bg-sunken)" : "transparent",
                       border: 0,
-                      borderLeft: idx === active ? "2px solid var(--accent)" : "2px solid transparent",
+                      borderLeft: idx === active ? "2px solid var(--gold)" : "2px solid transparent",
                       cursor: "pointer",
                       color: "var(--text)",
                     }}

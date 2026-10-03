@@ -135,9 +135,9 @@ export function LoginForm() {
                   // A calmer tone than the wrong-credentials red — this
                   // isn't a mistake the user made, just a pause.
                   fontSize: "0.8125rem",
-                  color: "var(--accent)",
-                  background: "color-mix(in srgb, var(--accent) 10%, transparent)",
-                  border: "1px solid color-mix(in srgb, var(--accent) 30%, transparent)",
+                  color: "var(--gold)",
+                  background: "color-mix(in srgb, var(--gold) 10%, transparent)",
+                  border: "1px solid color-mix(in srgb, var(--gold) 30%, transparent)",
                   borderRadius: 8,
                   padding: "0.6rem 0.75rem",
                 }

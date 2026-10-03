@@ -15,7 +15,7 @@ function Keys({ keys }: { keys: string[] }) {
           key={`${k}-${i}`}
           style={{
             fontSize: "0.75rem",
-            border: "1px solid var(--border)",
+            border: "1px solid var(--border-strong)",
             borderRadius: 4,
             padding: "0.05rem 0.4rem",
             minWidth: "1.4rem",

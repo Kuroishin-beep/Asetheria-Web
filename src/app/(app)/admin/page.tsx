@@ -68,7 +68,7 @@ export default async function AdminPage() {
                 style={{
                   fontSize: "1.5rem",
                   fontWeight: 700,
-                  color: "var(--accent)",
+                  color: "var(--gold)",
                 }}
               >
                 {s.value.toLocaleString()}

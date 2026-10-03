@@ -259,7 +259,7 @@ export function EntryForm({
               name="visibility"
               value={opt.value}
               defaultChecked={initial.visibility === opt.value}
-              style={{ marginTop: "0.25rem", accentColor: "var(--accent)" }}
+              style={{ marginTop: "0.25rem", accentColor: "var(--gold)" }}
             />
             <span>
               <span style={{ fontWeight: 500 }}>{opt.label}</span>

@@ -1,36 +1,31 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useTheme } from "next-themes";
 
 export function ThemeToggle() {
-  const [theme, setTheme] = useState<"light" | "dark">("dark");
+  const { resolvedTheme, setTheme } = useTheme();
+  // The stored theme is unknown on the server, so render the icon only after
+  // mount; before that the button is the same size with no glyph.
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
 
-  useEffect(() => {
-    const current = document.documentElement.getAttribute("data-theme");
-    setTheme(current === "light" ? "light" : "dark");
-  }, []);
-
-  function toggle() {
-    const next = theme === "dark" ? "light" : "dark";
-    setTheme(next);
-    document.documentElement.setAttribute("data-theme", next);
-    try {
-      localStorage.setItem("asetheria-theme", next);
-    } catch {
-      // Private browsing — the theme just won't persist.
-    }
-  }
+  const isDark = resolvedTheme !== "light";
+  const next = isDark ? "light" : "dark";
+  // Server and first client render must match: the real theme is only known
+  // after mount, so until then the label stays generic.
+  const label = mounted ? `Switch to ${next} theme` : "Toggle theme";
 
   return (
     <button
       type="button"
-      onClick={toggle}
+      onClick={() => setTheme(next)}
       className="btn"
       style={{ padding: "0.4rem 0.6rem" }}
-      aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} theme`}
-      title={`Switch to ${theme === "dark" ? "light" : "dark"} theme`}
+      aria-label={label}
+      title={label}
     >
-      <span aria-hidden="true">{theme === "dark" ? "☾" : "☀"}</span>
+      <span aria-hidden="true">{mounted ? (isDark ? "☾" : "☀") : " "}</span>
     </button>
   );
 }

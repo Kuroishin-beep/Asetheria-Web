@@ -250,7 +250,7 @@ function TableCard({
             style={{
               fontSize: "1.35rem",
               fontWeight: 700,
-              color: "var(--accent)",
+              color: "var(--gold)",
               marginRight: "0.75rem",
             }}
           >

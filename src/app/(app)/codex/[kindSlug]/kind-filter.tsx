@@ -117,7 +117,7 @@ export function KindFilter({
               onClick={() => setView("cards")}
               style={
                 view === "cards"
-                  ? { borderColor: "var(--accent)", color: "var(--accent)" }
+                  ? { borderColor: "var(--gold)", color: "var(--gold)" }
                   : undefined
               }
             >
@@ -130,7 +130,7 @@ export function KindFilter({
               onClick={() => setView("table")}
               style={
                 view === "table"
-                  ? { borderColor: "var(--accent)", color: "var(--accent)" }
+                  ? { borderColor: "var(--gold)", color: "var(--gold)" }
                   : undefined
               }
             >
@@ -172,7 +172,7 @@ export function KindFilter({
             onClick={() => setTag(null)}
             style={
               tag === null
-                ? { borderColor: "var(--accent)", color: "var(--accent)" }
+                ? { borderColor: "var(--gold)", color: "var(--gold)" }
                 : undefined
             }
           >
@@ -186,7 +186,7 @@ export function KindFilter({
               onClick={() => setTag(tag === t ? null : t)}
               style={
                 tag === t
-                  ? { borderColor: "var(--accent)", color: "var(--accent)" }
+                  ? { borderColor: "var(--gold)", color: "var(--gold)" }
                   : undefined
               }
             >
@@ -216,7 +216,7 @@ export function KindFilter({
               {sorted.map((e) => (
                 <tr key={e.id} style={{ borderTop: "1px solid var(--border-soft)" }}>
                   <td style={{ padding: "0.5rem 0.75rem" }}>
-                    <Link href={`/codex/entry/${e.slug}`} style={{ color: "var(--accent)" }}>
+                    <Link href={`/codex/entry/${e.slug}`} style={{ color: "var(--gold)" }}>
                       {e.name}
                     </Link>
                   </td>
@@ -322,7 +322,7 @@ function SortableHeader({
           border: 0,
           font: "inherit",
           fontWeight: 600,
-          color: active ? "var(--accent)" : "var(--text)",
+          color: active ? "var(--gold)" : "var(--text)",
           cursor: "pointer",
         }}
         aria-sort={active ? (sort.dir === 1 ? "ascending" : "descending") : "none"}

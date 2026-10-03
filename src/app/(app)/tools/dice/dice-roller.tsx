@@ -187,7 +187,7 @@ export function DiceRoller() {
                           ? "var(--color-patina-400)"
                           : r.crit === "miss"
                             ? "var(--color-blood-400)"
-                            : "var(--accent)",
+                            : "var(--gold)",
                       minWidth: "2.5rem",
                     }}
                   >
@@ -298,7 +298,7 @@ export function DiceRoller() {
               <dt
                 style={{
                   fontFamily: "ui-monospace, monospace",
-                  color: "var(--accent)",
+                  color: "var(--gold)",
                 }}
               >
                 {code}

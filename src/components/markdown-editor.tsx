@@ -158,8 +158,8 @@ export function MarkdownEditor({
   );
 
   const tabStyle = (on: boolean): React.CSSProperties => ({
-    borderColor: on ? "var(--accent)" : undefined,
-    color: on ? "var(--accent)" : undefined,
+    borderColor: on ? "var(--gold)" : undefined,
+    color: on ? "var(--gold)" : undefined,
   });
 
   return (

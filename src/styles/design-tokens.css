@@ -1,0 +1,172 @@
+/* ---------------------------------------------------------------------------
+   Asetheria design tokens: the single source of truth for colour, radius,
+   elevation and motion. Imported by src/app/globals.css.
+
+   Identity (kept): obsidian-and-ash dark, warm-vellum light, imperial gold.
+   Refresh: deeper layering (background, card, popover), calmer borders,
+   higher-contrast muted text, a 12px radius, softer elevation and one gold
+   focus ring used everywhere. Contrast of every text pair is asserted by
+   tests/design-tokens.spec.ts, and the measured ratios are recorded in
+   docs/design-tokens.md.
+
+   Theme switching: next-themes stamps data-theme="light" | "dark" on <html>.
+   --------------------------------------------------------------------------- */
+
+@theme {
+  --font-display: var(--font-cinzel), Georgia, serif;
+  --font-prose: var(--font-garamond), Georgia, serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  /* Palette primitives. Components use the semantic tokens below, never these. */
+  --color-ink-950: #0a0908;
+  --color-ink-900: #12100e;
+  --color-ink-850: #1a1715;
+  --color-ink-800: #221e1a;
+  --color-ink-700: #322b25;
+  --color-ink-600: #4a4038;
+
+  --color-vellum-50: #faf6ee;
+  --color-vellum-100: #f3ecdd;
+  --color-vellum-200: #e8dcc4;
+  --color-vellum-300: #d8c7a5;
+
+  --color-gold-200: #f0dda8;
+  --color-gold-300: #e2c47c;
+  --color-gold-400: #d4a94e;
+  --color-gold-500: #b98c34;
+  --color-gold-600: #8f6a24;
+
+  --color-patina-300: #8fc4b4;
+  --color-patina-400: #5fa38f;
+  --color-patina-500: #3f7d6b;
+
+  --color-tyrian-300: #c99bd4;
+  --color-tyrian-400: #a06bb0;
+  --color-tyrian-500: #7a4a8a;
+
+  --color-blood-400: #c05a4a;
+  --color-blood-500: #9c3f31;
+
+  /* Motion. Durations and easings consumed by src/lib/motion.ts and utilities. */
+  --duration-fast: 150ms;
+  --duration-base: 250ms;
+  --duration-slow: 400ms;
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ---- Light: warm vellum ------------------------------------------------- */
+:root,
+[data-theme="light"] {
+  --radius: 0.75rem;
+
+  --background: #f7f1e4;
+  --foreground: #241d14;
+  --card: #fffcf5;
+  --card-foreground: #241d14;
+  --popover: #fffdf8;
+  --popover-foreground: #241d14;
+  --primary: #85601d;
+  --primary-foreground: #fffdf8;
+  --secondary: #ece2cb;
+  --secondary-foreground: #3a2f20;
+  --muted: #efe6d3;
+  --muted-foreground: #5f4f3a;
+  --accent: #ebdfc3;
+  --accent-foreground: #241d14;
+  --destructive: #9c3f31;
+  --destructive-foreground: #fffdf8;
+  --border: #ddd0b4;
+  --input: #8c7a58;
+  --ring: #85601d;
+
+  --chart-1: #85601d;
+  --chart-2: #34695a;
+  --chart-3: #7a4a8a;
+  --chart-4: #9c3f31;
+  --chart-5: #5f4f3a;
+
+  --sidebar: #f2ead8;
+  --sidebar-foreground: #241d14;
+  --sidebar-primary: #85601d;
+  --sidebar-primary-foreground: #fffdf8;
+  --sidebar-accent: #e8dcc0;
+  --sidebar-accent-foreground: #241d14;
+  --sidebar-border: #ddd0b4;
+  --sidebar-ring: #85601d;
+
+  /* Named roles used across the app beyond shadcn's set. */
+  --faint-foreground: #6f5f48;
+  --gold: #85601d;
+  --gold-soft: #b98c34;
+  --link: #7a5a1d;
+  --secret: #7a4a8a;
+  --success: #34695a;
+
+  /* Legacy names, kept until every screen is migrated (removed in slice 2e). */
+  --bg: var(--background);
+  --bg-raised: var(--card);
+  --bg-sunken: var(--muted);
+  --border-soft: var(--border);
+  --border-strong: var(--input);
+  --text: var(--foreground);
+  --text-muted: var(--muted-foreground);
+  --text-faint: var(--faint-foreground);
+  --on-accent: var(--primary-foreground);
+
+  --shadow-1: 0 1px 2px rgb(36 29 20 / 0.06), 0 2px 8px -2px rgb(36 29 20 / 0.08);
+  --shadow-2: 0 2px 4px rgb(36 29 20 / 0.06), 0 12px 28px -12px rgb(36 29 20 / 0.22);
+  --shadow-3: 0 4px 8px rgb(36 29 20 / 0.08), 0 24px 48px -16px rgb(36 29 20 / 0.32);
+  --shadow: var(--shadow-1);
+  --glow: color-mix(in srgb, var(--gold) 7%, transparent);
+}
+
+/* ---- Dark: obsidian and ash --------------------------------------------- */
+[data-theme="dark"] {
+  --background: #0b0a09;
+  --foreground: #efe6d6;
+  --card: #151210;
+  --card-foreground: #efe6d6;
+  --popover: #1c1814;
+  --popover-foreground: #efe6d6;
+  --primary: #d4a94e;
+  --primary-foreground: #14100a;
+  --secondary: #231f1a;
+  --secondary-foreground: #efe6d6;
+  --muted: #1a1715;
+  --muted-foreground: #b5a48d;
+  --accent: #2b251e;
+  --accent-foreground: #f5ecdc;
+  --destructive: #e07a6a;
+  --destructive-foreground: #14100a;
+  --border: #2a241d;
+  --input: #776a57;
+  --ring: #d4a94e;
+
+  --chart-1: #d4a94e;
+  --chart-2: #5fa38f;
+  --chart-3: #c99bd4;
+  --chart-4: #e07a6a;
+  --chart-5: #b5a48d;
+
+  --sidebar: #100e0c;
+  --sidebar-foreground: #efe6d6;
+  --sidebar-primary: #d4a94e;
+  --sidebar-primary-foreground: #14100a;
+  --sidebar-accent: #231f1a;
+  --sidebar-accent-foreground: #f5ecdc;
+  --sidebar-border: #2a241d;
+  --sidebar-ring: #d4a94e;
+
+  --faint-foreground: #8f7e69;
+  --gold: #d4a94e;
+  --gold-soft: #e2c47c;
+  --link: #e2c47c;
+  --secret: #c99bd4;
+  --success: #8fc4b4;
+
+  --shadow-1: 0 1px 2px rgb(0 0 0 / 0.45), 0 2px 8px -2px rgb(0 0 0 / 0.5);
+  --shadow-2: 0 2px 4px rgb(0 0 0 / 0.4), 0 14px 32px -14px rgb(0 0 0 / 0.75);
+  --shadow-3: 0 4px 8px rgb(0 0 0 / 0.45), 0 28px 56px -18px rgb(0 0 0 / 0.85);
+  --shadow: var(--shadow-1);
+  --glow: color-mix(in srgb, var(--gold) 9%, transparent);
+}

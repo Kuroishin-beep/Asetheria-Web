@@ -82,7 +82,7 @@ export function EntryCard({
             lineHeight: 1.5,
             fontFamily: "var(--font-prose)",
             fontStyle: "italic",
-            borderLeft: "2px solid var(--border)",
+            borderLeft: "2px solid var(--border-strong)",
             paddingLeft: "0.6rem",
           }}
         >
