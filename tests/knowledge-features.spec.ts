@@ -19,6 +19,8 @@ test.describe("command palette & shortcuts (DM)", () => {
 
   test("an empty palette lists commands, and typing one runs it", async ({ page }) => {
     await page.goto("/");
+    // The shortcut listener attaches on hydration; wait for the page to settle.
+    await page.waitForLoadState("networkidle");
     await page.keyboard.press("Control+k");
     const dialog = page.getByRole("dialog", { name: "Search the codex" });
     await expect(dialog).toBeVisible();

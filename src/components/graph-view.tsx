@@ -164,6 +164,15 @@ function layout(nodes: Node[], edges: Edge[]): Map<string, Point> {
     }
   }
 
+  // Round to a tenth of a pixel. The layout runs on the server and again
+  // during hydration; full-precision floats can differ in the last digit
+  // between the two, which React reports as a hydration mismatch and which
+  // leaves nodes drawn where the server put them but clickable where the
+  // client did.
+  for (const p of pos.values()) {
+    p.x = Math.round(p.x * 10) / 10;
+    p.y = Math.round(p.y * 10) / 10;
+  }
   return pos;
 }
 

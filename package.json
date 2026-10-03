@@ -18,6 +18,7 @@
     "lore:build": "tsx scripts/build-lore-population.ts",
     "codex:merge-duplicates": "tsx scripts/merge-duplicates.ts",
     "links:rebuild": "tsx scripts/rebuild-links.ts",
+    "cities:build": "tsx scripts/build-city-locations.ts",
     "verify:links": "tsx scripts/verify-links.ts",
     "verify:expansion": "tsx scripts/verify-expansion.ts",
     "describe": "tsx scripts/generate-descriptions.ts",

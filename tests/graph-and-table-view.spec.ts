@@ -35,7 +35,11 @@ test.describe("graph view", () => {
     // together that one occludes the other's click target.
     const anyNode = page.locator('g[role="button"]').first();
     await expect(anyNode).toBeVisible();
-    await anyNode.click();
+    // Open it from the keyboard: with several hundred nodes a neighbour can
+    // overlap the first node's pixels, which would make a mouse click land on
+    // the wrong node. Enter on a focused node is the same navigation path.
+    await anyNode.focus();
+    await page.keyboard.press("Enter");
     await expect(page).toHaveURL(/\/codex\/entry\//);
   });
 

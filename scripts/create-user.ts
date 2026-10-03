@@ -9,8 +9,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { neon } from "@neondatabase/serverless";
-import { drizzle } from "drizzle-orm/neon-http";
+import { connectScriptDb } from "./lib/script-db";
 import { sql } from "drizzle-orm";
 import * as schema from "../src/db/schema";
 import { users } from "../src/db/schema";
@@ -61,7 +60,7 @@ if (!url) {
   process.exit(1);
 }
 
-const db = drizzle(neon(url), { schema });
+const db = connectScriptDb(url);
 
 async function main() {
   const hash = await hashPassword(password!);

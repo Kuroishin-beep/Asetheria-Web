@@ -47,8 +47,23 @@ Where things stand and how to pick them up. The detail lives in
 - `data/lore-population.json`: bodies for all 186 deities
 - `scripts/merge-duplicates.ts`: 13 duplicate settlements merged, spellings kept as aliases
 
+**Cities**: `data/city-locations.json` — 96 new places inside the 16
+capitals/major cities plus Deiperduem and Duneforged: 63 common institutions
+in each empire's idiom (forum/baths/basilica/garrison; agora/temple
+precinct/gymnasion/theatre; bazaar/fire-temple/caravanserai/water-court) with
+a city-specific section, and 33 landmarks the city write-ups already named.
+22 existing pages (Duneforged's districts and temples, Aqua Aeterna, the
+Paradise, Palace of Eronis) now sit under their city. Note: players only see
+these once granted — default grants cover empires + `major-city` tags only.
+
+**Scripts now work on any Postgres**: all 15 of main's content scripts used to
+be Neon-only; `scripts/lib/script-db.ts` routes local DBs through `pg`, so the
+local test DB now holds the same descriptions Neon does (cities, towns,
+villages, wilds, sites, organizations). `enrich-from-html` still needs the
+Notion HTML export, which is not on this machine.
+
 New scripts: `foundry:extract`, `codex:import-file`, `lore:build`,
-`codex:merge-duplicates`, `links:rebuild`.
+`codex:merge-duplicates`, `links:rebuild`, `cities:build`.
 
 ## 3. To ship
 
@@ -64,6 +79,7 @@ psql $env:DATABASE_URL -f scripts/sql/setup.sql
 npx tsx scripts/import-codex-file.ts data/foundry-world.json --fill-empty
 npx tsx scripts/import-codex-file.ts data/lore-population.json --fill-empty
 npx tsx scripts/merge-duplicates.ts --apply
+npx tsx scripts/import-codex-file.ts data/city-locations.json --fill-empty
 npx tsx scripts/rebuild-links.ts
 npm run embeddings:generate
 ```

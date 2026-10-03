@@ -22,8 +22,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { neon } from "@neondatabase/serverless";
-import { drizzle } from "drizzle-orm/neon-http";
+import { connectScriptDb } from "./lib/script-db";
 import { eq } from "drizzle-orm";
 import * as schema from "../src/db/schema";
 import { entries } from "../src/db/schema";
@@ -59,7 +58,7 @@ if (!ROOT || !fs.existsSync(ROOT)) {
 /** Only rewrite a body when the export adds at least this much text. */
 const MIN_GAIN = 400;
 
-const db = drizzle(neon(url), { schema });
+const db = connectScriptDb(url);
 
 // ---------------------------------------------------------------------------
 // HTML -> Markdown

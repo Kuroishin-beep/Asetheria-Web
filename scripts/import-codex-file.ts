@@ -74,6 +74,15 @@ const entrySchema = z.object({
   tags: z.array(z.string()).default([]),
   visibility: z.enum(schema.visibility.enumValues).default("public"),
   sourcePath: z.string().nullable().optional(),
+  /** The page this one belongs under (a district under its city). */
+  parentSlug: z.string().nullable().optional(),
+  /** Only file an existing page under its parent; never create it. */
+  attachOnly: z.boolean().optional(),
+  /**
+   * With --fill-empty, also replace a body shorter than this many characters —
+   * for one-line stubs that the file supersedes. Off unless set per entry.
+   */
+  replaceBodyShorterThan: z.number().int().positive().optional(),
 });
 const fileSchema = z.object({ entries: z.array(entrySchema) });
 
@@ -114,6 +123,10 @@ async function main() {
   const parsed = fileSchema.parse(JSON.parse(fs.readFileSync(file, "utf8")));
   console.log(`\n  ${path.relative(REPO, file)}: ${parsed.entries.length} entries${FILL_EMPTY ? " (fill-empty)" : ""}${DRY_RUN ? " — DRY RUN" : ""}\n`);
 
+  const wanted = [
+    ...parsed.entries.map((e) => e.slug),
+    ...parsed.entries.flatMap((e) => (e.parentSlug ? [e.parentSlug] : [])),
+  ];
   const existing = await db
     .select({
       id: entries.id,
@@ -121,10 +134,12 @@ async function main() {
       summary: entries.summary,
       body: entries.body,
       fields: entries.fields,
+      parentId: entries.parentId,
     })
     .from(entries)
-    .where(inArray(entries.slug, parsed.entries.map((e) => e.slug)));
+    .where(inArray(entries.slug, wanted));
   const bySlug = new Map(existing.map((e) => [e.slug, e]));
+  const idOf = (slug: string | null | undefined) => (slug ? bySlug.get(slug)?.id ?? null : null);
 
   const touched: string[] = [];
   let created = 0;
@@ -133,6 +148,11 @@ async function main() {
 
   for (const e of parsed.entries) {
     const found = bySlug.get(e.slug);
+    if (!found && e.attachOnly) {
+      console.log(`  ! ${e.slug}: not in the database, nothing to attach`);
+      skipped++;
+      continue;
+    }
     if (!found) {
       if (!DRY_RUN) {
         const [row] = await db
@@ -148,9 +168,12 @@ async function main() {
             tags: e.tags,
             visibility: e.visibility,
             sourcePath: e.sourcePath ?? null,
+            parentId: idOf(e.parentSlug),
           })
-          .returning({ id: entries.id });
+          .returning({ id: entries.id, slug: entries.slug });
         touched.push(row.id);
+        // Later entries in the same file may name this one as their parent.
+        bySlug.set(row.slug, { id: row.id, slug: row.slug, summary: e.summary, body: e.body, fields: e.fields, parentId: idOf(e.parentSlug) });
       }
       console.log(`  + ${e.kind.padEnd(13)} ${e.name}`);
       created++;
@@ -164,11 +187,14 @@ async function main() {
 
     const patch: Partial<typeof entries.$inferInsert> = {};
     if (blank(found.summary) && !blank(e.summary)) patch.summary = e.summary;
-    if (blank(found.body) && !blank(e.body)) patch.body = e.body;
+    const stub = e.replaceBodyShorterThan && (found.body ?? "").trim().length < e.replaceBodyShorterThan;
+    if ((blank(found.body) || stub) && !blank(e.body)) patch.body = e.body;
     const missingFields = Object.fromEntries(
       Object.entries(e.fields).filter(([k, v]) => !blank(v) && blank(found.fields?.[k])),
     );
     if (Object.keys(missingFields).length) patch.fields = { ...found.fields, ...missingFields };
+    const parentId = idOf(e.parentSlug);
+    if (!found.parentId && parentId && parentId !== found.id) patch.parentId = parentId;
 
     if (Object.keys(patch).length === 0) {
       skipped++;

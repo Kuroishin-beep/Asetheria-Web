@@ -5,6 +5,8 @@ test.use({ storageState: "tests/.auth/dm.json" });
 test.describe("command palette", () => {
   test("Ctrl+K opens it, typing filters, Enter navigates", async ({ page }) => {
     await page.goto("/");
+    // The shortcut listener attaches on hydration; wait for the page to settle.
+    await page.waitForLoadState("networkidle");
     await page.keyboard.press("Control+k");
     await expect(page.getByRole("dialog", { name: /search the codex/i })).toBeVisible();
 
@@ -17,6 +19,8 @@ test.describe("command palette", () => {
 
   test("Escape closes the palette", async ({ page }) => {
     await page.goto("/");
+    // The shortcut listener attaches on hydration; wait for the page to settle.
+    await page.waitForLoadState("networkidle");
     await page.keyboard.press("Control+k");
     await expect(page.getByRole("dialog")).toBeVisible();
     await page.keyboard.press("Escape");

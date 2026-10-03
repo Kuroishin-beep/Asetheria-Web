@@ -16,8 +16,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { neon } from "@neondatabase/serverless";
-import { drizzle } from "drizzle-orm/neon-http";
+import { connectScriptDb } from "./lib/script-db";
 import { eq, sql } from "drizzle-orm";
 import * as schema from "../src/db/schema";
 import { entries } from "../src/db/schema";
@@ -43,7 +42,7 @@ if (!url) {
 }
 
 const APPLY = process.argv.includes("--apply");
-const db = drizzle(neon(url), { schema });
+const db = connectScriptDb(url);
 
 type Settlement = {
   name: string;
