@@ -1,47 +1,38 @@
-import { SkeletonBar } from "@/components/skeleton";
+import { Card, CardContent } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
 
 /**
  * Skeleton for a cold /login navigation, shaped like the real form
- * (title, two fields, one button) so nothing jumps when the real content
- * arrives. No spinner — a static, low-motion placeholder instead.
+ * (brand mark, title, two fields, one button) so nothing jumps when the real
+ * content arrives. No spinner.
  */
 export default function LoginLoading() {
   return (
     <main
-      style={{
-        minHeight: "100dvh",
-        display: "grid",
-        placeItems: "center",
-        padding: "2rem 1rem",
-      }}
+      className="grid min-h-dvh place-items-center px-4 py-8"
       aria-busy="true"
       aria-label="Loading sign-in"
     >
-      <div style={{ width: "min(24rem, 100%)" }}>
-        <div
-          style={{
-            display: "grid",
-            justifyItems: "center",
-            gap: "0.75rem",
-            marginBottom: "1.75rem",
-          }}
-        >
-          <SkeletonBar width="2rem" height="2rem" />
-          <SkeletonBar width="14rem" height="1.5rem" />
-          <SkeletonBar width="10rem" height="1rem" />
+      <div className="w-full max-w-sm">
+        <div className="mb-6 grid justify-items-center gap-3">
+          <Skeleton className="size-12 rounded-full" />
+          <Skeleton className="h-8 w-64" />
+          <Skeleton className="h-4 w-48" />
         </div>
 
-        <div className="card" style={{ padding: "1.5rem", display: "grid", gap: "1rem" }}>
-          <div style={{ display: "grid", gap: "0.4rem" }}>
-            <SkeletonBar width="3rem" height="0.7rem" />
-            <SkeletonBar width="100%" height="2.5rem" />
-          </div>
-          <div style={{ display: "grid", gap: "0.4rem" }}>
-            <SkeletonBar width="4.5rem" height="0.7rem" />
-            <SkeletonBar width="100%" height="2.5rem" />
-          </div>
-          <SkeletonBar width="100%" height="2.5rem" />
-        </div>
+        <Card>
+          <CardContent className="grid gap-4">
+            <div className="grid gap-2">
+              <Skeleton className="h-4 w-12" />
+              <Skeleton className="h-9 w-full" />
+            </div>
+            <div className="grid gap-2">
+              <Skeleton className="h-4 w-20" />
+              <Skeleton className="h-9 w-full" />
+            </div>
+            <Skeleton className="h-9 w-full" />
+          </CardContent>
+        </Card>
       </div>
     </main>
   );

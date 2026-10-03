@@ -1,7 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
+import { Loader2 } from "lucide-react";
+import { FormMessage } from "@/components/shared/form-message";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+
+const MIN_PASSWORD_LENGTH = 10;
 
 export function RegisterForm() {
   const router = useRouter();
@@ -13,14 +20,14 @@ export function RegisterForm() {
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
 
-  async function onSubmit(e: React.FormEvent) {
+  async function onSubmit(e: FormEvent) {
     e.preventDefault();
     if (password !== confirm) {
       setError("The two passwords do not match.");
       return;
     }
-    if (password.length < 10) {
-      setError("Password must be at least 10 characters.");
+    if (password.length < MIN_PASSWORD_LENGTH) {
+      setError(`Password must be at least ${MIN_PASSWORD_LENGTH} characters.`);
       return;
     }
     setBusy(true);
@@ -47,14 +54,11 @@ export function RegisterForm() {
   }
 
   return (
-    <form onSubmit={onSubmit} style={{ display: "grid", gap: "1rem" }}>
-      <div>
-        <label className="label" htmlFor="username">
-          Name
-        </label>
-        <input
+    <form onSubmit={onSubmit} className="grid gap-4">
+      <div className="grid gap-2">
+        <Label htmlFor="username">Name</Label>
+        <Input
           id="username"
-          className="input"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           autoComplete="username"
@@ -65,33 +69,27 @@ export function RegisterForm() {
         />
       </div>
 
-      <div>
-        <label className="label" htmlFor="password">
-          Password
-        </label>
-        <input
+      <div className="grid gap-2">
+        <Label htmlFor="password">Password</Label>
+        <Input
           id="password"
           type="password"
-          className="input"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           autoComplete="new-password"
-          minLength={10}
+          minLength={MIN_PASSWORD_LENGTH}
           required
         />
-        <p style={{ fontSize: "0.75rem", color: "var(--text-muted)", marginTop: "0.35rem" }}>
-          At least 10 characters. A short phrase works better than a short word.
+        <p className="text-xs text-muted-foreground">
+          At least {MIN_PASSWORD_LENGTH} characters. A short phrase works better than a short word.
         </p>
       </div>
 
-      <div>
-        <label className="label" htmlFor="confirm">
-          Password again
-        </label>
-        <input
+      <div className="grid gap-2">
+        <Label htmlFor="confirm">Password again</Label>
+        <Input
           id="confirm"
           type="password"
-          className="input"
           value={confirm}
           onChange={(e) => setConfirm(e.target.value)}
           autoComplete="new-password"
@@ -99,42 +97,24 @@ export function RegisterForm() {
         />
       </div>
 
-      <div>
-        <label className="label" htmlFor="code">
-          Invite code
-        </label>
-        <input
+      <div className="grid gap-2">
+        <Label htmlFor="code">Invite code</Label>
+        <Input
           id="code"
-          className="input"
           value={code}
           onChange={(e) => setCode(e.target.value)}
           autoComplete="off"
           required
         />
-        <p style={{ fontSize: "0.75rem", color: "var(--text-muted)", marginTop: "0.35rem" }}>
-          From your DM. The codex is not open to strangers.
-        </p>
+        <p className="text-xs text-muted-foreground">From your DM. The codex is not open to strangers.</p>
       </div>
 
-      {error && (
-        <p
-          role="alert"
-          style={{
-            fontSize: "0.8125rem",
-            color: "var(--color-blood-400)",
-            background: "color-mix(in srgb, var(--color-blood-400) 10%, transparent)",
-            border: "1px solid color-mix(in srgb, var(--color-blood-400) 30%, transparent)",
-            borderRadius: 8,
-            padding: "0.6rem 0.75rem",
-          }}
-        >
-          {error}
-        </p>
-      )}
+      {error && <FormMessage>{error}</FormMessage>}
 
-      <button type="submit" className="btn btn-primary" disabled={busy}>
+      <Button type="submit" disabled={busy}>
+        {busy && <Loader2 aria-hidden="true" className="animate-spin" />}
         {busy ? "Sealing the oath…" : "Join the party"}
-      </button>
+      </Button>
     </form>
   );
 }

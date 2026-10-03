@@ -11,7 +11,7 @@ Status key: NOT STARTED / IN PROGRESS / IMPLEMENTED / TESTED / DONE / BLOCKED
 | 0 | Prod catch-up (Neon) | none (ops only) | Neon `DATABASE_URL` from user | **BLOCKED: awaiting credential** (code phases proceed locally) |
 | 1 | Enum migration: `fauna` + `table`; retag fauna; roll_tables → table entries | `src/db/schema.ts`, `src/lib/kinds.ts`, `src/lib/rbac.ts`, `src/lib/validation.ts`, `scripts/import-codex-file.ts`, `scripts/migrate-fauna-and-tables.ts`, `scripts/sql/*`, drizzle migration, tests | none | **DONE** |
 | 2a | Design foundation: shadcn spike, tokens + refresh, next-themes, motion presets | `components.json`, `src/lib/utils.ts`, `src/lib/motion.ts`, `src/components/ui/*`, `src/app/globals.css`, `src/app/layout.tsx`, `docs/design-*.md` | 1 | **DONE** |
-| 2b | Shell + auth pages | `app-shell`, `theme-toggle`, login/register/welcome/onboarding | 2a | NOT STARTED |
+| 2b | Shell + auth pages | `app-shell`, `theme-toggle`, login/register/welcome/onboarding | 2a | **DONE** |
 | 2c | Codex pages (+ loading/error/empty) | `entry-card`, `codex/**`, `loading.tsx`, `error.tsx` | 2b | NOT STARTED |
 | 2d | Editor, palette, graph, shortcuts | `entry-form`, `markdown-editor`, `command-palette`, `graph-view`, `keyboard-shortcuts` | 2c | NOT STARTED |
 | 2e | Tools + admin + sweep (grep gates, axe) | `tools/*`, `admin/*`, `rbac-panel` | 2d | NOT STARTED |
@@ -72,3 +72,19 @@ Bugs found and fixed in this phase (by tests):
 - shadcn init clashed with legacy `--accent` / `--border` meanings: legacy variables renamed (`--gold`, `--gold-soft`, `--border-strong`) before the new tokens were added.
 Known/pre-existing: hydration warning in `graph-view.tsx` (slice 2d). `lint` is still `tsc --noEmit` only.
 Plan adjustment (documented in `docs/design-migration.md`): the 2e grep gate exempts `src/styles/shadcn.css`, `src/components/ui/*`, and `src/app/(app)/tools/tables/*` (deleted in Phase 3).
+
+### Phase 2b (shell + auth pages): DONE (2026-10-04)
+
+Built: `AppShell` rewritten (shadcn Button/Badge/Sheet/ScrollArea/Tooltip, lucide icons, Motion page transition, skip link, mobile drawer is a focus-trapping Sheet); `src/lib/section-icons.ts` (lucide per kind and location tier); `AuthShell` and `FormMessage` shared components; login (+ skeleton `loading.tsx`), register, welcome (two doors), onboarding pages and forms on shadcn Input/Label/Button/Card; `ThemeToggle` on shadcn Button. `tests/app-shell.spec.ts` (8 tests).
+
+Evidence (observed):
+1. Login keeps `#username`, `#password`, `#door-error`, button names "Enter", "Enter as a player", "Enter the codex", "Join the party", "Show password"/"Hide password"; `auth.spec.ts` (14), `entry-doors.spec.ts` (7), `rbac.spec.ts` onboarding, `responsive-visual.spec.ts` (5) all pass unchanged except the two assertions below.
+2. Keyboard-only login works (responsive-visual keyboard test passes); skip link is the first tab stop and moves focus to `#main` (app-shell test).
+3. Mobile 375px: sidebar hidden, drawer opens as `role=dialog`, Escape closes it and focus returns to the menu button, choosing a section navigates and closes (app-shell tests 3 and 4).
+4. No horizontal scroll at 375/768/1280 (app-shell test 6).
+5. Nav icons are SVGs, zero emoji in the nav text, exactly one `aria-current="page"` link (app-shell test 1).
+6. Screenshots of five key pages x 3 widths x 2 themes: `test-results/design/after-2b`.
+Totals: `tsc` exit 0; `next build` compiled and generated 21 pages; full suite **128 passed** (120 + 8), 0 failed.
+
+Test edits (rule 3 justification): `auth.spec.ts` matched the role badge by its emoji text (`"⚜ DM"`, `"☗ Player"`). The project rule requires lucide-react icons, so the glyph is gone; the assertions now match the badge by its `title` ("Full edit access" / "Read-only access"). The intent (role badge visible for the right role) is unchanged.
+Known leftovers for later slices: arbitrary font sizes such as `text-[13px]`/`text-[11px]` in new components are swept in 2e; plain `.btn`/`.card` legacy classes remain in untouched screens (2c to 2e).

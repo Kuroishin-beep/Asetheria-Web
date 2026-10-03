@@ -2,15 +2,33 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ComponentType, type ReactNode } from "react";
+import { motion } from "motion/react";
+import { LogOut, Menu, Plus, ShieldCheck, User } from "lucide-react";
+import type { EntryKind } from "@/db/schema";
 import { CommandPalette } from "@/components/command-palette";
 import { KeyboardShortcuts } from "@/components/keyboard-shortcuts";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { pageTransition } from "@/lib/motion";
+import { iconForSection, KEEPER_ICONS, TOOL_ICONS } from "@/lib/section-icons";
+import { cn } from "@/lib/utils";
 
 export type NavKind = {
   slug: string;
   label: string;
-  icon: string;
+  kind: EntryKind;
   count: number;
 };
 
@@ -20,10 +38,18 @@ export type ShellUser = {
   displayName?: string | null;
 };
 
-const TOOL_LINKS = [
-  { href: "/graph", label: "Graph", icon: "🕸" },
-  { href: "/tools/dice", label: "Dice", icon: "🎲" },
-  { href: "/tools/tables", label: "Random Tables", icon: "🎰" },
+type NavIcon = ComponentType<{ className?: string }>;
+
+const TOOL_LINKS: { href: string; label: string; Icon: NavIcon }[] = [
+  { href: "/graph", label: "Graph", Icon: TOOL_ICONS.graph },
+  { href: "/tools/dice", label: "Dice", Icon: TOOL_ICONS.dice },
+  { href: "/tools/tables", label: "Random Tables", Icon: TOOL_ICONS.tables },
+];
+
+const KEEPER_LINKS: { href: string; label: string; Icon: NavIcon }[] = [
+  { href: "/archive", label: "Archive", Icon: KEEPER_ICONS.archive },
+  { href: "/admin", label: "Backup & Import", Icon: KEEPER_ICONS.backup },
+  { href: "/admin/rbac", label: "Players & Access", Icon: KEEPER_ICONS.access },
 ];
 
 export function AppShell({
@@ -33,7 +59,7 @@ export function AppShell({
 }: {
   user: ShellUser;
   kinds: NavKind[];
-  children: React.ReactNode;
+  children: ReactNode;
 }) {
   const pathname = usePathname();
   const router = useRouter();
@@ -42,14 +68,6 @@ export function AppShell({
   // Any navigation closes the mobile drawer.
   useEffect(() => setMenuOpen(false), [pathname]);
 
-  // Prevent the page behind the drawer from scrolling.
-  useEffect(() => {
-    document.body.style.overflow = menuOpen ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [menuOpen]);
-
   async function signOut() {
     await fetch("/api/auth/logout", { method: "POST" });
     router.push("/welcome");
@@ -57,294 +75,181 @@ export function AppShell({
   }
 
   const isDM = user.role === "dm";
+  const who = user.displayName || user.username;
 
   const sidebar = (
-    <nav aria-label="Codex sections" style={{ padding: "1rem 0.75rem" }}>
-      <SectionLabel>Codex</SectionLabel>
-      <ul style={{ display: "grid", gap: 1, marginBottom: "1.25rem" }}>
+    <nav aria-label="Codex sections" className="flex flex-col gap-6 p-3">
+      <NavGroup label="Codex">
         {kinds.map((k) => (
-          <li key={k.slug}>
-            <NavItem
-              href={`/codex/${k.slug}`}
-              active={pathname === `/codex/${k.slug}`}
-              icon={k.icon}
-              label={k.label}
-              trailing={k.count > 0 ? String(k.count) : undefined}
-            />
-          </li>
+          <NavItem
+            key={k.slug}
+            href={`/codex/${k.slug}`}
+            active={pathname === `/codex/${k.slug}`}
+            Icon={iconForSection(k.slug, k.kind)}
+            label={k.label}
+            trailing={k.count > 0 ? String(k.count) : undefined}
+          />
         ))}
-      </ul>
+      </NavGroup>
 
-      <SectionLabel>Tools</SectionLabel>
-      <ul style={{ display: "grid", gap: 1, marginBottom: "1.25rem" }}>
-        {TOOL_LINKS.map((t) => (
-          <li key={t.href}>
-            <NavItem
-              href={t.href}
-              active={pathname.startsWith(t.href)}
-              icon={t.icon}
-              label={t.label}
-            />
-          </li>
+      <NavGroup label="Tools">
+        {TOOL_LINKS.map(({ href, label, Icon }) => (
+          <NavItem key={href} href={href} active={pathname.startsWith(href)} Icon={Icon} label={label} />
         ))}
-      </ul>
+      </NavGroup>
 
       {isDM && (
-        <>
-          <SectionLabel>Keeper</SectionLabel>
-          <ul style={{ display: "grid", gap: 1 }}>
-            <li>
-              <NavItem
-                href="/archive"
-                active={pathname === "/archive"}
-                icon="🗄"
-                label="Archive"
-              />
-            </li>
-            <li>
-              <NavItem
-                href="/admin"
-                active={pathname === "/admin"}
-                icon="⚙"
-                label="Backup & Import"
-              />
-            </li>
-            <li>
-              <NavItem
-                href="/admin/rbac"
-                active={pathname === "/admin/rbac"}
-                icon="🛡"
-                label="Players & Access"
-              />
-            </li>
-          </ul>
-        </>
+        <NavGroup label="Keeper">
+          {KEEPER_LINKS.map(({ href, label, Icon }) => (
+            <NavItem key={href} href={href} active={pathname === href} Icon={Icon} label={label} />
+          ))}
+        </NavGroup>
       )}
     </nav>
   );
 
   return (
-    <div style={{ minHeight: "100dvh", display: "flex", flexDirection: "column" }}>
-      {/* ---- Top bar ---- */}
-      <header
-        className="no-print"
-        style={{
-          position: "sticky",
-          top: 0,
-          zIndex: 50,
-          background: "color-mix(in srgb, var(--bg) 88%, transparent)",
-          backdropFilter: "blur(10px)",
-          borderBottom: "1px solid var(--border-soft)",
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "0.75rem",
-            padding: "0.6rem 1rem",
-            maxWidth: "100rem",
-            margin: "0 auto",
-          }}
+    <TooltipProvider delayDuration={300}>
+      <div className="flex min-h-dvh flex-col">
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-primary focus:px-4 focus:py-2 focus:text-primary-foreground"
         >
-          <button
-            type="button"
-            className="btn lg:hidden"
-            onClick={() => setMenuOpen((v) => !v)}
-            aria-expanded={menuOpen}
-            aria-label="Toggle navigation menu"
-            style={{ padding: "0.4rem 0.6rem" }}
-          >
-            <span aria-hidden="true">{menuOpen ? "✕" : "☰"}</span>
-          </button>
+          Skip to content
+        </a>
 
-          <Link
-            href="/"
-            className="font-display"
-            style={{
-              fontSize: "1.05rem",
-              fontWeight: 700,
-              color: "var(--gold)",
-              textDecoration: "none",
-              whiteSpace: "nowrap",
-              overflow: "hidden",
-              textOverflow: "ellipsis",
-            }}
-          >
-            <span className="hidden sm:inline">The Continent of </span>Asetheria
-          </Link>
+        {/* ---- Top bar ---- */}
+        <header className="no-print sticky top-0 z-40 border-b border-border bg-background/85 backdrop-blur-md">
+          <div className="mx-auto flex h-12 max-w-[100rem] items-center gap-2 px-4 sm:gap-3">
+            <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
+              <SheetTrigger asChild>
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="icon"
+                  className="lg:hidden"
+                  aria-label="Toggle navigation menu"
+                >
+                  <Menu aria-hidden="true" />
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="left" className="w-[17rem] gap-0 p-0 sm:max-w-[17rem]">
+                <SheetHeader className="border-b border-border p-4">
+                  <SheetTitle className="font-display text-base text-gold">Asetheria</SheetTitle>
+                  <SheetDescription className="sr-only">Browse the codex sections and tools.</SheetDescription>
+                </SheetHeader>
+                <ScrollArea className="min-h-0 flex-1">{sidebar}</ScrollArea>
+              </SheetContent>
+            </Sheet>
 
-          <div style={{ flex: 1 }} />
-
-          <CommandPalette isDM={isDM} />
-          <KeyboardShortcuts isDM={isDM} />
-
-          {isDM && (
-            <Link href="/codex/new" className="btn btn-primary">
-              <span aria-hidden="true">+</span>
-              <span className="hidden sm:inline">New</span>
+            <Link
+              href="/"
+              className="font-display truncate text-base font-bold tracking-tight text-gold hover:text-gold-soft"
+            >
+              <span className="hidden sm:inline">The Continent of </span>Asetheria
             </Link>
-          )}
 
-          <ThemeToggle />
+            <div className="flex-1" />
 
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "0.5rem",
-              paddingLeft: "0.5rem",
-              borderLeft: "1px solid var(--border-soft)",
-            }}
-          >
-            <span
-              className="hidden md:flex chip"
-              title={isDM ? "Full edit access" : "Read-only access"}
-            >
-              {isDM ? "⚜ DM" : "☗ Player"}
-            </span>
-            <button
-              type="button"
-              onClick={signOut}
-              className="btn"
-              style={{ padding: "0.4rem 0.6rem" }}
-              title={`Sign out (${user.displayName || user.username})`}
-              aria-label={`Sign out, signed in as ${user.displayName || user.username}`}
-            >
-              <span aria-hidden="true">⏻</span>
-            </button>
-          </div>
-        </div>
-      </header>
+            <CommandPalette isDM={isDM} />
+            <KeyboardShortcuts isDM={isDM} />
 
-      <div
-        style={{
-          flex: 1,
-          display: "flex",
-          maxWidth: "100rem",
-          margin: "0 auto",
-          width: "100%",
-        }}
-      >
-        {/* ---- Desktop sidebar ---- */}
-        <aside
-          className="hidden lg:block no-print"
-          style={{
-            width: "15rem",
-            flexShrink: 0,
-            borderRight: "1px solid var(--border-soft)",
-            position: "sticky",
-            top: "3.25rem",
-            alignSelf: "flex-start",
-            maxHeight: "calc(100dvh - 3.25rem)",
-            overflowY: "auto",
-          }}
-        >
-          {sidebar}
-        </aside>
+            {isDM && (
+              <Button asChild>
+                <Link href="/codex/new">
+                  <Plus aria-hidden="true" />
+                  <span className="hidden sm:inline">New</span>
+                </Link>
+              </Button>
+            )}
 
-        {/* ---- Mobile drawer ---- */}
-        {menuOpen && (
-          <div
-            className="lg:hidden no-print"
-            onMouseDown={(e) => {
-              if (e.target === e.currentTarget) setMenuOpen(false);
-            }}
-            style={{
-              position: "fixed",
-              inset: "3.25rem 0 0",
-              zIndex: 40,
-              background: "rgb(0 0 0 / 0.5)",
-            }}
-          >
-            <div
-              style={{
-                width: "min(17rem, 82vw)",
-                height: "100%",
-                overflowY: "auto",
-                background: "var(--bg-raised)",
-                borderRight: "1px solid var(--border-strong)",
-              }}
-            >
-              {sidebar}
+            <ThemeToggle />
+
+            <div className="flex items-center gap-2 border-l border-border pl-2 sm:pl-3">
+              <Badge
+                variant="outline"
+                className="hidden gap-1 md:inline-flex"
+                title={isDM ? "Full edit access" : "Read-only access"}
+              >
+                {isDM ? (
+                  <ShieldCheck aria-hidden="true" className="size-3" />
+                ) : (
+                  <User aria-hidden="true" className="size-3" />
+                )}
+                {isDM ? "DM" : "Player"}
+              </Badge>
+              <Button
+                type="button"
+                variant="ghost"
+                size="icon"
+                onClick={signOut}
+                title={`Sign out (${who})`}
+                aria-label={`Sign out, signed in as ${who}`}
+              >
+                <LogOut aria-hidden="true" />
+              </Button>
             </div>
           </div>
-        )}
+        </header>
 
-        <main style={{ flex: 1, minWidth: 0, padding: "1.5rem 1rem 4rem" }}>
-          {children}
-        </main>
+        <div className="mx-auto flex w-full max-w-[100rem] flex-1">
+          {/* ---- Desktop sidebar ---- */}
+          <aside className="no-print sticky top-12 hidden h-[calc(100dvh-3rem)] w-60 shrink-0 self-start border-r border-border lg:block">
+            <ScrollArea className="h-full">{sidebar}</ScrollArea>
+          </aside>
+
+          <main id="main" tabIndex={-1} className="min-w-0 flex-1 px-4 pb-16 pt-6 outline-none">
+            <motion.div key={pathname} variants={pageTransition} initial="hidden" animate="visible">
+              {children}
+            </motion.div>
+          </main>
+        </div>
       </div>
-    </div>
+    </TooltipProvider>
   );
 }
 
-function SectionLabel({ children }: { children: React.ReactNode }) {
+function NavGroup({ label, children }: { label: string; children: ReactNode }) {
   return (
-    <p
-      style={{
-        fontSize: "0.6875rem",
-        fontWeight: 700,
-        textTransform: "uppercase",
-        letterSpacing: "0.09em",
-        color: "var(--text-faint)",
-        padding: "0 0.6rem",
-        marginBottom: "0.4rem",
-      }}
-    >
-      {children}
-    </p>
+    <div>
+      <p className="mb-2 px-3 text-[11px] font-bold uppercase tracking-[0.09em] text-faint-foreground">{label}</p>
+      <ul className="grid gap-1">{children}</ul>
+    </div>
   );
 }
 
 function NavItem({
   href,
   active,
-  icon,
+  Icon,
   label,
   trailing,
 }: {
   href: string;
   active: boolean;
-  icon: string;
+  Icon: NavIcon;
   label: string;
   trailing?: string;
 }) {
   return (
-    <Link
-      href={href}
-      aria-current={active ? "page" : undefined}
-      style={{
-        display: "flex",
-        alignItems: "center",
-        gap: "0.6rem",
-        padding: "0.4rem 0.6rem",
-        borderRadius: 7,
-        textDecoration: "none",
-        fontSize: "0.875rem",
-        color: active ? "var(--gold)" : "var(--text-muted)",
-        background: active ? "var(--bg-sunken)" : "transparent",
-        fontWeight: active ? 600 : 400,
-      }}
-    >
-      <span aria-hidden="true" style={{ width: "1.1rem", textAlign: "center" }}>
-        {icon}
-      </span>
-      <span
-        style={{
-          flex: 1,
-          overflow: "hidden",
-          textOverflow: "ellipsis",
-          whiteSpace: "nowrap",
-        }}
+    <li>
+      <Link
+        href={href}
+        aria-current={active ? "page" : undefined}
+        className={cn(
+          "group relative flex items-center gap-3 rounded-md px-3 py-2 text-sm transition-colors duration-150",
+          "text-muted-foreground hover:bg-accent hover:text-accent-foreground",
+          active && "bg-accent font-semibold text-foreground",
+        )}
       >
-        {label}
-      </span>
-      {trailing && (
-        <span style={{ fontSize: "0.6875rem", color: "var(--text-faint)" }}>
-          {trailing}
-        </span>
-      )}
-    </Link>
+        {active && <span aria-hidden="true" className="absolute inset-y-2 left-0 w-1 rounded-full bg-primary" />}
+        <Icon
+          aria-hidden="true"
+          className={cn("size-4 shrink-0", active ? "text-gold" : "text-faint-foreground group-hover:text-accent-foreground")}
+        />
+        <span className="flex-1 truncate">{label}</span>
+        {trailing && <span className="text-[11px] tabular-nums text-faint-foreground">{trailing}</span>}
+      </Link>
+    </li>
   );
 }

@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import type { Metadata } from "next";
+import { AuthShell } from "@/components/auth/auth-shell";
+import { Card, CardContent } from "@/components/ui/card";
 import { getCurrentUser } from "@/lib/auth";
 import { RegisterForm } from "./register-form";
 
@@ -15,67 +17,30 @@ export default async function RegisterPage() {
   const open = Boolean(process.env.SIGNUP_CODE?.trim());
 
   return (
-    <main
-      style={{
-        minHeight: "100dvh",
-        display: "grid",
-        placeItems: "center",
-        padding: "2rem 1rem",
-      }}
+    <AuthShell
+      title="The Continent of Asetheria"
+      description={
+        open
+          ? "Take an oath and the codex opens, as far as the party is allowed."
+          : "The codex is sealed to strangers."
+      }
     >
-      <div style={{ width: "min(24rem, 100%)" }}>
-        <div style={{ textAlign: "center", marginBottom: "1.75rem" }}>
-          <p
-            aria-hidden="true"
-            style={{ fontSize: "2rem", color: "var(--gold)", lineHeight: 1 }}
-          >
-            ⚜
-          </p>
-          <h1
-            className="font-display"
-            style={{
-              fontSize: "1.5rem",
-              fontWeight: 700,
-              marginTop: "0.75rem",
-              color: "var(--text)",
-            }}
-          >
-            The Continent of Asetheria
-          </h1>
-          <p
-            style={{
-              color: "var(--text-muted)",
-              fontSize: "0.875rem",
-              marginTop: "0.35rem",
-            }}
-          >
-            {open
-              ? "Take an oath and the codex opens — as far as the party is allowed."
-              : "The codex is sealed to strangers."}
-          </p>
-        </div>
-
-        <div className="card" style={{ padding: "1.5rem" }}>
+      <Card>
+        <CardContent>
           {open ? (
             <RegisterForm />
           ) : (
-            <p style={{ fontSize: "0.875rem", color: "var(--text-muted)" }}>
-              Registration is closed. Ask the DM for an account.
-            </p>
+            <p className="text-sm text-muted-foreground">Registration is closed. Ask the DM for an account.</p>
           )}
-        </div>
+        </CardContent>
+      </Card>
 
-        <p
-          style={{
-            textAlign: "center",
-            marginTop: "1.25rem",
-            fontSize: "0.8125rem",
-            color: "var(--text-muted)",
-          }}
-        >
-          Already sworn? <Link href="/login">Sign in</Link>
-        </p>
-      </div>
-    </main>
+      <p className="mt-4 text-center text-[13px] text-muted-foreground">
+        Already sworn?{" "}
+        <Link href="/login" className="text-link underline-offset-4 hover:underline">
+          Sign in
+        </Link>
+      </p>
+    </AuthShell>
   );
 }

@@ -1,7 +1,12 @@
 "use client";
 
-import { useId, useRef, useState } from "react";
+import { useId, useRef, useState, type FormEvent } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { Eye, EyeOff, Loader2 } from "lucide-react";
+import { FormMessage } from "@/components/shared/form-message";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 
 export function LoginForm() {
   const router = useRouter();
@@ -17,7 +22,7 @@ export function LoginForm() {
   const [busy, setBusy] = useState(false);
   const usernameRef = useRef<HTMLInputElement>(null);
 
-  async function onSubmit(e: React.FormEvent) {
+  async function onSubmit(e: FormEvent) {
     e.preventDefault();
     const trimmedUsername = username.trim();
     if (!trimmedUsername || !password) return;
@@ -37,9 +42,9 @@ export function LoginForm() {
         setThrottled(res.status === 429);
         setBusy(false);
         // Generic error, not tied to a specific field (so it never hints
-        // which one was wrong) — send focus back to the top of the form so
-        // a keyboard or screen-reader user can immediately retry. Skipped
-        // for a throttle: retyping won't help, so don't imply it will.
+        // which one was wrong): send focus back to the top of the form so a
+        // keyboard or screen-reader user can immediately retry. Skipped for a
+        // throttle: retyping won't help, so don't imply it will.
         if (res.status !== 429) {
           usernameRef.current?.focus();
           usernameRef.current?.select();
@@ -64,15 +69,12 @@ export function LoginForm() {
   const canSubmit = username.trim().length > 0 && password.length > 0;
 
   return (
-    <form onSubmit={onSubmit} style={{ display: "grid", gap: "1rem" }} noValidate>
-      <div>
-        <label className="label" htmlFor="username">
-          Name
-        </label>
-        <input
+    <form onSubmit={onSubmit} className="grid gap-4" noValidate>
+      <div className="grid gap-2">
+        <Label htmlFor="username">Name</Label>
+        <Input
           id="username"
           ref={usernameRef}
-          className="input"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           autoComplete="username"
@@ -83,86 +85,44 @@ export function LoginForm() {
         />
       </div>
 
-      <div>
-        <label className="label" htmlFor="password">
-          Password
-        </label>
-        <div style={{ position: "relative" }}>
-          <input
+      <div className="grid gap-2">
+        <Label htmlFor="password">Password</Label>
+        <div className="relative">
+          <Input
             id="password"
             type={showPassword ? "text" : "password"}
-            className="input"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             autoComplete="current-password"
             required
-            style={{ paddingRight: "2.75rem" }}
+            className="pr-12"
             aria-invalid={error ? true : undefined}
             aria-describedby={error ? errorId : undefined}
           />
-          <button
+          <Button
             type="button"
+            variant="ghost"
+            size="icon-sm"
+            className="absolute right-1 top-1/2 -translate-y-1/2 text-muted-foreground"
             onClick={() => setShowPassword((v) => !v)}
             aria-label={showPassword ? "Hide password" : "Show password"}
             aria-pressed={showPassword}
-            style={{
-              position: "absolute",
-              right: "0.4rem",
-              top: "50%",
-              transform: "translateY(-50%)",
-              background: "transparent",
-              border: 0,
-              padding: "0.35rem 0.5rem",
-              cursor: "pointer",
-              color: "var(--text-muted)",
-              fontSize: "0.8125rem",
-              lineHeight: 1,
-            }}
           >
-            <span aria-hidden="true">{showPassword ? "🙈" : "👁"}</span>
-          </button>
+            {showPassword ? <EyeOff aria-hidden="true" /> : <Eye aria-hidden="true" />}
+          </Button>
         </div>
       </div>
 
       {error && (
-        <p
-          id={errorId}
-          role="alert"
-          data-variant={throttled ? "throttle" : "error"}
-          style={
-            throttled
-              ? {
-                  // A calmer tone than the wrong-credentials red — this
-                  // isn't a mistake the user made, just a pause.
-                  fontSize: "0.8125rem",
-                  color: "var(--gold)",
-                  background: "color-mix(in srgb, var(--gold) 10%, transparent)",
-                  border: "1px solid color-mix(in srgb, var(--gold) 30%, transparent)",
-                  borderRadius: 8,
-                  padding: "0.6rem 0.75rem",
-                }
-              : {
-                  fontSize: "0.8125rem",
-                  color: "var(--color-blood-400)",
-                  background: "color-mix(in srgb, var(--color-blood-400) 10%, transparent)",
-                  border: "1px solid color-mix(in srgb, var(--color-blood-400) 30%, transparent)",
-                  borderRadius: 8,
-                  padding: "0.6rem 0.75rem",
-                }
-          }
-        >
+        <FormMessage id={errorId} variant={throttled ? "notice" : "error"}>
           {error}
-        </p>
+        </FormMessage>
       )}
 
-      <button
-        type="submit"
-        className="btn btn-primary"
-        disabled={busy || !canSubmit}
-        aria-busy={busy}
-      >
+      <Button type="submit" disabled={busy || !canSubmit} aria-busy={busy}>
+        {busy && <Loader2 aria-hidden="true" className="animate-spin" />}
         {busy ? "Opening the codex…" : "Enter"}
-      </button>
+      </Button>
     </form>
   );
 }

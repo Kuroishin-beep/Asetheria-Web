@@ -1,8 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type FormEvent } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
+import { Crown, Loader2, Swords } from "lucide-react";
+import { FormMessage } from "@/components/shared/form-message";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 
 export function EnterButtons() {
   const router = useRouter();
@@ -15,7 +21,7 @@ export function EnterButtons() {
   const [busy, setBusy] = useState(false);
   const [password, setPassword] = useState("");
 
-  async function enterAsPlayer(event: React.FormEvent<HTMLFormElement>) {
+  async function enterAsPlayer(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setBusy(true);
     setError(null);
@@ -40,119 +46,61 @@ export function EnterButtons() {
   }
 
   return (
-    <div
-      style={{
-        display: "grid",
-        gap: "1rem",
-        gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 15rem), 1fr))",
-      }}
-    >
-      <form
-        onSubmit={enterAsPlayer}
-        className="card"
-        style={{
-          padding: "1.5rem",
-          display: "flex",
-          flexDirection: "column",
-          gap: "0.5rem",
-          textAlign: "center",
-        }}
-      >
-        <p aria-hidden="true" style={{ fontSize: "1.75rem", lineHeight: 1 }}>
-          ⚔
-        </p>
-        <h2 className="font-display" style={{ fontWeight: 700, fontSize: "1.125rem" }}>
-          The Party
-        </h2>
-        <p
-          style={{
-            fontSize: "0.8125rem",
-            color: "var(--text-muted)",
-            flexGrow: 1,
-          }}
-        >
-          Read everything the party has uncovered with the password your DM
-          shared — the DM&rsquo;s secrets stay sealed.
-        </p>
-        <label htmlFor="party-password" className="sr-only">
-          Party password
-        </label>
-        <input
-          id="party-password"
-          type="password"
-          className="input"
-          autoComplete="current-password"
-          placeholder="Party password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-          aria-invalid={error ? true : undefined}
-          aria-describedby={error ? "door-error" : undefined}
-        />
-        <button
-          type="submit"
-          className="btn btn-primary"
-          disabled={busy || password.length === 0}
-          style={{ marginTop: "0.25rem" }}
-        >
-          {busy ? "Opening the codex…" : "Enter as a player"}
-        </button>
-      </form>
+    <div className="grid gap-4 sm:grid-cols-2">
+      <Card className="text-center">
+        <form onSubmit={enterAsPlayer} className="flex h-full flex-col gap-(--card-spacing)">
+          <CardHeader className="justify-items-center">
+            <Swords aria-hidden="true" className="mb-2 size-7 text-gold" />
+            <h2 className="font-display text-lg font-bold tracking-tight">The Party</h2>
+            <CardDescription className="text-[13px]">
+              Read everything the party has uncovered with the password your DM shared. The DM&rsquo;s
+              secrets stay sealed.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="mt-auto grid gap-3">
+            <Label htmlFor="party-password" className="sr-only">
+              Party password
+            </Label>
+            <Input
+              id="party-password"
+              type="password"
+              autoComplete="current-password"
+              placeholder="Party password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              aria-invalid={error ? true : undefined}
+              aria-describedby={error ? "door-error" : undefined}
+            />
+            <Button type="submit" disabled={busy || password.length === 0}>
+              {busy && <Loader2 aria-hidden="true" className="animate-spin" />}
+              {busy ? "Opening the codex…" : "Enter as a player"}
+            </Button>
+          </CardContent>
+        </form>
+      </Card>
 
-      <div
-        className="card"
-        style={{
-          padding: "1.5rem",
-          display: "flex",
-          flexDirection: "column",
-          gap: "0.5rem",
-          textAlign: "center",
-        }}
-      >
-        <p aria-hidden="true" style={{ fontSize: "1.75rem", lineHeight: 1 }}>
-          ⚜
-        </p>
-        <h2 className="font-display" style={{ fontWeight: 700, fontSize: "1.125rem" }}>
-          The Dungeon Master
-        </h2>
-        <p
-          style={{
-            fontSize: "0.8125rem",
-            color: "var(--text-muted)",
-            flexGrow: 1,
-          }}
-        >
-          The full codex — secrets, DM notes, and the pen itself. This door
-          takes a password.
-        </p>
-        <Link
-          href={next === "/" ? "/login" : `/login?next=${encodeURIComponent(next)}`}
-          className="btn"
-          style={{ marginTop: "0.25rem" }}
-        >
-          Sign in as the DM
-        </Link>
-      </div>
+      <Card className="text-center">
+        <CardHeader className="justify-items-center">
+          <Crown aria-hidden="true" className="mb-2 size-7 text-gold" />
+          <h2 className="font-display text-lg font-bold tracking-tight">The Dungeon Master</h2>
+          <CardDescription className="text-[13px]">
+            The full codex: secrets, DM notes, and the pen itself. This door takes a password.
+          </CardDescription>
+        </CardHeader>
+        <CardFooter className="mt-auto">
+          <Button asChild variant="outline" className="w-full">
+            <Link href={next === "/" ? "/login" : `/login?next=${encodeURIComponent(next)}`}>
+              Sign in as the DM
+            </Link>
+          </Button>
+        </CardFooter>
+      </Card>
 
       {error && (
-        <p
-          id="door-error"
-          role="alert"
-          style={{
-            gridColumn: "1 / -1",
-            fontSize: "0.8125rem",
-            color: "var(--color-blood-400)",
-            background:
-              "color-mix(in srgb, var(--color-blood-400) 10%, transparent)",
-            border:
-              "1px solid color-mix(in srgb, var(--color-blood-400) 30%, transparent)",
-            borderRadius: 8,
-            padding: "0.6rem 0.75rem",
-            textAlign: "center",
-          }}
-        >
+        <FormMessage id="door-error" className="text-center sm:col-span-2">
           {error}
-        </p>
+        </FormMessage>
       )}
     </div>
   );

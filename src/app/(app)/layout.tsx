@@ -28,7 +28,7 @@ export default async function AppLayout({
   ).map((s) => ({
     slug: s.slug,
     label: s.label,
-    icon: s.icon,
+    kind: s.kind,
     count: sectionCount(s),
   }));
 

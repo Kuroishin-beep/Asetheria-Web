@@ -55,7 +55,7 @@
   --shadow-sm: var(--shadow-1);
   --shadow-md: var(--shadow-2);
   --shadow-lg: var(--shadow-3);
-  --font-heading: var(--font-display);
+  --font-heading: var(--font-sans);
 }
 
 @layer base {

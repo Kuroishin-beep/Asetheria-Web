@@ -1,5 +1,10 @@
 import { redirect } from "next/navigation";
 import type { Metadata } from "next";
+import { AuthShell } from "@/components/auth/auth-shell";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { getCurrentUser } from "@/lib/auth";
 import { setDisplayName } from "./actions";
 
@@ -14,68 +19,22 @@ export default async function WelcomePage() {
   if (user.role !== "player" || user.displayName) redirect("/");
 
   return (
-    <main
-      style={{
-        minHeight: "100dvh",
-        display: "grid",
-        placeItems: "center",
-        padding: "2rem 1rem",
-      }}
-    >
-      <div style={{ width: "min(24rem, 100%)" }}>
-        <div style={{ textAlign: "center", marginBottom: "1.75rem" }}>
-          <p
-            aria-hidden="true"
-            style={{ fontSize: "2rem", color: "var(--gold)", lineHeight: 1 }}
-          >
-            ⚜
-          </p>
-          <h1
-            className="font-display"
-            style={{
-              fontSize: "1.5rem",
-              fontWeight: 700,
-              marginTop: "0.75rem",
-              color: "var(--text)",
-            }}
-          >
-            Welcome to the Continent
-          </h1>
-          <p
-            style={{
-              color: "var(--text-muted)",
-              fontSize: "0.875rem",
-              marginTop: "0.35rem",
-            }}
-          >
-            What should we call you at the table?
-          </p>
-        </div>
-
-        <form action={setDisplayName} className="card" style={{ padding: "1.5rem", display: "grid", gap: "1rem" }}>
-          <div>
-            <label className="label" htmlFor="displayName">
-              Your name
-            </label>
-            <input
-              id="displayName"
-              name="displayName"
-              className="input"
-              autoFocus
-              required
-              maxLength={60}
-              placeholder="e.g. Kestra"
-            />
-          </div>
-          <p style={{ fontSize: "0.75rem", color: "var(--text-faint)" }}>
-            The GM decides what you can see from here — you&rsquo;ll start with
-            the continent&rsquo;s empires and its major cities.
-          </p>
-          <button type="submit" className="btn btn-primary">
-            Enter the codex
-          </button>
-        </form>
-      </div>
-    </main>
+    <AuthShell title="Welcome to the Continent" description="What should we call you at the table?">
+      <Card>
+        <CardContent>
+          <form action={setDisplayName} className="grid gap-4">
+            <div className="grid gap-2">
+              <Label htmlFor="displayName">Your name</Label>
+              <Input id="displayName" name="displayName" autoFocus required maxLength={60} placeholder="e.g. Kestra" />
+            </div>
+            <p className="text-xs text-muted-foreground">
+              The GM decides what you can see from here. You&rsquo;ll start with the continent&rsquo;s
+              empires and its major cities.
+            </p>
+            <Button type="submit">Enter the codex</Button>
+          </form>
+        </CardContent>
+      </Card>
+    </AuthShell>
   );
 }

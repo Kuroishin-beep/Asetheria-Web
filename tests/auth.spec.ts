@@ -52,7 +52,9 @@ test.describe("login form", () => {
     await page.getByRole("button", { name: "Enter" }).click();
     await page.waitForURL("/");
     await expect(page.getByRole("link", { name: /^New/ })).toBeVisible();
-    await expect(page.getByText("⚜ DM")).toBeVisible();
+    // The role badge used to be matched by its emoji glyph; icons are now lucide
+    // SVGs (project rule: lucide-react only), so match the badge by its title.
+    await expect(page.getByTitle("Full edit access")).toBeVisible();
   });
 
   test("valid player login reaches the dashboard read-only", async ({ page }) => {
@@ -62,7 +64,7 @@ test.describe("login form", () => {
     await page.getByRole("button", { name: "Enter" }).click();
     await page.waitForURL("/");
     await expect(page.getByRole("link", { name: /^New/ })).toHaveCount(0);
-    await expect(page.getByText("☗ Player")).toBeVisible();
+    await expect(page.getByTitle("Read-only access")).toBeVisible();
   });
 
   test("wrong password shows a generic error and stays on /login", async ({ page }) => {
