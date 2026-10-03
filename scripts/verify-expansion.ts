@@ -39,8 +39,8 @@ const seenSlugs = new Set<string>();
 
 const VALID_KINDS = new Set([
   "deity", "pantheon", "organization", "faction", "location", "empire", "npc",
-  "family", "creature", "item", "ore", "flora", "lore", "quest", "session",
-  "rule", "system", "note",
+  "family", "creature", "item", "ore", "flora", "fauna", "lore", "quest", "session",
+  "rule", "system", "note", "table",
 ]);
 
 let linkCount = 0;

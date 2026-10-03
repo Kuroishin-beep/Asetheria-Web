@@ -111,6 +111,14 @@ function tagsFor(e: {
       out.push("Flora & Fauna");
       break;
 
+    case "fauna":
+      out.push("Flora & Fauna");
+      break;
+
+    case "table":
+      out.push("Random Table");
+      break;
+
     case "item":
       out.push("Item");
       if (f.rarity) out.push(f.rarity.trim());

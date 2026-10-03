@@ -3,6 +3,12 @@
 -- Idempotent — safe to run on every deploy.
 -- ---------------------------------------------------------------------------
 
+-- Entry kinds added after the original enum (Phase 1: fauna + table). Postgres
+-- cannot drop enum values, so these are additive and idempotent. They run
+-- outside any transaction, as ALTER TYPE ... ADD VALUE requires.
+ALTER TYPE entry_kind ADD VALUE IF NOT EXISTS 'fauna';
+ALTER TYPE entry_kind ADD VALUE IF NOT EXISTS 'table';
+
 -- Trigram matching powers the "did you mean" behaviour in the command palette.
 CREATE EXTENSION IF NOT EXISTS pg_trgm;
 

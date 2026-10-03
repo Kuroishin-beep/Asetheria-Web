@@ -57,8 +57,8 @@ export function nameAliases(name: string): string[] {
 /** Which kind a shared title should link to first — earlier wins. */
 const KIND_PRIORITY = [
   "empire", "location", "organization", "faction", "family", "npc", "deity",
-  "creature", "item", "ore", "flora", "quest", "lore", "session", "system",
-  "rule", "pantheon", "note",
+  "creature", "item", "ore", "flora", "fauna", "quest", "lore", "session", "system",
+  "rule", "table", "pantheon", "note",
 ];
 
 function kindRank(kind: string | undefined): number {

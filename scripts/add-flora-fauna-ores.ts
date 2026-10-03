@@ -410,7 +410,7 @@ async function main() {
   type Plan = {
     slug: string;
     name: string;
-    kind: "flora" | "ore";
+    kind: "flora" | "fauna" | "ore";
     summary: string;
     fields: Record<string, string>;
     tags: string[];
@@ -418,7 +418,11 @@ async function main() {
   const plan: Plan[] = [];
   const skipped: string[] = [];
 
-  for (const f of FAUNA.concat(FLORA as Flora[])) {
+  const specimens = [
+    ...FAUNA.map((f) => ({ f, kind: "fauna" as const })),
+    ...(FLORA as Flora[]).map((f) => ({ f, kind: "flora" as const })),
+  ];
+  for (const { f, kind } of specimens) {
     if (existingNames.has(f.name.trim().toLowerCase())) {
       skipped.push(f.name);
       continue;
@@ -426,7 +430,7 @@ async function main() {
     plan.push({
       slug: slugify(f.name),
       name: f.name,
-      kind: "flora",
+      kind,
       summary: f.description,
       fields: {
         scientificName: f.scientificName,

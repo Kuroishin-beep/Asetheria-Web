@@ -3,7 +3,7 @@ import { notFound, redirect } from "next/navigation";
 import type { Metadata } from "next";
 import { getCurrentUser } from "@/lib/auth";
 import { countEntries, listEntries, PAGE_SIZE } from "@/lib/entries";
-import { KIND_BY_KEY, SECTION_BY_SLUG } from "@/lib/kinds";
+import { KIND_BY_KEY, LEGACY_SECTION_SLUGS, SECTION_BY_SLUG } from "@/lib/kinds";
 import {
   CardGrid,
   EmptyState,
@@ -32,6 +32,8 @@ export default async function KindPage({
   searchParams: Promise<{ page?: string }>;
 }) {
   const { kindSlug } = await params;
+  const moved = LEGACY_SECTION_SLUGS[kindSlug];
+  if (moved) redirect(`/codex/${moved}`);
   const def = SECTION_BY_SLUG[kindSlug];
   if (!def) notFound();
 

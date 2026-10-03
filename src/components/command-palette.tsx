@@ -15,7 +15,7 @@ type Hit = {
 const ICONS: Record<string, string> = {
   deity: "☀", pantheon: "⛩", organization: "⚜", faction: "⚔", location: "⛰",
   empire: "👑", npc: "☗", family: "🛡", creature: "🐉", item: "⚗", ore: "⛏",
-  flora: "🌿", lore: "📜", quest: "🗝", session: "🕮", rule: "⚖", system: "⚙",
+  flora: "🌿", fauna: "🦌", table: "🎰", lore: "📜", quest: "🗝", session: "🕮", rule: "⚖", system: "⚙",
   note: "✎",
 };
 

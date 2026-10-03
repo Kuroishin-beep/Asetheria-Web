@@ -209,11 +209,24 @@ export const KINDS: KindDef[] = [
   },
   {
     kind: "flora",
-    label: "Flora & Fauna",
-    singular: "Specimen",
-    slug: "flora-fauna",
+    label: "Flora",
+    singular: "Plant",
+    slug: "flora",
     icon: "🌿",
-    blurb: "Living things worth cataloguing.",
+    blurb: "Plants, fungi, and herbs worth cataloguing.",
+    fields: [
+      { key: "scientificName", label: "Scientific Name" },
+      { key: "effects", label: "Effects", type: "textarea" },
+      { key: "lore", label: "Lore", type: "textarea" },
+    ],
+  },
+  {
+    kind: "fauna",
+    label: "Fauna",
+    singular: "Animal",
+    slug: "fauna",
+    icon: "🦌",
+    blurb: "Wildlife and ecology: the animals of the Continent, away from the stat block.",
     fields: [
       { key: "scientificName", label: "Scientific Name" },
       { key: "effects", label: "Effects", type: "textarea" },
@@ -266,6 +279,15 @@ export const KINDS: KindDef[] = [
     fields: [{ key: "category", label: "Category" }],
   },
   {
+    kind: "table",
+    label: "Random Tables",
+    singular: "Table",
+    slug: "tables",
+    icon: "🎰",
+    blurb: "Roll for names, loot, weather, rumours, forage: whatever you need mid-session.",
+    fields: [{ key: "dice", label: "Dice", placeholder: "1d20" }],
+  },
+  {
     kind: "note",
     label: "Notes",
     singular: "Note",
@@ -293,6 +315,14 @@ export const KIND_BY_KEY: Record<EntryKind, KindDef> = Object.fromEntries(
 export const KIND_BY_SLUG: Record<string, KindDef> = Object.fromEntries(
   KINDS.map((k) => [k.slug, k]),
 );
+
+/**
+ * Section addresses that used to exist and now live elsewhere. "Flora & Fauna"
+ * became two sections when `fauna` split off from `flora`.
+ */
+export const LEGACY_SECTION_SLUGS: Record<string, string> = {
+  "flora-fauna": "flora",
+};
 
 export function kindLabel(kind: EntryKind): string {
   return KIND_BY_KEY[kind]?.singular ?? kind;

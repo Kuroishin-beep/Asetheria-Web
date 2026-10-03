@@ -20,6 +20,8 @@
     "links:rebuild": "tsx scripts/rebuild-links.ts",
     "cities:build": "tsx scripts/build-city-locations.ts",
     "verify:links": "tsx scripts/verify-links.ts",
+    "check:links": "tsx scripts/check-links.ts",
+    "migrate:fauna-tables": "tsx scripts/migrate-fauna-and-tables.ts",
     "verify:expansion": "tsx scripts/verify-expansion.ts",
     "describe": "tsx scripts/generate-descriptions.ts",
     "db:generate": "drizzle-kit generate",
