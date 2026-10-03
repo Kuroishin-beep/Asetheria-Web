@@ -9,7 +9,7 @@ import {
 
 /**
  * Cookie plumbing. Kept apart from `session.ts` because `next/headers` is not
- * available in Edge middleware.
+ * available in the request proxy (src/proxy.ts).
  */
 
 function cookieOptions(maxAge: number) {

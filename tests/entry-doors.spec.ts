@@ -10,10 +10,12 @@ import {
 
 /**
  * The entry paths merged in from main: the /welcome door page, the
- * passwordless party door, and invite-code registration. Registration tests
+ * password-gated party door, and invite-code registration. Registration tests
  * need SIGNUP_CODE in .env.local (the dev server must see it too).
  */
 const SIGNUP_CODE = process.env.SIGNUP_CODE?.trim();
+// The party door opens the shared player account with that account's password.
+const PARTY_PASSWORD = process.env.PLAYER_PASSWORD ?? "";
 
 async function userIdByName(username: string) {
   const rows = await query<{ id: string; role: string }>(
@@ -37,6 +39,7 @@ test.describe("welcome doors", () => {
 
   test("the party door signs in as a player, honors next, and hides DM controls", async ({ page }) => {
     await page.goto("/welcome?next=%2Fsearch");
+    await page.getByLabel("Party password").fill(PARTY_PASSWORD);
     await page.getByRole("button", { name: "Enter as a player" }).click();
     await page.waitForURL((url) => url.pathname !== "/welcome");
     // A shared player account without a name is sent to /onboarding first.
@@ -45,8 +48,20 @@ test.describe("welcome doors", () => {
     await expect(page).not.toHaveURL(/\/admin$/);
   });
 
+  test("the party door refuses a wrong or missing password", async ({ page, request }) => {
+    const missing = await request.post("/api/auth/player", { data: {} });
+    expect(missing.status()).toBe(400);
+    await page.goto("/welcome");
+    await expect(page.getByRole("button", { name: "Enter as a player" })).toBeDisabled();
+    await page.getByLabel("Party password").fill(`wrong-${randomUUID()}`);
+    await page.getByRole("button", { name: "Enter as a player" }).click();
+    await expect(page.locator("#door-error")).toContainText("party password");
+    await expect(page).toHaveURL(/\/welcome/);
+  });
+
   test("the party door ignores a cross-site next", async ({ page }) => {
     await page.goto("/welcome?next=//evil.example.com");
+    await page.getByLabel("Party password").fill(PARTY_PASSWORD);
     await page.getByRole("button", { name: "Enter as a player" }).click();
     await page.waitForURL((url) => url.pathname !== "/welcome");
     expect(page.url()).not.toContain("evil.example.com");

@@ -7,7 +7,18 @@
  * The model (~30MB) is downloaded once and cached under
  * `node_modules/.cache` / the OS cache dir on first use.
  */
-import { pipeline, type FeatureExtractionPipeline } from "@huggingface/transformers";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
+import { env, pipeline, type FeatureExtractionPipeline } from "@huggingface/transformers";
+
+// Serverless functions (Vercel, Lambda) only have a writable /tmp — the default
+// cache under node_modules is read-only there, so a cold start could never
+// cache the model. EMBEDDINGS_CACHE_DIR overrides both.
+if (process.env.EMBEDDINGS_CACHE_DIR) {
+  env.cacheDir = process.env.EMBEDDINGS_CACHE_DIR;
+} else if (process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME) {
+  env.cacheDir = join(tmpdir(), "asetheria-models");
+}
 
 let extractor: FeatureExtractionPipeline | null = null;
 let loading: Promise<FeatureExtractionPipeline> | null = null;

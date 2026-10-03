@@ -6,7 +6,7 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 /**
- * Public (see middleware.ts's PUBLIC_PATHS — this route is what that entry
+ * Public (see proxy.ts's PUBLIC_PATHS — this route is what that entry
  * was referring to before it existed). Intentionally unauthenticated and
  * minimal: no entry counts, no user info, nothing that would make this
  * useful to anyone but an uptime check or a deploy hook.

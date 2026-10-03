@@ -87,7 +87,7 @@ export async function listEntries(
   return db
     .select(listColumns)
     .from(entries)
-    .where(conditions.length ? and(...(conditions as any[])) : undefined)
+    .where(conditions.length ? and(...conditions) : undefined)
     .orderBy(asc(entries.name))
     .limit(opts.limit ?? PAGE_SIZE)
     .offset(opts.offset ?? 0);
@@ -118,7 +118,7 @@ export async function countLocationsByTier(
       total: count(),
     })
     .from(entries)
-    .where(and(...(conditions as any[])))
+    .where(and(...conditions))
     .groupBy(sql`coalesce(${entries.fields}->>'tier', '')`);
 
   const out: Record<string, number> = {};
@@ -141,7 +141,7 @@ export async function listEntriesBySlugs(
   const rows = await db
     .select(listColumns)
     .from(entries)
-    .where(and(...(conditions as any[])));
+    .where(and(...conditions));
 
   const order = new Map(slugs.map((s, i) => [s, i]));
   return rows.sort(
@@ -164,7 +164,7 @@ export async function listLoreWithContent(
   return db
     .select(listColumns)
     .from(entries)
-    .where(and(...(conditions as any[])))
+    .where(and(...conditions))
     .orderBy(desc(sql`length(${entries.body})`), asc(entries.name))
     .limit(limit);
 }
@@ -178,7 +178,7 @@ export async function countEntries(
   const [row] = await db
     .select({ total: count() })
     .from(entries)
-    .where(conditions.length ? and(...(conditions as any[])) : undefined);
+    .where(conditions.length ? and(...conditions) : undefined);
   return row?.total ?? 0;
 }
 
@@ -187,7 +187,7 @@ export async function countByKind(user: SessionUser) {
   const rows = await db
     .select({ kind: entries.kind, total: count() })
     .from(entries)
-    .where(and(...(conditions as any[])))
+    .where(and(...conditions))
     .groupBy(entries.kind);
 
   const out: Partial<Record<EntryKind, number>> = {};
@@ -215,7 +215,7 @@ export async function getEntryBySlug(
   const [row] = await db
     .select()
     .from(entries)
-    .where(and(...(conditions as any[])))
+    .where(and(...conditions))
     .limit(1);
 
   if (!row) return null;
@@ -235,7 +235,7 @@ export async function getEntryById(
   const [row] = await db
     .select()
     .from(entries)
-    .where(and(...(conditions as any[])))
+    .where(and(...conditions))
     .limit(1);
   if (!row) return null;
   return user.role === "dm" ? row : redactForPlayer(row);
@@ -275,7 +275,7 @@ export async function getOutgoingLinks(
     })
     .from(links)
     .innerJoin(entries, eq(entries.id, links.targetId))
-    .where(and(...(conditions as any[])))
+    .where(and(...conditions))
     .orderBy(asc(entries.name))
     .limit(200);
 }
@@ -303,7 +303,7 @@ export async function getBacklinks(
     })
     .from(links)
     .innerJoin(entries, eq(entries.id, links.sourceId))
-    .where(and(...(conditions as any[])))
+    .where(and(...conditions))
     .orderBy(asc(entries.name))
     .limit(200);
 }
@@ -324,7 +324,7 @@ export async function getChildren(user: SessionUser, parentId: string) {
       summary: entries.summary,
     })
     .from(entries)
-    .where(and(...(conditions as any[])))
+    .where(and(...conditions))
     .orderBy(asc(entries.name))
     .limit(200);
 }
@@ -340,7 +340,7 @@ export async function getParent(user: SessionUser, parentId: string | null) {
       kind: entries.kind,
     })
     .from(entries)
-    .where(and(...(conditions as any[])))
+    .where(and(...conditions))
     .limit(1);
   return row ?? null;
 }
@@ -583,7 +583,7 @@ export async function getRecentlyUpdated(user: SessionUser, limit = 8) {
       updatedAt: entries.updatedAt,
     })
     .from(entries)
-    .where(and(...(conditions as any[])))
+    .where(and(...conditions))
     .orderBy(desc(entries.updatedAt))
     .limit(limit);
 }
@@ -605,7 +605,7 @@ export async function getGraphData(
   const nodes = await db
     .select({ id: entries.id, slug: entries.slug, name: entries.name, kind: entries.kind })
     .from(entries)
-    .where(and(...(conditions as any[])))
+    .where(and(...conditions))
     .limit(5000);
 
   const visible = new Set(nodes.map((n) => n.id));

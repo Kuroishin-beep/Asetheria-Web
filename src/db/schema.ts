@@ -12,6 +12,7 @@ import {
   pgEnum,
   check,
   vector,
+  type AnyPgColumn,
 } from "drizzle-orm/pg-core";
 
 // Note: full-text search is implemented with a generated `search_vector`
@@ -116,7 +117,7 @@ export const entries = pgTable(
     tags: text("tags").array().notNull().default(sql`ARRAY[]::text[]`),
     visibility: visibility("visibility").notNull().default("public"),
     /** Optional parent for hierarchy (a city inside an empire, a god in a pantheon). */
-    parentId: uuid("parent_id").references((): any => entries.id, {
+    parentId: uuid("parent_id").references((): AnyPgColumn => entries.id, {
       onDelete: "set null",
     }),
     /** Where this came from in the original Notion export. Purely informational. */

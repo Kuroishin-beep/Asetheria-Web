@@ -30,10 +30,19 @@ function identify(ip: string, username: string): string {
     .digest("hex");
 }
 
+/**
+ * Best-effort client address for throttling. The first `x-forwarded-for` hop is
+ * whatever the client typed, so it is never trusted on its own: prefer headers
+ * the platform sets itself (Vercel overwrites both of these), then fall back to
+ * the *last* forwarded hop — the one appended by the proxy nearest to us, which
+ * a client cannot choose.
+ */
 export function clientIp(headers: Headers): string {
+  const forwarded = headers.get("x-forwarded-for")?.split(",");
   return (
-    headers.get("x-forwarded-for")?.split(",")[0].trim() ||
-    headers.get("x-real-ip") ||
+    headers.get("x-vercel-forwarded-for")?.split(",")[0].trim() ||
+    headers.get("x-real-ip")?.trim() ||
+    forwarded?.[forwarded.length - 1]?.trim() ||
     "unknown"
   );
 }

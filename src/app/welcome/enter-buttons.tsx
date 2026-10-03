@@ -13,12 +13,18 @@ export function EnterButtons() {
 
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
+  const [password, setPassword] = useState("");
 
-  async function enterAsPlayer() {
+  async function enterAsPlayer(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
     setBusy(true);
     setError(null);
     try {
-      const res = await fetch("/api/auth/player", { method: "POST" });
+      const res = await fetch("/api/auth/player", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ password }),
+      });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) {
         setError(data.error ?? "Could not open the codex.");
@@ -41,7 +47,8 @@ export function EnterButtons() {
         gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 15rem), 1fr))",
       }}
     >
-      <div
+      <form
+        onSubmit={enterAsPlayer}
         className="card"
         style={{
           padding: "1.5rem",
@@ -64,19 +71,33 @@ export function EnterButtons() {
             flexGrow: 1,
           }}
         >
-          No key needed. Step in and read everything the party has uncovered —
-          the DM&rsquo;s secrets stay sealed.
+          Read everything the party has uncovered with the password your DM
+          shared — the DM&rsquo;s secrets stay sealed.
         </p>
+        <label htmlFor="party-password" className="sr-only">
+          Party password
+        </label>
+        <input
+          id="party-password"
+          type="password"
+          className="input"
+          autoComplete="current-password"
+          placeholder="Party password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+          aria-invalid={error ? true : undefined}
+          aria-describedby={error ? "door-error" : undefined}
+        />
         <button
-          type="button"
+          type="submit"
           className="btn btn-primary"
-          onClick={enterAsPlayer}
-          disabled={busy}
+          disabled={busy || password.length === 0}
           style={{ marginTop: "0.25rem" }}
         >
           {busy ? "Opening the codex…" : "Enter as a player"}
         </button>
-      </div>
+      </form>
 
       <div
         className="card"
@@ -115,6 +136,7 @@ export function EnterButtons() {
 
       {error && (
         <p
+          id="door-error"
           role="alert"
           style={{
             gridColumn: "1 / -1",

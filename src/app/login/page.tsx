@@ -63,8 +63,8 @@ export default function LoginPage() {
               marginTop: "0.35rem",
             }}
           >
-            The Dungeon Master&rsquo;s door. Players can{" "}
-            <Link href="/welcome">enter without a password</Link>.
+            The Dungeon Master&rsquo;s door. Players use{" "}
+            <Link href="/welcome">the party door</Link>.
           </p>
         </div>
 

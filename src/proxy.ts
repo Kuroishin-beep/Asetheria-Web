@@ -2,7 +2,7 @@ import { NextResponse, type NextRequest } from "next/server";
 import { SESSION_COOKIE, verifySessionToken } from "@/lib/session";
 
 /**
- * Gate for the whole app. This runs on the Edge runtime, so it verifies the
+ * Gate for the whole app. This runs before every request, so it verifies the
  * JWT signature only — the database-backed check (revocation, role) happens in
  * `getCurrentUser()`. Treat this as a fast first filter, not the sole guard.
  */
@@ -16,7 +16,7 @@ const PUBLIC_PATHS = [
   "/api/health",
 ];
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   const isPublic = PUBLIC_PATHS.some(

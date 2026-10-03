@@ -34,6 +34,9 @@ const securityHeaders = [
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
+  // Native ONNX runtime + model files: load from node_modules at runtime
+  // rather than trying to bundle them.
+  serverExternalPackages: ["@huggingface/transformers", "onnxruntime-node"],
   async headers() {
     return [{ source: "/:path*", headers: securityHeaders }];
   },

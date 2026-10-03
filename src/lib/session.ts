@@ -3,7 +3,7 @@ import type { UserRole } from "@/db/schema";
 
 /**
  * Pure token helpers — deliberately free of any `next/headers` import so this
- * module can be used from Edge middleware. Cookie reading and writing lives in
+ * module can be used from the request proxy (src/proxy.ts). Cookie reading and writing lives in
  * `session-cookie.ts`, which is Node-runtime only.
  */
 
