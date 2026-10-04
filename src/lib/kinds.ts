@@ -82,6 +82,7 @@ export const KINDS: KindDef[] = [
       { key: "race", label: "Race", placeholder: "Aarakocra" },
       { key: "symbol", label: "Symbol" },
       { key: "classSubclass", label: "Class & Subclass" },
+      { key: "portrait", label: "Portrait", placeholder: "/portraits/name.png or an https:// address" },
     ],
   },
   {
@@ -135,6 +136,7 @@ export const KINDS: KindDef[] = [
       { key: "factions", label: "Factions" },
       { key: "gods", label: "Worships" },
       { key: "attitude", label: "Attitude", placeholder: "Ally, Neutral, Hostile" },
+      { key: "portrait", label: "Portrait", placeholder: "/portraits/name.png or an https:// address" },
       { key: "statblock", label: "Stat Block", type: "textarea" },
     ],
   },

@@ -6,6 +6,7 @@ import { db } from "@/db";
 import { entries, type EntryKind } from "@/db/schema";
 import { getCurrentUser } from "@/lib/auth";
 import { createEntryAction } from "@/lib/actions";
+import { templateFor } from "@/lib/entry-templates";
 import { KIND_BY_KEY, sectionPath } from "@/lib/kinds";
 import { EntryForm } from "@/components/entry-form";
 import { PageHeading } from "@/components/entry-card";
@@ -54,8 +55,8 @@ export default async function NewEntryPage({
           name: "",
           kind,
           summary: "",
-          body: "",
-          dmNotes: "",
+          body: templateFor(kind).body,
+          dmNotes: templateFor(kind).dmNotes,
           visibility: "public",
           tags: [],
           fields: {},

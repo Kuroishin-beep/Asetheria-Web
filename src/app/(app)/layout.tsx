@@ -34,7 +34,7 @@ export default async function AppLayout({
 
   return (
     <AppShell
-      user={{ username: user.username, role: user.role, displayName: user.displayName }}
+      user={{ id: user.id, username: user.username, role: user.role, displayName: user.displayName }}
       kinds={kinds}
     >
       {children}

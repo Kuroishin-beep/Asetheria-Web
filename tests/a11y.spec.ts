@@ -14,6 +14,7 @@ const ROUTES: { name: string; path: string; auth: "dm" | "player" | null }[] = [
   { name: "front page", path: "/", auth: "dm" },
   { name: "section list", path: "/codex/npcs", auth: "dm" },
   { name: "entry page", path: "/codex/entry/corinth-city", auth: "dm" },
+  { name: "NPC page (hero card, local graph)", path: "/codex/entry/arthur-ramaris", auth: "dm" },
   { name: "new entry form", path: "/codex/new?kind=npc", auth: "dm" },
   { name: "search results", path: "/search?q=bacchus", auth: "dm" },
   { name: "graph", path: "/graph", auth: "dm" },

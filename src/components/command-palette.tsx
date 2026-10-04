@@ -9,6 +9,7 @@ import { Dialog, DialogContent, DialogDescription, DialogTitle, DialogTrigger } 
 import { Input } from "@/components/ui/input";
 import { Kbd } from "@/components/ui/kbd";
 import { KIND_ICONS } from "@/lib/section-icons";
+import { readRecent } from "@/lib/recent-views";
 import { actionsFor, type AppAction } from "@/lib/shortcuts";
 import { cn } from "@/lib/utils";
 
@@ -41,11 +42,12 @@ function matchesAction(a: AppAction, q: string): boolean {
  * Deliberately keyboard-first: at the table you want to find an NPC, or jump
  * to the dice, in two seconds without reaching for the mouse.
  */
-export function CommandPalette({ isDM = false }: { isDM?: boolean }) {
+export function CommandPalette({ isDM = false, userId }: { isDM?: boolean; userId?: string }) {
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<Hit[]>([]);
+  const [recent, setRecent] = useState<Hit[]>([]);
   const [active, setActive] = useState(0);
   const [loading, setLoading] = useState(false);
   const requestId = useRef(0);
@@ -70,6 +72,29 @@ export function CommandPalette({ isDM = false }: { isDM?: boolean }) {
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, []);
+
+  // The empty box shows the last pages this person opened, re-checked against
+  // their access on the server so nothing they can no longer read is listed.
+  useEffect(() => {
+    if (!open || !userId) return;
+    const slugs = readRecent(userId);
+    if (slugs.length === 0) {
+      setRecent([]);
+      return;
+    }
+    let cancelled = false;
+    fetch(`/api/recent?slugs=${encodeURIComponent(slugs.join(","))}`)
+      .then((res) => (res.ok ? res.json() : { results: [] }))
+      .then((data) => {
+        if (!cancelled) setRecent(data.results ?? []);
+      })
+      .catch(() => {
+        if (!cancelled) setRecent([]);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [open, userId]);
 
   useEffect(() => {
     if (open) {
@@ -107,7 +132,9 @@ export function CommandPalette({ isDM = false }: { isDM?: boolean }) {
 
   // Commands first (all of them on an empty box, matching ones as you type),
   // then entries.
+  const showRecent = query.trim() === "" && recent.length > 0;
   const rows: Row[] = [
+    ...(showRecent ? recent.map((hit) => ({ type: "entry" as const, hit })) : []),
     ...actionsFor(isDM)
       .filter((a) => (query.trim() ? matchesAction(a, query.trim()) : true))
       .slice(0, query.trim() ? TYPED_COMMANDS : EMPTY_BOX_COMMANDS)
@@ -185,6 +212,11 @@ export function CommandPalette({ isDM = false }: { isDM?: boolean }) {
             {rows.length === 0 && query.trim().length >= MIN_QUERY_LENGTH && !loading && (
               <p className="px-4 py-5 text-sm text-muted-foreground">
                 Nothing found. Press Enter for a full-text search.
+              </p>
+            )}
+            {showRecent && (
+              <p id="recent-heading" className="px-4 pb-1 pt-3 text-[11px] font-semibold uppercase tracking-[0.07em] text-faint-foreground">
+                Recently viewed
               </p>
             )}
             {rows.map((row, idx) => {

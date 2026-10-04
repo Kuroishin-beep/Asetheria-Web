@@ -6,6 +6,9 @@ import { Eye, EyeOff, Pencil, Sparkles } from "lucide-react";
 import { CardGrid, EntryCard } from "@/components/entry-card";
 import { RollTableView } from "@/components/roll-table-view";
 import { Eyebrow } from "@/components/shared/eyebrow";
+import { EntryHero } from "@/components/entry-hero";
+import { LocalGraph, type LocalNode } from "@/components/local-graph";
+import { RecordView } from "@/components/record-view";
 import { LinkedNames } from "@/components/shared/linked-names";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Badge, badgeVariants } from "@/components/ui/badge";
@@ -22,6 +25,7 @@ import {
   getUnlinkedMentions,
   getWikiLinkResolver,
 } from "@/lib/entries";
+import { HERO_INFOBOX, PORTRAIT_FIELD } from "@/lib/entry-hero";
 import { KIND_BY_KEY } from "@/lib/kinds";
 import { extractHeadings, renderMarkdown } from "@/lib/markdown";
 import { LINKED_FIELD_KEYS, parseAliases } from "@/lib/links";
@@ -88,9 +92,16 @@ export default async function EntryPage({
   const dmHtml = isDM && entry.dmNotes ? renderMarkdown(entry.dmNotes, resolve) : "";
 
   const fieldDefs = def?.fields ?? [];
+  // A hero kind moves its key facts into the hero card, so they are not shown twice.
+  const heroKeys = HERO_INFOBOX[entry.kind];
+  const heroFacts = heroKeys
+    ? fieldDefs
+        .filter((f) => heroKeys.includes(f.key) && entry.fields?.[f.key])
+        .map((f) => ({ key: f.key, label: f.label, value: entry.fields[f.key] }))
+    : [];
   const shownFields = fieldDefs
     .map((f) => ({ ...f, value: entry.fields?.[f.key] }))
-    .filter((f) => f.value);
+    .filter((f) => f.value && !(heroKeys && (heroKeys.includes(f.key) || f.key === PORTRAIT_FIELD)));
   // Anything imported that the kind doesn't define a field for is still shown,
   // so no property from Notion silently disappears.
   const knownKeys = new Set(fieldDefs.map((f) => f.key));
@@ -98,8 +109,19 @@ export default async function EntryPage({
     ([k, v]) => v && !knownKeys.has(k) && k !== "description" && k !== "aliases",
   );
 
+  // Every list below came through the access-checked queries, so a player's
+  // picture holds only entries they may read.
+  const neighbours: LocalNode[] = [];
+  const seen = new Set<string>([entry.id]);
+  for (const n of [...(parent ? [parent] : []), ...children, ...outgoing, ...backlinks]) {
+    if (seen.has(n.id)) continue;
+    seen.add(n.id);
+    neighbours.push({ id: n.id, slug: n.slug, name: n.name, kind: n.kind });
+  }
+
   return (
     <article className="max-w-6xl">
+      <RecordView userId={user.id} slug={entry.slug} />
       {/* ---- Breadcrumb ---- */}
       <Breadcrumb aria-label="Breadcrumb" className="no-print mb-4">
         <BreadcrumbList>
@@ -178,6 +200,10 @@ export default async function EntryPage({
 
         <div className="mt-5 h-px bg-linear-to-r from-transparent via-border to-transparent" />
       </header>
+
+      {heroKeys && (
+        <EntryHero name={entry.name} portrait={entry.fields?.[PORTRAIT_FIELD]} facts={heroFacts} />
+      )}
 
       <div className="grid gap-8 min-[1100px]:grid-cols-[minmax(0,1fr)_21rem] min-[1100px]:gap-10">
         <div className="min-w-0">
@@ -302,6 +328,8 @@ export default async function EntryPage({
 
         {/* ---- Connections ---- */}
         <aside className="min-w-0">
+          <LocalGraph centre={{ id: entry.id, slug: entry.slug, name: entry.name, kind: entry.kind }} neighbours={neighbours} />
+
           {children.length > 0 && (
             <Section title={`Within ${entry.name}`}>
               <CardGrid>

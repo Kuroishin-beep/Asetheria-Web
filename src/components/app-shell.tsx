@@ -33,6 +33,7 @@ export type NavKind = {
 };
 
 export type ShellUser = {
+  id: string;
   username: string;
   role: "dm" | "player";
   displayName?: string | null;
@@ -150,7 +151,7 @@ export function AppShell({
 
             <div className="flex-1" />
 
-            <CommandPalette isDM={isDM} />
+            <CommandPalette isDM={isDM} userId={user.id} />
             <KeyboardShortcuts isDM={isDM} />
 
             {isDM && (
