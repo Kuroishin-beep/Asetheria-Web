@@ -208,3 +208,26 @@ Built: `data/natural-world/places-1..4.json` (27 mines/quarries, 28 groves/growi
 Test scoping change (justified): `natural-world-import.spec.ts` DB queries matched `original: natural-world/%`, which now also matches places; scoped to ore/flora/fauna (its subject). `loadAll()` now reads only `ores|flora|fauna-*.json`.
 Not done: the plan's `search-safety.spec.ts` extension; the R5 and 404 assertions live in `natural-world-links.spec.ts`, which covers player access to the secret place directly.
 Prod rollout (after Phase 0): import 4 places files, `backfill-found-in --apply`, `links:rebuild`, `embeddings:generate`.
+
+## Phase 6 — Authored `table` entries (ENH-04) — DONE (local DB; prod import waits on Phase 0)
+
+Evidence per acceptance criterion:
+1. **Every table covers its full dice span with no gap or overlap:** `npm run verify:natural-world` (static, `validateTable`) and `natural-world-tables.spec.ts` (every roll in each span lands on exactly one row, for the file and for the database copy). 24 tables: 6 forage (by biome), 4 mining strikes (stone, metal vein 1d10, gems, strange finds), 6 wildlife encounters (by biome), 3 harvest quality (2d6 plants, 1d6 hides, 2d6 smelting), 5 "what's in this" (gallery, market stall, common room, smithy, shrine). Dice used: 1d4..1d10, 1d6, 2d6 with ranges.
+2. **Backlinks:** each table names places and specimens in its intro; `scripts/link-tables-to-places.ts` appends a "Tables" line to the 38 places a table names (idempotent; 7 more after the intros were enriched), so a table's linked mentions list the places citing it. Test: every table has >= 3 outgoing links and >= 1 citing place. Roller results stay plain text (the roller does not render links), so links live in the intro, which renders them.
+3. **Secret tables never reach a player:** a secret table fixture gives a player 404, absent from the list and from search; a player without the `table` grant gets 404; granted players see no DM `Use:` note.
+4. **Re-import creates 0 duplicates:** re-import prints "0 created"; the link script reports "0 places would be updated"; entry count unchanged; no duplicate slug among live entries.
+5. `tsc` 0; `next build` ok; audit 0; design gates 0 violations; embeddings current.
+Found and fixed by the tests: one table (mountain forage) had no citing place and five generic ones linked only two things; I added place links to those intros instead of lowering the test's floor, and refreshed my own unedited rows from the data file.
+Note: a zero-row-changed check (md5 of all non-place entries before/after) showed 0 existing descriptions changed by the import.
+Prod rollout (after Phase 0): import `tables.json`, `link-tables-to-places --apply`, `links:rebuild`, `embeddings:generate`.
+
+## Phase 7 — Database view per kind (ENH-05) — DONE
+
+Evidence per acceptance criterion:
+1. **Numeric-aware order:** `/codex/ores?view=table&sort=costPerLb&dir=asc` orders 5 sp, 5 gp, 9 gp, 50 gp, 5,000 gp, blank last (`database-view.spec.ts`); descending reverses and keeps blanks last; the first row of a descending cost sort is the dearest ore in the whole section (cross-checked against the database). `numericValue` reads "5,000 gp", "CR 1/4", coin units (cp/sp/ep/gp/pp), ranges; rarity sorts by rank (Common < Uncommon < Rare < Legendary).
+2. **Unknown key ignored, no 500:** `sort=__proto__`, SQL-looking keys, NUL bytes, bad `dir`, bad `cols`, `page=abc` all return 200 with the default order. The sort key never reaches SQL: access is decided by the same query as the card list and the ordering is applied in code (`listEntriesSorted`), so R13 holds by construction.
+3. **Players never get secret rows or DM data:** a secret fixture is absent from the player's page and from every response body; its DM note never appears; a player without the kind grant gets no data.
+4. **375px:** no horizontal page scroll (documentElement overflow <= 0); the table scrolls inside its own container.
+Also: view, sort and columns live in the URL and survive reload; column picker (checkbox menu, URL `cols`); long text fields are hidden by default and can be shown; the pager keeps the view state; header click flips direction; axe clean in both themes for the sorted table.
+Replaced behaviour: the Phase 2 client-side, page-local, string sort. `graph-and-table-view.spec.ts` still passes unchanged.
+Full suite after Phases 6 and 7: **268 passed**, 0 failed. (An earlier full run during Phase 6, while I was editing app code, had 249/250 with one `search-safety` failure that did not reproduce in 22 realistic repeats and 40 probes of gibberish queries; no leak found, and the clean run above passes it.)

@@ -7,6 +7,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { slugify } from "../../src/lib/links";
+import { diceSpan, parseRollTable, validateTable } from "../../src/lib/roll-table";
 
 export const DATA_DIR = path.resolve(__dirname, "..", "..", "data", "natural-world");
 
@@ -214,6 +215,7 @@ export function check(): string[] {
     if (counts[kind] !== TARGETS[kind]) problems.push(`expected ${TARGETS[kind]} ${kind} entries, found ${counts[kind]}`);
   }
   problems.push(...checkPlaces(slugs, names));
+  problems.push(...checkTables(slugs, names));
   return problems;
 }
 
@@ -251,5 +253,55 @@ export function checkPlaces(takenSlugs: Set<string>, takenNames: Set<string>): s
     }
   }
   if (places.length !== PLACE_TARGET) problems.push(`expected ${PLACE_TARGET} places, found ${places.length}`);
+  return problems;
+}
+
+export const TABLE_TARGET = 24;
+
+export type TableEntry = {
+  slug: string;
+  kind: "table";
+  name: string;
+  summary: string;
+  body: string;
+  dmNotes: string;
+  fields: { dice: string };
+  tags: string[];
+  visibility: string;
+  sourcePath?: string | null;
+};
+
+export function loadTables(): TableEntry[] {
+  const file = path.join(DATA_DIR, "tables.json");
+  if (!fs.existsSync(file)) return [];
+  return (JSON.parse(fs.readFileSync(file, "utf8")) as { entries: TableEntry[] }).entries;
+}
+
+/** Every authored table covers its whole dice span exactly once, and is real, linked prose. */
+export function checkTables(takenSlugs: Set<string>, takenNames: Set<string>): string[] {
+  const problems: string[] = [];
+  const tables = loadTables();
+  for (const t of tables) {
+    const where = `tables.json: ${t.name ?? t.slug}`;
+    if (t.kind !== "table") problems.push(`${where}: kind must be table`);
+    if (t.slug !== slugify(t.name)) problems.push(`${where}: slug "${t.slug}" should be "${slugify(t.name)}"`);
+    if (takenSlugs.has(t.slug)) problems.push(`${where}: duplicate slug "${t.slug}"`);
+    takenSlugs.add(t.slug);
+    if (takenNames.has(t.name.trim().toLowerCase())) problems.push(`${where}: duplicate name`);
+    takenNames.add(t.name.trim().toLowerCase());
+    if (t.visibility !== "public") problems.push(`${where}: visibility must be public`);
+    if (!diceSpan(t.fields?.dice ?? "")) problems.push(`${where}: unreadable dice "${t.fields?.dice}"`);
+    for (const p of validateTable(t.fields?.dice ?? "", t.body ?? "")) problems.push(`${where}: ${p}`);
+    const rows = parseRollTable(t.body ?? "").rows;
+    if (rows.some((r) => !r.result || r.result.length < 8)) problems.push(`${where}: a row has a stub result`);
+    if (new Set(rows.map((r) => r.result)).size !== rows.length) problems.push(`${where}: two rows have the same result`);
+    if (wikiTargets(t.body ?? "").length === 0) problems.push(`${where}: links no place or specimen`);
+    if (!t.dmNotes?.startsWith("Use:")) problems.push(`${where}: dmNotes must start with "Use:"`);
+    if (!t.tags?.includes("random-table")) problems.push(`${where}: needs the random-table tag`);
+    if (!t.sourcePath?.startsWith("original: natural-world/tables")) problems.push(`${where}: sourcePath must start with "original: natural-world/tables"`);
+    const text = JSON.stringify(t).toLowerCase();
+    for (const bad of DENYLIST) if (text.includes(bad)) problems.push(`${where}: contains denylisted text "${bad}"`);
+  }
+  if (tables.length !== TABLE_TARGET) problems.push(`expected ${TABLE_TARGET} tables, found ${tables.length}`);
   return problems;
 }

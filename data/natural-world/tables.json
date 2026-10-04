@@ -1,0 +1,449 @@
+{
+  "format": "asetheria-codex",
+  "note": "Original random tables for the natural world: forage, mining, wildlife, harvest and building contents. Rows cover each die span exactly once. Written for Asetheria; no third-party text.",
+  "entries": [
+    {
+      "slug": "forage-in-the-desert",
+      "kind": "table",
+      "name": "Forage in the Desert",
+      "summary": "What a hungry party turns up in the red waste: dates, resin, truffles and a lot of nothing.",
+      "body": "Roll once per half-day of foraging in [[Dasht-a Khaliq]]. A successful Survival check earns the roll; a failure earns the last row. Good ground is found at [[The Honey-Palm Oasis]], [[The Myrrh Wadi]] and [[The Truffle Flats]].\n\n| Roll | Result |\n|---|---|\n| 1 | A handful of dates from a lone [[Honey Palm]]: a day's food for one. |\n| 2 | Lumps of hardened gum from a [[Bitter Myrrh]] tree: worth 5 gp to a caravan trader. |\n| 3 | A cluster of [[Sand-Truffle]] under a cracked crust: a feast for four. |\n| 4 | Wild [[Caravan Cumin]] in a dry wadi: seasons a week of meals. |\n| 5 | A stand of salt-bush with edible leaves: poor food, but safe. |\n| 6 | A clump of [[Sweet-Root]] the children of the oasis would call a treat. |\n| 7 | A hidden seep with clean water and nothing else of use. |\n| 8 | Nothing but dust and a scorpion in the boot. |",
+      "dmNotes": "Use: Reroll the last row if the party followed a nomad guide. Truffle-diggers do not share their places.",
+      "fields": {
+        "dice": "1d8"
+      },
+      "tags": [
+        "random-table",
+        "natural-world",
+        "Desert"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/tables"
+    },
+    {
+      "slug": "forage-in-the-forest",
+      "kind": "table",
+      "name": "Forage in the Forest",
+      "summary": "Nuts, bark, berries and fungi of the old forest, and the one mushroom that kills.",
+      "body": "Roll once per half-day in [[Foloicauria Forest]]. A Survival check earns the roll. Fungi are best identified at [[The Mushroom Caverns]], and any forager should know the difference before eating.\n\n| Roll | Result |\n|---|---|\n| 1 | Acorns from a [[Thunder-Oak]]: bitter but filling when leached. |\n| 2 | A thicket of wild berries: a good meal for the whole party. |\n| 3 | Bark and leaf of [[Witch Hazel]]: a poultice that eases bruises. |\n| 4 | A ring of [[Nullcap (Neutral Mushroom)]]: safe, bland and plentiful. |\n| 5 | [[Embergill Bloom (Beneficial Mushroom)]] on a rotting log: a restorative if cooked. |\n| 6 | Red-spotted [[Fly-Cap]]: tempting, and a mistake to eat. DC 12 Nature to recognise it. |\n| 7 | [[Widow’s Bell (Harmful Mushroom)]], looking very like the safe kind. DC 15 Nature to tell them apart. |\n| 8 | A fine day, nothing found, and the sense of being watched. |",
+      "dmNotes": "Use: On a failed identification check the party eats the row's result. Rows 6 and 7 are poison.",
+      "fields": {
+        "dice": "1d8"
+      },
+      "tags": [
+        "random-table",
+        "natural-world",
+        "Forest"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/tables"
+    },
+    {
+      "slug": "forage-in-the-marsh",
+      "kind": "table",
+      "name": "Forage in the Marsh",
+      "summary": "Reeds, roots and leeches of the great marsh, where everything useful is also wet.",
+      "body": "Roll once per half-day in [[Maeotis Helos]]. A guide is not optional; see [[The Reed-Cutters' Fen]] for the cutters' channels.\n\n| Roll | Result |\n|---|---|\n| 1 | Hollow [[Pen-Reed]], cut and bundled: 2 gp a bundle to a scribe. |\n| 2 | A mass of [[River Reed]] fit for thatch or a raft. |\n| 3 | A pond of [[Blue Water-Lotus]]: edible roots and a temple's incense. |\n| 4 | A jar's worth of [[Healer's Leech]], alive and hungry. |\n| 5 | [[Hedge-Mallow]] on a dry hummock: a soothing tea. |\n| 6 | Wild duck eggs in the reeds: food for the party for a day. |\n| 7 | [[Moorroot]] on the boggy edge: pretty, and best left alone. |\n| 8 | Mud, mosquitoes and a sinking boot: lose one hour. |",
+      "dmNotes": "Use: Row 7 is a trap for the unwary: Moorroot is harmful when eaten or handled bare-handed.",
+      "fields": {
+        "dice": "1d8"
+      },
+      "tags": [
+        "random-table",
+        "natural-world",
+        "Marsh"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/tables"
+    },
+    {
+      "slug": "forage-in-the-mountains",
+      "kind": "table",
+      "name": "Forage in the Mountains",
+      "summary": "Thin-air herbs and resins of the high crags, and the cold that comes with them.",
+      "body": "Roll once per half-day in the [[Olympus Mountain Range]] or [[Cloudspine Ridge]]. Altitude imposes disadvantage on the Survival check above the tree-line. Good ground is [[The Cedar Stair]] and [[The Ibex Crags]].\n\n| Roll | Result |\n|---|---|\n| 1 | [[Hymettan Thyme]] on a sunny slope: fragrant, and a bee-keeper's prize. |\n| 2 | A scatter of [[Juniper]] berries: seasoning and a mild medicine. |\n| 3 | [[Mountain Spikenard]] in a crevice: a perfumer pays 10 gp a bunch. |\n| 4 | Resin from a [[Mountain Cedar]]: seals a wound or a waterskin. |\n| 5 | [[Balm of the Hill Country]] on a stony shelf: heals minor cuts. |\n| 6 | [[Wolf's-Bane]] in a damp gully: a poison, and a hazard to handle. |\n| 7 | A cluster of [[Gout-Crocus]]: a physician's drug, a fool's salad. |\n| 8 | Bare rock, a chill wind and a cairn left by someone else. |",
+      "dmNotes": "Use: A cairn on row 8 can hold a message, a cache or a body. Decide before the roll.",
+      "fields": {
+        "dice": "1d8"
+      },
+      "tags": [
+        "random-table",
+        "natural-world",
+        "Mountain"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/tables"
+    },
+    {
+      "slug": "forage-on-the-coast",
+      "kind": "table",
+      "name": "Forage on the Coast",
+      "summary": "Sea-onions, gums and shore plants of the Aeolian coast, with the occasional gift of the tide.",
+      "body": "Roll once per half-day along the shore of the [[Aeolus Reach]] or [[Nereid’s Veil]]. See [[The Fig Orchards]] for the cultivated side.\n\n| Roll | Result |\n|---|---|\n| 1 | A bulb of [[Sea-Onion]]: a poison for rats and a medicine for the heart. |\n| 2 | Tears of [[Weeping Mastic]], chewed for the breath or sold for 3 gp. |\n| 3 | Pine-nuts under an [[Umbrella Pine]]: a filling snack. |\n| 4 | Pods of the [[Locust-Bean]]: sweet, and a standard ration for pack animals. |\n| 5 | Olives from a wild [[Grey Olive]]: bitter, preservable and useful. |\n| 6 | A strip of washed-up kelp and shellfish: a meal for four. |\n| 7 | A drift of [[Pumice]] stones at the tide-line: free scrubbing. |\n| 8 | Stinging jellyfish in the shallows: 1d4 damage and nothing for the pot. |",
+      "dmNotes": "Use: A storm raises the chance of a wreck on the tide-line. Replace row 6 with salvage if one has passed.",
+      "fields": {
+        "dice": "1d8"
+      },
+      "tags": [
+        "random-table",
+        "natural-world",
+        "Coast"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/tables"
+    },
+    {
+      "slug": "forage-on-the-plains",
+      "kind": "table",
+      "name": "Forage on the Plains",
+      "summary": "Grain, herbs and dye-weeds of the grassland, picked over by a thousand years of farmers.",
+      "body": "Roll once per half-day on the [[Latium Plains]] or [[Elysian Plains]]. The best farms are in [[The Rye-Ghost Fields]].\n\n| Roll | Result |\n|---|---|\n| 1 | Wild [[Old Emmer]] gone to seed: grain for a week, with work. |\n| 2 | Barley volunteers from a ruined field: [[Legion Barley]], a day's ration. |\n| 3 | [[Yellow Weld]] along a track: a dyer's yellow, 2 gp a bundle. |\n| 4 | [[Sweet Marjoram]] on a bank: seasoning and a mild calming tea. |\n| 5 | [[Soldier's Nettle]] in a ditch: cooked, a fine soup; raw, a hazard. |\n| 6 | [[Rope-Hemp]] in a hedge: fibre for rope, 1 gp a bundle. |\n| 7 | A black-eared head of [[Rye-Ghost]]: if eaten, strange dreams. DC 12 Nature to spot it. |\n| 8 | A fence, a farmer and a polite request to leave. |",
+      "dmNotes": "Use: Row 7 can be used as a hook for the village of the third furrow.",
+      "fields": {
+        "dice": "1d8"
+      },
+      "tags": [
+        "random-table",
+        "natural-world",
+        "Plains"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/tables"
+    },
+    {
+      "slug": "mining-strike-building-stone",
+      "kind": "table",
+      "name": "Mining Strike: Building Stone",
+      "summary": "What a quarry team brings up from a surface cut, by the day.",
+      "body": "Roll once per day of work at a quarry such as [[The Pentelic Terraces]], [[The Travertine Cuts]] or [[The Chalk Downs]].\n\n| Roll | Result |\n|---|---|\n| 1 | Soft [[Tufa Stone]]: easy to cut, cheap to sell. |\n| 2 | Pale [[Tiburtine Stone]]: a builder's staple, 1 gp a block. |\n| 3 | Fine white [[Pentelic Marble]]: a temple's choice, 50 gp a block. |\n| 4 | Honey-white [[Alabaster]]: for jars and lamps. |\n| 5 | Hard grey [[Road Basalt]]: for paving and millstones. |\n| 6 | A band of [[Black Flint]]: for blades, sparks and walls. |\n| 7 | Grey sand of [[Pozzolana]]: makes mortar that sets under water. |\n| 8 | Rotten rock: the face slumps and the day's work is lost. |",
+      "dmNotes": "Use: On a roll of 8 the DM may ask for a DC 12 Dexterity save against falling stone (1d6).",
+      "fields": {
+        "dice": "1d8"
+      },
+      "tags": [
+        "random-table",
+        "natural-world",
+        "Mining"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/tables"
+    },
+    {
+      "slug": "mining-strike-metal-vein",
+      "kind": "table",
+      "name": "Mining Strike: Metal Vein",
+      "summary": "What a shaft yields when the miners follow a vein, from copper to the rare silver.",
+      "body": "Roll once per week of work at a mine such as [[The Green Gallery]], [[The Silver Drifts]] or [[The Calamine Diggings]]. A skilled foreman adds 1 to the roll.\n\n| Roll | Result |\n|---|---|\n| 1-2 | [[Copper]] ore, plentiful and poor: 1 gp per hundredweight. |\n| 3 | [[Tin]] in a pocket: the rarer half of bronze. |\n| 4 | [[Lead]] in heavy grey lumps: for pipes and sling bullets. |\n| 5-6 | [[Iron]] ore in a red seam: the backbone of the League's armies. |\n| 7 | [[Calamine]]: the brass-maker's gold-maker. |\n| 8 | [[Silver]] in a thin vein: worth the digging. |\n| 9 | [[Cinnabar]]: red, valuable and poisonous. |\n| 10 | [[Gold]] in a quartz stringer: a small fortune, and a large problem. |",
+      "dmNotes": "Use: On a 10, the overseer wants a share. On a 1, the crew reports a rock-fall.",
+      "fields": {
+        "dice": "1d10"
+      },
+      "tags": [
+        "random-table",
+        "natural-world",
+        "Mining"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/tables"
+    },
+    {
+      "slug": "mining-strike-gem-pocket",
+      "kind": "table",
+      "name": "Mining Strike: Gem Pocket",
+      "summary": "What a lucky prospector finds in a pocket of coloured stone.",
+      "body": "Roll when a prospector reports a pocket at [[The Carnelian Washings]], [[Blue-Vein Pit]] or [[The Turquoise Diggings]].\n\n| Roll | Result |\n|---|---|\n| 1 | [[Carnelian]], warm red and easy to engrave. |\n| 2 | [[Seal Jasper]], banded and good for a signet. |\n| 3 | [[Mountain Crystal]], clear as ice. |\n| 4 | [[Desert Emerald]], small, green and valuable. |\n| 5 | [[Wine-Red Garnet]], dark and rich. |\n| 6 | [[Banded Agate]], layered like a cut onion. |\n| 7 | [[Nishapur Turquoise]], robin's-egg blue: the satrap will want it. |\n| 8 | [[Lapis]], deep blue, flecked gold: the best find of the season. |",
+      "dmNotes": "Use: Stones from the royal diggings are counted. A character who pockets a find risks the satrap's justice.",
+      "fields": {
+        "dice": "1d8"
+      },
+      "tags": [
+        "random-table",
+        "natural-world",
+        "Mining"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/tables"
+    },
+    {
+      "slug": "mining-strike-strange-find",
+      "kind": "table",
+      "name": "Mining Strike: Strange Find",
+      "summary": "What turns up in the odd places where the earth or the sky has done something unusual.",
+      "body": "Roll once when digging at a strange site such as [[Smoke-Steps]], [[The Pitch Seep]] or [[The Fallen-Star Shrine]].\n\n| Roll | Result |\n|---|---|\n| 1 | A lump of [[Brimstone]], yellow and choking. |\n| 2 | A glassy chunk of [[Fire-Stone]], warm for days. |\n| 3 | A skin of [[Persian Naphtha]]: burns on water. |\n| 4 | A crust of [[Natron]], white and caustic. |\n| 5 | A scatter of [[Orpiment]] and [[Realgar]]: pretty poisons. |\n| 6 | A fist of [[Star Metal]]: the iron that fell from the sky. |",
+      "dmNotes": "Use: A 6 draws attention from the shrine's priests, who regard the stone as theirs.",
+      "fields": {
+        "dice": "1d6"
+      },
+      "tags": [
+        "random-table",
+        "natural-world",
+        "Mining"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/tables"
+    },
+    {
+      "slug": "wildlife-encounter-desert",
+      "kind": "table",
+      "name": "Wildlife Encounter: Desert",
+      "summary": "Who or what a party meets on the road through the waste.",
+      "body": "Roll once per day or night of travel across [[Dasht-a Khaliq]]. See [[The Onager Plain]] and [[The Cobra Heaps]].\n\n| Roll | Result |\n|---|---|\n| 1 | A [[Hood-Asp]] sunning on a warm stone. |\n| 2 | A buried [[Horned Sand-Viper]]: DC 15 Perception to spot it. |\n| 3 | A [[Sand Monitor]] raiding a nest. |\n| 4 | A [[Fat-Tail Scorpion]] in the bedding. |\n| 5 | A pack of [[Gold-Coat Jackal]] following the caravan at a distance. |\n| 6 | A herd of [[Wild Ass of the Waste]], running. |\n| 7 | A long train of [[Sand-Ship]], with riders. |\n| 8 | [[Sky-Cleaner]] vultures circling something dead. |",
+      "dmNotes": "Use: Rows 1, 2 and 4 are poisonous. Row 8 is a hook: find out what died.",
+      "fields": {
+        "dice": "1d8"
+      },
+      "tags": [
+        "random-table",
+        "natural-world",
+        "Desert",
+        "Encounter"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/tables"
+    },
+    {
+      "slug": "wildlife-encounter-forest",
+      "kind": "table",
+      "name": "Wildlife Encounter: Forest",
+      "summary": "The beasts of the old forest, from the bison to the beetle.",
+      "body": "Roll once per day of travel through [[Foloicauria Forest]]. See [[The Aurochs Glades]].\n\n| Roll | Result |\n|---|---|\n| 1 | A [[Great Forest Bull]] in a glade: dangerous if approached. |\n| 2 | A herd of [[Hill Bison]] crossing the trail. |\n| 3 | A [[Mountain Brown Bear]] foraging for berries. |\n| 4 | A [[Tusker of the Thicket]] in the undergrowth. |\n| 5 | A [[Plateau Wolf]] pack at dusk. |\n| 6 | A [[Hill Fallow Deer]] drinking at a stream. |\n| 7 | A [[Giant Eagle-Owl]] booming from a high branch. |\n| 8 | A swarm of [[Blister Beetle]] on the ash trees. |",
+      "dmNotes": "Use: Rows 1, 3 and 4 are combat risks unless the party backs away. Row 8: DC 12 Con save or blistering.",
+      "fields": {
+        "dice": "1d8"
+      },
+      "tags": [
+        "random-table",
+        "natural-world",
+        "Forest",
+        "Encounter"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/tables"
+    },
+    {
+      "slug": "wildlife-encounter-mountains",
+      "kind": "table",
+      "name": "Wildlife Encounter: Mountains",
+      "summary": "Cats, goats and carrion-eaters of the high country.",
+      "body": "Roll once per day in the [[Oros Mountain Range]], [[Olympus Mountain Range]] or on [[The Leopard's Ledge]].\n\n| Roll | Result |\n|---|---|\n| 1 | A [[Plateau Rock-Leopard]] stalking from above. |\n| 2 | A band of [[Cliff-Goat]] on an impossible ledge. |\n| 3 | A flock of [[Horned Wild Sheep]] grazing a terrace. |\n| 4 | A [[King's Eagle]] riding the updraft. |\n| 5 | A [[Bone-Breaker]] dropping a bone to crack it. |\n| 6 | A [[Mountain Brown Bear]] at a cave mouth. |\n| 7 | A covey of [[Rock-Partridge]] flushing underfoot. |\n| 8 | A [[Mountain Honeybee]] hive in a rock face. |",
+      "dmNotes": "Use: The leopard is rarely seen. A character who sees it has been allowed to.",
+      "fields": {
+        "dice": "1d8"
+      },
+      "tags": [
+        "random-table",
+        "natural-world",
+        "Mountain",
+        "Encounter"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/tables"
+    },
+    {
+      "slug": "wildlife-encounter-marsh",
+      "kind": "table",
+      "name": "Wildlife Encounter: Marsh",
+      "summary": "Birds, fish and worse in the reeds.",
+      "body": "Roll once per day in [[Maeotis Helos]]. See [[The Pelican Islands]].\n\n| Roll | Result |\n|---|---|\n| 1 | A flock of [[Bill-Bag Pelican]] fishing in a line. |\n| 2 | A [[Grey Crane]] dancing on a mudbank. |\n| 3 | A [[Phasian Pheasant]] bursting from cover. |\n| 4 | A cloud of leeches: [[Healer's Leech]], in the shallows. |\n| 5 | A [[Black-Egg Sturgeon]] rolling in a deep channel. |\n| 6 | A [[Flame-Wader]] flock, pink in the dusk. |\n| 7 | A [[Great Forest Bull]] wading to the neck. |\n| 8 | Mist, silence and a channel that was not here yesterday. |",
+      "dmNotes": "Use: Row 8 is the marsh's own encounter: a lost party, a missing guide, or a thing in the water.",
+      "fields": {
+        "dice": "1d8"
+      },
+      "tags": [
+        "random-table",
+        "natural-world",
+        "Marsh",
+        "Encounter"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/tables"
+    },
+    {
+      "slug": "wildlife-encounter-coast",
+      "kind": "table",
+      "name": "Wildlife Encounter: Coast",
+      "summary": "What the divers and fishermen meet at the water's edge.",
+      "body": "Roll once per outing along the [[Aeolus Reach]] or on [[The Sponge Banks]].\n\n| Roll | Result |\n|---|---|\n| 1 | A [[Pond-Moray]] in a crevice: a bite that does not let go. |\n| 2 | An [[Ink-Fish]] changing colour on the sand. |\n| 3 | A bed of [[Purple-Snail]] on the rocks. |\n| 4 | A school of [[Dying Mullet]] in the shallows. |\n| 5 | A [[Diver's Sponge]] colony worth cutting. |\n| 6 | A fall of [[Passage Quail]], exhausted on the shingle. |\n| 7 | An [[Aeolian Petrel]] fleeing inland: a storm is near. |\n| 8 | A [[The Numbfish]] in the sand: a numbing shock for the barefoot. |",
+      "dmNotes": "Use: Row 7 means a storm within the hour. A wise captain heads for harbour.",
+      "fields": {
+        "dice": "1d8"
+      },
+      "tags": [
+        "random-table",
+        "natural-world",
+        "Coast",
+        "Encounter"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/tables"
+    },
+    {
+      "slug": "wildlife-encounter-plains",
+      "kind": "table",
+      "name": "Wildlife Encounter: Plains",
+      "summary": "The grassland's herds, hunters and fliers.",
+      "body": "Roll once per day on the [[Malaunian Steppe]] or [[Elysian Plains]]. See [[The Lion Grass]] and [[The Horse Meadows]].\n\n| Roll | Result |\n|---|---|\n| 1 | A [[Mane-King of the Steppe]], hunting at dawn. |\n| 2 | A migrating herd of [[Malaunian Saiga]]. |\n| 3 | A wild [[Heavenly Horse]] herd: a fortune if one can be caught. |\n| 4 | A [[Plateau Wolf]] pack on the edge of the grass. |\n| 5 | A pair of [[Two-Hump Camel]] with riders. |\n| 6 | A [[Hunting Falcon]] stooping on a hare. |\n| 7 | A [[Spring-Swallow]] flock skimming the grass. |\n| 8 | A [[Grey Crane]] pair dancing in the wet. |",
+      "dmNotes": "Use: Row 3 invites a chase. A caught foal is worth a village.",
+      "fields": {
+        "dice": "1d8"
+      },
+      "tags": [
+        "random-table",
+        "natural-world",
+        "Plains",
+        "Encounter"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/tables"
+    },
+    {
+      "slug": "harvest-quality-plants",
+      "kind": "table",
+      "name": "Harvest Quality: Plants",
+      "summary": "How good a gathered crop of herbs, resin or fibre turns out to be.",
+      "body": "Roll after a gathering check, adding the character's proficiency bonus. Applies to the plants of [[The Hedge of Healing]], [[The Myrrh Wadi]], [[The Saffron Terraces]] and the like.\n\n| Roll | Result |\n|---|---|\n| 2 | Ruined: spoiled in the gathering, worth nothing. |\n| 3-4 | Poor: half the usual yield, half the usual effect. |\n| 5-6 | Meagre: three-quarters of the usual yield. |\n| 7 | Fair: the usual yield and effect. |\n| 8-9 | Good: the usual yield, and the effect lasts twice as long. |\n| 10-11 | Fine: a third more than the usual yield at full effect. |\n| 12 | Exceptional: double yield and double effect, and word gets round. |",
+      "dmNotes": "Use: Poison or medicine alike: quality scales the dose.",
+      "fields": {
+        "dice": "2d6"
+      },
+      "tags": [
+        "random-table",
+        "natural-world",
+        "Harvest"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/tables"
+    },
+    {
+      "slug": "harvest-quality-hides-and-carcasses",
+      "kind": "table",
+      "name": "Harvest Quality: Hides and Carcasses",
+      "summary": "What a skinner takes from a kill, from ruined to royal.",
+      "body": "Roll after a skinning check on any animal in the codex's fauna list, such as the [[Plateau Rock-Leopard]] or [[Mane-King of the Steppe]]; the best skinners work at [[The Hunting Park]].\n\n| Roll | Result |\n|---|---|\n| 1 | Ruined: a bad cut and a lost day. |\n| 2 | Poor: patchy, fit for rough use only. |\n| 3 | Fair: sold at the market rate. |\n| 4 | Good: sold at a quarter above the market rate. |\n| 5 | Fine: a tanner pays double. |\n| 6 | Superb: a gift for a lord, and a story to go with it. |",
+      "dmNotes": "Use: A kill from a protected species (stork, owl, geese, the temple snakes) brings its own consequences.",
+      "fields": {
+        "dice": "1d6"
+      },
+      "tags": [
+        "random-table",
+        "natural-world",
+        "Harvest"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/tables"
+    },
+    {
+      "slug": "harvest-quality-smelting-yield",
+      "kind": "table",
+      "name": "Harvest Quality: Smelting Yield",
+      "summary": "How much usable metal a furnace gives from a charge of ore.",
+      "body": "Roll once per charge at a furnace such as [[The Copper Smelts]] or [[The Iron Furnaces]]. A master smith adds 2.\n\n| Roll | Result |\n|---|---|\n| 2 | Slag: the charge is wasted and the furnace needs repair. |\n| 3-4 | A third of the expected metal, brittle. |\n| 5-6 | Two-thirds of the expected metal. |\n| 7-8 | The expected yield. |\n| 9-10 | The expected yield, of high quality. |\n| 11 | A fifth more than expected, of high quality. |\n| 12 | A master-quality ingot, and a reputation for the smith. |",
+      "dmNotes": "Use: On a 2, the furnace is out of use for a day while the crew rakes the slag.",
+      "fields": {
+        "dice": "2d6"
+      },
+      "tags": [
+        "random-table",
+        "natural-world",
+        "Harvest"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/tables"
+    },
+    {
+      "slug": "whats-in-the-gallery",
+      "kind": "table",
+      "name": "What's in the Gallery",
+      "summary": "What a party finds in a worked mine gallery, by the shift.",
+      "body": "Roll once per chamber explored in a mine such as [[The Green Gallery]], [[The Salt Cathedral]] or [[The Cinnabar Shafts]].\n\n| Roll | Result |\n|---|---|\n| 1 | Rusted picks and a pile of rubble. |\n| 2 | A cold lamp and a miner's lunch, long abandoned. |\n| 3 | A seam of the main ore, ready to be cut. |\n| 4 | A cistern of foul water. |\n| 5 | A rope-ladder to a deeper level. |\n| 6 | A crude shrine to the miners' saint, with coins. |\n| 7 | A collapsed side-tunnel and a skeleton. |\n| 8 | A sealed door, scratched with warnings. |",
+      "dmNotes": "Use: Row 8 is the entrance to a deeper dungeon. The scratch-marks are the foremen's.",
+      "fields": {
+        "dice": "1d8"
+      },
+      "tags": [
+        "random-table",
+        "natural-world",
+        "Building",
+        "Mining"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/tables"
+    },
+    {
+      "slug": "whats-on-the-market-stall",
+      "kind": "table",
+      "name": "What's on the Market Stall",
+      "summary": "What a stallholder has laid out, from the common to the odd.",
+      "body": "Roll once per stall visited at a market such as [[The Spice Wharf]], [[The Amber Stalls]] or [[The Lyre-Makers' Row]].\n\n| Roll | Result |\n|---|---|\n| 1 | Bundles of common herbs and spices. |\n| 2 | Dried figs, almonds and pine-nuts by the bag. |\n| 3 | Small cut stones and trinkets. |\n| 4 | Dyed cloth in madder-red and woad-blue. |\n| 5 | A stack of honey jars with the beekeepers' seal. |\n| 6 | Pens, ink and quires of paper. |\n| 7 | Cheap amber, probably glass. |\n| 8 | A rare item: a potion, a poison or a stone of strange origin. |",
+      "dmNotes": "Use: Row 7 is a scam. A DC 14 Investigation reveals it.",
+      "fields": {
+        "dice": "1d8"
+      },
+      "tags": [
+        "random-table",
+        "natural-world",
+        "Building",
+        "Market"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/tables"
+    },
+    {
+      "slug": "whats-in-the-common-room",
+      "kind": "table",
+      "name": "What's in the Common Room",
+      "summary": "Who is drinking in the inn when the party walks in.",
+      "body": "Roll when the party enters an inn such as [[The Wise Owl Inn]], [[The Caravan Stone]] or the keeper's house at [[The Wreckers' Beacon]].\n\n| Roll | Result |\n|---|---|\n| 1 | A few quiet locals and a sleeping dog. |\n| 2 | A caravan crew, loud and homeward bound. |\n| 3 | A pair of soldiers off duty, nursing their cups. |\n| 4 | A scholar with a book and a candle. |\n| 5 | A priest collecting for a shrine. |\n| 6 | A story-teller about to begin. |\n| 7 | A stranger in a corner, watching the door. |\n| 8 | A fight about to start over a dice game. |",
+      "dmNotes": "Use: Row 7 is the stranger who knows more than he should. Give him a name.",
+      "fields": {
+        "dice": "1d8"
+      },
+      "tags": [
+        "random-table",
+        "natural-world",
+        "Building",
+        "Inn"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/tables"
+    },
+    {
+      "slug": "whats-in-the-smithy",
+      "kind": "table",
+      "name": "What's in the Smithy",
+      "summary": "What hangs on the wall and sits on the anvil when the party visits a forge.",
+      "body": "Roll when the party visits a forge such as [[The Iron Furnaces]] or [[The Cold Forge]].\n\n| Roll | Result |\n|---|---|\n| 1 | Horseshoes and nails in tidy bins. |\n| 2 | A half-finished plough-blade. |\n| 3 | A rack of ordinary swords, priced to move. |\n| 4 | Bars of bronze and brass awaiting an order. |\n| 5 | A masterwork blade, not for sale. |\n| 6 | An apprentice, red-faced, pumping the bellows. |\n| 7 | A broken arming sword in for repair, with a noble crest. |\n| 8 | A locked chest, and a smith who changes the subject. |",
+      "dmNotes": "Use: Row 8 is a hook. The chest holds an unfinished commission someone does not want delivered.",
+      "fields": {
+        "dice": "1d8"
+      },
+      "tags": [
+        "random-table",
+        "natural-world",
+        "Building",
+        "Smithy"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/tables"
+    },
+    {
+      "slug": "whats-in-the-shrine",
+      "kind": "table",
+      "name": "What's in the Shrine",
+      "summary": "What a pilgrim finds when they step into a small sanctuary.",
+      "body": "Roll when the party enters a shrine such as [[The Fallen-Star Shrine]], [[The Gods' Table Grotto]] or [[The Dream Dormitory]].\n\n| Roll | Result |\n|---|---|\n| 1 | A lamp, a dish of oil and an empty bench. |\n| 2 | Wilted flowers and a scattering of coins. |\n| 3 | A priest sweeping the floor. |\n| 4 | A family at prayer for a sick child. |\n| 5 | Offerings of grain, honey and wine. |\n| 6 | A carved wall of names, the dead of the parish. |\n| 7 | A hidden niche with a scroll. |\n| 8 | A faint light that is not from the lamp. |",
+      "dmNotes": "Use: Row 8 is the shrine's god taking notice. Decide what the party was asking for.",
+      "fields": {
+        "dice": "1d8"
+      },
+      "tags": [
+        "random-table",
+        "natural-world",
+        "Building",
+        "Shrine"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/tables"
+    }
+  ]
+}
