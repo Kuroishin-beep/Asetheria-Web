@@ -80,7 +80,6 @@ export function iconForSection(slug: string, kind?: EntryKind): LucideIcon {
 export const TOOL_ICONS = {
   graph: Network,
   dice: Dices,
-  tables: Dices,
 } as const;
 
 export const KEEPER_ICONS = {

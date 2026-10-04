@@ -55,6 +55,8 @@ export function MarkdownEditor({
   defaultValue,
   draftKey,
   minHeightClass = "min-h-88",
+  onValueChange,
+  replaceWith,
 }: {
   id: string;
   name: string;
@@ -62,6 +64,10 @@ export function MarkdownEditor({
   draftKey: string;
   /** Tailwind min-height class for the writing area (default 22rem). */
   minHeightClass?: string;
+  /** Called with the current text whenever it changes (for live validation next to the editor). */
+  onValueChange?: (value: string) => void;
+  /** Replaces the text when `id` changes, e.g. to insert a starter template. */
+  replaceWith?: { text: string; id: number } | null;
 }) {
   const [value, setValue] = useState(defaultValue);
   const [tab, setTab] = useState<"write" | "preview">("write");
@@ -71,6 +77,16 @@ export function MarkdownEditor({
   const [linkQuery, setLinkQuery] = useState<{ start: number; text: string } | null>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const requestId = useRef(0);
+
+  useEffect(() => {
+    onValueChange?.(value);
+  }, [value, onValueChange]);
+
+  const replaceId = replaceWith?.id;
+  const replaceText = replaceWith?.text;
+  useEffect(() => {
+    if (replaceId !== undefined && replaceText !== undefined) setValue(replaceText);
+  }, [replaceId, replaceText]);
 
   // Offer an unsaved draft from a previous visit, if it differs from what's saved.
   useEffect(() => {

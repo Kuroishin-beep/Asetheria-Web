@@ -23,26 +23,6 @@ export const entryInputSchema = z.object({
 
 export type EntryInput = z.infer<typeof entryInputSchema>;
 
-export const rollTableItemSchema = z.object({
-  min: z.number().int().min(0).max(10_000),
-  max: z.number().int().min(0).max(10_000),
-  result: z.string().trim().min(1).max(2_000),
-});
-
-export const rollTableInputSchema = z.object({
-  name: z.string().trim().min(1).max(200),
-  description: z.string().trim().max(2_000).default(""),
-  dice: z
-    .string()
-    .trim()
-    .regex(/^\d{0,3}d\d{1,4}([+-]\d{1,4})?$/i, "Use dice notation like 1d20 or 2d6+1")
-    .default("1d20"),
-  items: z.array(rollTableItemSchema).max(500).default([]),
-  visibility: visibilitySchema.default("secret"),
-});
-
-export type RollTableInput = z.infer<typeof rollTableInputSchema>;
-
 /**
  * Parses the `fields[...]` and `tags` conventions used by the entry form.
  * Empty values are dropped so a blank input never creates a hollow property.

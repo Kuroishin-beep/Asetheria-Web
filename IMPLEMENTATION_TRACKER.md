@@ -15,7 +15,7 @@ Status key: NOT STARTED / IN PROGRESS / IMPLEMENTED / TESTED / DONE / BLOCKED
 | 2c | Codex pages (+ loading/error/empty) | `entry-card`, `codex/**`, `loading.tsx`, `error.tsx` | 2b | **DONE** |
 | 2d | Editor, palette, graph, shortcuts | `entry-form`, `markdown-editor`, `command-palette`, `graph-view`, `keyboard-shortcuts` | 2c | **DONE** |
 | 2e | Tools + admin + sweep (grep gates, axe) | `tools/*`, `admin/*`, `rbac-panel` | 2d | **DONE** |
-| 3 | `fauna` + `table` UI and field model; roller | `kinds.ts`, `codex/tables`, roller, `tools/tables` redirect | 1, 2e | NOT STARTED |
+| 3 | `fauna` + `table` UI and field model; roller | `kinds.ts`, `codex/tables`, roller, `tools/tables` redirect | 1, 2e | **DONE** |
 | 4 | Licence-safe ingestion + original specimens | `data/natural-world/*`, `scripts/import-open5e-docs.ts`, attribution note, `docs/content-review.md` | 3 | NOT STARTED |
 | 5 | Places, structures, `foundIn` linkage (+ R5 field-link leak fix first) | `data/places-*.json`, `src/lib/entries.ts`, link rendering, `verify-links.ts` | 4 | NOT STARTED |
 | 6 | Authored `table` entries (+24) | `data/tables-*.json` | 5 | NOT STARTED |
@@ -156,3 +156,23 @@ Known leftover (planned): `tools/tables` (legacy manager, own stylesheet) is rem
 - 2c: error/not-found/empty/skeleton states, `.prose-codex` and `#sec-*` preserved (criterion corrected for Suspense vs `loading.tsx`): evidenced.
 - 2d: `knowledge-features.spec.ts` unchanged and green: evidenced.
 - 2e: grep gate, axe, reduced motion: evidenced above.
+
+### Phase 3 (fauna + table UI and field model, roller): DONE (2026-10-04)
+
+Built: place fields (`foundIn`, `biome`, `rarity`) on ore/flora/fauna and the fauna fields (`habitat`, `diet`, `behavior`, `harvest`) in `kinds.ts`; `foundIn` is a graph relation (`found-in`) whose names may be plain or `[[wiki links]]` (`links.ts`); `RollTableView` (rolls with the dice engine, highlights the row, announces the result, keeps the last five rolls); table entry page draws the rows (prose around the Markdown table is rendered as text); live table validation in the editor (dice + rows, named problems, "Insert starter rows", Save disabled) and the same check in the create/update server actions; `src/lib/roll-table.ts` gained `validateTable`, `stripTable`, `hasTable`, `starterTable`. The legacy tool is gone: `tools/tables/table-manager.tsx`, its CSS, `saveRollTableAction`/`archive`/`restore` and the roll-table zod schemas are deleted; `/tools/tables` permanently redirects (HTTP 308) to `/codex/tables`; Backup & Import counts `table` entries; the `g t` shortcut and palette command point at `/codex/tables`; the design gate lost its tables exemption.
+
+Evidence (observed):
+1. DM creates an animal with every field and sees each value on its page and the animal in `/codex/fauna`; stored as kind `fauna` (`fauna-ui.spec.ts` test 1). Ore, flora and fauna forms all offer Found in / Biome / Rarity (test 3). Flora and Fauna are separate sections and `/codex/flora-fauna` still opens (test 4).
+2. **Roller:** every active table entry in the database is valid and 100 rolls of each always land on a row whose range contains the roll (`roll-tables.spec.ts` test 1, pure data check over the real tables); in the browser a freshly authored d4 table is rolled 100 times, every status line is "<total> <result>" with the right result for the total, and exactly one row is highlighted each time (test 3).
+3. `/tools/tables` answers 308 with `Location: /codex/tables` (test 2).
+4. **Broken tables cannot be saved:** overlap ("Roll 4 is in more than one row."), gap ("No row covers 3-4."), out-of-range ("outside 1d6") and bad dice ("not dice notation") are each named live and Save is disabled (tests 4 and 6); with the disabled attribute stripped, the server refuses it with "This table can't be saved yet" and creates nothing (test 5).
+5. Search: the palette finds a table by name and full-text search finds it by content; a player with no grant finds nothing and gets a 404 on the entry (tests 7 and 8). *(Plan wording adjusted: the palette looks up names only, so "forage" is matched by full-text search; the table named "Herbalist's Field Guide" is matched by the palette.)*
+6. `found-in` is a real connection: plain names and `[[Corinth City|the isthmus]]` both create `found-in` edges to Corinth City, an unknown name is ignored, and Corinth City's page lists both entries (`fauna-ui.spec.ts` test 2).
+7. a11y: the rollable table page, the new-table form and the fauna section pass axe in both themes (6 more tests).
+8. `tsc` exit 0; `next build` compiled (21 pages); `npm audit --omit=dev` 0; design gates 12 rules / 0 violations; full suite **211 passed** (190 + 21), 0 failed.
+
+Findings:
+- The plan said fields are link-scanned for `[[links]]`; they are not: only the fixed `RELATION_FIELDS` keys are read, as comma-separated plain names. `foundIn` was added to that list and the parser now also accepts `[[name]]` / `[[name|label]]`. (PLAN.md ENH-03 text was imprecise; the behaviour above is the contract.)
+- A table cannot be blanked (an empty table is invalid), so the "blank then purge" cleanup does not apply to tables; test tables are archived through the normal confirmation. Real DMs lose nothing: an empty table could never have been created.
+- Pre-existing, flagged for Phase 4's licence ledger: `data/homebrew/planar-metals.json` (24 entries) was imported from a GM Binder page by an earlier session (`homebrew-content.spec.ts` names it). Q1 (licence-safe only) governs new ingestion; whether to keep this older batch is a decision for you.
+Prod rollout: no schema change. Deploy the code; `/tools/tables` redirects; data already migrated by Phase 1.

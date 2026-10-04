@@ -15,6 +15,7 @@ import { NativeSelect, NativeSelectOption } from "@/components/ui/native-select"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Textarea } from "@/components/ui/textarea";
 import { KINDS, KIND_BY_KEY } from "@/lib/kinds";
+import { hasTable, starterTable, validateTable } from "@/lib/roll-table";
 
 export type EntryFormValues = {
   id?: string;
@@ -79,6 +80,10 @@ export function EntryForm({
   const [showDmNotes, setShowDmNotes] = useState(
     Boolean(initial.dmNotes) || initial.visibility === "secret",
   );
+  // A random table is checked live: its dice and its Markdown rows must agree before it can be saved.
+  const [dice, setDice] = useState(initial.fields.dice ?? "1d20");
+  const [bodyValue, setBodyValue] = useState(initial.body);
+  const [starter, setStarter] = useState<{ text: string; id: number } | null>(null);
 
   const def = KIND_BY_KEY[kind];
   const formRef = useRef<HTMLFormElement>(null);
@@ -103,6 +108,9 @@ export function EntryForm({
     const known = new Set([...(def?.fields.map((f) => f.key) ?? []), "aliases"]);
     return Object.keys(initial.fields).filter((k) => !known.has(k) && initial.fields[k]);
   }, [def, initial.fields]);
+
+  const tableProblems = kind === "table" ? validateTable(dice, bodyValue) : [];
+  const blocked = tableProblems.length > 0;
 
   return (
     <form
@@ -221,6 +229,15 @@ export function EntryForm({
                       defaultValue={initial.fields[f.key] ?? ""}
                       placeholder={f.placeholder}
                     />
+                  ) : kind === "table" && f.key === "dice" ? (
+                    <Input
+                      id={`field-${f.key}`}
+                      name={`fields[${f.key}]`}
+                      value={dice}
+                      onChange={(e) => setDice(e.target.value)}
+                      placeholder={f.placeholder}
+                      className="font-mono"
+                    />
                   ) : (
                     <Input
                       id={`field-${f.key}`}
@@ -248,11 +265,53 @@ export function EntryForm({
 
       {/* ---- Body ---- */}
       <FormSection title="Description">
-        <p className="text-[13px] text-muted-foreground">
-          Markdown works. Type <code className="rounded bg-muted px-1">[[Aeterna City]]</code> to link another
-          entry; suggestions appear as you type, and the link shows up on both pages. Ctrl+S saves.
-        </p>
-        <MarkdownEditor id="body" name="body" defaultValue={initial.body} draftKey={draftKey} />
+        {kind === "table" ? (
+          <p className="text-[13px] text-muted-foreground">
+            Write what the table is for, then the rows as a Markdown table: <code className="rounded bg-muted px-1">| 1-3 | A copper ring |</code>.
+            Every number the dice can roll must land on exactly one row. Ctrl+S saves.
+          </p>
+        ) : (
+          <p className="text-[13px] text-muted-foreground">
+            Markdown works. Type <code className="rounded bg-muted px-1">[[Aeterna City]]</code> to link another
+            entry; suggestions appear as you type, and the link shows up on both pages. Ctrl+S saves.
+          </p>
+        )}
+        {kind === "table" && !hasTable(bodyValue) && (
+          <Button
+            type="button"
+            variant="outline"
+            className="justify-self-start"
+            onClick={() =>
+              setStarter((prev) => ({
+                text: `${bodyValue.trim() ? `${bodyValue.trim()}
+
+` : ""}${starterTable(dice)}`,
+                id: (prev?.id ?? 0) + 1,
+              }))
+            }
+          >
+            <Plus aria-hidden="true" />
+            Insert starter rows
+          </Button>
+        )}
+        <MarkdownEditor
+          id="body"
+          name="body"
+          defaultValue={initial.body}
+          draftKey={draftKey}
+          onValueChange={setBodyValue}
+          replaceWith={starter}
+        />
+        {blocked && (
+          <FormMessage as="div">
+            This table can&rsquo;t be saved yet:
+            <ul className="mt-1 list-disc pl-4">
+              {tableProblems.map((p) => (
+                <li key={p}>{p}</li>
+              ))}
+            </ul>
+          </FormMessage>
+        )}
       </FormSection>
 
       {/* ---- DM notes ---- */}
@@ -291,7 +350,7 @@ export function EntryForm({
       </FormSection>
 
       <div className="sticky bottom-0 flex flex-wrap gap-3 border-t border-border bg-background/90 py-3 backdrop-blur-md">
-        <SubmitButton label={submitLabel} />
+        <SubmitButton label={submitLabel} blocked={blocked} />
         <Button asChild variant="outline">
           <Link href={cancelHref}>Cancel</Link>
         </Button>
@@ -300,10 +359,10 @@ export function EntryForm({
   );
 }
 
-function SubmitButton({ label }: { label: string }) {
+function SubmitButton({ label, blocked }: { label: string; blocked: boolean }) {
   const { pending } = useFormStatus();
   return (
-    <Button type="submit" disabled={pending}>
+    <Button type="submit" disabled={pending || blocked}>
       {pending && <Loader2 aria-hidden="true" className="animate-spin" />}
       {pending ? "Saving…" : label}
     </Button>

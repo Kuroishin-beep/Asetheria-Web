@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import { sql } from "drizzle-orm";
 import { DatabaseBackup, Download, FileText } from "lucide-react";
 import { db } from "@/db";
-import { entries, links, revisions, rollTables } from "@/db/schema";
+import { entries, links, revisions } from "@/db/schema";
 import { getCurrentUser } from "@/lib/auth";
 import { PageHeading } from "@/components/entry-card";
 import { Eyebrow } from "@/components/shared/eyebrow";
@@ -41,7 +41,10 @@ export default async function AdminPage() {
     db.select({ n: sql<number>`count(*)::int` }).from(entries),
     db.select({ n: sql<number>`count(*)::int` }).from(links),
     db.select({ n: sql<number>`count(*)::int` }).from(revisions),
-    db.select({ n: sql<number>`count(*)::int` }).from(rollTables),
+    db
+      .select({ n: sql<number>`count(*)::int` })
+      .from(entries)
+      .where(sql`kind = 'table' AND archived_at IS NULL`),
     db
       .select({ n: sql<number>`count(*)::int` })
       .from(entries)

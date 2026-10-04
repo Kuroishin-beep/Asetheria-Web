@@ -27,10 +27,6 @@ const COLOR_NAMES =
 
 const VENDOR_UI = { prefix: "src/components/ui/", reason: "generated shadcn primitives wrap the plain elements by definition" };
 const VENDOR_CSS = { prefix: "src/styles/shadcn.css", reason: "vendor CSS inlined from shadcn/tailwind.css (framework keyframes)" };
-const TABLES_TOOL = {
-  prefix: "src/app/(app)/tools/tables/",
-  reason: "legacy random-tables manager, deleted in Phase 3 when tables become entries",
-};
 const TOKENS = { prefix: "src/styles/design-tokens.css", reason: "the one file that defines the palette" };
 const LAYOUT_THEME_COLOR = {
   prefix: "src/app/layout.tsx",
@@ -55,7 +51,7 @@ export const RULES: Rule[] = [
     name: "no colour literals in components (hex, rgb(), hsl())",
     pattern: /#[0-9a-fA-F]{6}\b|#[0-9a-fA-F]{3}\b(?![0-9a-zA-Z])|\brgba?\(|\bhsla?\(/,
     extensions: [".tsx", ".ts"],
-    exempt: [VENDOR_UI, TABLES_TOOL, LAYOUT_THEME_COLOR],
+    exempt: [VENDOR_UI, LAYOUT_THEME_COLOR],
   },
   {
     name: "no CSS @keyframes in app code",
@@ -73,31 +69,31 @@ export const RULES: Rule[] = [
     name: "no inline style objects (use Tailwind classes)",
     pattern: /\bstyle=\{\{/,
     extensions: [".tsx"],
-    exempt: [TABLES_TOOL],
+    exempt: [],
   },
   {
     name: "no plain <button>, <select> or <textarea> (use the shadcn wrappers)",
     pattern: /<(?:button|select|textarea)\b/,
     extensions: [".tsx"],
-    exempt: [VENDOR_UI, TABLES_TOOL],
+    exempt: [VENDOR_UI],
   },
   {
     name: "no plain <input> except type=hidden (use the shadcn Input)",
     pattern: /<input\b(?![^>]*type="hidden")/,
     extensions: [".tsx"],
-    exempt: [VENDOR_UI, TABLES_TOOL],
+    exempt: [VENDOR_UI],
   },
   {
     name: "no emoji glyphs in UI code (icons are lucide-react)",
     pattern: /[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{2B00}-\u{2BFF}]/u,
     extensions: [".tsx", ".ts"],
-    exempt: [TABLES_TOOL],
+    exempt: [],
   },
   {
     name: "no arbitrary spacing values (use the 4/8/12/16/24/32/48/64 scale)",
     pattern: /\b(?:p|px|py|pt|pb|pl|pr|m|mx|my|mt|mb|ml|mr|gap|gap-x|gap-y|space-x|space-y)-\[/,
     extensions: [".tsx"],
-    exempt: [VENDOR_UI, TABLES_TOOL],
+    exempt: [VENDOR_UI],
   },
   {
     name: "no console.log in production code",

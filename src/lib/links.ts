@@ -25,6 +25,8 @@ const RELATION_FIELDS: Record<string, string> = {
   capital: "capital-is",
   region: "located-in",
   organization: "part-of",
+  // Where a plant, animal or ore is found: place names, comma separated.
+  foundIn: "found-in",
 };
 
 export function normalizeName(s: string): string {
@@ -225,7 +227,8 @@ export function resolveLinks(
     if (!value) continue;
     // Properties are often comma-separated lists of names.
     for (const part of value.split(",")) {
-      const id = nameIndex.get(normalizeName(part));
+      // A property may be written as plain names or as [[wiki links]] / [[name|label]].
+      const id = nameIndex.get(normalizeName(part.replace(/^\s*\[\[|\]\]\s*$/g, "").split("|")[0]));
       if (id) push(id, relation);
     }
   }

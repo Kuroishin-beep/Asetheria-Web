@@ -2,8 +2,11 @@ import { test, expect } from "@playwright/test";
 import {
   checkCoverage,
   diceSpan,
+  hasTable,
   parseRollTable,
   serializeRollTable,
+  starterTable,
+  stripTable,
   type RollRow,
 } from "../src/lib/roll-table";
 
@@ -96,5 +99,38 @@ test.describe("roll table format (pure logic, no browser needed)", () => {
     expect(checkCoverage("1d6", [{ min: 4, max: 2, result: "a" }])[0]).toContain("runs backwards");
     expect(checkCoverage("nope", [{ min: 1, max: 1, result: "a" }])[0]).toContain("not dice notation");
     expect(checkCoverage("1d6", [])).toEqual(["The table has no rows."]);
+  });
+});
+
+test.describe("roll table authoring helpers (pure logic)", () => {
+  test("stripTable keeps the prose and drops the table lines", () => {
+    const body = "Intro line.\n\n| Roll | Result |\n|---|---|\n| 1 | a |\n\nAfter.";
+    expect(stripTable(body)).toBe("Intro line.\n\nAfter.");
+    expect(stripTable("| Roll | Result |\n|---|---|\n| 1 | a |")).toBe("");
+  });
+
+  test("hasTable is true only when a pipe row exists", () => {
+    expect(hasTable("Just prose.")).toBe(false);
+    expect(hasTable("x\n| Roll | Result |")).toBe(true);
+  });
+
+  test("starterTable covers the full span in up to four bands, blank until written, so it cannot be saved as is", () => {
+    const body = starterTable("1d20");
+    const parsed = parseRollTable(body);
+    expect(parsed.rows.map((r) => [r.min, r.max])).toEqual([]);
+    expect(parsed.problems.length).toBe(4); // four blank results, each reported
+    // Filling every result in makes it a complete, valid table.
+    const filled = body.replace(/\| \s*\|$/gm, "| x |");
+    const ok = parseRollTable(filled);
+    expect(ok.problems).toEqual([]);
+    expect(checkCoverage("1d20", ok.rows)).toEqual([]);
+    expect(ok.rows[0].min).toBe(1);
+    expect(ok.rows[ok.rows.length - 1].max).toBe(20);
+  });
+
+  test("starterTable on a tiny die uses one row per face and on bad dice gives an empty table", () => {
+    const d2 = parseRollTable(starterTable("1d2").replace(/\| \s*\|$/gm, "| x |"));
+    expect(d2.rows.map((r) => [r.min, r.max])).toEqual([[1, 1], [2, 2]]);
+    expect(parseRollTable(starterTable("nope")).rows).toEqual([]);
   });
 });

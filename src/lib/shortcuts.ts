@@ -23,7 +23,7 @@ export const NAV_ACTIONS: AppAction[] = [
   { id: "quests", label: "Browse quests", keys: ["g", "q"], href: "/codex/quests", keywords: "hooks adventures" },
   { id: "deities", label: "Browse deities", keys: ["g", "d"], href: "/codex/deities", keywords: "gods pantheon" },
   { id: "dice", label: "Open the dice roller", keys: ["g", "r"], href: "/tools/dice", keywords: "roll d20" },
-  { id: "tables", label: "Open roll tables", keys: ["g", "t"], href: "/tools/tables", keywords: "random" },
+  { id: "tables", label: "Open roll tables", keys: ["g", "t"], href: "/codex/tables", keywords: "random" },
   { id: "new", label: "Create a new entry", keys: ["c"], href: "/codex/new", dmOnly: true, keywords: "add write" },
   { id: "archive", label: "Open the archive", keys: ["g", "a"], href: "/archive", dmOnly: true, keywords: "deleted restore" },
   { id: "admin", label: "Open admin & backups", keys: ["g", "x"], href: "/admin", dmOnly: true, keywords: "import export" },

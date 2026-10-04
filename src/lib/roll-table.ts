@@ -189,3 +189,48 @@ function compressRanges(values: number[]): string {
   }
   return parts.join(", ");
 }
+
+/** The prose of a table entry's body with the Markdown table itself removed (the page draws the table). */
+export function stripTable(body: string): string {
+  return body
+    .split(/\r?\n/)
+    .filter((line) => !line.trim().startsWith("|"))
+    .join("\n")
+    .replace(/\n{3,}/g, "\n\n")
+    .trim();
+}
+
+/** Whether a body already contains a Markdown table. */
+export function hasTable(body: string): boolean {
+  return body.split(/\r?\n/).some((line) => line.trim().startsWith("|"));
+}
+
+/**
+ * A table covering the whole dice span in up to four even bands, with the results left
+ * blank so the entry cannot be saved until each row has been written.
+ */
+export function starterTable(dice: string): string {
+  const span = diceSpan(dice);
+  if (!span) return serializeRollTable([]);
+  const size = span.max - span.min + 1;
+  const bands = Math.min(4, size);
+  const rows: RollRow[] = [];
+  for (let i = 0; i < bands; i++) {
+    const min = span.min + Math.floor((i * size) / bands);
+    const max = span.min + Math.floor(((i + 1) * size) / bands) - 1;
+    rows.push({ min, max, result: "" });
+  }
+  return serializeRollTable(rows);
+}
+
+/**
+ * Everything wrong with a table entry, in plain words, or an empty list when it
+ * can be saved and rolled: unreadable rows first, then gaps, overlaps and
+ * ranges outside the dice. Shared by the editor (live), the save actions and
+ * the content scripts.
+ */
+export function validateTable(dice: string, body: string): string[] {
+  const parsed = parseRollTable(body);
+  if (parsed.rows.length === 0 && parsed.problems.length > 0) return parsed.problems;
+  return [...parsed.problems, ...checkCoverage(dice, parsed.rows)];
+}

@@ -58,7 +58,7 @@ Two details found by tests:
 ## Exemptions to the design-system grep gate (slice 2e)
 - `src/styles/shadcn.css`: vendor CSS with framework `@keyframes`.
 - `src/components/ui/*`: the plain `<button>` / `<input>` live inside the shadcn wrappers by definition.
-- `src/app/(app)/tools/tables/*`: deleted in Phase 3 (replaced by `table` entries), not migrated.
+- ~~`src/app/(app)/tools/tables/*`~~: removed in Phase 3 (random tables are `table` entries); `/tools/tables` now permanently redirects to `/codex/tables`. The gate has no exemption for it any more.
 
 ## Local edits to generated shadcn components (`src/components/ui/*`)
 Keep this list current so a future `shadcn add --overwrite` does not silently undo them.

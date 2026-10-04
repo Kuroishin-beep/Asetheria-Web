@@ -43,7 +43,6 @@ type NavIcon = ComponentType<{ className?: string }>;
 const TOOL_LINKS: { href: string; label: string; Icon: NavIcon }[] = [
   { href: "/graph", label: "Graph", Icon: TOOL_ICONS.graph },
   { href: "/tools/dice", label: "Dice", Icon: TOOL_ICONS.dice },
-  { href: "/tools/tables", label: "Random Tables", Icon: TOOL_ICONS.tables },
 ];
 
 const KEEPER_LINKS: { href: string; label: string; Icon: NavIcon }[] = [

@@ -4,8 +4,9 @@ import { notFound, redirect } from "next/navigation";
 import type { Metadata } from "next";
 import { Eye, EyeOff, Pencil, Sparkles } from "lucide-react";
 import { CardGrid, EntryCard } from "@/components/entry-card";
+import { RollTableView } from "@/components/roll-table-view";
 import { Eyebrow } from "@/components/shared/eyebrow";
-import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Badge, badgeVariants } from "@/components/ui/badge";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import { Button } from "@/components/ui/button";
@@ -23,6 +24,7 @@ import {
 import { KIND_BY_KEY } from "@/lib/kinds";
 import { extractHeadings, renderMarkdown } from "@/lib/markdown";
 import { parseAliases } from "@/lib/links";
+import { parseRollTable, stripTable, validateTable } from "@/lib/roll-table";
 import { KIND_ICONS } from "@/lib/section-icons";
 import { ArchiveButton } from "./archive-button";
 
@@ -76,7 +78,12 @@ export default async function EntryPage({
   const outline = extractHeadings(entry.body ?? "").filter((h) => h.level <= 3);
   const outlineBase = outline.length ? Math.min(...outline.map((o) => o.level)) : 0;
 
-  const bodyHtml = renderMarkdown(entry.body, resolve);
+  // A random table draws its own rows; only the prose around the Markdown table is rendered as text.
+  const isTable = entry.kind === "table";
+  const tableDice = entry.fields?.dice ?? "";
+  const tableProblems = isTable ? validateTable(tableDice, entry.body) : [];
+  const tableRows = isTable ? parseRollTable(entry.body).rows : [];
+  const bodyHtml = renderMarkdown(isTable ? stripTable(entry.body) : entry.body, resolve);
   const dmHtml = isDM && entry.dmNotes ? renderMarkdown(entry.dmNotes, resolve) : "";
 
   const fieldDefs = def?.fields ?? [];
@@ -235,9 +242,34 @@ export default async function EntryPage({
             </Card>
           )}
 
+          {isTable &&
+            (tableProblems.length === 0 ? (
+              <RollTableView dice={tableDice} rows={tableRows} />
+            ) : (
+              <Alert variant="destructive" role="note" className="mb-6">
+                <AlertTitle>This table cannot be rolled yet</AlertTitle>
+                <AlertDescription>
+                  {isDM ? (
+                    <>
+                      <ul className="mt-1 list-disc pl-4">
+                        {tableProblems.map((p) => (
+                          <li key={p}>{p}</li>
+                        ))}
+                      </ul>
+                      <Link href={`/codex/entry/${entry.slug}/edit`} className="mt-2 inline-block text-link underline-offset-4 hover:underline">
+                        Fix it in the editor →
+                      </Link>
+                    </>
+                  ) : (
+                    "The DM is still setting this table up."
+                  )}
+                </AlertDescription>
+              </Alert>
+            ))}
+
           {bodyHtml ? (
             <div className="prose-codex" dangerouslySetInnerHTML={{ __html: bodyHtml }} />
-          ) : (
+          ) : isTable ? null : (
             <p className="py-4 italic text-faint-foreground">
               {backlinks.length > 0
                 ? "No description written yet, but this is referenced elsewhere; see the linked mentions."

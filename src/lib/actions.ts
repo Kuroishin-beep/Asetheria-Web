@@ -4,17 +4,14 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { and, eq, ne } from "drizzle-orm";
 import { db } from "@/db";
-import { entries, revisions, rollTables, type Entry } from "@/db/schema";
+import { entries, revisions, type Entry } from "@/db/schema";
 import { requireDM } from "@/lib/auth";
 import { sectionPath, sectionPaths } from "@/lib/kinds";
 import { slugify } from "@/lib/links";
 import { rebuildLinksForEntry } from "@/lib/link-graph";
 import { refreshEmbeddingAfterResponse } from "@/lib/embedding-sync";
-import {
-  parseEntryForm,
-  rollTableInputSchema,
-  type EntryInput,
-} from "@/lib/validation";
+import { validateTable } from "@/lib/roll-table";
+import { parseEntryForm, type EntryInput } from "@/lib/validation";
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -57,6 +54,17 @@ async function uniqueSlug(base: string, excludeId?: string): Promise<string> {
   return `${root}-${Date.now()}`;
 }
 
+/**
+ * A random table must be a complete, readable table before it is saved: the
+ * editor already blocks the button, and this is the check that cannot be
+ * bypassed by posting the form directly.
+ */
+function tableProblem(input: EntryInput): string | null {
+  if (input.kind !== "table") return null;
+  const problems = validateTable(input.fields.dice ?? "", input.body);
+  return problems.length ? `This table can't be saved yet: ${problems.join(" ")}` : null;
+}
+
 function revalidateEntry(slug?: string, kind?: Entry["kind"]) {
   revalidatePath("/");
   if (kind) for (const path of sectionPaths(kind)) revalidatePath(path);
@@ -74,6 +82,8 @@ export async function createEntryAction(_prev: unknown, formData: FormData) {
     return { error: parsed.error.issues[0]?.message ?? "Invalid input." };
   }
   const input: EntryInput = parsed.data;
+  const tableError = tableProblem(input);
+  if (tableError) return { error: tableError };
   const slug = await uniqueSlug(input.name);
 
   const [row] = await db
@@ -110,6 +120,8 @@ export async function updateEntryAction(
     return { error: parsed.error.issues[0]?.message ?? "Invalid input." };
   }
   const input = parsed.data;
+  const tableError = tableProblem(input);
+  if (tableError) return { error: tableError };
 
   const [current] = await db
     .select()
@@ -274,76 +286,5 @@ export async function revertToRevisionAction(revisionId: string) {
   await rebuildLinksForEntry(row.id, row.body, row.fields);
   refreshEmbeddingAfterResponse(row.id);
   revalidateEntry(row.slug, row.kind);
-  return { ok: true };
-}
-
-// ---------------------------------------------------------------------------
-// Roll tables
-// ---------------------------------------------------------------------------
-
-export async function saveRollTableAction(
-  tableId: string | null,
-  _prev: unknown,
-  formData: FormData,
-) {
-  await requireDM();
-
-  let items: unknown = [];
-  try {
-    items = JSON.parse(String(formData.get("items") ?? "[]"));
-  } catch {
-    return { error: "Table rows are malformed." };
-  }
-
-  const parsed = rollTableInputSchema.safeParse({
-    name: String(formData.get("name") ?? ""),
-    description: String(formData.get("description") ?? ""),
-    dice: String(formData.get("dice") ?? "1d20"),
-    visibility: String(formData.get("visibility") ?? "secret"),
-    items,
-  });
-  if (!parsed.success) {
-    return { error: parsed.error.issues[0]?.message ?? "Invalid table." };
-  }
-  const input = parsed.data;
-
-  if (tableId) {
-    await db
-      .update(rollTables)
-      .set({ ...input, updatedAt: new Date() })
-      .where(eq(rollTables.id, tableId));
-  } else {
-    const base = slugify(input.name);
-    const [clash] = await db
-      .select({ id: rollTables.id })
-      .from(rollTables)
-      .where(eq(rollTables.slug, base))
-      .limit(1);
-    await db
-      .insert(rollTables)
-      .values({ ...input, slug: clash ? `${base}-${Date.now()}` : base });
-  }
-
-  revalidatePath("/tools/tables");
-  return { ok: true };
-}
-
-export async function archiveRollTableAction(tableId: string) {
-  await requireDM();
-  await db
-    .update(rollTables)
-    .set({ archivedAt: new Date() })
-    .where(eq(rollTables.id, tableId));
-  revalidatePath("/tools/tables");
-  return { ok: true };
-}
-
-export async function restoreRollTableAction(tableId: string) {
-  await requireDM();
-  await db
-    .update(rollTables)
-    .set({ archivedAt: null })
-    .where(eq(rollTables.id, tableId));
-  revalidatePath("/tools/tables");
   return { ok: true };
 }

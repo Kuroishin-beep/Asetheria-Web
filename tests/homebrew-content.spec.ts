@@ -24,8 +24,10 @@ test.describe("homebrew content import (metals + flora)", () => {
     await page.goto("/codex/entry/woundwort");
     await expect(page.getByRole("heading", { name: "Woundwort", level: 1 })).toBeVisible();
 
-    await page.goto("/tools/tables");
-    await expect(page.getByText("The Herbalist's Field Guide (d20)")).toBeVisible();
+    // Random tables are codex entries now; the migrated herbalism table keeps its address.
+    await page.goto("/codex/entry/herbalists-field-guide-d20");
+    await expect(page.getByRole("heading", { name: "The Herbalist's Field Guide (d20)", level: 1 })).toBeVisible();
+    await expect(page.getByRole("button", { name: "Roll on this table" })).toBeVisible();
   });
 
   test("planar metals from the external GM Binder scan are present, and the officially-sourced plants page was not imported", async ({
