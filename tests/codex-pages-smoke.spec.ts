@@ -59,7 +59,7 @@ test.describe("location sections (dm)", () => {
       await page.waitForURL(/\/codex\/entry\/.+/);
       slug = decodeURIComponent(page.url().split("/codex/entry/")[1]);
 
-      await page.getByRole("button", { name: "🗄 Archive" }).click();
+      await page.getByRole("button", { name: "Archive", exact: true }).click();
       await page.getByRole("button", { name: "Yes, archive" }).click();
       await page.waitForURL(/\/codex\/towns/);
       await expect(page.locator("h1").first()).toBeVisible();

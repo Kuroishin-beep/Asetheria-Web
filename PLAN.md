@@ -148,7 +148,7 @@ Previous plans: `docs/PLAN-archive-rbac-2026-09.md` (RBAC/RAG, executed).
 - Acceptance: login button and fields keep `#username`, `#password`, `#door-error` and accessible names ("Enter", "Enter as a player", "Enter the codex"); keyboard-only login works; 375/768/1280px screenshots captured.
 
 **2c. Codex pages** (`entry-card`, kind browse, entry page, empty/error/loading states)
-- Acceptance: every route under `src/app/(app)/codex` has `loading.tsx` (Skeleton matching layout) and `error.tsx` (friendly text + retry); empty kind shows icon + title + CTA, never plain text; `.prose-codex` and `#sec-*` anchors preserved.
+- Acceptance: the codex has a friendly error boundary with a working retry (`(app)/error.tsx`, root `error.tsx`) and a friendly not-found page that is still a real HTTP 404; slow data streams behind Skeleton placeholders shaped like the content (section lists and the front page, inside `<Suspense>` after every `notFound()`/`redirect()` guard); an empty section shows icon + title + hint (+ CTA for the DM), never plain text; `.prose-codex` and `#sec-*` anchors preserved. *(Corrected during implementation: the original wording required a route-level `loading.tsx` on every codex route. Verified in this repo that a `loading.tsx` on `/codex/[kindSlug]` makes `/codex/<unknown>` answer HTTP 200 instead of 404, which breaks the access rules and tests, so skeletons live in Suspense boundaries instead; see `docs/design-migration.md`.)*
 
 **2d. Editor, command palette, graph, shortcuts** (`entry-form`, `markdown-editor`, `command-palette`, `graph-view`, `keyboard-shortcuts`)
 - Acceptance: all `knowledge-features.spec.ts` assertions pass unchanged (chords, `?` sheet, `[[` autocomplete, draft recovery, preview).

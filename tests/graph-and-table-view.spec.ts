@@ -12,7 +12,7 @@ test.describe("table view", () => {
 
   test("ores section offers a table view showing structured fields as columns", async ({ page }) => {
     await page.goto("/codex/ores");
-    await page.getByRole("button", { name: "☰ Table" }).click();
+    await page.getByRole("button", { name: "Table", exact: true }).click();
     await expect(page.getByRole("columnheader", { name: /Cost per lb/ })).toBeVisible();
     await expect(page.getByRole("link", { name: "Steel", exact: true })).toBeVisible();
 

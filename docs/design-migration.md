@@ -59,3 +59,17 @@ Two details found by tests:
 - `src/styles/shadcn.css`: vendor CSS with framework `@keyframes`.
 - `src/components/ui/*`: the plain `<button>` / `<input>` live inside the shadcn wrappers by definition.
 - `src/app/(app)/tools/tables/*`: deleted in Phase 3 (replaced by `table` entries), not migrated.
+
+## Local edits to generated shadcn components (`src/components/ui/*`)
+Keep this list current so a future `shadcn add --overwrite` does not silently undo them.
+- `breadcrumb.tsx` `BreadcrumbPage`: removed `role="link"` and `aria-disabled`. The current page is plain text
+  with `aria-current="page"` (WAI-ARIA breadcrumb pattern); the generated version announced the page title as a
+  link, which assistive tech and tests (`getByRole("link")`) read as a second link to the same page.
+
+## Loading states: Suspense, not route-level `loading.tsx`
+A `loading.tsx` makes Next stream the shell before the page body runs, so `notFound()` afterwards still answered
+**HTTP 200**. Verified in this repo: with `loading.tsx` on `/codex/[kindSlug]`, `/codex/nope-xyz` returned 200.
+Missing and hidden pages must be a real 404 (the RBAC tests and the "hidden looks like missing" rule depend on it),
+so skeletons are rendered inside `<Suspense>` boundaries *after* every `notFound()` / `redirect()` guard has run:
+the codex section list and the front page stream behind skeletons; entry pages render fully before first byte.
+(`src/app/login/loading.tsx` stays: `/login` never calls `notFound()`.)

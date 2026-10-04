@@ -2,8 +2,13 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
-import { CardGrid, EntryCard } from "@/components/entry-card";
+import { ArrowDown, ArrowUp, ChevronLeft, ChevronRight, LayoutGrid, Search, Table2 } from "lucide-react";
+import { CardGrid, EmptyState, EntryCard } from "@/components/entry-card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import type { EntryKind } from "@/db/schema";
+import { cn } from "@/lib/utils";
 
 type Item = {
   id: string;
@@ -18,6 +23,8 @@ type Item = {
 };
 
 type FieldDef = { key: string; label: string };
+
+const MAX_TAG_CHIPS = 24;
 
 /**
  * Client-side filter over an already-loaded page of a section. With at most
@@ -58,7 +65,7 @@ export function KindFilter({
     }
     return [...counts.entries()]
       .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
-      .slice(0, 24);
+      .slice(0, MAX_TAG_CHIPS);
   }, [items]);
 
   const filtered = useMemo(() => {
@@ -71,7 +78,7 @@ export function KindFilter({
   }, [items, query, tag]);
 
   const sorted = useMemo(() => {
-    const value = (it: Item) => (sort.key === "name" ? it.name : it.fields[sort.key] ?? "");
+    const value = (it: Item) => (sort.key === "name" ? it.name : (it.fields[sort.key] ?? ""));
     return [...filtered].sort(
       (a, b) => value(a).localeCompare(value(b), undefined, { numeric: true }) * sort.dir,
     );
@@ -83,25 +90,18 @@ export function KindFilter({
 
   return (
     <>
-      <div
-        className="no-print"
-        style={{
-          display: "flex",
-          gap: "0.6rem",
-          flexWrap: "wrap",
-          alignItems: "center",
-          marginBottom: "1rem",
-        }}
-      >
-        <input
-          className="input"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          placeholder={paged ? `Filter this page…` : `Filter ${total} ${noun}…`}
-          aria-label={paged ? `Filter this page of ${noun}` : `Filter ${noun}`}
-          style={{ flex: 1, minWidth: "12rem", maxWidth: "24rem" }}
-        />
-        <span style={{ fontSize: "0.8125rem", color: "var(--text-muted)" }}>
+      <div className="no-print mb-4 flex flex-wrap items-center gap-3">
+        <div className="relative min-w-48 max-w-sm flex-1">
+          <Search aria-hidden="true" className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
+          <Input
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder={paged ? "Filter this page…" : `Filter ${total} ${noun}…`}
+            aria-label={paged ? `Filter this page of ${noun}` : `Filter ${noun}`}
+            className="pl-9"
+          />
+        </div>
+        <span className="text-[13px] text-muted-foreground">
           {paged
             ? `${filtered.length} of ${items.length} shown · ${total} total`
             : filtered.length === total
@@ -109,137 +109,106 @@ export function KindFilter({
               : `${filtered.length} of ${total}`}
         </span>
         {fieldDefs.length > 0 && (
-          <div role="group" aria-label="View" style={{ display: "flex", gap: "0.25rem" }}>
-            <button
+          <div role="group" aria-label="View" className="flex gap-1">
+            <Button
               type="button"
-              className="chip"
+              variant="outline"
+              size="sm"
               aria-pressed={view === "cards"}
               onClick={() => setView("cards")}
-              style={
-                view === "cards"
-                  ? { borderColor: "var(--gold)", color: "var(--gold)" }
-                  : undefined
-              }
+              className={cn(view === "cards" && "border-primary text-gold")}
             >
-              ▦ Cards
-            </button>
-            <button
+              <LayoutGrid aria-hidden="true" />
+              Cards
+            </Button>
+            <Button
               type="button"
-              className="chip"
+              variant="outline"
+              size="sm"
               aria-pressed={view === "table"}
               onClick={() => setView("table")}
-              style={
-                view === "table"
-                  ? { borderColor: "var(--gold)", color: "var(--gold)" }
-                  : undefined
-              }
+              className={cn(view === "table" && "border-primary text-gold")}
             >
-              ☰ Table
-            </button>
+              <Table2 aria-hidden="true" />
+              Table
+            </Button>
           </div>
         )}
       </div>
 
       {paged && query.trim() !== "" && (
-        <p
-          className="no-print"
-          style={{
-            fontSize: "0.8125rem",
-            color: "var(--text-muted)",
-            marginBottom: "1rem",
-          }}
-        >
+        <p className="no-print mb-4 text-[13px] text-muted-foreground">
           Filtering page {page} of {pageCount}.{" "}
-          <Link href={`/search?q=${encodeURIComponent(query.trim())}`}>
+          <Link href={`/search?q=${encodeURIComponent(query.trim())}`} className="text-link underline-offset-4 hover:underline">
             Search all {total} {noun} →
           </Link>
         </p>
       )}
 
       {allTags.length > 1 && (
-        <div
-          className="no-print"
-          style={{
-            display: "flex",
-            gap: "0.35rem",
-            flexWrap: "wrap",
-            marginBottom: "1.25rem",
-          }}
-        >
-          <button
-            type="button"
-            className="chip"
-            onClick={() => setTag(null)}
-            style={
-              tag === null
-                ? { borderColor: "var(--gold)", color: "var(--gold)" }
-                : undefined
-            }
-          >
+        <div className="no-print mb-6 flex flex-wrap gap-1">
+          <TagChip active={tag === null} onClick={() => setTag(null)}>
             All
-          </button>
+          </TagChip>
           {allTags.map(([t, n]) => (
-            <button
-              key={t}
-              type="button"
-              className="chip"
-              onClick={() => setTag(tag === t ? null : t)}
-              style={
-                tag === t
-                  ? { borderColor: "var(--gold)", color: "var(--gold)" }
-                  : undefined
-              }
-            >
+            <TagChip key={t} active={tag === t} onClick={() => setTag(tag === t ? null : t)}>
               {t}
-              <span style={{ color: "var(--text-faint)" }}>{n}</span>
-            </button>
+              <span className="text-faint-foreground">{n}</span>
+            </TagChip>
           ))}
         </div>
       )}
 
       {filtered.length === 0 ? (
-        <p style={{ color: "var(--text-muted)", padding: "2rem 0" }}>
-          Nothing matches that filter.
-        </p>
+        <EmptyState
+          Icon={Search}
+          title="Nothing matches that filter"
+          hint="Try a different word, or clear the tag filter."
+          action={
+            <Button
+              type="button"
+              variant="outline"
+              onClick={() => {
+                setQuery("");
+                setTag(null);
+              }}
+            >
+              Clear filters
+            </Button>
+          }
+        />
       ) : view === "table" ? (
-        <div className="card" style={{ overflowX: "auto", padding: 0 }}>
-          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.875rem" }}>
-            <thead>
-              <tr>
+        <div className="overflow-hidden rounded-xl bg-card ring-1 ring-foreground/10">
+          <Table>
+            <TableHeader>
+              <TableRow className="hover:bg-transparent">
                 <SortableHeader label="Name" sortKey="name" sort={sort} onSort={toggleSort} />
                 {fieldDefs.map((f) => (
                   <SortableHeader key={f.key} label={f.label} sortKey={f.key} sort={sort} onSort={toggleSort} />
                 ))}
-              </tr>
-            </thead>
-            <tbody>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
               {sorted.map((e) => (
-                <tr key={e.id} style={{ borderTop: "1px solid var(--border-soft)" }}>
-                  <td style={{ padding: "0.5rem 0.75rem" }}>
-                    <Link href={`/codex/entry/${e.slug}`} style={{ color: "var(--gold)" }}>
+                <TableRow key={e.id}>
+                  <TableCell>
+                    <Link href={`/codex/entry/${e.slug}`} className="font-medium text-gold underline-offset-4 hover:underline">
                       {e.name}
                     </Link>
-                  </td>
+                  </TableCell>
                   {fieldDefs.map((f) => (
-                    <td
+                    <TableCell
                       key={f.key}
-                      style={{
-                        padding: "0.5rem 0.75rem",
-                        color: "var(--text-muted)",
-                        maxWidth: "16rem",
-                        overflow: "hidden",
-                        textOverflow: "ellipsis",
-                        whiteSpace: "nowrap",
-                      }}
+                      className="max-w-64 truncate text-muted-foreground"
                       title={e.fields[f.key] ?? ""}
                     >
                       {e.fields[f.key] ?? "—"}
-                    </td>
+                    </TableCell>
                   ))}
-                </tr>
+                </TableRow>
               ))}
-            </tbody>
-          </table>
+            </TableBody>
+          </Table>
         </div>
       ) : (
         <CardGrid>
@@ -258,42 +227,62 @@ export function KindFilter({
       )}
 
       {paged && (
-        <nav
-          className="no-print"
-          aria-label={`${noun} pages`}
-          style={{
-            display: "flex",
-            gap: "0.6rem",
-            alignItems: "center",
-            justifyContent: "center",
-            flexWrap: "wrap",
-            marginTop: "2rem",
-          }}
-        >
+        <nav aria-label={`${noun} pages`} className="no-print mt-8 flex flex-wrap items-center justify-center gap-3">
           {page > 1 ? (
-            <Link className="btn" href={`${basePath}?page=${page - 1}`} rel="prev">
-              ← Previous
-            </Link>
+            <Button asChild variant="outline">
+              <Link href={`${basePath}?page=${page - 1}`} rel="prev">
+                <ChevronLeft aria-hidden="true" />
+                Previous
+              </Link>
+            </Button>
           ) : (
-            <span className="btn" aria-disabled="true" style={{ opacity: 0.45 }}>
-              ← Previous
-            </span>
+            <Button variant="outline" disabled>
+              <ChevronLeft aria-hidden="true" />
+              Previous
+            </Button>
           )}
-          <span style={{ fontSize: "0.8125rem", color: "var(--text-muted)" }}>
+          <span className="text-[13px] text-muted-foreground">
             Page {page} of {pageCount}
           </span>
           {page < pageCount ? (
-            <Link className="btn" href={`${basePath}?page=${page + 1}`} rel="next">
-              Next →
-            </Link>
+            <Button asChild variant="outline">
+              <Link href={`${basePath}?page=${page + 1}`} rel="next">
+                Next
+                <ChevronRight aria-hidden="true" />
+              </Link>
+            </Button>
           ) : (
-            <span className="btn" aria-disabled="true" style={{ opacity: 0.45 }}>
-              Next →
-            </span>
+            <Button variant="outline" disabled>
+              Next
+              <ChevronRight aria-hidden="true" />
+            </Button>
           )}
         </nav>
       )}
     </>
+  );
+}
+
+function TagChip({
+  active,
+  onClick,
+  children,
+}: {
+  active: boolean;
+  onClick: () => void;
+  children: React.ReactNode;
+}) {
+  return (
+    <Button
+      type="button"
+      variant="outline"
+      size="xs"
+      aria-pressed={active}
+      onClick={onClick}
+      className={cn("rounded-full font-normal", active && "border-primary bg-primary/10 text-gold")}
+    >
+      {children}
+    </Button>
   );
 }
 
@@ -309,26 +298,18 @@ function SortableHeader({
   onSort: (key: string) => void;
 }) {
   const active = sort.key === sortKey;
+  const Arrow = sort.dir === 1 ? ArrowUp : ArrowDown;
   return (
-    <th style={{ textAlign: "left", padding: 0 }}>
-      <button
+    <TableHead aria-sort={active ? (sort.dir === 1 ? "ascending" : "descending") : "none"} className="p-0">
+      <Button
         type="button"
+        variant="ghost"
         onClick={() => onSort(sortKey)}
-        style={{
-          width: "100%",
-          textAlign: "left",
-          padding: "0.5rem 0.75rem",
-          background: "transparent",
-          border: 0,
-          font: "inherit",
-          fontWeight: 600,
-          color: active ? "var(--gold)" : "var(--text)",
-          cursor: "pointer",
-        }}
-        aria-sort={active ? (sort.dir === 1 ? "ascending" : "descending") : "none"}
+        className={cn("h-10 w-full justify-start rounded-none px-3 font-semibold", active && "text-gold")}
       >
-        {label} {active ? (sort.dir === 1 ? "▲" : "▼") : ""}
-      </button>
-    </th>
+        {label}
+        {active && <Arrow aria-hidden="true" className="size-3" />}
+      </Button>
+    </TableHead>
   );
 }

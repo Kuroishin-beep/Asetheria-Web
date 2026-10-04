@@ -1,6 +1,14 @@
+import type { ComponentType, ReactNode } from "react";
 import Link from "next/link";
-import { kindIcon } from "@/lib/kinds";
+import { Sparkles } from "lucide-react";
 import type { EntryKind } from "@/db/schema";
+import { StaggerContainer } from "@/components/motion/stagger-container";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { KIND_ICONS } from "@/lib/section-icons";
+import { cn } from "@/lib/utils";
+
+type IconComponent = ComponentType<{ className?: string }>;
 
 export function EntryCard({
   slug,
@@ -22,164 +30,94 @@ export function EntryCard({
   /** Quoted sentence from the linking entry, shown instead of the summary. */
   context?: string | null;
 }) {
+  const Icon = KIND_ICONS[kind] ?? Sparkles;
   return (
     <Link
       href={`/codex/entry/${slug}`}
-      className="card"
-      style={{
-        display: "block",
-        padding: "0.85rem 1rem",
-        textDecoration: "none",
-        color: "inherit",
-        transition: "border-color 0.15s, transform 0.08s",
-      }}
+      className="group block h-full rounded-xl outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
     >
-      <div
-        style={{
-          display: "flex",
-          alignItems: "baseline",
-          gap: "0.55rem",
-          marginBottom: summary ? "0.3rem" : 0,
-        }}
+      <Card
+        size="sm"
+        className="h-full gap-2 transition-all duration-150 group-hover:-translate-y-0.5 group-hover:shadow-md group-hover:ring-primary/40 group-active:translate-y-0 group-active:scale-[0.99]"
       >
-        <span aria-hidden="true" style={{ flexShrink: 0 }}>
-          {kindIcon(kind)}
-        </span>
-        <span
-          className="font-display"
-          style={{ fontWeight: 600, flex: 1, minWidth: 0, lineHeight: 1.35 }}
-        >
-          {name}
-        </span>
-        {visibility === "secret" && (
-          <span className="chip chip-secret" style={{ flexShrink: 0 }}>
-            secret
+        <CardHeader className="grid-cols-[auto_1fr_auto] items-center gap-3">
+          <span className="flex size-8 items-center justify-center rounded-md bg-muted text-gold">
+            <Icon aria-hidden="true" className="size-4" />
           </span>
-        )}
-      </div>
-
-      {relation && (
-        <p
-          style={{
-            fontSize: "0.6875rem",
-            color: "var(--text-faint)",
-            textTransform: "uppercase",
-            letterSpacing: "0.06em",
-            marginBottom: "0.25rem",
-          }}
-        >
-          {relation.replace(/-/g, " ")}
-        </p>
-      )}
-
-      {/* A quoted mention is more useful than a generic summary — it says what
-          the other page actually claims about this entry. */}
-      {context ? (
-        <p
-          style={{
-            fontSize: "0.8125rem",
-            color: "var(--text-muted)",
-            lineHeight: 1.5,
-            fontFamily: "var(--font-prose)",
-            fontStyle: "italic",
-            borderLeft: "2px solid var(--border-strong)",
-            paddingLeft: "0.6rem",
-          }}
-        >
-          “{context}”
-        </p>
-      ) : (
-        summary && (
-          <p
-            style={{
-              fontSize: "0.8125rem",
-              color: "var(--text-muted)",
-              lineHeight: 1.5,
-              display: "-webkit-box",
-              WebkitLineClamp: 2,
-              WebkitBoxOrient: "vertical",
-              overflow: "hidden",
-            }}
-          >
-            {summary}
-          </p>
-        )
-      )}
-
-      {tags && tags.length > 0 && (
-        <div
-          style={{
-            display: "flex",
-            gap: "0.35rem",
-            flexWrap: "wrap",
-            marginTop: "0.5rem",
-          }}
-        >
-          {tags.slice(0, 4).map((t) => (
-            <span key={t} className="chip">
-              {t}
-            </span>
-          ))}
-          {tags.length > 4 && (
-            <span className="chip">+{tags.length - 4}</span>
+          <span className="min-w-0 text-[15px] font-semibold leading-snug tracking-tight">{name}</span>
+          {visibility === "secret" && (
+            <Badge variant="outline" className="border-secret/45 bg-secret/10 text-secret">
+              secret
+            </Badge>
           )}
-        </div>
-      )}
+        </CardHeader>
+
+        <CardContent className="grid gap-2">
+          {relation && (
+            <p className="text-[11px] uppercase tracking-[0.06em] text-faint-foreground">
+              {relation.replace(/-/g, " ")}
+            </p>
+          )}
+
+          {/* A quoted mention is more useful than a generic summary: it says
+              what the other page actually claims about this entry. */}
+          {context ? (
+            <p className="border-l-2 border-input pl-3 font-prose text-sm italic leading-relaxed text-muted-foreground">
+              “{context}”
+            </p>
+          ) : (
+            summary && <p className="line-clamp-2 text-sm leading-relaxed text-muted-foreground">{summary}</p>
+          )}
+
+          {tags && tags.length > 0 && (
+            <div className="flex flex-wrap gap-1">
+              {tags.slice(0, 4).map((t) => (
+                <Badge key={t} variant="secondary" className="font-normal">
+                  {t}
+                </Badge>
+              ))}
+              {tags.length > 4 && (
+                <Badge variant="secondary" className="font-normal">
+                  +{tags.length - 4}
+                </Badge>
+              )}
+            </div>
+          )}
+        </CardContent>
+      </Card>
     </Link>
   );
 }
 
 export function PageHeading({
+  Icon,
   icon,
   title,
   blurb,
   action,
 }: {
+  /** A lucide icon drawn beside the title. */
+  Icon?: IconComponent;
+  /** Legacy emoji icon, removed once the last screen is migrated (slice 2e). */
   icon?: string;
   title: string;
   blurb?: string;
-  action?: React.ReactNode;
+  action?: ReactNode;
 }) {
   return (
-    <div style={{ marginBottom: "1.5rem" }}>
-      <div
-        style={{
-          display: "flex",
-          alignItems: "flex-start",
-          gap: "1rem",
-          flexWrap: "wrap",
-        }}
-      >
-        <div style={{ flex: 1, minWidth: "min(16rem, 100%)" }}>
-          <h1
-            className="font-display"
-            style={{
-              fontSize: "clamp(1.4rem, 1.1rem + 1.2vw, 1.9rem)",
-              fontWeight: 700,
-              lineHeight: 1.2,
-              display: "flex",
-              alignItems: "center",
-              gap: "0.6rem",
-            }}
-          >
-            {icon && <span aria-hidden="true">{icon}</span>}
+    <div className="mb-6">
+      <div className="flex flex-wrap items-start gap-4">
+        <div className="min-w-[min(16rem,100%)] flex-1">
+          <h1 className="font-display flex items-center gap-3 text-[clamp(1.5rem,1.1rem+1.2vw,2rem)] font-bold leading-tight tracking-tight">
+            {Icon && <Icon aria-hidden="true" className="size-7 shrink-0 text-gold" />}
+            {!Icon && icon && <span aria-hidden="true">{icon}</span>}
             {title}
           </h1>
-          {blurb && (
-            <p
-              style={{
-                color: "var(--text-muted)",
-                marginTop: "0.4rem",
-                fontSize: "0.9375rem",
-              }}
-            >
-              {blurb}
-            </p>
-          )}
+          {blurb && <p className="mt-2 text-[15px] text-muted-foreground">{blurb}</p>}
         </div>
         {action && <div className="no-print">{action}</div>}
       </div>
-      <div className="rule-fade" style={{ marginTop: "1rem" }} />
+      <div className="mt-4 h-px bg-linear-to-r from-transparent via-border to-transparent" />
     </div>
   );
 }
@@ -188,47 +126,34 @@ export function EmptyState({
   title,
   hint,
   action,
+  Icon = Sparkles,
+  className,
 }: {
   title: string;
   hint?: string;
-  action?: React.ReactNode;
+  action?: ReactNode;
+  Icon?: IconComponent;
+  className?: string;
 }) {
   return (
-    <div
-      className="card"
-      style={{ padding: "3rem 1.5rem", textAlign: "center" }}
-    >
-      <p aria-hidden="true" style={{ fontSize: "1.75rem", opacity: 0.4 }}>
-        ✦
-      </p>
-      <p style={{ fontWeight: 600, marginTop: "0.75rem" }}>{title}</p>
-      {hint && (
-        <p
-          style={{
-            color: "var(--text-muted)",
-            fontSize: "0.875rem",
-            marginTop: "0.35rem",
-          }}
-        >
-          {hint}
-        </p>
-      )}
-      {action && <div style={{ marginTop: "1.25rem" }}>{action}</div>}
-    </div>
+    <Card className={cn("border border-dashed bg-transparent py-12 text-center shadow-none ring-0", className)}>
+      <CardContent className="grid justify-items-center gap-3">
+        <span className="flex size-12 items-center justify-center rounded-full bg-muted text-gold">
+          <Icon aria-hidden="true" className="size-6" />
+        </span>
+        <p className="font-semibold">{title}</p>
+        {hint && <p className="max-w-sm text-sm text-muted-foreground">{hint}</p>}
+        {action && <div className="mt-2">{action}</div>}
+      </CardContent>
+    </Card>
   );
 }
 
-/** Responsive auto-fitting grid used by every listing page. */
-export function CardGrid({ children }: { children: React.ReactNode }) {
+/** Responsive auto-fitting grid used by every listing page; cards enter in a short stagger. */
+export function CardGrid({ children }: { children: ReactNode }) {
   return (
-    <div
-      style={{
-        display: "grid",
-        gap: "0.75rem",
-        gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 17rem), 1fr))",
-      }}
-    >
+    <StaggerContainer className="grid grid-cols-[repeat(auto-fill,minmax(min(100%,17rem),1fr))] gap-3">
       {children}
-    </div>
+    </StaggerContainer>
   );
 }

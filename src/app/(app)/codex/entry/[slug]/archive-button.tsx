@@ -1,78 +1,76 @@
 "use client";
 
 import { useState, useTransition } from "react";
+import { Archive, Loader2 } from "lucide-react";
+import {
+  AlertDialog,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import { Button } from "@/components/ui/button";
 import { archiveEntryAction } from "@/lib/actions";
 
 /**
  * The closest thing to a delete in this app. It is deliberately two-step and
- * says plainly that nothing is destroyed — the entry moves to /archive and can
+ * says plainly that nothing is destroyed: the entry moves to /archive and can
  * be brought back at any time.
  */
-export function ArchiveButton({
-  entryId,
-  name,
-}: {
-  entryId: string;
-  name: string;
-}) {
-  const [confirming, setConfirming] = useState(false);
+export function ArchiveButton({ entryId, name }: { entryId: string; name: string }) {
+  const [open, setOpen] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [pending, startTransition] = useTransition();
 
-  if (!confirming) {
-    return (
-      <button
-        type="button"
-        className="btn btn-danger"
-        onClick={() => setConfirming(true)}
-      >
-        🗄 Archive
-      </button>
-    );
-  }
-
   return (
-    <div
-      className="card"
-      style={{
-        padding: "0.75rem",
-        display: "grid",
-        gap: "0.6rem",
-        maxWidth: "22rem",
+    <AlertDialog
+      open={open}
+      onOpenChange={(next) => {
+        // Never let a click-away or Escape abandon an archive that is in flight.
+        if (pending) return;
+        setOpen(next);
+        if (!next) setError(null);
       }}
     >
-      <p style={{ fontSize: "0.8125rem", lineHeight: 1.5 }}>
-        Move <strong>{name}</strong> to the archive? It stays in the database and
-        you can restore it whenever you like.
-      </p>
-      {error && (
-        <p style={{ fontSize: "0.8125rem", color: "var(--color-blood-400)" }}>
-          {error}
-        </p>
-      )}
-      <div style={{ display: "flex", gap: "0.5rem" }}>
-        <button
-          type="button"
-          className="btn btn-danger"
-          disabled={pending}
-          onClick={() =>
-            startTransition(async () => {
-              const res = await archiveEntryAction(entryId);
-              if (res && "error" in res && res.error) setError(res.error);
-            })
-          }
-        >
-          {pending ? "Archiving…" : "Yes, archive"}
-        </button>
-        <button
-          type="button"
-          className="btn"
-          onClick={() => setConfirming(false)}
-          disabled={pending}
-        >
-          Cancel
-        </button>
-      </div>
-    </div>
+      <AlertDialogTrigger asChild>
+        <Button type="button" variant="outline" className="hover:border-destructive/50 hover:text-destructive">
+          <Archive aria-hidden="true" />
+          Archive
+        </Button>
+      </AlertDialogTrigger>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>Archive {name}?</AlertDialogTitle>
+          <AlertDialogDescription>
+            It moves to the archive and stays in the database. You can restore it whenever you like.
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        {error && (
+          <p role="alert" className="text-sm text-destructive">
+            {error}
+          </p>
+        )}
+        <AlertDialogFooter>
+          <AlertDialogCancel disabled={pending}>Cancel</AlertDialogCancel>
+          <Button
+            type="button"
+            variant="destructive"
+            disabled={pending}
+            onClick={() =>
+              startTransition(async () => {
+                const res = await archiveEntryAction(entryId);
+                if (res && "error" in res && res.error) setError(res.error);
+              })
+            }
+          >
+            {pending && <Loader2 aria-hidden="true" className="animate-spin" />}
+            {pending ? "Archiving…" : "Yes, archive"}
+          </Button>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
   );
 }

@@ -1,8 +1,9 @@
 import { redirect } from "next/navigation";
 import type { Metadata } from "next";
+import { Archive } from "lucide-react";
+import { EmptyState, PageHeading } from "@/components/entry-card";
 import { getCurrentUser } from "@/lib/auth";
 import { listArchived } from "@/lib/entries";
-import { PageHeading, EmptyState } from "@/components/entry-card";
 import { ArchiveRow } from "./archive-row";
 
 export const metadata: Metadata = { title: "Archive" };
@@ -15,20 +16,21 @@ export default async function ArchivePage() {
   const rows = await listArchived();
 
   return (
-    <div style={{ maxWidth: "56rem" }}>
+    <div className="max-w-4xl">
       <PageHeading
-        icon="🗄"
+        Icon={Archive}
         title="Archive"
         blurb="Nothing here is deleted. Restore any entry to put it back in the codex."
       />
 
       {rows.length === 0 ? (
         <EmptyState
+          Icon={Archive}
           title="The archive is empty"
           hint="Archived entries land here and can be restored at any time."
         />
       ) : (
-        <div style={{ display: "grid", gap: "0.5rem" }}>
+        <div className="grid gap-2">
           {rows.map((e) => {
             const isBlank =
               !e.body.trim() &&

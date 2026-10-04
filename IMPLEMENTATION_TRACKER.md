@@ -12,7 +12,7 @@ Status key: NOT STARTED / IN PROGRESS / IMPLEMENTED / TESTED / DONE / BLOCKED
 | 1 | Enum migration: `fauna` + `table`; retag fauna; roll_tables → table entries | `src/db/schema.ts`, `src/lib/kinds.ts`, `src/lib/rbac.ts`, `src/lib/validation.ts`, `scripts/import-codex-file.ts`, `scripts/migrate-fauna-and-tables.ts`, `scripts/sql/*`, drizzle migration, tests | none | **DONE** |
 | 2a | Design foundation: shadcn spike, tokens + refresh, next-themes, motion presets | `components.json`, `src/lib/utils.ts`, `src/lib/motion.ts`, `src/components/ui/*`, `src/app/globals.css`, `src/app/layout.tsx`, `docs/design-*.md` | 1 | **DONE** |
 | 2b | Shell + auth pages | `app-shell`, `theme-toggle`, login/register/welcome/onboarding | 2a | **DONE** |
-| 2c | Codex pages (+ loading/error/empty) | `entry-card`, `codex/**`, `loading.tsx`, `error.tsx` | 2b | NOT STARTED |
+| 2c | Codex pages (+ loading/error/empty) | `entry-card`, `codex/**`, `loading.tsx`, `error.tsx` | 2b | **DONE** |
 | 2d | Editor, palette, graph, shortcuts | `entry-form`, `markdown-editor`, `command-palette`, `graph-view`, `keyboard-shortcuts` | 2c | NOT STARTED |
 | 2e | Tools + admin + sweep (grep gates, axe) | `tools/*`, `admin/*`, `rbac-panel` | 2d | NOT STARTED |
 | 3 | `fauna` + `table` UI and field model; roller | `kinds.ts`, `codex/tables`, roller, `tools/tables` redirect | 1, 2e | NOT STARTED |
@@ -88,3 +88,24 @@ Totals: `tsc` exit 0; `next build` compiled and generated 21 pages; full suite *
 
 Test edits (rule 3 justification): `auth.spec.ts` matched the role badge by its emoji text (`"⚜ DM"`, `"☗ Player"`). The project rule requires lucide-react icons, so the glyph is gone; the assertions now match the badge by its `title` ("Full edit access" / "Read-only access"). The intent (role badge visible for the right role) is unchanged.
 Known leftovers for later slices: arbitrary font sizes such as `text-[13px]`/`text-[11px]` in new components are swept in 2e; plain `.btn`/`.card` legacy classes remain in untouched screens (2c to 2e).
+
+### Phase 2c (codex pages): DONE (2026-10-04)
+
+Scope note: the slice also covers the front page (`(app)/page.tsx`, `prologue.tsx`), search and archive pages because they all render `EntryCard`/`PageHeading`/`EmptyState`; moving those components forces their callers.
+
+Built: `entry-card.tsx` (EntryCard, PageHeading, EmptyState, CardGrid with Motion stagger) on shadcn Card/Badge + lucide; kind section page (`KindFilter` on Input/Button/Table, sortable columns, tag chips, view toggle, pagination); entry page (Breadcrumb, header, properties Card, Alert, outline Card, DM notes, connections rail, `ArchiveButton` as an AlertDialog); search page; archive page + row; front page with `EntryStrip`; `ErrorState`, root `error.tsx` and `(app)/error.tsx` using Next 16 `retry`; `(app)/not-found.tsx`; Suspense skeletons (`shared/skeletons.tsx`). New specs: `codex-ui.spec.ts` (10), `error-states.spec.ts` (1).
+
+Evidence (observed):
+1. Error boundary is real and recovers: `error-states.spec.ts` renames the `entries` table away, the page shows "Something went wrong" + "Try again", no driver text/table name/stack in the body, the table is restored, "Try again" brings the NPCs section back. Passes.
+2. Not-found stays a real 404: `/codex/not-a-section` and `/codex/entry/not-an-entry-xyz` return 404 with the friendly page and a "Back to the front page" link (codex-ui test 4). Probed directly: with a route-level `loading.tsx` the same URL returned **200**; removed it and re-probed 404.
+3. Empty states: player on an unrevealed section sees icon + "No fauna yet" + hint and no create button (test 8); search with no hits and unknown tag show empty states with a recovery link (tests 9, 10); filter-no-match shows "Nothing matches that filter" with a working "Clear filters" button (test 2).
+4. Cards: SVG icons only, zero emoji in the main region, filter narrows and reports "N of M", tag chips toggle `aria-pressed` (tests 1 to 3).
+5. Entry page: breadcrumb ends in the current page (`aria-current`), Archive opens an alertdialog, Cancel/Escape leave the entry unarchived (DB asserted) and return focus to the trigger (test 6). `.prose-codex`, `#sec-*` anchors, wiki links and DM notes unchanged: `knowledge-features.spec.ts`, `city-locations.spec.ts`, `entries-crud.spec.ts` pass.
+6. `tsc` exit 0; `next build` compiled, 21 pages; `npm audit --omit=dev` 0 vulnerabilities; full suite **139 passed** (128 + 10 + 1), 0 failed.
+
+Bugs found by tests and fixed in the app:
+- shadcn `BreadcrumbPage` exposed the current page as `role="link"` (a second link with the page's own name; broke `getByRole("link", {name: "playwright"})` strict matching and is wrong for assistive tech): removed the role in `ui/breadcrumb.tsx` (listed in `docs/design-migration.md`).
+- Route-level `loading.tsx` turned unknown pages into HTTP 200 (see evidence 2): replaced with Suspense skeletons; plan criterion corrected in PLAN.md.
+
+Test edits (rule 3 justification): selectors/names tied to the old markup, intent unchanged. `div.card` / `li.card` locators became `[data-slot="card"]` (shadcn's stable hook) in `helpers.ts` and `entries-crud.spec.ts`; button names lost their emoji prefix (`"🗄 Archive"` -> `"Archive"`, `"↩ Restore"` -> `"Restore"`, `"☰ Table"` -> `"Table"`) and `"⊘ DM only"` became `"DM only: hidden from players"` because the glyphs are now lucide icons (project rule). `rbac-panel.spec.ts` and `roll-tables.spec.ts` still use `.card`; they are migrated with their screens in 2e and Phase 3.
+Not covered by a skeleton by design: entry pages (they can 404) render fully before the first byte.

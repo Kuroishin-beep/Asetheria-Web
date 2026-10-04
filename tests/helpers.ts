@@ -76,8 +76,8 @@ export async function deleteEphemeralEntry(page: Page, slug: string) {
   if (res && res.status() === 404) {
     await page.goto("/archive");
     const restoreBtn = page
-      .locator("div.card", { hasText: slug })
-      .getByRole("button", { name: "↩ Restore" })
+      .locator('[data-slot="card"]', { hasText: slug })
+      .getByRole("button", { name: "Restore" })
       .first();
     if (await restoreBtn.isVisible().catch(() => false)) {
       await restoreBtn.click();
@@ -85,7 +85,7 @@ export async function deleteEphemeralEntry(page: Page, slug: string) {
       // leave the archive list as proof the DB write landed, rather than a
       // fixed sleep that can race ahead of it.
       await expect(
-        page.locator("div.card", { hasText: slug }),
+        page.locator('[data-slot="card"]', { hasText: slug }),
       ).toHaveCount(0, { timeout: 10_000 }).catch(() => {});
     }
     res = await page.goto(`/codex/entry/${slug}/edit`);
@@ -110,7 +110,7 @@ export async function deleteEphemeralEntry(page: Page, slug: string) {
   // { ok: true } without redirecting, so don't block on a navigation that
   // may never happen — wait for the URL to change away from the specific
   // page we're on now, not a pattern that's already satisfied.
-  const archiveBtn = page.getByRole("button", { name: "🗄 Archive" });
+  const archiveBtn = page.getByRole("button", { name: "Archive", exact: true });
   if (await archiveBtn.isVisible().catch(() => false)) {
     const beforeUrl = page.url();
     await archiveBtn.click();
@@ -122,7 +122,7 @@ export async function deleteEphemeralEntry(page: Page, slug: string) {
   // means the entry's name and its slug are identical, so the archive row
   // (which shows the name) can be found by matching the slug text directly.
   await page.goto("/archive");
-  const row = page.locator("div.card", { hasText: slug });
+  const row = page.locator('[data-slot="card"]', { hasText: slug });
   const deleteBtn = row.getByRole("button", { name: "Delete blank" }).first();
   if (await deleteBtn.isVisible().catch(() => false)) {
     await deleteBtn.click();

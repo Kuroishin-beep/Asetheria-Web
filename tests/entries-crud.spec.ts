@@ -51,7 +51,7 @@ test.describe("entry CRUD (DM)", () => {
     await page.waitForURL(/\/codex\/entry\/.+/);
 
     await expect(page.getByText("Updated by the edit test.")).toBeVisible();
-    await expect(page.getByText("⊘ DM only")).toBeVisible();
+    await expect(page.getByText("DM only: hidden from players")).toBeVisible();
     await expect(page.getByText("This is a DM-only note.")).toBeVisible();
 
     // Revision history recorded both the create and the update.
@@ -63,7 +63,7 @@ test.describe("entry CRUD (DM)", () => {
     const name = testName("crud-archive");
     const slug = await track(page, await createEntryViaUI(page, { kind: "note", name }));
 
-    await page.getByRole("button", { name: "🗄 Archive" }).click();
+    await page.getByRole("button", { name: "Archive", exact: true }).click();
     await page.getByRole("button", { name: "Yes, archive" }).click();
     await page.waitForURL(/\/codex\/notes/);
 
@@ -78,8 +78,8 @@ test.describe("entry CRUD (DM)", () => {
     await page.goto("/archive");
     await expect(page.getByText(name)).toBeVisible();
 
-    const archivedRow = page.locator("div.card", { hasText: name });
-    await archivedRow.getByRole("button", { name: "↩ Restore" }).click();
+    const archivedRow = page.locator('[data-slot="card"]', { hasText: name });
+    await archivedRow.getByRole("button", { name: "Restore" }).click();
     // restoreEntryAction doesn't navigate — it's a transition +
     // router.refresh() — so wait for the row to actually leave the archive
     // list (proof the DB write landed) before following the entry's URL,
@@ -146,13 +146,13 @@ test.describe("entry CRUD (DM)", () => {
       await createEntryViaUI(page, { kind: "note", name, summary: "Not blank yet." }),
     );
 
-    await page.getByRole("button", { name: "🗄 Archive" }).click();
+    await page.getByRole("button", { name: "Archive", exact: true }).click();
     await page.getByRole("button", { name: "Yes, archive" }).click();
     await page.waitForURL(/\/codex\/notes/);
 
     await page.goto("/archive");
     // Non-blank entries never show a "Delete blank" button at all.
-    const row = page.locator("div.card", { hasText: name });
+    const row = page.locator('[data-slot="card"]', { hasText: name });
     await expect(row.getByRole("button", { name: "Delete blank" })).toHaveCount(0);
 
     void slug; // tracked above; cleaned up in afterEach
