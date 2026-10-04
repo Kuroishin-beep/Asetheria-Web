@@ -29,6 +29,26 @@ const RELATION_FIELDS: Record<string, string> = {
   foundIn: "found-in",
 };
 
+/** Property keys rendered as links to the pages they name (role-scoped, like body links). */
+export const LINKED_FIELD_KEYS: ReadonlySet<string> = new Set(["foundIn"]);
+
+/**
+ * Splits a relation property ("Corinth City, [[Delphara City|the shrine town]]")
+ * into the name to look up and the text to show. Shared by the link graph and
+ * the page renderer so they can never disagree about what a value names.
+ */
+export function parseRelationValue(value: string): { name: string; label: string }[] {
+  return value
+    .split(",")
+    .map((part) => part.trim())
+    .filter(Boolean)
+    .map((part) => {
+      const wiki = part.match(/^\[\[([^\]|]+)(?:\|([^\]]*))?\]\]$/);
+      if (wiki) return { name: wiki[1].trim(), label: (wiki[2] ?? wiki[1]).trim() };
+      return { name: part, label: part };
+    });
+}
+
 export function normalizeName(s: string): string {
   return s
     .toLowerCase()
@@ -226,9 +246,9 @@ export function resolveLinks(
     const value = fields[key];
     if (!value) continue;
     // Properties are often comma-separated lists of names.
-    for (const part of value.split(",")) {
-      // A property may be written as plain names or as [[wiki links]] / [[name|label]].
-      const id = nameIndex.get(normalizeName(part.replace(/^\s*\[\[|\]\]\s*$/g, "").split("|")[0]));
+    // A property may be written as plain names or as [[wiki links]] / [[name|label]].
+    for (const { name } of parseRelationValue(value)) {
+      const id = nameIndex.get(normalizeName(name));
       if (id) push(id, relation);
     }
   }

@@ -41,7 +41,7 @@ test.describe("the data files (pure)", () => {
 test.describe("once imported", () => {
   test("every batch entry is in the database with its kind, and each file imports once", async () => {
     const rows = await query<{ kind: string; n: string }>(
-      `SELECT kind, count(*)::text AS n FROM entries WHERE source_path LIKE $1 AND archived_at IS NULL GROUP BY kind`,
+      `SELECT kind, count(*)::text AS n FROM entries WHERE source_path LIKE $1 AND kind IN ('ore','flora','fauna') AND archived_at IS NULL GROUP BY kind`,
       [SOURCE],
     );
     const byKind = Object.fromEntries(rows.map((r) => [r.kind, Number(r.n)]));
@@ -80,7 +80,7 @@ test.describe("once imported", () => {
               count(*) FILTER (WHERE l.relation = 'found-in')::text AS foundin,
               count(*) FILTER (WHERE l.relation = 'mentions')::text AS mentions
        FROM entries e LEFT JOIN links l ON l.source_id = e.id
-       WHERE e.source_path LIKE $1 AND e.archived_at IS NULL
+       WHERE e.source_path LIKE $1 AND e.kind IN ('ore','flora','fauna') AND e.archived_at IS NULL
        GROUP BY e.id, e.name`,
       [SOURCE],
     );

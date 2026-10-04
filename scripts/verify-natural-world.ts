@@ -5,13 +5,13 @@
  *
  *   npx tsx scripts/verify-natural-world.ts
  */
-import { TARGETS, check, loadAll } from "./lib/natural-world";
+import { PLACE_TARGET, TARGETS, check, loadAll, loadPlaces } from "./lib/natural-world";
 
 const problems = check();
 const all = loadAll().flatMap((f) => f.entries);
 const counts = (kind: string) => all.filter((e) => e.kind === kind).length;
 
-console.log(`\n  ore ${counts("ore")}/${TARGETS.ore}   flora ${counts("flora")}/${TARGETS.flora}   fauna ${counts("fauna")}/${TARGETS.fauna}`);
+console.log(`\n  ore ${counts("ore")}/${TARGETS.ore}   flora ${counts("flora")}/${TARGETS.flora}   fauna ${counts("fauna")}/${TARGETS.fauna}   places ${loadPlaces().flatMap((f) => f.entries).length}/${PLACE_TARGET}`);
 if (problems.length === 0) {
   console.log("  natural-world data: 0 problems.\n");
 } else {

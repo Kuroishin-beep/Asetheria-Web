@@ -192,3 +192,19 @@ Changed test (justified): `kind-migration.spec.ts` "exactly the eight original a
 Open decision for you (ledger): three homebrew batches predate Q1 — `planar-metals` (24, GM Binder), `flora` herbalism (20, "external GM Binder page"), `metals` (player-supplied, origin unrecorded). Keep / rewrite as original / archive. Nothing changed.
 Deviation: Open5e importer (optional in PLAN) not built.
 Prod rollout: after Phase 0 (Neon URL): run the 8 imports, `links:rebuild`, `embeddings:generate`.
+
+## Phase 5 — Places, structures, specimen linkage (ENH-03) — DONE (local DB; prod import waits on Phase 0)
+
+Evidence per acceptance criterion:
+1. **Every ore/flora/fauna has a non-empty `Found in`; no broken links:** 227 specimens gained 238 place names (94 had none). `natural-world-links.spec.ts`: query finds 0 specimens without it; every name resolves to a live page; every name is a `found-in` edge (565 edges). `check:links --max 2`: still exactly the 2 pre-existing unresolved links. (The plan's "verify:links" is `check:links`; see Phase 1.)
+2. **A Location page lists its specimens:** `the-green-gallery` shows Malachite under Linked mentions, for the DM and for a granted player.
+3. **R5, field links cannot leak (test written first, red, then fixed):** `Found in` rendered as plain text before; now `LinkedNames` resolves through the same role-scoped resolver as body links. DM: links to all, incl. secret. Player with location grant: link to the open place only; the secret place's name is plain text with no link, no tooltip (`[title]` count 0) and its address 404s. Player without the grant: no links at all.
+4. **No orphan places:** 100 new places, each with a live location parent whose name equals `fields.region` (query assertion). Verifier whitelists 37 wild/city parents.
+5. **Zero existing descriptions changed:** md5 of summary|body|dm_notes for all 990 pre-existing entries snapshotted before the import and compared after: 0 changed or removed (1090 after). The backfill writes only `fields.foundIn` (asserted on its source: one UPDATE, `jsonb_set(fields,'{foundIn}')`) and is idempotent ("0 specimens would be updated").
+6. **Graph edges rise by at least the `foundIn` links:** found-in edges >= resolvable (specimen, place) pairs (asserted); 238 added.
+7. `tsc` 0; `next build` ok; `npm audit --omit=dev` 0; design gates 12 rules / 0 violations; embeddings 100 new; full suite **240 passed** (224 + 16), 0 failed.
+
+Built: `data/natural-world/places-1..4.json` (27 mines/quarries, 28 groves/growing grounds, 21 habitats, 24 structures; each with a DM-only `Hook:`), `found-in-extra.json` (2 specimens no place names), `scripts/backfill-found-in.ts`, `src/components/shared/linked-names.tsx`, `parseRelationValue`/`LINKED_FIELD_KEYS` in `src/lib/links.ts` (the link graph and the renderer now share one parser), verifier extended to places.
+Test scoping change (justified): `natural-world-import.spec.ts` DB queries matched `original: natural-world/%`, which now also matches places; scoped to ore/flora/fauna (its subject). `loadAll()` now reads only `ores|flora|fauna-*.json`.
+Not done: the plan's `search-safety.spec.ts` extension; the R5 and 404 assertions live in `natural-world-links.spec.ts`, which covers player access to the secret place directly.
+Prod rollout (after Phase 0): import 4 places files, `backfill-found-in --apply`, `links:rebuild`, `embeddings:generate`.

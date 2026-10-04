@@ -6,6 +6,7 @@ import { Eye, EyeOff, Pencil, Sparkles } from "lucide-react";
 import { CardGrid, EntryCard } from "@/components/entry-card";
 import { RollTableView } from "@/components/roll-table-view";
 import { Eyebrow } from "@/components/shared/eyebrow";
+import { LinkedNames } from "@/components/shared/linked-names";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Badge, badgeVariants } from "@/components/ui/badge";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
@@ -23,7 +24,7 @@ import {
 } from "@/lib/entries";
 import { KIND_BY_KEY } from "@/lib/kinds";
 import { extractHeadings, renderMarkdown } from "@/lib/markdown";
-import { parseAliases } from "@/lib/links";
+import { LINKED_FIELD_KEYS, parseAliases } from "@/lib/links";
 import { parseRollTable, stripTable, validateTable } from "@/lib/roll-table";
 import { KIND_ICONS } from "@/lib/section-icons";
 import { ArchiveButton } from "./archive-button";
@@ -190,7 +191,9 @@ export default async function EntryPage({
                       <dt>
                         <Eyebrow>{f.label}</Eyebrow>
                       </dt>
-                      <dd className="mt-1 text-[15px] leading-normal">{f.value}</dd>
+                      <dd className="mt-1 text-[15px] leading-normal">
+                        {LINKED_FIELD_KEYS.has(f.key) && f.value ? <LinkedNames value={f.value} resolve={resolve} /> : f.value}
+                      </dd>
                     </div>
                   ))}
                   {extraFields.map(([k, v]) => (
