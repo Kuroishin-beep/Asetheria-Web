@@ -1,11 +1,21 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, type KeyboardEvent } from "react";
+import { Eye, Pencil } from "lucide-react";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Textarea } from "@/components/ui/textarea";
 import { renderMarkdown } from "@/lib/markdown";
+import { cn } from "@/lib/utils";
 
 type Suggestion = { id: string; name: string; kind: string; summary: string };
 
 const DRAFT_PREFIX = "asetheria-draft:";
+const DRAFT_SAVE_DELAY_MS = 400;
+const SUGGESTION_DELAY_MS = 120;
+const MAX_SUGGESTIONS = 8;
+const MIN_QUERY_LENGTH = 2;
 
 function readDraft(key: string): string | null {
   try {
@@ -31,7 +41,7 @@ export function clearDraft(key: string) {
 
 /**
  * The description editor: a plain markdown textarea with the three things
- * that make writing a wiki bearable —
+ * that make writing a wiki bearable:
  *
  *  - **[[ autocomplete** (Obsidian): typing `[[` suggests entries by name, and
  *    Enter/Tab inserts a link that resolves;
@@ -44,13 +54,14 @@ export function MarkdownEditor({
   name,
   defaultValue,
   draftKey,
-  minHeight = "22rem",
+  minHeightClass = "min-h-88",
 }: {
   id: string;
   name: string;
   defaultValue: string;
   draftKey: string;
-  minHeight?: string;
+  /** Tailwind min-height class for the writing area (default 22rem). */
+  minHeightClass?: string;
 }) {
   const [value, setValue] = useState(defaultValue);
   const [tab, setTab] = useState<"write" | "preview">("write");
@@ -71,13 +82,13 @@ export function MarkdownEditor({
     if (pendingDraft !== null) return; // don't overwrite the draft before it's been offered
     const timer = setTimeout(() => {
       writeDraft(draftKey, value === defaultValue ? null : value);
-    }, 400);
+    }, DRAFT_SAVE_DELAY_MS);
     return () => clearTimeout(timer);
   }, [value, draftKey, defaultValue, pendingDraft]);
 
   // [[ autocomplete
   useEffect(() => {
-    if (!linkQuery || linkQuery.text.trim().length < 2) {
+    if (!linkQuery || linkQuery.text.trim().length < MIN_QUERY_LENGTH) {
       setSuggestions([]);
       return;
     }
@@ -87,12 +98,12 @@ export function MarkdownEditor({
         const res = await fetch(`/api/find?q=${encodeURIComponent(linkQuery.text)}`);
         const data = await res.json();
         if (reqId !== requestId.current) return;
-        setSuggestions((data.results ?? []).slice(0, 8));
+        setSuggestions((data.results ?? []).slice(0, MAX_SUGGESTIONS));
         setActive(0);
       } catch {
         if (reqId === requestId.current) setSuggestions([]);
       }
-    }, 120);
+    }, SUGGESTION_DELAY_MS);
     return () => clearTimeout(timer);
   }, [linkQuery]);
 
@@ -126,184 +137,125 @@ export function MarkdownEditor({
     });
   }
 
-  function onKeyDown(e: React.KeyboardEvent<HTMLTextAreaElement>) {
-    if (suggestions.length > 0) {
-      if (e.key === "ArrowDown") {
-        e.preventDefault();
-        setActive((i) => Math.min(i + 1, suggestions.length - 1));
-        return;
-      }
-      if (e.key === "ArrowUp") {
-        e.preventDefault();
-        setActive((i) => Math.max(i - 1, 0));
-        return;
-      }
-      if (e.key === "Enter" || e.key === "Tab") {
-        e.preventDefault();
-        insertLink(suggestions[active]);
-        return;
-      }
-      if (e.key === "Escape") {
-        e.preventDefault();
-        setSuggestions([]);
-        setLinkQuery(null);
-        return;
-      }
+  function onKeyDown(e: KeyboardEvent<HTMLTextAreaElement>) {
+    if (suggestions.length === 0) return;
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      setActive((i) => Math.min(i + 1, suggestions.length - 1));
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      setActive((i) => Math.max(i - 1, 0));
+    } else if (e.key === "Enter" || e.key === "Tab") {
+      e.preventDefault();
+      insertLink(suggestions[active]);
+    } else if (e.key === "Escape") {
+      e.preventDefault();
+      setSuggestions([]);
+      setLinkQuery(null);
     }
   }
 
-  const previewHtml = useMemo(
-    () => (tab === "preview" ? renderMarkdown(value) : ""),
-    [tab, value],
-  );
-
-  const tabStyle = (on: boolean): React.CSSProperties => ({
-    borderColor: on ? "var(--gold)" : undefined,
-    color: on ? "var(--gold)" : undefined,
-  });
+  const previewHtml = useMemo(() => (tab === "preview" ? renderMarkdown(value) : ""), [tab, value]);
 
   return (
-    <div style={{ display: "grid", gap: "0.5rem", position: "relative" }}>
+    <div className="relative grid gap-2">
       {pendingDraft !== null && (
-        <div
-          role="status"
-          className="card"
-          style={{
-            padding: "0.6rem 0.8rem",
-            display: "flex",
-            gap: "0.6rem",
-            alignItems: "center",
-            flexWrap: "wrap",
-            fontSize: "0.8125rem",
-          }}
-        >
-          <span style={{ flex: 1, minWidth: "12rem" }}>
+        <Alert role="status" className="flex flex-wrap items-center gap-3">
+          <AlertDescription className="min-w-48 flex-1">
             You have unsaved changes from an earlier visit.
-          </span>
-          <button
+          </AlertDescription>
+          <Button
             type="button"
-            className="btn btn-primary"
+            size="sm"
             onClick={() => {
               setValue(pendingDraft);
               setPendingDraft(null);
             }}
           >
             Restore draft
-          </button>
-          <button
+          </Button>
+          <Button
             type="button"
-            className="btn"
+            size="sm"
+            variant="outline"
             onClick={() => {
               writeDraft(draftKey, null);
               setPendingDraft(null);
             }}
           >
             Discard
-          </button>
-        </div>
+          </Button>
+        </Alert>
       )}
 
-      <div role="tablist" aria-label="Editor mode" style={{ display: "flex", gap: "0.35rem" }}>
-        <button
-          type="button"
-          role="tab"
-          aria-selected={tab === "write"}
-          className="chip"
-          style={tabStyle(tab === "write")}
-          onClick={() => setTab("write")}
-        >
-          ✎ Write
-        </button>
-        <button
-          type="button"
-          role="tab"
-          aria-selected={tab === "preview"}
-          className="chip"
-          style={tabStyle(tab === "preview")}
-          onClick={() => setTab("preview")}
-        >
-          👁 Preview
-        </button>
-      </div>
+      <Tabs value={tab} onValueChange={(v) => setTab(v === "preview" ? "preview" : "write")}>
+        <TabsList aria-label="Editor mode">
+          <TabsTrigger value="write">
+            <Pencil aria-hidden="true" />
+            Write
+          </TabsTrigger>
+          <TabsTrigger value="preview">
+            <Eye aria-hidden="true" />
+            Preview
+          </TabsTrigger>
+        </TabsList>
 
-      {/* The textarea stays mounted (hidden in preview) so the form always submits it. */}
-      <textarea
-        ref={textareaRef}
-        id={id}
-        name={name}
-        className="textarea"
-        style={{
-          minHeight,
-          fontFamily: "var(--font-prose)",
-          display: tab === "write" ? undefined : "none",
-        }}
-        value={value}
-        onChange={(e) => {
-          setValue(e.target.value);
-          detectLinkQuery(e.target.value, e.target.selectionStart);
-        }}
-        onKeyDown={onKeyDown}
-        onBlur={() => setTimeout(() => setSuggestions([]), 150)}
-        aria-autocomplete="list"
-        aria-controls={suggestions.length ? `${id}-links` : undefined}
-        aria-expanded={suggestions.length > 0}
-      />
+        {/* Both panels stay mounted so the textarea is always part of the form that submits. */}
+        <TabsContent value="write" forceMount className="relative data-[state=inactive]:hidden">
+          <Textarea
+            ref={textareaRef}
+            id={id}
+            name={name}
+            className={cn("font-prose text-base leading-relaxed", minHeightClass)}
+            value={value}
+            onChange={(e) => {
+              setValue(e.target.value);
+              detectLinkQuery(e.target.value, e.target.selectionStart);
+            }}
+            onKeyDown={onKeyDown}
+            onBlur={() => setTimeout(() => setSuggestions([]), 150)}
+            aria-autocomplete="list"
+            aria-controls={suggestions.length ? `${id}-links` : undefined}
+            aria-expanded={suggestions.length > 0}
+          />
 
-      {tab === "preview" && (
-        <div
-          className="prose-codex card"
-          style={{ minHeight, padding: "1rem 1.15rem" }}
-          // renderMarkdown escapes the source first; only its own tags are emitted.
-          dangerouslySetInnerHTML={{
-            __html: previewHtml || "<p><em>Nothing written yet.</em></p>",
-          }}
-        />
-      )}
-
-      {suggestions.length > 0 && tab === "write" && (
-        <ul
-          id={`${id}-links`}
-          role="listbox"
-          aria-label="Link to an entry"
-          className="card"
-          style={{
-            position: "absolute",
-            left: "0.5rem",
-            right: "0.5rem",
-            bottom: "0.5rem",
-            zIndex: 20,
-            listStyle: "none",
-            margin: 0,
-            padding: "0.3rem",
-            maxHeight: "16rem",
-            overflowY: "auto",
-          }}
-        >
-          {suggestions.map((s, idx) => (
-            <li
-              key={s.id}
-              role="option"
-              aria-selected={idx === active}
-              onMouseDown={(e) => {
-                e.preventDefault();
-                insertLink(s);
-              }}
-              onMouseEnter={() => setActive(idx)}
-              style={{
-                padding: "0.45rem 0.6rem",
-                borderRadius: 6,
-                cursor: "pointer",
-                background: idx === active ? "var(--bg-sunken)" : "transparent",
-              }}
+          {suggestions.length > 0 && (
+            <ul
+              id={`${id}-links`}
+              role="listbox"
+              aria-label="Link to an entry"
+              className="absolute inset-x-2 bottom-2 z-20 max-h-64 overflow-y-auto rounded-lg bg-popover p-1 shadow-lg ring-1 ring-foreground/10"
             >
-              <span style={{ fontWeight: 500 }}>{s.name}</span>{" "}
-              <span style={{ fontSize: "0.75rem", color: "var(--text-faint)", textTransform: "uppercase" }}>
-                {s.kind}
-              </span>
-            </li>
-          ))}
-        </ul>
-      )}
+              {suggestions.map((s, idx) => (
+                <li
+                  key={s.id}
+                  role="option"
+                  aria-selected={idx === active}
+                  onMouseDown={(e) => {
+                    e.preventDefault();
+                    insertLink(s);
+                  }}
+                  onMouseEnter={() => setActive(idx)}
+                  className={cn("cursor-pointer rounded-md px-3 py-2", idx === active && "bg-accent")}
+                >
+                  <span className="font-medium">{s.name}</span>{" "}
+                  <span className="text-xs uppercase text-faint-foreground">{s.kind}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+        </TabsContent>
+
+        <TabsContent value="preview" forceMount className="data-[state=inactive]:hidden">
+          <div
+            className={cn("prose-codex rounded-xl bg-card p-4 ring-1 ring-foreground/10", minHeightClass)}
+            // renderMarkdown escapes the source first; only its own tags are emitted.
+            dangerouslySetInnerHTML={{
+              __html: previewHtml || "<p><em>Nothing written yet.</em></p>",
+            }}
+          />
+        </TabsContent>
+      </Tabs>
     </div>
   );
 }

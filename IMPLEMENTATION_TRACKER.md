@@ -13,7 +13,7 @@ Status key: NOT STARTED / IN PROGRESS / IMPLEMENTED / TESTED / DONE / BLOCKED
 | 2a | Design foundation: shadcn spike, tokens + refresh, next-themes, motion presets | `components.json`, `src/lib/utils.ts`, `src/lib/motion.ts`, `src/components/ui/*`, `src/app/globals.css`, `src/app/layout.tsx`, `docs/design-*.md` | 1 | **DONE** |
 | 2b | Shell + auth pages | `app-shell`, `theme-toggle`, login/register/welcome/onboarding | 2a | **DONE** |
 | 2c | Codex pages (+ loading/error/empty) | `entry-card`, `codex/**`, `loading.tsx`, `error.tsx` | 2b | **DONE** |
-| 2d | Editor, palette, graph, shortcuts | `entry-form`, `markdown-editor`, `command-palette`, `graph-view`, `keyboard-shortcuts` | 2c | NOT STARTED |
+| 2d | Editor, palette, graph, shortcuts | `entry-form`, `markdown-editor`, `command-palette`, `graph-view`, `keyboard-shortcuts` | 2c | **DONE** |
 | 2e | Tools + admin + sweep (grep gates, axe) | `tools/*`, `admin/*`, `rbac-panel` | 2d | NOT STARTED |
 | 3 | `fauna` + `table` UI and field model; roller | `kinds.ts`, `codex/tables`, roller, `tools/tables` redirect | 1, 2e | NOT STARTED |
 | 4 | Licence-safe ingestion + original specimens | `data/natural-world/*`, `scripts/import-open5e-docs.ts`, attribution note, `docs/content-review.md` | 3 | NOT STARTED |
@@ -109,3 +109,23 @@ Bugs found by tests and fixed in the app:
 
 Test edits (rule 3 justification): selectors/names tied to the old markup, intent unchanged. `div.card` / `li.card` locators became `[data-slot="card"]` (shadcn's stable hook) in `helpers.ts` and `entries-crud.spec.ts`; button names lost their emoji prefix (`"🗄 Archive"` -> `"Archive"`, `"↩ Restore"` -> `"Restore"`, `"☰ Table"` -> `"Table"`) and `"⊘ DM only"` became `"DM only: hidden from players"` because the glyphs are now lucide icons (project rule). `rbac-panel.spec.ts` and `roll-tables.spec.ts` still use `.card`; they are migrated with their screens in 2e and Phase 3.
 Not covered by a skeleton by design: entry pages (they can 404) render fully before the first byte.
+
+### Phase 2d (editor, palette, graph, shortcuts): DONE (2026-10-04)
+
+Built: `EntryForm` (shadcn Input/Label/NativeSelect/RadioGroup/Textarea, `FormSection` labelled groups, `FormMessage`), `MarkdownEditor` (Tabs, Alert, Textarea; textarea stays mounted for submission), `CommandPalette` (Dialog + DialogTrigger, same actions/entries/`/api/find` logic, rows are still buttons), `KeyboardShortcuts` help sheet (Dialog), `GraphView` (token colours in five groups + legend, keyboard focus ring), new/edit pages, `RevisionList`. Graph layout moved to `src/lib/graph-layout.ts` and computed on the server. New spec: `tests/editor-ui.spec.ts` (10).
+
+Evidence (observed):
+1. All pre-existing editor/palette/shortcut assertions pass without edits to `knowledge-features.spec.ts` or `search-palette.spec.ts` (`[[` autocomplete + Enter inserts, Preview tab, draft restore, Ctrl+K palette actions, g-chords, `?` sheet, shortcuts blocked while typing, player has no create command): 33 of 33 in the targeted run.
+2. Labels and groups: every form control has a bound visible label and the sections are labelled groups (`editor-ui` test 1); the Type select switches the details group to "Ore details" and exposes "Cost per lb." (same test).
+3. Validation: whitespace name is refused by the server with the friendly "Every entry needs a name." message in a `p[role=alert]`, URL stays on /codex/new (test 2).
+4. Keyboard: Ctrl+S saves; arrow keys move through the visibility radios and the saved entry is `secret` in the DB (test 3). Palette opens focused on the search box; Escape returns focus to the trigger (test 6); Enter on a command runs it; empty results offer a full-text search (test 7); the `?` sheet is a labelled dialog with a Close button (test 8).
+5. Draft: Discard hides the banner and clears `asetheria-draft:new` (test 4). 375px form has no horizontal overflow (test 5).
+6. Graph: loads with **zero console errors**, five legend items, nodes are focusable and show their label on focus (test 9).
+7. `tsc` exit 0, `next build` OK (21 pages), `npm audit --omit=dev` 0, full suite **149 passed** (139 + 10), 0 failed.
+
+Bugs found by tests and fixed in the app:
+- **Graph hydration mismatch (pre-existing since baseline, logged as known):** server and client each ran the chaotic force layout; Node and Chromium use different V8 builds of the math functions, so a last-bit difference grew into a completely different layout (`x1="188.3"` vs `326.2`). Fix: layout runs only on the server and is passed down as data (`layoutGraph` in the graph page); the client only draws. The earlier "round to 0.1px" attempt could not fix a divergence of this size.
+- Palette returned focus to `<body>` on close: Radix only restores focus to a real `DialogTrigger`; the trigger button is now one.
+Test edits (rule 3 justification, intent unchanged): `helpers.ts` and `entries-crud.spec.ts` selected the visibility radios with `input[name="visibility"][value=...]` and a button named `"+ Add private notes"`. The radios are now a Radix group (found by accessible name: Everyone / DM only / Revealed) and the button is "Add private notes" (lucide icon instead of a "+" glyph).
+Test-timing note: Radix selects on the focus move only while an arrow key is still down, so the test presses it with `delay: 60`, as a human does; a zero-delay synthetic press moves focus without selecting.
+Remaining for 2e: `command-palette`/shell now clean; legacy `.btn/.card/.input/...` CSS is still present for the tools, admin and RBAC screens.

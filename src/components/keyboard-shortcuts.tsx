@@ -2,29 +2,21 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
+import { Kbd } from "@/components/ui/kbd";
 import { PAGE_KEYS, actionsFor, isTypingTarget } from "@/lib/shortcuts";
 
 /** How long after `g` the second key of a chord is still accepted. */
 const CHORD_WINDOW_MS = 1200;
 
+/** Any open modal (the palette, this sheet, a confirmation) owns the keyboard. */
+const OPEN_MODAL_SELECTOR = '[role="dialog"], [role="alertdialog"]';
+
 function Keys({ keys }: { keys: string[] }) {
   return (
-    <span style={{ display: "inline-flex", gap: "0.25rem" }}>
+    <span className="inline-flex gap-1">
       {keys.map((k, i) => (
-        <kbd
-          key={`${k}-${i}`}
-          style={{
-            fontSize: "0.75rem",
-            border: "1px solid var(--border-strong)",
-            borderRadius: 4,
-            padding: "0.05rem 0.4rem",
-            minWidth: "1.4rem",
-            textAlign: "center",
-            color: "var(--text-muted)",
-          }}
-        >
-          {k}
-        </kbd>
+        <Kbd key={`${k}-${i}`}>{k}</Kbd>
       ))}
     </span>
   );
@@ -46,7 +38,7 @@ export function KeyboardShortcuts({ isDM }: { isDM: boolean }) {
     function onKey(e: KeyboardEvent) {
       if (e.metaKey || e.ctrlKey || e.altKey) return;
       if (isTypingTarget(e.target)) return;
-      if (document.querySelector('[role="dialog"][aria-modal="true"]') && e.key !== "Escape") {
+      if (document.querySelector(OPEN_MODAL_SELECTOR) && e.key !== "Escape") {
         return; // the palette or another dialog owns the keyboard
       }
 
@@ -98,52 +90,31 @@ export function KeyboardShortcuts({ isDM }: { isDM: boolean }) {
     return () => window.removeEventListener("keydown", onKey);
   }, [isDM, router]);
 
-  if (!helpOpen) return null;
-
   const nav = actionsFor(isDM);
   const page = PAGE_KEYS.filter((k) => isDM || !k.dmOnly);
+  const rows = [
+    ...page.map((k) => ({ keys: k.keys, label: k.label })),
+    ...nav.map((a) => ({ keys: a.keys, label: a.label })),
+  ];
 
   return (
-    <div
-      role="dialog"
-      aria-modal="true"
-      aria-label="Keyboard shortcuts"
-      onMouseDown={(e) => {
-        if (e.target === e.currentTarget) setHelpOpen(false);
-      }}
-      style={{
-        position: "fixed",
-        inset: 0,
-        zIndex: 110,
-        background: "rgb(0 0 0 / 0.55)",
-        display: "flex",
-        alignItems: "flex-start",
-        justifyContent: "center",
-        padding: "max(5vh, 1rem) 1rem 1rem",
-      }}
-    >
-      <div className="card" style={{ width: "min(36rem, 100%)", maxHeight: "85vh", overflowY: "auto", padding: "1.25rem" }}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "0.75rem" }}>
-          <h2 className="font-display" style={{ fontSize: "1.125rem", fontWeight: 700 }}>
-            Keyboard shortcuts
-          </h2>
-          <button type="button" className="btn" onClick={() => setHelpOpen(false)} aria-label="Close shortcuts">
-            ✕
-          </button>
-        </div>
-        <dl style={{ display: "grid", gridTemplateColumns: "auto 1fr", gap: "0.5rem 1rem", alignItems: "center" }}>
-          {[...page.map((k) => ({ keys: k.keys, label: k.label })), ...nav.map((a) => ({ keys: a.keys, label: a.label }))].map(
-            (row) => (
-              <div key={row.label} style={{ display: "contents" }}>
-                <dt>
-                  <Keys keys={row.keys} />
-                </dt>
-                <dd style={{ fontSize: "0.875rem", color: "var(--text-muted)" }}>{row.label}</dd>
-              </div>
-            ),
-          )}
+    <Dialog open={helpOpen} onOpenChange={setHelpOpen}>
+      <DialogContent className="max-h-[85vh] overflow-y-auto sm:max-w-xl">
+        <DialogTitle className="font-display text-lg font-bold tracking-tight">Keyboard shortcuts</DialogTitle>
+        <DialogDescription className="sr-only">
+          Every shortcut available in the codex. They never fire while you are typing in a field.
+        </DialogDescription>
+        <dl className="grid grid-cols-[auto_1fr] items-center gap-x-4 gap-y-2">
+          {rows.map((row) => (
+            <div key={row.label} className="contents">
+              <dt>
+                <Keys keys={row.keys} />
+              </dt>
+              <dd className="text-sm text-muted-foreground">{row.label}</dd>
+            </div>
+          ))}
         </dl>
-      </div>
-    </div>
+      </DialogContent>
+    </Dialog>
   );
 }

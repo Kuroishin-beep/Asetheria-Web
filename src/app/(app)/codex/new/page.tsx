@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import type { Metadata } from "next";
 import { asc, isNull } from "drizzle-orm";
+import { FilePlus2 } from "lucide-react";
 import { db } from "@/db";
 import { entries, type EntryKind } from "@/db/schema";
 import { getCurrentUser } from "@/lib/auth";
@@ -10,6 +11,9 @@ import { EntryForm } from "@/components/entry-form";
 import { PageHeading } from "@/components/entry-card";
 
 export const metadata: Metadata = { title: "New entry" };
+
+/** The parent picker is a plain list; beyond this many entries it is truncated. */
+const PARENT_OPTION_LIMIT = 1000;
 
 export default async function NewEntryPage({
   searchParams,
@@ -32,11 +36,12 @@ export default async function NewEntryPage({
     // An archived page can't be a parent: its children would point at a 404.
     .where(isNull(entries.archivedAt))
     .orderBy(asc(entries.name))
-    .limit(1000);
+    .limit(PARENT_OPTION_LIMIT);
 
   return (
-    <div style={{ maxWidth: "56rem" }}>
+    <div className="max-w-4xl">
       <PageHeading
+        Icon={FilePlus2}
         title={`New ${KIND_BY_KEY[kind].singular}`}
         blurb="Everything here can be changed later, and every edit is kept in history."
       />

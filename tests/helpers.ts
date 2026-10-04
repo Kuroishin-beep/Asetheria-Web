@@ -28,6 +28,8 @@ export type EntryFormInput = {
   visibility?: "public" | "secret" | "revealed";
 };
 
+const VISIBILITY_LABEL = { public: "Everyone", secret: "DM only", revealed: "Revealed" } as const;
+
 /** Fills the shared EntryForm component. Assumes it's already on screen. */
 export async function fillEntryForm(page: Page, input: EntryFormInput) {
   if (input.kind) await page.selectOption("#kind", input.kind);
@@ -36,10 +38,11 @@ export async function fillEntryForm(page: Page, input: EntryFormInput) {
   if (input.tags !== undefined) await page.fill("#tags", input.tags);
   if (input.body !== undefined) await page.fill("#body", input.body);
   if (input.visibility) {
-    await page.check(`input[name="visibility"][value="${input.visibility}"]`);
+    // The visibility choice is a Radix radio group: radios are found by their label.
+    await page.getByRole("radio", { name: VISIBILITY_LABEL[input.visibility], exact: true }).check();
   }
   if (input.dmNotes !== undefined) {
-    const addBtn = page.getByRole("button", { name: "+ Add private notes" });
+    const addBtn = page.getByRole("button", { name: "Add private notes" });
     if (await addBtn.isVisible().catch(() => false)) await addBtn.click();
     await page.fill("#dmNotes", input.dmNotes);
   }

@@ -2,6 +2,9 @@
 
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
+import { History, Loader2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 import { revertToRevisionAction } from "@/lib/actions";
 
 type Rev = {
@@ -28,56 +31,46 @@ export function RevisionList({ revisions }: { revisions: Rev[] }) {
   return (
     <>
       {error && (
-        <p
-          role="alert"
-          style={{
-            fontSize: "0.8125rem",
-            color: "var(--color-blood-400)",
-            marginBottom: "0.75rem",
-          }}
-        >
+        <p role="alert" className="mb-3 text-[13px] text-destructive">
           {error}
         </p>
       )}
-      <ul style={{ display: "grid", gap: "0.4rem" }}>
+      <ul className="grid gap-2">
         {revisions.map((r) => (
-          <li
-            key={r.id}
-            className="card"
-            style={{
-              padding: "0.6rem 0.85rem",
-              display: "flex",
-              alignItems: "center",
-              gap: "0.75rem",
-              flexWrap: "wrap",
-            }}
-          >
-            <span style={{ fontSize: "0.875rem", flex: 1, minWidth: "10rem" }}>
-              <strong style={{ fontWeight: 600 }}>
-                {VERB[r.action] ?? r.action}
-              </strong>{" "}
-              <span style={{ color: "var(--text-muted)" }}>
-                by {r.authorName ?? "unknown"} ·{" "}
-                {new Date(r.createdAt).toLocaleString()}
-              </span>
-            </span>
-            <button
-              type="button"
-              className="btn"
-              disabled={pending}
-              onClick={() => {
-                setError(null);
-                setBusyId(r.id);
-                startTransition(async () => {
-                  const res = await revertToRevisionAction(r.id);
-                  setBusyId(null);
-                  if (res && "error" in res && res.error) setError(res.error);
-                  else router.refresh();
-                });
-              }}
-            >
-              {busyId === r.id ? "Restoring…" : "Restore this version"}
-            </button>
+          <li key={r.id}>
+            <Card size="sm">
+              <CardContent className="flex flex-wrap items-center gap-3">
+                <span className="min-w-40 flex-1 text-sm">
+                  <strong className="font-semibold">{VERB[r.action] ?? r.action}</strong>{" "}
+                  <span className="text-muted-foreground">
+                    by {r.authorName ?? "unknown"} · {new Date(r.createdAt).toLocaleString()}
+                  </span>
+                </span>
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  disabled={pending}
+                  onClick={() => {
+                    setError(null);
+                    setBusyId(r.id);
+                    startTransition(async () => {
+                      const res = await revertToRevisionAction(r.id);
+                      setBusyId(null);
+                      if (res && "error" in res && res.error) setError(res.error);
+                      else router.refresh();
+                    });
+                  }}
+                >
+                  {busyId === r.id ? (
+                    <Loader2 aria-hidden="true" className="animate-spin" />
+                  ) : (
+                    <History aria-hidden="true" />
+                  )}
+                  {busyId === r.id ? "Restoring…" : "Restore this version"}
+                </Button>
+              </CardContent>
+            </Card>
           </li>
         ))}
       </ul>

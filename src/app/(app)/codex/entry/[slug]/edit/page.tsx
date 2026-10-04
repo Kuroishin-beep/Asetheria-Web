@@ -1,6 +1,7 @@
 import { notFound, redirect } from "next/navigation";
 import type { Metadata } from "next";
 import { and, asc, isNull, ne } from "drizzle-orm";
+import { PencilLine } from "lucide-react";
 import { db } from "@/db";
 import { entries } from "@/db/schema";
 import { getCurrentUser } from "@/lib/auth";
@@ -8,9 +9,13 @@ import { getEntryBySlug, getRevisions } from "@/lib/entries";
 import { updateEntryAction } from "@/lib/actions";
 import { EntryForm } from "@/components/entry-form";
 import { PageHeading } from "@/components/entry-card";
+import { Eyebrow } from "@/components/shared/eyebrow";
 import { RevisionList } from "./revision-list";
 
 type Params = { slug: string };
+
+/** The parent picker is a plain list; beyond this many entries it is truncated. */
+const PARENT_OPTION_LIMIT = 1000;
 
 export async function generateMetadata({
   params,
@@ -41,7 +46,7 @@ export default async function EditEntryPage({
       // An archived page can't be a parent: its children would point at a 404.
       .where(and(ne(entries.id, entry.id), isNull(entries.archivedAt)))
       .orderBy(asc(entries.name))
-      .limit(1000),
+      .limit(PARENT_OPTION_LIMIT),
     getRevisions(entry.id),
   ]);
 
@@ -49,10 +54,11 @@ export default async function EditEntryPage({
   const action = updateEntryAction.bind(null, entry.id);
 
   return (
-    <div style={{ maxWidth: "56rem" }}>
+    <div className="max-w-4xl">
       <PageHeading
+        Icon={PencilLine}
         title={`Editing ${entry.name}`}
-        blurb="Saving keeps a snapshot of the previous version — nothing is lost."
+        blurb="Saving keeps a snapshot of the previous version. Nothing is lost."
       />
       <EntryForm
         action={action}
@@ -74,9 +80,11 @@ export default async function EditEntryPage({
       />
 
       {revisions.length > 0 && (
-        <section style={{ marginTop: "3rem" }}>
-          <h2 className="label">History ({revisions.length})</h2>
-          <div className="rule-fade" style={{ margin: "0.5rem 0 1rem" }} />
+        <section className="mt-12">
+          <h2>
+            <Eyebrow>History ({revisions.length})</Eyebrow>
+          </h2>
+          <div className="mb-4 mt-2 h-px bg-linear-to-r from-transparent via-border to-transparent" />
           <RevisionList
             revisions={revisions.map((r) => ({
               id: r.id,

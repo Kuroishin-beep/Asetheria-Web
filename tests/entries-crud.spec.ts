@@ -44,8 +44,8 @@ test.describe("entry CRUD (DM)", () => {
     // Edit: change summary, add dmNotes, switch to secret.
     await page.goto(`/codex/entry/${slug}/edit`);
     await page.fill("#summary", "Updated by the edit test.");
-    await page.check('input[name="visibility"][value="secret"]');
-    await page.getByRole("button", { name: "+ Add private notes" }).click();
+    await page.getByRole("radio", { name: "DM only", exact: true }).check();
+    await page.getByRole("button", { name: "Add private notes" }).click();
     await page.fill("#dmNotes", "This is a DM-only note.");
     await page.getByRole("button", { name: "Save changes" }).click();
     await page.waitForURL(/\/codex\/entry\/.+/);
