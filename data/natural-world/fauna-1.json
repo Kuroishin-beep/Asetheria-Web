@@ -1,0 +1,546 @@
+{
+  "format": "asetheria-codex",
+  "note": "Original fauna, batch 1 of 3: land mammals. Each entry is written for Asetheria; the real animal it is grounded in is named in the DM notes under 'Basis'. These are ecology entries, not stat blocks. No third-party text is reproduced.",
+  "entries": [
+    {
+      "slug": "plateau-rock-leopard",
+      "kind": "fauna",
+      "name": "Plateau Rock-Leopard",
+      "summary": "A pale, thick-furred leopard of the cold highlands, silent as shadow and seen once in a lifetime.",
+      "body": "A big cat the colour of old stone, spotted in open rosettes and thick-furred against the plateau winters. It hunts alone at dusk, drops from rocks onto goats and wild sheep, and drags its kill into a crevice where it feeds for days. Villagers see the tracks but almost never the animal.\n\n## Where it is found\n\nIt ranges the cliffs and ravines of the [[Parthian Ravine]] and the high crags of the [[Mountain of Kharveth]].\n\n## In play\n\nA rock-leopard attack is an ambush from above, usually at dusk (Perception, DC 15, to spot it first). Its skin is a king's gift, and its pelt on the shoulder of a hunter is a famous boast. Herders leave a goat on a rock at the start of winter as a toll and are rarely robbed again.",
+      "dmNotes": "Basis: real Persian leopard (Panthera pardus saxicolor), a solitary big cat of the mountains of Iran and the Caucasus; leopards were hunted for their pelts and kept by Persian and Roman courts.",
+      "fields": {
+        "scientificName": "Panthera pardus saxicolor",
+        "foundIn": "Parthian Ravine, Mountain of Kharveth",
+        "biome": "Mountain",
+        "rarity": "Rare",
+        "habitat": "Cold crags, ravines and rocky highlands",
+        "diet": "Wild goats, sheep, hares",
+        "behavior": "Solitary and nocturnal; ambushes from above and caches kills in crevices.",
+        "harvest": "A pelt prized as a gift of kings; claws worn as charms.",
+        "effects": "• Ambush hunter: sets upon prey from above at dusk.\n• Herders leave a goat on a rock each winter as a toll.\n• Its pelt is a status symbol.",
+        "lore": "Hunters say you meet it only when it has already decided you are not worth the trouble."
+      },
+      "tags": [
+        "Fauna",
+        "Predator",
+        "Acheaorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/fauna-1"
+    },
+    {
+      "slug": "mane-king-of-the-steppe",
+      "kind": "fauna",
+      "name": "Mane-King of the Steppe",
+      "summary": "A short-maned lion of dry scrub, hunted by kings for sport and spared by the poor for no kindness at all.",
+      "body": "A lion smaller than the legends, with a scant mane and a belly fold, that hunts in prides across the dry scrubland. The kings of the plateau made lion hunts a rite of state: a beast let out of a cage into a walled park and killed before the court. In the wild they are rarer every year, and the villages that once suffered them have grown fond of the quiet.\n\n## Where it is found\n\nThe last prides live in the dry scrub around [[Shir'abad D'ar]], whose gate is carved with their image, and on the edge of the [[Malaunian Steppe]].\n\n## In play\n\nA pride attack is a major threat to a caravan. A royal lion-hunt is an excuse for a diplomatic gathering. The king who kills the last lion of the province finds that his court's frescoes no longer match the land.",
+      "dmNotes": "Basis: real Asiatic lion (Panthera leo persica), once ranging from Greece through the Near East to India and now restricted to one Indian forest; lion hunts were a symbol of Assyrian and Persian royal power.",
+      "fields": {
+        "scientificName": "Panthera leo persica",
+        "foundIn": "Shir'abad D'ar, Malaunian Steppe",
+        "biome": "Dry scrub",
+        "rarity": "Rare",
+        "habitat": "Open dry scrubland with cover and water",
+        "diet": "Wild asses, gazelles, livestock",
+        "behavior": "Lives in small prides; hunts at dawn and dusk; less maned than its southern cousins.",
+        "harvest": "Pelts and manes for royal display; carved as an emblem of kings.",
+        "effects": "• A pride is a serious danger to an unguarded caravan.\n• The royal lion-hunt is a diplomatic occasion.\n• Its numbers fall wherever kings hunt.",
+        "lore": "The gate-carvers say every lion in stone stands for one the kings did not leave alive."
+      },
+      "tags": [
+        "Fauna",
+        "Predator",
+        "Acheaorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/fauna-1"
+    },
+    {
+      "slug": "great-forest-bull",
+      "kind": "fauna",
+      "name": "Great Forest Bull",
+      "summary": "A black wild ox, taller than a man at the shoulder, the ancestor of every herd and the despair of every hunter.",
+      "body": "A huge, long-horned, black wild ox with a pale stripe down its back, standing taller than a man at the shoulder. It lives in the deepest forest and the edge of the bog, and a bull in rut is a thing that kings have died hunting. The cattle of the farm are its small descendants and keep a faint memory of the old temper.\n\n## Where it is found\n\nThe last herds live deep in the [[Foloicauria Forest]] and the damp margins of the [[Maeotis Helos]].\n\n## In play\n\nA bull charges with its horns low and does not stop for arrows. A hunter who takes one earns a legend and probably a scar. Its horns, banded in silver, are the great drinking-cups of the northern halls.",
+      "dmNotes": "Basis: real aurochs (Bos primigenius), the wild ancestor of domestic cattle, extinct since 1627 but hunted in antiquity; Caesar describes the aurochs of the Hercynian Forest and its horns as banded drinking horns.",
+      "fields": {
+        "scientificName": "Bos primigenius",
+        "foundIn": "Foloicauria Forest, Maeotis Helos",
+        "biome": "Deep forest and bog edge",
+        "rarity": "Legendary",
+        "habitat": "Old forest, marsh margins and wet meadow",
+        "diet": "Grass, leaves, acorns",
+        "behavior": "Herds with a fierce bull; charges at threats and will not retreat.",
+        "harvest": "Horns for silver-banded drinking-cups; hide for armour.",
+        "effects": "• A charging bull ignores arrows and shields.\n• Its horns are the great cups of northern halls.\n• Killing one is a hunter's legend.",
+        "lore": "Farmers say every ox has an old bull inside it, waiting for a bad day."
+      },
+      "tags": [
+        "Fauna",
+        "Beast",
+        "Invictian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/fauna-1"
+    },
+    {
+      "slug": "hill-bison",
+      "kind": "fauna",
+      "name": "Hill Bison",
+      "summary": "A humpbacked, shaggy forest bison of the high woods, shy but ferocious when cornered.",
+      "body": "A heavy, dark, humpbacked beast with a shaggy mane and short curved horns, living in small herds in the high woods and mountain clearings. It is shyer than the great bull and a good deal more common, and the hill-folk hunt it for its meat and its wool-thick hide.\n\n## Where it is found\n\nIt grazes the clearings of the [[Foloicauria Forest]] and the glades beneath the [[Klynin Mountain Range]].\n\n## In play\n\nA wounded bison turns on its hunter at once and is faster than it looks. Its meat feeds a village for a week and its hide makes a rain-proof cloak. Its dung, dried, is a camp fuel known to every ranger.",
+      "dmNotes": "Basis: real European bison or wisent (Bison bonasus), a woodland bison once widespread across Europe and nearly exterminated by the twentieth century; it was hunted in Roman times for arena shows and for meat.",
+      "fields": {
+        "scientificName": "Bison bonasus",
+        "foundIn": "Foloicauria Forest, Klynin Mountain Range",
+        "biome": "Forest clearing",
+        "rarity": "Uncommon",
+        "habitat": "Mixed forest and mountain clearings",
+        "diet": "Grass, bark, acorns",
+        "behavior": "Lives in small herds; shy, but charges when wounded or cornered.",
+        "harvest": "Meat, shaggy hide for cloaks, horns for cups.",
+        "effects": "• A wounded bison turns on its hunter at once.\n• Meat feeds a village for a week.\n• Hide makes a rain-proof cloak.",
+        "lore": "Hill folk say the bison is the forest's idea of patience."
+      },
+      "tags": [
+        "Fauna",
+        "Beast",
+        "Invictian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/fauna-1"
+    },
+    {
+      "slug": "wild-ass-of-the-waste",
+      "kind": "fauna",
+      "name": "Wild Ass of the Waste",
+      "summary": "A swift, sand-coloured wild ass that no rider can catch and no king has ever tamed.",
+      "body": "A sand-coloured wild ass, fast as a horse and tougher than either, running in loose herds across the dry waste. It outpaces every pursuer for the first miles and outlasts them for the rest. The kings who have hunted it for sport are the same ones who have failed to tame it, and the old tales have it laughing at the cavalry.\n\n## Where it is found\n\nIt crosses the dry flats of the [[Dasht-a Khaliq]] and the stony pans beyond the [[Zaruk'thal Spine]].\n\n## In play\n\nA herd on the horizon is a good omen for water. Chasing one is a day's ruinous work. A character who finally catches a foal has something of a legend, and a stubborn pet.",
+      "dmNotes": "Basis: real onager or Persian wild ass (Equus hemionus onager), a fast desert equid of Iran and Mesopotamia depicted in Assyrian hunt reliefs and never successfully domesticated.",
+      "fields": {
+        "scientificName": "Equus hemionus onager",
+        "foundIn": "Dasht-a Khaliq, Zaruk'thal Spine",
+        "biome": "Desert flat",
+        "rarity": "Uncommon",
+        "habitat": "Dry plains and stony desert with scattered water",
+        "diet": "Coarse grass, thorny scrub",
+        "behavior": "Moves in loose herds; faster than a horse over short distances and enduring over long ones.",
+        "harvest": "Meat and hide; foals are almost impossible to tame.",
+        "effects": "• A herd on the horizon signals water.\n• Almost impossible to catch or tame.\n• Prized as a royal hunt.",
+        "lore": "The nomads say a wild ass has been laughing at kings since before kings had names."
+      },
+      "tags": [
+        "Fauna",
+        "Beast",
+        "Acheaorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/fauna-1"
+    },
+    {
+      "slug": "two-hump-camel",
+      "kind": "fauna",
+      "name": "Two-Hump Camel",
+      "summary": "A shaggy, patient camel of the cold desert, carrying the silk-road trade across the roof of the world.",
+      "body": "A heavy, shaggy, two-humped camel built for cold and thin air. It carries four hundred pounds for a month across the northern passes, eats thorns and dry grass, and spits at those it dislikes. In winter it grows a coat as thick as a rug, and in spring it sheds it all in handfuls, which the weavers gather and spin.\n\n## Where it is found\n\nIts caravans work the northern roads out of [[Xerastri City]] and across the [[Malaunian Steppe]].\n\n## In play\n\nA caravan beast carries enough for a small party's journey. It can go for days without water and takes revenge in a thousand small ways. A camel in a rage is a bad thing; a camel in a good mood, a miracle.",
+      "dmNotes": "Basis: real Bactrian camel (Camelus bactrianus), a cold-hardy, two-humped pack animal of Central Asia that carried the Silk Road trade; it sheds a thick winter coat each spring.",
+      "fields": {
+        "scientificName": "Camelus bactrianus",
+        "foundIn": "Xerastri City, Malaunian Steppe",
+        "biome": "Cold desert",
+        "rarity": "Common",
+        "habitat": "Cold deserts, dry steppe and mountain passes",
+        "diet": "Thorn scrub, dry grass, salt-bush",
+        "behavior": "Patient but spiteful; spits at those it dislikes; sheds its winter coat in spring.",
+        "harvest": "Wool combed from the spring moult; milk; carrying capacity.",
+        "effects": "• Carries 400 lb for a month.\n• Goes for days without water.\n• Wool is gathered from the spring moult.",
+        "lore": "A camel's opinion of you is permanent, and it tells everyone."
+      },
+      "tags": [
+        "Fauna",
+        "Beast of burden",
+        "Acheaorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/fauna-1"
+    },
+    {
+      "slug": "sand-ship",
+      "kind": "fauna",
+      "name": "Sand-Ship",
+      "summary": "A long-legged one-humped camel of the hot desert, the beast that made the caravan roads possible.",
+      "body": "A tall, long-legged, single-humped camel, built for the hot south. It strides across soft sand without sinking, goes a week without water, and lets down a long, patient groan when it is made to kneel. Without it the caravan roads would not exist and the cities of the plateau would never have been rich.\n\n## Where it is found\n\nIts herds roam the [[Dasht-a Khaliq]], and its trains leave [[Atarabad City]] for the south and east.\n\n## In play\n\nA riding camel makes twenty-five miles a day across sand. A pack-camel carries 300 pounds. Mounting one is easy; staying on one in a sandstorm is not (Animal Handling, DC 12).",
+      "dmNotes": "Basis: real dromedary (Camelus dromedarius), the one-humped camel domesticated in Arabia and used as the principal beast of burden and mount of the hot deserts of the Near East and North Africa.",
+      "fields": {
+        "scientificName": "Camelus dromedarius",
+        "foundIn": "Dasht-a Khaliq, Atarabad City",
+        "biome": "Hot desert",
+        "rarity": "Common",
+        "habitat": "Hot sandy desert",
+        "diet": "Thorns, dry grass, dates",
+        "behavior": "Walks across soft sand without sinking; kneels with a long groan.",
+        "harvest": "Milk, wool, hide, dung fuel and carrying capacity.",
+        "effects": "• Rides 25 miles a day over sand.\n• Carries 300 lb as a pack beast.\n• Goes a week without water.",
+        "lore": "The nomads say the desert made the camel and the camel made the nomads."
+      },
+      "tags": [
+        "Fauna",
+        "Beast of burden",
+        "Acheaorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/fauna-1"
+    },
+    {
+      "slug": "tower-beast",
+      "kind": "fauna",
+      "name": "Tower-Beast",
+      "summary": "A vast grey elephant carrying a wooden tower of archers, the terror of the old battlefield and a sullen, intelligent giant.",
+      "body": "A grey, huge, wrinkled beast that stands twice the height of a man, with a trunk that can pick up a coin and a tusk that can break a gate. Trained from a calf by a driver who rides its neck with a hooked goad, it carries a wooden tower of archers into the line of battle. Horses bolt from the smell of it; infantry break at the sight of it.\n\n## Where it is found\n\nIts herds are brought from the far east to the stables of [[Persemenid City]] and a few reach the arenas of [[Aeterna City]].\n\n## In play\n\nA tower-beast in a charge is a battlefield-wrecker (a Wisdom saving throw, DC 14, for those who must stand against it). A driver carries a spike and mallet to put the beast down if it goes mad, and knows to use them. The beasts are said to remember their dead.",
+      "dmNotes": "Basis: real Asian elephant (Elephas maximus), used as war elephants in Persian, Hellenistic and Roman armies; mahouts carried a spike and mallet to kill a panicked elephant, and elephants frightened horses, as Hannibal and Pyrrhus found.",
+      "fields": {
+        "scientificName": "Elephas maximus",
+        "foundIn": "Persemenid City, Aeterna City",
+        "biome": "Imported",
+        "rarity": "Rare",
+        "habitat": "Warm forests and grasslands of the far east; stabled in the cities",
+        "diet": "Grass, leaves, bark, grain",
+        "behavior": "Intelligent, long-lived and sensitive; panics under heavy fire and can turn on its own side.",
+        "harvest": "Ivory; a trained beast is a king's capital investment.",
+        "effects": "• A charge forces a Wisdom save (DC 14) from those in its path.\n• Horses bolt at the smell.\n• A panicked beast is killed by its driver.",
+        "lore": "Drivers say an elephant forgives a thousand cruelties and remembers the thousand and first."
+      },
+      "tags": [
+        "Fauna",
+        "War beast",
+        "Acheaorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/fauna-1"
+    },
+    {
+      "slug": "heavenly-horse",
+      "kind": "fauna",
+      "name": "Heavenly Horse",
+      "summary": "A tall, long-legged, golden-coated horse of the high plain, bred only for kings and never for sale.",
+      "body": "A tall, deep-chested horse with a coat that glints like a coin in the sun and legs like a dancer's. The royal stud on the high plain breeds it for the king's cavalry and the king's gifts, and no price will buy one. A rider on one cuts through a line of ordinary cavalry as a knife through bread.\n\n## Where it is found\n\nThe royal stud lies on the plain below [[Persemenid City]] and its offspring graze in the pastures of the [[Elysian Plains]].\n\n## In play\n\nOne of these horses is a gift fit for an emperor and a bribe fit for an empire. Stealing one is a crime for which the penalty is long and imaginative. A rider of one has advantage on checks to outpace a pursuer.",
+      "dmNotes": "Basis: real Nisaean horse, the large, prized war-horse bred in the Nisaean plain of Media and used by the Persian kings and the Parthian cataphracts; it is the likely inspiration for the Chinese 'heavenly horses' of Ferghana.",
+      "fields": {
+        "scientificName": "Equus ferus caballus",
+        "foundIn": "Persemenid City, Elysian Plains",
+        "biome": "High plain",
+        "rarity": "Legendary",
+        "habitat": "High-grass plains in the royal stud",
+        "diet": "Fine grass, barley",
+        "behavior": "Spirited and loyal; bred for endurance and speed.",
+        "harvest": "Offspring are royal gifts; not for sale.",
+        "effects": "• A rider has advantage on checks to outpace pursuers.\n• A gift fit for an emperor.\n• Theft carries a heavy penalty.",
+        "lore": "The kings say a horse of this line sweats blood and never loses a race."
+      },
+      "tags": [
+        "Fauna",
+        "Horse",
+        "Acheaorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/fauna-1"
+    },
+    {
+      "slug": "mountain-brown-bear",
+      "kind": "fauna",
+      "name": "Mountain Brown Bear",
+      "summary": "A huge shaggy mountain bear that sleeps all winter, robs bee-trees in spring and turns every honey-hunter into a story.",
+      "body": "A big, shaggy, brown bear that dens in a mountain cave for the winter and wakes hungry and thin. It eats roots, berries and carrion, steals the honey from wild hives, and will take a sheep or a child if it finds one in the wrong place. A mother with cubs is the most dangerous animal on the mountain.\n\n## Where it is found\n\nIt lives in the caves of the [[Olympus Mountain Range]] and the deep woods of the [[Foloicauria Forest]].\n\n## In play\n\nA bear surprised at a kill or with cubs attacks at once and with deadly strength. The bear-dancers of the fairs are chained and bitter. Its fat is a medicine, its claws are a charm, and its den in spring is a sensible place to avoid.",
+      "dmNotes": "Basis: real brown bear (Ursus arctos; the Syrian subspecies U. a. syriacus lived across the Near East), an omnivorous hibernator hunted and baited in Roman arenas and a symbol of strength; mothers with cubs are especially dangerous.",
+      "fields": {
+        "scientificName": "Ursus arctos",
+        "foundIn": "Olympus Mountain Range, Foloicauria Forest",
+        "biome": "Mountain forest",
+        "rarity": "Uncommon",
+        "habitat": "Caves, dense woods and mountain meadows",
+        "diet": "Roots, berries, honey, carrion, the odd sheep",
+        "behavior": "Hibernates; wakes hungry; fiercely protective of cubs.",
+        "harvest": "Fat as medicine; claws as charms; pelt as a rug.",
+        "effects": "• Surprised or with cubs, attacks at once.\n• Raids bee-trees in spring.\n• Fat is a folk medicine.",
+        "lore": "Mountain folk say you do not see the bear; the bear sees you and decides."
+      },
+      "tags": [
+        "Fauna",
+        "Predator",
+        "Hellenorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/fauna-1"
+    },
+    {
+      "slug": "plateau-wolf",
+      "kind": "fauna",
+      "name": "Plateau Wolf",
+      "summary": "A long-legged grey wolf that follows the herds, haunts the border and gave the legions their earliest foundation myth.",
+      "body": "A lean, long-legged, grey wolf of the high plateaus, hunting in packs that can run a deer to exhaustion over a day. It follows the herds, eats carrion and takes the weak, and the shepherds' dogs are bred to meet it. The Imperium's founders are said to have been raised by one.\n\n## Where it is found\n\nPacks roam the [[Elysian Plains]] and the foothills of the [[Klynin Mountain Range]], and a she-wolf is the emblem of [[Romulo City]].\n\n## In play\n\nA pack hunts by endurance and cunning. A lone wolf near a village is a warning. The legions carry its image on their standards and a bounty on its head, a contradiction every soldier has learned to ignore.",
+      "dmNotes": "Basis: real grey wolf (Canis lupus), a social pack hunter widespread across Eurasia; the Roman foundation myth has Romulus and Remus suckled by a she-wolf, and wolf-skin standards were carried by legionary standard-bearers.",
+      "fields": {
+        "scientificName": "Canis lupus",
+        "foundIn": "Elysian Plains, Klynin Mountain Range, Romulo City",
+        "biome": "Plain and foothill",
+        "rarity": "Common",
+        "habitat": "Open plains, foothills and forest edge",
+        "diet": "Deer, wild sheep, livestock, carrion",
+        "behavior": "Hunts in packs by endurance; follows herds; communicates by howling.",
+        "harvest": "Pelt; a bounty is paid for the dead.",
+        "effects": "• A pack runs down prey over a day.\n• A lone wolf near a village is a warning.\n• The she-wolf is the emblem of Romulo.",
+        "lore": "The Imperium's founders were fed by one, and it still has not decided whether to be grateful."
+      },
+      "tags": [
+        "Fauna",
+        "Predator",
+        "Invictian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/fauna-1"
+    },
+    {
+      "slug": "gold-coat-jackal",
+      "kind": "fauna",
+      "name": "Gold-Coat Jackal",
+      "summary": "A small, tawny, yelping scavenger that follows armies and haunts graveyards, and gives the god of the dead his head.",
+      "body": "A small, lean, tawny dog-like scavenger that yips and wails in packs at dusk. It follows armies for the dead, haunts the edges of cemeteries and takes whatever the careless leave out. The dead-god of the south is shown with a jackal's head, a reminder that something has always waited at the edge of the camp.\n\n## Where it is found\n\nIt shadows the caravans of the [[Dasht-a Khaliq]] and the burial grounds of [[R’eyshar]].\n\n## In play\n\nA jackal's cry at dusk calls for no reaction; its silence is a better clue. A band at a graveyard is cause for a quiet night's watch. A character who feeds one might gain a stubborn, scruffy friend.",
+      "dmNotes": "Basis: real golden jackal (Canis aureus), a scavenging canid of the Near East and Mediterranean; the Egyptian god Anubis, patron of embalming and cemeteries, was depicted with a jackal's head.",
+      "fields": {
+        "scientificName": "Canis aureus",
+        "foundIn": "Dasht-a Khaliq, R'eyshar",
+        "biome": "Desert and ruin",
+        "rarity": "Common",
+        "habitat": "Dry plains, ruins and cemetery edges",
+        "diet": "Carrion, small animals, fruit, scraps",
+        "behavior": "Wails in chorus at dusk; scavenges at the edge of camps and burial grounds.",
+        "harvest": "Pelts; occasionally tamed as a camp scavenger.",
+        "effects": "• Follows armies and caravans for scraps.\n• Haunts cemetery edges.\n• Its cry marks the hour of dusk.",
+        "lore": "The people of the south say the jackal is the god's shadow and never thank it."
+      },
+      "tags": [
+        "Fauna",
+        "Scavenger",
+        "Acheaorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/fauna-1"
+    },
+    {
+      "slug": "grave-laugher",
+      "kind": "fauna",
+      "name": "Grave-Laugher",
+      "summary": "A striped, sloping-backed scavenger whose whooping cry at night is taken for the laughter of the dead.",
+      "body": "A shaggy, striped, hunch-backed scavenger with a powerful jaw that can crack a bone to the marrow. It hunts alone or in small groups at night, whoops and chuckles in the dark, and digs for bodies in shallow graves. Folk belief gives it the power to mimic a voice, to change sex and to turn a man into a hyena by magic.\n\n## Where it is found\n\nIt prowls the rocky country of the [[Zaruk'thal Spine]] and the ruins around [[R’eyshar]].\n\n## In play\n\nA shallow grave in hyena country is a bad idea. The creature's cackle at night is often just a scavenger and sometimes a diversion for a thief. A character who is jumpy by nature and travelling alone has a bad time.",
+      "dmNotes": "Basis: real striped hyena (Hyaena hyaena), a nocturnal scavenger of the Near East and Africa; ancient writers (Aristotle, Pliny, Aelian) credited hyenas with mimicking voices, changing sex and magical powers.",
+      "fields": {
+        "scientificName": "Hyaena hyaena",
+        "foundIn": "Zaruk'thal Spine, R'eyshar",
+        "biome": "Rocky desert",
+        "rarity": "Uncommon",
+        "habitat": "Rocky hills, ruins and cemeteries",
+        "diet": "Carrion, bones, small animals",
+        "behavior": "Nocturnal and solitary; whoops in the dark; digs up shallow graves.",
+        "harvest": "Pelt and teeth as folk charms.",
+        "effects": "• Digs up shallow graves.\n• Its whooping is mistaken for laughter.\n• Folk belief credits it with magic.",
+        "lore": "Mothers say a hyena can borrow your voice, and warn their children not to answer the dark."
+      },
+      "tags": [
+        "Fauna",
+        "Scavenger",
+        "Acheaorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/fauna-1"
+    },
+    {
+      "slug": "hill-fallow-deer",
+      "kind": "fauna",
+      "name": "Hill Fallow Deer",
+      "summary": "A spotted, pale-coated deer of open woodland, kept in the walled parks of the rich and hunted by everyone else.",
+      "body": "A graceful, pale-coated deer with white spots in summer and broad, flattened antlers on the stags. It lives in open woodland and grazes at dawn. The rich keep herds of it in walled parks to hunt at their leisure; the poor poach it in the dark.\n\n## Where it is found\n\nIts wild herds live in the oak woods of the [[Elysian Plains]] and the parklands of [[Persevalis City]].\n\n## In play\n\nA deer-park is a status symbol and a poacher's playground. A stag brought down in the autumn feeds a village for a fortnight. A character who is caught at it by a keeper might spend a year in the royal quarry.",
+      "dmNotes": "Basis: real fallow deer (Dama dama, with the Persian fallow deer D. mesopotamica a relict in Iran), kept in Roman and Persian game-parks (paradeisoi, vivaria) and hunted by the elite.",
+      "fields": {
+        "scientificName": "Dama dama",
+        "foundIn": "Elysian Plains, Persevalis City",
+        "biome": "Open woodland",
+        "rarity": "Common",
+        "habitat": "Open oak woods and parks",
+        "diet": "Grass, leaves, acorns",
+        "behavior": "Grazes at dawn and dusk; stags rut loudly in autumn.",
+        "harvest": "Venison and hide; antlers.",
+        "effects": "• A stag feeds a village for a fortnight.\n• Walled parks are a status symbol.\n• Poaching is a hanging matter in some provinces.",
+        "lore": "A deer in a walled park has never been free and does not know it."
+      },
+      "tags": [
+        "Fauna",
+        "Game",
+        "Acheaorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/fauna-1"
+    },
+    {
+      "slug": "tusker-of-the-thicket",
+      "kind": "fauna",
+      "name": "Tusker of the Thicket",
+      "summary": "A bristle-backed wild boar of the oak woods, the hunter's great test since the oldest songs.",
+      "body": "A heavy, bristle-backed boar with curved tusks a hand long and a temper that does not allow retreat. It roots in the oak woods for acorns, wallows in the wet and charges at once when cornered. Heroes are tested against it in every Hellenorian tale, and the village hunt is the day when every young man is measured.\n\n## Where it is found\n\nIt crashes through the thickets of the [[Oros Mountain Range]] and the oak woods of the [[Foloicauria Forest]].\n\n## In play\n\nA cornered tusker charges and slashes with its tusks. A hunting party with spears and dogs has a good chance; a lone archer, less. A boar-head on the wall is a mark of the family's courage and the cook's imagination.",
+      "dmNotes": "Basis: real wild boar (Sus scrofa), the quarry of the Calydonian boar hunt and the Erymanthian boar of myth; boar hunting was central to Greek and Roman aristocratic life and dangerous to hunters.",
+      "fields": {
+        "scientificName": "Sus scrofa",
+        "foundIn": "Oros Mountain Range, Foloicauria Forest",
+        "biome": "Oak woodland",
+        "rarity": "Common",
+        "habitat": "Dense oak thickets and wet hollows",
+        "diet": "Acorns, roots, small animals, carrion",
+        "behavior": "Charges when cornered; sows defend their litters fiercely.",
+        "harvest": "Meat, hide and tusks.",
+        "effects": "• A cornered boar charges and slashes with its tusks.\n• A dog-and-spear hunt is the standard test of a young man.\n• Tusks are traditional trophies.",
+        "lore": "Every hero's story has a boar in it, and every hunter's has a scar."
+      },
+      "tags": [
+        "Fauna",
+        "Game",
+        "Hellenorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/fauna-1"
+    },
+    {
+      "slug": "cliff-goat",
+      "kind": "fauna",
+      "name": "Cliff-Goat",
+      "summary": "A bearded, sweeping-horned wild goat that climbs where no hunter can, and the ancestor of every farm goat.",
+      "body": "A sturdy, bearded, brown wild goat with great backward-sweeping horns that can reach three feet on a male. It lives on high cliffs and steep slopes, leaping between ledges with a certainty that makes a climber's heart stop. Every domestic goat in the world descends from it, and the herds still keep the fondness for the heights.\n\n## Where it is found\n\nIt clings to the crags of the [[Olympus Mountain Range]] and the cliffs of the [[Cloudspine Ridge]].\n\n## In play\n\nA hunter must climb to reach one (Athletics, DC 15) and must be quiet to get close. The horns, polished, are a drinking-cup and a trophy; a village of goatherds knows by heart the paths a wild goat takes.",
+      "dmNotes": "Basis: real wild goat or bezoar ibex (Capra aegagrus), the wild ancestor of the domestic goat, living in the mountains of Anatolia, the Caucasus and Iran; the bezoar stone, from its stomach, was a prized antidote.",
+      "fields": {
+        "scientificName": "Capra aegagrus",
+        "foundIn": "Olympus Mountain Range, Cloudspine Ridge",
+        "biome": "Mountain cliff",
+        "rarity": "Uncommon",
+        "habitat": "Steep rocky slopes and cliffs",
+        "diet": "Mountain grass, leaves, lichen",
+        "behavior": "Leaps between ledges; herds are led by an old female.",
+        "harvest": "Horns, meat, hide; a stone in its stomach is a folk antidote.",
+        "effects": "• Hunting it requires a hard climb.\n• Horns are prized trophies and cups.\n• A stomach stone is sold as an antidote.",
+        "lore": "Goatherds say a wild goat does not run from a hunter, it simply goes where he cannot follow."
+      },
+      "tags": [
+        "Fauna",
+        "Game",
+        "Hellenorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/fauna-1"
+    },
+    {
+      "slug": "horned-wild-sheep",
+      "kind": "fauna",
+      "name": "Horned Wild Sheep",
+      "summary": "A rust-red wild sheep with curling horns, from whose flock all the woolly sheep in the world were bred.",
+      "body": "A lean, rust-red wild sheep with great spiral horns and a short, coarse coat. It lives on high stony plateaus, and the rams fight with a crack that carries for a mile. The woolly sheep of every farm are its descendants, bred from its stock over a thousand generations.\n\n## Where it is found\n\nIts flocks graze the high plateaus near [[Mithratal City]] and the stony slopes of the [[Mountain of Kharveth]].\n\n## In play\n\nA ram's horn makes a trumpet that carries across a valley. A flock wild on the hills is a good sign of unspoiled country. Hunters bring home the horns as a trophy and leave the rest to the wolves.",
+      "dmNotes": "Basis: real mouflon (Ovis gmelini, the Armenian or Iranian mouflon), the wild sheep of the Near East, considered a principal ancestor of domestic sheep; rams fight by clashing horns.",
+      "fields": {
+        "scientificName": "Ovis gmelini",
+        "foundIn": "Mithratal City, Mountain of Kharveth",
+        "biome": "High plateau",
+        "rarity": "Uncommon",
+        "habitat": "Stony hills and high plateaus",
+        "diet": "Grass, herbs, leaves",
+        "behavior": "Rams clash horns in the rut; flocks keep to open ground.",
+        "harvest": "Horns for trumpets and trophies; meat and hide.",
+        "effects": "• A ram's horn makes a far-carrying trumpet.\n• A wild flock marks unspoiled country.\n• Ancestors of the farm sheep.",
+        "lore": "Shepherds call the wild ram the great-grandfather of every sheep, and take a hat off to him."
+      },
+      "tags": [
+        "Fauna",
+        "Game",
+        "Acheaorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/fauna-1"
+    },
+    {
+      "slug": "snake-warden",
+      "kind": "fauna",
+      "name": "Snake-Warden",
+      "summary": "A long, grizzled, quick-footed mongoose, kept in granary and temple to keep the snakes down.",
+      "body": "A long, low, grizzled mongoose with a tail as long as its body and a quick, direct way of moving. It hunts snakes, rats and eggs with a cheerful ferocity and is half-tamed in the homes of the south, where it is kept to hold the granaries clear of vermin. Its mastery of the cobra is the stuff of legend.\n\n## Where it is found\n\nIt lives in the reed-beds of the [[Maeotis Helos]] and the granaries of [[Atarabad City]].\n\n## In play\n\nA mongoose in the house is an effective ward against snakes. It darts and strikes faster than any serpent and is a favourite of children and a nuisance to chickens. A character with one is protected from small vermin and moderately inconvenienced.",
+      "dmNotes": "Basis: real Egyptian mongoose or ichneumon (Herpestes ichneumon), the snake-hunting animal sacred in Egypt and kept as a pest-controller, described by Herodotus and Pliny (who tells a tall tale of it fighting crocodiles).",
+      "fields": {
+        "scientificName": "Herpestes ichneumon",
+        "foundIn": "Maeotis Helos, Atarabad City",
+        "biome": "Reed-bed and granary",
+        "rarity": "Uncommon",
+        "habitat": "Reed-beds, riverbanks and human granaries",
+        "diet": "Snakes, rats, eggs, insects",
+        "behavior": "Quick, bold and curious; half-tame in the south; hunts snakes by speed.",
+        "harvest": "Kept as a living pest-control rather than killed.",
+        "effects": "• Kills snakes and vermin around the house.\n• Faster than a cobra.\n• A beloved pet and a risk to chickens.",
+        "lore": "A house with a mongoose is a house with a small dragon-slayer."
+      },
+      "tags": [
+        "Fauna",
+        "Pest control",
+        "Acheaorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/fauna-1"
+    },
+    {
+      "slug": "banquet-dormouse",
+      "kind": "fauna",
+      "name": "Banquet Dormouse",
+      "summary": "A fat, grey, squirrel-tailed dormouse that sleeps half the year and is fattened in jars for the tables of the rich.",
+      "body": "A plump grey rodent with a bushy tail, big black eyes and an enormous appetite. It sleeps through the winter in a hollow tree and wakes up lean and hungry. Imperial gourmets keep them in special jars on the estate, fed on acorns and chestnuts in the dark until they are fat enough to roast with honey and poppy seed.\n\n## Where it is found\n\nIt lives in the beech and oak woods near [[Mavelon City]] and in the estate gardens of [[Aeterna City]].\n\n## In play\n\nA plate of roast dormice is the sign of an extravagant host. Imperial law once tried to forbid the dish and failed. A character who keeps them as pets is odd; one who keeps them to eat is merely Imperial.",
+      "dmNotes": "Basis: real edible dormouse (Glis glis), fattened in clay jars (gliraria) by wealthy Romans and served roasted with honey and poppy seeds; sumptuary laws tried and failed to ban the practice.",
+      "fields": {
+        "scientificName": "Glis glis",
+        "foundIn": "Mavelon City, Aeterna City",
+        "biome": "Woodland",
+        "rarity": "Uncommon",
+        "habitat": "Hollow trees in beech and oak woods",
+        "diet": "Acorns, nuts, fruit, bark",
+        "behavior": "Hibernates for half the year; fattens quickly in the dark on a nut diet.",
+        "harvest": "Roasted with honey and poppy seed as a banquet delicacy.",
+        "effects": "• Fattened in special jars.\n• A mark of an extravagant host.\n• Hibernates half the year.",
+        "lore": "A law against eating them was passed; every senator ignored it with a good appetite."
+      },
+      "tags": [
+        "Fauna",
+        "Delicacy",
+        "Invictian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/fauna-1"
+    },
+    {
+      "slug": "kings-lynx",
+      "kind": "fauna",
+      "name": "King's Lynx",
+      "summary": "A tufted-eared wild cat of the dry hills, trained by kings to leap and catch birds in mid-air.",
+      "body": "A long-legged, sandy cat with black tufts on its ears, a short tail and a leap that takes it a man's height off the ground to snatch a bird in flight. It hunts hares and birds on the dry hills, and the kings of the plateau train them to course game as a falcon would, a courtly fashion more fussy than useful.\n\n## Where it is found\n\nIt stalks the dry hills of the [[Parthian Ravine]] and the scrub beyond [[Xerastri City]].\n\n## In play\n\nA trained lynx on a lead is a sign of royal favour. It can leap and snatch a bird in the air. An untamed one in a barn is a nuisance and a surprise; a character who tames one has a story and a scar.",
+      "dmNotes": "Basis: real caracal (Caracal caracal), a tufted-eared cat of Africa and the Middle East, trained in medieval Persia and India for hunting small game and birds and famed for leaping to catch birds in flight.",
+      "fields": {
+        "scientificName": "Caracal caracal",
+        "foundIn": "Parthian Ravine, Xerastri City",
+        "biome": "Dry hills",
+        "rarity": "Uncommon",
+        "habitat": "Dry hills, scrub and rocky ground",
+        "diet": "Hares, birds, small antelope",
+        "behavior": "Solitary hunter; leaps high to take birds in flight.",
+        "harvest": "Kept as a royal hunting animal; pelts are less prized.",
+        "effects": "• Can be trained to hunt birds.\n• Leaps a man's height from a standstill.\n• A sign of royal favour on a lead.",
+        "lore": "Courtiers say it is the only cat that has ever agreed to work for a king."
+      },
+      "tags": [
+        "Fauna",
+        "Hunter",
+        "Acheaorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/fauna-1"
+    }
+  ]
+}

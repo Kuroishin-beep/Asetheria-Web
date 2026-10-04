@@ -22,6 +22,8 @@
     "verify:links": "tsx scripts/verify-links.ts",
     "check:links": "tsx scripts/check-links.ts",
     "check:design": "tsx scripts/check-design-system.ts",
+    "verify:natural-world": "tsx scripts/verify-natural-world.ts",
+    "codex:archive-batch": "tsx scripts/archive-batch.ts",
     "check:contrast": "tsx scripts/check-contrast.ts",
     "migrate:fauna-tables": "tsx scripts/migrate-fauna-and-tables.ts",
     "verify:expansion": "tsx scripts/verify-expansion.ts",

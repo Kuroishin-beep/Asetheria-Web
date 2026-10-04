@@ -1,0 +1,546 @@
+{
+  "format": "asetheria-codex",
+  "note": "Original fauna, batch 3 of 3: reptiles, fish and small creatures. Each entry is written for Asetheria; the real animal it is grounded in is named in the DM notes under 'Basis'. These are ecology entries, not stat blocks. No third-party text is reproduced.",
+  "entries": [
+    {
+      "slug": "hood-asp",
+      "kind": "fauna",
+      "name": "Hood-Asp",
+      "summary": "A banded desert cobra that rears and spreads a hood, the royal serpent of the south and the quiet end of a queen.",
+      "body": "A thick, banded, sand-coloured cobra that rears a third of its body off the ground and spreads a wide hood when it is angry. The kings of the south wear its image on their crowns as the sign of the power that strikes. It is shy until cornered, and a bite is slow and sure. A queen of the south is said to have chosen it for her own end rather than a conqueror's chains.\n\n## Where it is found\n\nIt lies in the dry stone-heaps of the [[Dasht-a Khaliq]] and the old granaries of [[Atarabad City]].\n\n## In play\n\nA bite is a Constitution saving throw, DC 14, against a deadly neurotoxin; a healer within an hour is the difference between life and death. Snake-charmers know how to read its warning. A mongoose in the house is the best protection.",
+      "dmNotes": "Basis: real Egyptian cobra (Naja haje), the asp of the ancient Mediterranean, the uraeus on the crowns of the pharaohs; the death of Cleopatra by an 'asp' is the best-known story, and mongooses were kept to control snakes.",
+      "fields": {
+        "scientificName": "Naja haje",
+        "foundIn": "Dasht-a Khaliq, Atarabad City",
+        "biome": "Desert",
+        "rarity": "Uncommon",
+        "habitat": "Dry rocky ground, stone heaps and old buildings",
+        "diet": "Rodents, birds, lizards, other snakes",
+        "behavior": "Rears and spreads its hood when threatened; shy until cornered.",
+        "harvest": "Venom for poisoners and, rarely, healers; its image for royal crowns.",
+        "effects": "• Bite: Con save DC 14 against a lethal neurotoxin.\n• Warns with a hood before striking.\n• Pairs well with a mongoose in the house.",
+        "lore": "The king's crown carries the serpent so that every subject remembers what it is to be near power."
+      },
+      "tags": [
+        "Fauna",
+        "Reptile",
+        "Acheaorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/fauna-3"
+    },
+    {
+      "slug": "horned-sand-viper",
+      "kind": "fauna",
+      "name": "Horned Sand-Viper",
+      "summary": "A buried, sideways-moving viper with two small horns over its eyes, that waits in the dune for a footstep.",
+      "body": "A small, sand-coloured viper with two upright horns above its eyes. It buries itself in the dune with only the eyes and horns showing and travels in a sideways loop, leaving a track like a row of parallel scratches. The camel-drivers of the plateau knock their staffs on the ground before they sit.\n\n## Where it is found\n\nIt waits in the dunes of the [[Dasht-a Khaliq]] and the sand-pans below the [[Zaruk'thal Spine]].\n\n## In play\n\nA buried viper is nearly invisible (Perception, DC 15, to spot it). Its bite calls for a Constitution saving throw, DC 12, or the character takes poison damage and swelling. A guide who knocks his staff on the ground before sitting is a guide worth the pay.",
+      "dmNotes": "Basis: real horned desert viper (Cerastes cerastes), a venomous North African and Near Eastern snake that buries itself in sand and moves by sidewinding; Herodotus, Pliny and Lucan describe the cerastes.",
+      "fields": {
+        "scientificName": "Cerastes cerastes",
+        "foundIn": "Dasht-a Khaliq, Zaruk'thal Spine",
+        "biome": "Sand dune",
+        "rarity": "Uncommon",
+        "habitat": "Sand dunes and sandy flats",
+        "diet": "Lizards, small rodents, birds",
+        "behavior": "Buries itself in the sand; moves sideways; ambushes prey.",
+        "harvest": "Venom for poisoners.",
+        "effects": "• Nearly invisible when buried (Perception DC 15).\n• Bite: Con save DC 12 or poison damage and swelling.\n• Its track is a row of parallel scratches.",
+        "lore": "Camel-drivers knock their staffs on the ground before they sit, and do not explain why."
+      },
+      "tags": [
+        "Fauna",
+        "Reptile",
+        "Acheaorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/fauna-3"
+    },
+    {
+      "slug": "river-dragon",
+      "kind": "fauna",
+      "name": "River-Dragon",
+      "summary": "A huge, armoured, patient crocodile of the great southern river, worshipped as a god in one town and hunted in the next.",
+      "body": "A vast, olive-green, armoured reptile that lies in the shallows like a log and takes any animal that comes to drink. A big one is sixteen feet long, and it can lie motionless for hours before the strike. In one town of the south it is a god, fed and garlanded in its sacred pool; in the next it is a pest to be hunted from boats.\n\n## Where it is found\n\nIt basks on the mud banks of the [[Xeruezcho Canal]] and the far-south reaches reached by the caravans of [[Persemenid City]].\n\n## In play\n\nA crocodile bite is a Strength-based grapple and a drowning roll. A sacred beast is a diplomatic problem as much as a hunting one: one does not kill the god of a town and expect dinner. A character may meet a tame one wearing earrings and decline to ask.",
+      "dmNotes": "Basis: real Nile crocodile (Crocodylus niloticus), the ambush predator of the Nile worshipped as Sobek at Crocodilopolis and elsewhere, where sacred crocodiles were adorned with gold earrings; Herodotus describes the cult and the hunting of crocodiles elsewhere.",
+      "fields": {
+        "scientificName": "Crocodylus niloticus",
+        "foundIn": "Xeruezcho Canal, Persemenid City",
+        "biome": "River and canal",
+        "rarity": "Uncommon",
+        "habitat": "Large rivers, canals and mud banks",
+        "diet": "Fish, antelope, livestock, unwary people",
+        "behavior": "Lies motionless in the shallows; seizes prey at the water's edge and drowns it.",
+        "harvest": "Hide and teeth; worshipped as sacred in some towns.",
+        "effects": "• Bite grapples and drags into the water.\n• Sacred in some towns, hunted in others.\n• Lies still for hours before it strikes.",
+        "lore": "The boatmen say the river-dragon has never lost an argument with a swimmer."
+      },
+      "tags": [
+        "Fauna",
+        "Reptile",
+        "Acheaorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/fauna-3"
+    },
+    {
+      "slug": "ground-lion",
+      "kind": "fauna",
+      "name": "Ground-Lion",
+      "summary": "A slow, swivel-eyed, colour-changing lizard that catches flies with a tongue like a whip, and lives on air, the old tales said.",
+      "body": "A small, slow, bumpy lizard with eyes that turn independently, a curled tail and a body that shifts colour from green to brown to black. It stalks insects with a silent, rocking walk and shoots out its tongue faster than the eye can follow. The old naturalists thought it lived on air; the name means the lion of the ground, which says more about the namers than about the animal.\n\n## Where it is found\n\nIt clings to the bushes along the roads of [[Carianea]] and [[Napplesia]].\n\n## In play\n\nA chameleon on a branch is a harmless delight; a pet one is a curiosity. A character who studies it can learn to hide in plain sight (an advantage on a Stealth check against those who are looking for movement).",
+      "dmNotes": "Basis: real Mediterranean chameleon (Chamaeleo chamaeleon); Aristotle describes it, ancient writers believed it lived on air, and the Greek name 'khamaileon' means 'ground lion'.",
+      "fields": {
+        "scientificName": "Chamaeleo chamaeleon",
+        "foundIn": "Carianea, Napplesia",
+        "biome": "Coastal scrub",
+        "rarity": "Uncommon",
+        "habitat": "Bushes and trees along dry coastal roads",
+        "diet": "Flies, beetles, grasshoppers",
+        "behavior": "Moves slowly with a rocking gait; changes colour with mood; shoots out its tongue.",
+        "harvest": "None; kept as a curiosity.",
+        "effects": "• Harmless but fascinating.\n• Colour changes with mood and light.\n• Old tales said it lived on air.",
+        "lore": "The naturalists named it a lion, and the lizard has been silently disagreeing ever since."
+      },
+      "tags": [
+        "Fauna",
+        "Reptile",
+        "Hellenorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/fauna-3"
+    },
+    {
+      "slug": "hill-tortoise",
+      "kind": "fauna",
+      "name": "Hill Tortoise",
+      "summary": "A small, domed, long-lived tortoise of the dry slopes, whose shell becomes the sounding-box of a lyre.",
+      "body": "A small, high-domed, mottled tortoise that plods across the dry hillsides and sleeps through the winter under a bush. It lives for eighty years or more, and its shell, emptied and dried, is the sounding-box of the lyre that the whole coast plays. The god of the herald and the thief is said to have made the first from one and to have given it to his brother.\n\n## Where it is found\n\nIt plods across the dry slopes of the [[Oros Mountain Range]] and the garden walls of [[Corinth City]].\n\n## In play\n\nA tortoise on a doorstep is a long-lived household mascot. A lyre of good tortoiseshell is a musician's treasure. A character who has spent a year in one village will have met the tortoise that belongs to everyone.",
+      "dmNotes": "Basis: real spur-thighed or Greek tortoise (Testudo graeca), a long-lived Mediterranean tortoise; the myth of Hermes making the first lyre from a tortoise shell is the origin of the lyre's sounding-box.",
+      "fields": {
+        "scientificName": "Testudo graeca",
+        "foundIn": "Oros Mountain Range, Corinth City",
+        "biome": "Dry hillside",
+        "rarity": "Common",
+        "habitat": "Dry scrub and sunny slopes",
+        "diet": "Grass, flowers, wild herbs",
+        "behavior": "Hibernates under shrubs; lives for decades.",
+        "harvest": "Shell as the sounding-box of a lyre.",
+        "effects": "• Lives eighty years or more.\n• Shell becomes a lyre's body.\n• A household mascot in many villages.",
+        "lore": "Players say the best lyre is the one built from a shell that has already heard a good song."
+      },
+      "tags": [
+        "Fauna",
+        "Reptile",
+        "Hellenorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/fauna-3"
+    },
+    {
+      "slug": "healers-serpent",
+      "kind": "fauna",
+      "name": "Healer's Serpent",
+      "summary": "A long, harmless, olive-brown snake kept in the healing temples, coiled around a staff in the sign of medicine.",
+      "body": "A slender, olive-brown, harmless snake up to six feet long, that climbs trees and walls and eats mice and eggs. The healing temples keep a colony in their dormitories, and sick pilgrims who lie down to dream among them wake with a cure or an interpretation. The god of medicine carries a staff with one coiled around it.\n\n## Where it is found\n\nIt winds through the temple grounds of [[Delphara City]] and the old walls of [[Romulo City]], where its descendants live wild.\n\n## In play\n\nA dream among the snakes is a ritual, and a possible quest hook: the priests interpret what the pilgrim sees. A character who is bitten by one has been bitten by nothing worse than a nip. A figure with a snake-staff is a healer, or says he is.",
+      "dmNotes": "Basis: real Aesculapian snake (Zamenis longissimus), a non-venomous Mediterranean climbing snake kept in the temples of Asclepius, where pilgrims slept for healing dreams (incubation); it was introduced to Rome and became the symbol of medicine on the rod of Asclepius.",
+      "fields": {
+        "scientificName": "Zamenis longissimus",
+        "foundIn": "Delphara City, Romulo City",
+        "biome": "Temple ground and old wall",
+        "rarity": "Uncommon",
+        "habitat": "Walls, ruins and woodland edge",
+        "diet": "Mice, small birds, eggs",
+        "behavior": "Climbs well; harmless to people; kept in healing temples.",
+        "harvest": "None; sacred to the god of medicine.",
+        "effects": "• Pilgrims dream among them for healing.\n• Harmless to people.\n• The sign of the physician's staff.",
+        "lore": "Healers say a snake that has never bitten anyone is the only fit companion for a healer."
+      },
+      "tags": [
+        "Fauna",
+        "Reptile",
+        "Invictian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/fauna-3"
+    },
+    {
+      "slug": "sand-monitor",
+      "kind": "fauna",
+      "name": "Sand Monitor",
+      "summary": "A yard-long, pale, forked-tongued lizard that raids nests and burrows and is eaten in the desert with relish.",
+      "body": "A long, lean, pale lizard with a forked tongue that flickers constantly, reaching a yard from nose to tail. It hunts by day across the desert, robbing nests, eating other lizards and digging out burrows, and rises on its hind legs to look about. The nomads cook it over the fire.\n\n## Where it is found\n\nIt patrols the stony flats of the [[Dasht-a Khaliq]] and the dry wadis of the [[Parthian Ravine]].\n\n## In play\n\nA monitor in the open is a surprise and a good meal. Its bite is bad but not deadly, and its tail can lash painfully. A hungry party on the plateau has done well to find one.",
+      "dmNotes": "Basis: real desert monitor (Varanus griseus), a large lizard of the Near East and North Africa; ancient writers describe the 'land crocodile' of Libya and the nomadic habit of eating monitors.",
+      "fields": {
+        "scientificName": "Varanus griseus",
+        "foundIn": "Dasht-a Khaliq, Parthian Ravine",
+        "biome": "Desert flat",
+        "rarity": "Uncommon",
+        "habitat": "Sandy and stony desert with burrows",
+        "diet": "Lizards, eggs, small mammals, insects",
+        "behavior": "Hunts by day; rises on its hind legs to look about.",
+        "harvest": "Meat; hide.",
+        "effects": "• A surprise and a meal on the road.\n• Bite is painful, not deadly.\n• Tail lash can bruise.",
+        "lore": "The nomads say the desert monitor is the last of the old dragons, and the least dignified."
+      },
+      "tags": [
+        "Fauna",
+        "Reptile",
+        "Acheaorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/fauna-3"
+    },
+    {
+      "slug": "pond-moray",
+      "kind": "fauna",
+      "name": "Pond-Moray",
+      "summary": "A long, mottled eel kept in the stone fishponds of the rich, fat on offal and, it is whispered, on the careless.",
+      "body": "A long, muscular, mottled, scaleless fish with a mouth full of needle teeth that gapes constantly to breathe. The rich of the coast keep moray eels in stone fishponds beside their villas as a delicacy and as a boast, and feed them on offal. A famous glutton is said to have fed them slaves who displeased him, and the cruelty is the point of the story.\n\n## Where it is found\n\nIt lurks in the rock-crevices of the [[Aeolus Reach]] and the villa fishponds of [[Fucostia]].\n\n## In play\n\nA moray's bite is a savage shear, and it does not let go readily. A fishpond is a sign of wealth and cruelty in a household. A guest who is invited to feed the eels should be wary of the host's sense of humour.",
+      "dmNotes": "Basis: real Mediterranean moray (Muraena helena), kept in Roman fishponds (piscinae) as a luxury food; Seneca and Pliny tell the story of Vedius Pollio feeding slaves to his lampreys or morays, and Augustus's reaction.",
+      "fields": {
+        "scientificName": "Muraena helena",
+        "foundIn": "Aeolus Reach, Fucostia",
+        "biome": "Rock crevice and fishpond",
+        "rarity": "Uncommon",
+        "habitat": "Rocky sea bottoms and villa fishponds",
+        "diet": "Fish, octopus, offal",
+        "behavior": "Hides in crevices; its mouth gapes to breathe; bites hard.",
+        "harvest": "Prized as a table delicacy; a pond is a status symbol.",
+        "effects": "• A bite shears and does not let go.\n• A pond is a sign of wealth and cruelty.\n• Kept as a luxury food.",
+        "lore": "A host who feeds his eels well and his guests badly will always be remembered."
+      },
+      "tags": [
+        "Fauna",
+        "Fish",
+        "Invictian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/fauna-3"
+    },
+    {
+      "slug": "dying-mullet",
+      "kind": "fauna",
+      "name": "Dying Mullet",
+      "summary": "A small red bottom-fish whose scales flush through a dozen colours as it dies, so a rich man pays by weight to watch it expire at table.",
+      "body": "A small, pink-red, whiskered bottom-fish that roots in the sand for crabs. When it is taken from the water its colours change, flashing red, then purple, then pale as it dies. The wealthy of the coast pay absurd sums for a large one, and the finest practice is to bring it alive to the table in a glass bowl so the guests can watch the colours go.\n\n## Where it is found\n\nIt is netted off the shores of [[Carianea]] and the shallows of the [[Nereid’s Veil]] coast.\n\n## In play\n\nA fine mullet is worth its weight in silver at an imperial banquet. A cook who delivers one at the right moment is a treasured servant. A poor fisherman who sells his best catch to a rich man's steward goes home with a purse and a lingering sense of waste.",
+      "dmNotes": "Basis: real red mullet (Mullus barbatus), a Mediterranean fish prized by Roman gourmets, who paid huge prices and watched the dying fish change colour at table; Seneca and Pliny complain of the practice.",
+      "fields": {
+        "scientificName": "Mullus barbatus",
+        "foundIn": "Carianea, Nereid's Veil",
+        "biome": "Sandy shallows",
+        "rarity": "Uncommon",
+        "habitat": "Sandy and muddy sea bottoms",
+        "diet": "Crabs, worms, small molluscs",
+        "behavior": "Feels the sand with chin barbels; changes colour as it dies.",
+        "harvest": "Sold at fantastic prices to the rich.",
+        "effects": "• Worth its weight in silver at a rich table.\n• Colours flush as it dies.\n• Brought live to the banquet in a glass bowl.",
+        "lore": "The old moralists complained that the Imperium paid more for a fish than for a farm."
+      },
+      "tags": [
+        "Fauna",
+        "Fish",
+        "Invictian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/fauna-3"
+    },
+    {
+      "slug": "black-egg-sturgeon",
+      "kind": "fauna",
+      "name": "Black-Egg Sturgeon",
+      "summary": "A huge, armoured, bottom-feeding fish that climbs the rivers each spring and carries the black roe of kings.",
+      "body": "A vast, grey, bony-plated fish with a long snout and four whiskers, growing to twelve feet and living a century. Each spring it climbs the great rivers of the north to spawn, and the fishermen who meet it at the weirs net the black roe for the tables of kings. It is the largest freshwater fish of the continent and the slowest to recover when it is overfished.\n\n## Where it is found\n\nIt runs up the rivers into the [[Kaspiran Seas]] and the lagoons of the [[Maeotis Helos]].\n\n## In play\n\nThe roe of a female is worth a house; a good run feeds a whole river-town. Overfishing is a slow disaster that no one notices until the run fails. A character who learns that the weir is empty has a reason to ask why.",
+      "dmNotes": "Basis: real beluga sturgeon (Huso huso), a huge Caspian and Black Sea fish whose roe (caviar) has been prized since antiquity and which is now critically endangered; ancient Greeks and Romans prized sturgeon (acipenser) as a luxury fish.",
+      "fields": {
+        "scientificName": "Huso huso",
+        "foundIn": "Kaspiran Seas, Maeotis Helos",
+        "biome": "Large river and sea",
+        "rarity": "Rare",
+        "habitat": "Deep rivers, brackish seas and spawning runs",
+        "diet": "Fish, crustaceans, molluscs",
+        "behavior": "Climbs rivers to spawn each spring; slow to mature.",
+        "harvest": "Black roe, meat and isinglass.",
+        "effects": "• The roe of one female is worth a house.\n• Overfishing collapses the run slowly.\n• Lives a century.",
+        "lore": "The river-towns say a king who eats the roe eats a hundred years of patience."
+      },
+      "tags": [
+        "Fauna",
+        "Fish",
+        "Acheaorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/fauna-3"
+    },
+    {
+      "slug": "purple-snail",
+      "kind": "fauna",
+      "name": "Purple-Snail",
+      "summary": "A spiny sea-snail whose gland, crushed by the ten thousand, makes the dye that colours the robes of kings.",
+      "body": "A small, spined, whorled sea-snail that clings to the rocks of the Aeolian shallows. A gland in its body gives a pale yellow fluid that, in the sun, turns green, then blue, then a deep, lasting purple. It takes thousands of snails to dye a single robe, and the shell-heaps beside the dye-works are higher than the houses.\n\n## Where it is found\n\nIts beds lie in the shallows of the [[Aeolus Reach]] and the rocky coves of [[Carianea]], where the dye-works stink for a mile.\n\n## In play\n\nA robe of the true purple is reserved by law for the highest ranks; wearing it without permission is a crime. The dye-works are a hot, foul trade, and the workers' hands are stained for life. A character who needs to trace the source of a stolen cloak can follow the smell.",
+      "dmNotes": "Basis: real spiny dye-murex (Bolinus brandaris) and banded dye-murex (Hexaplex trunculus), the sea snails whose hypobranchial gland produced Tyrian purple, the most expensive dye of antiquity; it took thousands of molluscs per gram and the processing stank terribly.",
+      "fields": {
+        "scientificName": "Bolinus brandaris",
+        "foundIn": "Aeolus Reach, Carianea",
+        "biome": "Rocky shallows",
+        "rarity": "Uncommon",
+        "habitat": "Rocky and sandy shallows",
+        "diet": "Other molluscs, carrion",
+        "behavior": "Clings to rocks; the gland fluid turns purple in sunlight.",
+        "harvest": "A true-purple dye reserved for rulers.",
+        "effects": "• Thousands are needed for one robe.\n• True purple is reserved by law.\n• The dye-works can be smelled for a mile.",
+        "lore": "The dyers say a purple robe is made of ten thousand small deaths and one very large invoice."
+      },
+      "tags": [
+        "Fauna",
+        "Shellfish",
+        "Hellenorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/fauna-3"
+    },
+    {
+      "slug": "ink-fish",
+      "kind": "fauna",
+      "name": "Ink-Fish",
+      "summary": "A flat-bodied, eight-armed sea animal that changes colour at will and squirts a cloud of black when it flees.",
+      "body": "A soft-bodied cousin of the octopus with a flat cuttle-bone inside its body, ten arms and an uncanny, thoughtful eye. It changes colour and texture in a heartbeat to match the sand or to flash a warning, and when frightened it squirts a cloud of dark ink. The ink makes the scribe's brown pigment; the bone is ground for tooth-powder and given to caged birds.\n\n## Where it is found\n\nIt drifts in the sandy shallows off [[Carianea]] and the grassy bays of the [[Aeolus Reach]].\n\n## In play\n\nA cuttlefish's ink is an ink worth having. A diver chasing one in a lagoon sees a creature that vanishes on demand. A scribe who runs out of brown has a reason to look at the sea.",
+      "dmNotes": "Basis: real common cuttlefish (Sepia officinalis), whose ink (sepia) was used as writing ink by Greeks and Romans and whose cuttlebone was used for polishing and as a dietary supplement for caged birds.",
+      "fields": {
+        "scientificName": "Sepia officinalis",
+        "foundIn": "Carianea, Aeolus Reach",
+        "biome": "Sandy shallows",
+        "rarity": "Common",
+        "habitat": "Sandy bottoms and seagrass beds",
+        "diet": "Crabs, shrimp, small fish",
+        "behavior": "Changes colour and texture instantly; ejects ink when threatened.",
+        "harvest": "Ink for scribes; cuttlebone for polishing and tooth-powder.",
+        "effects": "• Ink is a good brown writing ink.\n• Vanishes by camouflage when frightened.\n• Bone is ground for tooth-powder.",
+        "lore": "Divers say the cuttlefish is the only creature in the sea that changes its mind in public."
+      },
+      "tags": [
+        "Fauna",
+        "Sea creature",
+        "Hellenorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/fauna-3"
+    },
+    {
+      "slug": "divers-sponge",
+      "kind": "fauna",
+      "name": "Diver's Sponge",
+      "summary": "A soft, golden-brown colonial animal of the rocky sea-floor, fished by free divers and used for washing, padding and healing.",
+      "body": "A soft, golden-brown, holey mass that clings to the rocks of the sea-floor and looks, until the diver cuts it free, like a plant. Dried and cleaned it is the finest wash-cloth on earth and a pad for a soldier's helmet. A diver goes down on a stone, cuts what he can in a breath and comes up with lungs on fire, and a town of sponge-divers has a good many widows.\n\n## Where it is found\n\nIt grows on the rocky sea-floor around [[Carianea]], the coast's sponge-diving town, and the reefs off [[Azadeh Atoll]].\n\n## In play\n\nA good sponge is a washing-cloth, a cushion, a medical swab and a drinking aid for soldiers on the march. A diver who stays down too long needs a rescue. The cutters of the coast are a respected, short-lived trade.",
+      "dmNotes": "Basis: real bath sponge (Spongia officinalis), harvested by free-divers in the Aegean since antiquity and used for washing, padding helmets and as a medical swab; sponge-diving was dangerous and its communities (as at Kalymnos) bore heavy losses.",
+      "fields": {
+        "scientificName": "Spongia officinalis",
+        "foundIn": "Carianea, Azadeh Atoll",
+        "biome": "Rocky sea floor",
+        "rarity": "Common",
+        "habitat": "Rocky bottoms in clear water",
+        "diet": "Filters plankton from the water",
+        "behavior": "A sessile colony; regrows slowly when cut properly.",
+        "harvest": "Cut by free-divers; washed, dried and sold.",
+        "effects": "• A good sponge is a wash-cloth, a pad and a swab.\n• Diving for it is dangerous work.\n• Regrows if cut with care.",
+        "lore": "A sponge-town's wealth is measured in sponges and its history in widows."
+      },
+      "tags": [
+        "Fauna",
+        "Sea creature",
+        "Hellenorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/fauna-3"
+    },
+    {
+      "slug": "blood-coral",
+      "kind": "fauna",
+      "name": "Blood-Coral",
+      "summary": "A branching red sea-growth cut from deep rock, worn by children against illness and by kings against the evil eye.",
+      "body": "A bright red, branching growth that looks like a small bush on the underside of sea-caves. The gatherers prise it off with iron hooks in deep water, and the branches are cut into beads and set in silver. Mothers hang a twig of it round a child's neck, and a king's ring may carry a polished bud.\n\n## Where it is found\n\nIt clings to the caves under the cliffs of the [[Nereid’s Veil]] and the rocky bays of [[Zandar Isle]].\n\n## In play\n\nA twig of red coral worn at the throat is the commonest protective charm on the coast. A gatherer's life is short and his boat is poor. A character who finds a fresh branch on a beach has found a decent night's wages.",
+      "dmNotes": "Basis: real red coral (Corallium rubrum), a Mediterranean coral harvested from sea-caves and used as a protective charm and jewellery; Pliny records it traded to India and thought to protect children and crops.",
+      "fields": {
+        "scientificName": "Corallium rubrum",
+        "foundIn": "Nereid's Veil, Zandar Isle",
+        "biome": "Sea-cave",
+        "rarity": "Uncommon",
+        "habitat": "Dark rock walls and the roofs of sea-caves",
+        "diet": "Filters plankton from the water",
+        "behavior": "A slow-growing colony; harvested at depth.",
+        "harvest": "Beads, charms and ring-stones.",
+        "effects": "• A twig at the throat is a charm for children.\n• Gathering it is dangerous and poorly paid.\n• Fresh beach-finds are worth a night's wages.",
+        "lore": "Mothers say the coral is the sea's own blood, shared out against sickness."
+      },
+      "tags": [
+        "Fauna",
+        "Sea creature",
+        "Hellenorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/fauna-3"
+    },
+    {
+      "slug": "scarlet-grain",
+      "kind": "fauna",
+      "name": "Scarlet-Grain",
+      "summary": "A bead-like insect that lives on a prickly oak and, crushed, gives the finest scarlet dye in the world.",
+      "body": "A tiny, round, pea-sized insect that sits glued to the twigs of a low prickly oak, looking like a berry. Gathered by hand, dried and crushed, it gives a brilliant scarlet dye of a purity that madder cannot match. The grain is traded by the ounce and tax-assessed as a luxury, and the dyers who use it are among the best-paid in the trade.\n\n## Where it is found\n\nIt is gathered from the scrub oaks of the [[Oros Mountain Range]] and the dry hills of the [[Klynin Mountain Range]].\n\n## In play\n\nA length of scarlet cloth is a mark of high office. The collectors are women and children with small baskets, working in a short season. A merchant who sells madder as scarlet is a cheat, and the cloth's lasting shade proves it.",
+      "dmNotes": "Basis: real kermes scale insect (Kermes vermilio) on the kermes oak (Quercus coccifera), the source of the red dye 'coccum' (scarlet) in the ancient Mediterranean, tax-assessed in Roman Spain; later displaced by cochineal.",
+      "fields": {
+        "scientificName": "Kermes vermilio",
+        "foundIn": "Oros Mountain Range, Klynin Mountain Range",
+        "biome": "Scrub oak hill",
+        "rarity": "Uncommon",
+        "habitat": "Prickly scrub oak on dry hills",
+        "diet": "Sap of the oak",
+        "behavior": "Females sit fixed to twigs and look like berries.",
+        "harvest": "Dried and crushed for scarlet dye.",
+        "effects": "• Gives the finest scarlet.\n• Gathered by hand in a short season.\n• Traded and taxed as a luxury.",
+        "lore": "The dyers say scarlet is the colour of a debt that has been paid in advance."
+      },
+      "tags": [
+        "Fauna",
+        "Insect",
+        "Hellenorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/fauna-3"
+    },
+    {
+      "slug": "blister-beetle",
+      "kind": "fauna",
+      "name": "Blister Beetle",
+      "summary": "A bright green beetle that raises blisters on skin, doses the unwary and, in the wrong dose, ends a love affair and a life.",
+      "body": "A shining emerald, soft-bodied beetle that swarms on ash and privet in early summer. Crushed on skin it raises a blister; taken by mouth it burns the bowels and the bladder, and it is the original and most dangerous of the love-potions. Physicians used it in tiny quantities for warts; poisoners, and lovers who ought to have known better, used it in much larger ones.\n\n## Where it is found\n\nIt swarms on the ash-trees of the [[Foloicauria Forest]] and the hedges around [[Falecosa]].\n\n## In play\n\nA swarm on a tree is a warning for walkers. Handling one calls for a Constitution saving throw, DC 12, against blistering. A dose in a lover's wine is the tool of a poisoner, and a character who finds a green dust in a cup knows it.",
+      "dmNotes": "Basis: real blister beetle (Lytta vesicatoria, the 'Spanish fly'), whose cantharidin is a vesicant used in antiquity for warts and as a notorious, dangerous aphrodisiac and poison; Roman writers describe cantharides poisoning.",
+      "fields": {
+        "scientificName": "Lytta vesicatoria",
+        "foundIn": "Foloicauria Forest, Falecosa",
+        "biome": "Ash woodland and hedge",
+        "rarity": "Uncommon",
+        "habitat": "Ash and privet in early summer",
+        "diet": "Leaves of ash and privet",
+        "behavior": "Swarms in early summer; secretes a blistering agent.",
+        "harvest": "Dried and ground for physicians and poisoners.",
+        "effects": "• Handling: Con save DC 12 or blisters.\n• Ground into a drink, a deadly poison.\n• A traditional (and dangerous) love-potion.",
+        "lore": "Physicians say it cures a wart and kills a husband, and the dose is the whole of the art."
+      },
+      "tags": [
+        "Fauna",
+        "Insect",
+        "Invictian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/fauna-3"
+    },
+    {
+      "slug": "healers-leech",
+      "kind": "fauna",
+      "name": "Healer's Leech",
+      "summary": "A dark, glossy freshwater leech kept in jars by physicians to draw bad blood and, they say, bad humours.",
+      "body": "A dark, striped, slug-like worm that lives in still ponds and swims in a looping wave. It attaches with three jaws and drinks until it drops off, and the physician's workshop keeps a jar of them for the old art of bleeding. A patient with a fever, a headache or a swollen limb is set with a dozen leeches, and it works about as well as anything else the physician has.\n\n## Where it is found\n\nIt is gathered from the ponds of the [[Maeotis Helos]] and the still pools near [[Willowheart Enclave]], where the herbalists keep them in jars.\n\n## In play\n\nA leech applied to a bruise can reduce swelling (a modest medical aid), and a leech on a limb can draw out a poison if it is fresh. A patient who is over-bled becomes weak; a physician who bleeds too freely is no healer.",
+      "dmNotes": "Basis: real medicinal leech (Hirudo medicinalis), used in ancient Greek and Roman medicine (Nicander, Pliny, Galen) for bloodletting; modern medicine still uses leeches for some surgical and vascular problems, but bloodletting as a general cure is ineffective.",
+      "fields": {
+        "scientificName": "Hirudo medicinalis",
+        "foundIn": "Maeotis Helos, Willowheart Enclave",
+        "biome": "Still pond",
+        "rarity": "Common",
+        "habitat": "Ponds and slow, weedy water",
+        "diet": "Blood of mammals and amphibians",
+        "behavior": "Swims in a looping wave; attaches and feeds until full.",
+        "harvest": "Kept in jars by physicians and herbalists.",
+        "effects": "• Can reduce swelling from a bruise.\n• Overuse weakens a patient.\n• A fresh leech can draw out some poisons.",
+        "lore": "Physicians say the leech is the one honest member of their trade: it takes what it needs and falls off."
+      },
+      "tags": [
+        "Fauna",
+        "Medicine",
+        "Hellenorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/fauna-3"
+    },
+    {
+      "slug": "mountain-honeybee",
+      "kind": "fauna",
+      "name": "Mountain Honeybee",
+      "summary": "A small, dark, thyme-fed bee that makes the most prized honey on the coast and the sweetest gift to a god.",
+      "body": "A small, dark, quick honeybee that lives in hollow trees and in the clay hives of the highland beekeepers. It works the thyme and the flowering herbs of the dry hills, and its honey is a dark, fragrant, slightly bitter gold that is offered to the gods, eaten by the sick and sealed in jars for a king. A good beekeeper is a patient man, and a swarm in a house is a good omen.\n\n## Where it is found\n\nIt is kept on the high slopes above [[Kirimitsana]] and in the hill villages of the [[Olympus Mountain Range]].\n\n## In play\n\nA jar of mountain honey is a gift for a magistrate and a medicine for a fever. A beekeeper who sells honey that is actually sugar syrup is punished by the whole village. A swarm entering a house is a sign of luck and a reason to rush for a basket.",
+      "dmNotes": "Basis: real western honeybee (Apis mellifera) of the Mediterranean, kept in clay and woven hives; the honey of Mount Hymettus was celebrated, and honey was used as sweetener, medicine and offering throughout the ancient world.",
+      "fields": {
+        "scientificName": "Apis mellifera",
+        "foundIn": "Kirimitsana, Olympus Mountain Range",
+        "biome": "Highland slope",
+        "rarity": "Common",
+        "habitat": "Hollow trees and highland hives",
+        "diet": "Nectar and pollen of thyme and wild herbs",
+        "behavior": "Swarms in spring; defends the hive; builds comb.",
+        "harvest": "Honey and wax, offered to the gods and traded to kings.",
+        "effects": "• A jar of honey is a gift for a magistrate.\n• Honey eases a fever and a cough.\n• A swarm entering a house is a good omen.",
+        "lore": "The beekeepers say you must tell the bees about every death in the family, or they will leave."
+      },
+      "tags": [
+        "Fauna",
+        "Insect",
+        "Hellenorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/fauna-3"
+    },
+    {
+      "slug": "fat-tail-scorpion",
+      "kind": "fauna",
+      "name": "Fat-Tail Scorpion",
+      "summary": "A dark, thick-tailed desert scorpion whose sting kills the careless and whose carapace gleams under the lamp.",
+      "body": "A dark, heavy-bodied scorpion with a thick curled tail and a smooth, shining shell that gleams like horn in lamplight. It hides in the cracks of stone and under bedding and strikes when pressed. Every child of the desert is taught to shake out boots and bedding and never to put a hand where the eyes have not been.\n\n## Where it is found\n\nIt lurks in the stone walls of [[R’eyshar]] and the dry gullies of the [[Dasht-a Khaliq]].\n\n## In play\n\nA sting requires a Constitution saving throw, DC 14, or the victim is poisoned for a day and suffers cramps and fever. Scorpion-charmers can cure the sting for a price. A traveller who sleeps in a ruin without checking his boots will be reminded.",
+      "dmNotes": "Basis: real Arabian fat-tailed scorpion (Androctonus crassicauda), a highly venomous scorpion of the Near East; scorpion stings were a major hazard to travellers, and scorpion-lore fills ancient natural histories.",
+      "fields": {
+        "scientificName": "Androctonus crassicauda",
+        "foundIn": "R'eyshar, Dasht-a Khaliq",
+        "biome": "Stone wall and gully",
+        "rarity": "Common",
+        "habitat": "Cracks in stone, ruins and dry gullies",
+        "diet": "Insects, spiders, small lizards",
+        "behavior": "Hides by day and hunts by night; strikes when pressed.",
+        "harvest": "Venom for poisoners and apothecaries.",
+        "effects": "• Sting: Con save DC 14 or poisoned for a day.\n• Hides in boots and bedding.\n• Cures cost a healer's fee.",
+        "lore": "Desert children learn three rules: shake your boots, shake your blanket, shake the wall."
+      },
+      "tags": [
+        "Fauna",
+        "Arachnid",
+        "Acheaorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/fauna-3"
+    },
+    {
+      "slug": "tree-singer",
+      "kind": "fauna",
+      "name": "Tree-Singer",
+      "summary": "A shrill, big-eyed cicada whose summer drone is the sound of heat, and whose song a poet envied for its lack of hunger.",
+      "body": "A thick-bodied, big-eyed, clear-winged insect that spends years underground as a pale grub and a few weeks in the sun as a noisy adult. The males sing from the trees in the heat of the day, a drone that rises to a shriek and cuts off in an instant. The poets of the coast hold it up as a happy creature that lives on dew and sings for nothing.\n\n## Where it is found\n\nIt shrieks from the olive-groves of [[Atticenea]] and the pine-woods of the [[Latium Plains]].\n\n## In play\n\nThe summer chorus is the sound of high noon, and a sudden silence is a warning that something has disturbed the grove. Children collect the shed shells. A character who makes a poem about it is merely repeating a thousand predecessors.",
+      "dmNotes": "Basis: real cicada (Cicada orni and relatives), the loud Mediterranean insect celebrated in Greek poetry (Anacreon's ode to the cicada) as living on dew; nymphs spend years underground, and the sudden silence of cicadas is noticed as a sign of disturbance.",
+      "fields": {
+        "scientificName": "Cicada orni",
+        "foundIn": "Atticenea, Latium Plains",
+        "biome": "Olive grove and pine wood",
+        "rarity": "Common",
+        "habitat": "Trees in hot, dry country",
+        "diet": "Tree sap",
+        "behavior": "Males sing in the heat of the day; nymphs live underground for years.",
+        "harvest": "None; shed shells are collected by children.",
+        "effects": "• The summer chorus marks high noon.\n• A sudden silence signals disturbance.\n• Poets say it lives on dew.",
+        "lore": "The poets say the cicada is the only creature that sings from joy, and the only one that never says what it is singing about."
+      },
+      "tags": [
+        "Fauna",
+        "Insect",
+        "Hellenorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/fauna-3"
+    }
+  ]
+}

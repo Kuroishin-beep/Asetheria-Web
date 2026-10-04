@@ -176,3 +176,19 @@ Findings:
 - A table cannot be blanked (an empty table is invalid), so the "blank then purge" cleanup does not apply to tables; test tables are archived through the normal confirmation. Real DMs lose nothing: an empty table could never have been created.
 - Pre-existing, flagged for Phase 4's licence ledger: `data/homebrew/planar-metals.json` (24 entries) was imported from a GM Binder page by an earlier session (`homebrew-content.spec.ts` names it). Q1 (licence-safe only) governs new ingestion; whether to keep this older batch is a decision for you.
 Prod rollout: no schema change. Deploy the code; `/tools/tables` redirects; data already migrated by Phase 1.
+
+## Phase 4 — Natural-world content (+40 ores, +60 flora, +60 fauna) — DONE (local DB; prod import waits on Phase 0)
+
+Evidence:
+1. 160 original entries in `data/natural-world/*.json` (8 files), each grounded in public-domain facts with a `Basis:` DM note, `sourcePath: original: natural-world/<file>`. `npm run verify:natural-world`: 40/40 ore, 60/60 flora, 60/60 fauna, 0 problems (shape, fields, slug = slugified name, rarity, empire tag, licence denylist).
+2. Imported locally with `import-codex-file`: ore 96, flora 90, fauna 68 active. Re-import: "0 created, 0 filled, 20 unchanged" (`natural-world-import.spec.ts`). `check:links --max 2`: 2 unresolved (both pre-existing). `embeddings:generate`: 167 embedded.
+3. Every place named in `foundIn` or a `[[link]]` resolves; every entry has a `found-in` and a `mentions` edge; a place page lists them as linked mentions; full-text search finds a body-only word; a granted player sees the page and never the `Basis:` DM note.
+4. `scripts/archive-batch.ts` (`npm run codex:archive-batch`) archives/restores a whole batch by `source_path`, dry run by default (tested).
+5. `docs/content-licences.md` ledger written.
+6. `tsc` 0; `next build` ok; `npm audit --omit=dev` 0; full suite **224 passed**, 0 failed (13 new tests).
+
+Changed test (justified): `kind-migration.spec.ts` "exactly the eight original animals are fauna" asserted the whole fauna kind equalled the eight migrated animals; Phase 4 legitimately adds 60 more. It now asserts the eight by name are fauna and none remain in flora (same migration intent).
+
+Open decision for you (ledger): three homebrew batches predate Q1 — `planar-metals` (24, GM Binder), `flora` herbalism (20, "external GM Binder page"), `metals` (player-supplied, origin unrecorded). Keep / rewrite as original / archive. Nothing changed.
+Deviation: Open5e importer (optional in PLAN) not built.
+Prod rollout: after Phase 0 (Neon URL): run the 8 imports, `links:rebuild`, `embeddings:generate`.

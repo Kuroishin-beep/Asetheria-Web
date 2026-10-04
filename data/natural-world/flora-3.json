@@ -1,0 +1,466 @@
+{
+  "format": "asetheria-codex",
+  "note": "Original flora, batch 3 of 3: poisons, medicinals, fungi, crops and fibres. Each entry is written for Asetheria; the real plant it is grounded in is named in the DM notes under 'Basis'. No third-party text is reproduced.",
+  "entries": [
+    {
+      "slug": "judges-hemlock",
+      "kind": "flora",
+      "name": "Judge's Hemlock",
+      "summary": "A tall spotted-stemmed weed of ditches, the state's gentle poison and the cause of a famous quiet death.",
+      "body": "A tall, feathery, white-flowered plant with a purple-blotched stem and a mousy smell. Every part of it is poison, and the state of the old cities used it as a quiet means of execution: a cup, a slow numbness from the feet upward, a calm end with the mind clear. Mistaken for wild parsley by the careless, it has killed more foragers than any monster.\n\n## Where it is found\n\nIt grows in the damp ditches of the [[Latium Plains]] and the field edges around [[Thebesieas City]].\n\n## In play\n\nSwallowed, it calls for a Constitution saving throw, DC 14, each hour or the victim loses motor control from the legs upward. A herbalist with the right training knows the spotted stem by sight (Nature, DC 10). There is no sure antidote, and a character who needs one should find a very good healer, quickly.",
+      "dmNotes": "Basis: real poison hemlock (Conium maculatum), used in ancient Greece for state executions (Socrates is the best-known case); it causes ascending paralysis, and can be mistaken for wild carrot or parsley.",
+      "fields": {
+        "scientificName": "Conium maculatum",
+        "foundIn": "Latium Plains, Thebesieas City",
+        "biome": "Ditch and field edge",
+        "rarity": "Common",
+        "effects": "• Poison: ascending paralysis, calm mind to the end.\n• Mistaken for wild parsley.\n• No sure antidote.",
+        "lore": "The city that uses hemlock for its criminals calls it mercy, and nobody asks the criminals."
+      },
+      "tags": [
+        "Flora",
+        "Poison",
+        "Hellenorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/flora-3"
+    },
+    {
+      "slug": "wolfs-bane",
+      "kind": "flora",
+      "name": "Wolf's-Bane",
+      "summary": "A hooded blue flower of high pastures, the deadliest plant of the mountains, and an arrow-poison for wolf hunters.",
+      "body": "A tall spike of deep blue flowers shaped like a monk's cowl, growing in mountain meadows. Every part is poison, and the root is deadly even to handle. Hunters tip arrows with its juice to bring down wolves, and the stories say it grew from the foam of the three-headed hound. A bare cut brushing the root can numb a hand.\n\n## Where it is found\n\nIt flowers in the high meadows of the [[Olympus Mountain Range]] and the passes of [[Cloudspine Ridge]].\n\n## In play\n\nA poisoned arrow deals an extra 2d6 poison damage on a failed Constitution saving throw (DC 14). Handling the root without gloves requires its own save. A hunter's guild keeps the knowledge of where it grows secret.",
+      "dmNotes": "Basis: real aconite or monkshood (Aconitum napellus), a deadly mountain plant used by the Greeks and Romans to poison arrows and bait wolves; in myth it grew where Cerberus's foam fell.",
+      "fields": {
+        "scientificName": "Aconitum napellus",
+        "foundIn": "Olympus Mountain Range, Cloudspine Ridge",
+        "biome": "Mountain meadow",
+        "rarity": "Uncommon",
+        "effects": "• Arrow poison: extra 2d6 poison damage (Con save DC 14).\n• Handling the bare root numbs the skin.\n• Used by hunters against wolves.",
+        "lore": "The shepherds say the flower is named for the monk, and the monk for his hood."
+      },
+      "tags": [
+        "Flora",
+        "Poison",
+        "Hellenorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/flora-3"
+    },
+    {
+      "slug": "sleep-poppy",
+      "kind": "flora",
+      "name": "Sleep-Poppy",
+      "summary": "A tall, pale-flowered poppy whose milky sap dulls pain, stops a cough and, in excess, stops everything.",
+      "body": "A tall poppy with large papery pale flowers and a round seed-pod. Scored in the evening, the pod weeps a milky sap that is dried into a brown gum: the apothecary's strongest remedy for pain, for cough, and for a dying man's last night. Used wrongly, it is a poison; used habitually, a chain.\n\n## Where it is found\n\nIt is grown in hidden fields beyond [[Tabrishi'ir]] and in the temple gardens of [[Delphara City]], where the oracle's priestesses are said to take it.\n\n## In play\n\nA small dose dulls pain and grants a fitful rest (advantage on saves against pain, disadvantage on Perception). Excess calls for a Constitution saving throw, DC 14, or the patient falls into a dangerous sleep. Regular use breeds a craving.",
+      "dmNotes": "Basis: real opium poppy (Papaver somniferum), whose latex was used in antiquity as a painkiller and sedative (Dioscorides, Galen) and whose dependence-forming properties were also recognised.",
+      "fields": {
+        "scientificName": "Papaver somniferum",
+        "foundIn": "Tabrishi'ir, Delphara City",
+        "biome": "Garden field",
+        "rarity": "Uncommon",
+        "effects": "• Small dose: advantage on saves against pain, disadvantage on Perception.\n• Excess: Con save DC 14 or a dangerous sleep.\n• Regular use breeds a craving.",
+        "lore": "Healers keep it locked up and grudgingly."
+      },
+      "tags": [
+        "Flora",
+        "Medicine",
+        "Acheaorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/flora-3"
+    },
+    {
+      "slug": "pig-bean",
+      "kind": "flora",
+      "name": "Pig-Bean",
+      "summary": "A sticky, foul-smelling weed whose seeds bring madness, visions and a first-rate toothache cure.",
+      "body": "A sticky, hairy, ill-smelling plant of waste ground, with dull yellow flowers veined in purple. Burned, its seeds fill a room with smoke that brings visions and a creeping madness; swallowed, it brings delirium. Applied with care to an aching tooth, it eases the pain. The seer-priests burn it in the rooms where the dead are consulted.\n\n## Where it is found\n\nIt springs up on rubbish heaps and by old walls near [[Mavelon City]] and the waste ground around [[Persevalis City]].\n\n## In play\n\nBreathing its smoke calls for a Wisdom saving throw, DC 13, or the character sees things that aren't there for an hour. Tied in a bundle with a charm it is a seer's tool; given in a cup it is a poisoner's. A foul-smelling plant in an unlikely spot is worth a second look.",
+      "dmNotes": "Basis: real henbane (Hyoscyamus niger), a hallucinogenic and toxic plant used in antiquity by seers and in medicine for toothache and pain; its seeds were burned in the oracle's practices according to some sources.",
+      "fields": {
+        "scientificName": "Hyoscyamus niger",
+        "foundIn": "Mavelon City, Persevalis City",
+        "biome": "Waste ground",
+        "rarity": "Uncommon",
+        "effects": "• Smoke: Wisdom save DC 13 or hallucinations for an hour.\n• In a cup: delirium and poisoning.\n• Applied carefully, eases a toothache.",
+        "lore": "Seers burn it in the rooms where the dead are asked questions, and hope the dead do not mind the smell."
+      },
+      "tags": [
+        "Flora",
+        "Poison",
+        "Invictian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/flora-3"
+    },
+    {
+      "slug": "beautiful-lady",
+      "kind": "flora",
+      "name": "Beautiful Lady",
+      "summary": "A glossy black berry that dilates the eye to make a woman lovely, and kills the unwary.",
+      "body": "A bushy plant of shaded places with dull purple bell flowers and glossy, sweet-tasting black berries. A drop of the juice in the eye opens the pupil wide and gives a dark, glittering gaze that courtiers prize. The same berries, eaten, are among the deadliest in the garden.\n\n## Where it is found\n\nIt grows wild in the shaded hollows of the [[Foloicauria Forest]] and in a few secret beds in the courtyards of [[Aeterna City]].\n\n## In play\n\nA drop in each eye gives the user advantage on Charisma (Persuasion) checks to charm for an hour, and disadvantage on seeing in bright light. Swallowed, a few berries deal heavy poison damage (Constitution save DC 15). Children who mistake it for a blueberry are the commonest victims.",
+      "dmNotes": "Basis: real deadly nightshade (Atropa belladonna), whose name 'beautiful lady' reflects the Renaissance cosmetic use of dilating the pupils; all parts are highly toxic, and the genus is named for Atropos, the Fate who cuts the thread.",
+      "fields": {
+        "scientificName": "Atropa belladonna",
+        "foundIn": "Foloicauria Forest, Aeterna City",
+        "biome": "Shaded woodland",
+        "rarity": "Uncommon",
+        "effects": "• Eye-drops dilate the pupils (advantage to charm, disadvantage in bright light).\n• Berries: Con save DC 15 or heavy poison damage.\n• Mistaken for blueberries by children.",
+        "lore": "The court says the lady's beauty is the point of the poison."
+      },
+      "tags": [
+        "Flora",
+        "Poison",
+        "Invictian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/flora-3"
+    },
+    {
+      "slug": "madness-cure-hellebore",
+      "kind": "flora",
+      "name": "Madness-Cure Hellebore",
+      "summary": "A winter-flowering root bought at a high price by the madman's family and the poisoner's accomplice.",
+      "body": "A low evergreen with pale green-white flowers that open in the depths of winter. The root is a violent purge, long prescribed for madness, melancholy and fits, and taken in the wrong dose it kills. A purging at the right moment of the moon, say the healers of the coast, drives out the black bile that brews despair.\n\n## Where it is found\n\nIt grows in the shaded glens of the [[Oros Mountain Range]] near [[Anticata]], and a few doses are sold at the sanctuary of [[Delphara City]].\n\n## In play\n\nA healer's treatment may clear a long-term madness, but the patient must survive it (Constitution saving throw, DC 14, or take heavy damage). A family that pays for a dose is desperate, and the one who sells it should be wary of whom they sell to.",
+      "dmNotes": "Basis: real hellebore (Helleborus niger and related species), used by Greek physicians as a violent purgative and for madness (Hippocrates, Theophrastus); it is toxic at higher doses. Not for use as a prescription in the real world.",
+      "fields": {
+        "scientificName": "Helleborus niger",
+        "foundIn": "Oros Mountain Range, Anticata, Delphara City",
+        "biome": "Shaded glen",
+        "rarity": "Uncommon",
+        "effects": "• A purge prescribed for madness (Con save DC 14 or heavy damage).\n• Flowers in winter.\n• Deadly in an overdose.",
+        "lore": "The old physicians said the cure for black thoughts was something black."
+      },
+      "tags": [
+        "Flora",
+        "Medicine",
+        "Hellenorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/flora-3"
+    },
+    {
+      "slug": "gout-crocus",
+      "kind": "flora",
+      "name": "Gout-Crocus",
+      "summary": "A pale lilac flower that blooms after the leaves have died, and the root that eases a rich man's swollen toe.",
+      "body": "A pale lilac flower that appears in autumn from the bare ground, long after the leaves have withered, so it seems to spring out of nothing. Its bulb is the physician's remedy for the rich man's swollen toe and the poor man's rheumatic joints, and a poisoner's precise tool, since the dose that heals and the dose that kills are close neighbours.\n\n## Where it is found\n\nIt flowers in the meadows of the [[Elysian Plains]] and the hills behind [[Kirimitsana]].\n\n## In play\n\nA careful dose eases a painful joint for a day. An overdose causes sickness and a slow collapse (Constitution saving throw, DC 14, each day). A healer who says she has used it successfully has a story to tell and a reputation to guard.",
+      "dmNotes": "Basis: real autumn crocus (Colchicum autumnale), the source of colchicine; it was used in antiquity (the 'hermodactyl') for gout and joint pain and is highly toxic in overdose.",
+      "fields": {
+        "scientificName": "Colchicum autumnale",
+        "foundIn": "Elysian Plains, Kirimitsana",
+        "biome": "Meadow",
+        "rarity": "Uncommon",
+        "effects": "• A careful dose eases swollen joints for a day.\n• Overdose: Con save DC 14 daily or collapse.\n• Flowers in autumn without leaves.",
+        "lore": "Physicians call it the flower with a very thin line between a cure and a funeral."
+      },
+      "tags": [
+        "Flora",
+        "Medicine",
+        "Hellenorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/flora-3"
+    },
+    {
+      "slug": "sea-onion",
+      "kind": "flora",
+      "name": "Sea-Onion",
+      "summary": "A huge bulb of the sea-cliffs, hung on doors against evil and boiled into the physician's strongest cough-syrup.",
+      "body": "A giant bulb that sits half out of the ground on rocky coastal slopes, sending up a spike of white flowers in late summer. A bulb hung over the door is said to guard a house against evil spirits, and the same bulb, cut and soaked in vinegar and honey, is the apothecary's strongest remedy for cough and dropsy. It is also, quietly, rat-poison.\n\n## Where it is found\n\nIt clings to the sea-cliffs of the [[Nereid’s Veil]] and the rocky headlands near [[Carianea]].\n\n## In play\n\nA syrup of it relieves a lingering cough (one dose, one day). It is lethal to rats and, taken in excess, unkind to humans. A bulb hung over a door is a mark of a cautious household and a nod to old customs.",
+      "dmNotes": "Basis: real sea squill (Drimia maritima), used in antiquity as a diuretic, expectorant and rat-poison, with a long folk tradition of hanging the bulb as a protective charm; overdose is dangerous.",
+      "fields": {
+        "scientificName": "Drimia maritima",
+        "foundIn": "Nereid's Veil, Carianea",
+        "biome": "Sea cliff",
+        "rarity": "Uncommon",
+        "effects": "• Syrup relieves a lingering cough.\n• Hung over a door against evil spirits, by custom.\n• Lethal to rats; hard on humans in excess.",
+        "lore": "Sailors hang one on the mast for luck, and are not sure why."
+      },
+      "tags": [
+        "Flora",
+        "Medicine",
+        "Hellenorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/flora-3"
+    },
+    {
+      "slug": "sacred-haoma",
+      "kind": "flora",
+      "name": "Sacred Haoma",
+      "summary": "A leafless, bitter shrub of the high plateau, pressed by priests for a sacred drink that quickens the heart and clears the mind.",
+      "body": "A grey-green shrub of jointed, almost leafless stems that grows on the stony heights. The priests of the covenant crush it with water and milk in a stone mortar to make a bitter, sacred drink, which brings alertness, a racing pulse and an ecstatic wakefulness. The song that accompanies the pressing is older than their law.\n\n## Where it is found\n\nIt grows on the stony slopes of the [[Mountain of Kharveth]] and the heights near [[Mithratal City]].\n\n## In play\n\nA cup of the drink grants a priest advantage on Wisdom checks for an hour but raises the heartbeat and wrecks sleep that night. The identity of the true haoma is a matter of dispute among the priesthood and of fierce loyalty among their schools.",
+      "dmNotes": "Basis: ephedra (Ephedra sp.), one candidate for the Zoroastrian and Vedic ritual drink haoma/soma, a stimulant containing ephedrine; the identity of haoma is genuinely disputed among scholars, so treat this as the setting's answer, not a historical claim.",
+      "fields": {
+        "scientificName": "Ephedra major",
+        "foundIn": "Mountain of Kharveth, Mithratal City",
+        "biome": "Stony heights",
+        "rarity": "Rare",
+        "effects": "• The sacred drink grants advantage on Wisdom checks for an hour.\n• Raises the pulse and spoils the next night's sleep.\n• Its true identity is hotly contested.",
+        "lore": "The priests say the drink was brought down from the mountain by the first man who saw the dawn."
+      },
+      "tags": [
+        "Flora",
+        "Sacred",
+        "Acheaorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/flora-3"
+    },
+    {
+      "slug": "rye-ghost",
+      "kind": "flora",
+      "name": "Rye-Ghost",
+      "summary": "A black horn growing in damp rye, which brings burning limbs, visions and a village-wide madness.",
+      "body": "A purple-black, hornlike growth that pushes out of the ears of damp rye in a wet summer. A baker who grinds it into bread feeds a whole village a quiet poison: burning limbs, convulsions, visions and a dancing madness that sweeps a town. In ages past a plague of it was blamed on witches.\n\n## Where it is found\n\nIt appears in cold, wet summers in the rye-fields of the [[Latium Plains]] and the northern barns near [[Anticata]].\n\n## In play\n\nA village struck by it is a mystery for the party: the symptoms spread by bread, not by touch. Learned characters may suspect the grain (Medicine, DC 15). A miller who sells ergot-tainted flour may be innocent or may have been paid to be careless.",
+      "dmNotes": "Basis: real ergot (Claviceps purpurea), a fungus of rye and other grains that causes ergotism (convulsive and gangrenous forms); outbreaks were later attributed to witchcraft or divine wrath, and ergot has been proposed as the cause of historical mass hysterias.",
+      "fields": {
+        "scientificName": "Claviceps purpurea",
+        "foundIn": "Latium Plains, Anticata",
+        "biome": "Wet grain field",
+        "rarity": "Uncommon",
+        "effects": "• Poisoned bread: burning limbs, convulsions, visions.\n• Spreads by bread, not by touch.\n• Past outbreaks were blamed on witches.",
+        "lore": "The old women say a village that dances in the street has been fed something it should not have."
+      },
+      "tags": [
+        "Flora",
+        "Fungus",
+        "Invictian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/flora-3"
+    },
+    {
+      "slug": "fly-cap",
+      "kind": "flora",
+      "name": "Fly-Cap",
+      "summary": "A red, white-spotted mushroom of the birch woods, used to stun flies, summon visions and unsettle the unwary.",
+      "body": "A bright red toadstool with a white-spotted cap, growing in clusters under birch and pine. Crumbled in milk it stuns flies, hence the name; eaten, it brings sickness, wild visions and a long, strange sleep. The shamans of the northern forest use it in their rites and are unwilling to say how.\n\n## Where it is found\n\nIt grows beneath the birches of the [[Foloicauria Forest]] and in the high woods near [[Vael’Tharan Mountain]].\n\n## In play\n\nEating it calls for a Constitution saving throw, DC 13, or the eater is poisoned and sees visions for several hours. A shaman's rite using it is a source of prophecy or of a good deal of vomiting. The bright cap is a warning, and children are told never to touch it.",
+      "dmNotes": "Basis: real fly agaric (Amanita muscaria), a hallucinogenic and toxic mushroom used by some northern Eurasian peoples in ritual and long associated with fairy-tale imagery.",
+      "fields": {
+        "scientificName": "Amanita muscaria",
+        "foundIn": "Foloicauria Forest, Vael'Tharan Mountain",
+        "biome": "Birch woods",
+        "rarity": "Common",
+        "effects": "• Eaten: Con save DC 13 or poisoned with visions.\n• Crumbled in milk, stuns flies.\n• Shamans use it in rites.",
+        "lore": "The woodcutters say the mushroom grows where the forest has a dream."
+      },
+      "tags": [
+        "Flora",
+        "Fungus",
+        "Invictian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/flora-3"
+    },
+    {
+      "slug": "sand-truffle",
+      "kind": "flora",
+      "name": "Sand-Truffle",
+      "summary": "A buried desert fungus that fruits after the winter rains and feeds caravans, hunters and the very lucky.",
+      "body": "A pale lump the size of a plum that forms under the sand in the wet season, with no stalk or cap. It betrays itself only by a faint crack in the ground and a smell that the nomads' dogs can find from yards away. Fresh it is soft and earthy and sweet; it is the first meal of the spring, and a good hunt can feed a camp.\n\n## Where it is found\n\nIt fruits in the sandy hollows of the [[Dasht-a Khaliq]] after winter rain and in the dry steppe near [[Zi'rzamin Dar'a]].\n\n## In play\n\nA hunter with a trained dog gathers a meal in an hour (Survival, DC 12). A bag of them is a valuable treat in a city market. They do not keep, and a noble who wants some by Tuesday needs a very fast rider.",
+      "dmNotes": "Basis: real desert truffle (Terfezia arenaria and related species), a fungus of arid regions of the Near East and North Africa, gathered after the winter rains and recorded as food in Greek and Roman writing.",
+      "fields": {
+        "scientificName": "Terfezia arenaria",
+        "foundIn": "Dasht-a Khaliq, Zi'rzamin Dar'a",
+        "biome": "Desert",
+        "rarity": "Uncommon",
+        "effects": "• Gathered after winter rain, easy to miss.\n• A trained dog finds them by smell.\n• Fresh only: they do not keep.",
+        "lore": "The nomads say the first rain drops a seed of sweetness into the sand, and the dogs agree."
+      },
+      "tags": [
+        "Flora",
+        "Fungus",
+        "Acheaorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/flora-3"
+    },
+    {
+      "slug": "legion-barley",
+      "kind": "flora",
+      "name": "Legion Barley",
+      "summary": "The hardy grain of the poor and the punished, boiled into soldier's porridge and given to gladiators and soldiers who disgraced themselves.",
+      "body": "A short, hardy grain with bearded heads that ripens fast and grows in thin soil. It is the bread of the poor and the porridge of the army, and a legion that has been disgraced is fed barley instead of wheat for a season, a hard small humiliation that the soldiers remember. Gladiators were known as barley-men, for the diet that built their bodies.\n\n## Where it is found\n\nIt covers the thin fields of [[Argotiko]] and the dry terraces of [[Falecosa]].\n\n## In play\n\nA ration of barley is cheap, filling and unglamorous. A soldier sentenced to it is a known figure and has a grievance. Brewers use it for beer, and a good strong barley wine is a ritual drink of the coast.",
+      "dmNotes": "Basis: real barley (Hordeum vulgare), the staple grain of the poor and of ancient armies; Roman soldiers punished for cowardice could be given barley instead of wheat, and gladiators were called hordearii, 'barley men'.",
+      "fields": {
+        "scientificName": "Hordeum vulgare",
+        "foundIn": "Argotiko, Falecosa",
+        "biome": "Thin field",
+        "rarity": "Common",
+        "effects": "• A cheap, filling porridge ration.\n• A punishment diet for disgraced soldiers.\n• Brewed into beer and barley wine.",
+        "lore": "A man who has eaten barley for a season does not forget who gave it to him."
+      },
+      "tags": [
+        "Flora",
+        "Grain",
+        "Hellenorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/flora-3"
+    },
+    {
+      "slug": "old-emmer",
+      "kind": "flora",
+      "name": "Old Emmer",
+      "summary": "An ancient hulled wheat, the grain of the oldest altars and the first bread of the plateau.",
+      "body": "A hulled wheat so old that it was in the field before the first city. Its grains cling to their husks and must be pounded loose, and its bread is dense and nutty. The priests still use it at their altars, and the old families of the plateau will serve a loaf of it at a feast, to remind guests of how far back they go.\n\n## Where it is found\n\nIt is grown in small plots near [[Persevalis City]] and in the fields of [[Mavelon City]], tended for its ritual use.\n\n## In play\n\nA slice of emmer bread is the proper offering to the old gods. A thresher who must pound the husk loose needs patience. A family that still grows it is proud of its past, and may be hiding a good deal more of it.",
+      "dmNotes": "Basis: real emmer wheat (Triticum dicoccum), one of the first domesticated cereals, a hulled grain used in ancient bread and offerings, including the Roman far used in ritual (confarreatio).",
+      "fields": {
+        "scientificName": "Triticum dicoccum",
+        "foundIn": "Persevalis City, Mavelon City",
+        "biome": "Small field",
+        "rarity": "Uncommon",
+        "effects": "• Dense, nutty bread; the offering of the old altars.\n• Hulled: pounded loose by hand.\n• Grown by families proud of their past.",
+        "lore": "A loaf of emmer on the table says: we were here first."
+      },
+      "tags": [
+        "Flora",
+        "Grain",
+        "Acheaorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/flora-3"
+    },
+    {
+      "slug": "river-flax",
+      "kind": "flora",
+      "name": "River Flax",
+      "summary": "A slender blue-flowered crop soaked in pools and beaten into linen, the cloth of priests, sails and shrouds.",
+      "body": "A slender annual with sky-blue flowers that last a morning. Pulled before it seeds, soaked in a stinking pool until the stems rot, beaten and combed, it yields long pale fibres that spin into linen. Linen is the cloth of priests, the cloth of sails, the cloth of the dead. The seed, pressed, gives an oil.\n\n## Where it is found\n\nIt is grown along the river meadows of the [[River Tiberius]] and the damp fields near [[Fucostia]].\n\n## In play\n\nThe retting pools stink so badly that they are sited downwind of the village. A bolt of fine linen is a rich woman's gift and a ship's sail is its own fortune. A character who deals in flax and linen has a reputation for patience and a long, sour smell.",
+      "dmNotes": "Basis: real flax (Linum usitatissimum), cultivated since the Neolithic for linen, which was the principal textile of Egypt and widely used for sails, priestly garments and burial wrappings; retting in pools is notoriously foul-smelling.",
+      "fields": {
+        "scientificName": "Linum usitatissimum",
+        "foundIn": "River Tiberius, Fucostia",
+        "biome": "River meadow",
+        "rarity": "Common",
+        "effects": "• Retted and combed into linen fibre.\n• Linen is cloth for priests, sails and shrouds.\n• Seed gives a lamp and cooking oil.",
+        "lore": "The women who spin it say a good thread begins in the nose."
+      },
+      "tags": [
+        "Flora",
+        "Fibre",
+        "Invictian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/flora-3"
+    },
+    {
+      "slug": "rope-hemp",
+      "kind": "flora",
+      "name": "Rope-Hemp",
+      "summary": "A tall fibre plant of the steppe, twisted into the cords of ships, bows and gallows.",
+      "body": "A tall, rank, fast-growing plant of the steppe and river valleys with leaves like a hand. Its long, tough stem fibres are twisted into the strongest cordage the world knows: ship's cable, bow-strings, nets and, in the end, the hangman's rope. The horse-peoples carry it in sacks, and the burners of it in their tents breathe a heavy smoke that they say clears their heads.\n\n## Where it is found\n\nIt covers whole valleys of the [[Malaunian Steppe]] and the northern reaches of the [[Elysian Plains]].\n\n## In play\n\nA coil of hemp rope is a standard adventurer's kit (50 feet, DC 17 to break). Breathing the smoke of burning seed calls for a Wisdom saving throw, DC 10, or the character is mildly intoxicated and giggly for an hour. The steppe riders consider it a gift and nothing more.",
+      "dmNotes": "Basis: real hemp (Cannabis sativa), a major fibre crop for rope and sailcloth in antiquity; Herodotus describes Scythians burning hemp seeds in tents and inhaling the vapour.",
+      "fields": {
+        "scientificName": "Cannabis sativa",
+        "foundIn": "Malaunian Steppe, Elysian Plains",
+        "biome": "Steppe valley",
+        "rarity": "Common",
+        "effects": "• Fibre twists into strong rope and bowstrings.\n• Seed smoke: mild intoxication (Wis save DC 10).\n• Steppe riders carry it in sacks.",
+        "lore": "A horse-rider's whole kit is leather, felt and hemp, and he can tell you which is which blind."
+      },
+      "tags": [
+        "Flora",
+        "Fibre",
+        "Acheaorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/flora-3"
+    },
+    {
+      "slug": "tree-wool",
+      "kind": "flora",
+      "name": "Tree-Wool",
+      "summary": "A shrub with bolls of white fluff that grows on plants, not sheep, to the astonishment of every visiting merchant.",
+      "body": "A knee-high shrub with yellow flowers that give way to round green pods. When the pods split, they reveal a white fluff that is picked, cleaned, carded and spun into a soft, light thread. Travellers from the north swear they saw wool growing on a tree and are not believed. The women of the south spin it, and the cloth is cool in summer and kind to a baby's skin.\n\n## Where it is found\n\nIt is grown on irrigated plots in the south of the [[Dasht-a Khaliq]] and near [[Qa'zshahrv'in]].\n\n## In play\n\nA length of the pale cloth is a gift for a child. A merchant who sells it as wool to a gullible buyer is a cheat; one who sells it as tree-wool and charges honestly is a business partner. The picking is slow and hard on the hands.",
+      "dmNotes": "Basis: real cotton (Gossypium herbaceum), cultivated in the Near East and India; Herodotus and later writers reported 'wool-bearing trees' to astonished Greek audiences, since cotton was rare in the Mediterranean world.",
+      "fields": {
+        "scientificName": "Gossypium herbaceum",
+        "foundIn": "Dasht-a Khaliq, Qa'zshahrv'in",
+        "biome": "Irrigated plot",
+        "rarity": "Uncommon",
+        "effects": "• White bolls spin into a cool, soft thread.\n• Mistaken by outsiders for wool grown on trees.\n• Slow, hard picking.",
+        "lore": "Southern children are told that sheep dream of this shrub."
+      },
+      "tags": [
+        "Flora",
+        "Fibre",
+        "Acheaorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/flora-3"
+    },
+    {
+      "slug": "sweet-root",
+      "kind": "flora",
+      "name": "Sweet-Root",
+      "summary": "A woody root as sweet as honey, chewed by thirsty travellers and brewed into the apothecary's cure for a cough.",
+      "body": "A bushy perennial with pale purple flower spikes and a long, deep yellow root. Chewed raw, the root is sweet as sugar and quenches thirst; brewed, it soothes a sore throat and a sore stomach; mixed with other herbs it sweetens bitter medicines to something a child will swallow. The roots of the old plants are as thick as a wrist.\n\n## Where it is found\n\nIt grows on the dry river-flats of the [[Dasht-a Khaliq]] and the stony fields near [[Shir'abad D'ar]].\n\n## In play\n\nA piece chewed in the desert eases thirst for an hour (advantage on a saving throw against thirst-related exhaustion). A healer's sweet-root tea soothes a cough. Too much, though, raises the blood's pressure and the temper.",
+      "dmNotes": "Basis: real licorice (Glycyrrhiza glabra), whose sweet root was used by Greeks and Romans as a thirst-quencher and medicine; Theophrastus and Dioscorides describe 'Scythian root'; Tutankhamun's tomb contained licorice.",
+      "fields": {
+        "scientificName": "Glycyrrhiza glabra",
+        "foundIn": "Dasht-a Khaliq, Shir'abad D'ar",
+        "biome": "Dry river flat",
+        "rarity": "Common",
+        "effects": "• Chewed root eases thirst for an hour.\n• Tea soothes a cough and a stomach.\n• Sweetens bitter medicines.",
+        "lore": "A traveller who finds it in the waste says a quiet thank-you to whoever planted it."
+      },
+      "tags": [
+        "Flora",
+        "Medicine",
+        "Acheaorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/flora-3"
+    },
+    {
+      "slug": "hedge-mallow",
+      "kind": "flora",
+      "name": "Hedge-Mallow",
+      "summary": "A common soft-leaved weed that feeds the poor, soothes the sore and graces the philosophers' simple meal.",
+      "body": "A humble sprawling weed of hedgerows and waste ground, with pink striped flowers and soft round leaves. The poor boil the leaves as a green; the healer makes a poultice of them for a boil; the philosopher, who has read that a wise man needs little, eats a dish of it with a pointed look. It is everywhere and costs nothing.\n\n## Where it is found\n\nIt grows beside every road of the [[Latium Plains]] and every village ditch of [[Anticata]].\n\n## In play\n\nA mallow poultice eases a swollen sore (no check). A wholesome green in a poor household's stew, it can be gathered in any damp lane. A character who is starving can find it nearly anywhere (Survival, DC 8), if not a lot of it.",
+      "dmNotes": "Basis: real common mallow (Malva sylvestris), eaten as a vegetable and used as a poultice in Greek and Roman medicine; Horace boasts of a diet of mallow, chicory and olives.",
+      "fields": {
+        "scientificName": "Malva sylvestris",
+        "foundIn": "Latium Plains, Anticata",
+        "biome": "Roadside",
+        "rarity": "Common",
+        "effects": "• A boiled green for the poor.\n• Leaves make a soothing poultice.\n• Easily foraged in any damp lane.",
+        "lore": "A philosopher's dinner is a plate of mallow and a long speech about it."
+      },
+      "tags": [
+        "Flora",
+        "Herb",
+        "Invictian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/flora-3"
+    },
+    {
+      "slug": "soldiers-nettle",
+      "kind": "flora",
+      "name": "Soldier's Nettle",
+      "summary": "A stinging weed that grows beside every old camp, rubbed on skin by shivering legions to warm their limbs.",
+      "body": "A tall, bristly, ill-tempered herb whose hairs inject an acid that raises white welts. The legions of the cold northern marches took to rubbing it on their legs to drive the numbness out of them, and a camp-site is marked by a belt of it, since the plant grows richest where a company slept. Boiled, it is a spring tonic and a cheap green.\n\n## Where it is found\n\nIt grows around old camp-sites and midden heaps along the roads of the [[Latium Plains]] and the border country near [[Anticata]].\n\n## In play\n\nA patch of nettle is a sign of past habitation, a useful clue to an old camp. Handling it bare-handed deals 1 damage and a rash. Boiled nettle soup is a spring ration with no sting, and good for those who are brave enough to gather it.",
+      "dmNotes": "Basis: real stinging nettle (Urtica dioica), a sign of past human settlement, used as food and tonic; Roman soldiers in Britain reputedly flogged themselves with nettles to keep warm, according to Roman writers.",
+      "fields": {
+        "scientificName": "Urtica dioica",
+        "foundIn": "Latium Plains, Anticata",
+        "biome": "Old camp-site",
+        "rarity": "Common",
+        "effects": "• Stings bare skin (1 damage and a rash).\n• Boiled, a spring tonic and cheap green.\n• A thick patch marks an old camp.",
+        "lore": "A soldier who flogs himself with it is either very cold or very bored."
+      },
+      "tags": [
+        "Flora",
+        "Herb",
+        "Invictian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/flora-3"
+    }
+  ]
+}

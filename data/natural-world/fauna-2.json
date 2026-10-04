@@ -1,0 +1,546 @@
+{
+  "format": "asetheria-codex",
+  "note": "Original fauna, batch 2 of 3: birds. Each entry is written for Asetheria; the real bird it is grounded in is named in the DM notes under 'Basis'. These are ecology entries, not stat blocks. No third-party text is reproduced.",
+  "entries": [
+    {
+      "slug": "flame-wader",
+      "kind": "fauna",
+      "name": "Flame-Wader",
+      "summary": "A tall pink wading bird that stands in salt lagoons in thousands, a living sunset and a dish for emperors.",
+      "body": "A long-necked, pink-white wader with legs like reeds and a bill bent like a hook, standing in the shallows of salt lagoons in flocks of thousands. At dusk the whole lagoon blushes. The colour comes from what it eats, and the bird pales in captivity. Emperors serve its tongue at feasts and the poets compare it to a flame.\n\n## Where it is found\n\nIt crowds the salt lagoons of the [[Kaspiran Seas]] and the shallow bays near [[Azadeh Atoll]].\n\n## In play\n\nA flock rising off the water is a sight no traveller forgets. The tongue is a rare dish, and a banquet that serves it is a banquet to remember. A character who lingers on the shore at sunset has seen something beautiful.",
+      "dmNotes": "Basis: real greater flamingo (Phoenicopterus roseus), a pink filter-feeding wader of salt lagoons; the Roman gourmet Apicius praised flamingo tongues, and the emperor Elagabalus is said to have served platters of them.",
+      "fields": {
+        "scientificName": "Phoenicopterus roseus",
+        "foundIn": "Kaspiran Seas, Azadeh Atoll",
+        "biome": "Salt lagoon",
+        "rarity": "Uncommon",
+        "habitat": "Shallow salt lagoons and tidal flats",
+        "diet": "Brine shrimp, algae, small molluscs",
+        "behavior": "Nests in huge colonies; the pink fades in captivity as its diet changes.",
+        "harvest": "Tongues as an emperor's delicacy; feathers for fans.",
+        "effects": "• A rising flock is a famous sight.\n• Its tongue is a luxury dish.\n• Colour fades in captivity.",
+        "lore": "The sailors say the sun does not set until the flamingos have gone to bed."
+      },
+      "tags": [
+        "Fauna",
+        "Bird",
+        "Acheaorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/fauna-2"
+    },
+    {
+      "slug": "bill-bag-pelican",
+      "kind": "fauna",
+      "name": "Bill-Bag Pelican",
+      "summary": "A huge, patient, pouch-billed bird that scoops fish by the bucketful and appears on the signs of fishermen.",
+      "body": "A huge white-grey bird with a long hooked bill and a bag of loose skin beneath it that can hold a bucketful of fish. It fishes in groups, herding a school into the shallows and scooping them up in a sweep. A good bird is a good sign for a village, and the stories say a mother tears her own breast to feed her young.\n\n## Where it is found\n\nIt nests on the reed islands of the [[Maeotis Helos]] and the lagoons by [[Marshroot Grove]].\n\n## In play\n\nA pelican pair patrolling a bay means a rich haul for the boats. Their pouches are a sailor's joke and a fisherman's comedy. A character who needs to steal a boat's catch can learn a good deal from the bird.",
+      "dmNotes": "Basis: real Dalmatian pelican (Pelecanus crispus), a large fish-eating bird of the eastern Mediterranean and Black Sea wetlands that fishes cooperatively; the medieval legend of the pelican feeding its young with its blood arises from its habit of pressing its bill to its breast.",
+      "fields": {
+        "scientificName": "Pelecanus crispus",
+        "foundIn": "Maeotis Helos, Marshroot Grove",
+        "biome": "Lagoon and marsh",
+        "rarity": "Uncommon",
+        "habitat": "Shallow lakes, lagoons and reed islands",
+        "diet": "Fish, caught by pouch",
+        "behavior": "Fishes in cooperative lines; presses its bill to its breast to feed chicks.",
+        "harvest": "Pouches as bags; feathers.",
+        "effects": "• Patrolling pairs mark a rich fishery.\n• Hold a bucketful of fish in the pouch.\n• Legend says it feeds its young with blood.",
+        "lore": "Fishermen paint one on the prow for luck, and sell the luck to others."
+      },
+      "tags": [
+        "Fauna",
+        "Bird",
+        "Hellenorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/fauna-2"
+    },
+    {
+      "slug": "roof-stork",
+      "kind": "fauna",
+      "name": "Roof-Stork",
+      "summary": "A tall black-and-white stork that nests on chimneys and temple roofs, a sign of luck for the house beneath.",
+      "body": "A tall, white, black-winged bird with red legs and a long red bill, building a great pile of sticks on a chimney or a temple roof and returning to it year after year. It eats frogs, snakes and mice, and it migrates south in the autumn in great kettles. A household whose roof carries a nest is blessed, and a family that harms the birds is shunned.\n\n## Where it is found\n\nIt nests on the roofs of [[Falecosa]] and the temples of [[Helionyx City]].\n\n## In play\n\nA stork nest on the inn is a sign of good custom. The return of the stork in spring is a village celebration. A stork killed on a roof is a crime; a character who wants to be believed uses the bird as his witness.",
+      "dmNotes": "Basis: real white stork (Ciconia ciconia), a migratory wading bird that nests on rooftops across Europe and the Near East; ancient Greek law (the Pelargikon) and folklore treated storks as protected and filial birds.",
+      "fields": {
+        "scientificName": "Ciconia ciconia",
+        "foundIn": "Falecosa, Helionyx City",
+        "biome": "Rooftop and wetland",
+        "rarity": "Common",
+        "habitat": "Rooftops, wetlands and meadows",
+        "diet": "Frogs, snakes, mice, insects",
+        "behavior": "Returns to the same nest each year; migrates south in great flocks.",
+        "harvest": "None; protected by custom.",
+        "effects": "• A roof nest is a sign of good luck.\n• Returns each spring as a village celebration.\n• Killing one is a crime in many towns.",
+        "lore": "The Hellenorian proverb: a stork on the roof, and the house will not go hungry."
+      },
+      "tags": [
+        "Fauna",
+        "Bird",
+        "Invictian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/fauna-2"
+    },
+    {
+      "slug": "crowned-hoopoe",
+      "kind": "fauna",
+      "name": "Crowned Hoopoe",
+      "summary": "A pinkish bird with a fan of black-tipped feathers on its head, a bad smell at the nest and a king's crown in the tales.",
+      "body": "A pinkish-brown, black-and-white-barred bird with a long curved bill and a crest it fans out like a crown when it lands. The nest smells foul, which the old naturalists took as proof of its uncleanness, and the folk-tales call it a prince turned to a bird. It struts across lawns, probing for insects with its long beak.\n\n## Where it is found\n\nIt forages on the dry lawns of [[Persevalis City]] and the garden terraces of [[Argotiko]].\n\n## In play\n\nA hoopoe on the doorstep is an omen of a visitor, good or bad. A character who keeps one as a pet quickly discovers the smell. The bird figures in a thousand tales as a messenger.",
+      "dmNotes": "Basis: real Eurasian hoopoe (Upupa epops), a crested insectivore that appears in Greek myth (Tereus transformed) and in the Persian Conference of the Birds as leader of the flock; its nest smells foul from a secretion of the uropygial gland.",
+      "fields": {
+        "scientificName": "Upupa epops",
+        "foundIn": "Persevalis City, Argotiko",
+        "biome": "Dry lawn and garden",
+        "rarity": "Common",
+        "habitat": "Open ground with scattered trees",
+        "diet": "Insects, grubs, small lizards",
+        "behavior": "Fans a crest on landing; its nest smells foul to deter predators.",
+        "harvest": "None; protected in some places by custom.",
+        "effects": "• Its arrival can be read as an omen.\n• Nests smell foul.\n• Leader of the birds in the plateau's tales.",
+        "lore": "The poets say it wears the crown because it was once the king, and has not forgiven anyone."
+      },
+      "tags": [
+        "Fauna",
+        "Bird",
+        "Acheaorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/fauna-2"
+    },
+    {
+      "slug": "night-singer",
+      "kind": "fauna",
+      "name": "Night-Singer",
+      "summary": "A small brown bird whose evening song is the most beautiful sound in the garden and the poet's favourite excuse.",
+      "body": "A small, plain brown bird, hard to see in the thicket and impossible to ignore at night. Its song, long, rich, rippling and heartbroken, is louder than anything its size has a right to produce, and it sings by night when the males compete for mates. The rich pay for singers in cages; the wise leave them in the dark.\n\n## Where it is found\n\nIt sings from the thickets of the garden terraces in [[Persevalis City]] and the groves around [[Delphara City]].\n\n## In play\n\nA song in the dark is the best lullaby on the plateau and the worst alarm: one does not hear the thief who comes in under it. A character who needs to hide a conversation does well to meet beneath one.",
+      "dmNotes": "Basis: real common nightingale (Luscinia megarhynchos), a small brown songbird famed for its night song in Greek myth (Philomela) and Persian poetry, where the nightingale's love for the rose is a classic image.",
+      "fields": {
+        "scientificName": "Luscinia megarhynchos",
+        "foundIn": "Persevalis City, Delphara City",
+        "biome": "Garden thicket",
+        "rarity": "Common",
+        "habitat": "Dense thickets near water",
+        "diet": "Insects, berries",
+        "behavior": "Males sing loudly through the night to attract a mate.",
+        "harvest": "Caged for song by the wealthy; wild is better.",
+        "effects": "• A song in the dark covers a quiet conversation.\n• Caged singers are a rich man's vanity.\n• Hearing one is a poet's cue.",
+        "lore": "Poets say it sings to the rose, and gardeners say it sings to the cat."
+      },
+      "tags": [
+        "Fauna",
+        "Bird",
+        "Acheaorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/fauna-2"
+    },
+    {
+      "slug": "spring-swallow",
+      "kind": "fauna",
+      "name": "Spring-Swallow",
+      "summary": "A forked-tailed bird that returns each year to the same eave, whose arrival the children of the coast sing into spring.",
+      "body": "A glossy blue-black bird with a rust-red throat and a long forked tail, nesting in cup-shaped mud nests beneath the eaves. It returns each spring from the far south, and its arrival is greeted with songs and a small feast in every village. A family that has a swallow nest is lucky, and one that knocks it down is not.\n\n## Where it is found\n\nIt nests under the eaves of every village of the [[Latium Plains]] and the [[Elysian Plains]].\n\n## In play\n\nThe first swallow is a signal to begin the planting. Children go door to door singing a swallow-song for a gift. Destroying a nest is an offence against the household gods, and the village will not forget it.",
+      "dmNotes": "Basis: real barn swallow (Hirundo rustica), a migratory songbird that nests under eaves; the Greek 'swallow song' (chelidonisma) was sung by children going door-to-door to celebrate its return.",
+      "fields": {
+        "scientificName": "Hirundo rustica",
+        "foundIn": "Latium Plains, Elysian Plains",
+        "biome": "Village eave",
+        "rarity": "Common",
+        "habitat": "Villages, barns and open country",
+        "diet": "Flying insects",
+        "behavior": "Returns each spring to the same nest; builds with mud pellets.",
+        "harvest": "None; protected by custom.",
+        "effects": "• Its return signals the start of planting.\n• A nest on the house is good luck.\n• Destroying a nest offends the household gods.",
+        "lore": "The children's song says: she has come, she has come, bringing the fair season."
+      },
+      "tags": [
+        "Fauna",
+        "Bird",
+        "Hellenorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/fauna-2"
+    },
+    {
+      "slug": "never-landing-swift",
+      "kind": "fauna",
+      "name": "Never-Landing Swift",
+      "summary": "A dark scythe-winged bird that sleeps, eats and mates on the wing, and is said to be a soul that has not yet found rest.",
+      "body": "A sooty, long-winged, scythe-shaped bird that screams across the evening sky in packs. It eats, drinks, sleeps and mates in flight, touching earth only to nest in a crevice, and its feet are so short that it cannot take off from flat ground. The coast says it is the soul of someone who died unhappy and is still looking for the way down.\n\n## Where it is found\n\nIt wheels above the cliffs of [[Carianea]] and the towers of [[Aeterna City]].\n\n## In play\n\nA swift on the ground is a stranded bird, and a character who picks one up and throws it into the air has done a kindness. Their screaming flocks over a city at dusk are a sign of a warm night. Children try to catch one and fail.",
+      "dmNotes": "Basis: real common swift (Apus apus), a migratory aerial insectivore that can spend months airborne and cannot take off easily from level ground; its tiny feet gave the genus its name (apous, 'footless').",
+      "fields": {
+        "scientificName": "Apus apus",
+        "foundIn": "Carianea, Aeterna City",
+        "biome": "Cliff and tower",
+        "rarity": "Common",
+        "habitat": "Cliffs, towers and rooftops",
+        "diet": "Flying insects, caught on the wing",
+        "behavior": "Eats, sleeps and mates in flight; cannot take off from the ground.",
+        "harvest": "None.",
+        "effects": "• A swift on the ground must be lifted and thrown into the air.\n• Screaming flocks mark a warm evening.\n• Folk belief calls it a restless soul.",
+        "lore": "The old women say a swift's cry is a prayer for someone who still has not been buried."
+      },
+      "tags": [
+        "Fauna",
+        "Bird",
+        "Invictian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/fauna-2"
+    },
+    {
+      "slug": "owl-of-the-wise-goddess",
+      "kind": "fauna",
+      "name": "Owl of the Wise Goddess",
+      "summary": "A small, yellow-eyed owl that hunts by day, perched on temple pillars and stamped on the coin of a city.",
+      "body": "A small, round-headed owl with an intent yellow stare and a habit of bobbing its head. It hunts at dusk and by day, perched on a temple pillar or a fence post, and takes mice and beetles. A city adopted it as its sign and stamped it on the coin; it is the wise goddess's bird, and the wise say a bad omen if it flies in on the left.\n\n## Where it is found\n\nIt perches on the pillars of [[Delphara City]] and the old walls of [[Corinth City]].\n\n## In play\n\nAn owl on a temple roof is a sign of the goddess's attention. A coin with the owl is respected anywhere on the coast, and a forger who copies it is punished doubly. A character who bobs back at one is thought odd.",
+      "dmNotes": "Basis: real little owl (Athene noctua), the owl of Athena stamped on Athenian silver tetradrachms; it is diurnal and crepuscular and commonly sits on ruins and posts in the Mediterranean.",
+      "fields": {
+        "scientificName": "Athene noctua",
+        "foundIn": "Delphara City, Corinth City",
+        "biome": "Ruin and temple",
+        "rarity": "Common",
+        "habitat": "Rocky ground, ruins and old walls",
+        "diet": "Mice, beetles, small birds",
+        "behavior": "Active by day and dusk; bobs its head when curious.",
+        "harvest": "None; protected as the goddess's bird.",
+        "effects": "• A sign of the wise goddess's favour.\n• Stamped on the city's silver coin.\n• Flying in on the left is a bad omen.",
+        "lore": "The Hellenorians say the goddess keeps the owl so she can see in the dark of men's minds."
+      },
+      "tags": [
+        "Fauna",
+        "Bird",
+        "Hellenorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/fauna-2"
+    },
+    {
+      "slug": "giant-eagle-owl",
+      "kind": "fauna",
+      "name": "Giant Eagle-Owl",
+      "summary": "A huge tufted owl whose booming call frightens the village and whose silent flight takes a hare at night.",
+      "body": "A huge, tawny, tufted owl with orange eyes as wide as a coin and a deep boom of a call that drifts across a valley at night. It nests in cliffs and ruins, and takes hares, hedgehogs and the occasional lamb. The country folk see an ill omen in its cry and a reason to bolt the door.\n\n## Where it is found\n\nIt calls from the cliffs of the [[Zaruk'thal Spine]] and the ruins of [[R’eyshar]].\n\n## In play\n\nAn owl's booming call at night over a camp is an unsettling start to a watch. It can lift a small animal off the ground. A character who hears it on the day of a death has a good reason to think there is a connection.",
+      "dmNotes": "Basis: real Eurasian eagle-owl (Bubo bubo), one of the largest owls, nesting on cliffs and in ruins across Europe and the Near East; Roman writers (Pliny, Livy) treated owl cries as ill omens, especially the eagle-owl's.",
+      "fields": {
+        "scientificName": "Bubo bubo",
+        "foundIn": "Zaruk'thal Spine, R'eyshar",
+        "biome": "Cliff and ruin",
+        "rarity": "Uncommon",
+        "habitat": "Rocky cliffs, ruins and gorges",
+        "diet": "Hares, hedgehogs, rats, small birds",
+        "behavior": "Booming call at night; hunts in silent flight.",
+        "harvest": "None.",
+        "effects": "• Its call is read as an ill omen.\n• Can carry off small game.\n• Hunts in silent flight.",
+        "lore": "The Imperial saying: an owl at a death means little, and an owl at a birth means something."
+      },
+      "tags": [
+        "Fauna",
+        "Bird",
+        "Acheaorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/fauna-2"
+    },
+    {
+      "slug": "kings-eagle",
+      "kind": "fauna",
+      "name": "King's Eagle",
+      "summary": "A huge dark eagle that kills lambs, is carried on the standards of the legions and takes the sky as its own.",
+      "body": "A huge, dark-brown eagle with a golden nape and a wingspan that shades a field. It rides the mountain updrafts for hours, stoops on hares and fox-cubs, and has been known to take a lamb from a flock in front of its shepherd. The legions carry its image on their standards, and an eagle's flight before a battle is the best omen a general can ask for.\n\n## Where it is found\n\nIt nests on the high crags of the [[Olympus Mountain Range]] and the [[Cloudspine Ridge]], and its image tops every standard of [[Aeterna City]].\n\n## In play\n\nA pair above the field of battle is read as a sign of favour. A falconer who has trained one is a rare and costly specialist. A hunter's family knows to bring the flock in at the sight of its shadow.",
+      "dmNotes": "Basis: real golden eagle (Aquila chrysaetos), a large raptor of mountain country and a royal and military symbol across Eurasia; the Roman aquila was the legion's standard, and eagle omens were read before battle.",
+      "fields": {
+        "scientificName": "Aquila chrysaetos",
+        "foundIn": "Olympus Mountain Range, Cloudspine Ridge, Aeterna City",
+        "biome": "Mountain",
+        "rarity": "Uncommon",
+        "habitat": "High crags and mountain updrafts",
+        "diet": "Hares, marmots, young lambs, carrion",
+        "behavior": "Soars for hours; stoops at great speed.",
+        "harvest": "Trained by falconers; feathers for arrow-fletching and standards.",
+        "effects": "• A flight before battle is read as an omen.\n• A trained bird is a rare and costly asset.\n• Takes lambs from unattended flocks.",
+        "lore": "Legionaries say the eagle stands for the emperor because neither has ever been seen to land."
+      },
+      "tags": [
+        "Fauna",
+        "Bird",
+        "Invictian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/fauna-2"
+    },
+    {
+      "slug": "bone-breaker",
+      "kind": "fauna",
+      "name": "Bone-Breaker",
+      "summary": "A rust-breasted vulture with a bone-pale head that drops bones from the sky to crack them for the marrow.",
+      "body": "A long-winged, rust-breasted vulture with a tuft of black bristle beneath its beak. It feeds on bones, carrying them high and dropping them on a rock to crack the marrow, and so has a reputation for killing without hunting. The poet Aeschylus is said to have died when one mistook his bald head for a stone.\n\n## Where it is found\n\nIt nests on the high crags of the [[Mountain of Kharveth]] and the cliffs of the [[Zaruk'thal Spine]].\n\n## In play\n\nA bone-breaker's drop zone is littered with white splinters. A character who finds the splinters knows the bird has a nest nearby. A shepherd who hears the crack of a dropped bone knows a flock may have lost its weakest.",
+      "dmNotes": "Basis: real bearded vulture or lammergeier (Gypaetus barbatus), a bone-eating vulture that drops bones from height to crack them; legend says the playwright Aeschylus was killed when an eagle (probably this bird) dropped a tortoise on his bald head.",
+      "fields": {
+        "scientificName": "Gypaetus barbatus",
+        "foundIn": "Mountain of Kharveth, Zaruk'thal Spine",
+        "biome": "High crag",
+        "rarity": "Rare",
+        "habitat": "High cliffs and mountain ridges",
+        "diet": "Bones and marrow, carrion",
+        "behavior": "Drops bones from height onto rock to crack them.",
+        "harvest": "Feathers as prized ornaments.",
+        "effects": "• Its drop zone is littered with bone splinters.\n• Marks a high nesting crag nearby.\n• Said to have killed a famous poet.",
+        "lore": "Poets say the bird has the best sense of humour in the sky, and the worst aim."
+      },
+      "tags": [
+        "Fauna",
+        "Bird",
+        "Acheaorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/fauna-2"
+    },
+    {
+      "slug": "sky-cleaner",
+      "kind": "fauna",
+      "name": "Sky-Cleaner",
+      "summary": "A big, pale, bald-necked vulture that circles on the thermals and tidies the dead of the plateau.",
+      "body": "A huge, pale, tawny vulture with a long bare neck and a ruff of white feathers, riding the thermals above the dry hills in great spiralling flocks. It finds carrion by sight and each other by the circle of its fellows, and will strip a carcass in minutes. The old faiths of the plateau give their dead to these birds in towers.\n\n## Where it is found\n\nIt circles above the [[Parthian Ravine]] and the dry hills of [[Mithratal City]], where the Towers of Silence stand.\n\n## In play\n\nCircling birds are the first sign of a dead animal or a dead man. A priest of the sky-burial rite is a quiet, serious figure of the community. A traveller who sees them wheeling over a ridge knows something has died there.",
+      "dmNotes": "Basis: real griffon vulture (Gyps fulvus), a social carrion-eating raptor of the Mediterranean and Near East; Zoroastrian tradition exposes the dead in Towers of Silence (dakhmas) to be eaten by vultures.",
+      "fields": {
+        "scientificName": "Gyps fulvus",
+        "foundIn": "Parthian Ravine, Mithratal City",
+        "biome": "Dry hills",
+        "rarity": "Common",
+        "habitat": "Dry hills, cliffs and open plateaus",
+        "diet": "Carrion",
+        "behavior": "Rides thermals in flocks; strips a carcass in minutes.",
+        "harvest": "None; sacred to the sky-burial rite.",
+        "effects": "• Circling birds mark a death.\n• Used in the plateau's sky-burial rite.\n• Locates carrion by sight and by watching each other.",
+        "lore": "The priests say the vulture is the last honest undertaker."
+      },
+      "tags": [
+        "Fauna",
+        "Bird",
+        "Acheaorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/fauna-2"
+    },
+    {
+      "slug": "eye-tail-peacock",
+      "kind": "fauna",
+      "name": "Eye-Tail Peacock",
+      "summary": "A blue-necked bird whose fan of a hundred eyes, brought from the far east, sits in every rich man's garden.",
+      "body": "A turquoise-necked bird with a train of long feathers marked with shimmering eyes, which it fans and shakes in a courtship display. It was brought from the far east as a gift to kings and now struts in every rich man's garden, to the delight of children and the despair of gardeners. Its cry is a harsh, wailing shriek.\n\n## Where it is found\n\nIt struts in the gardens of [[Persemenid City]] and the estates of [[Hellarchon City]].\n\n## In play\n\nA peacock in the garden is a mark of wealth. A fan of its feathers is a ritual object in the temples of the queen of heaven. The meat is tough and the bird noisy; the Imperium's gourmets served it anyway.",
+      "dmNotes": "Basis: real Indian peafowl (Pavo cristatus), introduced to the Mediterranean from India (Alexander's campaigns; Aristophanes mentions it) and kept as a luxury ornamental bird, sacred to Hera/Juno; peacock was a status dish for the Roman elite.",
+      "fields": {
+        "scientificName": "Pavo cristatus",
+        "foundIn": "Persemenid City, Hellarchon City",
+        "biome": "Estate garden",
+        "rarity": "Uncommon",
+        "habitat": "Walled gardens and estate parks",
+        "diet": "Grain, insects, small reptiles",
+        "behavior": "Males fan their train in display; call with a harsh wail.",
+        "harvest": "Feathers for fans; meat as a status dish.",
+        "effects": "• A mark of wealth.\n• The fan of feathers is a temple object.\n• The noise annoys neighbours.",
+        "lore": "The queen of heaven's priestesses say the eyes in the tail were put there to watch the world."
+      },
+      "tags": [
+        "Fauna",
+        "Bird",
+        "Hellenorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/fauna-2"
+    },
+    {
+      "slug": "phasian-pheasant",
+      "kind": "fauna",
+      "name": "Phasian Pheasant",
+      "summary": "A long-tailed, jewel-coloured bird of the river-marsh, brought home by heroes and eaten by those who can afford it.",
+      "body": "A bird of the river-marshes with a long barred tail and a cock of bronze, green and red that seems to have been dipped in a jeweller's shop. The heroes who went to fetch the golden fleece are said to have brought it home from the river that gave it its name. It is hunted with hawks and nets and served at a rich man's table.\n\n## Where it is found\n\nIt skulks in the reed-edges of the [[Maeotis Helos]] and the wet thickets by [[Marshroot Grove]].\n\n## In play\n\nA pheasant flushed from the reeds is a burst of noise and colour. A hunt with falcons is a nobleman's pastime. A dish of it is a sign that the host has connections and tolerates a good deal of fuss.",
+      "dmNotes": "Basis: real common pheasant (Phasianus colchicus), named for the river Phasis in Colchis, the land of the Golden Fleece; Greeks and Romans introduced and kept it as a game and table bird.",
+      "fields": {
+        "scientificName": "Phasianus colchicus",
+        "foundIn": "Maeotis Helos, Marshroot Grove",
+        "biome": "River marsh",
+        "rarity": "Uncommon",
+        "habitat": "Reed-edges, wet thickets and river bottoms",
+        "diet": "Seeds, insects, shoots",
+        "behavior": "Skulks in cover; bursts into flight with a clatter.",
+        "harvest": "Meat for rich tables; tail feathers for decoration.",
+        "effects": "• Flushing one gives away a position.\n• Hunted with hawks.\n• Said to have been brought home by heroes.",
+        "lore": "The tale says its first pair was carried home with the fleece, and ate better than the heroes."
+      },
+      "tags": [
+        "Fauna",
+        "Bird",
+        "Hellenorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/fauna-2"
+    },
+    {
+      "slug": "rock-partridge",
+      "kind": "fauna",
+      "name": "Rock-Partridge",
+      "summary": "A black-barred, red-legged partridge of the stony slopes that fights like a cock and is kept in a basket for song.",
+      "body": "A plump, grey partridge with a black necklace, barred flanks and bright red legs, running over stony hillsides and flushing with a burst of wings. The cocks are fierce fighters, and the boys of the hill villages keep them in cages for fighting and for their loud, clanking call. A partridge in the pot is a farmer's feast.\n\n## Where it is found\n\nIt scampers over the stony slopes of the [[Oros Mountain Range]] and the dry hills above [[Kirimitsana]].\n\n## In play\n\nA fighting partridge is a gambler's pet and a village scandal. A clutch of eggs is a find for a hungry traveller. A flushed covey is a clue to a hidden watering-hole.",
+      "dmNotes": "Basis: real chukar or rock partridge (Alectoris chukar and A. graeca), kept by Greeks for fighting and song and an important game bird; Greek tradition records partridge fights.",
+      "fields": {
+        "scientificName": "Alectoris chukar",
+        "foundIn": "Oros Mountain Range, Kirimitsana",
+        "biome": "Stony slope",
+        "rarity": "Common",
+        "habitat": "Dry stony hills with scrub",
+        "diet": "Seeds, shoots, insects",
+        "behavior": "Runs rather than flies; cocks fight fiercely.",
+        "harvest": "Meat and eggs; kept for fighting and song.",
+        "effects": "• Fighting cocks are a gambler's amusement.\n• A flushed covey marks hidden water.\n• Eggs are a hungry traveller's find.",
+        "lore": "Gamblers say a partridge never loses a fight it believes it can win."
+      },
+      "tags": [
+        "Fauna",
+        "Bird",
+        "Hellenorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/fauna-2"
+    },
+    {
+      "slug": "passage-quail",
+      "kind": "fauna",
+      "name": "Passage Quail",
+      "summary": "A small, speckled migrant that crosses the sea in clouds each autumn, so many that they fall exhausted on the shore and are netted by the thousand.",
+      "body": "A tiny, round, speckled bird that migrates across the sea in vast flocks each autumn and spring, so exhausted at the landfall that they fall out of the sky into waiting nets. A village on the coast can feed itself for a month on the autumn fall. Priests say the quail are a gift of the gods to the hungry.\n\n## Where it is found\n\nIt makes landfall at the coast near [[Carianea]] and on the island of [[Zandar Isle]].\n\n## In play\n\nA quail-fall is an event, a harvest and a festival. A great autumn passage brings every fowler, and every thief, to the shore. A traveller who arrives on the day of the fall will find the whole town in the mood for a feast.",
+      "dmNotes": "Basis: real common quail (Coturnix coturnix), a small migratory gamebird crossing the Mediterranean in huge flocks; exhausted quail were netted in large numbers on landing, and the Biblical account of quail sent to the Israelites reflects this.",
+      "fields": {
+        "scientificName": "Coturnix coturnix",
+        "foundIn": "Carianea, Zandar Isle",
+        "biome": "Coast",
+        "rarity": "Common",
+        "habitat": "Grassy fields; crossing the sea on migration",
+        "diet": "Seeds, insects",
+        "behavior": "Migrates in vast flocks; falls exhausted on landfall.",
+        "harvest": "Netted by the thousand; meat and eggs.",
+        "effects": "• An autumn fall feeds a coast for a month.\n• Draws fowlers and thieves alike.\n• A festival for the whole town.",
+        "lore": "Priests say the quail are the gods' bread, and the fowlers say they are the gods' sense of humour."
+      },
+      "tags": [
+        "Fauna",
+        "Bird",
+        "Hellenorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/fauna-2"
+    },
+    {
+      "slug": "grey-crane",
+      "kind": "fauna",
+      "name": "Grey Crane",
+      "summary": "A tall, trumpeting, long-flying bird that leads the migration in a V and dances at the mating season.",
+      "body": "A tall, grey, long-legged bird with a black-and-white head and a red crown, calling in a trumpeting voice that carries for miles. It migrates in great V-shaped flocks, and in the spring the pairs dance, bowing and leaping and tossing sticks in the air. The old stories say the crane's flight over a city is a gift of letters and that Hermes learned the alphabet from its wedge.\n\n## Where it is found\n\nIt winters on the [[Maeotis Helos]] and passes over the [[Elysian Plains]] in spring and autumn.\n\n## In play\n\nA flock in a V is a navigational aid to a sailor. The dance is a spectacle. A character who hunts a crane out of season is a poacher and a bad luck.",
+      "dmNotes": "Basis: real common crane (Grus grus), a large migratory bird that flies in V-formation and performs courtship dances; Greek myth credits Palamedes or Hermes with inventing letters from the crane's flight pattern, and the Ibycus legend features cranes as avengers.",
+      "fields": {
+        "scientificName": "Grus grus",
+        "foundIn": "Maeotis Helos, Elysian Plains",
+        "biome": "Marsh and plain",
+        "rarity": "Uncommon",
+        "habitat": "Wetlands and open plains",
+        "diet": "Grain, roots, small animals",
+        "behavior": "Migrates in V formation; pairs dance in spring.",
+        "harvest": "None; hunting out of season is a crime.",
+        "effects": "• A V of cranes is a landmark for navigators.\n• The mating dance is a spectacle.\n• Credited with inspiring letters.",
+        "lore": "Scribes say the first letter was the shape a flock makes against the sky."
+      },
+      "tags": [
+        "Fauna",
+        "Bird",
+        "Hellenorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/fauna-2"
+    },
+    {
+      "slug": "halcyon",
+      "kind": "fauna",
+      "name": "Halcyon",
+      "summary": "A jewel-blue kingfisher said to nest on the winter sea and calm the waves for seven days to hatch her eggs.",
+      "body": "A flash of blue and orange over a still river, a small bird with a long bill that dives for fish and carries them back to a burrow in the bank. The old tale gave the bird a floating nest on the winter sea and a promise from the god of winds to calm the waves for the seven days she needs. A calm spell in the dead of winter is still called the halcyon days.\n\n## Where it is found\n\nIt fishes the quiet reaches of the [[River Tiberius]] and the streams near [[Anticata]].\n\n## In play\n\nA calm spell in midwinter is welcomed by sailors, who will not say the bird's name aloud for fear of breaking it. A character who finds a kingfisher feather has a charm for fair weather, and an excuse to look pleased.",
+      "dmNotes": "Basis: real common kingfisher (Alcedo atthis), a small fish-eating bird that nests in riverbank burrows; Greek myth of Alcyone and Ceyx gave 'halcyon days' to the calm of mid-winter.",
+      "fields": {
+        "scientificName": "Alcedo atthis",
+        "foundIn": "River Tiberius, Anticata",
+        "biome": "Riverbank",
+        "rarity": "Common",
+        "habitat": "Slow rivers and streams with earth banks",
+        "diet": "Small fish, aquatic insects",
+        "behavior": "Dives for fish; nests in bank burrows.",
+        "harvest": "A feather is a folk charm for calm weather.",
+        "effects": "• A midwinter calm is called the halcyon days.\n• A feather is a charm for fair weather.\n• Sailors avoid saying its name aloud.",
+        "lore": "Sailors say a halcyon's nest is the only thing the winter sea respects."
+      },
+      "tags": [
+        "Fauna",
+        "Bird",
+        "Invictian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/fauna-2"
+    },
+    {
+      "slug": "hunting-falcon",
+      "kind": "fauna",
+      "name": "Hunting Falcon",
+      "summary": "The fastest thing on wings, trained by kings and nomads alike to bring down birds and hares from the sky.",
+      "body": "A compact, blue-grey, hooded falcon that stoops on its prey at a speed no other living creature can match. The nomads of the plateau have trained it for hunting longer than they have kept records, and the kings of the cities keep their mews and their falconers as a mark of rank. A falcon on the wrist is a sign of birth.\n\n## Where it is found\n\nIts eyries are on the cliffs of the [[Parthian Ravine]] and the towers of [[Xerastri City]].\n\n## In play\n\nA trained falcon can bring down a hare or a wild fowl on command. A falconer's apprentice spends years learning to read the bird's mood. A character who flies a falcon near a rival's pheasant coop has chosen a very small, very clean kind of provocation.",
+      "dmNotes": "Basis: real peregrine falcon (Falco peregrinus), the fastest animal in a stoop, trained for falconry in Persia and Central Asia from antiquity and a status symbol across Eurasia.",
+      "fields": {
+        "scientificName": "Falco peregrinus",
+        "foundIn": "Parthian Ravine, Xerastri City",
+        "biome": "Cliff and tower",
+        "rarity": "Uncommon",
+        "habitat": "Cliffs, tall buildings and open country",
+        "diet": "Birds, caught in a stoop",
+        "behavior": "Stoops at great speed; nests on cliff ledges.",
+        "harvest": "Trained by falconers; fledglings are taken for training.",
+        "effects": "• A trained bird takes hares and fowl on command.\n• A mark of noble birth.\n• Years of work for a falconer's apprentice.",
+        "lore": "Falconers say you do not own the bird, you merely have the use of its patience."
+      },
+      "tags": [
+        "Fauna",
+        "Bird",
+        "Acheaorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/fauna-2"
+    },
+    {
+      "slug": "silent-swan",
+      "kind": "fauna",
+      "name": "Silent Swan",
+      "summary": "A white, orange-billed swan that glides on royal ponds, and, in the legends, sings only once, as it dies.",
+      "body": "A huge, white bird with a curved neck and an orange bill, gliding on slow water with a calm that has become a kind of royal manner. It nests in reed-beds and drives off every intruder with hissing and wing-beats that can break a child's arm. The legend gives it a song only at its death, and poets have been quoting that for centuries.\n\n## Where it is found\n\nIt drifts on the royal ponds of [[Aeterna City]] and the lakes of the [[Foloicauria Forest]].\n\n## In play\n\nA swan on a pond is a mark of an estate. An angry swan in nest is a hazard to a toddler or a trespasser. Hearing a swan sing is a sign for a poet or a bad omen for a king, depending on who tells it.",
+      "dmNotes": "Basis: real mute swan (Cygnus olor), a large, aggressive-in-nesting waterbird kept as an ornamental on estates; ancient writers (Aeschylus, Plato) report the 'swan song' legend, though mute swans are largely silent.",
+      "fields": {
+        "scientificName": "Cygnus olor",
+        "foundIn": "Aeterna City, Foloicauria Forest",
+        "biome": "Lake and royal pond",
+        "rarity": "Uncommon",
+        "habitat": "Slow lakes, ponds and wide rivers with reed-beds",
+        "diet": "Water plants, grass, small fish",
+        "behavior": "Territorial in nesting season; hisses and strikes with its wings.",
+        "harvest": "Feathers for quills and pillows; royal birds are protected.",
+        "effects": "• A nesting pair can drive off a trespasser.\n• A sign of a well-kept estate.\n• Legend says it sings once, when it dies.",
+        "lore": "Poets say a swan's last song is the only honest thing a royal household ever produced."
+      },
+      "tags": [
+        "Fauna",
+        "Bird",
+        "Invictian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/fauna-2"
+    }
+  ]
+}

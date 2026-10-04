@@ -1,0 +1,466 @@
+{
+  "format": "asetheria-codex",
+  "note": "Original flora, batch 2 of 3: herbs, spices, aromatics and dye plants. Each entry is written for Asetheria; the real plant it is grounded in is named in the DM notes under 'Basis'. No third-party text is reproduced.",
+  "entries": [
+    {
+      "slug": "hymettan-thyme",
+      "kind": "flora",
+      "name": "Hymettan Thyme",
+      "summary": "Low aromatic scrub of the dry hills, the flower that gives the bees of the highlands their honey.",
+      "body": "A low, grey-green, wiry herb that carpets the dry hills in a purple haze in early summer. The bees that feed on it make a dark, fragrant honey that the coast prizes above all others, and the plant itself flavours meat, flavours oil, and goes into a smoky incense for the hearth gods.\n\n## Where it is found\n\nIts best fields cover the hills above [[Kirimitsana]], where the beekeepers of the mountain town set their hives in a long row.\n\n## In play\n\nA bundle of thyme in the bed-linen is said to bring good dreams and drive off fleas. The honey it makes is a gift fit for a magistrate. Bees that have fed on it are slow and docile in the evening, an advantage for any raider hoping to rob a hive.",
+      "dmNotes": "Basis: real Greek thyme (Thymbra capitata and related thymes), whose nectar produces the famous honey of Mount Hymettus near Athens; thyme was used as flavouring, incense and a fumigant.",
+      "fields": {
+        "scientificName": "Thymbra capitata",
+        "foundIn": "Kirimitsana",
+        "biome": "Dry hills",
+        "rarity": "Common",
+        "effects": "• Bees on thyme make a dark, fragrant honey.\n• A sprig in bedding drives off fleas.\n• Burned as a smoky household incense.",
+        "lore": "A gift of thyme honey is how a poor man thanks a rich one without lowering himself."
+      },
+      "tags": [
+        "Flora",
+        "Herb",
+        "Hellenorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/flora-2"
+    },
+    {
+      "slug": "witchs-rue",
+      "kind": "flora",
+      "name": "Witch's Rue",
+      "summary": "A bitter, blue-grey herb used as an antidote, a charm against the evil eye, and an abortifacient with a hard reputation.",
+      "body": "A bushy plant with blue-green lobed leaves and a harsh, bitter smell, grown in every herb garden for its reputation. Rue is a hundred things at once: a flavouring, a guard against the evil eye, an antidote to poisons, a charm against witches, a cure for sore eyes. Rubbed on skin it can blister, and taken wrongly it can harm.\n\n## Where it is found\n\nIt grows in the walled herb-gardens of [[Aeterna City]] and wild on the dry slopes of the [[Klynin Mountain Range]].\n\n## In play\n\nA sprig is the standard charm against the evil eye and sells for a copper. In a healer's hands it is a medicine (Medicine, DC 12) and in careless ones, a poison. Its sap can raise a rash on bare skin, which is the same stuff that gave it its mystique.",
+      "dmNotes": "Basis: real rue (Ruta graveolens), prized by Greeks and Romans as an antidote and charm and a flavouring; contact with the sap can cause photodermatitis and large doses are toxic.",
+      "fields": {
+        "scientificName": "Ruta graveolens",
+        "foundIn": "Aeterna City, Klynin Mountain Range",
+        "biome": "Herb garden",
+        "rarity": "Common",
+        "effects": "• Carried as a charm against the evil eye.\n• In a healer's hands, an antidote to some poisons.\n• Sap blisters bare skin; large doses poison.",
+        "lore": "The Imperial saying: rue is a friend to the wise and an enemy to the clever."
+      },
+      "tags": [
+        "Flora",
+        "Herb",
+        "Invictian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/flora-2"
+    },
+    {
+      "slug": "temple-hyssop",
+      "kind": "flora",
+      "name": "Temple Hyssop",
+      "summary": "A small bitter herb used as a sprinkler for ritual cleansing and as a medicine for the cough.",
+      "body": "A small bushy herb with spikes of blue flowers and a camphor scent. Bundled and dipped in water, it is the priest's sprinkler: a few flicks over a doorway or a sickroom purifies the place in the eyes of the gods. Steeped in honey it is the grandmother's cure for the cough.\n\n## Where it is found\n\nIt grows in the dry stony ground around [[Mithratal City]] and the sanctuary terraces of [[Delphara City]].\n\n## In play\n\nA priest with a bundle of hyssop can ritually cleanse a person or a place, which many communities require after a death or a crime. The tea eases a cough and soothes the chest. A character who needs a cover story for a night-time visit to a shrine does well to carry some.",
+      "dmNotes": "Basis: real hyssop (Hyssopus officinalis, or a similar aromatic Near Eastern herb), used in ritual purification in the ancient Mediterranean and Near East and as a cough remedy.",
+      "fields": {
+        "scientificName": "Hyssopus officinalis",
+        "foundIn": "Mithratal City, Delphara City",
+        "biome": "Stony hills",
+        "rarity": "Common",
+        "effects": "• A bundle dipped in water sprinkles ritual cleansing.\n• Tea with honey eases a cough.\n• Camphor-scented and bitter.",
+        "lore": "Priests say a house sprinkled with hyssop cannot hide a guilty heart."
+      },
+      "tags": [
+        "Flora",
+        "Herb",
+        "Acheaorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/flora-2"
+    },
+    {
+      "slug": "sea-wormwood",
+      "kind": "flora",
+      "name": "Sea-Wormwood",
+      "summary": "Silver-grey bitter herb steeped to expel worms, to flavour vermouth, and to curse a drunkard.",
+      "body": "A silvery, aromatic perennial whose leaves taste so bitter they pucker the whole face. It is the apothecary's staple against worms and fever, the brewer's flavouring for a harsh herbal wine, and the sort of thing a mother threatens a naughty child with. The word is a byword for bitterness in every empire.\n\n## Where it is found\n\nIt grows on the salt-marsh margins of the [[Maeotis Helos]] and the dry banks of the [[Latium Plains]].\n\n## In play\n\nA cup of wormwood tea clears intestinal parasites in three days. A wine infused with it is a drink for the sturdy. Taken in excess it brings tremors and a wild mind, and a heavy drinker of it is a recognisable figure in the taverns.",
+      "dmNotes": "Basis: real wormwood (Artemisia absinthium), a bitter herb used in antiquity as a vermifuge and tonic and to flavour wine (Pliny mentions wormwood wine); thujone in large amounts is toxic.",
+      "fields": {
+        "scientificName": "Artemisia absinthium",
+        "foundIn": "Maeotis Helos, Latium Plains",
+        "biome": "Marsh edge",
+        "rarity": "Common",
+        "effects": "• Tea clears intestinal worms in three days.\n• Infused wine is a bitter tonic.\n• Excess causes tremors and a wild mind.",
+        "lore": "A child told 'wormwood' knows to stop whatever it is doing."
+      },
+      "tags": [
+        "Flora",
+        "Herb",
+        "Invictian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/flora-2"
+    },
+    {
+      "slug": "saviours-sage",
+      "kind": "flora",
+      "name": "Saviour's Sage",
+      "summary": "Grey-green herb whose name means to heal, steeped for sore throats and strewn on the floors of the sick.",
+      "body": "A soft grey-green leaf with a heavy resinous smell, grown in every garden for its reputation. A tea of it eases a sore throat, a pinch in broth is thought to sharpen the wits, and the elderly keep a pot on the windowsill against the ills of winter. Its Hellenorian name literally means that which saves.\n\n## Where it is found\n\nIt grows in the kitchen gardens of [[Helionyx City]] and wild in the hills of the [[Olympus Mountain Range]].\n\n## In play\n\nA cup of sage tea restores a few hit points to a sore-throated character and lets them speak at full volume. A good healer is easily recognised by the pot at the door. It is common enough that it would be remarkable to find an apothecary without it.",
+      "dmNotes": "Basis: real sage (Salvia officinalis), whose Latin name (salvare, to save) reflects its medicinal reputation; used by Greeks and Romans for throat and digestion and as a general tonic.",
+      "fields": {
+        "scientificName": "Salvia officinalis",
+        "foundIn": "Helionyx City, Olympus Mountain Range",
+        "biome": "Kitchen garden",
+        "rarity": "Common",
+        "effects": "• Tea eases a sore throat.\n• Added to broth as a tonic for the old.\n• A pot at the door marks a healer.",
+        "lore": "A wise woman keeps sage and a short temper."
+      },
+      "tags": [
+        "Flora",
+        "Herb",
+        "Hellenorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/flora-2"
+    },
+    {
+      "slug": "sweet-marjoram",
+      "kind": "flora",
+      "name": "Sweet Marjoram",
+      "summary": "Fragrant garden herb that grows over graves, perfumes the lovers' bed and scents the oils of the baths.",
+      "body": "A soft, sweet-smelling herb with small rounded leaves, grown in pots and borders for its perfume. In myth the goddess of love breathed on it and gave it its scent; in practice every bath-house in the Imperium keeps a jar of its oil. A wreath of it is hung over the doors of newlyweds, and the same plant, in another corner of the world, is planted over graves.\n\n## Where it is found\n\nIt grows in the herb-beds of [[Romulo City]] and the bath-house gardens of [[Aeterna City]].\n\n## In play\n\nMarjoram oil rubbed into the temples eases a headache (advantage on one Constitution save against exhaustion from the pain). It is a gentle, harmless herb, and a character who needs an innocent cover for hours of slow cooking has found it.",
+      "dmNotes": "Basis: real marjoram (Origanum majorana), a fragrant herb associated with Aphrodite/Venus in Greek and Roman tradition and used in perfumes, cooking and for healing.",
+      "fields": {
+        "scientificName": "Origanum majorana",
+        "foundIn": "Romulo City, Aeterna City",
+        "biome": "Herb garden",
+        "rarity": "Common",
+        "effects": "• Oil eases a tension headache.\n• Wreaths are hung over newlyweds' doors.\n• A staple scent in bath-houses.",
+        "lore": "Gardeners say it grows sweeter the more it is cut and the less it is praised."
+      },
+      "tags": [
+        "Flora",
+        "Herb",
+        "Invictian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/flora-2"
+    },
+    {
+      "slug": "bug-herb",
+      "kind": "flora",
+      "name": "Bug-Herb",
+      "summary": "A leafy herb that smells of bedbugs when young and of lemon when ripe, grown for its seed and its smell.",
+      "body": "A feathery green herb whose fresh leaves are unmistakably pungent: the Hellenorians named it for the smell of a bedbug. The seed that follows is warm and citrus-sweet and is the base of half the spice mixes on the coast. A little goes into bread, wine and the poultices of the old.\n\n## Where it is found\n\nIt grows in the market gardens of [[Argotiko]] and the dry fields beyond [[Qa'zshahrv'in]].\n\n## In play\n\nA pinch of ground seed in a stew is the Hellenorian touch. Those who dislike the fresh leaf dislike it a great deal; a character with a strong opinion on the matter is nobody to cross at dinner.",
+      "dmNotes": "Basis: real coriander (Coriandrum sativum), whose Greek name koris refers to a bedbug; both leaves and seed were used in ancient cooking and medicine, and it is recorded in the Linear B tablets.",
+      "fields": {
+        "scientificName": "Coriandrum sativum",
+        "foundIn": "Argotiko, Qa'zshahrv'in",
+        "biome": "Market garden",
+        "rarity": "Common",
+        "effects": "• Ground seed flavours bread, wine and stew.\n• Fresh leaves smell strongly to some.\n• A mild digestive.",
+        "lore": "Love it or leave the table: there is no middle ground."
+      },
+      "tags": [
+        "Flora",
+        "Herb",
+        "Hellenorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/flora-2"
+    },
+    {
+      "slug": "caravan-cumin",
+      "kind": "flora",
+      "name": "Caravan Cumin",
+      "summary": "A warm brown seed ground into stew, bread and the cheap spice that every poor kitchen has.",
+      "body": "A small, slender annual that gives a brown, ridged, warm-smelling seed, and the cheapest spice a poor kitchen can buy. The caravans carry it in sacks as ballast, and the cooks of the plateau throw a pinch into every pot. A miser is called a cumin-splitter, from the man who divides a seed to save a seed.\n\n## Where it is found\n\nIt is grown on the dry fields around [[Atarabad City]] and the caravan towns beyond.\n\n## In play\n\nA small pouch of cumin makes a pot of lentils edible. In powder, it can be blown in a face to cause a fit of sneezing (a Constitution saving throw, DC 11, or lose the next action). A character who eats it daily has no trouble with the road stew.",
+      "dmNotes": "Basis: real cumin (Cuminum cyminum), a staple spice across the Mediterranean and Near East; Greek and Roman writers called a very stingy man a 'cumin-splitter'.",
+      "fields": {
+        "scientificName": "Cuminum cyminum",
+        "foundIn": "Atarabad City",
+        "biome": "Dry fields",
+        "rarity": "Common",
+        "effects": "• Ground seed flavours stews and bread.\n• Powder blown in the face causes a sneezing fit.\n• Cheap and ubiquitous.",
+        "lore": "A cumin-splitter is the name for a man who would count the beans in a bowl."
+      },
+      "tags": [
+        "Flora",
+        "Spice",
+        "Acheaorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/flora-2"
+    },
+    {
+      "slug": "torch-fennel",
+      "kind": "flora",
+      "name": "Torch-Fennel",
+      "summary": "A giant fennel whose dry stalk burns slowly and carries a coal from camp to camp: the first tinder-box.",
+      "body": "A towering fennel that can reach ten feet, with a thick hollow stalk full of dry pith. Lit at one end, the pith smoulders for hours and can carry a glowing coal in a pocket from one camp to the next. The myth says a god stole fire from heaven in such a stalk.\n\n## Where it is found\n\nIt grows on the dry slopes of the [[Oros Mountain Range]] and the rocky banks above [[Corinth City]].\n\n## In play\n\nA cut and dried stalk carries a coal for six hours in a leather case. The plant is poisonous to livestock in some varieties, which a farmer learns once. A traveller who needs to move fire and has no tinderbox can improvise one in an hour (Survival, DC 11).",
+      "dmNotes": "Basis: real giant fennel (Ferula communis, the narthex), whose dry pith smoulders slowly and was used to carry fire; in Greek myth Prometheus stole fire from the gods in a fennel stalk.",
+      "fields": {
+        "scientificName": "Ferula communis",
+        "foundIn": "Oros Mountain Range, Corinth City",
+        "biome": "Rocky slope",
+        "rarity": "Common",
+        "effects": "• A dried stalk carries a coal for hours.\n• Some varieties poison livestock.\n• Ten feet tall; visible from afar.",
+        "lore": "Children are told that the first fire came down in a stalk of it, and have never fully recovered."
+      },
+      "tags": [
+        "Flora",
+        "Herb",
+        "Hellenorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/flora-2"
+    },
+    {
+      "slug": "cooling-mint",
+      "kind": "flora",
+      "name": "Cooling Mint",
+      "summary": "Strong-scented herb that sours milk, scents tables and is rubbed on benches before guests arrive.",
+      "body": "A fast-spreading herb with square stems and a cool, sharp smell. In the old tales a nymph was trampled and turned into it, and a hearty smell is her last complaint. Hosts rub it on the table before a feast, cooks use it to cut a heavy sauce, and herbalists use it to ease a stomach.\n\n## Where it is found\n\nIt runs wild along the damp places of the [[River Tiberius]] and the garden terraces of [[Persevalis City]].\n\n## In play\n\nChewed fresh, it clears the breath and the nose. A warm tea settles a queasy stomach (advantage on one Constitution save against being sick). It spreads to cover any bed it is planted in, and a gardener who has planted it once regrets it.",
+      "dmNotes": "Basis: real mint (Mentha spicata and relatives), used by Greeks and Romans for scenting tables and in sauces and medicine; in myth the nymph Minthe was transformed into the plant.",
+      "fields": {
+        "scientificName": "Mentha spicata",
+        "foundIn": "River Tiberius, Persevalis City",
+        "biome": "Damp garden",
+        "rarity": "Common",
+        "effects": "• Tea settles a queasy stomach.\n• Rubbed on tables to scent a feast.\n• Spreads over any bed it is planted in.",
+        "lore": "A host who forgets the mint is a host who forgets the guest."
+      },
+      "tags": [
+        "Flora",
+        "Herb",
+        "Acheaorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/flora-2"
+    },
+    {
+      "slug": "trade-cassia",
+      "kind": "flora",
+      "name": "Trade Cassia",
+      "summary": "Rolled bark of an eastern tree, a warm, sweet spice carried half a world at a price the poor cannot imagine.",
+      "body": "The inner bark of a far eastern tree, dried until it curls into a stick the colour of a polished saddle. Sweet, warm and faintly peppery, it perfumes the court, flavours the finest wine, and goes into the anointing oil of kings. It arrives on the coast after a journey so long and so costly that a few sticks are a sum.\n\n## Where it is found\n\nIt reaches the continent only through the bazaar of [[Persemenid City]] and is sold on to the nobility of [[Hellarchon City]].\n\n## In play\n\nA pouch of cassia is a gift fit for a magistrate. Travellers tell tall stories about its origin: the spice-sellers cheerfully invent them to keep the price high, and a character who can see through the lie (Insight, DC 13) knows it grows on a tree like any other.",
+      "dmNotes": "Basis: real cassia (Cinnamomum cassia), a cinnamon-like bark from East Asia traded through the Near East; ancient writers told elaborate tall tales about its origin (such as harvesting from cinnamon-birds' nests) to protect the trade.",
+      "fields": {
+        "scientificName": "Cinnamomum cassia",
+        "foundIn": "Persemenid City, Hellarchon City",
+        "biome": "Imported",
+        "rarity": "Rare",
+        "effects": "• A few sticks scent a feast and flavour a rich wine.\n• Used in anointing oil.\n• Its true origin is a closely guarded trade secret.",
+        "lore": "The spice-sellers say it grows in the nests of great birds, and charge accordingly."
+      },
+      "tags": [
+        "Flora",
+        "Spice",
+        "Acheaorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/flora-2"
+    },
+    {
+      "slug": "black-pepper",
+      "kind": "flora",
+      "name": "Black Pepper",
+      "summary": "Dried berries from a distant climbing vine, worth their weight in silver and counted out peppercorn by peppercorn.",
+      "body": "A glossy climbing vine bears clusters of green berries that are dried until they wrinkle black and hard. Pungent and sharp, a few grains transform a dull dish, and the merchants who carry it across the sea sell it to the rich by the pound and to the poor by the grain. A city can be ransomed in peppercorns, and was.\n\n## Where it is found\n\nIt arrives at the docks of [[Hellarchon City]] and [[Fucostia]] by long-haul ship, and is stored in guarded warehouses.\n\n## In play\n\nA pound of pepper is worth many pounds of silver and is a standard portable treasure. A shipment diverted is a serious loss and a good heist. A plain cook who has used a whole peppercorn knows how much money is in her mortar.",
+      "dmNotes": "Basis: real black pepper (Piper nigrum), a spice from India that was among the most valuable trade goods of the Roman world; Alaric is recorded demanding 3,000 pounds of pepper in the ransom of Rome.",
+      "fields": {
+        "scientificName": "Piper nigrum",
+        "foundIn": "Hellarchon City, Fucostia",
+        "biome": "Imported",
+        "rarity": "Rare",
+        "effects": "• Worth its weight in silver.\n• A few grains transform a dull dish.\n• A cargo of it is a portable fortune.",
+        "lore": "A ransom in peppercorns is the polite form of extortion."
+      },
+      "tags": [
+        "Flora",
+        "Spice",
+        "Hellenorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/flora-2"
+    },
+    {
+      "slug": "root-of-warmth",
+      "kind": "flora",
+      "name": "Root of Warmth",
+      "summary": "A knobbled, pungent root brought from the far south, steeped against cold and a queasy sea.",
+      "body": "A knobbly, tan root that is peeled and sliced to reveal a pale yellow flesh with a hot, sharp, sweet taste. Sailors chew it against seasickness and soldiers steep it against cold, and the Imperium's great banquets serve it candied. A small piece cuts the chill of a wet night.\n\n## Where it is found\n\nIt comes in dried stems on the long sea road and is stocked in the spice-sellers of [[Fucostia]] and [[Aeterna City]].\n\n## In play\n\nA piece chewed on a rolling deck ends seasickness. A hot infusion gives advantage on a saving throw against the first stage of exposure to cold. It travels well and keeps for a year, so a trader's pack of dry root is a safe investment.",
+      "dmNotes": "Basis: real ginger (Zingiber officinale), imported into the Roman world and used as a spice and for digestion and chills; Dioscorides and Pliny mention it.",
+      "fields": {
+        "scientificName": "Zingiber officinale",
+        "foundIn": "Fucostia, Aeterna City",
+        "biome": "Imported",
+        "rarity": "Uncommon",
+        "effects": "• Chewed root ends seasickness.\n• A hot infusion helps against the first stage of cold.\n• Keeps for a year when dried.",
+        "lore": "A sailor without ginger is a sailor who will soon be seasick, and fervent."
+      },
+      "tags": [
+        "Flora",
+        "Spice",
+        "Invictian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/flora-2"
+    },
+    {
+      "slug": "red-root-madder",
+      "kind": "flora",
+      "name": "Red-Root Madder",
+      "summary": "A straggling plant whose roots, boiled and ground, give the red of soldiers' cloaks and the stains of drinkers' teeth.",
+      "body": "A scrambling, rough-stemmed plant that clambers over hedges and fences. Its long orange roots are dug, dried, ground and boiled to give the best red dye of the old world: the red of a legion's cloak and of the cheap woollens of a thousand villages. Cattle that eat it have red bones and red milk, and a farmer finds out.\n\n## Where it is found\n\nIt is grown in long beds near [[Tabrishi'ir]] and on the clay fields around [[Mavelon City]].\n\n## In play\n\nA cloth dyed with madder is the standard soldier's red and holds its colour for years. A dyer's hands are stained to the wrist, and a character with red hands who denies working in the dye-house is lying.",
+      "dmNotes": "Basis: real madder (Rubia tinctorum), the root dye behind the red of Roman military cloaks and Persian carpets; its pigment tints the bones and milk of animals that eat it.",
+      "fields": {
+        "scientificName": "Rubia tinctorum",
+        "foundIn": "Tabrishi'ir, Mavelon City",
+        "biome": "Clay fields",
+        "rarity": "Common",
+        "effects": "• Root yields a durable red dye.\n• Dyer's hands stay stained for weeks.\n• Animals that eat it have red bones and milk.",
+        "lore": "Weavers of the plateau say a carpet is only as good as its red."
+      },
+      "tags": [
+        "Flora",
+        "Dye",
+        "Acheaorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/flora-2"
+    },
+    {
+      "slug": "warriors-woad",
+      "kind": "flora",
+      "name": "Warrior's Woad",
+      "summary": "A yellow-flowered herb fermented into blue dye, painted on skin by the fierce and on wool by the patient.",
+      "body": "A leafy herb with clusters of tiny yellow flowers. Its leaves, crushed and left to rot in a vat, give up a blue dye that is deeper and more lasting than any other. The fermentation is foul-smelling and the dyers' quarter is always the poorest and most stinking, but the blue it makes is worth the stench. Painted raw on skin it dries to a fierce bruise-colour.\n\n## Where it is found\n\nIt grows in the cold fields of the north and is sold from the [[Foloicauria Forest]] borderlands to the dyers of [[Aeterna City]].\n\n## In play\n\nA warrior with woad-painted arms is a fierce neighbour. The dye is slow, smelly work. Dyers make their living by patience and a bad sense of smell, and each guild keeps its vats a trade secret.",
+      "dmNotes": "Basis: real woad (Isatis tinctoria), the European source of blue dye before indigo; Caesar recorded that the Britons stained themselves with vitrum (woad), and fermentation of the leaves is notoriously foul-smelling.",
+      "fields": {
+        "scientificName": "Isatis tinctoria",
+        "foundIn": "Foloicauria Forest, Aeterna City",
+        "biome": "Cold fields",
+        "rarity": "Common",
+        "effects": "• Fermented leaves make a lasting blue dye.\n• Painted raw, it stains skin dark blue.\n• The dyers' vats stink for a mile.",
+        "lore": "The north's gift to the south is a blue that outlasts the wearer."
+      },
+      "tags": [
+        "Flora",
+        "Dye",
+        "Invictian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/flora-2"
+    },
+    {
+      "slug": "yellow-weld",
+      "kind": "flora",
+      "name": "Yellow Weld",
+      "summary": "A slender roadside weed that gives the sun-bright yellow of wedding veils and festival robes.",
+      "body": "A tall, slim, yellow-green weed of waste ground and roadsides. Cut in flower and boiled, it gives a fast, brilliant yellow that is the colour of the flame-veil worn by the bride of the Imperium and of the festival robes of its priestesses. A dyer who wants green dips the cloth in woad first.\n\n## Where it is found\n\nIt springs up in every neglected field along the roads of the [[Latium Plains]] and the waste ground outside [[Romulo City]].\n\n## In play\n\nA length of weld-dyed silk is a bride's treasure. A dyer who needs a rich green knows the trick of mixing weld and woad. Foragers can cut a good armful in an hour and sell it for a few coppers.",
+      "dmNotes": "Basis: real weld (Reseda luteola), the main yellow dye of the ancient and medieval Old World; the flammeum, the Roman bride's veil, was a bright saffron-yellow-orange.",
+      "fields": {
+        "scientificName": "Reseda luteola",
+        "foundIn": "Latium Plains, Romulo City",
+        "biome": "Roadside",
+        "rarity": "Common",
+        "effects": "• Yields a fast, bright yellow dye.\n• With woad it gives a rich green.\n• Easily foraged along any road.",
+        "lore": "The bride's yellow comes from the weed her mother pulled from the garden wall."
+      },
+      "tags": [
+        "Flora",
+        "Dye",
+        "Invictian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/flora-2"
+    },
+    {
+      "slug": "red-hand-leaf",
+      "kind": "flora",
+      "name": "Red-Hand Leaf",
+      "summary": "A shrub whose ground leaves paint hands, nails and hair a rich rust-red, and bless a bride.",
+      "body": "A thin, many-branched shrub with small pale leaves that are dried and ground to a fine green powder. Mixed with water it makes a paste that stains skin, nails, hair and the manes of horses a warm rust-red that lasts for weeks. Brides have their palms painted before the wedding, and the old paint their white hair against age.\n\n## Where it is found\n\nIt grows in the hot gardens of [[Atarabad City]] and the oases of the [[Dasht-a Khaliq]].\n\n## In play\n\nA bride's painted hands are a mark of the day and of a family's means. The stain also marks a character who has recently been to a wedding, a very good alibi or a very bad one. The cooling paste eases a fever on the soles of the feet.",
+      "dmNotes": "Basis: real henna (Lawsonia inermis), whose ground leaves make a reddish-orange dye used for skin and hair across the Near East since antiquity, including at weddings.",
+      "fields": {
+        "scientificName": "Lawsonia inermis",
+        "foundIn": "Atarabad City, Dasht-a Khaliq",
+        "biome": "Oasis garden",
+        "rarity": "Common",
+        "effects": "• Paste stains skin, nails and hair rust-red for weeks.\n• A bride's palms are painted before the wedding.\n• A cooling paste eases a fever.",
+        "lore": "A bride's hands are the only fresh ink in a family's history."
+      },
+      "tags": [
+        "Flora",
+        "Dye",
+        "Acheaorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/flora-2"
+    },
+    {
+      "slug": "poor-mans-saffron",
+      "kind": "flora",
+      "name": "Poor Man's Saffron",
+      "summary": "A thistly orange flower whose petals dye silk red and stand in for the costlier crocus.",
+      "body": "A tall, spiny thistle with brilliant orange flower heads. The petals are picked, dried and used to dye cloth a warm orange-red and to colour food the gold that only saffron should give. Cooks who cannot afford the true spice use it; fraudulent merchants who sell it as the true spice are punished when caught.\n\n## Where it is found\n\nIt is grown in dry fields near [[Tabrishi'ir]] and sold in the bazaar of [[Persevalis City]].\n\n## In play\n\nA customer who suspects fraud can tell the real saffron from the false by the tint it gives to water (Investigation, DC 13). Its seeds yield a useful lamp oil. A merchant caught passing off the poor man's saffron as the real one is fined and shamed.",
+      "dmNotes": "Basis: real safflower (Carthamus tinctorius), used since antiquity for dye and as a cheap substitute for saffron; its seeds yield an edible and lamp oil.",
+      "fields": {
+        "scientificName": "Carthamus tinctorius",
+        "foundIn": "Tabrishi'ir, Persevalis City",
+        "biome": "Dry fields",
+        "rarity": "Common",
+        "effects": "• Petals dye cloth orange-red.\n• A cheap, fraudulent stand-in for saffron.\n• Seeds yield lamp oil.",
+        "lore": "A cook who cannot afford crocus plants a thistle and hopes."
+      },
+      "tags": [
+        "Flora",
+        "Dye",
+        "Acheaorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/flora-2"
+    },
+    {
+      "slug": "mountain-spikenard",
+      "kind": "flora",
+      "name": "Mountain Spikenard",
+      "summary": "A hairy mountain root ground into an ointment so costly that one jar can anoint a king or a corpse and ruin a household.",
+      "body": "A small, hairy, spiky root from a far northern slope, ground and steeped into an oil with a heavy, sweet, earthy fragrance. A single jar is enough to anoint a king; it is also the oil a grieving woman pours over a beloved's feet, and a rich widow once poured out a year's wages in one gesture. It is sold in tiny sealed alabaster flasks.\n\n## Where it is found\n\nThe root is dug on the high slopes beyond the [[Cloudspine Ridge]] and brought down by a few families who guard the secret.\n\n## In play\n\nA flask is a fortune in a small package. An oath sworn over spikenard oil is not to be broken. A character in the middle of a grand gesture can use it; a pickpocket who steals the flask learns how little a stolen fortune is worth if no one will buy it.",
+      "dmNotes": "Basis: real spikenard (Nardostachys jatamansi), a Himalayan root made into a costly perfume oil in antiquity; the Gospel accounts describe a woman anointing Jesus with nard worth a year's wages.",
+      "fields": {
+        "scientificName": "Nardostachys jatamansi",
+        "foundIn": "Cloudspine Ridge",
+        "biome": "High mountain",
+        "rarity": "Rare",
+        "effects": "• A flask is a fortune.\n• Used to anoint the king and the dead.\n• An oath over it is binding.",
+        "lore": "A widow pours it on the feet of her beloved, and the neighbours count the cost for years."
+      },
+      "tags": [
+        "Flora",
+        "Perfume",
+        "Invictian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/flora-2"
+    },
+    {
+      "slug": "balm-of-the-hill-country",
+      "kind": "flora",
+      "name": "Balm of the Hill Country",
+      "summary": "A rare scented shrub whose cut bark yields a drop of healing balm, guarded in walled gardens and sold by the thimble.",
+      "body": "A small, scrubby tree with aromatic leaves, grown nowhere but a few walled gardens on a single hillside. Its bark is cut with a stone knife and the sap collected drop by drop in horn spoons. The balm heals wounds, scents the court, and is such a treasure that conquerors have demanded the gardens as tribute.\n\n## Where it is found\n\nIts walled gardens lie in the foothills of the [[Klynin Mountain Range]], watched by soldiers and by a priesthood.\n\n## In play\n\nA few drops of the balm applied to a wound restores 1d8 hit points once per long rest, to a patient who rests an hour. A conqueror who takes the gardens and does not take the gardeners ends up with dead trees. The guards allow nobody with a knife past the gate.",
+      "dmNotes": "Basis: real balm of Gilead / opobalsamum (Commiphora gileadensis), a rare aromatic shrub whose resin was among the most costly medicinal and perfume products of antiquity, grown in a few guarded plantations (as at Jericho and Ein Gedi).",
+      "fields": {
+        "scientificName": "Commiphora gileadensis",
+        "foundIn": "Klynin Mountain Range",
+        "biome": "Walled hillside garden",
+        "rarity": "Legendary",
+        "effects": "• A few drops dress a wound (1d8 hit points once per long rest).\n• Worth far more than gold by weight.\n• Only the gardeners know how to tap it without killing the shrub.",
+        "lore": "Conquerors demand it as tribute, and learn why the gardeners are never named in the treaty."
+      },
+      "tags": [
+        "Flora",
+        "Balm",
+        "Invictian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/flora-2"
+    }
+  ]
+}

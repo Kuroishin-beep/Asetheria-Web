@@ -1,0 +1,526 @@
+{
+  "format": "asetheria-codex",
+  "note": "Original ores and stones, batch 1 of 2. Each entry is written for Asetheria; the real mineral or stone it is grounded in is named in the DM notes under 'Basis'. No third-party text is reproduced.",
+  "entries": [
+    {
+      "slug": "malachite",
+      "kind": "ore",
+      "name": "Malachite",
+      "summary": "Banded green copper stone, ground for paint, worn against the evil eye, and the first sign a seam of copper lies below.",
+      "body": "Malachite grows in rounded, onion-skinned masses of green so deep it looks wet. Smiths read it as a signpost: where malachite weeps from the rock, copper lies beneath, and the miners of the plateau open their tunnels under the green.\n\n## Where it is found\n\nThe copper hills of [[Dasht-a Khaliq]]'s rim and the foothills of the [[Klynin Mountain Range]] both show it at the surface, and the Acheaorian caravans out of [[Persemenid City]] carry it west by the sack.\n\n## In play\n\nGround fine it makes the green used on temple walls and on the eyelids of women and priests alike. A polished disc is worn by children in the belief that it turns the evil eye; it is said to crack when the wearer is cursed. A Wisdom (Survival) check, DC 12, reads a malachite stain as a copper lode.",
+      "dmNotes": "Basis: real malachite, copper carbonate hydroxide, used by the Egyptians and Persians as a green pigment and eye paint and as a prospecting indicator for copper. The cracking-charm belief is invented for the setting.",
+      "fields": {
+        "costPerLb": "5 gp",
+        "ferrous": "Non-ferrous",
+        "foundIn": "Dasht-a Khaliq, Klynin Mountain Range",
+        "biome": "Desert",
+        "rarity": "Common",
+        "location": "Surfaces over copper seams",
+        "properties": "• Soft and easily carved.\n• Marks a copper lode within a short dig.\n• Grinds to a durable green pigment.",
+        "uses": "• Pigment and eye paint.\n• Amulets against the evil eye.\n• Prospecting signpost for copper.",
+        "lore": "Mothers hang a polished disc over a cradle; when it cracks, they say, the cradle was watched."
+      },
+      "tags": [
+        "Ore",
+        "Stone",
+        "Acheaorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/ores-1"
+    },
+    {
+      "slug": "azurite",
+      "kind": "ore",
+      "name": "Azurite",
+      "summary": "A deep blue copper stone that turns green with age, prized by painters who can never keep it bright.",
+      "body": "Azurite is malachite's blue cousin, found in the same hills and often in the same lump, a blue heart wrapped in green. It is the colour of clear night, and it is a liar: left in the open for a few seasons it browns toward green, and the wall painted with it slowly goes the way of the hills it came from.\n\n## Where it is found\n\nIt shares the copper country of [[Dasht-a Khaliq]] and the [[Parthian Ravine]], and the best lumps are sold in the bazaar of [[Persevalis City]], where the garden city's painters buy it by the thumbnail.\n\n## In play\n\nA pound of finely ground azurite is worth a small estate to a muralist, but any picture painted with it fades by one shade a decade. A forger who uses it can be caught by a character who studies the green creeping in at the edges (Investigation, DC 14).",
+      "dmNotes": "Basis: real azurite, a blue copper carbonate, long used as a pigment (azurite blue) and known to degrade toward green through weathering into malachite.",
+      "fields": {
+        "costPerLb": "25 gp",
+        "ferrous": "Non-ferrous",
+        "foundIn": "Dasht-a Khaliq, Parthian Ravine",
+        "biome": "Desert",
+        "rarity": "Uncommon",
+        "location": "Paired with malachite in copper outcrops",
+        "properties": "• Brilliant blue when fresh.\n• Weathers to green over years.\n• Brittle; breaks along its crystals.",
+        "uses": "• The painter's blue, bought by the thumbnail.\n• Inlay in small jewelry.",
+        "lore": "A painter's blessing: may your blue outlast your debts."
+      },
+      "tags": [
+        "Ore",
+        "Stone",
+        "Acheaorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/ores-1"
+    },
+    {
+      "slug": "nishapur-turquoise",
+      "kind": "ore",
+      "name": "Nishapur Turquoise",
+      "summary": "Sky-blue stone from the northern frontier, worn on the bridle and on the brow and said to warn of falls.",
+      "body": "Turquoise comes up in veins through the dry hills in a blue that belongs to no other stone: not the sea's and not quite the sky's. The Acheaorians set it in saddle-gear and on diadems, and the frontier riders swear a stone on the bridle will go dull in the hour before a horse stumbles.\n\n## Where it is found\n\nIts workings lie in the dry hills behind [[Xerastri City]], and every ounce of it is taxed at the [[Shir'abad D'ar]] gate before it reaches [[Persemenid City]].\n\n## In play\n\nA turquoise set in a bridle gives its rider advantage on one Wisdom (Animal Handling) check per day to keep a mount on its feet, which the stone's owners take as proof and a skeptic as a good horseman's habit. Fakes of dyed bone are common (Investigation, DC 13).",
+      "dmNotes": "Basis: real turquoise, hydrated copper aluminium phosphate, historically most prized from the Nishapur region of Persia and from Sinai. The bridle-warning superstition is invented.",
+      "fields": {
+        "costPerLb": "60 gp",
+        "ferrous": "Non-ferrous",
+        "foundIn": "Xerastri City, Shir'abad D'ar",
+        "biome": "Desert",
+        "rarity": "Uncommon",
+        "location": "Veins in dry northern hills",
+        "properties": "• Takes a waxy polish.\n• Discolours with skin oil over years.\n• Tough but not hard.",
+        "uses": "• Bridle and diadem stones.\n• Inlay in ceremonial armour.",
+        "lore": "Riders count a stone gone dull as a day to walk the horse."
+      },
+      "tags": [
+        "Ore",
+        "Gem",
+        "Acheaorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/ores-1"
+    },
+    {
+      "slug": "orpiment",
+      "kind": "ore",
+      "name": "Orpiment",
+      "summary": "Golden yellow arsenic ore that looks like treasure, makes the best yellow paint, and kills quietly.",
+      "body": "Orpiment glitters in soft sheets of yellow so close to gold that men have been fooled and then fooled themselves into trying to make gold from it. It flakes under a thumbnail and it is poison to handle for long, which every scribe who uses it learns by the cough.\n\n## Where it is found\n\nIt forms in volcanic seeps and hot-spring country, and the springs near [[Loutrokleion]] and the sulphurous vents of the [[Olympus Mountain Range]] both give it up.\n\n## In play\n\nA scribe's yellow ink and an assassin's dusting-powder are the same stone ground two ways. Prolonged contact calls for a Constitution saving throw, DC 12, or the handler is poisoned until a long rest. A would-be alchemist who tries to turn it into gold ends with nothing but sore lungs.",
+      "dmNotes": "Basis: real orpiment, arsenic trisulfide, used as a golden-yellow pigment and as a poison; the emperor Caligula is recorded trying to extract gold from it. Treat the toxicity as real danger.",
+      "fields": {
+        "costPerLb": "15 gp",
+        "ferrous": "Non-ferrous",
+        "foundIn": "Loutrokleion, Olympus Mountain Range",
+        "biome": "Volcanic hills",
+        "rarity": "Uncommon",
+        "location": "Hot-spring and vent country",
+        "properties": "• Soft, flaking, bright yellow.\n• Arsenic: toxic as dust or paste.\n• Fools the eye into taking it for gold.",
+        "uses": "• Scribe's yellow.\n• Poison and rat-bane.\n• Fool's alchemy.",
+        "lore": "The old warning: a yellow that looks like gold has been lying since the world began."
+      },
+      "tags": [
+        "Ore",
+        "Poison",
+        "Hellenorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/ores-1"
+    },
+    {
+      "slug": "realgar",
+      "kind": "ore",
+      "name": "Realgar",
+      "summary": "Blood-red arsenic crystal, the other half of orpiment, used for red paint, fumigation, and quiet murders.",
+      "body": "Where orpiment is gold, realgar is blood: a clear orange-red crystal that darkens in the light and crumbles to powder if kept too long in the sun. It is cheaper than orpiment and nearly as deadly, and the apothecaries who sell it as a cure for skin disease are the same ones who sell the antidote.\n\n## Where it is found\n\nIt turns up beside orpiment in the vent country of the [[Olympus Mountain Range]] and in the dry gorges of the [[Parthian Ravine]], where Acheaorian caravans know to carry it sealed.\n\n## In play\n\nBurned in a closed room, realgar fills the air with a garlic stink and a Constitution saving throw, DC 13, against nausea. It is sold openly as a paint and, less openly, to anyone with a grudge. A character who studies a corpse can spot its work (Medicine, DC 15).",
+      "dmNotes": "Basis: real realgar, arsenic sulfide (As4S4), used as a red pigment, a medicine and a poison in antiquity; light turns it to a yellow powder (pararealgar).",
+      "fields": {
+        "costPerLb": "10 gp",
+        "ferrous": "Non-ferrous",
+        "foundIn": "Olympus Mountain Range, Parthian Ravine",
+        "biome": "Volcanic hills",
+        "rarity": "Uncommon",
+        "location": "Beside orpiment in vent country",
+        "properties": "• Red-orange crystals that dull in light.\n• Burns with a garlic smell.\n• Arsenic: toxic.",
+        "uses": "• Red paint.\n• Vermin poison.\n• An apothecary's risky cure for skin complaints.",
+        "lore": "A grudge is a pound of realgar and a patient cook."
+      },
+      "tags": [
+        "Ore",
+        "Poison",
+        "Acheaorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/ores-1"
+    },
+    {
+      "slug": "lodestone",
+      "kind": "ore",
+      "name": "Lodestone",
+      "summary": "Black iron stone that pulls iron to it, the toy of philosophers and the sailor's secret.",
+      "body": "A lump of lodestone drags a needle across a table without touching it, and that single trick has bought it a place in every philosopher's cabinet. It looks like any dull black rock until it is held near iron, and then it looks like a miracle, which is how it is sold.\n\n## Where it is found\n\nThe richest lumps come from the iron hills near [[Thessalonika City]], where the scholars of the League keep a cabinet of them, and a few from the heights of the [[Oros Mountain Range]].\n\n## In play\n\nA suspended lodestone, floated on a cork in water, points the same way each time; Hellenorian pilots of the [[Aeolus Reach]] guard that fact. A character with a lodestone and a needle can find north anywhere the stone has not been dropped or heated (no check; a roll if the stone is damaged). Lodestone also disturbs fine iron tools stored beside it.",
+      "dmNotes": "Basis: real lodestone, naturally magnetised magnetite, known to the Greeks (Thales) and long used as the basis of the compass; the word magnet probably comes from Magnesia. The pilot's secret is the setting's own gloss.",
+      "fields": {
+        "costPerLb": "20 gp",
+        "ferrous": "Ferrous",
+        "foundIn": "Thessalonika City, Oros Mountain Range",
+        "biome": "Mountain",
+        "rarity": "Uncommon",
+        "location": "Iron outcrops, struck by lightning",
+        "properties": "• Naturally magnetic.\n• Loses power if heated or struck hard.\n• Heavy, dull black.",
+        "uses": "• Navigational needle.\n• Philosophers' demonstrations.\n• Pulling splinters of iron from wounds.",
+        "lore": "The League's scholars say the stone loves iron the way a hound loves a master."
+      },
+      "tags": [
+        "Ore",
+        "Iron",
+        "Hellenorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/ores-1"
+    },
+    {
+      "slug": "northern-amber",
+      "kind": "ore",
+      "name": "Northern Amber",
+      "summary": "Warm golden resin, fossil of forests older than the empires, carried south along the long north road.",
+      "body": "Amber is not a stone but the sap of trees dead longer than any kingdom, gone hard and glassy, and sometimes holding the small bodies of things that crawled into it before it set. It is light enough to float in brine and warm to the hand, and rubbed on wool it will lift a hair from the table.\n\n## Where it is found\n\nIt washes up on the northern coast and is carried down the trade roads to [[Aeterna City]], where the [[Latium Plains]] markets sell it by weight against its own worth in silver.\n\n## In play\n\nAn amber bead worn on a child is a charm against fever, and a lump with a clear insect inside is worth ten times a plain one. Rubbed briskly it gives a faint static crackle (a trick a clever character might exploit).",
+      "dmNotes": "Basis: real amber, fossil tree resin, traded along the Amber Road from the Baltic to Rome; the Greek word for it, elektron, gave us electricity because rubbed amber attracts light objects.",
+      "fields": {
+        "costPerLb": "100 gp",
+        "ferrous": "Non-ferrous",
+        "foundIn": "Aeterna City, Latium Plains",
+        "biome": "Coast",
+        "rarity": "Uncommon",
+        "location": "Washed up on cold northern shores",
+        "properties": "• Light enough to float in brine.\n• Warm to the touch.\n• Static when rubbed.",
+        "uses": "• Beads and amulets against fever.\n• Carved ornaments.\n• Imperial gifts.",
+        "lore": "The Invictians say it is the tears of a dying sun, and price it as though it were true."
+      },
+      "tags": [
+        "Ore",
+        "Gem",
+        "Invictian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/ores-1"
+    },
+    {
+      "slug": "jet",
+      "kind": "ore",
+      "name": "Jet",
+      "summary": "A black, light, warm stone that is really old wood, burned as incense and worn in mourning.",
+      "body": "Jet is the dark ghost of a drowned forest, wood that slowly became something between stone and coal. It is light, takes a mirror polish, and gives off a faint resinous smell when it is rubbed hot. Mourners wear it and apothecaries burn it, and the two uses are older than the cities that taught them.\n\n## Where it is found\n\nIt is cut from black cliff-seams on the northern coast of the Imperium and sold from the [[River Tiberius]] wharves by the stall-load.\n\n## In play\n\nA piece worn through the year of mourning is a sign of respect; the same piece burned drives away snakes (so believers say). Jet is flammable when ground and heated, which a prepared character can use to light a damp fire.",
+      "dmNotes": "Basis: real jet, a compact lignite, worked as mourning jewellery and burned as an aromatic in antiquity. The Latin name derives from Gagae in Lycia.",
+      "fields": {
+        "costPerLb": "30 gp",
+        "ferrous": "Non-ferrous",
+        "foundIn": "River Tiberius",
+        "biome": "Coast",
+        "rarity": "Uncommon",
+        "location": "Black seams in sea cliffs",
+        "properties": "• Very light, deep black.\n• Takes a mirror polish.\n• Burns with a resinous smell.",
+        "uses": "• Mourning jewellery.\n• Incense against snakes, by tradition.\n• Carved amulets.",
+        "lore": "No Invictian widow is seen out of doors in her first year without a stone of it."
+      },
+      "tags": [
+        "Ore",
+        "Gem",
+        "Invictian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/ores-1"
+    },
+    {
+      "slug": "natron",
+      "kind": "ore",
+      "name": "Natron",
+      "summary": "White crust from dry lake beds, used to clean, to bake glass, and to dry the dead.",
+      "body": "Natron is the salt of the dry lake: a grey-white crust that dissolves to a slick, soapy, faintly burning brine. It cleans cloth, softens bread-dough, flavours a dead man's bath, and goes into every glassmaker's furnace as the flux that lets sand melt.\n\n## Where it is found\n\nIt crusts the salt-pans of the [[Kaspiran Seas]] and the dry lakes beside [[Varathros Lake]], and caravans out of [[Atarabad City]] carry it in sealed jars to keep the damp from it.\n\n## In play\n\nEmbalmers of the plateau use it to dry and keep the bodies of the rich; a corpse buried in natron stays recognisable for a long time. A glassmaker with a ready supply is worth a tax collector's attention.",
+      "dmNotes": "Basis: real natron, a mixture of sodium carbonate and bicarbonate found in dry lakebeds (Wadi El Natrun in Egypt), used for mummification, soap, and as a glass flux.",
+      "fields": {
+        "costPerLb": "2 gp",
+        "ferrous": "Non-ferrous",
+        "foundIn": "Kaspiran Seas, Varathros Lake, Atarabad City",
+        "biome": "Salt flat",
+        "rarity": "Common",
+        "location": "Crusts on dry lake beds",
+        "properties": "• Dissolves to an alkaline, soapy brine.\n• Dries flesh and preserves it.\n• Fluxes sand into glass.",
+        "uses": "• Cleaning and soap.\n• Embalming.\n• Glassmaking.",
+        "lore": "Embalmers speak of it with tenderness, the way gardeners speak of rain."
+      },
+      "tags": [
+        "Ore",
+        "Salt",
+        "Acheaorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/ores-1"
+    },
+    {
+      "slug": "brimstone",
+      "kind": "ore",
+      "name": "Brimstone",
+      "summary": "Yellow volcanic sulphur, burned to cleanse a house, bleach cloth, and drive away what should not be there.",
+      "body": "Brimstone gathers in bright yellow crusts around fumaroles and hot vents and stinks of a struck match and a rotten egg together. Hellenorians burn it to fumigate a house after sickness and a murder, and the old poets have heroes do the same after a bloody day.\n\n## Where it is found\n\nIt crusts the vents of the [[Olympus Mountain Range]], and miners lowered on ropes into the steaming crevices bring up baskets of it for the spa-town of [[Loutrokleion]].\n\n## In play\n\nBurning a pound of brimstone in a sealed room rids it of vermin and (by belief) of spirits, and it gives a Constitution saving throw, DC 12, to anything that stays to breathe it. Mixed with pitch and tow it makes a fire that clings to wood and is hard to douse.",
+      "dmNotes": "Basis: real native sulphur, used in antiquity for fumigation (Homer has Odysseus purify his hall with sulphur) and as an incendiary ingredient.",
+      "fields": {
+        "costPerLb": "3 gp",
+        "ferrous": "Non-ferrous",
+        "foundIn": "Olympus Mountain Range, Loutrokleion",
+        "biome": "Volcanic hills",
+        "rarity": "Common",
+        "location": "Crusts around steaming vents",
+        "properties": "• Bright yellow, brittle.\n• Burns with a blue flame and choking fumes.\n• Bleaches cloth.",
+        "uses": "• Fumigation.\n• Cloth bleaching.\n• Incendiary mixes.",
+        "lore": "After any killing in a Hellenorian house, the brimstone is lit before the family eats."
+      },
+      "tags": [
+        "Ore",
+        "Volcanic",
+        "Hellenorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/ores-1"
+    },
+    {
+      "slug": "pentelic-marble",
+      "kind": "ore",
+      "name": "Pentelic Marble",
+      "summary": "Fine white marble from the mountain behind the temple city, with a vein of iron that ages it to honey gold.",
+      "body": "Pentelic marble is the white of a clean sheet with a hidden warmth in it. Carved fresh it is almost blinding, and then a hundred years of sun and rain bring out the thin iron in the stone and turn it the colour of honey. The Hellenorian temples were built to be white at the opening and gold at the centenary.\n\n## Where it is found\n\nIt is quarried on the heights above [[Delphara City]] and floated to the coast for the temple precincts of [[Hellarchon City]].\n\n## In play\n\nA block of Pentelic costs more to ship than to buy, and a patron who orders a whole facade of it has made a statement about the next century. Sculptors can read a block's flaws by tapping it; a clear note means no hidden crack (Perception, DC 12).",
+      "dmNotes": "Basis: real Pentelic marble from Mount Pentelicus near Athens, used for the Parthenon; trace iron in the stone gives it a golden patina as it weathers.",
+      "fields": {
+        "costPerLb": "1 gp",
+        "ferrous": "Non-ferrous",
+        "foundIn": "Delphara City, Hellarchon City",
+        "biome": "Mountain",
+        "rarity": "Uncommon",
+        "location": "Quarries in the highland",
+        "properties": "• Fine-grained and bright white.\n• Weathers to a honey colour.\n• Takes carving of great delicacy.",
+        "uses": "• Temples and public sculpture.\n• Fine inscriptions.",
+        "lore": "A Hellenorian builder plans for the gold, not the white."
+      },
+      "tags": [
+        "Ore",
+        "Marble",
+        "Hellenorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/ores-1"
+    },
+    {
+      "slug": "lamp-quarried-marble",
+      "kind": "ore",
+      "name": "Lamp-Quarried Marble",
+      "summary": "Translucent island marble, so fine that miners cut it underground by lamplight and the light glows through the finished stone.",
+      "body": "The island marble is almost wax: translucent enough that a lamp held behind a thin slab glows through it. It is cut by lamplight in galleries under the hill, not in an open pit, because the stone is too precious and too fine for open weather. Statues of the gods in it seem to hold a candle under the skin.\n\n## Where it is found\n\nIts galleries are on the western islands of the [[Nereid’s Veil]], and the finished blocks are shipped to [[Corinth City]] under guard.\n\n## In play\n\nA statue of it is a masterwork by its stone alone and demands a sculptor of rank. A thin panel set in a temple wall lets daylight in and blazes at dusk. The galleries below the hill are cramped, cold and the sort of place where a lamp gutters and a cave-in is only a matter of time.",
+      "dmNotes": "Basis: real Parian marble (lychnites, 'lamp-stone'), quarried by lamplight on Paros and prized for translucency, used for the Venus de Milo and the Hermes of Praxiteles.",
+      "fields": {
+        "costPerLb": "4 gp",
+        "ferrous": "Non-ferrous",
+        "foundIn": "Nereid's Veil, Corinth City",
+        "biome": "Island",
+        "rarity": "Rare",
+        "location": "Underground galleries on island hills",
+        "properties": "• Translucent, fine, near-flawless.\n• Glows with a lamp behind it.\n• Worked underground by lamplight.",
+        "uses": "• Cult statuary.\n• Glowing temple panels.",
+        "lore": "Sculptors say you do not carve it, you wake it."
+      },
+      "tags": [
+        "Ore",
+        "Marble",
+        "Hellenorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/ores-1"
+    },
+    {
+      "slug": "imperial-porphyry",
+      "kind": "ore",
+      "name": "Imperial Porphyry",
+      "summary": "Purple stone quarried in one desert mountain and reserved by law for the ruler's use.",
+      "body": "Porphyry is a hard purple-red rock flecked with white, found in one mountain in the far desert and quarried only for the throne. It is so hard it breaks tools, and so rare that a column of it is a statement that cannot be imitated. Its colour belongs to the emperor as the purple dye belongs to him, and an heir to the throne is said to be born in it.\n\n## Where it is found\n\nIts only quarry in the Imperium's reach lies beyond the empire's southern borders, and its blocks are delivered to [[Aeterna City]] and [[Romulo City]] by long caravan.\n\n## In play\n\nUnlicensed possession of imperial porphyry is a crime. Carving it requires hardened tools (a smith may need a day to re-temper each chisel). A plain porphyry cup on a merchant's table is either a gift of the throne or a theft.",
+      "dmNotes": "Basis: real imperial porphyry, a purple igneous rock from Mons Porphyrites in Egypt's eastern desert, used almost exclusively for Roman imperial monuments; the title porphyrogenitus, 'born in the purple', refers to the porphyry birth-chamber in Constantinople.",
+      "fields": {
+        "costPerLb": "50 gp",
+        "ferrous": "Non-ferrous",
+        "foundIn": "Aeterna City, Romulo City",
+        "biome": "Desert",
+        "rarity": "Rare",
+        "location": "One remote desert quarry",
+        "properties": "• Extremely hard, purple with white flecks.\n• Blunts ordinary chisels.\n• Reserved by law for the ruler.",
+        "uses": "• Imperial columns, tombs and thrones.\n• Gifts of state.",
+        "lore": "The Invictians say the stone is the emperor's blood, set in the earth."
+      },
+      "tags": [
+        "Ore",
+        "Stone",
+        "Invictian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/ores-1"
+    },
+    {
+      "slug": "alabaster",
+      "kind": "ore",
+      "name": "Alabaster",
+      "summary": "Soft, creamy, translucent stone that carves like cheese and holds perfume better than any jar.",
+      "body": "Alabaster is soft enough to scratch with a fingernail and carves under a knife as easily as hard cheese. It is creamy white and a little see-through, and a jar of it keeps a perfume sweet and an ointment cool. The expensive oils of the plateau go to market in alabaster flasks, and the flask often costs more than the oil.\n\n## Where it is found\n\nIt is quarried in the cliffs beyond [[Persevalis City]] and worked in the oil-sellers' quarter of [[Persemenid City]].\n\n## In play\n\nA sealed alabaster flask of rare oil is a safe, discreet way to move wealth. The stone's softness means it is easily damaged: dropped, it shatters, and a character carrying a priceless flask across rough ground has something to worry about.",
+      "dmNotes": "Basis: real alabaster (a fine-grained gypsum or calcite), used by the ancient Egyptians, Persians and Greeks for ointment jars (alabastra) and carved vessels.",
+      "fields": {
+        "costPerLb": "2 gp",
+        "ferrous": "Non-ferrous",
+        "foundIn": "Persevalis City, Persemenid City",
+        "biome": "Desert",
+        "rarity": "Common",
+        "location": "Cliffs of soft pale stone",
+        "properties": "• Soft and easily carved.\n• Translucent in thin sections.\n• Shatters if dropped.",
+        "uses": "• Perfume and oil flasks.\n• Lamps and small statuary.",
+        "lore": "A bride is given an alabaster flask to break at the hearth, so the scent is the first thing in the new house."
+      },
+      "tags": [
+        "Ore",
+        "Stone",
+        "Acheaorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/ores-1"
+    },
+    {
+      "slug": "deep-rock-salt",
+      "kind": "ore",
+      "name": "Deep Rock Salt",
+      "summary": "Grey-white salt cut from a dry mountain mine, where the dead are kept as perfectly as the salt.",
+      "body": "Rock salt is cut in blocks from a mine under a dry hill, grey-white and clear as ice in the cleaner seams. The air underground is so dry that anything which falls and is not recovered stays exactly as it fell. A century on, a miner lost to a cave-in is found hair and beard intact, still holding his pick.\n\n## Where it is found\n\nThe great mine sits under the dry hills beyond [[Zi'rzamin Dar'a]], and the blocks are sledged out to [[Atarabad City]] for the caravans.\n\n## In play\n\nSalt is the cheap currency of the plateau: it preserves meat, cures leather, and pays a soldier. The mine's long dry galleries preserve lost workers, who are sometimes found and sometimes sold as curiosities by unscrupulous guides. A mummified miner is a hook for a story, or a warning.",
+      "dmNotes": "Basis: real rock salt mining, including the Chehrabad salt mine in Iran, where Achaemenid and Sasanian-era miners were naturally mummified in the salt; salt as the root of the word 'salary'.",
+      "fields": {
+        "costPerLb": "1 gp",
+        "ferrous": "Non-ferrous",
+        "foundIn": "Zi'rzamin Dar'a, Atarabad City",
+        "biome": "Desert",
+        "rarity": "Common",
+        "location": "Deep dry mines",
+        "properties": "• Cut in grey-white blocks.\n• Preserves flesh in dry galleries.\n• Currency in the plateau trade.",
+        "uses": "• Preserving meat and leather.\n• Trade good and soldier's pay.",
+        "lore": "Miners say the mountain keeps what it takes, and gives it back whole."
+      },
+      "tags": [
+        "Ore",
+        "Salt",
+        "Acheaorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/ores-1"
+    },
+    {
+      "slug": "quicklime",
+      "kind": "ore",
+      "name": "Quicklime",
+      "summary": "Burned limestone that boils when wetted, the heart of mortar and the bane of a besieger's ladders.",
+      "body": "Limestone burned hot for days comes out of the kiln as white lumps that look harmless and are not: wetted, they hiss and boil and burn flesh to the bone. Mixed with sand and water, they become the mortar that holds a city together; thrown in a fine cloud, they blind.\n\n## Where it is found\n\nIts kilns smoke across the hills of the [[Latium Plains]] and around [[Mavelon City]], where the lime-burners are a close, soot-black guild.\n\n## In play\n\nSacks of quicklime on a wall are a defender's trick: poured down on climbers, they require a Dexterity saving throw, DC 13, or the target is blinded until the eyes are washed. A character who splashes water on a sack by accident takes fire damage for the mistake.",
+      "dmNotes": "Basis: real quicklime (calcium oxide), the active ingredient of Roman mortar and concrete, produced by burning limestone; a reaction with water is violently exothermic.",
+      "fields": {
+        "costPerLb": "1 gp",
+        "ferrous": "Non-ferrous",
+        "foundIn": "Latium Plains, Mavelon City",
+        "biome": "Hills",
+        "rarity": "Common",
+        "location": "Kilns beside limestone hills",
+        "properties": "• Reacts violently with water.\n• Caustic: burns skin and eyes.\n• The base of mortar and plaster.",
+        "uses": "• Mortar and plaster.\n• Defender's blinding powder.\n• Tanning.",
+        "lore": "Lime-burners are known by their cracked hands and the grey in their beards at thirty."
+      },
+      "tags": [
+        "Ore",
+        "Building",
+        "Invictian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/ores-1"
+    },
+    {
+      "slug": "kohl-stone",
+      "kind": "ore",
+      "name": "Kohl-Stone",
+      "summary": "Grey metallic crystals ground to black eye paint, worn by every woman and half the men of the plateau.",
+      "body": "A grey, lead-bright mineral that breaks into long blades. Ground to a fine black powder it is the eye-paint of the plateau, worn in a heavy line along the lid against the glare, the dust and the evil eye alike. A little in the eye is a cosmetic; a lot is poison.\n\n## Where it is found\n\nIts mines are in the dry hills near [[Xerastri City]], and the powder is traded in tiny sealed jars through [[Persemenid City]].\n\n## In play\n\nA jar of fine kohl is a courtesy gift, and a woman who offers you hers is offering friendship. It is also an easy way to conceal a poison: a careless hand dusts it near food. Antimony in quantity calls for a Constitution saving throw, DC 12, against sickness.",
+      "dmNotes": "Basis: real stibnite (antimony sulfide) and galena, ground to make kohl, the eye cosmetic of Egypt, Persia and the Near East, worn for glare and as a charm against the evil eye.",
+      "fields": {
+        "costPerLb": "8 gp",
+        "ferrous": "Non-ferrous",
+        "foundIn": "Xerastri City, Persemenid City",
+        "biome": "Desert",
+        "rarity": "Common",
+        "location": "Dry hills near frontier forts",
+        "properties": "• Grey, metallic, bladed crystals.\n• Grinds to a black powder.\n• Mildly toxic in quantity.",
+        "uses": "• Eye-paint against glare and the evil eye.\n• A discreet courtesy gift.",
+        "lore": "Offering your kohl is the plateau's oldest handshake."
+      },
+      "tags": [
+        "Ore",
+        "Cosmetic",
+        "Acheaorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/ores-1"
+    },
+    {
+      "slug": "bloodstone",
+      "kind": "ore",
+      "name": "Bloodstone",
+      "summary": "Heavy red-black iron stone that streaks blood-red when rubbed, used by soldiers and surgeons alike.",
+      "body": "Haematite is dense and dark, with a metallic shine, and when it is scratched or ground it leaves a smear the red of fresh blood. Soldiers carry a lump against wounds, apothecaries grind it for eye-wash, and smiths polish a slab of it into a mirror that will outlast the glass.\n\n## Where it is found\n\nIt comes from the iron hills of the [[Oros Mountain Range]] and the dry ground around [[Thebesieas City]], where the League's hoplites carry a piece in their kit.\n\n## In play\n\nA character who wears a lump of bloodstone is taken for a veteran by those who know the habit, and a stone ground into a paste can stop minor bleeding (Medicine, DC 11). Its red powder is the base of a cheap, durable pigment.",
+      "dmNotes": "Basis: real haematite (iron oxide), 'bloodstone' in antiquity, used as a pigment, a polished mirror, and in folk medicine for bleeding; Pliny describes its use.",
+      "fields": {
+        "costPerLb": "6 gp",
+        "ferrous": "Ferrous",
+        "foundIn": "Oros Mountain Range, Thebesieas City",
+        "biome": "Hills",
+        "rarity": "Common",
+        "location": "Iron-rich hills",
+        "properties": "• Dense, metallic, red-black.\n• Streaks blood-red.\n• Takes a mirror polish.",
+        "uses": "• Soldier's charm and pigment.\n• Burnished mirrors.\n• Grind-and-pack for minor bleeding.",
+        "lore": "A veteran gives his first bloodstone to a recruit as a promise to bring him home."
+      },
+      "tags": [
+        "Ore",
+        "Iron",
+        "Hellenorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/ores-1"
+    },
+    {
+      "slug": "island-emery",
+      "kind": "ore",
+      "name": "Island Emery",
+      "summary": "Black grit from an island cape, the only thing the gem-cutters trust to cut a harder stone.",
+      "body": "Emery is a grey-black rock so abrasive that it eats other stones; ground to a powder, it cuts gems, polishes marble and sharpens bronze. The jewellers of the coast buy it by the pinch from one island and treat its supply as a secret of state.\n\n## Where it is found\n\nIt is dug from the cape of a single island in the [[Nereid’s Veil]] and sold through [[Hellarchon City]], where a gem-cutter without emery is a man with a very expensive hobby.\n\n## In play\n\nA pinch is enough to cut a hard stone, a pound is enough to supply a workshop for a year. A character who corners the emery trade gains influence far beyond its value in gold.",
+      "dmNotes": "Basis: real emery, a natural abrasive mixture of corundum and magnetite or haematite, anciently exported from Naxos in the Aegean and used to cut and polish gemstones.",
+      "fields": {
+        "costPerLb": "20 gp",
+        "ferrous": "Non-ferrous",
+        "foundIn": "Nereid's Veil, Hellarchon City",
+        "biome": "Island",
+        "rarity": "Uncommon",
+        "location": "A single island cape",
+        "properties": "• Extremely abrasive.\n• Grey-black and granular.\n• Cuts hard stones when ground.",
+        "uses": "• Gem-cutting.\n• Polishing marble and metal.\n• Sharpening bronze.",
+        "lore": "Jewellers say the island's cape is the only place the sea has teeth."
+      },
+      "tags": [
+        "Ore",
+        "Abrasive",
+        "Hellenorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/ores-1"
+    },
+    {
+      "slug": "pumice",
+      "kind": "ore",
+      "name": "Pumice",
+      "summary": "Foam of stone, light enough to float, used to smooth parchment, skin and temper.",
+      "body": "Pumice is volcanic froth turned to rock: so full of bubbles that it floats on water and weighs next to nothing in the hand. It is rough on the skin and rougher on a surface it is rubbed against, which is what it is for. Scribes pumice their parchment smooth, bath-keepers pumice their customers, and shipwrights pumice their planks.\n\n## Where it is found\n\nRafts of it drift in the strait after an eruption at the [[Aeolus Reach]], and wash ashore on the beaches near [[Carianea]].\n\n## In play\n\nA drifting raft of pumice, sometimes miles across, is a hazard to ships and a harvest to anyone with a net. A character who has been hiding in an old library finds that the shelves smell of it.",
+      "dmNotes": "Basis: real pumice, vesicular volcanic glass light enough to float, used in antiquity to smooth parchment and skin and for polishing; pumice rafts from eruptions drift across seas.",
+      "fields": {
+        "costPerLb": "1 gp",
+        "ferrous": "Non-ferrous",
+        "foundIn": "Aeolus Reach, Carianea",
+        "biome": "Coast",
+        "rarity": "Common",
+        "location": "Beaches after an eruption",
+        "properties": "• Floats on water.\n• Rough and abrasive.\n• Very light.",
+        "uses": "• Smoothing parchment, skin and wood.\n• Cleaning and polishing.",
+        "lore": "Sailors read a pumice-strewn beach the way farmers read ash: something burned, far away."
+      },
+      "tags": [
+        "Ore",
+        "Volcanic",
+        "Hellenorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/ores-1"
+    }
+  ]
+}

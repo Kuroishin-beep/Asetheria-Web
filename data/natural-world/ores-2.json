@@ -1,0 +1,526 @@
+{
+  "format": "asetheria-codex",
+  "note": "Original ores and stones, batch 2 of 2. Each entry is written for Asetheria; the real mineral or stone it is grounded in is named in the DM notes under 'Basis'. No third-party text is reproduced.",
+  "entries": [
+    {
+      "slug": "carnelian",
+      "kind": "ore",
+      "name": "Carnelian",
+      "summary": "Warm orange-red stone cut into signet seals, because wax will not stick to it.",
+      "body": "Carnelian is the red-orange of a lit coal seen through a veil, and it is the signet-maker's first choice: hard enough to hold a fine carving for generations, and wax pulls cleanly off it without leaving a smear. A merchant's ring in carnelian is a business card and a legal signature in one.\n\n## Where it is found\n\nIt is collected from river gravels in the hills behind [[Persevalis City]] and cut in the seal-makers' lane of [[Persemenid City]].\n\n## In play\n\nA forged seal is a serious crime; a character who studies a stamped letter can tell whether the carnelian that made it is the real ring (Investigation, DC 14). A gift of a carnelian ring is a sign of trust between houses.",
+      "dmNotes": "Basis: real carnelian, orange-red chalcedony, used for engraved seals and signet rings from Mesopotamia through Rome; wax does not adhere to it.",
+      "fields": {
+        "costPerLb": "40 gp",
+        "ferrous": "Non-ferrous",
+        "foundIn": "Persevalis City, Persemenid City",
+        "biome": "River gravel",
+        "rarity": "Uncommon",
+        "location": "River gravels in dry hills",
+        "properties": "• Hard, warm orange-red.\n• Wax does not stick to it.\n• Holds fine engraving.",
+        "uses": "• Signet rings and seals.\n• Charms and bead strings.",
+        "lore": "A merchant's ring outlives his debts."
+      },
+      "tags": [
+        "Ore",
+        "Gem",
+        "Acheaorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/ores-2"
+    },
+    {
+      "slug": "seal-jasper",
+      "kind": "ore",
+      "name": "Seal Jasper",
+      "summary": "Opaque banded stone in red, green and yellow, carved with gods and beasts for the pocket of every freeman.",
+      "body": "Jasper is the common cousin of the gem family, opaque and in every earth colour from brick red to moss green, and it is cheap enough that even a fishmonger can own a carved piece. A small flat stone, cut with a god or a beast and drilled for a cord, is the oldest everyday amulet of the coast.\n\n## Where it is found\n\nIt lies loose in the stream beds of the [[Oros Mountain Range]] and in the quarry rubble near [[Argotiko]], where the horse breeders carve a mount on theirs.\n\n## In play\n\nA jasper amulet carved with the right figure is the commonest keepsake in a Hellenorian pocket and a safe gift. The carvers also sell blank stones to cheats who want to counterfeit a god's mark.",
+      "dmNotes": "Basis: real jasper, opaque chalcedony in many colours, carved into seals, amulets and intaglios across the Greek and Roman world and cheap enough for ordinary people.",
+      "fields": {
+        "costPerLb": "5 gp",
+        "ferrous": "Non-ferrous",
+        "foundIn": "Oros Mountain Range, Argotiko",
+        "biome": "Mountain",
+        "rarity": "Common",
+        "location": "Stream beds and quarry rubble",
+        "properties": "• Opaque, banded, many colours.\n• Cheap and easily carved.",
+        "uses": "• Seals and amulets.\n• Beads and cheap inlay.",
+        "lore": "A man is judged by the god on his stone and the stone on his hand."
+      },
+      "tags": [
+        "Ore",
+        "Gem",
+        "Hellenorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/ores-2"
+    },
+    {
+      "slug": "mountain-crystal",
+      "kind": "ore",
+      "name": "Mountain Crystal",
+      "summary": "Clear quartz, believed to be ice that froze too hard to ever thaw, and used to light fires.",
+      "body": "Clear quartz crystal grows in the high caves in six-sided points as clear as winter water. The coast believes it is ice that froze so hard it forgot how to melt. A thick lens of it held to the sun will light a fire, and a cup of it is the drinking-vessel of rich fools who are afraid of poison, since it will not cloud for any known one.\n\n## Where it is found\n\nIts caves lie in the heights of the [[Olympus Mountain Range]], and the best clusters are pried out by shepherd-boys for sale in [[Hellarchon City]].\n\n## In play\n\nA lens of mountain crystal can light tinder in direct sun in a minute. A cup of it is a status symbol, and a famously brittle one: an emperor in a rage once smashed two in a night. Smashing his own is no kind of revenge on a rival.",
+      "dmNotes": "Basis: real rock crystal (clear quartz), thought by the ancients to be permanently frozen ice; it was used for burning lenses and luxury cups, and Nero is recorded smashing two crystal cups in a rage.",
+      "fields": {
+        "costPerLb": "30 gp",
+        "ferrous": "Non-ferrous",
+        "foundIn": "Olympus Mountain Range, Hellarchon City",
+        "biome": "Mountain",
+        "rarity": "Uncommon",
+        "location": "High caves and clefts",
+        "properties": "• Clear, hard, six-sided points.\n• Cold to the touch.\n• Focuses sunlight.",
+        "uses": "• Burning lenses.\n• Luxury drinking cups.\n• Charms against fever.",
+        "lore": "Shepherds call it the mountain's frozen breath, and sell it by the pointed span."
+      },
+      "tags": [
+        "Ore",
+        "Gem",
+        "Hellenorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/ores-2"
+    },
+    {
+      "slug": "desert-emerald",
+      "kind": "ore",
+      "name": "Desert Emerald",
+      "summary": "Green beryl dug from slave-worked mines in a remote wadi, soothing to the eyes and priceless at the court.",
+      "body": "A green beryl of such depth and clarity that a long look at it is said to rest the eyes. It is dug from shafts in a remote desert valley by workers who are not paid and are not asked, and the stones reach market through a chain of brokers who all take their cut. The finest are cut flat and held in front of the eye by a monarch who wishes to look at something very unpleasant without it being too bright.\n\n## Where it is found\n\nIts valley is far to the south of the [[Dasht-a Khaliq]], and the cut stones are sold at the court of [[Persemenid City]].\n\n## In play\n\nA flawless emerald is a king's ransom, and a good fake is a green glass; a jeweller's loupe settles the question (Investigation, DC 14). A character who finds the mines learns what those shafts cost in lives.",
+      "dmNotes": "Basis: real emerald (green beryl) from the Egyptian Mons Smaragdus mines, worked since Pharaonic times; Pliny records that Nero watched gladiators through a cut emerald. Treat the mines' labour as the dark side of the trade.",
+      "fields": {
+        "costPerLb": "500 gp",
+        "ferrous": "Non-ferrous",
+        "foundIn": "Dasht-a Khaliq, Persemenid City",
+        "biome": "Desert",
+        "rarity": "Rare",
+        "location": "Remote desert valley shafts",
+        "properties": "• Clear deep green, very hard.\n• Rests the eyes.\n• Prone to internal flaws.",
+        "uses": "• Royal jewellery.\n• Spectacles and viewing stones for monarchs.",
+        "lore": "The court says an emerald weeps for every man who dug it."
+      },
+      "tags": [
+        "Ore",
+        "Gem",
+        "Acheaorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/ores-2"
+    },
+    {
+      "slug": "wine-red-garnet",
+      "kind": "ore",
+      "name": "Wine-Red Garnet",
+      "summary": "Dark red gem the colour of old wine, cut as a flat cabochon and inlaid in a thousand cloisonné brooches.",
+      "body": "Garnets are the colour of wine held up to a candle, small, hard and abundant enough that a goldsmith can afford a hundred in one piece. They are cut into thin flat slices, backed with gold foil, and set into cells of gold to make the brilliant red-and-gold work the plateau is known for.\n\n## Where it is found\n\nIt is panned from the sands of mountain streams near [[Tabrishi'ir]] and cut in the jewellers' lane of [[Persevalis City]].\n\n## In play\n\nA garnet-inlaid brooch is the standard noble's gift and a favoured way to carry portable wealth. The backing foil means a damaged stone can be spotted at once (Perception, DC 10), and a chipped garnet is only fit for a poor man's finery.",
+      "dmNotes": "Basis: real almandine garnet, the dark red gem used in Persian, Roman and later cloisonné jewellery, cut flat and set over gold foil.",
+      "fields": {
+        "costPerLb": "45 gp",
+        "ferrous": "Non-ferrous",
+        "foundIn": "Tabrishi'ir, Persevalis City",
+        "biome": "River gravel",
+        "rarity": "Uncommon",
+        "location": "Stream sands",
+        "properties": "• Dark wine red, hard.\n• Cut flat and backed with gold foil.\n• Abundant, so the work is skilled.",
+        "uses": "• Cloisonné jewellery.\n• Rings and brooches.",
+        "lore": "A garnet is a coal that cooled in a river."
+      },
+      "tags": [
+        "Ore",
+        "Gem",
+        "Acheaorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/ores-2"
+    },
+    {
+      "slug": "banded-agate",
+      "kind": "ore",
+      "name": "Banded Agate",
+      "summary": "Stone laid down in layers like the rings of a tree, cut to show eyes, rivers and landscapes.",
+      "body": "Agate grows layer on layer inside hollow rocks, each band a different shade, so a slice cut across it shows rings, eyes, rivers or stripes. Carvers choose which band becomes a face and which a sleeve. A cameo cut from it is a portrait in two colours at once.\n\n## Where it is found\n\nIt is picked from the dry stream beds of the [[Malaunian Steppe]] and from the hill streams around [[Delphara City]], where the sanctuary sells it to pilgrims by the cameo.\n\n## In play\n\nA cameo is the best portrait a noble can buy, and a good one is a heavy tax-free gift. A lump uncut, known as a thunder-egg to the steppe riders, is believed to hold a spirit and is split only with ceremony.",
+      "dmNotes": "Basis: real agate, banded chalcedony named by Theophrastus for the Achates river in Sicily, widely used for cameos and engraved gems in Greek and Roman art.",
+      "fields": {
+        "costPerLb": "12 gp",
+        "ferrous": "Non-ferrous",
+        "foundIn": "Malaunian Steppe, Delphara City",
+        "biome": "Plains",
+        "rarity": "Common",
+        "location": "Stream beds and hollow rocks",
+        "properties": "• Banded in layers.\n• Takes a fine polish.\n• Hard enough to carve in detail.",
+        "uses": "• Cameos and seals.\n• Polished slabs and beads.",
+        "lore": "Steppe riders say an agate holds a spirit that must be asked before the knife."
+      },
+      "tags": [
+        "Ore",
+        "Gem",
+        "Hellenorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/ores-2"
+    },
+    {
+      "slug": "calamine",
+      "kind": "ore",
+      "name": "Calamine",
+      "summary": "A dull pinkish stone that, cooked with copper, turns the metal bright and golden: the secret of brass.",
+      "body": "Calamine is easy to overlook, a pale pink-white powdery rock that looks like chalk with a cold. Cooked in a sealed crucible with copper, it gives up its fumes into the metal and turns it a bright yellow gold: brass, which the smiths of the coast sell at the price of the real thing to people who do not ask.\n\n## Where it is found\n\nIts workings lie in the foothills of the [[Klynin Mountain Range]] and a few seams run under [[Mavelon City]], where the river mills grind it.\n\n## In play\n\nA smith who guards his calamine has a monopoly on the golden metal, and a rival who learns the trick can break it. A character with some metalwork learning can tell brass from gold by weight and by the way it tarnishes (Investigation, DC 12).",
+      "dmNotes": "Basis: real calamine, zinc carbonate or silicate, which the Romans heated with copper to make brass (cementation); under Augustus brass coinage (the sestertius) was introduced. Links to the setting's existing Brass and Orichalcum.",
+      "fields": {
+        "costPerLb": "4 gp",
+        "ferrous": "Non-ferrous",
+        "foundIn": "Klynin Mountain Range, Mavelon City",
+        "biome": "Hills",
+        "rarity": "Uncommon",
+        "location": "Foothill seams beside copper",
+        "properties": "• Pale pink-white, soft.\n• Fumes into hot copper to make brass.\n• Unremarkable to the eye.",
+        "uses": "• Brass-making.\n• Soothing powders for the skin.",
+        "lore": "A smith who cooks calamine in the dark has a gold that is not gold."
+      },
+      "tags": [
+        "Ore",
+        "Metal",
+        "Invictian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/ores-2"
+    },
+    {
+      "slug": "sinopic-red",
+      "kind": "ore",
+      "name": "Sinopic Red",
+      "summary": "A deep red earth traded from a distant port, used for the first sketch of every great painting and every legal seal.",
+      "body": "A dense, dark red clay, rich in iron, that grinds to the best red pigment the coast knows. Painters use it to lay out a picture before they commit to colour, so the name has passed into the trade: to sketch a thing in sinopic is to draw it in outline. Merchants use it too, to mark a bale as taxed or a cask as sealed.\n\n## Where it is found\n\nIt comes by sea from a far northern port and is landed at [[Ephelanum City]], where the [[Great Sanctuary of Ephelanum]] buys it by the ton for its walls.\n\n## In play\n\nA painter's workshop that runs out of red is a workshop that has lost its first drawing. A legal red seal made of it on a document is hard to forge, since the pigment's shade is known to clerks.",
+      "dmNotes": "Basis: real Sinopian red, a high-quality red ochre exported from Sinope on the Black Sea, from which sinopia (the preparatory underdrawing of a fresco) is named; Pliny discusses it.",
+      "fields": {
+        "costPerLb": "7 gp",
+        "ferrous": "Non-ferrous",
+        "foundIn": "Ephelanum City, The Great Sanctuary of Ephelanum",
+        "biome": "Coast",
+        "rarity": "Uncommon",
+        "location": "Imported by sea",
+        "properties": "• Dense, deep red earth.\n• Grinds to a fast pigment.\n• Hard to counterfeit in shade.",
+        "uses": "• Fresco underdrawing.\n• Marking and sealing goods.",
+        "lore": "A painter's first line is red; his last is gold."
+      },
+      "tags": [
+        "Ore",
+        "Pigment",
+        "Hellenorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/ores-2"
+    },
+    {
+      "slug": "verdigris",
+      "kind": "ore",
+      "name": "Verdigris",
+      "summary": "A green crust grown on copper hung over vinegar, used as paint, as medicine, and as a very slow poison.",
+      "body": "Verdigris is not mined but grown: hang a plate of copper over a jar of sharp vinegar in a warm room, and in a few weeks the metal wears a thick bloom of blue-green. Scraped off, it is a paint, an ointment, and a salt of copper that no sensible cook would let near a pan.\n\n## Where it is found\n\nIt is made in the dyers' and painters' lanes of [[Corinth City]] and in the copper-workers' alleys of [[Falecosa]].\n\n## In play\n\nA small pot of it is the standard green of a travelling painter. In an ointment it dresses a sore (and sometimes worsens it). Fed in doses over weeks, it is a slow poison that looks like a wasting illness (Medicine, DC 14, to suspect).",
+      "dmNotes": "Basis: real verdigris, copper acetate, made by exposing copper to vinegar fumes, used by Greeks and Romans as a pigment and medicine (Theophrastus and Pliny describe the process); it is toxic.",
+      "fields": {
+        "costPerLb": "9 gp",
+        "ferrous": "Non-ferrous",
+        "foundIn": "Corinth City, Falecosa",
+        "biome": "Workshop",
+        "rarity": "Common",
+        "location": "Grown on copper plates over vinegar",
+        "properties": "• Blue-green crust.\n• Toxic if swallowed.\n• Makes a vivid pigment.",
+        "uses": "• Green paint.\n• Wound ointment.\n• A slow poison.",
+        "lore": "Painters keep a pot of it and a healer's skepticism."
+      },
+      "tags": [
+        "Ore",
+        "Pigment",
+        "Hellenorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/ores-2"
+    },
+    {
+      "slug": "window-stone",
+      "kind": "ore",
+      "name": "Window-Stone",
+      "summary": "Clear gypsum, cut into thin sheets and used as window glass before glass was cheap.",
+      "body": "Cut from deep seams in the hills, the clear gypsum splits into thin transparent sheets that a rich man glazes his windows with. It lets in light and keeps out wind, and it is just cloudy enough that a neighbour cannot see in. A greenhouse of it will grow winter cucumbers for an emperor who has expensive tastes.\n\n## Where it is found\n\nIts mines are in the hills behind [[Mavelon City]], and the sheets are packed in straw for sale in [[Aeterna City]].\n\n## In play\n\nA window of it is a mark of wealth. The sheets are fragile, and a hailstorm can strip a villa's glazing in a minute. Miners cut the sheets by lamplight in low galleries where the roof is none too safe.",
+      "dmNotes": "Basis: real lapis specularis, a clear crystalline gypsum (selenite) quarried in Roman Spain and used for windows and early greenhouses (Pliny the Elder); the emperor Tiberius is said to have eaten winter cucumbers grown under it.",
+      "fields": {
+        "costPerLb": "10 gp",
+        "ferrous": "Non-ferrous",
+        "foundIn": "Mavelon City, Aeterna City",
+        "biome": "Hills",
+        "rarity": "Uncommon",
+        "location": "Deep gypsum seams",
+        "properties": "• Splits into thin clear sheets.\n• Soft and fragile.\n• Translucent, not transparent.",
+        "uses": "• Window panes.\n• Greenhouse glazing.\n• Lantern panels.",
+        "lore": "The poor curse the glass-houses; the rich curse the hail."
+      },
+      "tags": [
+        "Ore",
+        "Stone",
+        "Invictian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/ores-2"
+    },
+    {
+      "slug": "salamander-wool",
+      "kind": "ore",
+      "name": "Salamander Wool",
+      "summary": "Stone that is spun like thread, woven into cloth that cleans itself in fire.",
+      "body": "A pale fibrous stone that can be teased out like wool, spun and woven into a cloth that does not burn. Dropped in a fire a dirty napkin of it comes out clean and bright, a trick every banquet host of the coast tires of in a week. The women who work it cough for the rest of their lives and nobody asks why.\n\n## Where it is found\n\nIt is dug from a ridge on a southern island and sold through [[Napplesia]] to a few luxury weavers.\n\n## In play\n\nA shroud of it is the grand burial cloth of the rich, since it keeps the ashes of the pyre separate from the wood. Long-term handlers suffer a lung wasting; a character who spends a season working it takes a lasting Constitution penalty at the DM's discretion.",
+      "dmNotes": "Basis: real asbestos (amiantus), the incombustible fibrous mineral Pliny calls 'linen of Cyprus' and describes as used for funeral cloths and lamp wicks; he also notes the sickness of its weavers. The cough is a real hazard.",
+      "fields": {
+        "costPerLb": "80 gp",
+        "ferrous": "Non-ferrous",
+        "foundIn": "Napplesia",
+        "biome": "Island",
+        "rarity": "Rare",
+        "location": "Fibrous ridges on a southern island",
+        "properties": "• Fibrous, spun and woven.\n• Does not burn.\n• Hazardous to breathe.",
+        "uses": "• Fireproof napkins and shrouds.\n• Lamp wicks.",
+        "lore": "Hosts show the trick once and apologise to the cough afterward."
+      },
+      "tags": [
+        "Ore",
+        "Fibre",
+        "Invictian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/ores-2"
+    },
+    {
+      "slug": "fullers-clay",
+      "kind": "ore",
+      "name": "Fuller's Clay",
+      "summary": "Greasy grey earth that eats oil from wool; the fulling-houses of every city run on it.",
+      "body": "A soft, soapy, grey clay that sucks grease out of raw wool and cloth like a sponge. In the fulling-houses it is trodden into cloth by barefoot workers standing in vats, wetted with an ammonia-sharp liquid that the whole street avoids. A well-fulled cloak is the pride of a city.\n\n## Where it is found\n\nIt is dug from pits near the sea in [[Carianea]] and carted inland to the weaving towns.\n\n## In play\n\nA fulling-house smells so strongly that it is built at the edge of town. A character who has stolen a bolt of cloth can wash out its mark here, and a cleverer one can tell a stolen bolt from the grease-stain left by an old dye.",
+      "dmNotes": "Basis: real fuller's earth, an absorbent clay (cimolian earth from Kimolos was famous) used by Roman fullones to clean and thicken cloth, with urine as the other main agent.",
+      "fields": {
+        "costPerLb": "1 gp",
+        "ferrous": "Non-ferrous",
+        "foundIn": "Carianea",
+        "biome": "Coast",
+        "rarity": "Common",
+        "location": "Clay pits near the sea",
+        "properties": "• Soft, greasy, absorbent.\n• Draws oil and dirt from cloth.",
+        "uses": "• Fulling and cleaning wool.\n• Mild skin poultice.",
+        "lore": "You smell a fulling-house before you see its town."
+      },
+      "tags": [
+        "Ore",
+        "Clay",
+        "Hellenorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/ores-2"
+    },
+    {
+      "slug": "pozzolana",
+      "kind": "ore",
+      "name": "Pozzolana",
+      "summary": "Red volcanic ash that makes a mortar which hardens under water and outlives the empire.",
+      "body": "A gritty reddish-brown ash from the lowlands near the old volcano, dug from the ground like sand. Mixed with lime and water, it makes a mortar that sets even under the sea and keeps getting harder for centuries. The harbour moles and the great domes of the Imperium stand because of it, and the engineers of the empire guard the secret as they guard their roads.\n\n## Where it is found\n\nIts pits are at the foot of the hills in the [[Latium Plains]] and its ships load at [[Fucostia]] for every harbour in the Imperium.\n\n## In play\n\nA harbour built of it will outlast the dock-lords who ordered it. Sabotaging a pozzolana shipment is an effective strike against Imperial building works, and an ambitious character might simply buy the pits.",
+      "dmNotes": "Basis: real pozzolana, volcanic ash from Pozzuoli, which Vitruvius describes as making concrete that hardens in seawater; it underlies Roman maritime and monumental construction.",
+      "fields": {
+        "costPerLb": "1 gp",
+        "ferrous": "Non-ferrous",
+        "foundIn": "Latium Plains, Fucostia",
+        "biome": "Plains",
+        "rarity": "Common",
+        "location": "Pits in volcanic lowlands",
+        "properties": "• Red-brown volcanic ash.\n• Mixed with lime it sets under water.\n• Grows harder with age.",
+        "uses": "• Harbour works and domes.\n• Waterproof cisterns.",
+        "lore": "Imperial engineers treat the recipe as a state secret, and a very dull one."
+      },
+      "tags": [
+        "Ore",
+        "Building",
+        "Invictian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/ores-2"
+    },
+    {
+      "slug": "tiburtine-stone",
+      "kind": "ore",
+      "name": "Tiburtine Stone",
+      "summary": "Creamy, pitted stone from river-springs, quarried for amphitheatres and said to survive any weather but a cold one.",
+      "body": "Tiburtine stone is the creamy, honeycombed rock that mineral springs lay down in the course of a thousand years. It is soft to cut and hard once it is cut, and it is the building stone of the Imperium's great stadia and bridges, where it shows as pale golden in the morning and sooty-grey at dusk.\n\n## Where it is found\n\nIts quarries are in the springs country east of [[Romulo City]], and barges carry blocks down the [[River Tiberius]].\n\n## In play\n\nA frost, though, will split an exposed block, so builders are careful about winter. A character who studies a ruined building of it can learn its age from the weathering (History or Survival, DC 12).",
+      "dmNotes": "Basis: real travertine, a calcium carbonate stone deposited by mineral springs, quarried at Tibur (Tivoli) and used in the Colosseum and Roman public buildings.",
+      "fields": {
+        "costPerLb": "1 gp",
+        "ferrous": "Non-ferrous",
+        "foundIn": "Romulo City, River Tiberius",
+        "biome": "Hills",
+        "rarity": "Common",
+        "location": "Spring-fed quarries",
+        "properties": "• Creamy, pitted, easy to cut.\n• Hardens on exposure.\n• Vulnerable to hard frost when green.",
+        "uses": "• Amphitheatres and bridges.\n• Fountains and steps.",
+        "lore": "Builders say the springs make it and the sun finishes it."
+      },
+      "tags": [
+        "Ore",
+        "Building",
+        "Invictian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/ores-2"
+    },
+    {
+      "slug": "road-basalt",
+      "kind": "ore",
+      "name": "Road Basalt",
+      "summary": "Hard black volcanic stone, cut into polygonal paving slabs for the great roads.",
+      "body": "Road basalt is a dense dark stone that comes out of a quarry in irregular many-sided slabs and is laid on the road bed with its edges fitted like a puzzle. It outlasts hooves, wheels and centuries, and the Imperium's long highways are paved with it, mile after weary mile.\n\n## Where it is found\n\nIts quarries are in the old lava flows near [[Anticata]] and along the [[Klynin Mountain Range]], and its slabs are hauled out on the roads that they will later pave.\n\n## In play\n\nA basalt-paved road is a mark of Imperial control; a stretch torn up is a sign of a recent rebellion. Marching armies can cover ground quickly on one, and the ruts in the stone tell a student of history how heavy the old carts were.",
+      "dmNotes": "Basis: real basalt, the dark volcanic stone (silex) used to pave Roman roads such as the Via Appia in polygonal slabs; Roman roads are among the longest-lasting structures of the ancient world.",
+      "fields": {
+        "costPerLb": "1 gp",
+        "ferrous": "Non-ferrous",
+        "foundIn": "Anticata, Klynin Mountain Range",
+        "biome": "Hills",
+        "rarity": "Common",
+        "location": "Old lava flows",
+        "properties": "• Dense, dark, very hard.\n• Splits into polygonal slabs.\n• Wears slowly.",
+        "uses": "• Road paving.\n• Millstones and troughs.",
+        "lore": "Legionaries say you can follow an Imperial road blind: the stone remembers where it was laid."
+      },
+      "tags": [
+        "Ore",
+        "Building",
+        "Invictian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/ores-2"
+    },
+    {
+      "slug": "red-syenite",
+      "kind": "ore",
+      "name": "Red Syenite",
+      "summary": "Rose-red granite from the southern cataracts, cut into obelisks that are hauled on river-barges across the world.",
+      "body": "A coarse, pink and red granite, speckled with black, that comes from one cataract-bound quarry in the south. It is so hard that it is cut by pounding with balls of harder stone, a task measured in years. The finished shafts are the tallest single stones the empires raise, and the barges that carry them down the river are an event for every town on the bank.\n\n## Where it is found\n\nIts quarry is far upriver beyond [[Persemenid City]], and shafts of it stand in the squares of [[Atarabad City]] and [[Hellarchon City]] alike.\n\n## In play\n\nAn obelisk of it is a symbol of conquest and a mighty burden to move. A broken one lies in a field near the quarry, never finished, and the unfinished shaft is a favourite place for a clandestine meeting.",
+      "dmNotes": "Basis: real Aswan (Syene) red granite, quarried for Egyptian obelisks, including the Unfinished Obelisk still lying in its quarry; Romans transported many to Rome by river and sea.",
+      "fields": {
+        "costPerLb": "2 gp",
+        "ferrous": "Non-ferrous",
+        "foundIn": "Persemenid City, Atarabad City, Hellarchon City",
+        "biome": "Desert",
+        "rarity": "Rare",
+        "location": "A single cataract quarry",
+        "properties": "• Coarse pink-red granite with black flecks.\n• Extremely hard.\n• Cut by pounding with harder stone.",
+        "uses": "• Obelisks and monumental columns.\n• Royal sarcophagi.",
+        "lore": "A town that has an obelisk has also had a war."
+      },
+      "tags": [
+        "Ore",
+        "Stone",
+        "Acheaorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/ores-2"
+    },
+    {
+      "slug": "fire-stone",
+      "kind": "ore",
+      "name": "Fire-Stone",
+      "summary": "Brassy golden nodules that spit sparks when struck with steel, the first tinderbox.",
+      "body": "A heavy, brassy-gold stone, often found in round knobbly nodules and sometimes mistaken for gold by the unwary. Struck with a bar of steel or another stone it throws a fat shower of sparks, and every campfire on the coast begins with a lump of it in the hand. The fools who think it is treasure are known by name and laughed at in every market.\n\n## Where it is found\n\nNodules lie in the chalk cliffs and clay of the [[Nereid’s Veil]] coast and in the washing-streams of the [[Zaruk'thal Spine]].\n\n## In play\n\nA fire-stone and a bar of steel start a fire in one strike in dry conditions and two in wet. A character who tries to sell it as gold must first persuade a buyer who has not met the fool before (Deception, DC 15).",
+      "dmNotes": "Basis: real pyrite (iron sulfide), 'pyrites lithos' or fire-stone, used with steel to strike sparks and often mistaken for gold (fool's gold); Dioscorides describes it.",
+      "fields": {
+        "costPerLb": "2 gp",
+        "ferrous": "Ferrous",
+        "foundIn": "Nereid's Veil, Zaruk'thal Spine",
+        "biome": "Coast",
+        "rarity": "Common",
+        "location": "Chalk cliffs and clay nodules",
+        "properties": "• Brassy, heavy, cubic or nodular.\n• Throws sparks against steel.\n• Mistaken for gold.",
+        "uses": "• Fire-starting.\n• A trader's cautionary tale.",
+        "lore": "Every child in the market learns the lie of the golden stone before they learn to count."
+      },
+      "tags": [
+        "Ore",
+        "Iron",
+        "Hellenorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/ores-2"
+    },
+    {
+      "slug": "persian-naphtha",
+      "kind": "ore",
+      "name": "Persian Naphtha",
+      "summary": "A clear, light oil that seeps from the ground where eternal fires burn, and ignites at a distance.",
+      "body": "In a few hollows of the plateau a thin clear oil seeps out of the ground, and the vapour above it catches fire from a spark or even from the sun. The priests have tended such fires for longer than the kings, and ordinary folk avoid them. Distilled and carried in a sealed jar the oil is a weapon: it clings to a target and burns on water.\n\n## Where it is found\n\nThe oldest seeps lie in the [[Parthian Ravine]] and in the dry flats near [[Mithratal City]], where the priests of the covenant keep a fire that has never gone out.\n\n## In play\n\nA flask of naphtha thrown at a target deals fire damage that is hard to put out (a Dexterity saving throw, DC 13, to smother it). Tales say a conqueror once tested it on a boy to see what it could do; every priest in the plateau remembers the story with distaste.",
+      "dmNotes": "Basis: real naphtha, light crude oil from natural seeps in Persia and Mesopotamia (such as the eternal fires of Baba Gurgur near Kirkuk); Plutarch records Alexander being shown naphtha's flammability at Ecbatana and the Zoroastrian veneration of such fires.",
+      "fields": {
+        "costPerLb": "25 gp",
+        "ferrous": "Non-ferrous",
+        "foundIn": "Parthian Ravine, Mithratal City",
+        "biome": "Desert",
+        "rarity": "Rare",
+        "location": "Natural seeps in the plateau",
+        "properties": "• Clear, light, volatile oil.\n• Burns fiercely, even on water.\n• Vapour ignites at a distance.",
+        "uses": "• Temple fires.\n• Incendiary flasks.\n• Lamp oil for those who can afford danger.",
+        "lore": "The priests say the fire is the earth breathing, and ask pilgrims not to hold it up to the light."
+      },
+      "tags": [
+        "Ore",
+        "Oil",
+        "Acheaorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/ores-2"
+    },
+    {
+      "slug": "black-flint",
+      "kind": "ore",
+      "name": "Black Flint",
+      "summary": "Dark glassy nodules in the white chalk, the oldest tool-stone and still the best for a cheap blade.",
+      "body": "Flint lies in the white chalk in dark lumps like plums in a pudding, and breaks with a bright curving edge sharper than any bronze. Before metal it was every blade, and long after metal it is still the farmer's sickle-tooth and the gunner's spark. Where chalk shows through the turf, knappers camp, and their chips glitter in the grass for centuries.\n\n## Where it is found\n\nIt lies in the chalk downs by the [[Latium Plains]] and on the cliffs of the [[Aeolus Reach]].\n\n## In play\n\nA freshly struck flake cuts as cleanly as a razor, and a poor villager can make himself a knife with a hammer-stone and an afternoon. Archaeologists, if the setting has any, treat chipped flint as a map of who walked where.",
+      "dmNotes": "Basis: real flint, a dark chert nodule found in chalk, the oldest tool-stone and still used for strike-a-light kits and sickle teeth in classical times; fresh flakes are extremely sharp.",
+      "fields": {
+        "costPerLb": "1 gp",
+        "ferrous": "Non-ferrous",
+        "foundIn": "Latium Plains, Aeolus Reach",
+        "biome": "Chalk downs",
+        "rarity": "Common",
+        "location": "Nodules in white chalk",
+        "properties": "• Dark, glassy, breaks to a razor edge.\n• Sparks against steel.\n• Common wherever chalk shows.",
+        "uses": "• Cheap blades and sickle teeth.\n• Fire-starting.",
+        "lore": "Knappers say flint holds a spark the way a good friend holds a grudge."
+      },
+      "tags": [
+        "Ore",
+        "Stone",
+        "Invictian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/ores-2"
+    },
+    {
+      "slug": "tufa-stone",
+      "kind": "ore",
+      "name": "Tufa Stone",
+      "summary": "Soft, light, volcanic stone that saws like cheese and hardens in the air, the builder's cheap first choice.",
+      "body": "Tufa is volcanic ash compacted into rock, honey-grey and full of tiny holes, so light that a mason can lift a block alone and so soft that it can be sawn like cheese. Left in the air it hardens, and for centuries the Imperium built almost everything of it that was not worth building of marble: walls, tombs, cisterns, whole streets. Under its plaster it is a good deal weaker than it looks.\n\n## Where it is found\n\nIt is quarried from the hill-pits around [[Romulo City]] and the old ash-fields of the [[Latium Plains]], and the quarries beneath the city are older than the city.\n\n## In play\n\nA tufa tomb is the commonest resting place of the Invictian dead, and the cut galleries below Romulo are a ready-made dungeon. Water gets into the stone over a century and a wall that looks solid may be rotten to the core (Investigation, DC 12, spots a failing block).",
+      "dmNotes": "Basis: real tufa (volcanic tuff), the soft, light, easily worked stone of the Roman Campagna, used for walls, tombs and cisterns and extensively quarried and tunnelled around Rome (the catacombs are cut in it).",
+      "fields": {
+        "costPerLb": "1 gp",
+        "ferrous": "Non-ferrous",
+        "foundIn": "Romulo City, Latium Plains",
+        "biome": "Hills",
+        "rarity": "Common",
+        "location": "Hill-pits and old ash-fields",
+        "properties": "• Light, porous, honey-grey.\n• Sawn easily when fresh; hardens in air.\n• Weakened by long exposure to water.",
+        "uses": "• Walls, tombs and cisterns.\n• Cut galleries and catacombs.",
+        "lore": "Imperial masons say Romulo is built on stone that was ash, and will be ash again."
+      },
+      "tags": [
+        "Ore",
+        "Building",
+        "Invictian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/ores-2"
+    }
+  ]
+}

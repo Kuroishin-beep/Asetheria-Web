@@ -64,9 +64,11 @@ test.describe("fauna and table kinds: migration", () => {
     expect(labels).toContain("table");
   });
 
-  test("exactly the eight original animals are fauna, and none remain in flora", async () => {
+  test("all eight original animals are fauna, and none remain in flora", async () => {
+    // Fauna also holds the Phase 4 natural-world batches, so assert the migrated eight by name.
     const fauna = await query<{ name: string }>(
-      `SELECT name FROM entries WHERE kind = 'fauna' AND archived_at IS NULL ORDER BY name`,
+      `SELECT name FROM entries WHERE kind = 'fauna' AND archived_at IS NULL AND name = ANY($1) ORDER BY name`,
+      [FAUNA],
     );
     expect(fauna.map((r) => r.name).sort()).toEqual([...FAUNA].sort());
     const stillFlora = await query(`SELECT 1 FROM entries WHERE kind = 'flora' AND name = ANY($1)`, [FAUNA]);

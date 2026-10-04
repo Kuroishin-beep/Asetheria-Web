@@ -1,0 +1,466 @@
+{
+  "format": "asetheria-codex",
+  "note": "Original flora, batch 1 of 3: trees and great plants. Each entry is written for Asetheria; the real plant it is grounded in is named in the DM notes under 'Basis'. No third-party text is reproduced.",
+  "entries": [
+    {
+      "slug": "grey-olive",
+      "kind": "flora",
+      "name": "Grey Olive",
+      "summary": "A slow, silver-leaved tree that feeds the coast on oil, bread-dip and lamp-light, and outlives the families that plant it.",
+      "body": "The grey olive grows on thin stony soil where little else will, twisting into a knotted trunk that can stand a thousand years. Its fruit is bitter until cured, and its oil is the lifeblood of the coast: it feeds, it lights, it cleans the skin of athletes, and it anoints kings and corpses.\n\n## Where it is found\n\nIts groves cover the dry slopes behind [[Atticenea]] and the hills of the [[Oros Mountain Range]], and every family on the Hellenorian coast keeps at least one tree that was planted by a grandparent.\n\n## In play\n\nA mature tree yields oil worth a modest fortune over a season, and cutting one down is a crime in many towns, since it takes a generation to replace. Armies at war burn olive groves to starve a city, which every Hellenorian considers a sin and a very effective tactic.",
+      "dmNotes": "Basis: real olive (Olea europaea), the foundational crop of Greek and Roman life for food, lighting, cleaning and anointing; olive trees can live for centuries and cutting them was restricted in several city laws.",
+      "fields": {
+        "scientificName": "Olea europaea",
+        "foundIn": "Atticenea, Oros Mountain Range",
+        "biome": "Dry hills",
+        "rarity": "Common",
+        "effects": "• Oil heals minor skin chafing and burns when applied (restores 1 hit point, once a day).\n• A grove is a stable, taxable source of wealth.\n• Burned groves take a generation to recover.",
+        "lore": "A Hellenorian proverb says: plant an olive for your grandchildren, and a fig for yourself."
+      },
+      "tags": [
+        "Flora",
+        "Tree",
+        "Hellenorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/flora-1"
+    },
+    {
+      "slug": "mountain-cedar",
+      "kind": "flora",
+      "name": "Mountain Cedar",
+      "summary": "Great fragrant conifer of the high ridges, the timber of temples, ships and the doors of kings.",
+      "body": "Mountain cedars grow broad and flat-topped on high ridges, resinous and richly scented, and their wood is almost proof against rot and insects. A cedar beam in a temple roof will stand for a thousand years, and the old forests that supplied the first empires have been cut for so long that the stands that remain are guarded like treasure.\n\n## Where it is found\n\nIts last great stand clings to the [[Cloudspine Ridge]] and a smaller one to the flanks of [[Vael’Tharan Mountain]].\n\n## In play\n\nA cedar-built ship is the pride of any fleet, and a gate of cedar is a gift of the gods. Felling a stand without a licence is a crime, and the foresters who guard them are hard, well-armed and sworn to the throne.",
+      "dmNotes": "Basis: real cedar of Lebanon (Cedrus libani), the prestige timber of the ancient Near East for temples and ships, long over-harvested so that only small stands survive.",
+      "fields": {
+        "scientificName": "Cedrus libani",
+        "foundIn": "Cloudspine Ridge, Vael'Tharan Mountain",
+        "biome": "Mountain",
+        "rarity": "Rare",
+        "effects": "• Its wood resists rot, insects and damp for a thousand years.\n• Burning it releases a sweet smoke that repels moths and fleas.\n• A felling licence is required in every empire.",
+        "lore": "Forest-wardens say a cedar remembers every man who has ever sheltered beneath it."
+      },
+      "tags": [
+        "Flora",
+        "Tree",
+        "Invictian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/flora-1"
+    },
+    {
+      "slug": "bitter-myrrh",
+      "kind": "flora",
+      "name": "Bitter Myrrh",
+      "summary": "A thorny desert shrub that bleeds a golden gum: incense, embalming balm, medicine, and the price of a king's gift.",
+      "body": "Bitter myrrh is a low, prickly desert shrub with knotty branches and few leaves. Cut or split, its bark weeps a pale gum that hardens to a reddish tear and has been burned in temples, rubbed into mummies, and mixed into wine since before records. It is bitter to the tongue and sweet to the nose.\n\n## Where it is found\n\nThe shrub grows wild in the stony hollows of the [[Dasht-a Khaliq]], and its tears are gathered by nomads who sell them to the caravans for [[Atarabad City]].\n\n## In play\n\nMyrrh in wine dulls pain (a character may ignore the first point of pain-related penalty for an hour) and burns as the standard embalmer's resin. A pound of it is worth more than silver, and a caravan master who carries it hires armed guards.",
+      "dmNotes": "Basis: real myrrh (Commiphora myrrha), a resin harvested from desert shrubs, used for incense, embalming and medicine and among the most valuable trade goods of the ancient world; it was a gift in the Gospel account of the Magi.",
+      "fields": {
+        "scientificName": "Commiphora myrrha",
+        "foundIn": "Dasht-a Khaliq, Atarabad City",
+        "biome": "Desert",
+        "rarity": "Uncommon",
+        "effects": "• Resin in wine dulls pain for an hour.\n• Burned as incense or used in embalming.\n• Worth more than silver by weight.",
+        "lore": "The nomads say the shrub weeps because it knows what the tears will be used for."
+      },
+      "tags": [
+        "Flora",
+        "Resin",
+        "Acheaorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/flora-1"
+    },
+    {
+      "slug": "honey-palm",
+      "kind": "flora",
+      "name": "Honey Palm",
+      "summary": "Tall oasis palm whose fruit is bread, sugar and wine to the desert, and whose shade makes a town possible.",
+      "body": "Honey palms rise from oasis wells, thirty feet of scaled trunk crowned with a fountain of fronds. The fruit is sweet and keeps for a year, and a family that owns a dozen trees can live on dates and their by-products: syrup, wine, rope, thatch and a fine shade for the children.\n\n## Where it is found\n\nIts groves ring every oasis of the [[Dasht-a Khaliq]] and the wells of [[Qa'zshahrv'in]] and [[Shir'abad D'ar]].\n\n## In play\n\nA date meal is a safe, filling ration that does not spoil. A palm grove is the heart of any desert settlement, and a raid that burns the grove is a raid meant to end the town. Climbing for the fruit needs a rope loop and a head for heights (Athletics, DC 10).",
+      "dmNotes": "Basis: real date palm (Phoenix dactylifera), the staple of desert oases in the Near East, providing food, sugar, fermented drink, fibre and shade; its cultivation is among the oldest in the region.",
+      "fields": {
+        "scientificName": "Phoenix dactylifera",
+        "foundIn": "Dasht-a Khaliq, Qa'zshahrv'in, Shir'abad D'ar",
+        "biome": "Desert oasis",
+        "rarity": "Common",
+        "effects": "• Dates are a durable, filling ration.\n• Syrup and fermented wine can be made from the fruit.\n• Fronds and trunk supply thatch, rope and timber.",
+        "lore": "A town with palms is a town that expects to be here in a hundred years."
+      },
+      "tags": [
+        "Flora",
+        "Tree",
+        "Acheaorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/flora-1"
+    },
+    {
+      "slug": "wasp-fig",
+      "kind": "flora",
+      "name": "Wasp-Fig",
+      "summary": "A sprawling fig that fruits only when a tiny wasp climbs inside, and whose sweet fruit feeds armies and poets.",
+      "body": "The wasp-fig is a spreading tree of broad rough leaves and soft purple fruit, ripe and honeyed for a few days and rotten the next. Its secret is the little wasp that crawls into each fig to lay her eggs: no wasp, no fig. Farmers hang a branch of wild figs in their orchard to bring the insects, a trade-craft whole villages know and whole villages guard.\n\n## Where it is found\n\nIt grows beside every farmstead of [[Falecosa]] and the hill orchards of [[Araavyna]].\n\n## In play\n\nDried figs are the soldier's sweet and the poor man's sugar. A tree grown in a wasp-free place bears hard green fruit that rots on the branch; a character who knows the old craft of hanging a wild branch has a reputation as a farmer.",
+      "dmNotes": "Basis: real common fig (Ficus carica), whose fruit requires pollination by fig wasps (caprification, practised since antiquity); dried figs were a staple food for Greeks and Romans.",
+      "fields": {
+        "scientificName": "Ficus carica",
+        "foundIn": "Falecosa, Araavyna",
+        "biome": "Orchard",
+        "rarity": "Common",
+        "effects": "• Dried figs keep for a year and feed an army.\n• Without the little wasp, the fruit never ripens.\n• Fresh figs spoil within days.",
+        "lore": "A farmer's pride is a fig that ripens, and a wasp is the secret partner nobody mentions."
+      },
+      "tags": [
+        "Flora",
+        "Tree",
+        "Invictian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/flora-1"
+    },
+    {
+      "slug": "blood-apple",
+      "kind": "flora",
+      "name": "Blood Apple",
+      "summary": "A tough red fruit of countless seeds, sacred to the gods of the dead and of marriage alike.",
+      "body": "The blood apple is a hard-skinned red fruit that splits to reveal rows of ruby seeds in white pith. It is sacred to the goddesses of the underworld, and a bride carries it to her wedding as a promise of children. A seed eaten in the wrong place can bind a mortal to the dark, which is why stories about it never end well.\n\n## Where it is found\n\nIt grows in the sheltered terraces of [[Persevalis City]] and the temple gardens of [[Delphara City]].\n\n## In play\n\nThe juice is a deep red dye and a cooling drink in summer. A character who eats a seed given by a priestess of the dead may find a promise attached; DMs should treat this as a quest hook, not a trap.",
+      "dmNotes": "Basis: real pomegranate (Punica granatum), important in Persian cuisine and in Greek myth, where Persephone's eating of pomegranate seeds binds her to the underworld; it was also a symbol at weddings.",
+      "fields": {
+        "scientificName": "Punica granatum",
+        "foundIn": "Persevalis City, Delphara City",
+        "biome": "Terrace garden",
+        "rarity": "Common",
+        "effects": "• The juice dyes cloth deep red and cools in summer.\n• A seed from a priestess of the dead binds a promise.\n• Rind tea eases a bad stomach.",
+        "lore": "A bride is warned never to eat all the seeds at her own wedding."
+      },
+      "tags": [
+        "Flora",
+        "Tree",
+        "Hellenorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/flora-1"
+    },
+    {
+      "slug": "wine-vine",
+      "kind": "flora",
+      "name": "Wine-Vine",
+      "summary": "A hungry, climbing vine that makes the coast's most important drink and its strongest arguments.",
+      "body": "The wine-vine climbs anything it can reach and sprawls over everything it cannot, bearing heavy clusters that are eaten fresh, dried to raisins or pressed to wine. Its roots go deep in poor soil, and a hillside that will grow nothing else may produce a vintage that makes a family's fortune for a generation.\n\n## Where it is found\n\nIts terraces climb the sunny slopes beneath [[Falecosa]] and ring the slopes of [[Mithratal City]], where covenants are sealed over a shared cup.\n\n## In play\n\nA good vintage commands a price like jewels. Wine is a medicine, a ritual, a bribe and a curse, and a character who understands the grape's craft (a Proficiency with brewer's supplies, DC 12) can tell the year and the slope from a sip.",
+      "dmNotes": "Basis: real grapevine (Vitis vinifera), central to Greek, Roman and Persian culture for food, wine and ritual; viticulture on terraced hillsides was characteristic of the Mediterranean.",
+      "fields": {
+        "scientificName": "Vitis vinifera",
+        "foundIn": "Falecosa, Mithratal City",
+        "biome": "Terraced hills",
+        "rarity": "Common",
+        "effects": "• Fruit can be eaten, dried or pressed.\n• Wine is a medicine, a ritual and a currency of favours.\n• A good vintage carries a family for a generation.",
+        "lore": "A vine is said to remember the hand that tied it."
+      },
+      "tags": [
+        "Flora",
+        "Vine",
+        "Invictian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/flora-1"
+    },
+    {
+      "slug": "plane-of-the-wells",
+      "kind": "flora",
+      "name": "Plane of the Wells",
+      "summary": "A vast, broad-leaved shade tree planted beside every well and sacred spring, said to hold the water for a village.",
+      "body": "The plane is a broad, mottled-barked tree that grows to a great height and a greater spread, casting a shade so dense that a village can gather beneath it on the hottest day. It is planted at wells and crossroads and at shrines, and some are so old that they have a name, a priest and a legend of their own.\n\n## Where it is found\n\nIts ancient trees shade the wells of [[Kirimitsana]] and the market square of [[Araavyna]].\n\n## In play\n\nA council held under a plane carries the weight of a vow. The oldest trees are protected by custom, and a harm to one is taken as a harm to the whole village. A traveller who sleeps beneath one is safe from the sun and traditionally from thieves.",
+      "dmNotes": "Basis: real Oriental plane (Platanus orientalis), a long-lived shade tree planted at springs and meeting-places across Greece and Persia; Xerxes is said to have halted his army to honour a great plane.",
+      "fields": {
+        "scientificName": "Platanus orientalis",
+        "foundIn": "Kirimitsana, Araavyna",
+        "biome": "Village well",
+        "rarity": "Uncommon",
+        "effects": "• Its shade keeps a well cool.\n• A council under it counts as a sworn oath.\n• Harming an old plane offends the village.",
+        "lore": "A story says a king once stopped his whole army to bow to a tree, and nobody laughed."
+      },
+      "tags": [
+        "Flora",
+        "Tree",
+        "Hellenorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/flora-1"
+    },
+    {
+      "slug": "thunder-oak",
+      "kind": "flora",
+      "name": "Thunder-Oak",
+      "summary": "A great hill oak whose rustling leaves are read by priestesses as the voice of the sky god.",
+      "body": "A vast, wide-crowned oak of the hill country whose acorns are fat and whose leaves rustle in a wind that seems to come from no direction. Priestesses of the sky-god sit in its shade and read the sound as an oracle, interpreting questions from pilgrims who have walked for days.\n\n## Where it is found\n\nThe oldest of the trees stands on the heights above [[Delphara City]], and lesser ones guard crossroads in the [[Foloicauria Forest]].\n\n## In play\n\nA reading is a roleplay opportunity: the priestess gives a cryptic reply, and the party must decide what it means. The acorns feed pigs and, in a bad year, humans. The oak is struck by lightning more than any other tree, and what grows from the burned stump is held holy.",
+      "dmNotes": "Basis: real valonia oak (Quercus ithaburensis), associated with the oracle of Zeus at Dodona in Epirus, where priestesses interpreted the rustling of the sacred oak's leaves; oaks are lightning-struck frequently.",
+      "fields": {
+        "scientificName": "Quercus ithaburensis",
+        "foundIn": "Delphara City, Foloicauria Forest",
+        "biome": "Hill forest",
+        "rarity": "Uncommon",
+        "effects": "• Priestesses read its rustling as prophecy.\n• Acorns feed swine and, in famine, people.\n• A lightning-struck stump is a holy site.",
+        "lore": "The pilgrims' saying: ask the oak a plain question and you will get an answer you cannot use."
+      },
+      "tags": [
+        "Flora",
+        "Tree",
+        "Hellenorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/flora-1"
+    },
+    {
+      "slug": "river-reed",
+      "kind": "flora",
+      "name": "River Reed",
+      "summary": "Tall pale reed of slow rivers, split into the writing-sheets and boat-hulls of the whole civilised world.",
+      "body": "River reed rises in dense green stands from still water, twice the height of a man, topped with a feathery head. Its pith is cut into thin strips, laid crosswise and pressed into sheets that take ink and last for centuries. The same plant, bound in bundles, makes boats, mats and sandals.\n\n## Where it is found\n\nIts vast beds line the slow channels of the [[Maeotis Helos]] and the delta mouths of the [[River Tiberius]].\n\n## In play\n\nA bale of river-reed sheets is a scribe's treasure. A raft of bundled reeds carries a family downstream for a season and then rots. Hiding in the reed-beds is easy for those who know them; a character with local knowledge has advantage on Stealth checks there.",
+      "dmNotes": "Basis: real papyrus (Cyperus papyrus), the aquatic sedge whose pith was made into the standard writing material of the Mediterranean world; its stems were also used for boats, mats and sandals.",
+      "fields": {
+        "scientificName": "Cyperus papyrus",
+        "foundIn": "Maeotis Helos, River Tiberius",
+        "biome": "Marsh",
+        "rarity": "Common",
+        "effects": "• Pith is pressed into durable writing sheets.\n• Bundled stems make boats, mats and sandals.\n• A reed-bed is excellent cover for those who know it.",
+        "lore": "A scribe's prayer: may the river never run dry, and the reed always be cut."
+      },
+      "tags": [
+        "Flora",
+        "Reed",
+        "Invictian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/flora-1"
+    },
+    {
+      "slug": "salt-cedar",
+      "kind": "flora",
+      "name": "Salt-Cedar",
+      "summary": "Feathery tamarisk of saline flats, sweating salt from its leaves and sacred to the wanderer's gods.",
+      "body": "A thin, feathery, pink-flowered shrub that thrives where nothing else will, in salt flats and dry river beds. Its leaves sweat out the salt it drinks, leaving a white crust at dawn, and its wood burns hot and clean. Travellers plant it on graves and at the edges of tents, as a sign that someone was here and meant to stay.\n\n## Where it is found\n\nIt crowds the shores of the [[Kaspiran Seas]] and the dry beds of the [[Xeruezcho Canal]].\n\n## In play\n\nA grove of tamarisk is a sure sign of water below, and it gives good cover to ambushers. The crust that forms on its leaves can be scraped as emergency salt. Its roots drink so fiercely that a wetland invaded by it will be a salt-flat in a generation.",
+      "dmNotes": "Basis: real tamarisk (Tamarix gallica and relatives), a salt-excreting desert shrub used for fuel and shade, with sacred associations in Egypt and the Near East; it can dry out wetlands when invasive.",
+      "fields": {
+        "scientificName": "Tamarix gallica",
+        "foundIn": "Kaspiran Seas, Xeruezcho Canal",
+        "biome": "Salt flat",
+        "rarity": "Common",
+        "effects": "• Leaves sweat a salt crust, scraped as emergency salt.\n• A stand marks water below.\n• Wood burns hot and clean.",
+        "lore": "Wanderers plant it over a grave, so the dead have shade."
+      },
+      "tags": [
+        "Flora",
+        "Shrub",
+        "Acheaorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/flora-1"
+    },
+    {
+      "slug": "weeping-mastic",
+      "kind": "flora",
+      "name": "Weeping Mastic",
+      "summary": "A small shrubby tree whose cut bark bleeds a clear gum, chewed for sweet breath and brewed into rare varnish.",
+      "body": "A low evergreen with leathery leaves and twisting branches. Slash its bark in the right season and it weeps a clear resin that hardens into pale tears, which are chewed for fresh breath, ground into varnish, burned as incense and stirred into sweet puddings. The gum grows only in one corner of one island and the harvest is guarded.\n\n## Where it is found\n\nIts groves lie in the southern part of the [[Aeolus Reach]] island chain and are walled and watched by the guild of tear-gatherers.\n\n## In play\n\nA lump of mastic chewed for a minute freshens the breath and calms the nerves (advantage on one Charisma check made within the hour). The guild's secrecy over the harvest is notorious, and a thief caught in the groves has a long, grim story of consequences.",
+      "dmNotes": "Basis: real mastic (Pistacia lentiscus var. chia), a resin harvested from trees on the Greek island of Chios, chewed, burned as incense and used in varnish, famously produced only in the southern part of the island.",
+      "fields": {
+        "scientificName": "Pistacia lentiscus",
+        "foundIn": "Aeolus Reach",
+        "biome": "Island scrub",
+        "rarity": "Rare",
+        "effects": "• Chewed gum freshens breath and calms nerves.\n• Ground into a fine varnish.\n• The harvest is closely guarded.",
+        "lore": "The tear-gatherers' oath: no tear leaves the grove unweighed."
+      },
+      "tags": [
+        "Flora",
+        "Resin",
+        "Hellenorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/flora-1"
+    },
+    {
+      "slug": "lovers-myrtle",
+      "kind": "flora",
+      "name": "Lovers' Myrtle",
+      "summary": "Small fragrant evergreen worn in wedding wreaths and cut into the crowns of the goddess of love.",
+      "body": "A glossy, aromatic shrub with white star flowers and dark berries. It is sacred to the goddess of love, and every wedding wreath is woven of its sprigs. The crushed leaves smell sharp and clean, and a bunch hung in a doorway keeps off ill luck.\n\n## Where it is found\n\nIt grows wild on the dry hills of the [[Latium Plains]] and in the courtyard gardens of [[Aeterna City]].\n\n## In play\n\nA gift of myrtle sprigs is a polite request for a courtship, and a refusal of them is a polite no. Berries steeped in wine make a mild digestive. A thief hiding in a thicket of it finds the scent clings to clothes for days.",
+      "dmNotes": "Basis: real myrtle (Myrtus communis), sacred to Aphrodite/Venus in Greek and Roman cult and used in wedding wreaths; leaves and berries were used in cooking and medicine.",
+      "fields": {
+        "scientificName": "Myrtus communis",
+        "foundIn": "Latium Plains, Aeterna City",
+        "biome": "Hill scrub",
+        "rarity": "Common",
+        "effects": "• Sprigs are given as courtship tokens.\n• Berries steep into a mild digestive.\n• The scent clings to clothes for days.",
+        "lore": "No Invictian bride walks to the altar without a bit of myrtle."
+      },
+      "tags": [
+        "Flora",
+        "Shrub",
+        "Invictian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/flora-1"
+    },
+    {
+      "slug": "bears-breeches",
+      "kind": "flora",
+      "name": "Bear's-Breeches",
+      "summary": "A spiny-leaved plant whose curling leaves were copied into the capitals of a thousand columns.",
+      "body": "A bold perennial with huge, deeply cut, glossy leaves and tall spikes of pale flowers. The leaves curl as they unfold, and the builders of the coast saw in them a pattern that could be carved: the capital of the proud column is a basket of its leaves, carved in stone. A weed in the field is a flourish in the temple.\n\n## Where it is found\n\nIt springs up in the shade of the old walls of [[Corinth City]] and along the shaded paths of [[Thessalonika City]].\n\n## In play\n\nA mason who recognises the leaf can date a building by how true the carving is to nature. Its roots, boiled, make a soothing poultice. The plant is famously hard to eradicate, and a gardener who has planted it once has planted it forever.",
+      "dmNotes": "Basis: real acanthus (Acanthus mollis), the plant whose leaves inspired the Corinthian capital (the tale attributes the idea to Callimachus after seeing a basket with acanthus growing around it); its roots were used medicinally.",
+      "fields": {
+        "scientificName": "Acanthus mollis",
+        "foundIn": "Corinth City, Thessalonika City",
+        "biome": "Shaded ruins",
+        "rarity": "Common",
+        "effects": "• Roots boiled make a soothing poultice.\n• The carved leaf dates a building.\n• Nearly impossible to eradicate.",
+        "lore": "Corinthian masons say their capitals were first grown, then carved."
+      },
+      "tags": [
+        "Flora",
+        "Perennial",
+        "Hellenorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/flora-1"
+    },
+    {
+      "slug": "early-almond",
+      "kind": "flora",
+      "name": "Early Almond",
+      "summary": "First tree to flower in the year, pink-white in the frost, a promise that the cold will break.",
+      "body": "The first tree to wake after winter, covered in pink-white blossom while the hills are still bare. Its nuts are sweet or poisonous bitter, depending on the tree, and a farmer who confuses the two learns a lesson. Hellenorians read the early bloom as a promise that the cold is finishing.\n\n## Where it is found\n\nIt flowers in the hill orchards behind [[Argotiko]] and in the walled gardens of [[Helionyx City]].\n\n## In play\n\nBitter almonds contain a poison that sickens or kills when eaten in quantity (a Constitution saving throw, DC 12, against poison). Almond oil is a beauty product and a medicine. A character who spots the first blossom and announces the spring is rewarded with a coin or a cup.",
+      "dmNotes": "Basis: real almond (Prunus dulcis), whose bitter variety contains amygdalin that releases cyanide; the almond blossoms early in the Mediterranean spring and was a symbol of renewal.",
+      "fields": {
+        "scientificName": "Prunus dulcis",
+        "foundIn": "Argotiko, Helionyx City",
+        "biome": "Orchard",
+        "rarity": "Common",
+        "effects": "• Sweet nuts feed; bitter nuts poison.\n• Oil is a medicine and a cosmetic.\n• Early bloom signals the end of winter.",
+        "lore": "The first almond blossom is welcomed with a cup poured on the ground."
+      },
+      "tags": [
+        "Flora",
+        "Tree",
+        "Hellenorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/flora-1"
+    },
+    {
+      "slug": "green-nut",
+      "kind": "flora",
+      "name": "Green Nut",
+      "summary": "A desert tree whose pale, splitting shells hold bright green kernels fit for a king's table.",
+      "body": "A small, drought-hardy tree of the dry hills, its fruit clusters hang like red grapes and ripen to a pale shell that splits with a snap. Inside lies a bright green kernel, sweet and oily, which the Acheaorian court eats at feasts and the Imperium imports at a price.\n\n## Where it is found\n\nIt grows on the dry hills near [[Persevalis City]] and in the terraces of [[Tabrishi'ir]].\n\n## In play\n\nA bowl of green nuts is the mark of a rich table. The tree's resin is a mild glue, and its wood is burnt for a perfumed fire. Gathering the crop is hard, seasonal work and a good excuse for travelling labour crews to roam the hills.",
+      "dmNotes": "Basis: real pistachio (Pistacia vera), native to Persia and Central Asia and a luxury food of the ancient world; the nuts split open when ripe.",
+      "fields": {
+        "scientificName": "Pistacia vera",
+        "foundIn": "Persevalis City, Tabrishi'ir",
+        "biome": "Dry hills",
+        "rarity": "Uncommon",
+        "effects": "• Kernels are a rich, oily delicacy.\n• Resin serves as a mild glue.\n• The harvest brings seasonal workers.",
+        "lore": "Hosts say a bowl of green nuts is the polite way to ask a guest to stay longer."
+      },
+      "tags": [
+        "Flora",
+        "Tree",
+        "Acheaorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/flora-1"
+    },
+    {
+      "slug": "locust-bean",
+      "kind": "flora",
+      "name": "Locust-Bean",
+      "summary": "Dark evergreen whose sweet pods feed poor families, mules and hungry hermits.",
+      "body": "A spreading, evergreen tree with dark leathery leaves and long brown pods full of sweet pulp. In a famine year the poor eat the pods; in a good year they feed them to mules. The hard seeds of the pod, always the same weight, were once the standard for weighing gold and gems.\n\n## Where it is found\n\nIt shades the dry lanes around [[Carianea]] and the roadsides near [[Napplesia]].\n\n## In play\n\nA pound of dried pods is a cheap, filling emergency ration (one pound feeds a person for a day). A jeweller who finds the old weight-seeds still in her scales knows the shop is very old. A holy man who lives on them in the wilderness is a recognised figure of the coast.",
+      "dmNotes": "Basis: real carob (Ceratonia siliqua), whose pods were famine food and animal fodder in the Mediterranean; its seeds (the origin of the word 'carat') were used as uniform weights.",
+      "fields": {
+        "scientificName": "Ceratonia siliqua",
+        "foundIn": "Carianea, Napplesia",
+        "biome": "Dry coast",
+        "rarity": "Common",
+        "effects": "• Pods are a cheap emergency ration.\n• Seeds weigh uniformly and were used as weights.\n• Feeds mules and the very poor.",
+        "lore": "Hermits are said to live on it for years, and complain about nothing."
+      },
+      "tags": [
+        "Flora",
+        "Tree",
+        "Hellenorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/flora-1"
+    },
+    {
+      "slug": "umbrella-pine",
+      "kind": "flora",
+      "name": "Umbrella Pine",
+      "summary": "A flat-topped coastal pine whose fat seeds are eaten by the poor and offered at the altars of the rich.",
+      "body": "A broad, flat-crowned pine that stands along the coastal plain like a row of green umbrellas. Its cones are fat and heavy, and when they split in the summer sun the pine-nuts inside are eaten in bread, in sauces, and in sweet cakes. The tree is a landmark for sailors and a shade for lovers.\n\n## Where it is found\n\nIt lines the [[Latium Plains]] coast and the road near [[Fucostia]].\n\n## In play\n\nA stand of them marks the sea road. Picking the cones is easy, extracting the nuts is slow, and children are paid a copper a basket. A thief hiding among the trunks has no cover from above and a good deal from below.",
+      "dmNotes": "Basis: real stone pine (Pinus pinea), the flat-crowned Mediterranean pine whose edible seeds were widely eaten in Roman cuisine; it is a distinctive feature of the Italian coastal landscape.",
+      "fields": {
+        "scientificName": "Pinus pinea",
+        "foundIn": "Latium Plains, Fucostia",
+        "biome": "Coastal plain",
+        "rarity": "Common",
+        "effects": "• Pine-nuts are eaten in bread and sauces.\n• Cones split open in the summer sun.\n• A line of them marks the sea road.",
+        "lore": "Sailors steer by a certain pine as farmers steer by a church."
+      },
+      "tags": [
+        "Flora",
+        "Tree",
+        "Invictian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/flora-1"
+    },
+    {
+      "slug": "blue-water-lotus",
+      "kind": "flora",
+      "name": "Blue Water-Lotus",
+      "summary": "A pale blue water lily that opens at dawn and closes at dusk, and brings dreams to those who steep it in wine.",
+      "body": "A water lily of still pools, its sky-blue petals open at sunrise and fold shut at sundown, rising and sinking with the sun like a tiny god. Steeped in wine it is said to bring vivid dreams and a gentle calm. Painters set it in the hands of the dead as a promise of morning.\n\n## Where it is found\n\nIt floats on the quiet pools of the [[Maeotis Helos]] and the temple ponds of [[Mithratal City]].\n\n## In play\n\nA cup of lotus wine gives a gentle sedation and strange dreams: on a long rest, the drinker has advantage on a saving throw against fear but may remember the dream as an omen. A funeral garland of lotus is a signal of respect.",
+      "dmNotes": "Basis: real blue water-lily (Nymphaea caerulea), sacred in ancient Egypt, opening each morning and closing at night, and used as a mild psychoactive in steeped wine.",
+      "fields": {
+        "scientificName": "Nymphaea caerulea",
+        "foundIn": "Maeotis Helos, Mithratal City",
+        "biome": "Still water",
+        "rarity": "Uncommon",
+        "effects": "• Steeped in wine, it brings calm and vivid dreams.\n• Opens at dawn, closes at dusk.\n• Funeral garlands signal respect.",
+        "lore": "Painters put it in a dead hand as a promise of morning."
+      },
+      "tags": [
+        "Flora",
+        "Water",
+        "Acheaorian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/flora-1"
+    },
+    {
+      "slug": "pen-reed",
+      "kind": "flora",
+      "name": "Pen-Reed",
+      "summary": "A tall, tough, hollow reed cut for pens, flutes, fishing rods and the staves of the poor.",
+      "body": "A giant bamboo-like reed with hollow jointed stems that grow ten feet in a season. Cut and split, it makes the scribe's pen, the shepherd's pipe, the fisherman's rod and the walking-stick of the old. Along a river bank it grows so thick it forms a wall that boars and fugitives alike disappear into.\n\n## Where it is found\n\nIt crowds the banks of the [[River Tiberius]] and the margins of the [[Xeruezcho Canal]].\n\n## In play\n\nA bundle of cut stems sells for a few coppers and keeps a scriptorium in pens for a month. A character who cuts and tunes a pipe gets a flute worth a meal. A thicket is slow to cross and hides almost anything (Stealth advantage for small creatures).",
+      "dmNotes": "Basis: real giant reed (Arundo donax), used by Greeks and Romans for writing pens (calami), pipes, fishing rods and construction; it forms dense riverside thickets.",
+      "fields": {
+        "scientificName": "Arundo donax",
+        "foundIn": "River Tiberius, Xeruezcho Canal",
+        "biome": "Riverbank",
+        "rarity": "Common",
+        "effects": "• Cut stems become pens, flutes and rods.\n• Dense thickets hide small creatures.\n• Grows ten feet in a season.",
+        "lore": "Poets say the reed sings because it was once a nymph, and has never finished complaining."
+      },
+      "tags": [
+        "Flora",
+        "Reed",
+        "Invictian"
+      ],
+      "visibility": "public",
+      "sourcePath": "original: natural-world/flora-1"
+    }
+  ]
+}
