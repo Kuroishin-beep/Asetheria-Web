@@ -6,6 +6,7 @@ import {
   uuid,
   jsonb,
   integer,
+  doublePrecision,
   boolean,
   index,
   uniqueIndex,
@@ -341,6 +342,61 @@ export const revisionsRelations = relations(revisions, ({ one }) => ({
 }));
 
 // ---------------------------------------------------------------------------
+// Maps and pins (Phase 8b)
+// ---------------------------------------------------------------------------
+
+/**
+ * A map image served from `public/maps/`. `width` and `height` are the image's
+ * pixel size; `version` is bumped when the artwork is replaced, so a pin set
+ * can be reviewed against the new image rather than silently drifting.
+ */
+export const maps = pgTable(
+  "maps",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    slug: text("slug").notNull(),
+    name: text("name").notNull(),
+    imagePath: text("image_path").notNull(),
+    width: integer("width").notNull(),
+    height: integer("height").notNull(),
+    version: integer("version").notNull().default(1),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [uniqueIndex("maps_slug_idx").on(t.slug)],
+);
+
+/**
+ * A pin ties one entry to a spot on a map. Coordinates are fractions of the
+ * image (0 to 1), not pixels, so a pin stays put when the image is shown at
+ * another size. A pin dies with its entry (hard delete) and is hidden while
+ * its entry is archived; whether a viewer sees it at all is decided by the
+ * entry's own access rules, in the query, never in the browser.
+ */
+export const mapPins = pgTable(
+  "map_pins",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    mapId: uuid("map_id")
+      .notNull()
+      .references(() => maps.id, { onDelete: "cascade" }),
+    entryId: uuid("entry_id")
+      .notNull()
+      .references(() => entries.id, { onDelete: "cascade" }),
+    x: doublePrecision("x").notNull(),
+    y: doublePrecision("y").notNull(),
+    label: text("label"),
+    createdBy: uuid("created_by").references(() => users.id, { onDelete: "set null" }),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [
+    index("map_pins_map_idx").on(t.mapId),
+    index("map_pins_entry_idx").on(t.entryId),
+    check("map_pins_x_range", sql`${t.x} >= 0 AND ${t.x} <= 1`),
+    check("map_pins_y_range", sql`${t.y} >= 0 AND ${t.y} <= 1`),
+  ],
+);
+
+// ---------------------------------------------------------------------------
 // Inferred types
 // ---------------------------------------------------------------------------
 
@@ -350,6 +406,8 @@ export type User = typeof users.$inferSelect;
 export type Link = typeof links.$inferSelect;
 export type Revision = typeof revisions.$inferSelect;
 export type RollTable = typeof rollTables.$inferSelect;
+export type MapRow = typeof maps.$inferSelect;
+export type MapPinRow = typeof mapPins.$inferSelect;
 export type EntryGrant = typeof entryGrants.$inferSelect;
 export type EntryKind = (typeof entryKind.enumValues)[number];
 export type Visibility = (typeof visibility.enumValues)[number];

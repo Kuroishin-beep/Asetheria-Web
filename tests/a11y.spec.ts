@@ -18,6 +18,8 @@ const ROUTES: { name: string; path: string; auth: "dm" | "player" | null }[] = [
   { name: "new entry form", path: "/codex/new?kind=npc", auth: "dm" },
   { name: "search results", path: "/search?q=bacchus", auth: "dm" },
   { name: "graph", path: "/graph", auth: "dm" },
+  { name: "map", path: "/map/wip-map", auth: "dm" },
+  { name: "map (player)", path: "/map/wip-map", auth: "player" },
   { name: "dice", path: "/tools/dice", auth: "dm" },
   { name: "random table (rollable)", path: "/codex/entry/herbalists-field-guide-d20", auth: "dm" },
   { name: "new table form", path: "/codex/new?kind=table", auth: "dm" },

@@ -16,11 +16,11 @@ import { sortRows, type SortSpec } from "@/lib/field-sort";
  */
 
 /** Archived entries are hidden from normal browsing but never deleted. */
-function liveOnly() {
+export function liveOnly() {
   return isNull(entries.archivedAt);
 }
 
-function readable(user: SessionUser) {
+export function readable(user: SessionUser) {
   if (user.role === "dm") return undefined;
   return and(ne(entries.visibility, "secret"), grantCondition(user));
 }

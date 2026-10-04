@@ -31,6 +31,7 @@ import {
   Tent,
   User,
   Users,
+  Map as MapIcon,
 } from "lucide-react";
 import type { EntryKind } from "@/db/schema";
 
@@ -78,6 +79,7 @@ export function iconForSection(slug: string, kind?: EntryKind): LucideIcon {
 }
 
 export const TOOL_ICONS = {
+  map: MapIcon,
   graph: Network,
   dice: Dices,
 } as const;
