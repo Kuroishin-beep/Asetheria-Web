@@ -21,6 +21,7 @@ const ROUTES: { name: string; path: string; auth: "dm" | "player" | null }[] = [
   { name: "random table (rollable)", path: "/codex/entry/herbalists-field-guide-d20", auth: "dm" },
   { name: "new table form", path: "/codex/new?kind=table", auth: "dm" },
   { name: "fauna section", path: "/codex/fauna", auth: "dm" },
+  { name: "database view (ores, sorted)", path: "/codex/ores?view=table&sort=costPerLb&dir=desc", auth: "dm" },
   { name: "backup and import", path: "/admin", auth: "dm" },
   { name: "players and access", path: "/admin/rbac", auth: "dm" },
   { name: "player front page", path: "/", auth: "player" },

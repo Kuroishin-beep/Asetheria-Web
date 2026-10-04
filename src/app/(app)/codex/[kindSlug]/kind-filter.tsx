@@ -1,13 +1,16 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
-import { ArrowDown, ArrowUp, ChevronLeft, ChevronRight, LayoutGrid, Search, Table2 } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useMemo, useState, useTransition } from "react";
+import { ArrowDown, ArrowUp, ChevronLeft, ChevronRight, Columns3, LayoutGrid, Search, Table2 } from "lucide-react";
 import { CardGrid, EmptyState, EntryCard } from "@/components/entry-card";
 import { Button } from "@/components/ui/button";
+import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import type { EntryKind } from "@/db/schema";
+import { SORT_NAME, type SortSpec } from "@/lib/field-sort";
 import { cn } from "@/lib/utils";
 
 type Item = {
@@ -27,7 +30,10 @@ type FieldDef = { key: string; label: string };
 const MAX_TAG_CHIPS = 24;
 
 /**
- * Client-side filter over an already-loaded page of a section. With at most
+ * The database view of a section. The view, sort order and visible columns live
+ * in the URL (`?view=table&sort=costPerLb&dir=desc&cols=...`) and are applied by
+ * the server across the whole section; this component only reads them and
+ * writes them back. The text filter and tag chips work on the loaded page. With at most
  * `PAGE_SIZE` entries in memory this is instant and avoids a round-trip per
  * keystroke.
  *
@@ -40,6 +46,10 @@ export function KindFilter({
   total,
   noun,
   fieldDefs,
+  view,
+  sort,
+  columns,
+  defaultColumns,
   page,
   pageCount,
   basePath,
@@ -48,15 +58,54 @@ export function KindFilter({
   total: number;
   noun: string;
   fieldDefs: FieldDef[];
+  view: "cards" | "table";
+  sort: SortSpec;
+  columns: string[];
+  defaultColumns: string[];
   page: number;
   pageCount: number;
   basePath: string;
 }) {
   const [query, setQuery] = useState("");
   const [tag, setTag] = useState<string | null>(null);
-  const [view, setView] = useState<"cards" | "table">("cards");
-  const [sort, setSort] = useState<{ key: string; dir: 1 | -1 }>({ key: "name", dir: 1 });
+  const router = useRouter();
+  const [pending, startTransition] = useTransition();
   const paged = pageCount > 1;
+  const visibleFields = fieldDefs.filter((f) => columns.includes(f.key));
+
+  /** The URL parameters that describe a view state; defaults are left out so URLs stay short. */
+  function paramsFor(nextView: "cards" | "table", nextSort: SortSpec, nextColumns: string[]) {
+    const params = new URLSearchParams();
+    if (nextView === "table") params.set("view", "table");
+    if (nextSort.key !== SORT_NAME || nextSort.dir !== "asc") {
+      params.set("sort", nextSort.key);
+      params.set("dir", nextSort.dir);
+    }
+    const isDefault = nextColumns.length === defaultColumns.length && defaultColumns.every((k) => nextColumns.includes(k));
+    if (!isDefault) params.set("cols", nextColumns.join(","));
+    return params;
+  }
+
+  /** Writes a new view state to the URL; the page resets to 1 because the order changed. */
+  function go(next: { view?: "cards" | "table"; sort?: SortSpec; columns?: string[] }) {
+    const qs = paramsFor(next.view ?? view, next.sort ?? sort, next.columns ?? columns).toString();
+    startTransition(() => router.replace(qs ? `${basePath}?${qs}` : basePath, { scroll: false }));
+  }
+
+  function pageHref(target: number) {
+    const params = paramsFor(view, sort, columns);
+    params.set("page", String(target));
+    return `${basePath}?${params.toString()}`;
+  }
+
+  function toggleSort(key: string) {
+    go({ sort: sort.key === key ? { key, dir: sort.dir === "asc" ? "desc" : "asc" } : { key, dir: "asc" } });
+  }
+
+  function toggleColumn(key: string, on: boolean) {
+    const next = fieldDefs.map((f) => f.key).filter((k) => (k === key ? on : columns.includes(k)));
+    go({ columns: next.length ? next : defaultColumns });
+  }
 
   const allTags = useMemo(() => {
     const counts = new Map<string, number>();
@@ -76,17 +125,6 @@ export function KindFilter({
       return it.haystack.includes(q);
     });
   }, [items, query, tag]);
-
-  const sorted = useMemo(() => {
-    const value = (it: Item) => (sort.key === "name" ? it.name : (it.fields[sort.key] ?? ""));
-    return [...filtered].sort(
-      (a, b) => value(a).localeCompare(value(b), undefined, { numeric: true }) * sort.dir,
-    );
-  }, [filtered, sort]);
-
-  function toggleSort(key: string) {
-    setSort((prev) => (prev.key === key ? { key, dir: prev.dir === 1 ? -1 : 1 } : { key, dir: 1 }));
-  }
 
   return (
     <>
@@ -115,7 +153,7 @@ export function KindFilter({
               variant="outline"
               size="sm"
               aria-pressed={view === "cards"}
-              onClick={() => setView("cards")}
+              onClick={() => go({ view: "cards" })}
               className={cn(view === "cards" && "border-primary text-gold")}
             >
               <LayoutGrid aria-hidden="true" />
@@ -126,13 +164,37 @@ export function KindFilter({
               variant="outline"
               size="sm"
               aria-pressed={view === "table"}
-              onClick={() => setView("table")}
+              onClick={() => go({ view: "table" })}
               className={cn(view === "table" && "border-primary text-gold")}
             >
               <Table2 aria-hidden="true" />
               Table
             </Button>
           </div>
+        )}
+        {view === "table" && (
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button type="button" variant="outline" size="sm">
+                <Columns3 aria-hidden="true" />
+                Columns
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="max-h-80 overflow-y-auto">
+              <DropdownMenuLabel>Show columns</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              {fieldDefs.map((f) => (
+                <DropdownMenuCheckboxItem
+                  key={f.key}
+                  checked={columns.includes(f.key)}
+                  onCheckedChange={(on) => toggleColumn(f.key, on === true)}
+                  onSelect={(e) => e.preventDefault()}
+                >
+                  {f.label}
+                </DropdownMenuCheckboxItem>
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
         )}
       </div>
 
@@ -178,25 +240,25 @@ export function KindFilter({
           }
         />
       ) : view === "table" ? (
-        <div className="overflow-hidden rounded-xl bg-card ring-1 ring-foreground/10">
+        <div className={cn("max-w-full rounded-xl bg-card ring-1 ring-foreground/10", pending && "opacity-70")} aria-busy={pending}>
           <Table>
             <TableHeader>
               <TableRow className="hover:bg-transparent">
                 <SortableHeader label="Name" sortKey="name" sort={sort} onSort={toggleSort} />
-                {fieldDefs.map((f) => (
+                {visibleFields.map((f) => (
                   <SortableHeader key={f.key} label={f.label} sortKey={f.key} sort={sort} onSort={toggleSort} />
                 ))}
               </TableRow>
             </TableHeader>
             <TableBody>
-              {sorted.map((e) => (
+              {filtered.map((e) => (
                 <TableRow key={e.id}>
                   <TableCell>
                     <Link href={`/codex/entry/${e.slug}`} className="font-medium text-gold underline-offset-4 hover:underline">
                       {e.name}
                     </Link>
                   </TableCell>
-                  {fieldDefs.map((f) => (
+                  {visibleFields.map((f) => (
                     <TableCell
                       key={f.key}
                       className="max-w-64 truncate text-muted-foreground"
@@ -212,7 +274,7 @@ export function KindFilter({
         </div>
       ) : (
         <CardGrid>
-          {sorted.map((e) => (
+          {filtered.map((e) => (
             <EntryCard
               key={e.id}
               slug={e.slug}
@@ -230,7 +292,7 @@ export function KindFilter({
         <nav aria-label={`${noun} pages`} className="no-print mt-8 flex flex-wrap items-center justify-center gap-3">
           {page > 1 ? (
             <Button asChild variant="outline">
-              <Link href={`${basePath}?page=${page - 1}`} rel="prev">
+              <Link href={pageHref(page - 1)} rel="prev">
                 <ChevronLeft aria-hidden="true" />
                 Previous
               </Link>
@@ -246,7 +308,7 @@ export function KindFilter({
           </span>
           {page < pageCount ? (
             <Button asChild variant="outline">
-              <Link href={`${basePath}?page=${page + 1}`} rel="next">
+              <Link href={pageHref(page + 1)} rel="next">
                 Next
                 <ChevronRight aria-hidden="true" />
               </Link>
@@ -294,13 +356,13 @@ function SortableHeader({
 }: {
   label: string;
   sortKey: string;
-  sort: { key: string; dir: 1 | -1 };
+  sort: SortSpec;
   onSort: (key: string) => void;
 }) {
   const active = sort.key === sortKey;
-  const Arrow = sort.dir === 1 ? ArrowUp : ArrowDown;
+  const Arrow = sort.dir === "asc" ? ArrowUp : ArrowDown;
   return (
-    <TableHead aria-sort={active ? (sort.dir === 1 ? "ascending" : "descending") : "none"} className="p-0">
+    <TableHead aria-sort={active ? (sort.dir === "asc" ? "ascending" : "descending") : "none"} className="p-0">
       <Button
         type="button"
         variant="ghost"

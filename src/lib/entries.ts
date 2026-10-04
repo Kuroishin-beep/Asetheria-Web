@@ -8,6 +8,7 @@ import { buildNameIndex, normalizeName, parseAliases } from "@/lib/links";
 import type { SessionUser } from "@/lib/session";
 import { grantCondition, grantConditionRaw } from "@/lib/rbac";
 import type { LocationTier } from "@/lib/locations";
+import { sortRows, type SortSpec } from "@/lib/field-sort";
 
 /**
  * Every read goes through here so that a player can never receive a secret
@@ -92,6 +93,33 @@ export async function listEntries(
     .orderBy(asc(entries.name))
     .limit(opts.limit ?? PAGE_SIZE)
     .offset(opts.offset ?? 0);
+}
+
+/** The most rows a sorted section is ever read in one go; no section approaches this. */
+const SORTED_READ_CAP = 5000;
+
+/**
+ * One page of a section ordered by name or by a property, across the whole
+ * section rather than the loaded page. Access is decided by the same SQL as
+ * `listEntries` (secret and ungranted rows never leave Postgres for a player);
+ * the ordering is then applied in code with `sortRows`, so the sort key is never
+ * part of a query. `spec.key` must already have passed `parseSort`.
+ */
+export async function listEntriesSorted(
+  user: SessionUser,
+  opts: ListOptions,
+  spec: SortSpec,
+): Promise<EntryListItem[]> {
+  const conditions = listConditions(user, opts);
+  const rows = await db
+    .select(listColumns)
+    .from(entries)
+    .where(conditions.length ? and(...conditions) : undefined)
+    .orderBy(asc(entries.name))
+    .limit(SORTED_READ_CAP);
+  const sorted = sortRows(rows, spec);
+  const offset = opts.offset ?? 0;
+  return sorted.slice(offset, offset + (opts.limit ?? PAGE_SIZE));
 }
 
 /** Locations of one tier, for the front page and the per-tier sections. */

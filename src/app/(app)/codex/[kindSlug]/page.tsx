@@ -7,9 +7,11 @@ import { EmptyState, PageHeading } from "@/components/entry-card";
 import { KindListSkeleton } from "@/components/shared/skeletons";
 import { Button } from "@/components/ui/button";
 import { getCurrentUser } from "@/lib/auth";
-import { countEntries, listEntries, PAGE_SIZE } from "@/lib/entries";
+import { countEntries, listEntriesSorted, PAGE_SIZE } from "@/lib/entries";
+import { parseColumns, parseSort } from "@/lib/field-sort";
 import { KIND_BY_KEY, LEGACY_SECTION_SLUGS, SECTION_BY_SLUG, type SectionDef } from "@/lib/kinds";
 import { iconForSection } from "@/lib/section-icons";
+import type { SortSpec } from "@/lib/field-sort";
 import type { SessionUser } from "@/lib/session";
 import { KindFilter } from "./kind-filter";
 
@@ -41,7 +43,7 @@ export default async function KindPage({
   searchParams,
 }: {
   params: Promise<Params>;
-  searchParams: Promise<{ page?: string }>;
+  searchParams: Promise<{ page?: string; view?: string; sort?: string; dir?: string; cols?: string }>;
 }) {
   const { kindSlug } = await params;
   const moved = LEGACY_SECTION_SLUGS[kindSlug];
@@ -52,7 +54,16 @@ export default async function KindPage({
   const user = await getCurrentUser();
   if (!user) redirect("/welcome");
 
-  const requested = Number((await searchParams).page);
+  const query = await searchParams;
+  const requested = Number(query.page);
+  const fieldDefs = KIND_BY_KEY[def.kind].fields;
+  const fieldKeys = fieldDefs.map((f) => f.key);
+  // Everything from the URL is checked against the kind's own properties here,
+  // so an unknown sort key or column falls back to the defaults instead of failing.
+  const sort = parseSort(query.sort, query.dir, fieldKeys);
+  const defaultColumns = fieldDefs.filter((f) => f.type !== "textarea").map((f) => f.key);
+  const columns = parseColumns(query.cols, fieldKeys, defaultColumns);
+  const view = query.view === "table" && fieldDefs.length > 0 ? "table" : "cards";
 
   // Everything that can 404 or redirect has run above, so the status line is
   // already right; only the list itself streams in behind its skeleton.
@@ -65,7 +76,7 @@ export default async function KindPage({
         action={user.role === "dm" ? <NewEntryButton def={def} /> : null}
       />
       <Suspense fallback={<KindListSkeleton />}>
-        <KindList user={user} def={def} requested={requested} />
+        <KindList user={user} def={def} requested={requested} view={view} sort={sort} columns={columns} defaultColumns={defaultColumns} />
       </Suspense>
     </>
   );
@@ -75,10 +86,18 @@ async function KindList({
   user,
   def,
   requested,
+  view,
+  sort,
+  columns,
+  defaultColumns,
 }: {
   user: SessionUser;
   def: SectionDef;
   requested: number;
+  view: "cards" | "table";
+  sort: SortSpec;
+  columns: string[];
+  defaultColumns: string[];
 }) {
   const total = await countEntries(user, { kind: def.kind, tier: def.tier });
   const pageCount = Math.max(1, Math.ceil(total / PAGE_SIZE));
@@ -88,12 +107,11 @@ async function KindList({
     pageCount,
   );
 
-  const rows = await listEntries(user, {
-    kind: def.kind,
-    tier: def.tier,
-    limit: PAGE_SIZE,
-    offset: (page - 1) * PAGE_SIZE,
-  });
+  const rows = await listEntriesSorted(
+    user,
+    { kind: def.kind, tier: def.tier, limit: PAGE_SIZE, offset: (page - 1) * PAGE_SIZE },
+    sort,
+  );
 
   if (rows.length === 0) {
     return (
@@ -115,6 +133,10 @@ async function KindList({
       total={total}
       noun={def.label.toLowerCase()}
       fieldDefs={KIND_BY_KEY[def.kind].fields.map((f) => ({ key: f.key, label: f.label }))}
+      view={view}
+      sort={sort}
+      columns={columns}
+      defaultColumns={defaultColumns}
       page={page}
       pageCount={pageCount}
       basePath={`/codex/${def.slug}`}
