@@ -138,7 +138,7 @@ test.describe("graph", () => {
     });
     page.on("pageerror", (e) => problems.push(e.message));
     await page.goto("/graph");
-    await expect(page.getByRole("img", { name: /Backlink graph/ })).toBeVisible();
+    await expect(page.getByRole("group", { name: /Backlink graph/ })).toBeVisible();
     await expect(page.getByRole("list", { name: "Colour legend" }).getByRole("listitem")).toHaveCount(5);
 
     const node = page.locator('g[role="button"]').first();

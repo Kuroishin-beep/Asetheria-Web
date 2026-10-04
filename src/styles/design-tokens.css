@@ -102,21 +102,9 @@
   --secret: #7a4a8a;
   --success: #34695a;
 
-  /* Legacy names, kept until every screen is migrated (removed in slice 2e). */
-  --bg: var(--background);
-  --bg-raised: var(--card);
-  --bg-sunken: var(--muted);
-  --border-soft: var(--border);
-  --border-strong: var(--input);
-  --text: var(--foreground);
-  --text-muted: var(--muted-foreground);
-  --text-faint: var(--faint-foreground);
-  --on-accent: var(--primary-foreground);
-
   --shadow-1: 0 1px 2px rgb(36 29 20 / 0.06), 0 2px 8px -2px rgb(36 29 20 / 0.08);
   --shadow-2: 0 2px 4px rgb(36 29 20 / 0.06), 0 12px 28px -12px rgb(36 29 20 / 0.22);
   --shadow-3: 0 4px 8px rgb(36 29 20 / 0.08), 0 24px 48px -16px rgb(36 29 20 / 0.32);
-  --shadow: var(--shadow-1);
   --glow: color-mix(in srgb, var(--gold) 7%, transparent);
 }
 
@@ -157,7 +145,7 @@
   --sidebar-border: #2a241d;
   --sidebar-ring: #d4a94e;
 
-  --faint-foreground: #8f7e69;
+  --faint-foreground: #9c8b76;
   --gold: #d4a94e;
   --gold-soft: #e2c47c;
   --link: #e2c47c;
@@ -167,6 +155,5 @@
   --shadow-1: 0 1px 2px rgb(0 0 0 / 0.45), 0 2px 8px -2px rgb(0 0 0 / 0.5);
   --shadow-2: 0 2px 4px rgb(0 0 0 / 0.4), 0 14px 32px -14px rgb(0 0 0 / 0.75);
   --shadow-3: 0 4px 8px rgb(0 0 0 / 0.45), 0 28px 56px -18px rgb(0 0 0 / 0.85);
-  --shadow: var(--shadow-1);
   --glow: color-mix(in srgb, var(--gold) 9%, transparent);
 }

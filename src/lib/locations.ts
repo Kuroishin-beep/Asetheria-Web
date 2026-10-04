@@ -22,7 +22,6 @@ export type TierDef = {
   label: string;
   singular: string;
   slug: string;
-  icon: string;
   blurb: string;
 };
 
@@ -33,7 +32,6 @@ export const LOCATION_TIERS: TierDef[] = [
     label: "Capitals",
     singular: "Capital",
     slug: "capitals",
-    icon: "★",
     blurb: "The seats of the three empires.",
   },
   {
@@ -41,7 +39,6 @@ export const LOCATION_TIERS: TierDef[] = [
     label: "Major Cities",
     singular: "City",
     slug: "cities",
-    icon: "🏛",
     blurb: "The great cities of Invicta, Hellenoria, and Acheaoria.",
   },
   {
@@ -49,7 +46,6 @@ export const LOCATION_TIERS: TierDef[] = [
     label: "Towns",
     singular: "Town",
     slug: "towns",
-    icon: "⌂",
     blurb: "Smaller settlements under imperial rule.",
   },
   {
@@ -57,7 +53,6 @@ export const LOCATION_TIERS: TierDef[] = [
     label: "Villages",
     singular: "Village",
     slug: "villages",
-    icon: "⛺",
     blurb: "Island, swamp, and Araucarian holdings on the margins.",
   },
   {
@@ -65,7 +60,6 @@ export const LOCATION_TIERS: TierDef[] = [
     label: "City Districts",
     singular: "District",
     slug: "districts",
-    icon: "🧱",
     blurb: "Quarters and streets within the Duneforged Citadel.",
   },
   {
@@ -73,7 +67,6 @@ export const LOCATION_TIERS: TierDef[] = [
     label: "Sites",
     singular: "Site",
     slug: "sites",
-    icon: "⌖",
     blurb: "Temples, halls, mines, and other places of note.",
   },
   {
@@ -81,7 +74,6 @@ export const LOCATION_TIERS: TierDef[] = [
     label: "The Wilds",
     singular: "Wild",
     slug: "wilds",
-    icon: "⛰",
     blurb: "Mountains, seas, plains, and everything between the walls.",
   },
 ];

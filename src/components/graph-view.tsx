@@ -101,7 +101,7 @@ export function GraphView({
         <svg
           viewBox={`0 0 ${GRAPH_WIDTH} ${GRAPH_HEIGHT}`}
           className="block h-auto w-full"
-          role="img"
+          role="group"
           aria-label={`Backlink graph: ${nodes.length} pages, ${edges.length} connections`}
         >
           <g opacity={0.35}>

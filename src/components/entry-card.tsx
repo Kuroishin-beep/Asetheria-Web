@@ -91,15 +91,12 @@ export function EntryCard({
 
 export function PageHeading({
   Icon,
-  icon,
   title,
   blurb,
   action,
 }: {
   /** A lucide icon drawn beside the title. */
   Icon?: IconComponent;
-  /** Legacy emoji icon, removed once the last screen is migrated (slice 2e). */
-  icon?: string;
   title: string;
   blurb?: string;
   action?: ReactNode;
@@ -110,7 +107,6 @@ export function PageHeading({
         <div className="min-w-[min(16rem,100%)] flex-1">
           <h1 className="font-display flex items-center gap-3 text-[clamp(1.5rem,1.1rem+1.2vw,2rem)] font-bold leading-tight tracking-tight">
             {Icon && <Icon aria-hidden="true" className="size-7 shrink-0 text-gold" />}
-            {!Icon && icon && <span aria-hidden="true">{icon}</span>}
             {title}
           </h1>
           {blurb && <p className="mt-2 text-[15px] text-muted-foreground">{blurb}</p>}

@@ -248,7 +248,16 @@ function NavItem({
           className={cn("size-4 shrink-0", active ? "text-gold" : "text-faint-foreground group-hover:text-accent-foreground")}
         />
         <span className="flex-1 truncate">{label}</span>
-        {trailing && <span className="text-[11px] tabular-nums text-faint-foreground">{trailing}</span>}
+        {trailing && (
+          <span
+            className={cn(
+              "text-[11px] tabular-nums",
+              active ? "text-muted-foreground" : "text-faint-foreground group-hover:text-muted-foreground",
+            )}
+          >
+            {trailing}
+          </span>
+        )}
       </Link>
     </li>
   );

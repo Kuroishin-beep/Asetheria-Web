@@ -1,7 +1,13 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
+import { CheckCircle2, Loader2, Upload } from "lucide-react";
+import { FormMessage } from "@/components/shared/form-message";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
 
 type Outcome = { created: number; updated: number; skipped: number };
 
@@ -12,7 +18,7 @@ export function ImportPanel() {
   const [error, setError] = useState<string | null>(null);
   const [outcome, setOutcome] = useState<Outcome | null>(null);
 
-  async function onSubmit(e: React.FormEvent) {
+  async function onSubmit(e: FormEvent) {
     e.preventDefault();
     const file = fileRef.current?.files?.[0];
     if (!file) {
@@ -45,58 +51,34 @@ export function ImportPanel() {
   }
 
   return (
-    <form onSubmit={onSubmit} className="card" style={{ padding: "1.15rem" }}>
-      <p
-        style={{
-          fontSize: "0.875rem",
-          color: "var(--text-muted)",
-          marginBottom: "0.85rem",
-        }}
-      >
-        Entries already in the codex are updated in place; anything new is added.
-        Nothing in your codex is deleted by an import, and the previous version
-        of every changed entry is kept in its history.
-      </p>
+    <Card>
+      <CardContent>
+        <form onSubmit={onSubmit} className="grid gap-4">
+          <p className="text-sm text-muted-foreground">
+            Entries already in the codex are updated in place; anything new is added. Nothing in your codex is
+            deleted by an import, and the previous version of every changed entry is kept in its history.
+          </p>
 
-      <input
-        ref={fileRef}
-        type="file"
-        accept="application/json,.json"
-        className="input"
-        aria-label="Backup file"
-        style={{ marginBottom: "0.85rem" }}
-      />
+          <Input ref={fileRef} type="file" accept="application/json,.json" aria-label="Backup file" />
 
-      {error && (
-        <p
-          role="alert"
-          style={{
-            fontSize: "0.875rem",
-            color: "var(--color-blood-400)",
-            marginBottom: "0.85rem",
-          }}
-        >
-          {error}
-        </p>
-      )}
+          {error && <FormMessage>{error}</FormMessage>}
 
-      {outcome && (
-        <p
-          role="status"
-          style={{
-            fontSize: "0.875rem",
-            color: "var(--color-patina-400)",
-            marginBottom: "0.85rem",
-          }}
-        >
-          Done — {outcome.created} added, {outcome.updated} updated
-          {outcome.skipped > 0 && `, ${outcome.skipped} blank rows skipped`}.
-        </p>
-      )}
+          {outcome && (
+            <Alert role="status">
+              <CheckCircle2 aria-hidden="true" className="text-success" />
+              <AlertDescription>
+                Done: {outcome.created} added, {outcome.updated} updated
+                {outcome.skipped > 0 && `, ${outcome.skipped} blank rows skipped`}.
+              </AlertDescription>
+            </Alert>
+          )}
 
-      <button type="submit" className="btn btn-primary" disabled={busy}>
-        {busy ? "Restoring…" : "Restore backup"}
-      </button>
-    </form>
+          <Button type="submit" disabled={busy} className="justify-self-start">
+            {busy ? <Loader2 aria-hidden="true" className="animate-spin" /> : <Upload aria-hidden="true" />}
+            {busy ? "Restoring…" : "Restore backup"}
+          </Button>
+        </form>
+      </CardContent>
+    </Card>
   );
 }

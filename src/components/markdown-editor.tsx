@@ -214,9 +214,10 @@ export function MarkdownEditor({
             }}
             onKeyDown={onKeyDown}
             onBlur={() => setTimeout(() => setSuggestions([]), 150)}
+            aria-label="Description"
             aria-autocomplete="list"
             aria-controls={suggestions.length ? `${id}-links` : undefined}
-            aria-expanded={suggestions.length > 0}
+            aria-activedescendant={suggestions.length ? `${id}-option-${active}` : undefined}
           />
 
           {suggestions.length > 0 && (
@@ -229,6 +230,7 @@ export function MarkdownEditor({
               {suggestions.map((s, idx) => (
                 <li
                   key={s.id}
+                  id={`${id}-option-${idx}`}
                   role="option"
                   aria-selected={idx === active}
                   onMouseDown={(e) => {

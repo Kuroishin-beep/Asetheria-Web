@@ -17,7 +17,6 @@ export type KindDef = {
   singular: string;
   /** URL segment, e.g. /codex/deities */
   slug: string;
-  icon: string;
   /** One-line description shown on the section header. */
   blurb: string;
   /** Structured properties offered in the editor for this kind. */
@@ -35,7 +34,6 @@ export const KINDS: KindDef[] = [
     label: "Empires",
     singular: "Empire",
     slug: "empires",
-    icon: "👑",
     blurb: "The three great powers and the kingdoms that came before.",
     fields: [
       { key: "capital", label: "Capital" },
@@ -49,7 +47,6 @@ export const KINDS: KindDef[] = [
     label: "Lore",
     singular: "Lore Page",
     slug: "lore",
-    icon: "📜",
     blurb: "Histories, myths, and the shape of the world.",
     fields: [{ key: "era", label: "Era" }],
   },
@@ -58,7 +55,6 @@ export const KINDS: KindDef[] = [
     label: "Locations",
     singular: "Location",
     slug: "locations",
-    icon: "⛰",
     blurb: "Cities, ruins, wilds, and the waters between them.",
     fields: [
       {
@@ -77,7 +73,6 @@ export const KINDS: KindDef[] = [
     label: "Deities",
     singular: "Deity",
     slug: "deities",
-    icon: "☀",
     blurb: "Gods, titans, and ascended powers of the Continent.",
     fields: [
       { key: "pantheon", label: "Pantheon", placeholder: "Invictian, Hellenorian, Titans…" },
@@ -94,7 +89,6 @@ export const KINDS: KindDef[] = [
     label: "Pantheons",
     singular: "Pantheon",
     slug: "pantheons",
-    icon: "⛩",
     blurb: "The divine hierarchies worshipped across Asetheria.",
     fields: [{ key: "culture", label: "Culture" }],
   },
@@ -103,7 +97,6 @@ export const KINDS: KindDef[] = [
     label: "Organizations",
     singular: "Organization",
     slug: "organizations",
-    icon: "⚜",
     blurb: "Guilds, orders, syndicates, and secret societies.",
     fields: [
       { key: "type", label: "Type", placeholder: "Secret Society, Guild, Military Order…" },
@@ -121,7 +114,6 @@ export const KINDS: KindDef[] = [
     label: "Factions",
     singular: "Faction",
     slug: "factions",
-    icon: "⚔",
     blurb: "The great continental alignments and the powers behind them.",
     fields: [
       { key: "alignment", label: "Alignment" },
@@ -134,7 +126,6 @@ export const KINDS: KindDef[] = [
     label: "NPCs",
     singular: "NPC",
     slug: "npcs",
-    icon: "☗",
     blurb: "Everyone the party has met — and everyone they haven't.",
     fields: [
       { key: "race", label: "Race" },
@@ -152,7 +143,6 @@ export const KINDS: KindDef[] = [
     label: "Families",
     singular: "Family",
     slug: "families",
-    icon: "🛡",
     blurb: "Noble houses, their crests, and their ambitions.",
     fields: [
       { key: "familyCrest", label: "Family Crest" },
@@ -166,7 +156,6 @@ export const KINDS: KindDef[] = [
     label: "Bestiary",
     singular: "Creature",
     slug: "bestiary",
-    icon: "🐉",
     blurb: "Beasts, horrors, and the things that hunt in the dark.",
     fields: [
       { key: "cr", label: "Challenge Rating" },
@@ -180,7 +169,6 @@ export const KINDS: KindDef[] = [
     label: "Items",
     singular: "Item",
     slug: "items",
-    icon: "⚗",
     blurb: "Homebrew gear, relics, and curiosities.",
     fields: [
       { key: "type", label: "Type" },
@@ -195,7 +183,6 @@ export const KINDS: KindDef[] = [
     label: "Ores & Materials",
     singular: "Ore",
     slug: "ores",
-    icon: "⛏",
     blurb: "What the smiths of the Continent work with.",
     fields: [
       { key: "costPerLb", label: "Cost per lb.", placeholder: "5,000 gp" },
@@ -212,7 +199,6 @@ export const KINDS: KindDef[] = [
     label: "Flora",
     singular: "Plant",
     slug: "flora",
-    icon: "🌿",
     blurb: "Plants, fungi, and herbs worth cataloguing.",
     fields: [
       { key: "scientificName", label: "Scientific Name" },
@@ -225,7 +211,6 @@ export const KINDS: KindDef[] = [
     label: "Fauna",
     singular: "Animal",
     slug: "fauna",
-    icon: "🦌",
     blurb: "Wildlife and ecology: the animals of the Continent, away from the stat block.",
     fields: [
       { key: "scientificName", label: "Scientific Name" },
@@ -238,7 +223,6 @@ export const KINDS: KindDef[] = [
     label: "Quests",
     singular: "Quest",
     slug: "quests",
-    icon: "🗝",
     blurb: "Hooks, arcs, and unfinished business.",
     fields: [
       { key: "status", label: "Status", placeholder: "Available, Active, Complete" },
@@ -252,7 +236,6 @@ export const KINDS: KindDef[] = [
     label: "Session Logs",
     singular: "Session",
     slug: "sessions",
-    icon: "🕮",
     blurb: "What actually happened at the table.",
     fields: [
       { key: "inGameDate", label: "In-Game Date" },
@@ -265,7 +248,6 @@ export const KINDS: KindDef[] = [
     label: "House Rules",
     singular: "Rule",
     slug: "rules",
-    icon: "⚖",
     blurb: "Homebrew mechanics and table rulings.",
     fields: [{ key: "category", label: "Category" }],
   },
@@ -274,7 +256,6 @@ export const KINDS: KindDef[] = [
     label: "Systems",
     singular: "System",
     slug: "systems",
-    icon: "⚙",
     blurb: "Economy, politics, banking — how the world runs.",
     fields: [{ key: "category", label: "Category" }],
   },
@@ -283,7 +264,6 @@ export const KINDS: KindDef[] = [
     label: "Random Tables",
     singular: "Table",
     slug: "tables",
-    icon: "🎰",
     blurb: "Roll for names, loot, weather, rumours, forage: whatever you need mid-session.",
     fields: [{ key: "dice", label: "Dice", placeholder: "1d20" }],
   },
@@ -292,7 +272,6 @@ export const KINDS: KindDef[] = [
     label: "Notes",
     singular: "Note",
     slug: "notes",
-    icon: "✎",
     blurb: "Everything that doesn't fit anywhere else — yet.",
     fields: [],
   },
@@ -326,10 +305,6 @@ export const LEGACY_SECTION_SLUGS: Record<string, string> = {
 
 export function kindLabel(kind: EntryKind): string {
   return KIND_BY_KEY[kind]?.singular ?? kind;
-}
-
-export function kindIcon(kind: EntryKind): string {
-  return KIND_BY_KEY[kind]?.icon ?? "✦";
 }
 
 export function kindSlug(kind: EntryKind): string {
@@ -370,7 +345,6 @@ export type SectionDef = {
   slug: string;
   label: string;
   singular: string;
-  icon: string;
   blurb: string;
   kind: EntryKind;
   /** Present only on the location tier sections. */
@@ -384,7 +358,6 @@ export const SECTIONS: SectionDef[] = KINDS.flatMap((k): SectionDef[] => {
         slug: k.slug,
         label: k.label,
         singular: k.singular,
-        icon: k.icon,
         blurb: k.blurb,
         kind: k.kind,
       },
@@ -394,7 +367,6 @@ export const SECTIONS: SectionDef[] = KINDS.flatMap((k): SectionDef[] => {
     slug: t.slug,
     label: t.label,
     singular: t.singular,
-    icon: t.icon,
     blurb: t.blurb,
     kind: "location" as const,
     tier: t.tier,

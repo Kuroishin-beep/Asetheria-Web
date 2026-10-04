@@ -21,6 +21,8 @@
     "cities:build": "tsx scripts/build-city-locations.ts",
     "verify:links": "tsx scripts/verify-links.ts",
     "check:links": "tsx scripts/check-links.ts",
+    "check:design": "tsx scripts/check-design-system.ts",
+    "check:contrast": "tsx scripts/check-contrast.ts",
     "migrate:fauna-tables": "tsx scripts/migrate-fauna-and-tables.ts",
     "verify:expansion": "tsx scripts/verify-expansion.ts",
     "describe": "tsx scripts/generate-descriptions.ts",
@@ -55,6 +57,7 @@
     "zod": "^3.24.1"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
     "@playwright/test": "^1.63.0",
     "@tailwindcss/postcss": "^4.0.0",
     "@types/node": "^22.10.6",

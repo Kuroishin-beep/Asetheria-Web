@@ -73,3 +73,7 @@ Missing and hidden pages must be a real 404 (the RBAC tests and the "hidden look
 so skeletons are rendered inside `<Suspense>` boundaries *after* every `notFound()` / `redirect()` guard has run:
 the codex section list and the front page stream behind skeletons; entry pages render fully before first byte.
 (`src/app/login/loading.tsx` stays: `/login` never calls `notFound()`.)
+- `tabs.tsx` `TabsTrigger`: inactive label `text-foreground/60` -> `text-muted-foreground`. The translucent version
+  measured 3.84:1 on the light theme's sunken tab strip (axe `color-contrast`); the token reads 4.5:1 or better.
+- `tabs.tsx` `TabsTrigger`: inactive label `text-foreground/60` -> `text-muted-foreground`. The translucent version
+  measured 3.84:1 on the light theme's sunken tab strip (axe `color-contrast`); the token reads 4.5:1 or better.

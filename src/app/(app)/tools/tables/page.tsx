@@ -4,7 +4,9 @@ import { asc, desc, isNull, isNotNull, and, ne } from "drizzle-orm";
 import { db } from "@/db";
 import { rollTables } from "@/db/schema";
 import { getCurrentUser } from "@/lib/auth";
+import { Dices } from "lucide-react";
 import { PageHeading } from "@/components/entry-card";
+import "./legacy.css";
 import { TableManager } from "./table-manager";
 
 export const metadata: Metadata = { title: "Random Tables" };
@@ -36,9 +38,9 @@ export default async function TablesPage() {
     : [];
 
   return (
-    <div style={{ maxWidth: "52rem" }}>
+    <div className="max-w-3xl">
       <PageHeading
-        icon="🎰"
+        Icon={Dices}
         title="Random Tables"
         blurb="Roll for names, loot, weather, rumours — whatever you need mid-session."
       />

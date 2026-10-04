@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Dices } from "lucide-react";
 import { PageHeading } from "@/components/entry-card";
 import { DiceRoller } from "./dice-roller";
 
@@ -6,9 +7,9 @@ export const metadata: Metadata = { title: "Dice" };
 
 export default function DicePage() {
   return (
-    <div style={{ maxWidth: "46rem" }}>
+    <div className="max-w-3xl">
       <PageHeading
-        icon="🎲"
+        Icon={Dices}
         title="Dice"
         blurb="Full notation, cryptographically random, and it keeps a log of the session."
       />

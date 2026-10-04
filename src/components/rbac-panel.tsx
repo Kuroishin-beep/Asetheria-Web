@@ -2,12 +2,23 @@
 
 import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
+import { Ban, Check, ChevronDown, ChevronUp, Eye, EyeOff, UserPlus } from "lucide-react";
+import { EmptyState } from "@/components/entry-card";
+import { FormMessage } from "@/components/shared/form-message";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
+import { NativeSelect, NativeSelectOption } from "@/components/ui/native-select";
 import type { EntryKind } from "@/db/schema";
+import { KIND_ICONS } from "@/lib/section-icons";
+import { cn } from "@/lib/utils";
 
 type Player = { id: string; username: string; displayName: string | null };
 type Grant = { kind: EntryKind | null; entryId: string | null; granted: boolean };
 type EntryRow = { id: string; name: string; kind: EntryKind; slug: string };
-type KindRow = { kind: EntryKind; label: string; icon: string };
+type KindRow = { kind: EntryKind; label: string };
 
 async function postRbac(body: Record<string, unknown>) {
   const res = await fetch("/api/rbac", {
@@ -64,10 +75,12 @@ export function RbacPanel({
 
   if (!activePlayerId) {
     return (
-      <p className="card" style={{ padding: "1.25rem", color: "var(--text-muted)" }}>
-        No player accounts exist yet. Create one with{" "}
-        <code>npm run user:add -- --username NAME --password &quot;PASS&quot;</code>.
-      </p>
+      <EmptyState
+        Icon={UserPlus}
+        title="No player accounts yet"
+        hint="Players register with the invite code, or you can create one from the command line:"
+        action={<code className="rounded bg-muted px-2 py-1 text-xs">npm run user:add -- --username NAME --password &quot;PASS&quot;</code>}
+      />
     );
   }
 
@@ -93,202 +106,156 @@ export function RbacPanel({
     });
   }
 
+  function bulk(action: "approve" | "reject" | "clear", entryIds: string[]) {
+    if (action === "clear") {
+      return run(() => postRbac({ action: "clearEntries", playerId: activePlayerId, entryIds }));
+    }
+    return run(() =>
+      postRbac({ action: "bulkEntries", playerId: activePlayerId, entryIds, granted: action === "approve" }),
+    );
+  }
+
   return (
-    <div style={{ display: "grid", gap: "1.25rem" }}>
-      <div>
-        <label className="label" htmlFor="player-select">
-          Player
-        </label>
-        <select
+    <div className="grid gap-6">
+      <div className="grid max-w-xs gap-2">
+        <Label htmlFor="player-select">Player</Label>
+        <NativeSelect
           id="player-select"
-          className="input"
+          className="w-full"
           value={activePlayerId}
           onChange={(e) => router.push(`/admin/rbac?player=${e.target.value}`)}
-          style={{ maxWidth: "20rem" }}
         >
           {players.map((p) => (
-            <option key={p.id} value={p.id}>
+            <NativeSelectOption key={p.id} value={p.id}>
               {p.displayName || p.username} ({p.username})
-            </option>
+            </NativeSelectOption>
           ))}
-        </select>
+        </NativeSelect>
       </div>
 
-      {error && (
-        <p
-          role="alert"
-          style={{
-            fontSize: "0.8125rem",
-            color: "var(--color-blood-400)",
-            background: "color-mix(in srgb, var(--color-blood-400) 10%, transparent)",
-            border: "1px solid color-mix(in srgb, var(--color-blood-400) 30%, transparent)",
-            borderRadius: 8,
-            padding: "0.6rem 0.75rem",
-          }}
-        >
-          {error}
-        </p>
-      )}
+      {error && <FormMessage>{error}</FormMessage>}
 
-      <ul style={{ display: "grid", gap: "0.5rem", listStyle: "none", padding: 0 }}>
+      <ul className="grid gap-2">
         {kinds.map((k) => {
           const kindEntries = entriesByKind.get(k.kind) ?? [];
           const granted = kindGrant.get(k.kind);
           const overrideCount = kindEntries.filter((e) => entryGrant.has(e.id)).length;
           const isExpanded = expandedKind === k.kind;
+          const Icon = KIND_ICONS[k.kind];
+          const allSelected = selected.size === kindEntries.length && kindEntries.length > 0;
 
           return (
-            <li key={k.kind} className="card" style={{ padding: "0.85rem 1rem" }}>
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "0.6rem",
-                  flexWrap: "wrap",
-                }}
-              >
-                <span aria-hidden="true">{k.icon}</span>
-                <span style={{ fontWeight: 600, flex: 1 }}>{k.label}</span>
-                {overrideCount > 0 && (
-                  <span className="chip" style={{ fontSize: "0.75rem" }}>
-                    {overrideCount} individually set
-                  </span>
-                )}
-                <button
-                  type="button"
-                  className="btn"
-                  disabled={busy}
-                  aria-pressed={granted === true}
-                  onClick={() =>
-                    run(() =>
-                      postRbac({
-                        action: "toggleKind",
-                        playerId: activePlayerId,
-                        kind: k.kind,
-                        granted: !(granted === true),
-                      }),
-                    )
-                  }
-                >
-                  {granted === true ? "Visible to player ✓" : "Hidden from player"}
-                </button>
-                {kindEntries.length > 0 && (
-                  <button
-                    type="button"
-                    className="btn"
-                    onClick={() => {
-                      setExpandedKind(isExpanded ? null : k.kind);
-                      setSelected(new Set());
-                    }}
-                  >
-                    {isExpanded ? "Close" : `${kindEntries.length} entries…`}
-                  </button>
-                )}
-              </div>
-
-              {isExpanded && (
-                <div style={{ marginTop: "0.75rem", borderTop: "1px solid var(--border-soft)", paddingTop: "0.75rem" }}>
-                  <div style={{ display: "flex", gap: "0.5rem", marginBottom: "0.6rem", flexWrap: "wrap" }}>
-                    <label style={{ display: "flex", alignItems: "center", gap: "0.35rem", fontSize: "0.8125rem" }}>
-                      <input
-                        type="checkbox"
-                        checked={selected.size === kindEntries.length && kindEntries.length > 0}
-                        onChange={(e) =>
-                          setSelected(e.target.checked ? new Set(kindEntries.map((x) => x.id)) : new Set())
-                        }
-                      />
-                      Select all
-                    </label>
-                    <div style={{ flex: 1 }} />
-                    <button
+            <li key={k.kind}>
+              <Card size="sm">
+                <CardContent>
+                  <div className="flex flex-wrap items-center gap-3">
+                    <Icon aria-hidden="true" className="size-4 text-gold" />
+                    <span className="flex-1 font-semibold">{k.label}</span>
+                    {overrideCount > 0 && <Badge variant="secondary">{overrideCount} individually set</Badge>}
+                    <Button
                       type="button"
-                      className="btn btn-primary"
-                      disabled={busy || selected.size === 0}
+                      variant="outline"
+                      disabled={busy}
+                      aria-pressed={granted === true}
+                      className={cn(granted === true && "border-success text-success")}
                       onClick={() =>
                         run(() =>
                           postRbac({
-                            action: "bulkEntries",
+                            action: "toggleKind",
                             playerId: activePlayerId,
-                            entryIds: [...selected],
-                            granted: true,
+                            kind: k.kind,
+                            granted: !(granted === true),
                           }),
                         )
                       }
                     >
-                      Approve selected
-                    </button>
-                    <button
-                      type="button"
-                      className="btn"
-                      disabled={busy || selected.size === 0}
-                      onClick={() =>
-                        run(() =>
-                          postRbac({
-                            action: "bulkEntries",
-                            playerId: activePlayerId,
-                            entryIds: [...selected],
-                            granted: false,
-                          }),
-                        )
-                      }
-                    >
-                      Reject selected
-                    </button>
-                    <button
-                      type="button"
-                      className="btn"
-                      disabled={busy || selected.size === 0}
-                      onClick={() =>
-                        run(() =>
-                          postRbac({
-                            action: "clearEntries",
-                            playerId: activePlayerId,
-                            entryIds: [...selected],
-                          }),
-                        )
-                      }
-                    >
-                      Clear override
-                    </button>
+                      {granted === true ? <Eye aria-hidden="true" /> : <EyeOff aria-hidden="true" />}
+                      {granted === true ? "Visible to player" : "Hidden from player"}
+                    </Button>
+                    {kindEntries.length > 0 && (
+                      <Button
+                        type="button"
+                        variant="outline"
+                        aria-expanded={isExpanded}
+                        onClick={() => {
+                          setExpandedKind(isExpanded ? null : k.kind);
+                          setSelected(new Set());
+                        }}
+                      >
+                        {isExpanded ? <ChevronUp aria-hidden="true" /> : <ChevronDown aria-hidden="true" />}
+                        {isExpanded ? "Close" : `${kindEntries.length} entries…`}
+                      </Button>
+                    )}
                   </div>
 
-                  <ul
-                    style={{
-                      display: "grid",
-                      gap: "0.25rem",
-                      listStyle: "none",
-                      padding: 0,
-                      maxHeight: "18rem",
-                      overflowY: "auto",
-                    }}
-                  >
-                    {kindEntries.map((e) => {
-                      const override = entryGrant.get(e.id);
-                      return (
-                        <li key={e.id} style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-                          <input
-                            type="checkbox"
-                            checked={selected.has(e.id)}
-                            onChange={() => toggleSelected(e.id)}
-                            aria-label={`Select ${e.name}`}
+                  {isExpanded && (
+                    <div className="mt-4 border-t border-border pt-4">
+                      <div className="mb-3 flex flex-wrap items-center gap-2">
+                        <div className="flex items-center gap-2">
+                          <Checkbox
+                            id={`select-all-${k.kind}`}
+                            checked={allSelected}
+                            onCheckedChange={(checked) =>
+                              setSelected(checked === true ? new Set(kindEntries.map((x) => x.id)) : new Set())
+                            }
                           />
-                          <span style={{ flex: 1, fontSize: "0.875rem" }}>{e.name}</span>
-                          {override === true && (
-                            <span className="chip" style={{ fontSize: "0.7rem" }}>
-                              granted
-                            </span>
-                          )}
-                          {override === false && (
-                            <span className="chip" style={{ fontSize: "0.7rem" }}>
-                              denied
-                            </span>
-                          )}
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </div>
-              )}
+                          <Label htmlFor={`select-all-${k.kind}`} className="text-[13px]">
+                            Select all
+                          </Label>
+                        </div>
+                        <div className="flex-1" />
+                        <Button
+                          type="button"
+                          disabled={busy || selected.size === 0}
+                          onClick={() => bulk("approve", [...selected])}
+                        >
+                          <Check aria-hidden="true" />
+                          Approve selected
+                        </Button>
+                        <Button
+                          type="button"
+                          variant="outline"
+                          disabled={busy || selected.size === 0}
+                          onClick={() => bulk("reject", [...selected])}
+                        >
+                          <Ban aria-hidden="true" />
+                          Reject selected
+                        </Button>
+                        <Button
+                          type="button"
+                          variant="outline"
+                          disabled={busy || selected.size === 0}
+                          onClick={() => bulk("clear", [...selected])}
+                        >
+                          Clear override
+                        </Button>
+                      </div>
+
+                      <ul className="grid max-h-72 gap-1 overflow-y-auto">
+                        {kindEntries.map((e) => {
+                          const override = entryGrant.get(e.id);
+                          return (
+                            <li key={e.id} className="flex items-center gap-2">
+                              <Checkbox
+                                checked={selected.has(e.id)}
+                                onCheckedChange={() => toggleSelected(e.id)}
+                                aria-label={`Select ${e.name}`}
+                              />
+                              <span className="flex-1 text-sm">{e.name}</span>
+                              {override === true && <Badge variant="secondary">granted</Badge>}
+                              {override === false && (
+                                <Badge variant="outline" className="border-destructive/50 text-destructive">
+                                  denied
+                                </Badge>
+                              )}
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
             </li>
           );
         })}

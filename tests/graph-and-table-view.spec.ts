@@ -27,7 +27,7 @@ test.describe("graph view", () => {
 
   test("renders as an SVG with nodes, and clicking a node navigates to its page", async ({ page }) => {
     await page.goto("/graph");
-    await expect(page.getByRole("img", { name: /Backlink graph/ })).toBeVisible();
+    await expect(page.getByRole("group", { name: /Backlink graph/ })).toBeVisible();
 
     // Any node proves the acceptance criterion (nodes are clickable and
     // navigate) — picking one specific node risks hitting the rare case

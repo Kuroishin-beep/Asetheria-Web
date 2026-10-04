@@ -1,10 +1,11 @@
 import { redirect } from "next/navigation";
 import type { Metadata } from "next";
+import { isNull } from "drizzle-orm";
+import { ShieldCheck } from "lucide-react";
 import { getCurrentUser } from "@/lib/auth";
 import { listPlayers, listGrantsForUser } from "@/lib/rbac";
 import { db } from "@/db";
 import { entries } from "@/db/schema";
-import { isNull } from "drizzle-orm";
 import { KINDS } from "@/lib/kinds";
 import { PageHeading } from "@/components/entry-card";
 import { RbacPanel } from "@/components/rbac-panel";
@@ -36,18 +37,18 @@ export default async function RbacAdminPage({
   const grants = activePlayer ? await listGrantsForUser(activePlayer.id) : [];
 
   return (
-    <div style={{ maxWidth: "64rem" }}>
+    <div className="max-w-5xl">
       <PageHeading
-        icon="🛡"
+        Icon={ShieldCheck}
         title="Players & Access"
-        blurb="Decide what each player can see. Nothing is visible to a player until it's granted here — a secret entry never is, no matter what."
+        blurb="Decide what each player can see. Nothing is visible to a player until it's granted here, and a secret entry never is, no matter what."
       />
       <RbacPanel
         players={players}
         activePlayerId={activePlayer?.id ?? null}
         grants={grants.map((g) => ({ kind: g.kind, entryId: g.entryId, granted: g.granted }))}
         entries={allEntries}
-        kinds={KINDS.map((k) => ({ kind: k.kind, label: k.label, icon: k.icon }))}
+        kinds={KINDS.map((k) => ({ kind: k.kind, label: k.label }))}
       />
     </div>
   );

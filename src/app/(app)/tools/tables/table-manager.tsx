@@ -52,7 +52,7 @@ export function TableManager({
       )}
 
       {tables.length === 0 && !editing ? (
-        <p style={{ color: "var(--text-muted)" }}>
+        <p style={{ color: "var(--muted-foreground)" }}>
           No tables yet.{" "}
           {isDM && "Create one to roll for names, loot, or encounters."}
         </p>
@@ -221,7 +221,7 @@ function TableCard({
         <p
           style={{
             fontSize: "0.875rem",
-            color: "var(--text-muted)",
+            color: "var(--muted-foreground)",
             marginTop: "0.35rem",
           }}
         >
@@ -230,7 +230,7 @@ function TableCard({
       )}
 
       {error && (
-        <p style={{ color: "var(--color-blood-400)", fontSize: "0.8125rem" }}>
+        <p style={{ color: "var(--destructive)", fontSize: "0.8125rem" }}>
           {error}
         </p>
       )}
@@ -241,8 +241,8 @@ function TableCard({
             marginTop: "0.85rem",
             padding: "0.75rem 1rem",
             borderRadius: 8,
-            background: "var(--bg-sunken)",
-            border: "1px solid var(--border-soft)",
+            background: "var(--muted)",
+            border: "1px solid var(--border)",
           }}
         >
           <span
@@ -265,7 +265,7 @@ function TableCard({
           style={{
             cursor: "pointer",
             fontSize: "0.8125rem",
-            color: "var(--text-muted)",
+            color: "var(--muted-foreground)",
           }}
         >
           {table.items.length} rows
@@ -407,7 +407,7 @@ function TableEditor({
                 aria-label={`Row ${i + 1} minimum`}
                 style={{ width: "5rem" }}
               />
-              <span style={{ color: "var(--text-faint)" }}>–</span>
+              <span style={{ color: "var(--faint-foreground)" }}>–</span>
               <input
                 type="number"
                 className="input"
@@ -452,7 +452,7 @@ function TableEditor({
       </div>
 
       {error && (
-        <p role="alert" style={{ color: "var(--color-blood-400)", fontSize: "0.875rem" }}>
+        <p role="alert" style={{ color: "var(--destructive)", fontSize: "0.875rem" }}>
           {error}
         </p>
       )}

@@ -66,11 +66,11 @@ test.describe("RBAC control panel (GM)", () => {
       // GM turns on the whole "location" kind for this player.
       await page.goto(`/admin/rbac?player=${userId}`);
       await page
-        .locator("li.card", { hasText: "Locations" })
+        .locator('[data-slot="card"]', { hasText: "Locations" })
         .getByRole("button", { name: "Hidden from player" })
         .click();
       await expect(
-        page.locator("li.card", { hasText: "Locations" }).getByRole("button", { name: /Visible to player/ }),
+        page.locator('[data-slot="card"]', { hasText: "Locations" }).getByRole("button", { name: /Visible to player/ }),
       ).toBeVisible();
 
       await playerPage.goto(`/codex/entry/${slugA}`);
@@ -80,7 +80,7 @@ test.describe("RBAC control panel (GM)", () => {
       // GM explicitly rejects Town B for this player, overriding the kind-level grant.
       await page.goto(`/admin/rbac?player=${userId}`);
       await page
-        .locator("li.card", { hasText: "Locations" })
+        .locator('[data-slot="card"]', { hasText: "Locations" })
         .getByRole("button", { name: /entries…/ })
         .click();
       await page.getByLabel(`Select ${(await entryName(page, slugB!))}`).check();

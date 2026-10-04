@@ -14,7 +14,7 @@ Status key: NOT STARTED / IN PROGRESS / IMPLEMENTED / TESTED / DONE / BLOCKED
 | 2b | Shell + auth pages | `app-shell`, `theme-toggle`, login/register/welcome/onboarding | 2a | **DONE** |
 | 2c | Codex pages (+ loading/error/empty) | `entry-card`, `codex/**`, `loading.tsx`, `error.tsx` | 2b | **DONE** |
 | 2d | Editor, palette, graph, shortcuts | `entry-form`, `markdown-editor`, `command-palette`, `graph-view`, `keyboard-shortcuts` | 2c | **DONE** |
-| 2e | Tools + admin + sweep (grep gates, axe) | `tools/*`, `admin/*`, `rbac-panel` | 2d | NOT STARTED |
+| 2e | Tools + admin + sweep (grep gates, axe) | `tools/*`, `admin/*`, `rbac-panel` | 2d | **DONE** |
 | 3 | `fauna` + `table` UI and field model; roller | `kinds.ts`, `codex/tables`, roller, `tools/tables` redirect | 1, 2e | NOT STARTED |
 | 4 | Licence-safe ingestion + original specimens | `data/natural-world/*`, `scripts/import-open5e-docs.ts`, attribution note, `docs/content-review.md` | 3 | NOT STARTED |
 | 5 | Places, structures, `foundIn` linkage (+ R5 field-link leak fix first) | `data/places-*.json`, `src/lib/entries.ts`, link rendering, `verify-links.ts` | 4 | NOT STARTED |
@@ -129,3 +129,30 @@ Bugs found by tests and fixed in the app:
 Test edits (rule 3 justification, intent unchanged): `helpers.ts` and `entries-crud.spec.ts` selected the visibility radios with `input[name="visibility"][value=...]` and a button named `"+ Add private notes"`. The radios are now a Radix group (found by accessible name: Everyone / DM only / Revealed) and the button is "Add private notes" (lucide icon instead of a "+" glyph).
 Test-timing note: Radix selects on the focus move only while an arrow key is still down, so the test presses it with `delay: 60`, as a human does; a zero-delay synthetic press moves focus without selecting.
 Remaining for 2e: `command-palette`/shell now clean; legacy `.btn/.card/.input/...` CSS is still present for the tools, admin and RBAC screens.
+
+### Phase 2e (tools, admin, sweep): DONE (2026-10-04). Phase 2 (design migration) complete.
+
+Built: dice roller + page, Backup & Import page + `ImportPanel`, Players & Access page + `RbacPanel` (Checkbox, NativeSelect, Badge), all on shadcn/ui; legacy component CSS removed from `globals.css` (kept only for the doomed tables tool in `tools/tables/legacy.css`); legacy colour aliases and the emoji icon fields removed (`KindDef.icon`, `kindIcon`); `skeleton.tsx` deleted; static design gates (`scripts/lib/design-gates.ts`, `npm run check:design`) with a spec that proves each rule fires; axe audit spec; motion spec; tokens doc regenerated.
+
+Evidence (observed):
+1. **Grep gates:** `npm run check:design` = 12 rules, 0 violations (no hardcoded colour utilities, no colour literals, no `@keyframes`, no CSS animation utilities except the button spinner, no inline `style={{`, no plain button/select/textarea/input except `type=hidden`, no emoji in UI code, no arbitrary spacing values, no `console.log`, no `any`/`@ts-ignore`, no palette primitives outside the token file). Exemptions are explicit and justified in the file: generated `components/ui/*`, vendor `styles/shadcn.css`, the legacy tables tool (deleted in Phase 3), `layout.tsx` `themeColor` (browser chrome cannot read CSS variables; a test asserts it equals the token backgrounds), and one instruction string in `session.ts`. `tests/design-gates.spec.ts` also proves each rule fires on a known-bad sample.
+2. **Accessibility:** `tests/a11y.spec.ts` runs axe (WCAG 2 A/AA, 2.1 AA, 2.2 AA) on 12 routes x 2 themes plus the open mobile drawer and open palette: **25 of 25 pass with 0 serious/critical** after the entrance animations settle.
+3. **Reduced motion:** `tests/motion.spec.ts` (3): with `prefers-reduced-motion` nothing is ever visible while offset and content ends at opacity 1; with normal motion content settles at opacity 1, transform none; no list card is left invisible after the stagger.
+4. Dice, admin and RBAC behaviour: `tools-admin.spec.ts` (10): roll/preset/invalid/boundary (500 dice ok, 501 refused with the engine's message)/log persistence/clear/notation reference; admin counts + both download links, "no file", "not JSON", "not a backup", and a real additive restore reporting "1 added, 0 updated"; `rbac-panel.spec.ts` passes with the new markup.
+5. `tsc` exit 0; `next build` compiled (21 pages); `npm audit --omit=dev` 0; contrast gate green; `check:links` still 2 (the pre-existing baseline); full suite **190 passed** (149 + 41), 0 failed.
+6. Before/after sets saved locally: `test-results/design/{before,after,after-2b,after-2c,after-2d,final-2e}`.
+
+Bugs found by the new tests and fixed in the app:
+- axe: the Markdown editor textarea had no accessible name and used `aria-expanded` (invalid on a textbox): now `aria-label="Description"` + `aria-activedescendant`.
+- axe: graph SVG was `role="img"` containing focusable nodes (nested-interactive): now `role="group"` with the same label.
+- axe: low-contrast inactive tab label (3.84:1), nav counts on the active row (3.86:1), meta text on secondary badges (4.17:1), and 19px-tall "N more" links below the 24px target size. Fixed in tabs, nav, a stronger dark `--faint-foreground`, and `min-h-6` on those links; the contrast gate gained eight more pairs so the token file itself now guarantees them.
+- **Pre-existing (dice):** the saved roll log was overwritten by an empty save before it was restored (visible when React runs effects twice in development). Saving now waits for the restore.
+Test edits (rule 3 justification): `graph-and-table-view.spec.ts` and `editor-ui.spec.ts` look the graph up as `role=group` (was `img`), because an `img` may not contain interactive children; `rbac-panel.spec.ts` selects the kind row by `[data-slot="card"]` (was `li.card`).
+Known leftover (planned): `tools/tables` (legacy manager, own stylesheet) is removed in Phase 3. The graph is a dense ring for 600+ nodes; filtering and clustering are Phase 8c.
+
+#### Phase 2 acceptance walk (PLAN.md Phase 2a to 2e)
+- 2a: no-flash theme persistence, contrast >= 4.5:1 / 3:1 in both themes, build + suite green, spike notes, before/after screenshots: all evidenced above (go decision recorded).
+- 2b: auth page ids/names preserved, keyboard-only login, 375px drawer, screenshots: evidenced.
+- 2c: error/not-found/empty/skeleton states, `.prose-codex` and `#sec-*` preserved (criterion corrected for Suspense vs `loading.tsx`): evidenced.
+- 2d: `knowledge-features.spec.ts` unchanged and green: evidenced.
+- 2e: grep gate, axe, reduced motion: evidenced above.

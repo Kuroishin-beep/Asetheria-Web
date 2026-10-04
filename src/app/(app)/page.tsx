@@ -45,7 +45,7 @@ function SectionHeading({
         <Eyebrow>{title}</Eyebrow>
       </h2>
       {href && (
-        <Link href={href} className="inline-flex items-center gap-1 text-[13px] text-link underline-offset-4 hover:underline">
+        <Link href={href} className="inline-flex min-h-6 items-center gap-1 text-[13px] text-link underline-offset-4 hover:underline">
           {more}
           <ArrowRight aria-hidden="true" className="size-3" />
         </Link>
@@ -102,7 +102,7 @@ function EntryStrip({
       </CardGrid>
       {limit && overflowNoun && entries.length > limit && (
         <p className="mt-3 text-[13px]">
-          <Link href={href} className="text-link underline-offset-4 hover:underline">
+          <Link href={href} className="inline-flex min-h-6 items-center text-link underline-offset-4 hover:underline">
             {entries.length - limit} more {overflowNoun} →
           </Link>
         </p>

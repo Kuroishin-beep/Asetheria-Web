@@ -68,7 +68,7 @@
 }
 
 * {
-  border-color: var(--border-soft);
+  border-color: var(--border);
 }
 
 html {
@@ -80,8 +80,8 @@ html {
 }
 
 body {
-  background-color: var(--bg);
-  color: var(--text);
+  background-color: var(--background);
+  color: var(--foreground);
   font-family: var(--font-sans);
   /* A faint woven texture keeps large dark areas from looking flat. */
   background-image:
@@ -96,7 +96,7 @@ body {
 
 ::selection {
   background: color-mix(in srgb, var(--gold) 35%, transparent);
-  color: var(--text);
+  color: var(--foreground);
 }
 
 /* Focus rings: visible for keyboard users, invisible for mouse users. */
@@ -109,164 +109,21 @@ body {
 /* Thin, themed scrollbars. */
 * {
   scrollbar-width: thin;
-  scrollbar-color: var(--border-strong) transparent;
+  scrollbar-color: var(--input) transparent;
 }
 *::-webkit-scrollbar {
   width: 10px;
   height: 10px;
 }
 *::-webkit-scrollbar-thumb {
-  background: var(--border-strong);
+  background: var(--input);
   border-radius: 99px;
   border: 3px solid transparent;
   background-clip: content-box;
 }
 *::-webkit-scrollbar-thumb:hover {
-  background: var(--text-faint);
+  background: var(--faint-foreground);
   background-clip: content-box;
-}
-
-/* ---------------------------------------------------------------------------
-   Reusable pieces
-   --------------------------------------------------------------------------- */
-
-.font-display {
-  font-family: var(--font-display);
-  letter-spacing: 0.02em;
-}
-
-/* A hairline rule that fades at both ends, used under section headings. */
-.rule-fade {
-  height: 1px;
-  background: linear-gradient(
-    to right,
-    transparent,
-    var(--border-strong),
-    var(--border-strong),
-    transparent
-  );
-}
-
-.card {
-  background: var(--bg-raised);
-  border: 1px solid var(--border-soft);
-  border-radius: 10px;
-  box-shadow: var(--shadow);
-}
-
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  border-radius: 8px;
-  border: 1px solid var(--border-strong);
-  background: var(--bg-raised);
-  color: var(--text);
-  padding: 0.5rem 0.9rem;
-  font-size: 0.875rem;
-  font-weight: 500;
-  line-height: 1.2;
-  cursor: pointer;
-  transition:
-    background-color 0.15s,
-    border-color 0.15s,
-    color 0.15s,
-    transform 0.06s;
-  white-space: nowrap;
-}
-.btn:hover:not(:disabled) {
-  border-color: var(--gold);
-  color: var(--gold);
-}
-.btn:active:not(:disabled) {
-  transform: translateY(1px);
-}
-.btn:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.btn-primary {
-  background: var(--gold);
-  border-color: var(--gold);
-  color: var(--on-accent);
-  font-weight: 600;
-}
-.btn-primary:hover:not(:disabled) {
-  background: var(--gold-soft);
-  border-color: var(--gold-soft);
-  color: var(--on-accent);
-}
-
-.btn-danger:hover:not(:disabled) {
-  border-color: var(--color-blood-400);
-  color: var(--color-blood-400);
-}
-
-.input,
-.textarea,
-.select {
-  width: 100%;
-  background: var(--bg);
-  border: 1px solid var(--border-strong);
-  border-radius: 8px;
-  padding: 0.55rem 0.75rem;
-  color: var(--text);
-  font-size: 0.9375rem;
-  font-family: inherit;
-  transition:
-    border-color 0.15s,
-    box-shadow 0.15s;
-}
-.input:focus,
-.textarea:focus,
-.select:focus {
-  outline: none;
-  border-color: var(--gold);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--gold) 18%, transparent);
-}
-.input::placeholder,
-.textarea::placeholder {
-  color: var(--text-faint);
-}
-.textarea {
-  resize: vertical;
-  min-height: 7rem;
-  line-height: 1.6;
-}
-
-.label {
-  display: block;
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.07em;
-  color: var(--text-muted);
-  margin-bottom: 0.35rem;
-}
-
-.chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.3rem;
-  border: 1px solid var(--border-strong);
-  background: var(--bg-sunken);
-  border-radius: 99px;
-  padding: 0.15rem 0.6rem;
-  font-size: 0.75rem;
-  color: var(--text-muted);
-  white-space: nowrap;
-}
-a.chip:hover {
-  border-color: var(--gold);
-  color: var(--gold);
-}
-
-.chip-secret {
-  border-color: color-mix(in srgb, var(--secret) 45%, transparent);
-  color: var(--secret);
-  background: color-mix(in srgb, var(--secret) 10%, transparent);
 }
 
 /* ---------------------------------------------------------------------------
@@ -276,7 +133,7 @@ a.chip:hover {
   font-family: var(--font-prose);
   font-size: 1.0625rem;
   line-height: 1.75;
-  color: var(--text);
+  color: var(--foreground);
   overflow-wrap: break-word;
 }
 .prose-codex > * + * {
@@ -291,7 +148,7 @@ a.chip:hover {
   line-height: 1.25;
   margin-top: 1.8em;
   margin-bottom: 0.6em;
-  color: var(--text);
+  color: var(--foreground);
 }
 .prose-codex h1 {
   font-size: 1.7rem;
@@ -299,7 +156,7 @@ a.chip:hover {
 .prose-codex h2 {
   font-size: 1.4rem;
   padding-bottom: 0.3em;
-  border-bottom: 1px solid var(--border-soft);
+  border-bottom: 1px solid var(--border);
 }
 .prose-codex h3 {
   font-size: 1.15rem;
@@ -309,7 +166,7 @@ a.chip:hover {
   font-size: 1rem;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: var(--text-muted);
+  color: var(--muted-foreground);
 }
 .prose-codex a {
   color: var(--link);
@@ -323,7 +180,7 @@ a.chip:hover {
 }
 .prose-codex strong {
   font-weight: 700;
-  color: var(--text);
+  color: var(--foreground);
 }
 .prose-codex em {
   font-style: italic;
@@ -348,7 +205,7 @@ a.chip:hover {
 .prose-codex blockquote {
   border-left: 3px solid var(--gold);
   padding: 0.25em 0 0.25em 1.1em;
-  color: var(--text-muted);
+  color: var(--muted-foreground);
   font-style: italic;
 }
 .prose-codex hr {
@@ -357,7 +214,7 @@ a.chip:hover {
   background: linear-gradient(
     to right,
     transparent,
-    var(--border-strong),
+    var(--input),
     transparent
   );
   margin: 2em 0;
@@ -365,14 +222,14 @@ a.chip:hover {
 .prose-codex code {
   font-family: ui-monospace, "Cascadia Code", Menlo, monospace;
   font-size: 0.875em;
-  background: var(--bg-sunken);
-  border: 1px solid var(--border-soft);
+  background: var(--muted);
+  border: 1px solid var(--border);
   border-radius: 4px;
   padding: 0.1em 0.35em;
 }
 .prose-codex pre {
-  background: var(--bg-sunken);
-  border: 1px solid var(--border-soft);
+  background: var(--muted);
+  border: 1px solid var(--border);
   border-radius: 8px;
   padding: 1em;
   overflow-x: auto;
@@ -386,7 +243,7 @@ a.chip:hover {
 /* Wide tables scroll inside their own box rather than the page. */
 .prose-codex .table-scroll {
   overflow-x: auto;
-  border: 1px solid var(--border-soft);
+  border: 1px solid var(--border);
   border-radius: 8px;
 }
 .prose-codex table {
@@ -397,40 +254,32 @@ a.chip:hover {
 }
 .prose-codex th,
 .prose-codex td {
-  border-bottom: 1px solid var(--border-soft);
+  border-bottom: 1px solid var(--border);
   padding: 0.55rem 0.8rem;
   text-align: left;
   vertical-align: top;
 }
 .prose-codex th {
-  background: var(--bg-sunken);
+  background: var(--muted);
   font-weight: 600;
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: var(--text-muted);
+  color: var(--muted-foreground);
 }
 .prose-codex tr:last-child td {
   border-bottom: 0;
 }
 .prose-codex mark {
   background: color-mix(in srgb, var(--gold) 30%, transparent);
-  color: var(--text);
+  color: var(--foreground);
   border-radius: 2px;
   padding: 0 0.15em;
 }
 
-/* Entry pages become two columns once there's room for a connections rail. */
-@media (min-width: 1100px) {
-  .entry-layout {
-    grid-template-columns: minmax(0, 1fr) 21rem !important;
-    gap: 2.5rem !important;
-  }
-}
-
 /* A wiki-link pointing at a page that doesn't exist yet. */
 .wikilink-missing {
-  color: var(--text-faint);
+  color: var(--faint-foreground);
   text-decoration: underline dotted;
   cursor: help;
 }
@@ -453,17 +302,4 @@ a.chip:hover {
     background: #fff;
     color: #000;
   }
-}
-
-/* Visually hidden but still announced by screen readers. */
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
 }

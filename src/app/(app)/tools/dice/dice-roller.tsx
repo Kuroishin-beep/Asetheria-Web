@@ -1,7 +1,16 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { ChevronRight, Dices, Trash2 } from "lucide-react";
+import { EmptyState } from "@/components/entry-card";
+import { FormMessage } from "@/components/shared/form-message";
+import { Eyebrow } from "@/components/shared/eyebrow";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
 import { DiceError, rollMany, type RollResult } from "@/lib/dice";
+import { cn } from "@/lib/utils";
 
 const PRESETS = [
   "1d20",
@@ -18,6 +27,20 @@ const PRESETS = [
   "6x4d6kh3",
 ];
 
+const NOTATION_REFERENCE: [string, string][] = [
+  ["2d6+3", "two six-sided dice, plus three"],
+  ["1d20adv", "advantage (roll twice, keep the best)"],
+  ["1d20dis", "disadvantage"],
+  ["4d6kh3", "roll four, keep the highest three"],
+  ["2d20kl1", "roll two, keep the lowest"],
+  ["3d6!", "exploding: max rolls again"],
+  ["6x4d6kh3", "repeat the roll six times"],
+  ["1d8+2d6-1", "combine any number of terms"],
+];
+
+const LOG_KEY = "asetheria-dice-log";
+const LOG_LIMIT = 50;
+
 type LogEntry = {
   id: number;
   at: string;
@@ -28,44 +51,41 @@ export function DiceRoller() {
   const [expr, setExpr] = useState("1d20");
   const [log, setLog] = useState<LogEntry[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const [restored, setRestored] = useState(false);
   const nextId = useRef(1);
-  const inputRef = useRef<HTMLInputElement>(null);
 
   // Restore the log so a refresh mid-session doesn't lose the history.
   useEffect(() => {
     try {
-      const saved = sessionStorage.getItem("asetheria-dice-log");
+      const saved = sessionStorage.getItem(LOG_KEY);
       if (saved) {
         const parsed = JSON.parse(saved) as LogEntry[];
         setLog(parsed);
         nextId.current = (parsed[0]?.id ?? 0) + 1;
       }
     } catch {
-      // Nothing worth surfacing — start with an empty log.
+      // Nothing worth surfacing: start with an empty log.
     }
+    setRestored(true);
   }, []);
 
+  // Saving waits until the saved log has been read. Without this, the first
+  // save wrote the still-empty log over it (visible when React runs effects twice in development).
   useEffect(() => {
+    if (!restored) return;
     try {
-      sessionStorage.setItem("asetheria-dice-log", JSON.stringify(log.slice(0, 50)));
+      sessionStorage.setItem(LOG_KEY, JSON.stringify(log.slice(0, LOG_LIMIT)));
     } catch {
       // Storage full or blocked; the log just won't persist.
     }
-  }, [log]);
+  }, [log, restored]);
 
   function doRoll(expression: string) {
     try {
       const results = rollMany(expression);
       setError(null);
       setLog((prev) =>
-        [
-          {
-            id: nextId.current++,
-            at: new Date().toLocaleTimeString(),
-            results,
-          },
-          ...prev,
-        ].slice(0, 50),
+        [{ id: nextId.current++, at: new Date().toLocaleTimeString(), results }, ...prev].slice(0, LOG_LIMIT),
       );
     } catch (e) {
       setError(e instanceof DiceError ? e.message : "That roll didn't work.");
@@ -73,241 +93,145 @@ export function DiceRoller() {
   }
 
   return (
-    <>
+    <div className="grid gap-4">
       <form
         onSubmit={(e) => {
           e.preventDefault();
           doRoll(expr);
         }}
-        style={{ display: "flex", gap: "0.6rem", marginBottom: "0.85rem" }}
+        className="flex gap-3"
       >
-        <input
-          ref={inputRef}
-          className="input"
+        <Input
           value={expr}
           onChange={(e) => setExpr(e.target.value)}
           placeholder="1d20+5, 4d6kh3, 6x4d6kh3…"
           aria-label="Dice expression"
-          style={{ fontFamily: "ui-monospace, monospace", fontSize: "1rem" }}
+          className="font-mono text-base"
         />
-        <button type="submit" className="btn btn-primary">
+        <Button type="submit">
+          <Dices aria-hidden="true" />
           Roll
-        </button>
+        </Button>
       </form>
 
-      <div
-        style={{
-          display: "flex",
-          gap: "0.35rem",
-          flexWrap: "wrap",
-          marginBottom: "1.5rem",
-        }}
-      >
+      <div className="flex flex-wrap gap-1" role="group" aria-label="Common rolls">
         {PRESETS.map((p) => (
-          <button
+          <Button
             key={p}
             type="button"
-            className="chip"
+            variant="outline"
+            size="xs"
+            className="rounded-full font-mono font-normal"
             onClick={() => {
               setExpr(p);
               doRoll(p);
             }}
-            style={{ cursor: "pointer", fontFamily: "ui-monospace, monospace" }}
           >
             {p}
-          </button>
+          </Button>
         ))}
       </div>
 
-      {error && (
-        <p
-          role="alert"
-          style={{
-            fontSize: "0.875rem",
-            color: "var(--color-blood-400)",
-            marginBottom: "1rem",
-          }}
-        >
-          {error}
-        </p>
-      )}
+      {error && <FormMessage>{error}</FormMessage>}
 
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          marginBottom: "0.6rem",
-        }}
-      >
-        <h2 className="label" style={{ margin: 0 }}>
-          Rolls
+      <div className="mt-2 flex items-center justify-between">
+        <h2>
+          <Eyebrow>Rolls</Eyebrow>
         </h2>
         {log.length > 0 && (
-          <button
-            type="button"
-            className="btn"
-            style={{ padding: "0.25rem 0.55rem", fontSize: "0.75rem" }}
-            onClick={() => setLog([])}
-          >
+          <Button type="button" variant="outline" size="xs" onClick={() => setLog([])}>
+            <Trash2 aria-hidden="true" />
             Clear
-          </button>
+          </Button>
         )}
       </div>
 
       {log.length === 0 ? (
-        <p style={{ color: "var(--text-muted)", fontSize: "0.875rem" }}>
-          Nothing rolled yet.
-        </p>
+        <EmptyState
+          Icon={Dices}
+          title="Nothing rolled yet"
+          hint="Type an expression above, or tap a common roll."
+          className="py-8"
+        />
       ) : (
-        <ul style={{ display: "grid", gap: "0.5rem" }}>
+        <ul className="grid gap-2">
           {log.map((entry) => (
-            <li key={entry.id} className="card" style={{ padding: "0.8rem 1rem" }}>
-              {entry.results.map((r, i) => (
-                <div
-                  key={i}
-                  style={{
-                    display: "flex",
-                    alignItems: "baseline",
-                    gap: "0.75rem",
-                    flexWrap: "wrap",
-                    paddingTop: i > 0 ? "0.5rem" : 0,
-                    marginTop: i > 0 ? "0.5rem" : 0,
-                    borderTop:
-                      i > 0 ? "1px solid var(--border-soft)" : undefined,
-                  }}
-                >
-                  <span
-                    style={{
-                      fontSize: "1.5rem",
-                      fontWeight: 700,
-                      fontFamily: "var(--font-display)",
-                      color:
-                        r.crit === "hit"
-                          ? "var(--color-patina-400)"
-                          : r.crit === "miss"
-                            ? "var(--color-blood-400)"
-                            : "var(--gold)",
-                      minWidth: "2.5rem",
-                    }}
-                  >
-                    {r.total}
-                  </span>
+            <li key={entry.id}>
+              <Card size="sm">
+                <CardContent>
+                  {entry.results.map((r, i) => (
+                    <div
+                      key={i}
+                      className={cn("flex flex-wrap items-baseline gap-3", i > 0 && "mt-2 border-t border-border pt-2")}
+                    >
+                      <span
+                        className={cn(
+                          "font-display min-w-10 text-2xl font-bold",
+                          r.crit === "hit" ? "text-success" : r.crit === "miss" ? "text-destructive" : "text-gold",
+                        )}
+                      >
+                        {r.total}
+                      </span>
 
-                  <span style={{ flex: 1, minWidth: "10rem" }}>
-                    <span
-                      style={{
-                        fontFamily: "ui-monospace, monospace",
-                        fontSize: "0.8125rem",
-                        color: "var(--text-muted)",
-                      }}
-                    >
-                      {r.expression}
-                    </span>
-                    <span
-                      style={{
-                        display: "block",
-                        fontSize: "0.8125rem",
-                        color: "var(--text-faint)",
-                        marginTop: "0.15rem",
-                      }}
-                    >
-                      {r.groups.map((g, gi) => (
-                        <span key={gi} style={{ marginRight: "0.6rem" }}>
-                          {g.notation}: [
-                          {g.kept.join(", ")}
-                          {g.dropped.length > 0 && (
-                            <span style={{ textDecoration: "line-through", opacity: 0.55 }}>
-                              {" "}
-                              {g.dropped.join(", ")}
+                      <span className="min-w-40 flex-1">
+                        <span className="font-mono text-[13px] text-muted-foreground">{r.expression}</span>
+                        <span className="mt-0.5 block text-[13px] text-faint-foreground">
+                          {r.groups.map((g, gi) => (
+                            <span key={gi} className="mr-3">
+                              {g.notation}: [{g.kept.join(", ")}
+                              {g.dropped.length > 0 && (
+                                <span className="line-through opacity-60"> {g.dropped.join(", ")}</span>
+                              )}
+                              ]
+                            </span>
+                          ))}
+                          {r.modifier !== 0 && (
+                            <span>
+                              {r.modifier > 0 ? "+" : ""}
+                              {r.modifier}
                             </span>
                           )}
-                          ]
                         </span>
-                      ))}
-                      {r.modifier !== 0 && (
-                        <span>
-                          {r.modifier > 0 ? "+" : ""}
-                          {r.modifier}
-                        </span>
-                      )}
-                    </span>
-                  </span>
+                      </span>
 
-                  {r.crit === "hit" && (
-                    <span
-                      className="chip"
-                      style={{
-                        borderColor: "var(--color-patina-400)",
-                        color: "var(--color-patina-400)",
-                      }}
-                    >
-                      critical
-                    </span>
-                  )}
-                  {r.crit === "miss" && (
-                    <span
-                      className="chip"
-                      style={{
-                        borderColor: "var(--color-blood-400)",
-                        color: "var(--color-blood-400)",
-                      }}
-                    >
-                      fumble
-                    </span>
-                  )}
-                  {i === 0 && (
-                    <span
-                      style={{ fontSize: "0.6875rem", color: "var(--text-faint)" }}
-                    >
-                      {entry.at}
-                    </span>
-                  )}
-                </div>
-              ))}
+                      {r.crit === "hit" && (
+                        <Badge variant="outline" className="border-success text-success">
+                          critical
+                        </Badge>
+                      )}
+                      {r.crit === "miss" && (
+                        <Badge variant="outline" className="border-destructive text-destructive">
+                          fumble
+                        </Badge>
+                      )}
+                      {i === 0 && <span className="text-[11px] text-faint-foreground">{entry.at}</span>}
+                    </div>
+                  ))}
+                </CardContent>
+              </Card>
             </li>
           ))}
         </ul>
       )}
 
-      <details className="card" style={{ padding: "0.85rem 1rem", marginTop: "1.5rem" }}>
-        <summary style={{ cursor: "pointer", fontWeight: 600, fontSize: "0.875rem" }}>
-          Notation reference
-        </summary>
-        <dl
-          style={{
-            marginTop: "0.85rem",
-            display: "grid",
-            gap: "0.4rem",
-            fontSize: "0.875rem",
-            gridTemplateColumns: "auto 1fr",
-            columnGap: "1rem",
-          }}
-        >
-          {[
-            ["2d6+3", "two six-sided dice, plus three"],
-            ["1d20adv", "advantage (roll twice, keep the best)"],
-            ["1d20dis", "disadvantage"],
-            ["4d6kh3", "roll four, keep the highest three"],
-            ["2d20kl1", "roll two, keep the lowest"],
-            ["3d6!", "exploding — max rolls again"],
-            ["6x4d6kh3", "repeat the roll six times"],
-            ["1d8+2d6-1", "combine any number of terms"],
-          ].map(([code, desc]) => (
-            <div key={code} style={{ display: "contents" }}>
-              <dt
-                style={{
-                  fontFamily: "ui-monospace, monospace",
-                  color: "var(--gold)",
-                }}
-              >
-                {code}
-              </dt>
-              <dd style={{ color: "var(--text-muted)" }}>{desc}</dd>
-            </div>
-          ))}
-        </dl>
-      </details>
-    </>
+      <Card size="sm" className="mt-4">
+        <CardContent>
+          <details className="group">
+            <summary className="flex cursor-pointer list-none items-center gap-1 rounded-md text-sm font-semibold outline-none focus-visible:ring-3 focus-visible:ring-ring/50 [&::-webkit-details-marker]:hidden">
+              <ChevronRight aria-hidden="true" className="size-4 transition-transform duration-150 group-open:rotate-90" />
+              Notation reference
+            </summary>
+            <dl className="mt-4 grid grid-cols-[auto_1fr] gap-x-4 gap-y-2 text-sm">
+              {NOTATION_REFERENCE.map(([code, desc]) => (
+                <div key={code} className="contents">
+                  <dt className="font-mono text-gold">{code}</dt>
+                  <dd className="text-muted-foreground">{desc}</dd>
+                </div>
+              ))}
+            </dl>
+          </details>
+        </CardContent>
+      </Card>
+    </div>
   );
 }

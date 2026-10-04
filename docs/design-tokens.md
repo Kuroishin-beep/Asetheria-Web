@@ -10,10 +10,17 @@ mapping in `globals.css`. Components never use palette primitives (`ink-*`, `vel
   `--input` border for controls, higher-contrast muted and meta text, a 12px base radius (`--radius: 0.75rem`),
   three elevation levels (`--shadow-1/2/3`), one gold focus ring (`--ring`), shared motion durations
   (150 / 250 / 400 ms) and easing, and Motion presets in `src/lib/motion.ts`.
-- **Spacing scale:** 4, 8, 12, 16, 24, 32, 48, 64 px only (Tailwind steps 1, 2, 3, 4, 6, 8, 12, 16).
+- **Spacing scale:** 4, 8, 12, 16, 24, 32, 48, 64 px only (Tailwind steps 1, 2, 3, 4, 6, 8, 12, 16). The design gate
+  rejects arbitrary spacing values (`p-[13px]`).
+- **Type micro-sizes:** `text-[11px]` (labels, counts), `text-[13px]` (hints, secondary lines) and `text-[15px]`
+  (card titles, property values) sit between Tailwind's `xs`/`sm`/`base` steps and are the only arbitrary type sizes
+  in use. They are typography, not spacing, so they are allowed; the contrast tests cover every colour they use.
+- **Enforcement:** `npm run check:design` runs the static gates (no hardcoded colours, no inline styles, no
+  keyframes, no plain form controls, no emoji icons, no arbitrary spacing); `tests/a11y.spec.ts` runs axe on the key
+  routes in both themes after the entrance animations settle.
 
 ## Measured contrast (WCAG 2.x), regenerated with `npx tsx scripts/check-contrast.ts --markdown`
-Asserted in CI by `tests/design-tokens.spec.ts`. Text pairs need 4.5:1; control borders and focus rings 3:1.
+Asserted in CI by `tests/design-tokens.spec.ts`. Text pairs need 4.5:1; control borders, focus rings and icons 3:1.
 
 | Pair | Role | Min | Light | Dark |
 |---|---|---|---|---|
@@ -23,8 +30,16 @@ Asserted in CI by `tests/design-tokens.spec.ts`. Text pairs need 4.5:1; control 
 | muted-foreground on background | muted text on page | 4.5:1 | 7.00 | 8.16 |
 | muted-foreground on card | muted text on card | 4.5:1 | 7.69 | 7.69 |
 | muted-foreground on muted | muted text on sunken surface | 4.5:1 | 6.35 | 7.36 |
-| faint-foreground on background | meta text on page | 4.5:1 | 5.48 | 5.05 |
-| faint-foreground on card | meta text on card | 4.5:1 | 6.02 | 4.76 |
+| faint-foreground on background | meta text on page | 4.5:1 | 5.48 | 6.00 |
+| faint-foreground on card | meta text on card | 4.5:1 | 6.02 | 5.66 |
+| faint-foreground on muted | meta text on sunken surface | 4.5:1 | 4.97 | 5.41 |
+| faint-foreground on secondary | meta text on a secondary badge | 4.5:1 | 4.79 | 4.97 |
+| faint-foreground on accent | meta text on hover / active rows | 4.5:1 | 4.66 | 4.59 |
+| muted-foreground on accent | muted text on hover / active rows | 4.5:1 | 5.95 | 6.25 |
+| muted-foreground on secondary | muted text on a secondary badge | 4.5:1 | 6.12 | 6.75 |
+| gold on muted | gold icon on a sunken tile | 3:1 | 4.59 | 8.14 |
+| gold on accent | gold icon on hover / active rows | 3:1 | 4.30 | 6.91 |
+| secret on card | secret marker text on card | 4.5:1 | 6.46 | 8.10 |
 | primary-foreground on primary | primary button label | 4.5:1 | 5.60 | 8.65 |
 | primary on background | primary used as text | 4.5:1 | 5.06 | 9.03 |
 | gold on background | gold accent text on page | 4.5:1 | 5.06 | 9.03 |
