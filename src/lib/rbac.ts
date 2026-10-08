@@ -17,6 +17,7 @@ import type { SessionUser } from "@/lib/session";
  *   1. `visibility = 'secret'`        -> always hidden (auth.ts's job, not ours)
  *   2. an entry-level grant exists    -> that row's `granted` wins, full stop
  *   3. else a kind-level grant exists -> that row's `granted` wins
+ *   3½. else an ancestor location has an explicit grant -> the nearest one wins
  *   4. else                           -> hidden (no default access)
  */
 
@@ -48,11 +49,51 @@ export function grantConditionRaw(
         SELECT 1 FROM entry_grants eg2
         WHERE eg2.entry_id = ${idColumn} AND eg2.user_id = ${uid}
       )
-      AND EXISTS (
-        SELECT 1 FROM entry_grants eg3
-        WHERE eg3.kind = ${kindColumn} AND eg3.user_id = ${uid} AND eg3.granted = true
+      AND (
+        EXISTS (
+          SELECT 1 FROM entry_grants eg3
+          WHERE eg3.kind = ${kindColumn} AND eg3.user_id = ${uid} AND eg3.granted = true
+        )
+        OR ${inheritedFromGrantedLocation(uid, idColumn)}
       )
     )
+  )`;
+}
+
+/** How far up the parent chain a grant is inherited: city → cathedral → temple and a little beyond. */
+const MAX_INHERIT_DEPTH = 4;
+
+/**
+ * Step 3½ of the resolution order: a page with no grant row of its own is
+ * visible when an ancestor *location* (its city, or the cathedral above a
+ * temple) was explicitly granted to this player — so granting a city shows
+ * its forum, harbour and temples without granting each one.
+ *
+ * The nearest ancestor with an explicit row decides: a denial on the
+ * cathedral hides its temples even though the city above it is granted.
+ * Secret or archived ancestors pass nothing down. The page's own
+ * `visibility <> 'secret'` check still applies on top (see above).
+ */
+function inheritedFromGrantedLocation(uid: string, idColumn: ReturnType<typeof sql>) {
+  return sql`EXISTS (
+    WITH RECURSIVE ancestors(id, depth) AS (
+      SELECT child.parent_id, 1 FROM entries child
+      WHERE child.id = ${idColumn} AND child.parent_id IS NOT NULL
+      UNION ALL
+      SELECT up.parent_id, a.depth + 1 FROM entries up
+      JOIN ancestors a ON up.id = a.id
+      WHERE up.parent_id IS NOT NULL AND a.depth < ${MAX_INHERIT_DEPTH}
+    ),
+    decided AS (
+      SELECT a.depth, g.granted
+      FROM ancestors a
+      JOIN entries anc ON anc.id = a.id
+      JOIN entry_grants g ON g.entry_id = anc.id AND g.user_id = ${uid}
+      WHERE anc.kind = 'location' AND anc.visibility <> 'secret' AND anc.archived_at IS NULL
+    )
+    SELECT 1 FROM decided
+    WHERE decided.granted = true
+      AND decided.depth = (SELECT min(depth) FROM decided)
   )`;
 }
 
