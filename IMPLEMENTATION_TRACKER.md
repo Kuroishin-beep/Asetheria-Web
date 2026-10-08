@@ -285,3 +285,9 @@ Remaining, owner's side: create the DM account (`npm run user:add` with the prod
 - Evidence: full suite 378 passed (16.2m); `tsc` clean; design gates 12 rules 0 violations; `npm audit --omit=dev` 0 vulnerabilities; `npm run build` OK.
 - `tests/planner.spec.ts` (24): six parallel starts give distinct consecutive session numbers; reveal writes exactly the chosen entry-level grants (DB-asserted); secret entries skipped and reported; "New for you" 404 -> 200 for players; palette "Start a new session"; DM-only routes.
 - Files: `src/lib/planner.ts`, `src/app/api/planner/{session,encounter,reveal}/route.ts`, `src/components/planner-panels.tsx`, `src/app/(app)/planner/page.tsx`, shortcuts/palette/nav/home edits, a11y spec.
+
+## Phase 10 — Character engine, house rules and saved characters (ENH-09a) — DONE (local DB; prod waits for `npm run db:characters` on Neon)
+- Evidence: `tests/character-engine.spec.ts` + `tests/characters-api.spec.ts` 53 passed; `tsc` clean; design gates 0 violations. Full-suite regression run is deferred to the end of Phase 11 (nothing outside new files and the `characters` schema entry changed).
+- Engine (`src/lib/character/*`): one constants module for the house rules; pure `validateAndDerive` used by wizard and server (server recomputes, never trusts a client sheet).
+- API `/api/characters[/id]`: player owns own (others' ids 404), DM reads all (`?scope=all`) and writes none, 20 per player (409), 64 KB cap (413), strict zod, soft delete.
+- SQL `scripts/sql/characters.sql` (idempotent) + rollback; `npm run db:characters[:rollback]`.

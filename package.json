@@ -26,6 +26,8 @@
     "db:maps": "tsx scripts/apply-sql.ts scripts/sql/maps.sql",
     "db:maps:rollback": "tsx scripts/apply-sql.ts scripts/sql/maps-rollback.sql",
     "maps:seed": "tsx scripts/seed-maps.ts",
+    "db:characters": "tsx scripts/apply-sql.ts scripts/sql/characters.sql",
+    "db:characters:rollback": "tsx scripts/apply-sql.ts scripts/sql/characters-rollback.sql",
     "codex:archive-batch": "tsx scripts/archive-batch.ts",
     "check:contrast": "tsx scripts/check-contrast.ts",
     "migrate:fauna-tables": "tsx scripts/migrate-fauna-and-tables.ts",

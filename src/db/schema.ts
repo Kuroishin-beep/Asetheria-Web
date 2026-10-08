@@ -396,6 +396,31 @@ export const mapPins = pgTable(
   ],
 );
 
+/**
+ * A player's saved character. `input` is what they chose (dice included);
+ * `sheet` is what the server computed from it with the house rules.
+ */
+export const characters = pgTable(
+  "characters",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    userId: uuid("user_id")
+      .notNull()
+      .references(() => users.id, { onDelete: "cascade" }),
+    name: text("name").notNull(),
+    input: jsonb("input").notNull(),
+    sheet: jsonb("sheet").notNull(),
+    schemaVersion: integer("schema_version").notNull().default(1),
+    archivedAt: timestamp("archived_at", { withTimezone: true }),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [
+    index("characters_user_idx").on(t.userId, t.archivedAt),
+    check("characters_name_length", sql`char_length(${t.name}) BETWEEN 1 AND 80`),
+  ],
+);
+
 // ---------------------------------------------------------------------------
 // Inferred types
 // ---------------------------------------------------------------------------
@@ -408,6 +433,7 @@ export type Revision = typeof revisions.$inferSelect;
 export type RollTable = typeof rollTables.$inferSelect;
 export type MapRow = typeof maps.$inferSelect;
 export type MapPinRow = typeof mapPins.$inferSelect;
+export type CharacterRow = typeof characters.$inferSelect;
 export type EntryGrant = typeof entryGrants.$inferSelect;
 export type EntryKind = (typeof entryKind.enumValues)[number];
 export type Visibility = (typeof visibility.enumValues)[number];
