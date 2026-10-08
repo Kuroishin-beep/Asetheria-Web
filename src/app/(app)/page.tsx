@@ -20,6 +20,7 @@ import {
   listLoreWithContent,
 } from "@/lib/entries";
 import { SECTIONS, STANDING_EMPIRE_SLUGS } from "@/lib/kinds";
+import { getWhatsNew } from "@/lib/planner";
 import { iconForSection } from "@/lib/section-icons";
 import type { SessionUser } from "@/lib/session";
 
@@ -123,7 +124,7 @@ export default async function DashboardPage() {
 }
 
 async function Dashboard({ user }: { user: SessionUser }) {
-  const [counts, tierCounts, recent, tags, empires, lore, capitals, majorCities, towns] =
+  const [counts, tierCounts, recent, tags, empires, lore, capitals, majorCities, towns, whatsNew] =
     await Promise.all([
       countByKind(user),
       countLocationsByTier(user),
@@ -134,6 +135,8 @@ async function Dashboard({ user }: { user: SessionUser }) {
       listLocationsByTier(user, "capital"),
       listLocationsByTier(user, "city"),
       listLocationsByTier(user, "town"),
+      // Pages the DM has just opened up to this player (nothing for the DM).
+      getWhatsNew(user, 8),
     ]);
 
   const total = Object.values(counts).reduce((a, b) => a + (b ?? 0), 0);
@@ -151,6 +154,19 @@ async function Dashboard({ user }: { user: SessionUser }) {
             : `${total} entries the party has uncovered.`
         }
       />
+
+      {whatsNew.length > 0 && (
+        <section aria-labelledby="whatsnew-heading" className="mb-10" data-testid="whats-new">
+          <h2 id="whatsnew-heading" className="mb-3 text-xs font-semibold uppercase tracking-[0.07em] text-muted-foreground">
+            New for you
+          </h2>
+          <CardGrid>
+            {whatsNew.map((e) => (
+              <EntryCard key={e.id} slug={e.slug} name={e.name} kind={e.kind} summary={e.summary} />
+            ))}
+          </CardGrid>
+        </section>
+      )}
 
       {/* ---- The story so far ---- */}
       <Prologue />

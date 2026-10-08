@@ -94,7 +94,7 @@ export function KeyboardShortcuts({ isDM }: { isDM: boolean }) {
   const page = PAGE_KEYS.filter((k) => isDM || !k.dmOnly);
   const rows = [
     ...page.map((k) => ({ keys: k.keys, label: k.label })),
-    ...nav.map((a) => ({ keys: a.keys, label: a.label })),
+    ...nav.filter((a) => a.keys.length > 0).map((a) => ({ keys: a.keys, label: a.label })),
   ];
 
   return (

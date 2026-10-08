@@ -19,6 +19,7 @@ const ROUTES: { name: string; path: string; auth: "dm" | "player" | null }[] = [
   { name: "search results", path: "/search?q=bacchus", auth: "dm" },
   { name: "graph", path: "/graph", auth: "dm" },
   { name: "map", path: "/map/wip-map", auth: "dm" },
+  { name: "planner", path: "/planner", auth: "dm" },
   { name: "graph (filtered, grouped)", path: "/graph?kind=location&cluster=parent", auth: "dm" },
   { name: "map (player)", path: "/map/wip-map", auth: "player" },
   { name: "dice", path: "/tools/dice", auth: "dm" },

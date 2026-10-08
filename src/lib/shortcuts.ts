@@ -13,6 +13,8 @@ export type AppAction = {
   dmOnly?: boolean;
   /** Extra words the palette matches on. */
   keywords?: string;
+  /** A command the palette runs itself (it does something rather than going to a page). */
+  command?: "start-session";
 };
 
 export const NAV_ACTIONS: AppAction[] = [
@@ -25,6 +27,8 @@ export const NAV_ACTIONS: AppAction[] = [
   { id: "dice", label: "Open the dice roller", keys: ["g", "r"], href: "/tools/dice", keywords: "roll d20" },
   { id: "tables", label: "Open roll tables", keys: ["g", "t"], href: "/codex/tables", keywords: "random" },
   { id: "new", label: "Create a new entry", keys: ["c"], href: "/codex/new", dmOnly: true, keywords: "add write" },
+  { id: "planner", label: "Open the planner", keys: ["g", "l"], href: "/planner", dmOnly: true, keywords: "session encounter reveal prep" },
+  { id: "start-session", label: "Start a new session", keys: [], command: "start-session", dmOnly: true, keywords: "session prep game night begin" },
   { id: "archive", label: "Open the archive", keys: ["g", "a"], href: "/archive", dmOnly: true, keywords: "deleted restore" },
   { id: "admin", label: "Open admin & backups", keys: ["g", "x"], href: "/admin", dmOnly: true, keywords: "import export" },
   { id: "rbac", label: "Manage players & access", keys: ["g", "p"], href: "/admin/rbac", dmOnly: true, keywords: "permissions grants" },

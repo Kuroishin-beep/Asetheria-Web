@@ -14,6 +14,7 @@ import {
   Leaf,
   type LucideIcon,
   MapPin,
+  NotebookPen,
   Mountain,
   Network,
   PawPrint,
@@ -88,4 +89,5 @@ export const KEEPER_ICONS = {
   archive: Archive,
   backup: DatabaseBackup,
   access: ShieldCheck,
+  planner: NotebookPen,
 } as const;

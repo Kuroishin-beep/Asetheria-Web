@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState, type KeyboardEvent } from "react";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 import { CornerDownLeft, CornerDownRight, Search } from "lucide-react";
 import type { EntryKind } from "@/db/schema";
 import { Button } from "@/components/ui/button";
@@ -146,7 +147,17 @@ export function CommandPalette({ isDM = false, userId }: { isDM?: boolean; userI
     (row: Row) => {
       setOpen(false);
       if (row.type === "entry") router.push(`/codex/entry/${row.hit.slug}`);
-      else if (row.action.href) router.push(row.action.href);
+      else if (row.action.command === "start-session") {
+        // Creates the next numbered session and opens it.
+        fetch("/api/planner/session", { method: "POST" })
+          .then(async (res) => {
+            const data = await res.json().catch(() => ({}));
+            if (!res.ok || !data.slug) throw new Error(data.error ?? "failed");
+            toast.success(`Started session ${data.number}`);
+            router.push(`/codex/entry/${data.slug}`);
+          })
+          .catch(() => toast.error("Could not start a session. Try again."));
+      } else if (row.action.href) router.push(row.action.href);
     },
     [router],
   );
@@ -224,7 +235,7 @@ export function CommandPalette({ isDM = false, userId }: { isDM?: boolean; userI
               const Icon = row.type === "entry" ? (KIND_ICONS[row.hit.kind as EntryKind] ?? Search) : CornerDownRight;
               const title = row.type === "entry" ? row.hit.name : row.action.label;
               const subtitle = row.type === "entry" ? row.hit.summary : null;
-              const tag = row.type === "entry" ? row.hit.kind : row.action.keys.join(" then ");
+              const tag = row.type === "entry" ? row.hit.kind : row.action.keys.length ? row.action.keys.join(" then ") : "command";
               return (
                 <Button
                   key={key}

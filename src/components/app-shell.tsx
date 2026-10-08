@@ -49,6 +49,7 @@ const TOOL_LINKS: { href: string; label: string; Icon: NavIcon }[] = [
 
 const KEEPER_LINKS: { href: string; label: string; Icon: NavIcon }[] = [
   { href: "/archive", label: "Archive", Icon: KEEPER_ICONS.archive },
+  { href: "/planner", label: "Planner", Icon: KEEPER_ICONS.planner },
   { href: "/admin", label: "Backup & Import", Icon: KEEPER_ICONS.backup },
   { href: "/admin/rbac", label: "Players & Access", Icon: KEEPER_ICONS.access },
 ];
