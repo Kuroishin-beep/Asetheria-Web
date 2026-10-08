@@ -144,7 +144,10 @@ test.describe("graph", () => {
     const node = page.locator('g[role="button"]').first();
     await node.focus();
     await expect(node).toBeFocused();
-    await expect(node.locator("text")).toBeVisible();
+    // Focusing a node shows its name. The label is drawn in the hover layer above the graph (kept apart from the
+    // nodes so moving the pointer does not repaint thousands of them), so it is found there, and must be that node's.
+    const name = ((await node.getAttribute("aria-label")) ?? "").replace(/^[^:]+:\s*/, "");
+    await expect(page.getByTestId("graph-hover").locator("text")).toHaveText(name);
     expect(problems.filter((p) => /hydrat|did not match|didn't match/i.test(p))).toEqual([]);
     expect(problems).toEqual([]);
   });

@@ -1,12 +1,31 @@
 import type { EntryKind } from "@/db/schema";
 
-export type GraphNode = { id: string; slug: string; name: string; kind: EntryKind };
+export type GraphNode = {
+  id: string;
+  slug: string;
+  name: string;
+  kind: EntryKind;
+  tags: string[];
+  region: string;
+  parentId: string | null;
+};
 export type GraphEdge = { source: string; target: string; relation: string };
 export type GraphPoint = { x: number; y: number };
 
 type Node = GraphNode;
 type Edge = GraphEdge;
 type Point = GraphPoint & { vx: number; vy: number };
+
+/** The pseudo-relation of a child-to-parent edge added for clustering; never a stored link. */
+export const PARENT_RELATION = "parent";
+/** Beyond this distance (px) repulsion between two nodes is ignored; at 2200/d^2 it is small (under 0.5 px of push per step). */
+const REPULSION_RADIUS = 70;
+/** Multiplier that makes a (column, row) grid cell a single numeric key. */
+const GRID_STRIDE = 4096;
+
+/** Children gather on a ring around their parent; this is the room each one is given along it. */
+const ORBIT_SPACING = 26;
+const ORBIT_MIN_RADIUS = 18;
 
 export const GRAPH_WIDTH = 900;
 export const GRAPH_HEIGHT = 640;
@@ -78,6 +97,8 @@ function computeLayout(nodes: Node[], edges: Edge[]): Map<string, Point> {
   });
 
   const iterations = connectedNodes.length > 400 ? 40 : 90;
+  const pointIndex = new Map<Point, number>();
+  connectedNodes.forEach((node, i) => pointIndex.set(pos.get(node.id)!, i));
   const repulsion = 2200;
   const springLength = 90;
   const springStrength = 0.02;
@@ -86,24 +107,43 @@ function computeLayout(nodes: Node[], edges: Edge[]): Map<string, Point> {
   const bound = ringRadius - 30;
 
   for (let iter = 0; iter < iterations; iter++) {
-    // Repulsion between every connected-node pair — the O(n^2) term, capped
-    // by `iterations` scaling down as the node count grows. Isolated nodes
-    // are fixed and excluded from this entirely.
-    for (let i = 0; i < connectedNodes.length; i++) {
-      const a = pos.get(connectedNodes[i].id)!;
-      for (let j = i + 1; j < connectedNodes.length; j++) {
-        const b = pos.get(connectedNodes[j].id)!;
-        let dx = a.x - b.x;
-        let dy = a.y - b.y;
-        let distSq = dx * dx + dy * dy || 0.01;
-        const force = repulsion / distSq;
-        const dist = Math.sqrt(distSq);
-        dx = (dx / dist) * force;
-        dy = (dy / dist) * force;
-        a.vx += dx;
-        a.vy += dy;
-        b.vx -= dx;
-        b.vy -= dy;
+    // Repulsion between nearby connected nodes. The force falls off as 1/d^2, so beyond REPULSION_RADIUS
+    // it is negligible; bucketing nodes into a grid of that cell size means each node only meets the
+    // handful in the 3x3 cells around it, which makes this step roughly linear in the node count instead
+    // of quadratic. Pairs are visited in a fixed order, so the result is deterministic.
+    // Isolated nodes are fixed and excluded from this entirely.
+    const grid = new Map<number, Point[]>();
+    const cellOf = (p: Point) => Math.floor(p.x / REPULSION_RADIUS) * GRID_STRIDE + Math.floor(p.y / REPULSION_RADIUS);
+    const points = connectedNodes.map((n) => pos.get(n.id)!);
+    for (const p of points) {
+      const key = cellOf(p);
+      (grid.get(key) ?? grid.set(key, []).get(key)!).push(p);
+    }
+    for (let i = 0; i < points.length; i++) {
+      const a = points[i];
+      const cx = Math.floor(a.x / REPULSION_RADIUS);
+      const cy = Math.floor(a.y / REPULSION_RADIUS);
+      for (let gx = cx - 1; gx <= cx + 1; gx++) {
+        for (let gy = cy - 1; gy <= cy + 1; gy++) {
+          const cell = grid.get(gx * GRID_STRIDE + gy);
+          if (!cell) continue;
+          for (const b of cell) {
+            // Each pair once: only the one whose index is lower does the work.
+            if (b === a || pointIndex.get(b)! < i) continue;
+            let dx = a.x - b.x;
+            let dy = a.y - b.y;
+            const distSq = dx * dx + dy * dy || 0.01;
+            if (distSq > REPULSION_RADIUS * REPULSION_RADIUS) continue;
+            const force = repulsion / distSq;
+            const dist = Math.sqrt(distSq);
+            dx = (dx / dist) * force;
+            dy = (dy / dist) * force;
+            a.vx += dx;
+            a.vy += dy;
+            b.vx -= dx;
+            b.vy -= dy;
+          }
+        }
       }
     }
 
@@ -145,6 +185,12 @@ function computeLayout(nodes: Node[], edges: Edge[]): Map<string, Point> {
     }
   }
 
+  // Clustering: when parent edges are present, each parent's children move onto a ring around it.
+  // Done after the forces settle (springs alone cannot beat the repulsion between hundreds of nodes), and
+  // parents first, so a grandchild orbits a child that is already in place. Deterministic: children are
+  // ordered by id, so the server and any rerun draw the same picture.
+  placeChildrenAroundParents(pos, edges);
+
   // Two nodes with near-identical neighbor sets (e.g. sibling cities in the
   // same empire) can converge to almost the same point — repulsion between
   // just that pair is too weak, at typical simulation distances, to be the
@@ -183,4 +229,37 @@ function computeLayout(nodes: Node[], edges: Edge[]): Map<string, Point> {
     p.y = Math.round(p.y * 10) / 10;
   }
   return pos;
+}
+
+
+function placeChildrenAroundParents(pos: Map<string, Point>, edges: Edge[]) {
+  const children = new Map<string, string[]>();
+  const hasParent = new Set<string>();
+  for (const e of edges) {
+    if (e.relation !== PARENT_RELATION) continue;
+    if (!pos.has(e.source) || !pos.has(e.target)) continue;
+    (children.get(e.source) ?? children.set(e.source, []).get(e.source)!).push(e.target);
+    hasParent.add(e.target);
+  }
+  if (children.size === 0) return;
+
+  // Breadth-first from the pages that are not anyone's child, so every parent is placed before its children.
+  const queue = [...children.keys()].filter((id) => !hasParent.has(id)).sort();
+  const seen = new Set(queue);
+  for (let head = 0; head < queue.length; head++) {
+    const parentId = queue[head];
+    const parent = pos.get(parentId)!;
+    const kids = [...(children.get(parentId) ?? [])].sort();
+    const radius = Math.max(ORBIT_MIN_RADIUS, (kids.length * ORBIT_SPACING) / (2 * Math.PI));
+    kids.forEach((kidId, i) => {
+      const angle = (i / kids.length) * Math.PI * 2;
+      const kid = pos.get(kidId)!;
+      kid.x = Math.min(WIDTH - 8, Math.max(8, parent.x + Math.cos(angle) * radius));
+      kid.y = Math.min(HEIGHT - 8, Math.max(8, parent.y + Math.sin(angle) * radius));
+      if (children.has(kidId) && !seen.has(kidId)) {
+        seen.add(kidId);
+        queue.push(kidId);
+      }
+    });
+  }
 }

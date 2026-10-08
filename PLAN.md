@@ -1,6 +1,6 @@
 # PLAN.md (v2): Natural-World Codex, shadcn/Motion Migration, vvd-style World Features
 
-Status: **DRAFT v2. Decisions folded in. No code written. Awaiting approval.**
+Status: **v2.1. Approved and in implementation. v2.1 adds the landing page and character creator (Q14, Phases 9 to 11).**
 Repo root: `E:\Github\Asetheria\Asetheria-Web` (git root). Branch audited: `hardening-and-content` @ `911f882` (unpushed).
 Previous plans: `docs/PLAN-archive-rbac-2026-09.md` (RBAC/RAG, executed).
 
@@ -21,6 +21,7 @@ Previous plans: `docs/PLAN-archive-rbac-2026-09.md` (RBAC/RAG, executed).
 | Q10 vvd boundary | "Yes" | **Closed.** Real-time collaboration and custom domains are excluded. |
 | Q11 table format | "Do what you recommend" | **Closed.** Markdown table in `body` + `fields.dice`. |
 | Q12 map | "Do what you recommend" | **Closed.** `WIP Map.png` is the first map; normalised pin coordinates allow replacement. |
+| Q14 landing page + character creator (2026-10-09) | Pasted request plus the Asetheria house rules | **Added to the plan as ENH-08 / ENH-09, Phases 9 to 11**, built after Phase 8d. Seven working assumptions are listed at the end of the "Added scope" section and can be corrected at any time. |
 | Q13 visual | "keep the dark and light tone but give it a visual refresh" | **Closed. Overrides the plan's "no re-brand" default.** Keep the dark and light *tonal identity* (obsidian/ash dark, warm light) but refresh typography, spacing, surfaces, elevation, motion and component polish. Phase 2a's "pixel-tolerance diff" criterion is replaced by the refresh criteria in Phase 2a. |
 
 *Interpretation note: you answered five questions (Q5, Q10, Q11, Q12, Q13) with three lines. I mapped "Do what you recommend" to Q5/Q11/Q12 (the ones that carried a recommendation), "Yes" to Q10, and the refresh line to Q13.*
@@ -38,6 +39,7 @@ Previous plans: `docs/PLAN-archive-rbac-2026-09.md` (RBAC/RAG, executed).
 | Populate entries: tables for everything | ENH-04, Phase 6 (+ data table view, Phase 7) |
 | List enhancements: player side and DM side | §5 (now partly committed: Phase 8) |
 | What can be improved / enhanced / added in future | §5 |
+| Landing page with motion scenes; character creator following the 5e sheet, from the Asetheria homebrew rules, with Wikidot links and a player tab (2026-10-09) | ENH-08 and ENH-09, Phases 9, 10 and 11 |
 | Polished site, inspired by vvdworldbuilding | Phase 2 (design system) + Phase 8 (map pins, graph, cards, planner) |
 
 ---
@@ -216,6 +218,95 @@ Previous plans: `docs/PLAN-archive-rbac-2026-09.md` (RBAC/RAG, executed).
 - "Start session" command creates a session entry with date and number; prep checklist; encounter builder that pulls Bestiary and `table` entries; "reveal after session" bulk grant of chosen entries to chosen players.
 - Acceptance: 1. the command creates the entry and navigates to it; 2. rolling the builder yields only creatures the DM can read; 3. bulk reveal creates grants for exactly the selected player/entry pairs and nothing else (DB assertion); 4. a player sees revealed entries immediately and the "what's new" list includes them.
 
+### Added scope, request of 2026-10-09 (Q14): landing page + character creator
+
+Your words, kept as the contract: *a character-creation feature, on the landing page before anyone logs in as DM or player; fields and inputs taken from the Asetheria Homebrew compendium; systematic and easy; hyperlinks to the site explaining parts of it, connected to Wikidot; detailed but simple, following the D&D 5e character sheet; it asks the player questions; connected to the player login with a tab to click; and a landing page for Asetheria before the login and character creation, with motion graphics on the theme of Asetheria, D&D and fantasy, with scenes in the spirit of LOTR, The Hobbit, Percy Jackson and more fantastical types.*
+
+#### ENH-08: Public landing page with motion scenes
+
+- **Today:** a signed-out visitor is redirected by `src/proxy.ts` to `/welcome`, a "door" page (party password for players, DM login). Signed-in users are bounced off it.
+- **Change:** `/welcome` becomes the landing page; the existing door (same component, same labels and roles, so the auth tests keep passing unmodified) is its last section. Two calls to action: **Enter the codex** (scrolls to / opens the door) and **Forge a hero** (links to `/create-character`, public).
+- **Scenes (original artwork only, drawn as inline SVG and animated with Motion; no video, no photographs):**
+  1. *The road at dawn*: layered misty peaks in parallax, drifting mist, a lone winding road, birds.
+  2. *The round-door hillside*: a green hill home with warm windows, chimney smoke, fireflies (the cosy-adventure mood).
+  3. *The sea-gate*: a harbour of white columns and a lighthouse, rolling waves, a constellation (the mythic Greek mood).
+  4. *The three empires*: banners of Imperium Invicta, Hellenoria and Acheaoria, each with a one-line hook taken from the codex's own text.
+  5. *The map unrolls*: the continent map reveals with a dotted route; then the call to adventure.
+  Motion: scroll-linked reveals and parallax, pointer parallax on desktop, floating particles. All motion is transform and opacity only.
+- **Not borrowed:** no names, logos, characters, quotations or artwork from The Lord of the Rings, The Hobbit, Percy Jackson or any other work. The brief asks for the *mood*; the art and copy are original (risk R19).
+- **Rules from `CLAUDE.md` that apply:** design tokens only (SVG fills use token classes, no hex), Motion not `@keyframes`, no inline style objects, semantic HTML, WCAG 2.2 AA, `prefers-reduced-motion` respected.
+
+**Acceptance (Phase 9)**
+1. A signed-out visitor to `/` or `/welcome` sees the landing page: one `h1`, at least five scenes, and both calls to action. A signed-in user is still redirected away (existing behaviour).
+2. "Forge a hero" opens `/create-character` without signing in (HTTP 200, no redirect).
+3. "Enter the codex" reaches the existing door; **every existing auth spec passes unmodified**.
+4. With `prefers-reduced-motion: reduce`: no scene animation runs (asserted through the Web Animations API and Motion state), no parallax, and all text and calls to action are still present.
+5. axe finds no serious or critical violation in both themes; 375, 768 and 1280 px have no horizontal scroll; keyboard-only can reach both calls to action; all decorative art is `aria-hidden`.
+6. Performance budget, measured and recorded: added JavaScript at most 60 KB gzipped beyond what the app already ships, total inline art at most 150 KB, cumulative layout shift under 0.05, and 90% of frames within 33 ms while scrolling under a 4x CPU throttle. Animations pause when off-screen.
+7. Licence guard: a test fails the build if the page text, alt text or asset names contain a protected title or character name from a denylist (for example Tolkien, Hobbit, Middle-earth, Percy Jackson, Olympus camp names), and `docs/content-licences.md` gets a "landing page art: original" row.
+8. Public means public: the page makes no database read and ships no codex entry text beyond constants written for it (risk R20; asserted by reading the HTML).
+
+#### ENH-09: Character creator (D&D 5e sheet, Asetheria house rules)
+
+**The rules, from the Asetheria Homebrew compendium** (your paste, with the duplicated sections merged). They live in one constants module (`src/lib/character/house-rules.ts`) so the engine, the UI text and the tests share a single source:
+
+| Topic | Rule as given |
+|---|---|
+| Ability scores, three methods | **Point buy**: budget is 27 + 2 + 1d4 points; before bonuses each score is at most 15 and at least 6. **Roll**: 4d6, drop the lowest, six times, once per stat; the six must total at least 72; below 72 you reroll all six; at 72 or more you either keep them or reroll once more and **must keep the new rolls** even if they are lower. **Standard array**: one of 15/14/13/12/10/8, 16/13/13/12/10/7, 17/13/12/11/10/7. |
+| Hit points | When rolling, maximise hit dice for levels 1 to 3, then roll normally. At each level you roll, a 1 may be rerolled once and the new roll must be used. |
+| Citizenship | Pick Imperium Invicta, Hellenoria or Acheaoria, or none; each carries benefits and weaknesses. |
+| Worship | Follow one of the gods or stay unaffiliated; the tie is personal, no binding obligations. |
+| Combat house rules (shown for reference on the sheet) | Flanking gives advantage on melee attacks; a critical hit maxes one set of damage dice then rolls normally; a natural 20 on a half-damage saving throw takes no damage; death saves are whispered to the DM and the player keeps character-welfare talk minimal; party members may swap initiative places once each, before combat, with nobody between them. |
+
+**The wizard** asks one question group at a time, with a progress bar and a Back button, in this order, and saves a draft after every answer:
+1. Who is this? (character name, player name, one-line concept)
+2. Heritage (SRD races, or "other" in your own words)
+3. Class and starting level (SRD classes; level 1 to 20)
+4. Background (names with a free feature box; the SRD only ships one background)
+5. Ability scores: choose **Point buy / Roll / Standard array**, then the method's own screen enforces the house rules (live budget, 6 to 15 limits, the 72 total, the single optional reroll, each array value used once); racial bonuses apply afterwards
+6. Skills and proficiencies (the class's number of choices, validated)
+7. Hit points (the house rules above: an automatic roller that applies "max for levels 1 to 3" and the reroll-a-1 rule, or manual entry)
+8. Equipment and starting gold (simple list)
+9. Citizenship (the three empires or none, with each one's benefits and weaknesses)
+10. Worship (a god or unaffiliated)
+11. Personality (traits, ideals, bonds, flaws, appearance, backstory)
+12. Review: a full 5e-style character sheet (name block; six abilities with modifiers; proficiency bonus; saving throws; eighteen skills; passive Perception; AC, initiative, speed; hit points and hit dice; attacks; features; spellcasting block for casters with ability, save DC, attack bonus and slots; equipment; personality; proficiencies; the house-rules card). Actions: print or save as PDF (print stylesheet), download as JSON, and for signed-in players save to their account.
+
+**Links to explain things (Wikidot):** every step has "Learn more" links that open `dnd5e.wikidot.com` in a new tab (`rel="noopener noreferrer"`). These are **links only**; nothing is copied or scraped from Wikidot (decision Q1 stands). Where the codex has its own page (the three empires, deities) the link goes to the codex page instead. The URLs live in one table (`src/lib/character/links.ts`); a test asserts each is `https`, the host is exactly `dnd5e.wikidot.com`, and the path matches an allowlist.
+
+**Where the options come from:** SRD 5.1 (CC BY 4.0, already attributed in the app) for races, classes, skills and tables; names of non-SRD backgrounds are listed as plain names with a Wikidot link and no description text.
+
+**Public versus member (important design decision, risk R20):** the public route cannot read the codex. Its citizenship list is three constants; "worship" is free text plus a short curated list of names I will ask you to supply. Signed-in players get the same wizard inside the app, where citizenship and worship are dropdowns built from the entries *that player may read* (the normal access rules), plus free text.
+
+**Saved characters.** Anonymous visitors: the draft lives in the browser (localStorage), and they can print or download. Signed-in players: a new table `characters` (id, user id with cascade delete, name, `data` jsonb with a `schemaVersion`, timestamps, soft delete). Server-side the character is **re-validated and its derived numbers recomputed**: an illegal point-buy spend, a reused array value, a roll set under 72 that was not rerolled, or an impossible score is rejected, and the dice rolls are stored with the sheet so the DM can see how it was made. A player sees only their own characters; the DM sees all (read-only). Limits: 20 characters per player, 64 KB per character.
+
+**Tab:** the sidebar gains **Characters** (players: "My characters" and "New character"; DM: a read-only list of everyone's). Same wizard component, `mode: "public" | "member"`.
+
+**Acceptance (Phase 10: engine, rules, storage)**
+1. Pure unit tests (run in the Playwright runner like the existing `dice` and `roll-table` tests) cover: ability modifier for scores 1 to 30; proficiency bonus for levels 1 to 20; point-buy budget (27 + 2 + d4 gives 30 to 33) with the 6 and 15 boundaries and every illegal spend rejected; rolling (4d6 drop lowest over 5,000 trials stays in 3 to 18 with the right mean; total of 72 accepted, 71 forces a reroll; after the one optional reroll the new rolls are binding even below 72); each standard array is accepted once per value and rejects reuse; hit points (levels 1 to 3 are maximum, a rolled 1 at level 4 or higher is rerolled once and the second result stands even if 1); spell-slot tables; AC, initiative, saves, skills and passive Perception on fixed fixtures.
+2. The `characters` migration is idempotent and has a rollback script that drops only that table (verified inside a rolled-back transaction, like the map tables).
+3. API: players create, read, update and delete only their own (403 on someone else's, 401 signed out); the DM can read all and write none; a tampered payload (illegal stats, wrong derived numbers, oversized, wrong schema version, unknown fields) is rejected with 400 and nothing is stored; the stored derived numbers always equal the server's recomputation.
+4. Concurrency and limits: the 21st character is refused; two saves of the same character resolve to the latest, never a mix.
+
+**Acceptance (Phase 11: wizard, sheet, tab)**
+1. The public wizard runs end to end without signing in, for each of the three ability methods, and produces a sheet whose numbers match the engine; invalid input at every step shows a friendly message and blocks Next.
+2. Back and refresh lose nothing (draft restored); clearing storage starts clean; corrupt stored data is ignored, not crashing.
+3. Every step has at least one working "Learn more" link, all pointing at `dnd5e.wikidot.com` (or a codex page), opening in a new tab with `noopener noreferrer`.
+4. Signed-in players see the Characters tab, the dropdowns contain only entries they may read (a secret deity is not in the list or the HTML), and Save stores a character they can reopen and edit; the DM sees it in the DM list; another player cannot open it.
+5. The public route's HTML and network traffic contain no codex entry data (risk R20).
+6. Print stylesheet produces a clean one-page sheet; JSON download re-imports.
+7. axe clean in both themes at 375, 768 and 1280 px; fully keyboard operable; reduced motion respected.
+
+#### New phases (after Phase 8d; Phase 0 then also rolls out `characters.sql`)
+
+| Phase | Slice | Depends on |
+|---|---|---|
+| **9** | Landing page and motion scenes (ENH-08) | Phase 2 |
+| **10** | Character engine, house rules, `characters` table and API (ENH-09 part 1) | Phase 9 not required; needs 8d done |
+| **11** | Character wizard, 5e sheet, Wikidot links, public route, Characters tab (ENH-09 part 2) | Phases 9 and 10 |
+
+**Assumptions I am proceeding on unless you correct them (Q14).** (a) The citizenship "benefits and weaknesses" table did not come through in the paste ("Untitled"); until you supply it I show each empire's own codex description and a clearly marked "benefits and weaknesses: to be supplied by the DM" slot that reads from a field on the empire entry, so it fills in the moment you add the text. (b) The "Stat Calculator" link was not included; I build the calculator in the app and add your external link if you send it. (c) Point-buy costs: the standard 5e table for 8 to 15 (0, 1, 2, 3, 4, 5, 7, 9) with 7 refunding 1 and 6 refunding 2; the extra 1d4 is rolled once when the character is started, stored with the draft, and not rerolled on refresh. (d) Class features appear as names with Wikidot links, not copied text. (e) Starting level 1 to 20; per-level hit points follow the house rule. (f) The DM can read every saved character. (g) "Connected to Wikidot" means outbound links only.
+
 ---
 
 ## 4. Risk Register
@@ -240,6 +331,12 @@ Previous plans: `docs/PLAN-archive-rbac-2026-09.md` (RBAC/RAG, executed).
 | R16 | Tests tied to entry names/counts | CI red | Update in same phase; look up by name, not count |
 | R17 | Map image is `WIP Map.png` (labelled work-in-progress, 2250x1200 raster) | Pins misplaced if the map changes | Normalised coords + per-map version; Q12 |
 | R18 | Scope growth from "ALL" (4 vvd features) | Schedule | Each 8x slice approved/shipped separately; planner last |
+| R19 | Landing art or copy borrows from The Lord of the Rings, The Hobbit, Percy Jackson or other works | Legal (trademark, copyright) | Original SVG art and copy only; mood not content; denylist test on text, alt text and asset names; ledger row |
+| R20 | **The public (pre-login) creator leaks private codex data** (secret deities, entry text) | DM secrets exposed to anyone with the URL | Public routes read nothing from the database: options are constants; members get access-scoped dropdowns; test reads the public HTML and network traffic |
+| R21 | Character data tampered with or illegal stats saved (point buy over budget, reused array value, rolls under 72 kept) | Unfair characters, trust | Server re-validates and recomputes everything; rolls stored with the sheet; rejection tests for each rule |
+| R22 | Landing animation hurts performance or accessibility (motion sickness, low-end devices) | Perf and a11y | Transform/opacity only; off-screen pause; reduced-motion static mode; budgets measured under 4x throttle |
+| R23 | Wikidot links rot or the host changes | Dead help links | Single link table, host and path allowlist test, optional link-check script; links only, nothing copied |
+| R24 | The pasted house rules are ambiguous (6 and 7 in point buy, reroll-a-1 wording, "reroll once more" at 72+) | Wrong rules encoded | Encoded literally from one constants module, assumptions (a) to (g) listed, exact fixture tests; DM can correct the constants in one place |
 
 ---
 
@@ -251,6 +348,9 @@ Previous plans: `docs/PLAN-archive-rbac-2026-09.md` (RBAC/RAG, executed).
 - Block-based editor rewrite.
 - Rewriting the 482 seed entries.
 - Dropping `roll_tables` (a later release, after a stable period).
+- Copying or scraping any text from Wikidot or the player's handbook (the creator links out only).
+- A full spell, feature or equipment database inside the creator (names and links, not text).
+- Leveling-up flows, multiclassing and a battle map for characters (the creator makes the sheet at creation).
 
 **Adjacent problems found, flagged for decision (not expanded):**
 1. Thessalonika/Aepistra tags contradict their write-ups.

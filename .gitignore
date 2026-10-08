@@ -25,3 +25,9 @@ backups/
 /playwright-report/
 /tests/.auth/
 /.playwright-mcp/
+
+# Production database credentials (Phase 0): never committed, never read by tests
+.env.neon
+
+# Database backups taken before production changes (contain user data and password hashes)
+backups/

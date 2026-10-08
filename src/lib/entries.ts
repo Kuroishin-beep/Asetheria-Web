@@ -617,7 +617,17 @@ export async function getRecentlyUpdated(user: SessionUser, limit = 8) {
     .limit(limit);
 }
 
-export type GraphNode = { id: string; slug: string; name: string; kind: EntryKind };
+export type GraphNode = {
+  id: string;
+  slug: string;
+  name: string;
+  kind: EntryKind;
+  tags: string[];
+  /** The place a page belongs to (its `region` property), or "" when it has none. */
+  region: string;
+  /** The parent page, only when this viewer may see it too; otherwise null. */
+  parentId: string | null;
+};
 export type GraphEdge = { source: string; target: string; relation: string };
 
 /**
@@ -631,13 +641,23 @@ export async function getGraphData(
   user: SessionUser,
 ): Promise<{ nodes: GraphNode[]; edges: GraphEdge[] }> {
   const conditions = [liveOnly(), readable(user)].filter(Boolean);
-  const nodes = await db
-    .select({ id: entries.id, slug: entries.slug, name: entries.name, kind: entries.kind })
+  const rows = await db
+    .select({
+      id: entries.id,
+      slug: entries.slug,
+      name: entries.name,
+      kind: entries.kind,
+      tags: entries.tags,
+      region: sql<string>`coalesce(${entries.fields}->>'region', '')`,
+      parentId: entries.parentId,
+    })
     .from(entries)
     .where(and(...conditions))
     .limit(5000);
 
-  const visible = new Set(nodes.map((n) => n.id));
+  const visible = new Set(rows.map((n) => n.id));
+  // A parent the viewer cannot see is dropped, not sent: its id would confirm it exists.
+  const nodes: GraphNode[] = rows.map((n) => ({ ...n, parentId: n.parentId && visible.has(n.parentId) ? n.parentId : null }));
   const rawEdges = await db
     .select({ source: links.sourceId, target: links.targetId, relation: links.relation })
     .from(links)

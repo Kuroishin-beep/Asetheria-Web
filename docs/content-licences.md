@@ -13,16 +13,17 @@ content belongs to its authors or to the publisher and carries no open licence.
 | **New places and structures (100)**: mines, quarries, groves, habitats, forges, markets, shrines | **Original writing for Asetheria**; the setting is invented, the real-world grounding is the specimens they host. Each carries a DM-only `Hook:` note | `data/natural-world/places-*.json`, `sourcePath: original: natural-world/places-<n>` | Cleared; guarded by `npm run verify:natural-world` (parent whitelist, denylist, shape) |
 | Earlier original fauna, flora and ores | Original, same method (`scripts/add-flora-fauna-ores.ts`, `add-named-creatures.ts`) | `scripts/` | Cleared |
 | Bestiary base layer | System Reference Document 5.1, Wizards of the Coast, **CC BY 4.0**. Each entry carries an attribution line and links to the attribution note | `scripts/import-srd-monsters.ts`, `add-srd-attribution-note.ts` | Cleared (attribution in app) |
-| Herbalism entries (20 plants) and the d20 field-guide table | Player-supplied reference material; the data file's own provenance mark says **"external GM Binder page"** (`data/homebrew/flora.json`). GM Binder content is the author's copyright and is not openly licensed | `data/homebrew/flora.json`, `sourcePath: homebrew: herbalism reference` | **Needs your decision** (see below) |
-| Metals and materials tables | Player-supplied reference table and lore (`data/homebrew/metals.json`); origin of the tables themselves is not recorded | `sourcePath: homebrew: metals & materials reference` | **Needs your decision**: confirm the supplier could share them |
-| **Planar metals (24 entries)** | Imported "per user request" from the GM Binder *Fantasy Metals Compendium* (`data/homebrew/planar-metals.json`, named in `tests/homebrew-content.spec.ts`) | `sourcePath: homebrew: Fantasy Metals Compendium (external)` | **Needs your decision** (see below) |
+| Herbalism entries (20 plants) and the d20 field-guide table | Player-supplied reference material; the data file's own provenance mark says **"external GM Binder page"** (`data/homebrew/flora.json`). GM Binder content is the author's copyright and is not openly licensed | `data/homebrew/flora.json`, `sourcePath: homebrew: herbalism reference` | **Kept by the owner's decision** (2026-10-04, see below) |
+| Metals and materials tables | Player-supplied reference table and lore (`data/homebrew/metals.json`); origin of the tables themselves is not recorded | `sourcePath: homebrew: metals & materials reference` | **Kept by the owner's decision** (2026-10-04); the supplier's right to share is the owner's call |
+| **Planar metals (24 entries)** | Imported "per user request" from the GM Binder *Fantasy Metals Compendium* (`data/homebrew/planar-metals.json`, named in `tests/homebrew-content.spec.ts`) | `sourcePath: homebrew: Fantasy Metals Compendium (external)` | **Kept by the owner's decision** (2026-10-04, see below) |
 
-**The decision (these three homebrew batches predate Q1).** They were imported earlier at your request, so this
-is not a mistake to hide; it is a conflict with the rule you set for new content. Options per batch: (a) keep, if
-you have the author's permission; (b) rewrite as original entries (the natural-world method) and archive the
-originals; (c) archive now. Each is reversible with the batch tool, for example
-`npm run codex:archive-batch -- "homebrew: Fantasy Metals Compendium" --apply` and `--restore --apply` to bring it
-back. Nothing here is archived or changed without your answer.
+**Decision recorded (2026-10-04): the owner chose to KEEP these three homebrew batches** (planar metals, the
+herbalism plants and field-guide table, and the metals tables). They predate rule Q1 (licence-safe sources only
+for *new* ingestion) and were imported earlier at the owner's request. Keeping them is the owner's call, made
+knowing that the GM Binder pages they came from are not openly licensed; the site is private to the campaign and
+the owner is responsible for having the right to use them. They are loaded into production with everything else.
+Nothing here is changed or archived. The batch tool still works if that ever changes:
+`npm run codex:archive-batch -- "homebrew: Fantasy Metals Compendium" --apply` and `--restore --apply` to undo.
 
 ## Excluded on purpose (never imported)
 D&D Beyond packs, Beneos, Tom Cartos modules, DMDave's *Empusa's Underbelly*, *Bitesized Book of Spectacular Shops*,
