@@ -11,6 +11,50 @@ that database password when Phase 0 is finished.**
 
 ---
 
+## 0. Update, 2026-10-10: PLAN.md FINISHED, merged to main (read this first; sections below are history)
+
+**All of `PLAN.md` v2.1 (Phases 0 to 11) and Steps 2 to 4 are done, verified, and pushed.**
+`hardening-and-content` and `origin/main` are both at `f520c26` (fast-forward, no force).
+The owner's local `main` is checked out in another worktree
+(`.claude/worktrees/hellenoria-museum-heist-a38a2b`) and is only behind: `git pull` there.
+
+Commits since the last update: `3b921a6` 8d planner · `8613029` 10 character engine and API ·
+`856d410` 11 character wizard and Characters tab · `e4163a1` 9 landing page (+ graph hover and
+logout fixes, case-id test naming) · `79da5f6` test-cases.html, TEST-REPORT, tracker · `f520c26` HANDOFF.md.
+
+**Evidence (final run):** 509 passed, 0 failed, 0 flaky, 0 skipped (18.6 min, one worker,
+retries 0, screenshot on every test). `tsc`, build, `npm audit --omit=dev` (0) and the design
+gates (0) clean. Graph pointer sweep p90 16.7 ms at 56 to 59 fps; landing scroll p90 16.8 ms;
+landing adds 12.9 KB gzipped JS (limit 60).
+
+**Deliverables:** `test-cases.html` (offline; 509 cases, one per test, each test titled
+`[TC-<MODULE>-<NNN>]`; real Actual/Status; dashboard; filters; coverage floor for 30 user
+actions; traceability for every PLAN.md criterion; print CSS). Regenerate with
+`npx tsx scripts/build-test-cases.ts --results test-results/results.json`.
+`TEST-REPORT.md` has totals, bugs, test corrections and risks.
+
+**Production (Neon):** `characters` table added 2026-10-10 (additive, 0 rows); entries 1,060.
+
+**Bugs fixed this stretch:** toasts were never mounted (now `AppToaster`, skipped on `/graph`);
+graph hover re-rendered the whole graph (now an external hover store); landing loops kept
+animating off screen and under reduced motion (`still()`); landing lacked a `contentinfo`
+landmark; logout returned 401 with an expired session (now public); wizard lost the last change
+on reload (saved on `pagehide`).
+
+**Known limits:** a toast raised on `/graph` is not shown; frame-time tests need an idle
+machine; this machine runs low on memory (two full runs were stopped).
+
+**Owner's steps:** create the DM account; Vercel env (`DATABASE_URL`, `AUTH_SECRET`,
+`PLAYER_PASSWORD`, optional `SIGNUP_CODE`, `EMBEDDINGS_CACHE_DIR`); deploy; `/api/health`;
+**rotate the Neon password**.
+
+**Next request (2026-10-10):** the owner asked for LegendKeeper / World Anvil style features
+"as well as the character creation". The character creator (Phases 10 and 11) is already built
+and merged. The LegendKeeper / World Anvil features are new scope: the first step is to agree
+which features, add them to PLAN.md as new phases, then build them the same way.
+
+---
+
 ## 1. The task, in one paragraph
 
 The user asked for a full upgrade of the Asetheria D&D codex (`E:\Github\Asetheria\Asetheria-Web`):
