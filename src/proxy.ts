@@ -8,6 +8,7 @@ import { SESSION_COOKIE, verifySessionToken } from "@/lib/session";
  */
 const PUBLIC_PATHS = [
   "/welcome",
+  "/create-character",
   "/login",
   "/register",
   "/api/auth/login",

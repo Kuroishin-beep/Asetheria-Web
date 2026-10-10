@@ -291,3 +291,14 @@ Remaining, owner's side: create the DM account (`npm run user:add` with the prod
 - Engine (`src/lib/character/*`): one constants module for the house rules; pure `validateAndDerive` used by wizard and server (server recomputes, never trusts a client sheet).
 - API `/api/characters[/id]`: player owns own (others' ids 404), DM reads all (`?scope=all`) and writes none, 20 per player (409), 64 KB cap (413), strict zod, soft delete.
 - SQL `scripts/sql/characters.sql` (idempotent) + rollback; `npm run db:characters[:rollback]`.
+
+## Phase 11 — Character wizard, 5e sheet, Wikidot links, Characters tab (ENH-09b) — DONE (local DB; prod waits for `characters.sql` on Neon)
+- Evidence: full suite 475 passed (17.5m) covering Phases 10 and 11; `tsc` clean; build OK; `npm audit --omit=dev` 0 vulnerabilities; design gates 12 rules 0 violations.
+- New specs: `character-draft.spec.ts` (pure wizard rules, draft read-back, Wikidot allowlist) and `character-creator.spec.ts` (public wizard for all three score methods, house-rule dice via a stubbed secure random, hit points, skills, links, progress/restore, JSON download and re-import, print, 375px, axe in both themes, member wizard, own/other/DM access, tampered save refused).
+- Public `/create-character` makes no API calls and shows no codex entry names (R20). Signed-in visitors go to `/characters/new`. DM list is read-only. Wikidot: 40 links, all answer 200 (`scripts/check-wikidot-links.ts`), links only.
+- Found and fixed:
+  - `<Toaster />` was never mounted, so no toast in the app ever displayed. Now mounted by `AppToaster`.
+  - Mounting it on `/graph` raised graph pointer-sweep p90 from 16.8 to about 50 ms (test limit 33.4), so `AppToaster` skips `/graph`. Limitation: a toast fired while on `/graph` (e.g. a palette error) is not shown. Graph p90 now 16.8 to 33.3 ms across repeat runs.
+  - The wizard draft is also saved on `pagehide`.
+- Test corrections (justified): point-buy floor test used 5 clicks where 8 to 6 is 2; "Back" locator made exact (it matched "4. Background"); two tests plant state after the pagehide save or use a fresh browser profile.
+- Phase 10 full-suite regression (deferred from its entry) is covered by this run.

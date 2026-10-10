@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Cinzel, EB_Garamond, Inter } from "next/font/google";
 import { MotionProvider } from "@/components/motion/motion-provider";
 import { ThemeProvider } from "@/components/theme-provider";
+import { AppToaster } from "@/components/app-toaster";
 import "./globals.css";
 
 const cinzel = Cinzel({
@@ -72,6 +73,7 @@ export default function RootLayout({
       <body>
         <ThemeProvider>
           <MotionProvider>{children}</MotionProvider>
+          <AppToaster />
         </ThemeProvider>
       </body>
     </html>

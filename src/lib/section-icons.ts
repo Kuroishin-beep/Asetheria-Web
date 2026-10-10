@@ -9,6 +9,7 @@ import {
   Dices,
   FlaskConical,
   Home,
+  UserRound,
   KeyRound,
   LayoutGrid,
   Leaf,
@@ -83,6 +84,7 @@ export const TOOL_ICONS = {
   map: MapIcon,
   graph: Network,
   dice: Dices,
+  characters: UserRound,
 } as const;
 
 export const KEEPER_ICONS = {
