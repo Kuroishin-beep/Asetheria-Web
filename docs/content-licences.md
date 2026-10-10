@@ -44,6 +44,13 @@ the DM notes say so.
 4. A whole batch can be taken out again without deleting anything:
    `npm run codex:archive-batch -- "original: natural-world/ores-1" --apply` (and `--restore --apply` to bring it back).
 
+## Landing page art (original)
+The public landing page (`/welcome`) and its five motion scenes (misty road at dawn, round-door hillside, sea-gate
+with columns and lighthouse, the three empires' banners, the unrolling map) are original vector drawings and text
+written for this project (`src/components/landing/`). They evoke a mood only: no name, place, character, image or line
+from any published work is used. `tests/landing.spec.ts` scans the rendered page and the art's source for a list of
+protected titles and names and fails if any appear.
+
 ## Not built, on purpose
 An Open5e importer (OGL/CC documents) was listed as optional in PLAN.md Phase 4. It was not needed to reach the
 promised counts and would add OGL Section 15 obligations. It can be added on request.

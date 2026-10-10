@@ -2,7 +2,7 @@ import { test, expect } from "@playwright/test";
 import { roll, rollMany, rollOnTable, DiceError } from "../src/lib/dice";
 
 test.describe("dice engine (pure logic, no browser needed)", () => {
-  test("simple die roll stays within bounds", () => {
+  test("[TC-DICE-001] simple die roll stays within bounds", () => {
     for (let i = 0; i < 200; i++) {
       const r = roll("1d20");
       expect(r.total).toBeGreaterThanOrEqual(1);
@@ -10,7 +10,7 @@ test.describe("dice engine (pure logic, no browser needed)", () => {
     }
   });
 
-  test("modifiers add correctly", () => {
+  test("[TC-DICE-002] modifiers add correctly", () => {
     for (let i = 0; i < 50; i++) {
       const r = roll("2d6+3");
       expect(r.total).toBeGreaterThanOrEqual(5);
@@ -18,7 +18,7 @@ test.describe("dice engine (pure logic, no browser needed)", () => {
     }
   });
 
-  test("advantage keeps the higher of two d20s", () => {
+  test("[TC-DICE-003] advantage keeps the higher of two d20s", () => {
     for (let i = 0; i < 50; i++) {
       const r = roll("1d20adv");
       expect(r.groups[0].kept).toHaveLength(1);
@@ -26,7 +26,7 @@ test.describe("dice engine (pure logic, no browser needed)", () => {
     }
   });
 
-  test("a lone unmodified d20 flags crit hit/miss correctly", () => {
+  test("[TC-DICE-004] a lone unmodified d20 flags crit hit/miss correctly", () => {
     let sawHit = false;
     let sawMiss = false;
     for (let i = 0; i < 500 && !(sawHit && sawMiss); i++) {
@@ -43,13 +43,13 @@ test.describe("dice engine (pure logic, no browser needed)", () => {
     }
   });
 
-  test("rejects malformed expressions instead of throwing an unrelated error", () => {
+  test("[TC-DICE-005] rejects malformed expressions instead of throwing an unrelated error", () => {
     expect(() => roll("not-dice")).toThrow(DiceError);
     expect(() => roll("")).toThrow(DiceError);
     expect(() => roll("999d999999")).toThrow(DiceError);
   });
 
-  test("rollMany repeats the same expression the requested number of times", () => {
+  test("[TC-DICE-006] rollMany repeats the same expression the requested number of times", () => {
     const results = rollMany("5x1d6");
     expect(results).toHaveLength(5);
     for (const r of results) {
@@ -58,7 +58,7 @@ test.describe("dice engine (pure logic, no browser needed)", () => {
     }
   });
 
-  test("rollOnTable picks the row whose bounds contain the roll", () => {
+  test("[TC-DICE-007] rollOnTable picks the row whose bounds contain the roll", () => {
     const items = [
       { min: 1, max: 2, result: "Sword" },
       { min: 3, max: 4, result: "Shield" },

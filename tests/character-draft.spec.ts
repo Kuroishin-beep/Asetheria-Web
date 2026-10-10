@@ -33,13 +33,13 @@ function complete(patch: Partial<Draft> = {}): Draft {
 }
 
 test.describe("steps and the draft", () => {
-  test("there are twelve steps ending in the review, each with a unique id", () => {
+  test("[TC-CHRD-001] there are twelve steps ending in the review, each with a unique id", () => {
     expect(STEPS).toHaveLength(12);
     expect(STEPS[STEPS.length - 1].id).toBe("review");
     expect(new Set(STEPS.map((s) => s.id)).size).toBe(12);
   });
 
-  test("a fresh draft asks for things in order: nothing past the first step is reachable", () => {
+  test("[TC-CHRD-002] a fresh draft asks for things in order: nothing past the first step is reachable", () => {
     const d = emptyDraft();
     expect(furthestStep(d)).toBe(0);
     expect(stepProblems(d, "who").length).toBeGreaterThan(0);
@@ -52,14 +52,14 @@ test.describe("steps and the draft", () => {
     for (const free of ["equipment", "worship", "personality", "review"] as const) expect(stepProblems(d, free)).toEqual([]);
   });
 
-  test("a complete draft passes every step and reaches the review", () => {
+  test("[TC-CHRD-003] a complete draft passes every step and reaches the review", () => {
     const d = complete();
     for (const s of STEPS) expect(stepProblems(d, s.id), s.id).toEqual([]);
     expect(furthestStep(d)).toBe(STEPS.length - 1);
     expect(validateAndDerive(toInput(d)).ok).toBe(true);
   });
 
-  test("each step's rule is enforced: name, heritage, class and level, background, skills, citizenship, armor class", () => {
+  test("[TC-CHRD-004] each step's rule is enforced: name, heritage, class and level, background, skills, citizenship, armor class", () => {
     expect(isStepComplete(complete({ name: "   " }), "who")).toBe(false);
     expect(isStepComplete(complete({ name: "x".repeat(81) }), "who")).toBe(false);
     expect(isStepComplete(complete({ raceId: "half-elf", chosenBonuses: ["str"] }), "heritage")).toBe(false);
@@ -79,7 +79,7 @@ test.describe("steps and the draft", () => {
     expect(isStepComplete(complete({ armorClass: 0 }), "equipment")).toBe(true);
   });
 
-  test("the ability-score step needs the right inputs for each method", () => {
+  test("[TC-CHRD-005] the ability-score step needs the right inputs for each method", () => {
     expect(stepProblems(complete({ method: "" }), "scores").length).toBeGreaterThan(0);
     expect(stepProblems(complete({ pbExtraRoll: 0 }), "scores")).toEqual(["Roll your bonus die first."]);
     expect(stepProblems(complete({ pbScores: scores(15, 15, 15, 15, 15, 15) }), "scores").length).toBeGreaterThan(0);
@@ -89,7 +89,7 @@ test.describe("steps and the draft", () => {
     expect(stepProblems(complete({ method: "standard-array", arrayIndex: 0, arrayAssignment: scores(15, 15, 13, 12, 10, 8) }), "scores").length).toBeGreaterThan(0);
   });
 
-  test("the hit-point step needs the right number of rolls, or a manual total in range", () => {
+  test("[TC-CHRD-006] the hit-point step needs the right number of rolls, or a manual total in range", () => {
     expect(stepProblems(complete({ level: 4, levelRolls: [] }), "hp").length).toBeGreaterThan(0);
     expect(stepProblems(complete({ level: 4, levelRolls: [{ first: 6 }] }), "hp")).toEqual([]);
     expect(stepProblems(complete({ level: 4, levelRolls: [{ first: 6, reroll: 3 }] }), "hp").length).toBeGreaterThan(0);
@@ -98,13 +98,13 @@ test.describe("steps and the draft", () => {
     expect(stepProblems(complete({ hpMode: "manual", manualHp: 13 }), "hp").length).toBeGreaterThan(0);
   });
 
-  test("Constitution for hit points includes the heritage bonus (a Hill Dwarf's +2)", () => {
+  test("[TC-CHRD-007] Constitution for hit points includes the heritage bonus (a Hill Dwarf's +2)", () => {
     expect(finalConScore(complete({ raceId: "human" }))).toBe(15);
     expect(finalConScore(complete({ raceId: "hill-dwarf" }))).toBe(16);
     expect(finalConScore(complete({ raceId: "" }))).toBe(14);
   });
 
-  test("the furthest reachable step stops at the first incomplete one", () => {
+  test("[TC-CHRD-008] the furthest reachable step stops at the first incomplete one", () => {
     expect(furthestStep(complete({ name: "" }))).toBe(0);
     expect(furthestStep(complete({ classId: "" }))).toBe(2);
     expect(furthestStep(complete({ classSkills: [] }))).toBe(5);
@@ -112,7 +112,7 @@ test.describe("steps and the draft", () => {
 });
 
 test.describe("draft <-> character", () => {
-  test("a draft becomes a character and back without loss, for each method", () => {
+  test("[TC-CHRD-009] a draft becomes a character and back without loss, for each method", () => {
     const rolled = rollSet();
     const variants: Draft[] = [
       complete(),
@@ -131,7 +131,7 @@ test.describe("draft <-> character", () => {
     }
   });
 
-  test("only the chosen method's data goes into the character", () => {
+  test("[TC-CHRD-010] only the chosen method's data goes into the character", () => {
     const input = toInput(complete({ method: "standard-array", arrayIndex: 0, arrayAssignment: scores(15, 14, 13, 12, 10, 8) }));
     expect(input.array).toBeDefined();
     expect(input.pointBuy).toBeUndefined();
@@ -140,12 +140,12 @@ test.describe("draft <-> character", () => {
 });
 
 test.describe("reading storage safely", () => {
-  test("a stored draft round-trips", () => {
+  test("[TC-CHRD-011] a stored draft round-trips", () => {
     const d = complete({ step: 4 });
     expect(loadDraft(JSON.stringify(d))).toEqual(d);
   });
 
-  test("nothing usable (null, empty, garbage, the wrong shape, extra keys, wrong types, huge text) gives a clean draft", () => {
+  test("[TC-CHRD-012] nothing usable (null, empty, garbage, the wrong shape, extra keys, wrong types, huge text) gives a clean draft", () => {
     const clean = emptyDraft();
     for (const raw of [null, undefined, "", "{", "not json", "[]", "null", "42", '{"name":42}', JSON.stringify({ ...emptyDraft(), step: 99 }), JSON.stringify({ ...emptyDraft(), extra: true }), JSON.stringify({ ...emptyDraft(), name: "x".repeat(500) }), JSON.stringify({ ...emptyDraft(), method: "teleport" }), JSON.stringify({ ...emptyDraft(), classSkills: ["not-a-skill"] }), JSON.stringify({ ...emptyDraft(), backstory: "y".repeat(5000) })]) {
       expect(loadDraft(raw as string | null | undefined), String(raw).slice(0, 40)).toEqual(clean);
@@ -154,7 +154,7 @@ test.describe("reading storage safely", () => {
 });
 
 test.describe("Wikidot links (links only, one host, known page shapes)", () => {
-  test("every link is https on dnd5e.wikidot.com and matches an allowed page shape", () => {
+  test("[TC-CHRD-013] every link is https on dnd5e.wikidot.com and matches an allowed page shape", () => {
     const links = allWikidotLinks();
     expect(links.length).toBeGreaterThan(40);
     for (const href of links) {
@@ -163,7 +163,7 @@ test.describe("Wikidot links (links only, one host, known page shapes)", () => {
     }
   });
 
-  test("hostile or foreign addresses are refused", () => {
+  test("[TC-CHRD-014] hostile or foreign addresses are refused", () => {
     for (const bad of [
       "http://dnd5e.wikidot.com/",
       "https://dnd5e.wikidot.com.evil.example/",
@@ -183,7 +183,7 @@ test.describe("Wikidot links (links only, one host, known page shapes)", () => {
     }
   });
 
-  test("every race, class and background resolves to a link (or none, for a custom one), and subraces use their parent's page", () => {
+  test("[TC-CHRD-015] every race, class and background resolves to a link (or none, for a custom one), and subraces use their parent's page", () => {
     for (const r of RACES) expect(heritageLink(r.id), r.id).not.toBeNull();
     for (const c of CLASSES) expect(classLink(c.id)?.href, c.id).toBe(`https://${WIKIDOT_HOST}/${c.id}`);
     for (const b of BACKGROUND_NAMES) expect(backgroundLink(b), b).not.toBeNull();
@@ -194,7 +194,7 @@ test.describe("Wikidot links (links only, one host, known page shapes)", () => {
     expect(classLink("necromancer")).toBeNull();
   });
 
-  test("a search link encodes its words, and each step with an explainer has links", () => {
+  test("[TC-CHRD-016] a search link encodes its words, and each step with an explainer has links", () => {
     expect(wikidotSearch("ability scores")).toBe(`https://${WIKIDOT_HOST}/search:site/q/ability%20scores`);
     expect(isAllowedWikidotUrl(wikidotSearch("death saving throws"))).toBe(true);
     for (const id of ["who", "heritage", "class", "background", "scores", "skills", "hp", "equipment", "review"]) expect(STEP_LINKS[id].length, id).toBeGreaterThan(0);
@@ -202,7 +202,7 @@ test.describe("Wikidot links (links only, one host, known page shapes)", () => {
 });
 
 test.describe("public options", () => {
-  test("the signed-out creator offers exactly the three empires, as constants", () => {
+  test("[TC-CHRD-017] the signed-out creator offers exactly the three empires, as constants", () => {
     expect(PUBLIC_EMPIRES.map((e) => e.id)).toEqual(["imperium-invicta", "hellenoria", "acheaoria"]);
     for (const e of PUBLIC_EMPIRES) {
       expect(e.summary.length).toBeGreaterThan(20);
@@ -210,7 +210,7 @@ test.describe("public options", () => {
     }
   });
 
-  test("the standard arrays used by the wizard are the three from the compendium", () => {
+  test("[TC-CHRD-018] the standard arrays used by the wizard are the three from the compendium", () => {
     expect(STANDARD_ARRAYS).toHaveLength(3);
   });
 });

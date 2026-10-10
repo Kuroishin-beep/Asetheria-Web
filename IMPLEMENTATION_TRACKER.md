@@ -302,3 +302,17 @@ Remaining, owner's side: create the DM account (`npm run user:add` with the prod
   - The wizard draft is also saved on `pagehide`.
 - Test corrections (justified): point-buy floor test used 5 clicks where 8 to 6 is 2; "Back" locator made exact (it matched "4. Background"); two tests plant state after the pagehide save or use a fresh browser profile.
 - Phase 10 full-suite regression (deferred from its entry) is covered by this run.
+
+## Phase 9 — Public landing page and motion scenes (ENH-08) — DONE (built last: 10 → 11 → 9, because its call to action opens the creator)
+- Evidence: full suite 509 passed (18.6m, clean machine); `tsc` clean; build OK; `npm audit --omit=dev` 0 vulnerabilities; design gates 12 rules 0 violations.
+- Acceptance: one h1, five scenes (road, hearth, sea-gate, empire banners, map), both calls to action; signed-in visitors redirected; Forge a hero opens `/create-character` (200); Enter the codex reaches the unchanged door (auth/door assertions unchanged; titles gained only their case-id prefix); reduced motion: no running animation (Web Animations API), no parallax, all text present; axe clean both themes; no sideways scroll at 375/768/1280; art `aria-hidden`.
+- Budget (measured): JavaScript added over `/login` in the production build 12.9 KB gzipped (limit 60 KB); landing source < 150 KB; CLS < 0.05; scroll under 4x CPU throttle p90 16.7 ms (limit 33.4).
+- Licence guard test (protected titles/names in text, alt text, source) and ledger entry ("Landing page art (original)" in `docs/content-licences.md`). No API call and no codex entry names on the page (R20).
+- Design gate: scoped, documented exemption for `src/components/landing/` from the inline-style rule (Motion values need `style`).
+- Found and fixed along the way:
+  - Landing loops kept tweening off screen and under reduced motion (a bare `repeat: Infinity` transition); now they stop (`still()`), and stars twinkle as two groups. Scroll p90 went 50 → 16.7 ms.
+  - Footer moved outside `<main>` so the page has a `contentinfo` landmark.
+  - Graph: hover now lives in a small external store read only by the overlay, so a hover no longer re-renders the graph and its filter lists. Pointer sweep 38–44 → 56–59 fps, p90 16.7 ms (the 8c test had become intermittent at 50 ms).
+  - `/api/auth/logout` is public: signing out with an already-expired session used to get a 401 and fail.
+- Test corrections (justified): frame-time limits compared at measured precision (33.400000000000546 vs 33.4 is two display frames, limit unchanged); New-for-you test waits for streamed links; long axe test gets 90 s; leak checks exclude the three empire names the public pages show on purpose as constants; landing motion checks sample the elements that animate.
+- Also in this commit (Steps 2–3 groundwork): `scripts/build-test-cases.ts` + `scripts/lib/test-catalogue.ts` (catalogue from the real specs), `test-cases/{ids,actions,traceability,overrides}.json`, `tests/coverage-gaps.spec.ts` (11 coverage-floor cases), every test titled with its case id (`tests/case-id.ts` for loop-generated ones), config: screenshot on every test, video + trace on failure, retries 0, JSON results.

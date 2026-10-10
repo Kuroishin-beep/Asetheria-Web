@@ -9,7 +9,7 @@ const PLAYER_USER = process.env.PLAYER_USERNAME!;
 const PLAYER_PASS = process.env.PLAYER_PASSWORD!;
 
 test.describe("login form polish", () => {
-  test("submit is disabled until both fields have a value", async ({ page }) => {
+  test("[TC-AUTH-001] submit is disabled until both fields have a value", async ({ page }) => {
     await page.goto("/login");
     const submit = page.getByRole("button", { name: "Enter" });
     await expect(submit).toBeDisabled();
@@ -19,7 +19,7 @@ test.describe("login form polish", () => {
     await expect(submit).toBeEnabled();
   });
 
-  test("the show/hide toggle reveals and re-hides the password", async ({ page }) => {
+  test("[TC-AUTH-002] the show/hide toggle reveals and re-hides the password", async ({ page }) => {
     await page.goto("/login");
     const passwordInput = page.locator("#password");
     await page.fill("#password", "secret-value");
@@ -34,7 +34,7 @@ test.describe("login form polish", () => {
     await expect(passwordInput).toHaveAttribute("type", "password");
   });
 
-  test("a failed login returns focus to the username field", async ({ page }) => {
+  test("[TC-AUTH-003] a failed login returns focus to the username field", async ({ page }) => {
     await page.goto("/login");
     await page.fill("#username", DM_USER);
     await page.fill("#password", "wrong-password");
@@ -45,7 +45,7 @@ test.describe("login form polish", () => {
 });
 
 test.describe("login form", () => {
-  test("valid DM login reaches the dashboard with full controls", async ({ page }) => {
+  test("[TC-AUTH-004] valid DM login reaches the dashboard with full controls", async ({ page }) => {
     await page.goto("/login");
     await page.fill("#username", DM_USER);
     await page.fill("#password", DM_PASS);
@@ -57,7 +57,7 @@ test.describe("login form", () => {
     await expect(page.getByTitle("Full edit access")).toBeVisible();
   });
 
-  test("valid player login reaches the dashboard read-only", async ({ page }) => {
+  test("[TC-AUTH-005] valid player login reaches the dashboard read-only", async ({ page }) => {
     await page.goto("/login");
     await page.fill("#username", PLAYER_USER);
     await page.fill("#password", PLAYER_PASS);
@@ -67,7 +67,7 @@ test.describe("login form", () => {
     await expect(page.getByTitle("Read-only access")).toBeVisible();
   });
 
-  test("wrong password shows a generic error and stays on /login", async ({ page }) => {
+  test("[TC-AUTH-006] wrong password shows a generic error and stays on /login", async ({ page }) => {
     await page.goto("/login");
     await page.fill("#username", DM_USER);
     await page.fill("#password", "definitely-wrong-password");
@@ -76,7 +76,7 @@ test.describe("login form", () => {
     await expect(page).toHaveURL(/\/login/);
   });
 
-  test("unknown username shows the same generic error (no user enumeration)", async ({ page }) => {
+  test("[TC-AUTH-007] unknown username shows the same generic error (no user enumeration)", async ({ page }) => {
     await page.goto("/login");
     await page.fill("#username", `nobody-${Date.now()}`);
     await page.fill("#password", "whatever12345");
@@ -84,12 +84,12 @@ test.describe("login form", () => {
     await expect(page.locator('p[role="alert"]')).toHaveText(/incorrect username or password/i);
   });
 
-  test("unauthenticated visit to a protected page redirects to /welcome with ?next=", async ({ page }) => {
+  test("[TC-AUTH-008] unauthenticated visit to a protected page redirects to /welcome with ?next=", async ({ page }) => {
     await page.goto("/admin");
     await expect(page).toHaveURL(/\/welcome\?next=%2Fadmin/);
   });
 
-  test("open-redirect guard: a cross-site next param is not honored", async ({ page }) => {
+  test("[TC-AUTH-009] open-redirect guard: a cross-site next param is not honored", async ({ page }) => {
     await page.goto("/login?next=//evil.example.com");
     await page.fill("#username", DM_USER);
     await page.fill("#password", DM_PASS);
@@ -102,7 +102,7 @@ test.describe("login form", () => {
     expect(page.url()).not.toContain("evil.example.com");
   });
 
-  test("logging in then visiting /login again bounces back to /", async ({ page }) => {
+  test("[TC-AUTH-010] logging in then visiting /login again bounces back to /", async ({ page }) => {
     await page.goto("/login");
     await page.fill("#username", DM_USER);
     await page.fill("#password", DM_PASS);
@@ -112,7 +112,7 @@ test.describe("login form", () => {
     await expect(page).toHaveURL("/");
   });
 
-  test("logout clears the session and protected pages redirect again", async ({ page }) => {
+  test("[TC-AUTH-011] logout clears the session and protected pages redirect again", async ({ page }) => {
     await page.goto("/login");
     await page.fill("#username", DM_USER);
     await page.fill("#password", DM_PASS);
@@ -126,7 +126,7 @@ test.describe("login form", () => {
 });
 
 test.describe("login throttle", () => {
-  test("repeated failed attempts eventually 429s", async ({ page }) => {
+  test("[TC-AUTH-012] repeated failed attempts eventually 429s", async ({ page }) => {
     const throttleUser = `throttle-check-${Date.now()}`;
     let sawThrottle = false;
     for (let i = 0; i < 10; i++) {
@@ -144,7 +144,7 @@ test.describe("login throttle", () => {
     expect(sawThrottle).toBe(true);
   });
 
-  test("throttled state renders with a distinct, calmer tone than a wrong password", async ({
+  test("[TC-AUTH-013] throttled state renders with a distinct, calmer tone than a wrong password", async ({
     page,
   }) => {
     const throttleUser = `throttle-tone-${Date.now()}`;

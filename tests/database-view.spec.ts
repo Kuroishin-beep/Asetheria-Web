@@ -61,7 +61,7 @@ async function fixtureOrder(page: import("@playwright/test").Page): Promise<stri
 }
 
 test.describe("sorting rules (pure)", () => {
-  test("numericValue reads thousands separators, fractions, coin units and ranges, and rejects text", () => {
+  test("[TC-DBV-001] numericValue reads thousands separators, fractions, coin units and ranges, and rejects text", () => {
     expect(numericValue("5,000 gp")).toBe(5000);
     expect(numericValue("5 gp")).toBe(5);
     expect(numericValue("CR 1/4")).toBe(0.25);
@@ -76,7 +76,7 @@ test.describe("sorting rules (pure)", () => {
     expect(numericValue("1/0")).toBeNull();
   });
 
-  test("5 gp sorts before 5,000 gp, silver before gold, and blanks last in both directions", () => {
+  test("[TC-DBV-002] 5 gp sorts before 5,000 gp, silver before gold, and blanks last in both directions", () => {
     const values = ["5,000 gp", "", "5 gp", "50 gp", "5 sp"];
     const asc = [...values].sort((a, b) => compareValues("costPerLb", a, b, "asc"));
     expect(asc).toEqual(["5 sp", "5 gp", "50 gp", "5,000 gp", ""]);
@@ -84,14 +84,14 @@ test.describe("sorting rules (pure)", () => {
     expect(desc).toEqual(["5,000 gp", "50 gp", "5 gp", "5 sp", ""]);
   });
 
-  test("rarity sorts by rank, not alphabet, and text falls back to natural order after numbers", () => {
+  test("[TC-DBV-003] rarity sorts by rank, not alphabet, and text falls back to natural order after numbers", () => {
     const rarities = ["Rare", "Common", "Legendary", "Uncommon"];
     expect([...rarities].sort((a, b) => compareValues("rarity", a, b, "asc"))).toEqual(["Common", "Uncommon", "Rare", "Legendary"]);
     expect(compareValues("armorClass", "23", "Varies", "asc")).toBeLessThan(0);
     expect(compareValues("x", "item 2", "item 10", "asc")).toBeLessThan(0);
   });
 
-  test("parseSort and parseColumns accept only whitelisted keys and fall back instead of failing", () => {
+  test("[TC-DBV-004] parseSort and parseColumns accept only whitelisted keys and fall back instead of failing", () => {
     const keys = ["costPerLb", "rarity"];
     expect(parseSort("costPerLb", "desc", keys)).toEqual({ key: "costPerLb", dir: "desc" });
     expect(parseSort("name", undefined, keys)).toEqual({ key: "name", dir: "asc" });
@@ -103,7 +103,7 @@ test.describe("sorting rules (pure)", () => {
     expect(parseColumns(undefined, keys, ["costPerLb"])).toEqual(["costPerLb"]);
   });
 
-  test("sortRows is stable and breaks ties by name", () => {
+  test("[TC-DBV-005] sortRows is stable and breaks ties by name", () => {
     const rows = [
       { name: "B", fields: { rarity: "Rare" } },
       { name: "A", fields: { rarity: "Rare" } },
@@ -116,14 +116,14 @@ test.describe("sorting rules (pure)", () => {
 test.describe("the view (DM)", () => {
   test.use({ storageState: "tests/.auth/dm.json" });
 
-  test("sorting by cost orders 5 sp, 5 gp, 50 gp, 5,000 gp and puts the blank last", async ({ page }) => {
+  test("[TC-DBV-006] sorting by cost orders 5 sp, 5 gp, 50 gp, 5,000 gp and puts the blank last", async ({ page }) => {
     await page.goto("/codex/ores?view=table&sort=costPerLb&dir=asc");
     await expect(page.getByRole("columnheader", { name: /Cost per lb/ })).toHaveAttribute("aria-sort", "ascending");
     // 5 sp (0.5) < 5 gp < 9 gp (the secret one, visible to the DM) < 50 gp < 5,000 gp, then the blank.
     expect(await fixtureOrder(page)).toEqual(["D five silver", "A five", "F secret", "C fifty", "B five thousand", "E blank"]);
   });
 
-  test("descending reverses the numbers and still puts the blank last", async ({ page }) => {
+  test("[TC-DBV-007] descending reverses the numbers and still puts the blank last", async ({ page }) => {
     await page.goto("/codex/ores?view=table&sort=costPerLb&dir=desc");
     await expect(page.getByRole("columnheader", { name: /Cost per lb/ })).toHaveAttribute("aria-sort", "descending");
     const order = await fixtureOrder(page);
@@ -133,7 +133,7 @@ test.describe("the view (DM)", () => {
     expect(order.indexOf("D five silver")).toBeLessThan(order.indexOf("E blank"));
   });
 
-  test("the first row of a descending cost sort is the dearest ore in the whole section", async ({ page }) => {
+  test("[TC-DBV-008] the first row of a descending cost sort is the dearest ore in the whole section", async ({ page }) => {
     const rows = await query<{ name: string; cost: string | null }>(
       `SELECT name, fields->>'costPerLb' AS cost FROM entries WHERE kind = 'ore' AND archived_at IS NULL`,
     );
@@ -147,7 +147,7 @@ test.describe("the view (DM)", () => {
     expect(numericValue(firstCost)).toBe(best.n);
   });
 
-  test("clicking a header writes the sort to the URL and flips direction on a second click", async ({ page }) => {
+  test("[TC-DBV-009] clicking a header writes the sort to the URL and flips direction on a second click", async ({ page }) => {
     await page.goto("/codex/ores?view=table");
     const header = page.getByRole("columnheader", { name: /Cost per lb/ });
     await header.getByRole("button").click();
@@ -158,7 +158,7 @@ test.describe("the view (DM)", () => {
     await expect(header).toHaveAttribute("aria-sort", "descending");
   });
 
-  test("the Table button puts the view in the URL, and a reload keeps it", async ({ page }) => {
+  test("[TC-DBV-010] the Table button puts the view in the URL, and a reload keeps it", async ({ page }) => {
     await page.goto("/codex/ores");
     await page.getByRole("button", { name: "Table", exact: true }).click();
     await expect(page).toHaveURL(/view=table/);
@@ -166,7 +166,7 @@ test.describe("the view (DM)", () => {
     await expect(page.getByRole("columnheader", { name: /Cost per lb/ })).toBeVisible();
   });
 
-  test("an unknown sort key, direction or column is ignored: 200, default order, no error", async ({ page }) => {
+  test("[TC-DBV-011] an unknown sort key, direction or column is ignored: 200, default order, no error", async ({ page }) => {
     for (const qs of [
       "view=table&sort=__proto__&dir=desc",
       "view=table&sort=name%3B%20DROP%20TABLE%20entries&dir=sideways",
@@ -182,7 +182,7 @@ test.describe("the view (DM)", () => {
     expect(Number(still[0].n)).toBeGreaterThan(90);
   });
 
-  test("the column picker hides and shows columns through the URL, and a reload keeps them", async ({ page }) => {
+  test("[TC-DBV-012] the column picker hides and shows columns through the URL, and a reload keeps them", async ({ page }) => {
     await page.goto("/codex/ores?view=table");
     await expect(page.getByRole("columnheader", { name: /Biome/ })).toBeVisible();
     await page.getByRole("button", { name: "Columns" }).click();
@@ -195,7 +195,7 @@ test.describe("the view (DM)", () => {
     await expect(page.getByRole("columnheader", { name: /Biome/ })).toHaveCount(0);
   });
 
-  test("the pager keeps the view, sort and columns", async ({ page }) => {
+  test("[TC-DBV-013] the pager keeps the view, sort and columns", async ({ page }) => {
     await page.goto("/codex/sites?view=table&sort=type&dir=desc");
     const next = page.getByRole("link", { name: /Next/ });
     if (await next.count()) {
@@ -206,7 +206,7 @@ test.describe("the view (DM)", () => {
 });
 
 test.describe("what a player gets", () => {
-  test("never a secret row, never a DM note, in the page or its data", async ({ browser }) => {
+  test("[TC-DBV-014] never a secret row, never a DM note, in the page or its data", async ({ browser }) => {
     const { context, page } = await login(browser, await playerWith(["ore"]));
     try {
       const responses: string[] = [];
@@ -230,7 +230,7 @@ test.describe("what a player gets", () => {
     }
   });
 
-  test("a player with no grant on the kind gets the empty section, not data", async ({ browser }) => {
+  test("[TC-DBV-015] a player with no grant on the kind gets the empty section, not data", async ({ browser }) => {
     const { context, page } = await login(browser, await playerWith(["location"]));
     try {
       const res = await page.goto("/codex/ores?view=table&sort=costPerLb");
@@ -245,7 +245,7 @@ test.describe("what a player gets", () => {
 test.describe("small screens", () => {
   test.use({ storageState: "tests/.auth/dm.json", viewport: { width: 375, height: 800 } });
 
-  test("at 375px the table scrolls inside its container and the page does not scroll sideways", async ({ page }) => {
+  test("[TC-DBV-016] at 375px the table scrolls inside its container and the page does not scroll sideways", async ({ page }) => {
     await page.goto("/codex/ores?view=table");
     await expect(page.getByRole("columnheader", { name: /Cost per lb/ })).toBeAttached();
     const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);

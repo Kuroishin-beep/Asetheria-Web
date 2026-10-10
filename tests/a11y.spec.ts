@@ -1,4 +1,5 @@
 import AxeBuilder from "@axe-core/playwright";
+import { tc } from "./case-id";
 import { expect, test, type Page } from "@playwright/test";
 
 /**
@@ -47,7 +48,7 @@ async function audit(page: Page) {
 
 for (const theme of ["dark", "light"] as const) {
   for (const route of ROUTES) {
-    test(`a11y: ${route.name} (${route.auth ?? "signed out"}) in ${theme} theme has no serious or critical violations`, async ({
+    test(tc("a11y.spec.ts", "", `a11y: ${route.name} (${route.auth ?? "signed out"}) in ${theme} theme has no serious or critical violations`), async ({
       browser,
     }) => {
       const context = await browser.newContext({
@@ -63,7 +64,7 @@ for (const theme of ["dark", "light"] as const) {
   }
 }
 
-test("a11y: the mobile drawer and the command palette are accessible when open", async ({ browser }) => {
+test("[TC-A11Y-043] a11y: the mobile drawer and the command palette are accessible when open", async ({ browser }) => {
   const context = await browser.newContext({ storageState: "tests/.auth/dm.json", viewport: { width: 375, height: 812 } });
   const page = await context.newPage();
   await page.goto("/", { waitUntil: "networkidle" });

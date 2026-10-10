@@ -4,7 +4,7 @@ import { deleteEphemeralEntry, testName } from "./helpers";
 test.describe("export access control", () => {
   test.use({ storageState: "tests/.auth/dm.json" });
 
-  test("DM gets a well-formed JSON backup", async ({ page }) => {
+  test("[TC-IMEX-001] DM gets a well-formed JSON backup", async ({ page }) => {
     const res = await page.request.get("/api/export?format=json");
     expect(res.status()).toBe(200);
     const body = await res.json();
@@ -15,7 +15,7 @@ test.describe("export access control", () => {
     expect(body.entries.some((e: Record<string, unknown>) => "embedding" in e)).toBe(false);
   });
 
-  test("DM gets a readable Markdown export", async ({ page }) => {
+  test("[TC-IMEX-002] DM gets a readable Markdown export", async ({ page }) => {
     const res = await page.request.get("/api/export?format=markdown");
     expect(res.status()).toBe(200);
     expect(res.headers()["content-type"]).toContain("text/markdown");
@@ -25,7 +25,7 @@ test.describe("export access control", () => {
 test.describe("export is DM-only", () => {
   test.use({ storageState: "tests/.auth/player.json" });
 
-  test("player export request is forbidden", async ({ page }) => {
+  test("[TC-IMEX-003] player export request is forbidden", async ({ page }) => {
     const res = await page.request.get("/api/export?format=json");
     expect(res.status()).toBe(403);
   });
@@ -34,7 +34,7 @@ test.describe("export is DM-only", () => {
 test.describe("import", () => {
   test.use({ storageState: "tests/.auth/dm.json" });
 
-  test("import is additive: existing entry count never decreases", async ({ page }) => {
+  test("[TC-IMEX-004] import is additive: existing entry count never decreases", async ({ page }) => {
     const name = testName("import-additive");
     try {
       const before = await (await page.request.get("/api/export?format=json")).json();
@@ -73,7 +73,7 @@ test.describe("import", () => {
     }
   });
 
-  test("BUG REGRESSION: importing an entry with a [[wiki link]] should build a backlink", async ({
+  test("[TC-IMEX-005] BUG REGRESSION: importing an entry with a [[wiki link]] should build a backlink", async ({
     page,
   }) => {
     const targetName = testName("import-link-target");

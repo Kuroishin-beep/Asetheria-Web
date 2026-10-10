@@ -8,7 +8,7 @@ import { expect, test } from "@playwright/test";
 test.describe("app shell (DM)", () => {
   test.use({ storageState: "tests/.auth/dm.json" });
 
-  test("desktop: sidebar lists sections with SVG icons and marks the current page", async ({ page }) => {
+  test("[TC-SHELL-001] desktop: sidebar lists sections with SVG icons and marks the current page", async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 900 });
     await page.goto("/codex/npcs");
     const nav = page.getByRole("navigation", { name: "Codex sections" });
@@ -28,7 +28,7 @@ test.describe("app shell (DM)", () => {
     expect(await nav.innerText()).not.toMatch(/\p{Extended_Pictographic}/u);
   });
 
-  test("desktop: DM sees the Keeper section and the New button", async ({ page }) => {
+  test("[TC-SHELL-002] desktop: DM sees the Keeper section and the New button", async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 900 });
     await page.goto("/");
     await expect(page.getByRole("link", { name: "Archive", exact: true })).toBeVisible();
@@ -37,7 +37,7 @@ test.describe("app shell (DM)", () => {
     await expect(page.getByRole("link", { name: /^New/ })).toBeVisible();
   });
 
-  test("mobile 375px: sidebar is hidden, the menu button opens a drawer, Escape closes it and returns focus", async ({ page }) => {
+  test("[TC-SHELL-003] mobile 375px: sidebar is hidden, the menu button opens a drawer, Escape closes it and returns focus", async ({ page }) => {
     await page.setViewportSize({ width: 375, height: 812 });
     await page.goto("/");
     const menuButton = page.getByRole("button", { name: "Toggle navigation menu" });
@@ -54,7 +54,7 @@ test.describe("app shell (DM)", () => {
     await expect(menuButton).toBeFocused();
   });
 
-  test("mobile: choosing a section navigates and closes the drawer", async ({ page }) => {
+  test("[TC-SHELL-004] mobile: choosing a section navigates and closes the drawer", async ({ page }) => {
     await page.setViewportSize({ width: 375, height: 812 });
     await page.goto("/");
     await page.getByRole("button", { name: "Toggle navigation menu" }).click();
@@ -63,7 +63,7 @@ test.describe("app shell (DM)", () => {
     await expect(page.getByRole("dialog")).toHaveCount(0);
   });
 
-  test("the skip link is the first tab stop and moves focus to the main region", async ({ page }) => {
+  test("[TC-SHELL-005] the skip link is the first tab stop and moves focus to the main region", async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 900 });
     await page.goto("/");
     await page.keyboard.press("Tab");
@@ -74,7 +74,7 @@ test.describe("app shell (DM)", () => {
     await expect(page.locator("#main")).toBeFocused();
   });
 
-  test("no horizontal page scroll at 375, 768 and 1280px", async ({ page }) => {
+  test("[TC-SHELL-006] no horizontal page scroll at 375, 768 and 1280px", async ({ page }) => {
     for (const width of [375, 768, 1280]) {
       await page.setViewportSize({ width, height: 900 });
       await page.goto("/");
@@ -83,7 +83,7 @@ test.describe("app shell (DM)", () => {
     }
   });
 
-  test("sign out returns to the welcome page and protects the codex", async ({ browser }) => {
+  test("[TC-SHELL-007] sign out returns to the welcome page and protects the codex", async ({ browser }) => {
     // Own session: signing out must not invalidate the shared saved DM cookie.
     const context = await browser.newContext();
     const page = await context.newPage();
@@ -104,7 +104,7 @@ test.describe("app shell (DM)", () => {
 test.describe("app shell (player)", () => {
   test.use({ storageState: "tests/.auth/player.json" });
 
-  test("a player has no Keeper section and no New button", async ({ page }) => {
+  test("[TC-SHELL-008] a player has no Keeper section and no New button", async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 900 });
     await page.goto("/");
     await expect(page.getByRole("navigation", { name: "Codex sections" })).toBeVisible();

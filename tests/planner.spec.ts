@@ -75,7 +75,7 @@ test.afterAll(async () => {
 test.describe("start a session", () => {
   test.use({ storageState: "tests/.auth/dm.json" });
 
-  test("creates the next numbered session, secret, with today's date and the prep checklist", async ({ request }) => {
+  test("[TC-PLAN-001] creates the next numbered session, secret, with today's date and the prep checklist", async ({ request }) => {
     const before = (await query<{ n: string | null }>(`SELECT max((fields->>'sessionNumber')::int)::text AS n FROM entries WHERE kind = 'session' AND fields->>'sessionNumber' ~ '^[0-9]+$'`))[0].n;
     const day = (d: Date) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
     const t0 = day(new Date());
@@ -102,7 +102,7 @@ test.describe("start a session", () => {
     expect(revisions.map((r) => r.action)).toEqual(["create"]);
   });
 
-  test("six simultaneous starts all succeed with six different, consecutive numbers (no duplicates)", async ({ request }) => {
+  test("[TC-PLAN-002] six simultaneous starts all succeed with six different, consecutive numbers (no duplicates)", async ({ request }) => {
     const results = await Promise.all(Array.from({ length: 6 }, () => request.post("/api/planner/session")));
     for (const r of results) expect(r.status()).toBe(201);
     const bodies = (await Promise.all(results.map((r) => r.json()))) as { slug: string; number: number }[];
@@ -114,14 +114,14 @@ test.describe("start a session", () => {
     expect(dupes).toHaveLength(0);
   });
 
-  test("an archived session's number is never reused", async ({ request }) => {
+  test("[TC-PLAN-003] an archived session's number is never reused", async ({ request }) => {
     const first = await startSession(request);
     await query(`UPDATE entries SET archived_at = now() WHERE slug = $1`, [first.slug]);
     const second = await startSession(request);
     expect(second.number).toBeGreaterThan(first.number);
   });
 
-  test("the planner page's button starts a session and opens it", async ({ page }) => {
+  test("[TC-PLAN-004] the planner page's button starts a session and opens it", async ({ page }) => {
     await page.goto("/planner");
     await expect(page.getByRole("heading", { level: 1, name: "Planner" })).toBeVisible();
     const button = page.getByTestId("start-session");
@@ -134,7 +134,7 @@ test.describe("start a session", () => {
     await expect(page.getByRole("heading", { name: "Prep checklist" })).toBeVisible();
   });
 
-  test("the command palette has a Start a new session command that creates it and navigates there", async ({ page }) => {
+  test("[TC-PLAN-005] the command palette has a Start a new session command that creates it and navigates there", async ({ page }) => {
     await page.goto("/");
     await expect(async () => {
       await page.keyboard.press("Control+k");
@@ -148,14 +148,14 @@ test.describe("start a session", () => {
 });
 
 test.describe("who may use the planner", () => {
-  test("signed-out callers get 401 on every planner endpoint", async ({ request }) => {
+  test("[TC-PLAN-006] signed-out callers get 401 on every planner endpoint", async ({ request }) => {
     const headers = { cookie: "" };
     expect((await request.post("/api/planner/session", { headers })).status()).toBe(401);
     expect((await request.post("/api/planner/encounter", { headers, data: { count: 1 } })).status()).toBe(401);
     expect((await request.post("/api/planner/reveal", { headers, data: { playerIds: [randomUUID()], entryIds: [randomUUID()] } })).status()).toBe(401);
   });
 
-  test("a player gets 403 on every planner endpoint and cannot open the page", async ({ browser }) => {
+  test("[TC-PLAN-007] a player gets 403 on every planner endpoint and cannot open the page", async ({ browser }) => {
     const p = await newPlayer();
     const { context, page } = await login(browser, p.username);
     try {
@@ -177,7 +177,7 @@ test.describe("encounter builder", () => {
 
   const roll = (request: APIRequestContext, data: Record<string, unknown>) => request.post("/api/planner/encounter", { data });
 
-  test("only creatures the DM can read are ever returned: archived ones never, secret ones yes", async ({ request }) => {
+  test("[TC-PLAN-008] only creatures the DM can read are ever returned: archived ones never, secret ones yes", async ({ request }) => {
     const seen = new Set<string>();
     let pool = -1;
     for (let i = 0; i < 40; i++) {
@@ -192,7 +192,7 @@ test.describe("encounter builder", () => {
     expect([...seen].sort()).toEqual([BEAST_A, BEAST_B, BEAST_SECRET].sort());
   });
 
-  test("a single pick is random over the pool and never repeats within one roll", async ({ request }) => {
+  test("[TC-PLAN-009] a single pick is random over the pool and never repeats within one roll", async ({ request }) => {
     const hits = new Map<string, number>();
     for (let i = 0; i < 60; i++) {
       const body = (await (await roll(request, { count: 1, type: TYPE })).json()) as { creatures: { name: string }[] };
@@ -204,7 +204,7 @@ test.describe("encounter builder", () => {
     expect(new Set(multi.creatures.map((c) => c.name)).size).toBe(3);
   });
 
-  test("the highest-CR filter understands fractions and excludes tougher creatures", async ({ request }) => {
+  test("[TC-PLAN-010] the highest-CR filter understands fractions and excludes tougher creatures", async ({ request }) => {
     const at = async (crMax: string) => ((await (await roll(request, { count: 8, type: TYPE, crMax })).json()) as { creatures: { name: string }[] }).creatures.map((c) => c.name).sort();
     expect(await at("1/2")).toEqual([BEAST_A]);
     expect(await at("1")).toEqual([BEAST_A, BEAST_SECRET].sort());
@@ -212,14 +212,14 @@ test.describe("encounter builder", () => {
     expect(await at("0")).toEqual([]);
   });
 
-  test("habitat and type filters narrow the pool, and nothing matching gives an empty, friendly result", async ({ request }) => {
+  test("[TC-PLAN-011] habitat and type filters narrow the pool, and nothing matching gives an empty, friendly result", async ({ request }) => {
     const desert = (await (await roll(request, { count: 8, type: TYPE, habitat: "desert" })).json()) as { creatures: { name: string }[]; pool: number };
     expect(desert.creatures.map((c) => c.name)).toEqual([BEAST_B]);
     const none = (await (await roll(request, { count: 3, type: `no-such-type-${tag}` })).json()) as { creatures: unknown[]; pool: number };
     expect(none).toMatchObject({ creatures: [], pool: 0 });
   });
 
-  test("rolling a table returns a roll inside its dice span and exactly that row's text", async ({ request }) => {
+  test("[TC-PLAN-012] rolling a table returns a roll inside its dice span and exactly that row's text", async ({ request }) => {
     const [t] = await query<{ body: string; dice: string }>(`SELECT body, fields->>'dice' AS dice FROM entries WHERE slug = 'forage-in-the-desert'`);
     const rows = parseRollTable(t.body).rows;
     const seen = new Set<number>();
@@ -234,7 +234,7 @@ test.describe("encounter builder", () => {
     expect(seen.size).toBeGreaterThan(3);
   });
 
-  test("bad requests are refused: count out of range, bad CR, junk slug, a page that is not a table, a table that does not exist", async ({ request }) => {
+  test("[TC-PLAN-013] bad requests are refused: count out of range, bad CR, junk slug, a page that is not a table, a table that does not exist", async ({ request }) => {
     for (const bad of [{ count: 0 }, { count: 9 }, { count: 1.5 }, { count: "3" }, { count: 1, crMax: "x".repeat(11) }, { count: 1, tableSlug: "../etc/passwd" }, { count: 1, type: "x".repeat(41) }]) {
       expect((await roll(request, bad)).status(), JSON.stringify(bad)).toBe(400);
     }
@@ -244,7 +244,7 @@ test.describe("encounter builder", () => {
     expect((await request.post("/api/planner/encounter", { data: "{not json", headers: { "content-type": "application/json" } })).status()).toBe(400);
   });
 
-  test("the builder page rolls and shows linked creatures and the table result", async ({ page }) => {
+  test("[TC-PLAN-014] the builder page rolls and shows linked creatures and the table result", async ({ page }) => {
     await page.goto("/planner");
     await page.getByLabel("Type contains").fill(TYPE);
     await page.getByLabel("Also roll a table").selectOption("forage-in-the-desert");
@@ -262,7 +262,7 @@ test.describe("reveal after the session", () => {
 
   const reveal = (request: APIRequestContext, data: unknown) => request.post("/api/planner/reveal", { data });
 
-  test("creates grants for exactly the chosen player and entry pairs and nothing else (database assertion)", async ({ request }) => {
+  test("[TC-PLAN-015] creates grants for exactly the chosen player and entry pairs and nothing else (database assertion)", async ({ request }) => {
     const a = await newPlayer();
     const b = await newPlayer();
     const c = await newPlayer();
@@ -301,7 +301,7 @@ test.describe("reveal after the session", () => {
     expect(await allGrants()).toHaveLength(4);
   });
 
-  test("a previous denial is turned into a grant, and duplicates in the request make no duplicate rows", async ({ request }) => {
+  test("[TC-PLAN-016] a previous denial is turned into a grant, and duplicates in the request make no duplicate rows", async ({ request }) => {
     const p = await newPlayer();
     const e = await entry(`Zz Reveal Denied ${tag}`, "note");
     await query(`INSERT INTO entry_grants (user_id, entry_id, granted) VALUES ($1, $2, false)`, [p.id, e]);
@@ -311,7 +311,7 @@ test.describe("reveal after the session", () => {
     expect(rows).toEqual([{ granted: true }]);
   });
 
-  test("a DM id, an unknown player and an unknown or archived entry are reported, never granted", async ({ request }) => {
+  test("[TC-PLAN-017] a DM id, an unknown player and an unknown or archived entry are reported, never granted", async ({ request }) => {
     const p = await newPlayer();
     const live = await entry(`Zz Reveal Live ${tag}`, "note");
     const gone = await entry(`Zz Reveal Archived ${tag}`, "note", { archived: true });
@@ -323,7 +323,7 @@ test.describe("reveal after the session", () => {
     expect((await query(`SELECT 1 FROM entry_grants WHERE entry_id = $1`, [gone]))).toHaveLength(0);
   });
 
-  test("invalid requests are refused and write nothing", async ({ request }) => {
+  test("[TC-PLAN-018] invalid requests are refused and write nothing", async ({ request }) => {
     const p = await newPlayer();
     const e = await entry(`Zz Reveal Invalid ${tag}`, "note");
     for (const bad of [
@@ -341,7 +341,7 @@ test.describe("reveal after the session", () => {
     expect((await query(`SELECT 1 FROM entry_grants WHERE user_id = $1`, [p.id]))).toHaveLength(0);
   });
 
-  test("the reveal form chooses players and entries, sends exactly those, and says what it skipped", async ({ page }) => {
+  test("[TC-PLAN-019] the reveal form chooses players and entries, sends exactly those, and says what it skipped", async ({ page }) => {
     const p = await newPlayer();
     const open = await entry(`Zz Form Open ${tag}`, "note");
     const hidden = await entry(`Zz Form Hidden ${tag}`, "note", { visibility: "secret" });
@@ -374,7 +374,7 @@ test.describe("what a player sees after a reveal", () => {
     }
   }
 
-  test("the entry opens at once (404 before, 200 after) and the front page lists it under New for you, newest first", async ({ browser }) => {
+  test("[TC-PLAN-020] the entry opens at once (404 before, 200 after) and the front page lists it under New for you, newest first", async ({ browser }) => {
     const p = await newPlayer();
     const first = await entry(`Zz Learned First ${tag}`, "note");
     const second = await entry(`Zz Learned Second ${tag}`, "note");
@@ -390,6 +390,8 @@ test.describe("what a player sees after a reveal", () => {
 
       await page.goto("/");
       const section = page.locator("section", { has: page.getByRole("heading", { name: "New for you" }) });
+      // allTextContents does not wait, and the front page streams its sections: wait for both links first.
+      await expect(section.getByRole("link")).toHaveCount(2);
       const names = await section.getByRole("link").allTextContents();
       const joined = names.join(" | ");
       expect(joined.indexOf(`Zz Learned Second ${tag}`)).toBeGreaterThanOrEqual(0);
@@ -399,7 +401,7 @@ test.describe("what a player sees after a reveal", () => {
     }
   });
 
-  test("a revealed page that is later hidden again or archived drops off the list", async ({ browser }) => {
+  test("[TC-PLAN-021] a revealed page that is later hidden again or archived drops off the list", async ({ browser }) => {
     const p = await newPlayer();
     const a = await entry(`Zz Fade A ${tag}`, "note");
     const b = await entry(`Zz Fade B ${tag}`, "note");
@@ -418,7 +420,7 @@ test.describe("what a player sees after a reveal", () => {
     }
   });
 
-  test("only the player who was chosen sees it, and the list is capped at 8", async ({ browser }) => {
+  test("[TC-PLAN-022] only the player who was chosen sees it, and the list is capped at 8", async ({ browser }) => {
     const chosen = await newPlayer();
     const other = await newPlayer();
     const many: string[] = [];
@@ -440,7 +442,7 @@ test.describe("what a player sees after a reveal", () => {
     }
   });
 
-  test("the DM never gets a New for you list", async ({ browser }) => {
+  test("[TC-PLAN-023] the DM never gets a New for you list", async ({ browser }) => {
     const context = await browser.newContext({ storageState: "tests/.auth/dm.json" });
     const page = await context.newPage();
     try {
@@ -455,7 +457,7 @@ test.describe("what a player sees after a reveal", () => {
 test.describe("small screens", () => {
   test.use({ storageState: "tests/.auth/dm.json", viewport: { width: 375, height: 800 } });
 
-  test("at 375px the planner has no horizontal page scroll", async ({ page }) => {
+  test("[TC-PLAN-024] at 375px the planner has no horizontal page scroll", async ({ page }) => {
     await page.goto("/planner");
     await expect(page.getByRole("heading", { level: 1, name: "Planner" })).toBeVisible();
     const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);

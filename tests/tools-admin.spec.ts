@@ -8,7 +8,7 @@ import { deleteEphemeralEntry, testName } from "./helpers";
 test.use({ storageState: "tests/.auth/dm.json" });
 
 test.describe("dice roller", () => {
-  test("a typed expression rolls, shows the expression and a total in range, and is logged", async ({ page }) => {
+  test("[TC-TOOLS-001] a typed expression rolls, shows the expression and a total in range, and is logged", async ({ page }) => {
     await page.goto("/tools/dice");
     await expect(page.getByText("Nothing rolled yet")).toBeVisible();
 
@@ -22,14 +22,14 @@ test.describe("dice roller", () => {
     await expect(page.getByText("Nothing rolled yet")).toHaveCount(0);
   });
 
-  test("a preset rolls immediately and puts its expression in the box", async ({ page }) => {
+  test("[TC-TOOLS-002] a preset rolls immediately and puts its expression in the box", async ({ page }) => {
     await page.goto("/tools/dice");
     await page.getByRole("button", { name: "4d6kh3", exact: true }).click();
     await expect(page.getByLabel("Dice expression")).toHaveValue("4d6kh3");
     await expect(page.getByRole("listitem").filter({ hasText: "4d6kh3" }).first()).toBeVisible();
   });
 
-  test("an unreadable expression shows a friendly message and logs nothing", async ({ page }) => {
+  test("[TC-TOOLS-003] an unreadable expression shows a friendly message and logs nothing", async ({ page }) => {
     await page.goto("/tools/dice");
     await page.getByLabel("Dice expression").fill("banana");
     await page.getByRole("button", { name: "Roll", exact: true }).click();
@@ -37,7 +37,7 @@ test.describe("dice roller", () => {
     await expect(page.getByText("Nothing rolled yet")).toBeVisible();
   });
 
-  test("boundary: the biggest legal pool rolls and an oversized one is refused", async ({ page }) => {
+  test("[TC-TOOLS-004] boundary: the biggest legal pool rolls and an oversized one is refused", async ({ page }) => {
     await page.goto("/tools/dice");
     await page.getByLabel("Dice expression").fill("500d6");
     await page.getByRole("button", { name: "Roll", exact: true }).click();
@@ -48,7 +48,7 @@ test.describe("dice roller", () => {
     await expect(page.locator('p[role="alert"]')).toContainText("Roll between 1 and 500 dice at a time.");
   });
 
-  test("the log survives a reload and Clear empties it", async ({ page }) => {
+  test("[TC-TOOLS-005] the log survives a reload and Clear empties it", async ({ page }) => {
     await page.goto("/tools/dice");
     await page.getByRole("button", { name: "1d8", exact: true }).click();
     await expect(page.getByRole("listitem").filter({ hasText: "1d8" }).first()).toBeVisible();
@@ -59,7 +59,7 @@ test.describe("dice roller", () => {
     await expect(page.getByText("Nothing rolled yet")).toBeVisible();
   });
 
-  test("the notation reference opens and lists the keep-highest form", async ({ page }) => {
+  test("[TC-TOOLS-006] the notation reference opens and lists the keep-highest form", async ({ page }) => {
     await page.goto("/tools/dice");
     await page.getByText("Notation reference").click();
     await expect(page.getByText("roll four, keep the highest three")).toBeVisible();
@@ -67,7 +67,7 @@ test.describe("dice roller", () => {
 });
 
 test.describe("backup and import page", () => {
-  test("shows the live counts and both download links", async ({ page }) => {
+  test("[TC-TOOLS-007] shows the live counts and both download links", async ({ page }) => {
     await page.goto("/admin");
     await expect(page.getByRole("heading", { level: 1, name: "Backup & Import" })).toBeVisible();
     await expect(page.getByText("Entries", { exact: true })).toBeVisible();
@@ -75,13 +75,13 @@ test.describe("backup and import page", () => {
     await expect(page.getByRole("link", { name: "Download as Markdown" })).toHaveAttribute("href", "/api/export?format=markdown");
   });
 
-  test("restoring with no file chosen says so", async ({ page }) => {
+  test("[TC-TOOLS-008] restoring with no file chosen says so", async ({ page }) => {
     await page.goto("/admin");
     await page.getByRole("button", { name: "Restore backup" }).click();
     await expect(page.locator('p[role="alert"]')).toHaveText("Choose a backup file first.");
   });
 
-  test("a file that is not JSON, and JSON that is not a backup, are each refused with a clear message", async ({ page }) => {
+  test("[TC-TOOLS-009] a file that is not JSON, and JSON that is not a backup, are each refused with a clear message", async ({ page }) => {
     await page.goto("/admin");
     const input = page.getByLabel("Backup file");
 
@@ -94,7 +94,7 @@ test.describe("backup and import page", () => {
     await expect(page.locator('p[role="alert"]')).toHaveText("That isn't a valid Asetheria backup.".replace("That isn't", "That file isn't"));
   });
 
-  test("a valid backup is restored additively and reports what changed", async ({ page }) => {
+  test("[TC-TOOLS-010] a valid backup is restored additively and reports what changed", async ({ page }) => {
     const name = testName("ui-import");
     const slug = name.toLowerCase();
     try {

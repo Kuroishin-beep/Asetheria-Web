@@ -13,7 +13,7 @@ function uniqueWord(label: string): string {
 }
 
 test.describe("search safety", () => {
-  test("a player cannot find a public entry by words only in its DM notes", async ({
+  test("[TC-SRCHS-001] a player cannot find a public entry by words only in its DM notes", async ({
     browser,
   }) => {
     const dmContext = await browser.newContext({ storageState: "tests/.auth/dm.json" });
@@ -56,7 +56,7 @@ test.describe("search safety", () => {
 test.describe("search snippets", () => {
   test.use({ storageState: "tests/.auth/dm.json" });
 
-  test("HTML in an entry body is escaped, highlighting survives", async ({ page }) => {
+  test("[TC-SRCHS-002] HTML in an entry body is escaped, highlighting survives", async ({ page }) => {
     const name = testName("snippet-xss");
     const word = uniqueWord("snip");
     // ts_headline drops well-formed tags from fragment snippets, but an

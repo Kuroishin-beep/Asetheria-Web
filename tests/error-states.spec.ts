@@ -22,7 +22,7 @@ test.afterAll(async () => {
   await closeDbHelpers();
 });
 
-test("a failing data layer shows a friendly error with Try again, never raw error text, and Try again recovers", async ({ page }) => {
+test("[TC-ERR-001] a failing data layer shows a friendly error with Try again, never raw error text, and Try again recovers", async ({ page }) => {
   await query(`ALTER TABLE entries RENAME TO entries_offline`);
   try {
     await page.goto("/codex/npcs");

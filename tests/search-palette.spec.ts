@@ -3,7 +3,7 @@ import { test, expect } from "@playwright/test";
 test.use({ storageState: "tests/.auth/dm.json" });
 
 test.describe("command palette", () => {
-  test("Ctrl+K opens it, typing filters, Enter navigates", async ({ page }) => {
+  test("[TC-SRCH-001] Ctrl+K opens it, typing filters, Enter navigates", async ({ page }) => {
     await page.goto("/");
     // The shortcut listener attaches on hydration; wait for the page to settle.
     await page.waitForLoadState("networkidle");
@@ -17,7 +17,7 @@ test.describe("command palette", () => {
     await expect(page).toHaveURL(/\/codex\/entry\/.+/);
   });
 
-  test("Escape closes the palette", async ({ page }) => {
+  test("[TC-SRCH-002] Escape closes the palette", async ({ page }) => {
     await page.goto("/");
     // The shortcut listener attaches on hydration; wait for the page to settle.
     await page.waitForLoadState("networkidle");
@@ -31,7 +31,7 @@ test.describe("command palette", () => {
 test.describe("full-text search", () => {
   test.use({ storageState: "tests/.auth/dm.json" });
 
-  test("finds entries via /search and via /api/find", async ({ page }) => {
+  test("[TC-SRCH-003] finds entries via /search and via /api/find", async ({ page }) => {
     await page.goto("/search?q=Bacchus");
     await expect(page.getByRole("link", { name: /bacchus/i }).first()).toBeVisible();
 

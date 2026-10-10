@@ -14,7 +14,7 @@ test.afterAll(async () => {
   await closeDbHelpers();
 });
 
-test("a DM creates an animal with every field and sees it on its page and in the Fauna section", async ({ page }) => {
+test("[TC-FAUNA-001] a DM creates an animal with every field and sees it on its page and in the Fauna section", async ({ page }) => {
   test.slow();
   const name = testName("fauna");
   let slug: string | undefined;
@@ -54,7 +54,7 @@ test("a DM creates an animal with every field and sees it on its page and in the
   }
 });
 
-test("'Found in' makes a real connection: plain names and [[links]] both reach the place, unknown names are ignored", async ({ page }) => {
+test("[TC-FAUNA-002] 'Found in' makes a real connection: plain names and [[links]] both reach the place, unknown names are ignored", async ({ page }) => {
   test.slow();
   const plain = testName("found-plain");
   const bracketed = testName("found-link");
@@ -87,7 +87,7 @@ test("'Found in' makes a real connection: plain names and [[links]] both reach t
   }
 });
 
-test("ore, flora and fauna forms all offer Found in, Biome and Rarity", async ({ page }) => {
+test("[TC-FAUNA-003] ore, flora and fauna forms all offer Found in, Biome and Rarity", async ({ page }) => {
   for (const kind of ["ore", "flora", "fauna"]) {
     await page.goto(`/codex/new?kind=${kind}`);
     for (const label of ["Found in", "Biome", "Rarity"]) {
@@ -96,7 +96,7 @@ test("ore, flora and fauna forms all offer Found in, Biome and Rarity", async ({
   }
 });
 
-test("the Flora and Fauna sections are separate, and the old combined address still opens", async ({ page }) => {
+test("[TC-FAUNA-004] the Flora and Fauna sections are separate, and the old combined address still opens", async ({ page }) => {
   await page.goto("/codex/flora");
   await expect(page.getByRole("heading", { level: 1, name: "Flora" })).toBeVisible();
   await page.goto("/codex/fauna");

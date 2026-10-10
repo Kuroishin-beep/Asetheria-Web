@@ -1,6 +1,6 @@
 "use client";
 
-import { memo, useEffect, useMemo, useRef, useState, useTransition, type KeyboardEvent } from "react";
+import { memo, useEffect, useMemo, useRef, useState, useSyncExternalStore, useTransition, type KeyboardEvent } from "react";
 import { useRouter } from "next/navigation";
 import { Network } from "lucide-react";
 import { EmptyState } from "@/components/entry-card";
@@ -95,6 +95,67 @@ const EdgeLayer = memo(function EdgeLayer({ edges, positions }: { edges: GraphEd
 });
 
 /**
+ * Which page the pointer (or focus) is on. Kept outside React state so a hover
+ * re-renders only the overlay that draws it, not the graph, its controls and
+ * their option lists: on a busy canvas that is the difference between one and
+ * three frames per move on a slow CPU.
+ */
+function createHoverStore() {
+  let current: string | null = null;
+  const listeners = new Set<() => void>();
+  return {
+    get: () => current,
+    set(id: string | null) {
+      if (id === current) return;
+      current = id;
+      for (const l of listeners) l();
+    },
+    subscribe(listener: () => void) {
+      listeners.add(listener);
+      return () => listeners.delete(listener);
+    },
+  };
+}
+type HoverStore = ReturnType<typeof createHoverStore>;
+
+/** The hover trace: the hovered page, its links and its name, drawn in its own small svg above the picture. */
+const HoverLayer = memo(function HoverLayer({
+  store,
+  positions,
+  neighbors,
+  names,
+}: {
+  store: HoverStore;
+  positions: Positions;
+  neighbors: Map<string, Set<string>>;
+  names: Map<string, GraphNode>;
+}) {
+  const hovered = useSyncExternalStore(store.subscribe, store.get, () => null);
+  const point = hovered ? positions[hovered] : null;
+  return (
+    <svg viewBox={`0 0 ${GRAPH_WIDTH} ${GRAPH_HEIGHT}`} className="pointer-events-none absolute inset-0 size-full" aria-hidden="true">
+      {hovered && point && (
+        <g className="pointer-events-none" data-testid="graph-hover">
+          {[...(neighbors.get(hovered) ?? [])].map((id) => {
+            const q = positions[id];
+            return q ? (
+              <g key={id}>
+                <line x1={point.x} y1={point.y} x2={q.x} y2={q.y} className="stroke-foreground" strokeWidth={1.6} opacity={0.8} />
+                <circle cx={q.x} cy={q.y} r={8} className="fill-none stroke-foreground" strokeWidth={1.5} />
+              </g>
+            ) : null;
+          })}
+          <circle cx={point.x} cy={point.y} r={9} className="fill-none stroke-ring" strokeWidth={2.5} />
+          <text x={point.x + 12} y={point.y + 4} fontSize={12} className="fill-foreground font-semibold">
+            {names.get(hovered)?.name}
+          </text>
+        </g>
+      )}
+    </svg>
+  );
+});
+
+/**
  * Every page, drawn once. Events are handled on the svg (delegation), not per
  * node, and hover is a separate overlay, so moving the pointer over a thousand
  * nodes never re-renders a thousand nodes.
@@ -170,7 +231,8 @@ export function GraphView({
   const router = useRouter();
   const svgRef = useRef<SVGSVGElement>(null);
   const [pending, startTransition] = useTransition();
-  const [hovered, setHovered] = useState<string | null>(null);
+  const [hoverStore] = useState(createHoverStore);
+  const setHovered = hoverStore.set;
   const [activeId, setActiveId] = useState<string | null>(null);
   const filtered = isFiltered(filters);
 
@@ -279,9 +341,6 @@ export function GraphView({
     );
   }
 
-  const hoveredPoint = hovered ? positions[hovered] : null;
-  const hoverNeighbours = hovered ? [...(neighbors.get(hovered) ?? [])] : [];
-
   return (
     <Card size="sm" className="overflow-hidden">
       <CardContent className="grid gap-3">
@@ -354,7 +413,7 @@ export function GraphView({
             data-shown={nodes.length}
             onPointerOver={(e) => {
               const id = nodeIdOf(e.target);
-              setHovered((cur) => (cur === id ? cur : id));
+              setHovered(id);
             }}
             onPointerLeave={() => setHovered(null)}
             onFocus={(e) => {
@@ -383,30 +442,8 @@ export function GraphView({
             />
           </svg>
           {/* The hover trace is its own layer above the picture: moving the pointer repaints this small svg,
-              not the two thousand nodes underneath it. */}
-          <svg
-            viewBox={`0 0 ${GRAPH_WIDTH} ${GRAPH_HEIGHT}`}
-            className="pointer-events-none absolute inset-0 size-full"
-            aria-hidden="true"
-          >
-            {hovered && hoveredPoint && (
-              <g className="pointer-events-none" data-testid="graph-hover">
-                {hoverNeighbours.map((id) => {
-                  const q = positions[id];
-                  return q ? (
-                    <g key={id}>
-                      <line x1={hoveredPoint.x} y1={hoveredPoint.y} x2={q.x} y2={q.y} className="stroke-foreground" strokeWidth={1.6} opacity={0.8} />
-                      <circle cx={q.x} cy={q.y} r={8} className="fill-none stroke-foreground" strokeWidth={1.5} />
-                    </g>
-                  ) : null;
-                })}
-                <circle cx={hoveredPoint.x} cy={hoveredPoint.y} r={9} className="fill-none stroke-ring" strokeWidth={2.5} />
-                <text x={hoveredPoint.x + 12} y={hoveredPoint.y + 4} fontSize={12} className="fill-foreground font-semibold">
-                  {bySlug.get(hovered)?.name}
-                </text>
-              </g>
-            )}
-          </svg>
+              not the two thousand nodes underneath it, and re-renders nothing else. */}
+          <HoverLayer store={hoverStore} positions={positions} neighbors={neighbors} names={bySlug} />
           </div>
         )}
 

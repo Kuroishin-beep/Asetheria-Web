@@ -40,7 +40,7 @@ test.afterAll(async () => {
   await closeDbHelpers();
 });
 
-test("granting a city shows its places; an explicit denial on a place still hides it", async ({ browser }) => {
+test("[TC-RBACI-001] granting a city shows its places; an explicit denial on a place still hides it", async ({ browser }) => {
   const { userId, context, page } = await playerSession(browser);
   try {
     // No grants at all: neither the city nor its agora.
@@ -62,7 +62,7 @@ test("granting a city shows its places; an explicit denial on a place still hide
   }
 });
 
-test("inheritance passes through levels, and the nearest explicit row decides", async ({ browser }) => {
+test("[TC-RBACI-002] inheritance passes through levels, and the nearest explicit row decides", async ({ browser }) => {
   const { userId, context, page } = await playerSession(browser);
   try {
     // Duneforged → Citadel Cathedral → Forge of Vulcan.

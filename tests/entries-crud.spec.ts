@@ -24,7 +24,7 @@ test.afterEach(async ({ page }) => {
 });
 
 test.describe("entry CRUD (DM)", () => {
-  test("create, edit, tag, and read back a note entry", async ({ page }) => {
+  test("[TC-ENT-001] create, edit, tag, and read back a note entry", async ({ page }) => {
     const name = testName("crud-note");
     const slug = await track(
       page,
@@ -59,7 +59,7 @@ test.describe("entry CRUD (DM)", () => {
     await expect(page.getByText(/^Created by/)).toBeVisible();
   });
 
-  test("archive then restore round-trips an entry", async ({ page }) => {
+  test("[TC-ENT-002] archive then restore round-trips an entry", async ({ page }) => {
     const name = testName("crud-archive");
     const slug = await track(page, await createEntryViaUI(page, { kind: "note", name }));
 
@@ -90,7 +90,7 @@ test.describe("entry CRUD (DM)", () => {
     await expect(page.locator("h1")).toContainText(name);
   });
 
-  test("reverting to an earlier revision restores its content", async ({ page }) => {
+  test("[TC-ENT-003] reverting to an earlier revision restores its content", async ({ page }) => {
     const name = testName("crud-revert");
     const slug = await track(
       page,
@@ -117,7 +117,7 @@ test.describe("entry CRUD (DM)", () => {
     await expect(page.getByText("Version one.")).toBeVisible();
   });
 
-  test("wiki-link in body creates a working backlink on the target page", async ({ page }) => {
+  test("[TC-ENT-004] wiki-link in body creates a working backlink on the target page", async ({ page }) => {
     const targetName = testName("crud-link-target");
     const targetSlug = await track(
       page,
@@ -139,7 +139,7 @@ test.describe("entry CRUD (DM)", () => {
     await expect(page.getByRole("link", { name: sourceName })).toBeVisible();
   });
 
-  test("purge is refused while the entry still has content", async ({ page }) => {
+  test("[TC-ENT-005] purge is refused while the entry still has content", async ({ page }) => {
     const name = testName("crud-purge-guard");
     const slug = await track(
       page,

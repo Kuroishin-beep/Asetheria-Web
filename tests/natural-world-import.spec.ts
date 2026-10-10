@@ -20,11 +20,11 @@ test.afterAll(async () => {
 });
 
 test.describe("the data files (pure)", () => {
-  test("pass every static check: shape, fields, provenance, licence denylist, counts", () => {
+  test("[TC-NATW-002] pass every static check: shape, fields, provenance, licence denylist, counts", () => {
     expect(check()).toEqual([]);
   });
 
-  test("hold exactly the promised number of new ores, flora and fauna, with no duplicate names across batches", () => {
+  test("[TC-NATW-003] hold exactly the promised number of new ores, flora and fauna, with no duplicate names across batches", () => {
     const all = loadAll().flatMap((f) => f.entries);
     for (const kind of ["ore", "flora", "fauna"] as const) {
       expect(all.filter((e) => e.kind === kind)).toHaveLength(TARGETS[kind]);
@@ -32,14 +32,14 @@ test.describe("the data files (pure)", () => {
     expect(new Set(all.map((e) => e.name.toLowerCase())).size).toBe(all.length);
   });
 
-  test("the denylist check really rejects scraped-source and third-party game text", () => {
+  test("[TC-NATW-004] the denylist check really rejects scraped-source and third-party game text", () => {
     const sample = JSON.stringify({ body: "Copied from a GM Binder page, see dnd5e.wikidot.com and the Forgotten Realms." }).toLowerCase();
     expect(["gm binder", "wikidot", "forgotten realms"].every((w) => sample.includes(w))).toBe(true);
   });
 });
 
 test.describe("once imported", () => {
-  test("every batch entry is in the database with its kind, and each file imports once", async () => {
+  test("[TC-NATW-005] every batch entry is in the database with its kind, and each file imports once", async () => {
     const rows = await query<{ kind: string; n: string }>(
       `SELECT kind, count(*)::text AS n FROM entries WHERE source_path LIKE $1 AND kind IN ('ore','flora','fauna') AND archived_at IS NULL GROUP BY kind`,
       [SOURCE],
@@ -48,7 +48,7 @@ test.describe("once imported", () => {
     expect(byKind).toEqual({ ore: TARGETS.ore, flora: TARGETS.flora, fauna: TARGETS.fauna });
   });
 
-  test("re-importing a batch creates nothing and changes no row count", async () => {
+  test("[TC-NATW-006] re-importing a batch creates nothing and changes no row count", async () => {
     const before = await query<{ n: string }>(`SELECT count(*)::text AS n FROM entries`);
     const out = execFileSync("npx", ["tsx", "scripts/import-codex-file.ts", "data/natural-world/ores-1.json"], {
       cwd: ROOT,
@@ -60,7 +60,7 @@ test.describe("once imported", () => {
     expect(after[0].n).toBe(before[0].n);
   });
 
-  test("every place named in a Found in property or a [[link]] is a real, active page", async () => {
+  test("[TC-NATW-007] every place named in a Found in property or a [[link]] is a real, active page", async () => {
     const all = await query<{ id: string; name: string; kind: string; fields: Record<string, string> }>(
       `SELECT id, name, kind, fields FROM entries WHERE archived_at IS NULL`,
     );
@@ -74,7 +74,7 @@ test.describe("once imported", () => {
     expect(missing).toEqual([]);
   });
 
-  test("each entry has a found-in connection and a body connection in the graph", async () => {
+  test("[TC-NATW-008] each entry has a found-in connection and a body connection in the graph", async () => {
     const rows = await query<{ name: string; foundin: string; mentions: string }>(
       `SELECT e.name,
               count(*) FILTER (WHERE l.relation = 'found-in')::text AS foundin,
@@ -92,7 +92,7 @@ test.describe("once imported", () => {
 test.describe("on the site (DM)", () => {
   test.use({ storageState: "tests/.auth/dm.json" });
 
-  test("an imported ore reads as a finished page: summary, sections, properties, place links and the DM's Basis note", async ({ page }) => {
+  test("[TC-NATW-009] an imported ore reads as a finished page: summary, sections, properties, place links and the DM's Basis note", async ({ page }) => {
     await page.goto("/codex/entry/malachite");
     await expect(page.getByRole("heading", { level: 1, name: "Malachite" })).toBeVisible();
     await expect(page.getByRole("heading", { name: "Where it is found" })).toBeVisible();
@@ -102,18 +102,18 @@ test.describe("on the site (DM)", () => {
     await expect(page.getByText(/^Basis: real malachite/)).toBeVisible();
   });
 
-  test("a place now lists the things found there, as linked mentions", async ({ page }) => {
+  test("[TC-NATW-010] a place now lists the things found there, as linked mentions", async ({ page }) => {
     await page.goto("/codex/entry/dasht-a-khaliq");
     await expect(page.getByRole("heading", { name: /Linked mentions/ })).toBeVisible();
     await expect(page.getByRole("link", { name: /Malachite/ }).first()).toBeVisible();
   });
 
-  test("full-text search finds an imported entry by a word that is only in its body", async ({ page }) => {
+  test("[TC-NATW-011] full-text search finds an imported entry by a word that is only in its body", async ({ page }) => {
     await page.goto("/search?q=bedbug");
     await expect(page.getByRole("link", { name: /Bug-Herb/ }).first()).toBeVisible();
   });
 
-  test("the sections list the new entries", async ({ page }) => {
+  test("[TC-NATW-012] the sections list the new entries", async ({ page }) => {
     await page.goto("/codex/ores?page=2");
     await expect(page.locator('[data-slot="card"]').first()).toBeVisible();
     await page.goto("/codex/fauna");
@@ -121,7 +121,7 @@ test.describe("on the site (DM)", () => {
   });
 });
 
-test("a player with the kind granted sees the entry but never its DM-only Basis note", async ({ browser }) => {
+test("[TC-NATW-001] a player with the kind granted sees the entry but never its DM-only Basis note", async ({ browser }) => {
   const username = `zz-nw-${randomUUID().slice(0, 8)}`;
   const userId = await createTestPlayer(username, PASSWORD);
   await query(`UPDATE users SET display_name = 'NW Tester' WHERE id = $1`, [userId]);
@@ -142,7 +142,7 @@ test("a player with the kind granted sees the entry but never its DM-only Basis 
 });
 
 test.describe("batch archive tool", () => {
-  test("archives and restores exactly one batch by its source, and refuses a too-short prefix", async () => {
+  test("[TC-NATW-013] archives and restores exactly one batch by its source, and refuses a too-short prefix", async () => {
     const tag = `test: archive-batch-${randomUUID().slice(0, 8)}`;
     const slugs = [0, 1].map(() => `zz-batch-${randomUUID().slice(0, 8)}`);
     try {

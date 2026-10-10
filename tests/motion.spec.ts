@@ -10,7 +10,7 @@ test.use({ storageState: "tests/.auth/dm.json" });
 
 const PAGE_WRAPPER = "main > div";
 
-test("with prefers-reduced-motion the page content is never visible while offset, and ends fully visible", async ({ browser }) => {
+test("[TC-MOTN-001] with prefers-reduced-motion the page content is never visible while offset, and ends fully visible", async ({ browser }) => {
   const context = await browser.newContext({ reducedMotion: "reduce", storageState: "tests/.auth/dm.json" });
   const page = await context.newPage();
   await page.goto("/codex/npcs", { waitUntil: "domcontentloaded" });
@@ -39,7 +39,7 @@ test("with prefers-reduced-motion the page content is never visible while offset
   await context.close();
 });
 
-test("with normal motion the page content settles at full opacity, in place", async ({ page }) => {
+test("[TC-MOTN-002] with normal motion the page content settles at full opacity, in place", async ({ page }) => {
   await page.goto("/codex/npcs");
   await expect
     .poll(
@@ -53,7 +53,7 @@ test("with normal motion the page content settles at full opacity, in place", as
     .toBe("1|none");
 });
 
-test("cards in a list finish their staggered entrance (none is left invisible)", async ({ page }) => {
+test("[TC-MOTN-003] cards in a list finish their staggered entrance (none is left invisible)", async ({ page }) => {
   await page.goto("/codex/npcs");
   await page.waitForTimeout(1500);
   const hidden = await page.evaluate(() =>

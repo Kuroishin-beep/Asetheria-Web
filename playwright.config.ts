@@ -21,12 +21,16 @@ export default defineConfig({
   fullyParallel: false,
   workers: 1,
   retries: 0,
-  reporter: [["list"], ["html", { open: "never", outputFolder: "playwright-report" }]],
+  // Every test's artifacts (a screenshot always; video and trace when it fails) land in ./test-results,
+  // and results.json feeds the Actual and Status columns of test-cases.html.
+  outputDir: "./test-results",
+  reporter: [["list"], ["html", { open: "never", outputFolder: "playwright-report" }], ["json", { outputFile: "test-results/results.json" }]],
   globalSetup: NO_SERVER ? undefined : "./tests/global-setup.ts",
   use: {
     baseURL: "http://localhost:3000",
     trace: "retain-on-failure",
-    screenshot: "only-on-failure",
+    video: "retain-on-failure",
+    screenshot: "on",
   },
   projects: [{ name: "chromium", use: { ...devices["Desktop Chrome"] } }],
   webServer: NO_SERVER ? undefined : {

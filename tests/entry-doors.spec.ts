@@ -30,14 +30,14 @@ test.afterAll(async () => {
 });
 
 test.describe("welcome doors", () => {
-  test("/welcome offers both the party door and the DM sign-in", async ({ page }) => {
+  test("[TC-DOOR-001] /welcome offers both the party door and the DM sign-in", async ({ page }) => {
     await page.goto("/welcome?next=%2Fsearch");
     await expect(page.getByRole("button", { name: "Enter as a player" })).toBeVisible();
     const dmLink = page.getByRole("link", { name: /sign in/i }).first();
     await expect(dmLink).toHaveAttribute("href", "/login?next=%2Fsearch");
   });
 
-  test("the party door signs in as a player, honors next, and hides DM controls", async ({ page }) => {
+  test("[TC-DOOR-002] the party door signs in as a player, honors next, and hides DM controls", async ({ page }) => {
     await page.goto("/welcome?next=%2Fsearch");
     await page.getByLabel("Party password").fill(PARTY_PASSWORD);
     await page.getByRole("button", { name: "Enter as a player" }).click();
@@ -48,7 +48,7 @@ test.describe("welcome doors", () => {
     await expect(page).not.toHaveURL(/\/admin$/);
   });
 
-  test("the party door refuses a wrong or missing password", async ({ page, request }) => {
+  test("[TC-DOOR-003] the party door refuses a wrong or missing password", async ({ page, request }) => {
     const missing = await request.post("/api/auth/player", { data: {} });
     expect(missing.status()).toBe(400);
     await page.goto("/welcome");
@@ -59,7 +59,7 @@ test.describe("welcome doors", () => {
     await expect(page).toHaveURL(/\/welcome/);
   });
 
-  test("the party door ignores a cross-site next", async ({ page }) => {
+  test("[TC-DOOR-004] the party door ignores a cross-site next", async ({ page }) => {
     await page.goto("/welcome?next=//evil.example.com");
     await page.getByLabel("Party password").fill(PARTY_PASSWORD);
     await page.getByRole("button", { name: "Enter as a player" }).click();
@@ -69,7 +69,7 @@ test.describe("welcome doors", () => {
 });
 
 test.describe("registration", () => {
-  test("a wrong invite code is refused", async ({ request }) => {
+  test("[TC-DOOR-005] a wrong invite code is refused", async ({ request }) => {
     test.skip(!SIGNUP_CODE, "SIGNUP_CODE not set in .env.local");
     const res = await request.post("/api/auth/register", {
       data: { username: `zz-reg-${randomUUID().slice(0, 8)}`, password: "correct horse battery staple", code: "nope" },
@@ -77,7 +77,7 @@ test.describe("registration", () => {
     expect(res.status()).toBe(403);
   });
 
-  test("registering via the form creates a named player with default grants", async ({ page }) => {
+  test("[TC-DOOR-006] registering via the form creates a named player with default grants", async ({ page }) => {
     test.skip(!SIGNUP_CODE, "SIGNUP_CODE not set in .env.local");
     const username = `zz-reg-${randomUUID().slice(0, 8)}`;
     const password = "correct horse battery staple";
@@ -103,7 +103,7 @@ test.describe("registration", () => {
     }
   });
 
-  test("the request body cannot choose the DM role", async ({ request }) => {
+  test("[TC-DOOR-007] the request body cannot choose the DM role", async ({ request }) => {
     test.skip(!SIGNUP_CODE, "SIGNUP_CODE not set in .env.local");
     const username = `zz-reg-${randomUUID().slice(0, 8)}`;
     try {

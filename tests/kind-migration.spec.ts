@@ -54,7 +54,7 @@ test.describe("fauna and table kinds: migration", () => {
     runMigration("--apply");
   });
 
-  test("the enum carries both new values", async () => {
+  test("[TC-KIND-003] the enum carries both new values", async () => {
     const labels = (
       await query<{ enumlabel: string }>(
         `SELECT e.enumlabel FROM pg_enum e JOIN pg_type t ON t.oid = e.enumtypid WHERE t.typname = 'entry_kind'`,
@@ -64,7 +64,7 @@ test.describe("fauna and table kinds: migration", () => {
     expect(labels).toContain("table");
   });
 
-  test("all eight original animals are fauna, and none remain in flora", async () => {
+  test("[TC-KIND-004] all eight original animals are fauna, and none remain in flora", async () => {
     // Fauna also holds the Phase 4 natural-world batches, so assert the migrated eight by name.
     const fauna = await query<{ name: string }>(
       `SELECT name FROM entries WHERE kind = 'fauna' AND archived_at IS NULL AND name = ANY($1) ORDER BY name`,
@@ -75,7 +75,7 @@ test.describe("fauna and table kinds: migration", () => {
     expect(stillFlora).toHaveLength(0);
   });
 
-  test("every legacy roll table has one table entry with the same dice and row count", async () => {
+  test("[TC-KIND-005] every legacy roll table has one table entry with the same dice and row count", async () => {
     const legacy = await query<{ id: string; name: string; dice: string; items: unknown[] }>(
       `SELECT id, name, dice, items FROM roll_tables`,
     );
@@ -92,7 +92,7 @@ test.describe("fauna and table kinds: migration", () => {
     }
   });
 
-  test("running the migration again changes nothing", async () => {
+  test("[TC-KIND-006] running the migration again changes nothing", async () => {
     const before = await query<{ n: string }>(`SELECT count(*)::text AS n FROM entries`);
     const out = runMigration("--apply");
     const after = await query<{ n: string }>(`SELECT count(*)::text AS n FROM entries`);
@@ -101,7 +101,7 @@ test.describe("fauna and table kinds: migration", () => {
     expect(out).toContain("table entries created: 0");
   });
 
-  test("a dry run reports the plan and writes nothing", async () => {
+  test("[TC-KIND-007] a dry run reports the plan and writes nothing", async () => {
     const before = await query<{ n: string }>(`SELECT count(*)::text AS n FROM entries`);
     const out = runMigration();
     const after = await query<{ n: string }>(`SELECT count(*)::text AS n FROM entries`);
@@ -113,18 +113,18 @@ test.describe("fauna and table kinds: migration", () => {
 test.describe("fauna and table kinds: access", () => {
   test.use({ storageState: "tests/.auth/dm.json" });
 
-  test("the DM can open the fauna and table sections", async ({ page }) => {
+  test("[TC-KIND-008] the DM can open the fauna and table sections", async ({ page }) => {
     expect((await page.goto("/codex/fauna"))?.status()).toBe(200);
     for (const name of FAUNA) await expect(page.getByText(name, { exact: true }).first()).toBeVisible();
     expect((await page.goto("/codex/tables"))?.status()).toBe(200);
   });
 
-  test("the old Flora & Fauna address still resolves", async ({ page }) => {
+  test("[TC-KIND-009] the old Flora & Fauna address still resolves", async ({ page }) => {
     expect((await page.goto("/codex/flora-fauna"))?.status()).toBe(200);
   });
 });
 
-test("an ungranted player sees no fauna or tables: empty sections, 404 entries, nothing in the palette feed", async ({ browser }) => {
+test("[TC-KIND-001] an ungranted player sees no fauna or tables: empty sections, 404 entries, nothing in the palette feed", async ({ browser }) => {
   const { userId, context, page } = await namedPlayer(browser);
   try {
     // Sections render for everyone (as every existing kind does) but list nothing.
@@ -142,7 +142,7 @@ test("an ungranted player sees no fauna or tables: empty sections, 404 entries, 
   }
 });
 
-test("a fauna kind grant shows public fauna and never secret fauna", async ({ browser }) => {
+test("[TC-KIND-002] a fauna kind grant shows public fauna and never secret fauna", async ({ browser }) => {
   const { userId, context, page } = await namedPlayer(browser);
   const secretName = `zz-secret-fauna-${randomUUID().slice(0, 8)}`;
   const slug = secretName.toLowerCase();

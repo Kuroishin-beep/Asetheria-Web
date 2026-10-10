@@ -28,7 +28,7 @@ async function archiveThroughUi(page: import("@playwright/test").Page, slug: str
   await page.waitForURL(/\/codex\/tables/);
 }
 
-test("every active table in the database is valid, and 100 rolls of each always land on a row whose range contains the roll", async () => {
+test("[TC-ROLLT-001] every active table in the database is valid, and 100 rolls of each always land on a row whose range contains the roll", async () => {
   const tables = await query<{ name: string; body: string; dice: string }>(
     `SELECT name, body, fields->>'dice' AS dice FROM entries WHERE kind = 'table' AND archived_at IS NULL`,
   );
@@ -45,7 +45,7 @@ test("every active table in the database is valid, and 100 rolls of each always 
   }
 });
 
-test("the old /tools/tables address permanently redirects to the tables section", async ({ playwright }) => {
+test("[TC-ROLLT-002] the old /tools/tables address permanently redirects to the tables section", async ({ playwright }) => {
   const api = await playwright.request.newContext({ baseURL: "http://localhost:3000", storageState: "tests/.auth/dm.json" });
   const res = await api.get("/tools/tables", { maxRedirects: 0 });
   expect(res.status()).toBe(308);
@@ -56,7 +56,7 @@ test("the old /tools/tables address permanently redirects to the tables section"
 test.describe("authoring and rolling a table (DM)", () => {
   test.use({ storageState: "tests/.auth/dm.json" });
 
-  test("create a d4 table with starter rows, roll it 100 times, and every result is one of its rows", async ({ page }) => {
+  test("[TC-ROLLT-004] create a d4 table with starter rows, roll it 100 times, and every result is one of its rows", async ({ page }) => {
     test.slow();
     const name = testName("table");
     let slug: string | undefined;
@@ -108,7 +108,7 @@ test.describe("authoring and rolling a table (DM)", () => {
     }
   });
 
-  test("overlapping rows, a gap and an out-of-range row are each named in the editor and block saving", async ({ page }) => {
+  test("[TC-ROLLT-005] overlapping rows, a gap and an out-of-range row are each named in the editor and block saving", async ({ page }) => {
     await page.goto("/codex/new?kind=table");
     await page.getByLabel("Name *", { exact: true }).fill(testName("broken-table"));
     await page.getByLabel("Dice", { exact: true }).fill("1d6");
@@ -133,7 +133,7 @@ test.describe("authoring and rolling a table (DM)", () => {
     await expect(create).toBeEnabled();
   });
 
-  test("the server refuses a broken table even when the disabled button is bypassed, and nothing is created", async ({ page }) => {
+  test("[TC-ROLLT-006] the server refuses a broken table even when the disabled button is bypassed, and nothing is created", async ({ page }) => {
     const name = testName("bypass-table");
     await page.goto("/codex/new?kind=table");
     await page.getByLabel("Name *", { exact: true }).fill(name);
@@ -149,7 +149,7 @@ test.describe("authoring and rolling a table (DM)", () => {
     expect(rows).toHaveLength(0);
   });
 
-  test("a table with a bad dice expression says so and cannot be saved", async ({ page }) => {
+  test("[TC-ROLLT-007] a table with a bad dice expression says so and cannot be saved", async ({ page }) => {
     await page.goto("/codex/new?kind=table");
     await page.getByLabel("Name *", { exact: true }).fill(testName("bad-dice"));
     await page.getByLabel("Dice", { exact: true }).fill("banana");
@@ -158,7 +158,7 @@ test.describe("authoring and rolling a table (DM)", () => {
     await expect(page.getByRole("button", { name: "Create entry" })).toBeDisabled();
   });
 
-  test("a table is found by the palette (by name) and by full-text search (by content)", async ({ page }) => {
+  test("[TC-ROLLT-008] a table is found by the palette (by name) and by full-text search (by content)", async ({ page }) => {
     const find = await page.request.get("/api/find?q=herbalist");
     expect(find.ok()).toBe(true);
     const palette = (await find.json()).results.map((r: { name: string; kind: string }) => `${r.kind}:${r.name}`);
@@ -170,7 +170,7 @@ test.describe("authoring and rolling a table (DM)", () => {
   });
 });
 
-test("a player with no grant on the table kind cannot find a table by search or open it", async ({ browser }) => {
+test("[TC-ROLLT-003] a player with no grant on the table kind cannot find a table by search or open it", async ({ browser }) => {
   const username = `zz-tbl-${randomUUID().slice(0, 8)}`;
   const userId = await createTestPlayer(username, "correct horse battery staple 42");
   await query(`UPDATE users SET display_name = 'Table Tester' WHERE id = $1`, [userId]);

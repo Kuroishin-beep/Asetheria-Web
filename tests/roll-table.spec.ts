@@ -11,7 +11,7 @@ import {
 } from "../src/lib/roll-table";
 
 test.describe("roll table format (pure logic, no browser needed)", () => {
-  test("diceSpan reports the lowest and highest possible total", () => {
+  test("[TC-ROLL-001] diceSpan reports the lowest and highest possible total", () => {
     expect(diceSpan("1d20")).toEqual({ min: 1, max: 20 });
     expect(diceSpan("d100")).toEqual({ min: 1, max: 100 });
     expect(diceSpan("2d6")).toEqual({ min: 2, max: 12 });
@@ -19,7 +19,7 @@ test.describe("roll table format (pure logic, no browser needed)", () => {
     expect(diceSpan("1d8-1")).toEqual({ min: 0, max: 7 });
   });
 
-  test("diceSpan rejects anything that is not simple dice notation", () => {
+  test("[TC-ROLL-002] diceSpan rejects anything that is not simple dice notation", () => {
     expect(diceSpan("")).toBeNull();
     expect(diceSpan("banana")).toBeNull();
     expect(diceSpan("1d1")).toBeNull();
@@ -27,7 +27,7 @@ test.describe("roll table format (pure logic, no browser needed)", () => {
     expect(diceSpan("1d20kh1")).toBeNull();
   });
 
-  test("serialize then parse returns exactly the rows it was given", () => {
+  test("[TC-ROLL-003] serialize then parse returns exactly the rows it was given", () => {
     const rows: RollRow[] = [
       { min: 1, max: 3, result: "A copper ring" },
       { min: 4, max: 4, result: "A | pipe and a \\ backslash" },
@@ -38,7 +38,7 @@ test.describe("roll table format (pure logic, no browser needed)", () => {
     expect(parseRollTable(body)).toEqual({ rows, problems: [] });
   });
 
-  test("round-trips 300 randomly generated tables with awkward characters", () => {
+  test("[TC-ROLL-004] round-trips 300 randomly generated tables with awkward characters", () => {
     const alphabet = ["a", "Z", " ", "|", "\\", "-", "1", "é", "\n", "*", "[", "]", "#", ":"];
     let seed = 12345;
     const next = () => (seed = (seed * 1103515245 + 12345) & 0x7fffffff);
@@ -61,7 +61,7 @@ test.describe("roll table format (pure logic, no browser needed)", () => {
     }
   });
 
-  test("prose around the table is ignored and an en dash range is read", () => {
+  test("[TC-ROLL-005] prose around the table is ignored and an en dash range is read", () => {
     const body = ["The old herbalist's guide.", "", "| Roll | Result |", "|:--|--:|", "| 1–2 | Moss |", "| 3 | Lichen |", "", "Trailing note."].join("\n");
     expect(parseRollTable(body)).toEqual({
       rows: [
@@ -72,7 +72,7 @@ test.describe("roll table format (pure logic, no browser needed)", () => {
     });
   });
 
-  test("a malformed row is reported, never silently dropped", () => {
+  test("[TC-ROLL-006] a malformed row is reported, never silently dropped", () => {
     const body = "| Roll | Result |\n|---|---|\n| 1 | Fine |\n| soon | Bad range |\n| 3 | |\n| 4 |";
     const { rows, problems } = parseRollTable(body);
     expect(rows).toEqual([{ min: 1, max: 1, result: "Fine" }]);
@@ -80,7 +80,7 @@ test.describe("roll table format (pure logic, no browser needed)", () => {
     expect(problems[0]).toContain("soon");
   });
 
-  test("coverage passes when every roll lands on exactly one row", () => {
+  test("[TC-ROLL-007] coverage passes when every roll lands on exactly one row", () => {
     const rows: RollRow[] = [
       { min: 1, max: 10, result: "a" },
       { min: 11, max: 20, result: "b" },
@@ -88,7 +88,7 @@ test.describe("roll table format (pure logic, no browser needed)", () => {
     expect(checkCoverage("1d20", rows)).toEqual([]);
   });
 
-  test("coverage names the gap, the overlap, the overrun and the backwards range", () => {
+  test("[TC-ROLL-008] coverage names the gap, the overlap, the overrun and the backwards range", () => {
     expect(checkCoverage("1d6", [{ min: 1, max: 2, result: "a" }, { min: 5, max: 6, result: "b" }])).toEqual([
       "No row covers 3-4.",
     ]);
@@ -103,18 +103,18 @@ test.describe("roll table format (pure logic, no browser needed)", () => {
 });
 
 test.describe("roll table authoring helpers (pure logic)", () => {
-  test("stripTable keeps the prose and drops the table lines", () => {
+  test("[TC-ROLL-009] stripTable keeps the prose and drops the table lines", () => {
     const body = "Intro line.\n\n| Roll | Result |\n|---|---|\n| 1 | a |\n\nAfter.";
     expect(stripTable(body)).toBe("Intro line.\n\nAfter.");
     expect(stripTable("| Roll | Result |\n|---|---|\n| 1 | a |")).toBe("");
   });
 
-  test("hasTable is true only when a pipe row exists", () => {
+  test("[TC-ROLL-010] hasTable is true only when a pipe row exists", () => {
     expect(hasTable("Just prose.")).toBe(false);
     expect(hasTable("x\n| Roll | Result |")).toBe(true);
   });
 
-  test("starterTable covers the full span in up to four bands, blank until written, so it cannot be saved as is", () => {
+  test("[TC-ROLL-011] starterTable covers the full span in up to four bands, blank until written, so it cannot be saved as is", () => {
     const body = starterTable("1d20");
     const parsed = parseRollTable(body);
     expect(parsed.rows.map((r) => [r.min, r.max])).toEqual([]);
@@ -128,7 +128,7 @@ test.describe("roll table authoring helpers (pure logic)", () => {
     expect(ok.rows[ok.rows.length - 1].max).toBe(20);
   });
 
-  test("starterTable on a tiny die uses one row per face and on bad dice gives an empty table", () => {
+  test("[TC-ROLL-012] starterTable on a tiny die uses one row per face and on bad dice gives an empty table", () => {
     const d2 = parseRollTable(starterTable("1d2").replace(/\| \s*\|$/gm, "| x |"));
     expect(d2.rows.map((r) => [r.min, r.max])).toEqual([[1, 1], [2, 2]]);
     expect(parseRollTable(starterTable("nope")).rows).toEqual([]);

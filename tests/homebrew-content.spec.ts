@@ -3,7 +3,7 @@ import { test, expect } from "@playwright/test";
 test.describe("homebrew content import (metals + flora)", () => {
   test.use({ storageState: "tests/.auth/dm.json" });
 
-  test("new metals are browsable with their cost/AC stats, and existing ore lore is untouched", async ({
+  test("[TC-HOME-001] new metals are browsable with their cost/AC stats, and existing ore lore is untouched", async ({
     page,
   }) => {
     await page.goto("/codex/entry/steel");
@@ -20,7 +20,7 @@ test.describe("homebrew content import (metals + flora)", () => {
     await expect(page.getByText("Armor Class")).toBeVisible();
   });
 
-  test("herb entries and the d20 field guide roll table are present", async ({ page }) => {
+  test("[TC-HOME-002] herb entries and the d20 field guide roll table are present", async ({ page }) => {
     await page.goto("/codex/entry/woundwort");
     await expect(page.getByRole("heading", { name: "Woundwort", level: 1 })).toBeVisible();
 
@@ -30,7 +30,7 @@ test.describe("homebrew content import (metals + flora)", () => {
     await expect(page.getByRole("button", { name: "Roll on this table" })).toBeVisible();
   });
 
-  test("planar metals from the external GM Binder scan are present, and the officially-sourced plants page was not imported", async ({
+  test("[TC-HOME-003] planar metals from the external GM Binder scan are present, and the officially-sourced plants page was not imported", async ({
     page,
   }) => {
     await page.goto("/codex/entry/aximium");

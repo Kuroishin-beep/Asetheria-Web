@@ -1,11 +1,14 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
-import { AuthShell } from "@/components/auth/auth-shell";
+import { Landing } from "@/components/landing/landing";
 import { getSession } from "@/lib/session-cookie";
 import { EnterButtons } from "./enter-buttons";
 
-export const metadata: Metadata = { title: "Welcome" };
+export const metadata: Metadata = {
+  title: "Welcome",
+  description: "The Continent of Asetheria: a campaign codex for a Dungeons & Dragons world of three empires. Enter the codex or forge a hero.",
+};
 
 export default async function WelcomePage() {
   // Anyone already holding a session goes straight to the codex.
@@ -13,10 +16,12 @@ export default async function WelcomePage() {
   if (session) redirect("/");
 
   return (
-    <AuthShell title="The Continent of Asetheria" description="Two doors into the codex. Choose yours." size="md">
-      <Suspense fallback={null}>
-        <EnterButtons />
-      </Suspense>
-    </AuthShell>
+    <Landing
+      door={
+        <Suspense fallback={null}>
+          <EnterButtons />
+        </Suspense>
+      }
+    />
   );
 }

@@ -10,7 +10,7 @@ test.afterAll(async () => {
 test.describe("RBAC control panel (GM)", () => {
   test.use({ storageState: "tests/.auth/dm.json" });
 
-  test("a non-GM cannot reach /admin/rbac or call its API directly", async ({ browser }) => {
+  test("[TC-RBACP-001] a non-GM cannot reach /admin/rbac or call its API directly", async ({ browser }) => {
     const playerContext = await browser.newContext({ storageState: "tests/.auth/player.json" });
     const playerPage = await playerContext.newPage();
 
@@ -25,7 +25,7 @@ test.describe("RBAC control panel (GM)", () => {
     await playerContext.close();
   });
 
-  test("toggling a kind off hides it immediately, and per-entry approve/reject overrides the kind toggle", async ({
+  test("[TC-RBACP-002] toggling a kind off hides it immediately, and per-entry approve/reject overrides the kind toggle", async ({
     page,
     browser,
   }) => {

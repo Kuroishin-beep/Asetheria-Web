@@ -19,20 +19,20 @@ async function backgroundOnFirstPaint(page: import("@playwright/test").Page, url
   }));
 }
 
-test("defaults to dark for a first-time visitor", async ({ page }) => {
+test("[TC-THEME-001] defaults to dark for a first-time visitor", async ({ page }) => {
   const first = await backgroundOnFirstPaint(page, "/");
   expect(first.attr).toBe("dark");
   expect(first.bg).toBe(DARK_BG);
 });
 
-test("a saved light theme is applied at DOMContentLoaded, before hydration (no flash)", async ({ page }) => {
+test("[TC-THEME-002] a saved light theme is applied at DOMContentLoaded, before hydration (no flash)", async ({ page }) => {
   await page.addInitScript(() => localStorage.setItem("asetheria-theme", "light"));
   const first = await backgroundOnFirstPaint(page, "/");
   expect(first.attr).toBe("light");
   expect(first.bg).toBe(LIGHT_BG);
 });
 
-test("the toggle switches theme, persists it under the old storage key, and survives a hard reload", async ({ page }) => {
+test("[TC-THEME-003] the toggle switches theme, persists it under the old storage key, and survives a hard reload", async ({ page }) => {
   await page.goto("/");
   await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
 
@@ -53,14 +53,14 @@ test("the toggle switches theme, persists it under the old storage key, and surv
   expect(await page.evaluate(() => localStorage.getItem("asetheria-theme"))).toBe("dark");
 });
 
-test("a garbage stored value falls back to dark instead of breaking the page", async ({ page }) => {
+test("[TC-THEME-004] a garbage stored value falls back to dark instead of breaking the page", async ({ page }) => {
   await page.addInitScript(() => localStorage.setItem("asetheria-theme", "neon"));
   const first = await backgroundOnFirstPaint(page, "/");
   expect(["dark", "light"]).toContain(first.attr);
   expect(first.bg).toBe(first.attr === "dark" ? DARK_BG : LIGHT_BG);
 });
 
-test("reduced motion: the page honours prefers-reduced-motion with no console errors", async ({ browser }) => {
+test("[TC-THEME-005] reduced motion: the page honours prefers-reduced-motion with no console errors", async ({ browser }) => {
   const context = await browser.newContext({
     reducedMotion: "reduce",
     storageState: "tests/.auth/dm.json",

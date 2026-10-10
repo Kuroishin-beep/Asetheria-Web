@@ -39,7 +39,7 @@ test.afterAll(async () => {
 });
 
 test.describe("the tables (data)", () => {
-  test("the data file holds exactly 24 tables and each covers its full dice span once, with no gap or overlap", () => {
+  test("[TC-NATT-001] the data file holds exactly 24 tables and each covers its full dice span once, with no gap or overlap", () => {
     const tables = loadTables();
     expect(tables).toHaveLength(TABLE_TARGET);
     for (const t of tables) {
@@ -52,7 +52,7 @@ test.describe("the tables (data)", () => {
     }
   });
 
-  test("the same holds for what is in the database, and every row is a real sentence", async () => {
+  test("[TC-NATT-002] the same holds for what is in the database, and every row is a real sentence", async () => {
     const rows = await query<{ name: string; body: string; dice: string }>(
       `SELECT name, body, fields->>'dice' AS dice FROM entries WHERE source_path = $1 AND archived_at IS NULL`,
       [SOURCE],
@@ -64,7 +64,7 @@ test.describe("the tables (data)", () => {
     }
   });
 
-  test("each table names places or specimens that exist, and the places it names cite it back", async () => {
+  test("[TC-NATT-003] each table names places or specimens that exist, and the places it names cite it back", async () => {
     const tables = await query<{ id: string; name: string }>(`SELECT id, name FROM entries WHERE source_path = $1 AND archived_at IS NULL`, [SOURCE]);
     const lacking: string[] = [];
     for (const t of tables) {
@@ -80,7 +80,7 @@ test.describe("the tables (data)", () => {
     expect(lacking).toEqual([]);
   });
 
-  test("re-importing creates no duplicates, and linking tables to places again changes nothing", async () => {
+  test("[TC-NATT-004] re-importing creates no duplicates, and linking tables to places again changes nothing", async () => {
     const before = await query<{ n: string }>(`SELECT count(*)::text AS n FROM entries`);
     const imp = execFileSync("npx", ["tsx", "scripts/import-codex-file.ts", "data/natural-world/tables.json"], { cwd: ROOT, encoding: "utf8", shell: true });
     expect(imp).toContain(" 0 created,");
@@ -97,7 +97,7 @@ test.describe("the tables on the site", () => {
   test.describe("DM", () => {
     test.use({ storageState: "tests/.auth/dm.json" });
 
-    test("a table page rolls, shows its places as links and its DM usage note", async ({ page }) => {
+    test("[TC-NATT-008] a table page rolls, shows its places as links and its DM usage note", async ({ page }) => {
       await page.goto("/codex/entry/forage-in-the-desert");
       await expect(page.getByRole("heading", { level: 1, name: "Forage in the Desert" })).toBeVisible();
       await expect(page.getByRole("link", { name: "Dasht-a Khaliq" }).first()).toBeVisible();
@@ -106,20 +106,20 @@ test.describe("the tables on the site", () => {
       await expect(page.getByRole("status")).toContainText(/\d/);
     });
 
-    test("a place that uses the table is listed in the table's linked mentions", async ({ page }) => {
+    test("[TC-NATT-009] a place that uses the table is listed in the table's linked mentions", async ({ page }) => {
       await page.goto("/codex/entry/forage-in-the-desert");
       await expect(page.getByRole("heading", { name: /Linked mentions/ })).toBeVisible();
       await expect(page.getByRole("link", { name: /The Myrrh Wadi/ }).first()).toBeVisible();
     });
 
-    test("the section lists all of the tables", async ({ page }) => {
+    test("[TC-NATT-010] the section lists all of the tables", async ({ page }) => {
       await page.goto("/codex/tables");
       await expect(page.locator('[data-slot="card"]').first()).toBeVisible();
       await expect(page.getByText(/\d+ total/)).toBeVisible();
     });
   });
 
-  test("a player with the table grant sees a table and the roller but never the DM note", async ({ browser }) => {
+  test("[TC-NATT-005] a player with the table grant sees a table and the roller but never the DM note", async ({ browser }) => {
     const { context, page } = await login(browser, await playerWith(["table", "location"]));
     try {
       await page.goto("/codex/entry/forage-in-the-desert");
@@ -132,7 +132,7 @@ test.describe("the tables on the site", () => {
     }
   });
 
-  test("a secret table never reaches a player: 404 on the page, absent from the list and from search", async ({ browser }) => {
+  test("[TC-NATT-006] a secret table never reaches a player: 404 on the page, absent from the list and from search", async ({ browser }) => {
     const slug = `zz-secret-table-${randomUUID().slice(0, 8)}`;
     const body = "A hidden table.\n\n| Roll | Result |\n|---|---|\n| 1-2 | Something only the DM should know about |";
     await query(
@@ -152,7 +152,7 @@ test.describe("the tables on the site", () => {
     }
   });
 
-  test("a player with no table grant sees an empty section and a 404 on a table", async ({ browser }) => {
+  test("[TC-NATT-007] a player with no table grant sees an empty section and a 404 on a table", async ({ browser }) => {
     const { context, page } = await login(browser, await playerWith(["location"]));
     try {
       expect((await page.goto("/codex/entry/forage-in-the-desert"))?.status()).toBe(404);

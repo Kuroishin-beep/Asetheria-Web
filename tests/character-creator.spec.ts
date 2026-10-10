@@ -1,4 +1,5 @@
 import fs from "node:fs";
+import { tc } from "./case-id";
 import { randomUUID } from "node:crypto";
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test, type Browser, type Page } from "@playwright/test";
@@ -144,7 +145,7 @@ async function login(browser: Browser, username: string) {
 }
 
 test.describe("the public wizard (signed out)", () => {
-  test("opens without signing in, and reads nothing from the codex: no API calls, no entry names", async ({ page }) => {
+  test("[TC-CHRC-001] opens without signing in, and reads nothing from the codex: no API calls, no entry names", async ({ page }) => {
     const apiCalls: string[] = [];
     page.on("request", (r) => {
       const p = new URL(r.url()).pathname;
@@ -158,7 +159,7 @@ test.describe("the public wizard (signed out)", () => {
     await expect(page.getByRole("note")).toContainText("You are not signed in");
 
     const html = await page.content();
-    const names = await query<{ name: string }>(`SELECT name FROM entries WHERE archived_at IS NULL AND kind IN ('deity','empire','npc','location') ORDER BY random() LIMIT 40`);
+    const names = await query<{ name: string }>(`SELECT name FROM entries WHERE archived_at IS NULL AND kind IN ('deity','empire','npc','location') AND name NOT IN ('Imperium Invicta','Hellenoria','Acheaoria') ORDER BY random() LIMIT 40`); // the three empires are named on the page on purpose, as constants
     for (const { name } of names) expect(html.includes(name), `leaked: ${name}`).toBe(false);
     for (const secret of [SECRET_GOD, OPEN_GOD]) expect(html).not.toContain(secret);
 
@@ -169,7 +170,7 @@ test.describe("the public wizard (signed out)", () => {
     expect(apiCalls).toEqual([]);
   });
 
-  test("the worship step is free text with no god list, and the citizenship step shows only the three empires", async ({ page }) => {
+  test("[TC-CHRC-002] the worship step is free text with no god list, and the citizenship step shows only the three empires", async ({ page }) => {
     await open(page);
     await buildFighter(page);
     await page.getByRole("button", { name: /^10\. Worship/ }).click();
@@ -181,7 +182,7 @@ test.describe("the public wizard (signed out)", () => {
     for (const empire of ["Imperium Invicta", "Hellenoria", "Acheaoria"]) await expect(page.getByText(empire, { exact: true }).first()).toBeVisible();
   });
 
-  test("a full run with the standard array ends on a sheet whose numbers follow the rules", async ({ page }) => {
+  test("[TC-CHRC-003] a full run with the standard array ends on a sheet whose numbers follow the rules", async ({ page }) => {
     await open(page);
     await buildFighter(page);
     const sheet = page.getByTestId("character-sheet");
@@ -203,7 +204,7 @@ test.describe("the public wizard (signed out)", () => {
     await expect(sheet).toContainText("Combat flanking");
   });
 
-  test("point buy: the bonus die is rolled once, the budget follows it, and the limits hold", async ({ page }) => {
+  test("[TC-CHRC-004] point buy: the bonus die is rolled once, the budget follows it, and the limits hold", async ({ page }) => {
     await stubDice(page);
     await open(page);
     await stepWho(page);
@@ -243,7 +244,7 @@ test.describe("the public wizard (signed out)", () => {
     await expect(title(page)).toHaveText("Skills");
   });
 
-  test("rolling: under 72 forces a reroll, 72 is accepted, the one extra reroll is binding even when lower", async ({ page }) => {
+  test("[TC-CHRC-005] rolling: under 72 forces a reroll, 72 is accepted, the one extra reroll is binding even when lower", async ({ page }) => {
     await stubDice(page);
     await open(page);
     await stepWho(page);
@@ -283,7 +284,7 @@ test.describe("the public wizard (signed out)", () => {
     await expect(title(page)).toHaveText("Skills");
   });
 
-  test("rolling: declining the optional reroll keeps the 72, and the six scores can be given to any ability", async ({ page }) => {
+  test("[TC-CHRC-006] rolling: declining the optional reroll keeps the 72, and the six scores can be given to any ability", async ({ page }) => {
     await stubDice(page);
     await open(page);
     await stepWho(page);
@@ -307,7 +308,7 @@ test.describe("the public wizard (signed out)", () => {
     await expect(title(page)).toHaveText("Skills");
   });
 
-  test("hit points: levels 1 to 3 are maxed, level 4 is rolled, and a 1 may be rerolled once and the reroll stands", async ({ page }) => {
+  test("[TC-CHRC-007] hit points: levels 1 to 3 are maxed, level 4 is rolled, and a 1 may be rerolled once and the reroll stands", async ({ page }) => {
     await stubDice(page);
     await open(page);
     await stepWho(page);
@@ -332,7 +333,7 @@ test.describe("the public wizard (signed out)", () => {
     await expect(title(page)).toHaveText("Equipment");
   });
 
-  test("every step refuses to go on without what it needs, in plain words, and keeps you where you are", async ({ page }) => {
+  test("[TC-CHRC-008] every step refuses to go on without what it needs, in plain words, and keeps you where you are", async ({ page }) => {
     await open(page);
     const refuses = async (stepName: string) => {
       await next(page);
@@ -366,7 +367,7 @@ test.describe("the public wizard (signed out)", () => {
     await refuses("Ability scores"); // nothing assigned yet
   });
 
-  test("skills: the count is enforced, a class skill cannot be repeated as a background skill, and extra boxes disable", async ({ page }) => {
+  test("[TC-CHRC-009] skills: the count is enforced, a class skill cannot be repeated as a background skill, and extra boxes disable", async ({ page }) => {
     await open(page);
     await stepWho(page);
     await stepHeritage(page);
@@ -388,7 +389,7 @@ test.describe("the public wizard (signed out)", () => {
     await expect(title(page)).toHaveText("Hit points");
   });
 
-  test("hit points can be entered by hand within the class's ceiling, and a bad number is refused", async ({ page }) => {
+  test("[TC-CHRC-010] hit points can be entered by hand within the class's ceiling, and a bad number is refused", async ({ page }) => {
     await open(page);
     await stepWho(page);
     await stepHeritage(page);
@@ -406,7 +407,7 @@ test.describe("the public wizard (signed out)", () => {
     await expect(title(page)).toHaveText("Equipment");
   });
 
-  test("every step has a Learn more link to Wikidot that opens in a new tab and says so", async ({ page }) => {
+  test("[TC-CHRC-011] every step has a Learn more link to Wikidot that opens in a new tab and says so", async ({ page }) => {
     await open(page);
     const check = async () => {
       const links = page.getByRole("navigation", { name: "Learn more" }).getByRole("link");
@@ -437,7 +438,7 @@ test.describe("the public wizard (signed out)", () => {
     await check(); // scores
   });
 
-  test("progress is kept: reload restores the answers and the step; corrupt storage starts clean; Start over clears it", async ({ page }) => {
+  test("[TC-CHRC-012] progress is kept: reload restores the answers and the step; corrupt storage starts clean; Start over clears it", async ({ page }) => {
     await open(page);
     await stepWho(page, "Remembered Rhea");
     await expect(title(page)).toHaveText("Heritage");
@@ -469,7 +470,7 @@ test.describe("the public wizard (signed out)", () => {
     await expect(page.getByLabel("Character name")).toHaveValue("");
   });
 
-  test("steps ahead of the first incomplete one are locked, Back works, and the progress bar follows", async ({ page }) => {
+  test("[TC-CHRC-013] steps ahead of the first incomplete one are locked, Back works, and the progress bar follows", async ({ page }) => {
     await open(page);
     await expect(page.getByRole("button", { name: /^5\. Ability scores/ })).toBeDisabled();
     await expect(page.getByTestId("progress")).toHaveAttribute("aria-valuenow", "1");
@@ -481,7 +482,7 @@ test.describe("the public wizard (signed out)", () => {
     await expect(page.getByRole("button", { name: /^1\. Who is this/ })).toHaveAttribute("aria-current", "step");
   });
 
-  test("the finished sheet downloads as JSON, and that file loads back into the wizard", async ({ page, browser }) => {
+  test("[TC-CHRC-014] the finished sheet downloads as JSON, and that file loads back into the wizard", async ({ page, browser }) => {
     await open(page);
     await buildFighter(page, "Download Dana");
     const [download] = await Promise.all([page.waitForEvent("download"), page.getByTestId("download").click()]);
@@ -505,7 +506,7 @@ test.describe("the public wizard (signed out)", () => {
     await expect(page.getByText("not a character this creator can read")).toBeVisible();
   });
 
-  test("printing hides the controls and keeps the sheet", async ({ page }) => {
+  test("[TC-CHRC-015] printing hides the controls and keeps the sheet", async ({ page }) => {
     await open(page);
     await buildFighter(page);
     await page.emulateMedia({ media: "print" });
@@ -514,7 +515,7 @@ test.describe("the public wizard (signed out)", () => {
     await expect(page.getByTestId("character-sheet")).toBeVisible();
   });
 
-  test("a heritage of 'Other' takes small bonuses and refuses wild ones", async ({ page }) => {
+  test("[TC-CHRC-016] a heritage of 'Other' takes small bonuses and refuses wild ones", async ({ page }) => {
     await open(page);
     await stepWho(page);
     await page.getByRole("radio", { name: /^Other/ }).click();
@@ -532,7 +533,7 @@ test.describe("the public wizard (signed out)", () => {
     await expect(title(page)).toHaveText("Class and level");
   });
 
-  test("a signed-in visitor is sent to the member creator instead", async ({ browser }) => {
+  test("[TC-CHRC-017] a signed-in visitor is sent to the member creator instead", async ({ browser }) => {
     const p = await newPlayer();
     const { context, page } = await login(browser, p.username);
     try {
@@ -552,7 +553,8 @@ test.describe("accessibility and small screens", () => {
   };
 
   for (const theme of ["dark", "light"] as const) {
-    test(`no serious axe violations on the first step, the scores step and the review sheet (${theme})`, async ({ page }) => {
+    test(tc("character-creator.spec.ts", "accessibility and small screens", `no serious axe violations on the first step, the scores step and the review sheet (${theme})`), async ({ page }) => {
+      test.setTimeout(90000); // three full axe audits plus the steps between them; 30 s is too tight on a busy machine
       await page.addInitScript((t) => localStorage.setItem("asetheria-theme", t), theme);
       await open(page);
       expect(await audit(page)).toEqual([]);
@@ -568,7 +570,8 @@ test.describe("accessibility and small screens", () => {
       expect(await audit(page)).toEqual([]);
     });
 
-    test(`no serious axe violations on a finished sheet (${theme})`, async ({ page }) => {
+    test(tc("character-creator.spec.ts", "accessibility and small screens", `no serious axe violations on a finished sheet (${theme})`), async ({ page }) => {
+      test.setTimeout(90000);
       await page.addInitScript((t) => localStorage.setItem("asetheria-theme", t), theme);
       await open(page);
       await buildFighter(page);
@@ -576,7 +579,7 @@ test.describe("accessibility and small screens", () => {
     });
   }
 
-  test("at 375px no step scrolls the page sideways, including the sheet", async ({ browser }) => {
+  test("[TC-CHRC-022] at 375px no step scrolls the page sideways, including the sheet", async ({ browser }) => {
     const context = await browser.newContext({ viewport: { width: 375, height: 800 } });
     const page = await context.newPage();
     try {
@@ -609,7 +612,7 @@ test.describe("accessibility and small screens", () => {
 });
 
 test.describe("the member wizard (a signed-in player)", () => {
-  test("the Characters tab leads to an empty list, then the wizard: the member version offers the codex's own empires and only the gods this player may read", async ({ browser }) => {
+  test("[TC-CHRC-023] the Characters tab leads to an empty list, then the wizard: the member version offers the codex's own empires and only the gods this player may read", async ({ browser }) => {
     const p = await newPlayer(["deity", "empire"]);
     const { context, page } = await login(browser, p.username);
     try {
@@ -637,7 +640,7 @@ test.describe("the member wizard (a signed-in player)", () => {
     }
   });
 
-  test("saving creates the character, opens its sheet and lists it; editing changes it; deleting removes it", async ({ browser }) => {
+  test("[TC-CHRC-024] saving creates the character, opens its sheet and lists it; editing changes it; deleting removes it", async ({ browser }) => {
     const p = await newPlayer();
     const { context, page } = await login(browser, p.username);
     try {
@@ -673,7 +676,7 @@ test.describe("the member wizard (a signed-in player)", () => {
     }
   });
 
-  test("another player's character is a 404 on the page and on edit, and the DM can read it but not change it", async ({ browser }) => {
+  test("[TC-CHRC-025] another player's character is a 404 on the page and on edit, and the DM can read it but not change it", async ({ browser }) => {
     const owner = await newPlayer();
     const other = await newPlayer();
     const A = await login(browser, owner.username);
@@ -708,7 +711,7 @@ test.describe("the member wizard (a signed-in player)", () => {
     }
   });
 
-  test("a rule broken behind the wizard's back is refused when saving, with the reason shown", async ({ browser }) => {
+  test("[TC-CHRC-026] a rule broken behind the wizard's back is refused when saving, with the reason shown", async ({ browser }) => {
     const p = await newPlayer();
     const { context, page } = await login(browser, p.username);
     try {

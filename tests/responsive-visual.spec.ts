@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test";
+import { tc } from "./case-id";
 
 const VIEWPORTS = [
   { name: "mobile-375", width: 375, height: 812 },
@@ -8,7 +9,7 @@ const VIEWPORTS = [
 
 test.describe("login page responsiveness + theming", () => {
   for (const vp of VIEWPORTS) {
-    test(`renders without horizontal overflow at ${vp.name}`, async ({ page }) => {
+    test(tc("responsive-visual.spec.ts", "login page responsiveness + theming", `renders without horizontal overflow at ${vp.name}`), async ({ page }) => {
       await page.setViewportSize({ width: vp.width, height: vp.height });
       await page.goto("/login");
       const overflow = await page.evaluate(
@@ -19,14 +20,14 @@ test.describe("login page responsiveness + theming", () => {
     });
   }
 
-  test("dark theme is the default and persists across reload", async ({ page }) => {
+  test("[TC-RESP-004] dark theme is the default and persists across reload", async ({ page }) => {
     await page.goto("/login");
     await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
     await page.reload();
     await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
   });
 
-  test("keyboard-only pass reaches username, password, show/hide, and submit in order", async ({
+  test("[TC-RESP-005] keyboard-only pass reaches username, password, show/hide, and submit in order", async ({
     page,
   }) => {
     await page.goto("/login");

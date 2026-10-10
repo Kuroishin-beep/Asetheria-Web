@@ -17,7 +17,7 @@ async function pressChord(page: Page, ...keys: string[]) {
 test.describe("command palette & shortcuts (DM)", () => {
   test.use({ storageState: "tests/.auth/dm.json" });
 
-  test("an empty palette lists commands, and typing one runs it", async ({ page }) => {
+  test("[TC-KNOW-001] an empty palette lists commands, and typing one runs it", async ({ page }) => {
     await page.goto("/");
     // The shortcut listener attaches on hydration; wait for the page to settle.
     await page.waitForLoadState("networkidle");
@@ -31,7 +31,7 @@ test.describe("command palette & shortcuts (DM)", () => {
     await expect(page).toHaveURL(/\/tools\/dice$/);
   });
 
-  test("g-chords navigate, ? opens the shortcut sheet, e edits the open entry", async ({ page }) => {
+  test("[TC-KNOW-002] g-chords navigate, ? opens the shortcut sheet, e edits the open entry", async ({ page }) => {
     await page.goto("/");
     await pressChord(page, "g", "s");
     await expect(page).toHaveURL(/\/search$/);
@@ -46,7 +46,7 @@ test.describe("command palette & shortcuts (DM)", () => {
     await expect(page).toHaveURL(/\/codex\/entry\/bacchus-the-bountiful-spirit\/edit$/);
   });
 
-  test("shortcuts never fire while typing in a field", async ({ page }) => {
+  test("[TC-KNOW-003] shortcuts never fire while typing in a field", async ({ page }) => {
     await page.goto("/search");
     const box = page.getByRole("searchbox").or(page.locator('input[name="q"]')).first();
     await box.click();
@@ -59,7 +59,7 @@ test.describe("command palette & shortcuts (DM)", () => {
 test.describe("shortcuts respect the player role", () => {
   test.use({ storageState: "tests/.auth/player.json" });
 
-  test("a player has no create shortcut or command", async ({ page }) => {
+  test("[TC-KNOW-004] a player has no create shortcut or command", async ({ page }) => {
     await page.goto("/");
     await pressChord(page, "c");
     await expect(page).not.toHaveURL(/\/codex\/new/);
@@ -71,7 +71,7 @@ test.describe("shortcuts respect the player role", () => {
 test.describe("editor", () => {
   test.use({ storageState: "tests/.auth/dm.json" });
 
-  test("[[ suggests entries and Enter inserts a resolvable link", async ({ page }) => {
+  test("[TC-KNOW-005] [[ suggests entries and Enter inserts a resolvable link", async ({ page }) => {
     await page.goto("/codex/new?kind=note");
     const body = page.locator("#body");
     await body.click();
@@ -82,7 +82,7 @@ test.describe("editor", () => {
     await expect(body).toHaveValue("Raise a cup to [[Bacchus, The Bountiful Spirit]]");
   });
 
-  test("Preview renders the markdown, links included", async ({ page }) => {
+  test("[TC-KNOW-006] Preview renders the markdown, links included", async ({ page }) => {
     await page.goto("/codex/new?kind=note");
     await page.locator("#body").fill("## Omens\n\nThe priests of [[Bacchus, The Bountiful Spirit]] are uneasy.");
     await page.getByRole("tab", { name: /Preview/ }).click();
@@ -91,7 +91,7 @@ test.describe("editor", () => {
     await expect(page.locator("#body")).toBeVisible();
   });
 
-  test("an unsaved draft survives a reload and can be restored", async ({ page }) => {
+  test("[TC-KNOW-007] an unsaved draft survives a reload and can be restored", async ({ page }) => {
     await page.goto("/codex/new?kind=note");
     const text = `Draft ${testName("draft")}`;
     await page.locator("#body").fill(text);
@@ -106,7 +106,7 @@ test.describe("editor", () => {
 test.describe("aliases, outlines and mentions", () => {
   test.use({ storageState: "tests/.auth/dm.json" });
 
-  test("a link to an alias resolves, with a hover preview, and an outline appears on long pages", async ({ page }) => {
+  test("[TC-KNOW-008] a link to an alias resolves, with a hover preview, and an outline appears on long pages", async ({ page }) => {
     const name = testName("alias-link");
     let slug: string | undefined;
     try {
@@ -133,7 +133,7 @@ test.describe("aliases, outlines and mentions", () => {
     }
   });
 
-  test("an entry that names a page without linking it shows up as an unlinked mention", async ({ page }) => {
+  test("[TC-KNOW-009] an entry that names a page without linking it shows up as an unlinked mention", async ({ page }) => {
     const name = testName("unlinked");
     let slug: string | undefined;
     try {
@@ -152,7 +152,7 @@ test.describe("aliases, outlines and mentions", () => {
 });
 
 test.describe("wiki links are scoped to what the reader may open", () => {
-  test("a player sees no link to a secret entry, the DM does", async ({ browser }) => {
+  test("[TC-KNOW-010] a player sees no link to a secret entry, the DM does", async ({ browser }) => {
     const dmContext = await browser.newContext({ storageState: "tests/.auth/dm.json" });
     const dm = await dmContext.newPage();
     const playerContext = await browser.newContext({ storageState: "tests/.auth/player.json" });
@@ -187,14 +187,14 @@ test.describe("wiki links are scoped to what the reader may open", () => {
 test.describe("imported content", () => {
   test.use({ storageState: "tests/.auth/dm.json" });
 
-  test("Foundry quests link their giver and keep hidden objectives in DM notes", async ({ page }) => {
+  test("[TC-KNOW-011] Foundry quests link their giver and keep hidden objectives in DM notes", async ({ page }) => {
     await page.goto("/codex/entry/bandits-at-the-broken-gate");
     await expect(page.getByRole("heading", { name: "Bandits at the Broken Gate", level: 1 })).toBeVisible();
     await expect(page.locator(".prose-codex a.wikilink", { hasText: "Thestun Vulkrim" })).toBeVisible();
     await expect(page.getByText("Objectives not yet revealed to the party")).toBeVisible();
   });
 
-  test("deities carry a namesake, their pantheon and who serves them", async ({ page }) => {
+  test("[TC-KNOW-012] deities carry a namesake, their pantheon and who serves them", async ({ page }) => {
     await page.goto("/codex/entry/vulcan-the-artisan-of-creation");
     const body = page.locator(".prose-codex");
     await expect(body).toContainText("In Roman religion Vulcan");

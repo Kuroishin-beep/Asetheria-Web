@@ -78,7 +78,7 @@ test.afterAll(async () => {
 });
 
 test.describe("rules (pure)", () => {
-  test("safePortraitUrl accepts site paths and https, and drops everything else", () => {
+  test("[TC-PAGE-001] safePortraitUrl accepts site paths and https, and drops everything else", () => {
     expect(safePortraitUrl("/portraits/a.png")).toBe("/portraits/a.png");
     expect(safePortraitUrl("https://example.com/a.png")).toBe("https://example.com/a.png");
     for (const bad of ["javascript:alert(1)", "data:image/png;base64,AAAA", "//evil.example/x.png", "http://example.com/a.png", "", "  ", "/x y.png", "/a\"onerror=1", undefined, null]) {
@@ -86,13 +86,13 @@ test.describe("rules (pure)", () => {
     }
   });
 
-  test("initialsOf takes two letters and skips a leading The", () => {
+  test("[TC-PAGE-002] initialsOf takes two letters and skips a leading The", () => {
     expect(initialsOf("The Harbour Master")).toBe("HM");
     expect(initialsOf("Aelith")).toBe("A");
     expect(initialsOf("")).toBe("");
   });
 
-  test("the NPC template carries Appearance and Motivation in the body and Secrets in the DM notes; secrets never go in a body", () => {
+  test("[TC-PAGE-003] the NPC template carries Appearance and Motivation in the body and Secrets in the DM notes; secrets never go in a body", () => {
     const npc = templateFor("npc");
     expect(npc.body).toContain("## Appearance");
     expect(npc.body).toContain("## Motivation");
@@ -105,7 +105,7 @@ test.describe("rules (pure)", () => {
 test.describe("hero card and templates (DM)", () => {
   test.use({ storageState: "tests/.auth/dm.json" });
 
-  test("an NPC page opens with a hero card: a portrait slot and an infobox from its fields", async ({ page }) => {
+  test("[TC-PAGE-004] an NPC page opens with a hero card: a portrait slot and an infobox from its fields", async ({ page }) => {
     await page.goto(`/codex/entry/${slugOf(HERO)}`);
     const hero = page.getByTestId("entry-hero");
     await expect(hero).toBeVisible();
@@ -119,25 +119,25 @@ test.describe("hero card and templates (DM)", () => {
     await expect(page.getByText("AC 12")).toBeVisible();
   });
 
-  test("with no portrait the slot shows initials; a site-path or https portrait renders as an image", async ({ page }) => {
+  test("[TC-PAGE-005] with no portrait the slot shows initials; a site-path or https portrait renders as an image", async ({ page }) => {
     await page.goto(`/codex/entry/${slugOf(NO_PORTRAIT)}`);
     await expect(page.getByTestId("portrait-slot").getByRole("img", { name: /No portrait/ })).toBeVisible();
     await page.goto(`/codex/entry/${slugOf(HTTPS_PORTRAIT)}`);
     await expect(page.getByTestId("portrait-slot").locator("img")).toHaveAttribute("src", "https://example.invalid/face.png");
   });
 
-  test("an unsafe portrait value (javascript:) is never put in the page", async ({ page }) => {
+  test("[TC-PAGE-006] an unsafe portrait value (javascript:) is never put in the page", async ({ page }) => {
     await page.goto(`/codex/entry/${slugOf(BAD_PORTRAIT)}`);
     await expect(page.getByTestId("portrait-slot").locator("img")).toHaveCount(0);
     expect(await page.content()).not.toContain("javascript:alert");
   });
 
-  test("a kind without a hero (a note) has none", async ({ page }) => {
+  test("[TC-PAGE-007] a kind without a hero (a note) has none", async ({ page }) => {
     await page.goto(`/codex/entry/${slugOf(HUB)}`);
     await expect(page.getByTestId("entry-hero")).toHaveCount(0);
   });
 
-  test("New NPC prefills Appearance and Motivation in the description and Secrets in the DM notes", async ({ page }) => {
+  test("[TC-PAGE-008] New NPC prefills Appearance and Motivation in the description and Secrets in the DM notes", async ({ page }) => {
     await page.goto("/codex/new?kind=npc");
     const body = page.locator("#body");
     await expect(body).toHaveValue(/## Appearance/);
@@ -145,14 +145,14 @@ test.describe("hero card and templates (DM)", () => {
     await expect(page.locator("#dmNotes")).toHaveValue(/## Secrets/);
   });
 
-  test("New Note stays blank, and New Location has its own headings", async ({ page }) => {
+  test("[TC-PAGE-009] New Note stays blank, and New Location has its own headings", async ({ page }) => {
     await page.goto("/codex/new?kind=note");
     await expect(page.locator("#body")).toHaveValue("");
     await page.goto("/codex/new?kind=location");
     await expect(page.locator("#body")).toHaveValue(/## At a glance/);
   });
 
-  test("the local graph shows the hub's neighbours to the DM, including the secret one", async ({ page }) => {
+  test("[TC-PAGE-010] the local graph shows the hub's neighbours to the DM, including the secret one", async ({ page }) => {
     await page.goto(`/codex/entry/${slugOf(HUB)}`);
     const graph = page.getByTestId("local-graph");
     await expect(graph).toBeVisible();
@@ -160,7 +160,7 @@ test.describe("hero card and templates (DM)", () => {
     await expect(graph.locator(`[data-node="${slugOf(SECRET_SPOKE)}"]`)).toHaveCount(1);
   });
 
-  test("clicking a graph node opens that page; the diagram is hidden from assistive tech and adds no duplicate links", async ({ page }) => {
+  test("[TC-PAGE-011] clicking a graph node opens that page; the diagram is hidden from assistive tech and adds no duplicate links", async ({ page }) => {
     await page.goto(`/codex/entry/${slugOf(HUB)}`);
     const graph = page.getByTestId("local-graph");
     // Not in the accessibility tree: none of the diagram's links is announced; the lists below carry them.
@@ -171,7 +171,7 @@ test.describe("hero card and templates (DM)", () => {
 });
 
 test.describe("what a player sees", () => {
-  test("the local graph holds only entries the player may read: the secret spoke is nowhere in the page", async ({ browser }) => {
+  test("[TC-PAGE-012] the local graph holds only entries the player may read: the secret spoke is nowhere in the page", async ({ browser }) => {
     const { username } = await playerWith(["note"]);
     const { context, page } = await login(browser, username);
     try {
@@ -187,7 +187,7 @@ test.describe("what a player sees", () => {
     }
   });
 
-  test("a player sees the hero but never the DM-only Secrets", async ({ browser }) => {
+  test("[TC-PAGE-013] a player sees the hero but never the DM-only Secrets", async ({ browser }) => {
     const { username } = await playerWith(["npc"]);
     const { context, page } = await login(browser, username);
     try {
@@ -208,7 +208,7 @@ async function openPalette(page: Page) {
 test.describe("recently viewed", () => {
   test.use({ storageState: "tests/.auth/dm.json" });
 
-  test("the palette's empty box lists the last 8 pages viewed, newest first, and drops the 9th", async ({ page }) => {
+  test("[TC-PAGE-014] the palette's empty box lists the last 8 pages viewed, newest first, and drops the 9th", async ({ page }) => {
     const names: string[] = [];
     for (let i = 1; i <= 9; i++) {
       const name = `Zz Recent ${tag} ${i}`;
@@ -231,7 +231,7 @@ test.describe("recently viewed", () => {
     expect(shown.join(" ")).not.toContain(names[0]);
   });
 
-  test("typing replaces the recent list with search results", async ({ page }) => {
+  test("[TC-PAGE-015] typing replaces the recent list with search results", async ({ page }) => {
     const name = `Zz Typed ${tag}`;
     await insert({ name, kind: "note" });
     await page.goto(`/codex/entry/${slugOf(name)}`);
@@ -241,7 +241,7 @@ test.describe("recently viewed", () => {
     await expect(page.getByText("Recently viewed", { exact: true })).toHaveCount(0);
   });
 
-  test("an entry that later becomes secret disappears from a player's recent list, and its name is never sent", async ({ browser }) => {
+  test("[TC-PAGE-016] an entry that later becomes secret disappears from a player's recent list, and its name is never sent", async ({ browser }) => {
     const name = `Zz Fades ${tag}`;
     await insert({ name, kind: "note" });
     const { username } = await playerWith(["note"]);
@@ -268,7 +268,7 @@ test.describe("recently viewed", () => {
     }
   });
 
-  test("two people on one browser never see each other's trail: the list is keyed by user", async ({ browser }) => {
+  test("[TC-PAGE-017] two people on one browser never see each other's trail: the list is keyed by user", async ({ browser }) => {
     const { username, id } = await playerWith(["note"]);
     const { context, page } = await login(browser, username);
     try {
@@ -288,7 +288,7 @@ test.describe("recently viewed", () => {
     }
   });
 
-  test("a garbage or hostile stored value is ignored, never crashes the palette", async ({ page }) => {
+  test("[TC-PAGE-018] a garbage or hostile stored value is ignored, never crashes the palette", async ({ page }) => {
     await page.goto("/");
     const me = await page.evaluate(() => Object.keys(window.localStorage));
     expect(Array.isArray(me)).toBe(true);
@@ -304,12 +304,12 @@ test.describe("recently viewed", () => {
 });
 
 test.describe("/api/recent", () => {
-  test("is not available to someone who is signed out", async ({ request }) => {
+  test("[TC-PAGE-019] is not available to someone who is signed out", async ({ request }) => {
     const res = await request.get("/api/recent?slugs=anything", { headers: { cookie: "" } });
     expect(res.status()).toBe(401);
   });
 
-  test("returns only what the caller may read, in the order given, and ignores junk slugs", async ({ browser }) => {
+  test("[TC-PAGE-020] returns only what the caller may read, in the order given, and ignores junk slugs", async ({ browser }) => {
     const { username } = await playerWith(["note"]);
     const { context, page } = await login(browser, username);
     try {

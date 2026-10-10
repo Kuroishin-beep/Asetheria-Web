@@ -1,0 +1,27 @@
+{
+ "TC-LAND-014": {
+  "category": "Boundary"
+ },
+ "TC-GRAPH-022": {
+  "category": "Boundary"
+ },
+ "TC-MAP-001": {
+  "category": "Data Integrity"
+ },
+ "TC-CHRC-001": {
+  "category": "Security",
+  "priority": "P0"
+ },
+ "TC-LAND-002": {
+  "category": "Security",
+  "priority": "P0"
+ },
+ "TC-LAND-004": {
+  "category": "Happy",
+  "priority": "P1"
+ },
+ "TC-LAND-005": {
+  "category": "Happy",
+  "priority": "P1"
+ }
+}

@@ -83,7 +83,7 @@ test.describe("Found in links, by role (R5)", () => {
   test.describe("DM", () => {
     test.use({ storageState: "tests/.auth/dm.json" });
 
-    test("sees every named place as a link, including the secret one", async ({ page }) => {
+    test("[TC-NATL-005] sees every named place as a link, including the secret one", async ({ page }) => {
       await page.goto(`/codex/entry/${slugOf(ORE)}`);
       const row = page.locator("dd", { has: page.getByText(/Nowhere Named/) });
       await expect(row.getByRole("link", { name: PUBLIC_PLACE })).toHaveAttribute("href", `/codex/entry/${slugOf(PUBLIC_PLACE)}`);
@@ -92,7 +92,7 @@ test.describe("Found in links, by role (R5)", () => {
     });
   });
 
-  test("a player who may read locations gets a link to the open place, and plain text for the secret and the unknown", async ({ browser }) => {
+  test("[TC-NATL-001] a player who may read locations gets a link to the open place, and plain text for the secret and the unknown", async ({ browser }) => {
     const { context, page } = await login(browser, await playerWith(["ore", "location"]));
     try {
       await page.goto(`/codex/entry/${slugOf(ORE)}`);
@@ -108,7 +108,7 @@ test.describe("Found in links, by role (R5)", () => {
     }
   });
 
-  test("a player with no grant on locations gets no links at all, and no tooltip", async ({ browser }) => {
+  test("[TC-NATL-002] a player with no grant on locations gets no links at all, and no tooltip", async ({ browser }) => {
     const { context, page } = await login(browser, await playerWith(["ore"]));
     try {
       await page.goto(`/codex/entry/${slugOf(ORE)}`);
@@ -121,7 +121,7 @@ test.describe("Found in links, by role (R5)", () => {
     }
   });
 
-  test("a player cannot open the secret place by guessing its address", async ({ browser }) => {
+  test("[TC-NATL-003] a player cannot open the secret place by guessing its address", async ({ browser }) => {
     const { context, page } = await login(browser, await playerWith(["ore", "location"]));
     try {
       expect((await page.goto(`/codex/entry/${slugOf(SECRET_PLACE)}`))?.status()).toBe(404);
@@ -130,7 +130,7 @@ test.describe("Found in links, by role (R5)", () => {
     }
   });
 
-  test("the open place lists the ore in its linked mentions; the ore never appears on the secret place for a player", async ({ browser }) => {
+  test("[TC-NATL-004] the open place lists the ore in its linked mentions; the ore never appears on the secret place for a player", async ({ browser }) => {
     const { context, page } = await login(browser, await playerWith(["ore", "location"]));
     try {
       await page.goto(`/codex/entry/${slugOf(PUBLIC_PLACE)}`);
@@ -143,7 +143,7 @@ test.describe("Found in links, by role (R5)", () => {
 });
 
 test.describe("the places and the specimen linkage (data)", () => {
-  test("exactly the planned number of new places exist and none is archived", async () => {
+  test("[TC-NATL-006] exactly the planned number of new places exist and none is archived", async () => {
     const rows = await query<{ n: string }>(
       `SELECT count(*)::text AS n FROM entries WHERE source_path LIKE $1 AND archived_at IS NULL AND kind = 'location'`,
       [PLACES],
@@ -151,7 +151,7 @@ test.describe("the places and the specimen linkage (data)", () => {
     expect(Number(rows[0].n)).toBe(PLACE_TARGET);
   });
 
-  test("no orphan places: each has a parent that is a live location, and its region names that parent", async () => {
+  test("[TC-NATL-007] no orphan places: each has a parent that is a live location, and its region names that parent", async () => {
     const bad = await query<{ name: string }>(
       `SELECT e.name FROM entries e LEFT JOIN entries p ON p.id = e.parent_id
        WHERE e.source_path LIKE $1 AND e.archived_at IS NULL
@@ -161,14 +161,14 @@ test.describe("the places and the specimen linkage (data)", () => {
     expect(bad.map((r) => r.name)).toEqual([]);
   });
 
-  test("every ore, plant and animal has a non-empty Found in", async () => {
+  test("[TC-NATL-008] every ore, plant and animal has a non-empty Found in", async () => {
     const bad = await query<{ name: string }>(
       `SELECT name FROM entries WHERE kind IN ('ore','flora','fauna') AND archived_at IS NULL AND coalesce(btrim(fields->>'foundIn'), '') = ''`,
     );
     expect(bad.map((r) => r.name)).toEqual([]);
   });
 
-  test("every place a Found in names is a live page, and each is a found-in edge in the graph", async () => {
+  test("[TC-NATL-009] every place a Found in names is a live page, and each is a found-in edge in the graph", async () => {
     const all = await query<{ id: string; name: string; kind: string; fields: Record<string, string> }>(
       `SELECT id, name, kind, fields FROM entries WHERE archived_at IS NULL AND coalesce(source_path, '') NOT LIKE 'test:%'`,
     );
@@ -196,7 +196,7 @@ test.describe("the places and the specimen linkage (data)", () => {
     expect(edges.length).toBeGreaterThanOrEqual(expected);
   });
 
-  test("every specimen a new place links gets that place in its Found in", async () => {
+  test("[TC-NATL-010] every specimen a new place links gets that place in its Found in", async () => {
     const lacking: string[] = [];
     const specimens = await query<{ name: string; foundin: string | null }>(
       `SELECT name, fields->>'foundIn' AS foundin FROM entries WHERE kind IN ('ore','flora','fauna') AND archived_at IS NULL`,
@@ -211,7 +211,7 @@ test.describe("the places and the specimen linkage (data)", () => {
     expect(lacking).toEqual([]);
   });
 
-  test("re-running the backfill changes nothing, and it writes nothing but Found in", async () => {
+  test("[TC-NATL-011] re-running the backfill changes nothing, and it writes nothing but Found in", async () => {
     const out = execFileSync("npx", ["tsx", "scripts/backfill-found-in.ts"], { cwd: ROOT, encoding: "utf8", shell: true });
     expect(out).toContain("0 specimens would be updated");
     const source = fs.readFileSync(path.join(ROOT, "scripts", "backfill-found-in.ts"), "utf8");
@@ -221,7 +221,7 @@ test.describe("the places and the specimen linkage (data)", () => {
     expect(updates[0]).not.toMatch(/\b(summary|body|dm_notes)\b/);
   });
 
-  test("the link checker still reports no new unresolved links", async () => {
+  test("[TC-NATL-012] the link checker still reports no new unresolved links", async () => {
     const out = execFileSync("npx", ["tsx", "scripts/check-links.ts", "--max", "2"], { cwd: ROOT, encoding: "utf8", shell: true });
     expect(out).toMatch(/2 unresolved \[\[links\]\] \(allowed: 2\)/);
   });
@@ -231,7 +231,7 @@ test.describe("the places on the site", () => {
   test.describe("DM", () => {
     test.use({ storageState: "tests/.auth/dm.json" });
 
-    test("a place's page lists the specimens found there as linked mentions, and shows the DM hook", async ({ page }) => {
+    test("[TC-NATL-015] a place's page lists the specimens found there as linked mentions, and shows the DM hook", async ({ page }) => {
       await page.goto("/codex/entry/the-green-gallery");
       await expect(page.getByRole("heading", { level: 1, name: "The Green Gallery" })).toBeVisible();
       await expect(page.getByRole("heading", { name: /Linked mentions/ })).toBeVisible();
@@ -240,14 +240,14 @@ test.describe("the places on the site", () => {
       await expect(page.getByRole("link", { name: "Klynin Mountain Range" }).first()).toBeVisible();
     });
 
-    test("a specimen's Found in links to the new places", async ({ page }) => {
+    test("[TC-NATL-016] a specimen's Found in links to the new places", async ({ page }) => {
       await page.goto("/codex/entry/malachite");
       const dd = page.locator("dd", { has: page.getByRole("link", { name: "The Green Gallery" }) });
       await expect(dd.getByRole("link", { name: "The Green Gallery" })).toHaveAttribute("href", "/codex/entry/the-green-gallery");
     });
   });
 
-  test("a player who may read locations sees the place and the link from the ore, and never the DM hook", async ({ browser }) => {
+  test("[TC-NATL-013] a player who may read locations sees the place and the link from the ore, and never the DM hook", async ({ browser }) => {
     const { context, page } = await login(browser, await playerWith(["ore", "location"]));
     try {
       await page.goto("/codex/entry/malachite");
@@ -261,7 +261,7 @@ test.describe("the places on the site", () => {
     }
   });
 
-  test("a player without the location grant gets the names as plain text and a 404 on the place", async ({ browser }) => {
+  test("[TC-NATL-014] a player without the location grant gets the names as plain text and a 404 on the place", async ({ browser }) => {
     const { context, page } = await login(browser, await playerWith(["ore"]));
     try {
       await page.goto("/codex/entry/malachite");

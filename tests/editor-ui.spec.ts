@@ -14,7 +14,7 @@ test.afterAll(async () => {
 });
 
 test.describe("entry form", () => {
-  test("every control has a visible label bound to it, and the type switches the details section", async ({ page }) => {
+  test("[TC-EDIT-001] every control has a visible label bound to it, and the type switches the details section", async ({ page }) => {
     await page.goto("/codex/new?kind=note");
     for (const label of ["Name *", "Type", "Also known as", "Summary", "Tags", "Belongs to"]) {
       await expect(page.getByLabel(label, { exact: true })).toBeVisible();
@@ -27,7 +27,7 @@ test.describe("entry form", () => {
     await expect(page.getByLabel("Cost per lb.")).toBeVisible();
   });
 
-  test("a blank name is refused by the server with a friendly message, and nothing is created", async ({ page }) => {
+  test("[TC-EDIT-002] a blank name is refused by the server with a friendly message, and nothing is created", async ({ page }) => {
     await page.goto("/codex/new?kind=note");
     // Whitespace passes the browser's `required` check but not the server's trim.
     await page.getByLabel("Name *", { exact: true }).fill("   ");
@@ -37,7 +37,7 @@ test.describe("entry form", () => {
     await expect(page).toHaveURL(/\/codex\/new/);
   });
 
-  test("Ctrl+S saves, and the visibility radio group works by keyboard", async ({ page }) => {
+  test("[TC-EDIT-003] Ctrl+S saves, and the visibility radio group works by keyboard", async ({ page }) => {
     // Create, assert and clean up through real pages; the first hit of a route on a cold dev server compiles it.
     test.slow();
     const name = testName("kbd");
@@ -67,7 +67,7 @@ test.describe("entry form", () => {
     }
   });
 
-  test("Discard throws away a recovered draft and clears it from storage", async ({ page }) => {
+  test("[TC-EDIT-004] Discard throws away a recovered draft and clears it from storage", async ({ page }) => {
     await page.goto("/codex/new?kind=note");
     await page.locator("#body").fill("A draft to discard");
     await page.waitForTimeout(700);
@@ -79,7 +79,7 @@ test.describe("entry form", () => {
     expect(await page.evaluate(() => localStorage.getItem("asetheria-draft:new"))).toBeNull();
   });
 
-  test("the form fits a 375px screen with no horizontal scroll", async ({ page }) => {
+  test("[TC-EDIT-005] the form fits a 375px screen with no horizontal scroll", async ({ page }) => {
     await page.setViewportSize({ width: 375, height: 812 });
     await page.goto("/codex/new?kind=npc");
     const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
@@ -88,7 +88,7 @@ test.describe("entry form", () => {
 });
 
 test.describe("command palette and shortcut sheet", () => {
-  test("opening from the button focuses the search box, and Escape returns focus to the button", async ({ page }) => {
+  test("[TC-EDIT-006] opening from the button focuses the search box, and Escape returns focus to the button", async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 900 });
     await page.goto("/");
     const trigger = page.getByRole("button", { name: "Search the codex" });
@@ -101,7 +101,7 @@ test.describe("command palette and shortcut sheet", () => {
     await expect(trigger).toBeFocused();
   });
 
-  test("arrow keys move the highlighted row and Enter opens it; no results offers a full-text search", async ({ page }) => {
+  test("[TC-EDIT-007] arrow keys move the highlighted row and Enter opens it; no results offers a full-text search", async ({ page }) => {
     await page.goto("/");
     await page.waitForLoadState("networkidle");
     await page.keyboard.press("Control+k");
@@ -117,7 +117,7 @@ test.describe("command palette and shortcut sheet", () => {
     await expect(page).toHaveURL(/\/search\?q=qxzjvkwpmb/);
   });
 
-  test("the shortcut sheet is a labelled dialog with a Close button and lists the chords", async ({ page }) => {
+  test("[TC-EDIT-008] the shortcut sheet is a labelled dialog with a Close button and lists the chords", async ({ page }) => {
     await page.goto("/");
     await page.waitForLoadState("networkidle");
     await page.locator("body").click({ position: { x: 5, y: 5 } });
@@ -131,7 +131,7 @@ test.describe("command palette and shortcut sheet", () => {
 });
 
 test.describe("graph", () => {
-  test("loads with no console errors (including hydration warnings), a legend, and focusable nodes", async ({ page }) => {
+  test("[TC-EDIT-009] loads with no console errors (including hydration warnings), a legend, and focusable nodes", async ({ page }) => {
     const problems: string[] = [];
     page.on("console", (m) => {
       if (m.type() === "error") problems.push(m.text());
@@ -152,7 +152,7 @@ test.describe("graph", () => {
     expect(problems).toEqual([]);
   });
 
-  test("a player with nothing revealed sees an empty state, not a blank canvas", async ({ browser }) => {
+  test("[TC-EDIT-010] a player with nothing revealed sees an empty state, not a blank canvas", async ({ browser }) => {
     // Covered structurally by graph-and-table-view; here only the DM graph is asserted non-empty.
     const context = await browser.newContext({ storageState: "tests/.auth/dm.json" });
     const page = await context.newPage();

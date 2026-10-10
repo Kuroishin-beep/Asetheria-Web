@@ -65,7 +65,7 @@ test.afterAll(async () => {
 });
 
 test.describe("migration", () => {
-  test("the table exists with a name-length check, a cascade, and the migration is idempotent", async () => {
+  test("[TC-CHRA-001] the table exists with a name-length check, a cascade, and the migration is idempotent", async () => {
     expect((await query<{ t: string }>(`SELECT to_regclass('characters')::text AS t`))[0].t).toBe("characters");
     const p = await newPlayer();
     await expect(query(`INSERT INTO characters (user_id, name, input, sheet) VALUES ($1, '', '{}', '{}')`, [p.id])).rejects.toThrow(/characters_name_length/);
@@ -86,7 +86,7 @@ test.describe("migration", () => {
     }
   });
 
-  test("the rollback drops only the characters table (run inside a transaction that is rolled back)", async () => {
+  test("[TC-CHRA-002] the rollback drops only the characters table (run inside a transaction that is rolled back)", async () => {
     expect(process.env.DATABASE_URL ?? "").not.toMatch(/neon\.tech|neon\.build/);
     const client = new Client({ connectionString: process.env.DATABASE_URL });
     await client.connect();
@@ -108,7 +108,7 @@ test.describe("migration", () => {
 });
 
 test.describe("a player's own characters", () => {
-  test("saving stores the server's own computation, not anything the browser claims", async ({ browser }) => {
+  test("[TC-CHRA-003] saving stores the server's own computation, not anything the browser claims", async ({ browser }) => {
     const p = await newPlayer();
     const { context, page } = await session(browser, p.username);
     try {
@@ -131,7 +131,7 @@ test.describe("a player's own characters", () => {
     }
   });
 
-  test("a client-supplied sheet, owner, id or any unknown key is rejected, and nothing is stored", async ({ browser }) => {
+  test("[TC-CHRA-004] a client-supplied sheet, owner, id or any unknown key is rejected, and nothing is stored", async ({ browser }) => {
     const p = await newPlayer();
     const { context, page } = await session(browser, p.username);
     try {
@@ -145,7 +145,7 @@ test.describe("a player's own characters", () => {
     }
   });
 
-  test("every house rule is enforced on the server: each tampered character is refused with its reasons", async ({ browser }) => {
+  test("[TC-CHRA-005] every house rule is enforced on the server: each tampered character is refused with its reasons", async ({ browser }) => {
     const p = await newPlayer();
     const { context, page } = await session(browser, p.username);
     try {
@@ -180,7 +180,7 @@ test.describe("a player's own characters", () => {
     }
   });
 
-  test("a rolled character with a binding lower reroll is accepted; going back to the discarded set is not", async ({ browser }) => {
+  test("[TC-CHRA-006] a rolled character with a binding lower reroll is accepted; going back to the discarded set is not", async ({ browser }) => {
     const { rollSet } = await import("../src/lib/character/engine");
     const p = await newPlayer();
     const { context, page } = await session(browser, p.username);
@@ -200,7 +200,7 @@ test.describe("a player's own characters", () => {
     }
   });
 
-  test("a player lists, opens, updates and deletes their own character", async ({ browser }) => {
+  test("[TC-CHRA-007] a player lists, opens, updates and deletes their own character", async ({ browser }) => {
     const p = await newPlayer();
     const { context, page } = await session(browser, p.username);
     try {
@@ -234,7 +234,7 @@ test.describe("a player's own characters", () => {
     }
   });
 
-  test("two saves of the same character at once leave one whole result, never a mix", async ({ browser }) => {
+  test("[TC-CHRA-008] two saves of the same character at once leave one whole result, never a mix", async ({ browser }) => {
     const p = await newPlayer();
     const { context, page } = await session(browser, p.username);
     try {
@@ -253,7 +253,7 @@ test.describe("a player's own characters", () => {
     }
   });
 
-  test("the 21st character is refused, and deleting one frees a slot", async ({ browser }) => {
+  test("[TC-CHRA-009] the 21st character is refused, and deleting one frees a slot", async ({ browser }) => {
     const p = await newPlayer();
     const { context, page } = await session(browser, p.username);
     try {
@@ -274,7 +274,7 @@ test.describe("a player's own characters", () => {
 });
 
 test.describe("who can see what", () => {
-  test("another player's character is 'not found' in every way, and a malformed id is too", async ({ browser }) => {
+  test("[TC-CHRA-010] another player's character is 'not found' in every way, and a malformed id is too", async ({ browser }) => {
     const a = await newPlayer();
     const b = await newPlayer();
     const A = await session(browser, a.username);
@@ -295,7 +295,7 @@ test.describe("who can see what", () => {
     }
   });
 
-  test("signed-out callers get 401", async ({ request }) => {
+  test("[TC-CHRA-011] signed-out callers get 401", async ({ request }) => {
     const headers = { cookie: "" };
     expect((await request.get("/api/characters", { headers })).status()).toBe(401);
     expect((await request.post("/api/characters", { headers, data: VALID })).status()).toBe(401);
@@ -304,7 +304,7 @@ test.describe("who can see what", () => {
     expect((await request.delete(`/api/characters/${randomUUID()}`, { headers })).status()).toBe(401);
   });
 
-  test("a player cannot ask for everyone's characters", async ({ browser }) => {
+  test("[TC-CHRA-012] a player cannot ask for everyone's characters", async ({ browser }) => {
     const p = await newPlayer();
     const { context, page } = await session(browser, p.username);
     try {
@@ -317,7 +317,7 @@ test.describe("who can see what", () => {
   test.describe("the DM", () => {
     test.use({ storageState: "tests/.auth/dm.json" });
 
-    test("reads every player's characters with their owner, and can open any one, but writes nothing", async ({ browser, request }) => {
+    test("[TC-CHRA-013] reads every player's characters with their owner, and can open any one, but writes nothing", async ({ browser, request }) => {
       const p = await newPlayer();
       const { context, page } = await session(browser, p.username);
       let id: string;

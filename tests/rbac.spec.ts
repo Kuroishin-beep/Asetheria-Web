@@ -15,7 +15,7 @@ test.afterAll(async () => {
 });
 
 test.describe("player onboarding + default RBAC grants", () => {
-  test("a brand-new player is asked to name themselves, then sees only empires + major cities by default", async ({
+  test("[TC-RBAC-001] a brand-new player is asked to name themselves, then sees only empires + major cities by default", async ({
     browser,
   }) => {
     const username = `zz-rbac-player-${randomUUID().slice(0, 8)}`;
@@ -87,7 +87,7 @@ test.describe("player onboarding + default RBAC grants", () => {
 });
 
 test.describe("secret visibility always overrides a grant", () => {
-  test("explicitly granting a secret entry to a player still hides it", async ({ browser }) => {
+  test("[TC-RBAC-002] explicitly granting a secret entry to a player still hides it", async ({ browser }) => {
     const username = `zz-rbac-secret-${randomUUID().slice(0, 8)}`;
     const password = "another fine password";
     const userId = await createTestPlayer(username, password);

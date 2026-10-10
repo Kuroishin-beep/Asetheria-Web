@@ -10,7 +10,7 @@ test.afterAll(async () => {
 test.describe("semantic search", () => {
   test.use({ storageState: "tests/.auth/dm.json" });
 
-  test("a natural-language query surfaces a semantically related deity even without an exact keyword match", async ({
+  test("[TC-SEM-001] a natural-language query surfaces a semantically related deity even without an exact keyword match", async ({
     page,
   }) => {
     // The pre-generated corpus embeddings (npm run embeddings:generate) cover
@@ -21,7 +21,7 @@ test.describe("semantic search", () => {
     await expect(stormGods.first()).toBeVisible();
   });
 
-  test("semantic search never surfaces a secret entry to a player, even one it would otherwise match well", async ({
+  test("[TC-SEM-002] semantic search never surfaces a secret entry to a player, even one it would otherwise match well", async ({
     page,
     browser,
   }) => {

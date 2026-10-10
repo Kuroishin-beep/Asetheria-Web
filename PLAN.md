@@ -301,7 +301,7 @@ Your words, kept as the contract: *a character-creation feature, on the landing 
 
 | Phase | Slice | Depends on |
 |---|---|---|
-| **9** | Landing page and motion scenes (ENH-08) | Phase 2 |
+| **9** | Landing page and motion scenes (ENH-08) | Phase 2 (built last, after 10 and 11, because its call to action opens the creator) |
 | **10** | Character engine, house rules, `characters` table and API (ENH-09 part 1) | Phase 9 not required; needs 8d done |
 | **11** | Character wizard, 5e sheet, Wikidot links, public route, Characters tab (ENH-09 part 2) | Phases 9 and 10 |
 

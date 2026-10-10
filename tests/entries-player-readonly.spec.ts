@@ -4,7 +4,7 @@ import { createEntryViaUI, deleteEphemeralEntry, testName } from "./helpers";
 test.describe("player role is strictly read-only", () => {
   test.use({ storageState: "tests/.auth/player.json" });
 
-  test("no write affordances appear anywhere in the shell", async ({ page }) => {
+  test("[TC-ENTR-001] no write affordances appear anywhere in the shell", async ({ page }) => {
     await page.goto("/");
     // `exact: true` matters here: other tests' ephemeral entries can be
     // named things like "zz-playwright-crud-archive-<uuid>", whose dashboard
@@ -17,27 +17,27 @@ test.describe("player role is strictly read-only", () => {
     ).toHaveCount(0);
   });
 
-  test("/codex/new redirects a player away", async ({ page }) => {
+  test("[TC-ENTR-002] /codex/new redirects a player away", async ({ page }) => {
     await page.goto("/codex/new");
     await expect(page).toHaveURL("/");
   });
 
-  test("/admin redirects a player away", async ({ page }) => {
+  test("[TC-ENTR-003] /admin redirects a player away", async ({ page }) => {
     await page.goto("/admin");
     await expect(page).toHaveURL("/");
   });
 
-  test("/archive redirects a player away", async ({ page }) => {
+  test("[TC-ENTR-004] /archive redirects a player away", async ({ page }) => {
     await page.goto("/archive");
     await expect(page).toHaveURL("/");
   });
 
-  test("/api/export is forbidden for a player", async ({ page }) => {
+  test("[TC-ENTR-005] /api/export is forbidden for a player", async ({ page }) => {
     const res = await page.request.get("/api/export");
     expect(res.status()).toBe(403);
   });
 
-  test("a secret entry is invisible in list, search, and by direct URL", async ({
+  test("[TC-ENTR-006] a secret entry is invisible in list, search, and by direct URL", async ({
     browser,
   }) => {
     // Create the secret entry as DM in one context...

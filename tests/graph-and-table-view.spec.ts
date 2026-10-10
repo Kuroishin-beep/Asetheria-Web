@@ -10,7 +10,7 @@ test.afterAll(async () => {
 test.describe("table view", () => {
   test.use({ storageState: "tests/.auth/dm.json" });
 
-  test("ores section offers a table view showing structured fields as columns", async ({ page }) => {
+  test("[TC-GTV-001] ores section offers a table view showing structured fields as columns", async ({ page }) => {
     await page.goto("/codex/ores");
     await page.getByRole("button", { name: "Table", exact: true }).click();
     await expect(page.getByRole("columnheader", { name: /Cost per lb/ })).toBeVisible();
@@ -25,7 +25,7 @@ test.describe("table view", () => {
 test.describe("graph view", () => {
   test.use({ storageState: "tests/.auth/dm.json" });
 
-  test("renders as an SVG with nodes, and clicking a node navigates to its page", async ({ page }) => {
+  test("[TC-GTV-002] renders as an SVG with nodes, and clicking a node navigates to its page", async ({ page }) => {
     await page.goto("/graph");
     await expect(page.getByRole("group", { name: /Backlink graph/ })).toBeVisible();
 
@@ -43,7 +43,7 @@ test.describe("graph view", () => {
     await expect(page).toHaveURL(/\/codex\/entry\//);
   });
 
-  test("a player's graph never includes a node they cannot see", async ({ browser }) => {
+  test("[TC-GTV-003] a player's graph never includes a node they cannot see", async ({ browser }) => {
     const username = `zz-graph-player-${randomUUID().slice(0, 8)}`;
     const password = "graph test password";
     const userId = await createTestPlayer(username, password);

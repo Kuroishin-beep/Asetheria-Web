@@ -82,7 +82,7 @@ test.afterAll(async () => {
 });
 
 test.describe("schema and rollback", () => {
-  test("both tables exist, coordinates are range-checked by the database, and a pin cannot outlive its map", async () => {
+  test("[TC-MAP-001] both tables exist, coordinates are range-checked by the database, and a pin cannot outlive its map", async () => {
     const tables = await query<{ t: string }>(`SELECT to_regclass('maps')::text AS t UNION ALL SELECT to_regclass('map_pins')::text`);
     expect(tables.map((r) => r.t)).toEqual(["maps", "map_pins"]);
     for (const [x, y] of [[1.01, 0.5], [-0.01, 0.5], [0.5, 1.5], [0.5, -1]]) {
@@ -96,7 +96,7 @@ test.describe("schema and rollback", () => {
     await query(`DELETE FROM map_pins WHERE entry_id = $1`, [ids[TARGET]]);
   });
 
-  test("the rollback script drops both tables and nothing else (run inside a transaction that is rolled back)", async () => {
+  test("[TC-MAP-002] the rollback script drops both tables and nothing else (run inside a transaction that is rolled back)", async () => {
     const url = process.env.DATABASE_URL ?? "";
     expect(url).not.toMatch(/neon\.tech|neon\.build/);
     const client = new Client({ connectionString: url });
@@ -115,7 +115,7 @@ test.describe("schema and rollback", () => {
     expect((await query<{ t: string }>(`SELECT to_regclass('map_pins')::text AS t`))[0].t).toBe("map_pins");
   });
 
-  test("the migration is idempotent", async () => {
+  test("[TC-MAP-003] the migration is idempotent", async () => {
     const url = process.env.DATABASE_URL ?? "";
     const client = new Client({ connectionString: url });
     await client.connect();
@@ -127,7 +127,7 @@ test.describe("schema and rollback", () => {
     }
   });
 
-  test("the first map is registered at the size of its image file, and the file is served only to signed-in users", async ({ request, browser }) => {
+  test("[TC-MAP-004] the first map is registered at the size of its image file, and the file is served only to signed-in users", async ({ request, browser }) => {
     const rows = await query<{ slug: string; width: number; height: number; image_path: string }>(`SELECT slug, width, height, image_path FROM maps WHERE slug = 'wip-map'`);
     expect(rows).toHaveLength(1);
     expect(rows[0]).toMatchObject({ width: 2250, height: 1200, image_path: "/maps/wip-map.png" });
@@ -151,7 +151,7 @@ test.describe("pins API", () => {
   test.describe("DM", () => {
     test.use({ storageState: "tests/.auth/dm.json" });
 
-    test("creates a pin at exact coordinates, including the edges 0 and 1, and lists it back", async ({ request }) => {
+    test("[TC-MAP-007] creates a pin at exact coordinates, including the edges 0 and 1, and lists it back", async ({ request }) => {
       for (const [x, y] of [[0, 0], [1, 1], [0.5, 0.25]]) {
         const res = await request.post(`/api/maps/${MAP_SLUG}/pins`, { data: { entryId: ids[TARGET], x, y, label: "  Edge  " } });
         expect(res.status(), `${x},${y}`).toBe(201);
@@ -164,7 +164,7 @@ test.describe("pins API", () => {
       await query(`DELETE FROM map_pins WHERE entry_id = $1`, [ids[TARGET]]);
     });
 
-    test("rejects bad coordinates, bad ids, an unknown map and an unknown entry", async ({ request }) => {
+    test("[TC-MAP-008] rejects bad coordinates, bad ids, an unknown map and an unknown entry", async ({ request }) => {
       const post = (data: unknown, slug = MAP_SLUG) => request.post(`/api/maps/${slug}/pins`, { data });
       for (const bad of [
         { entryId: ids[TARGET], x: 1.0001, y: 0.5 },
@@ -185,7 +185,7 @@ test.describe("pins API", () => {
       expect(none[0].n).toBe("0");
     });
 
-    test("deletes a pin, only on its own map, and not twice", async ({ request }) => {
+    test("[TC-MAP-009] deletes a pin, only on its own map, and not twice", async ({ request }) => {
       const created = await request.post(`/api/maps/${MAP_SLUG}/pins`, { data: { entryId: ids[TARGET], x: 0.3, y: 0.3 } });
       const { id } = (await created.json()) as { id: string };
       expect((await request.delete(`/api/maps/wip-map/pins/${id}`)).status()).toBe(404);
@@ -195,14 +195,14 @@ test.describe("pins API", () => {
     });
   });
 
-  test("signed-out callers get 401 on every method", async ({ request }) => {
+  test("[TC-MAP-005] signed-out callers get 401 on every method", async ({ request }) => {
     const headers = { cookie: "" };
     expect((await request.get(`/api/maps/${MAP_SLUG}/pins`, { headers })).status()).toBe(401);
     expect((await request.post(`/api/maps/${MAP_SLUG}/pins`, { headers, data: { entryId: ids[TARGET], x: 0.5, y: 0.5 } })).status()).toBe(401);
     expect((await request.delete(`/api/maps/${MAP_SLUG}/pins/${randomUUID()}`, { headers })).status()).toBe(401);
   });
 
-  test("a player may read pins but cannot create or delete them", async ({ browser }) => {
+  test("[TC-MAP-006] a player may read pins but cannot create or delete them", async ({ browser }) => {
     const { context, page } = await login(browser, await playerWith(["location"]));
     try {
       expect((await page.request.get(`/api/maps/${MAP_SLUG}/pins`)).status()).toBe(200);
@@ -222,7 +222,7 @@ test.describe("what each person sees (R6)", () => {
   test.describe("DM", () => {
     test.use({ storageState: "tests/.auth/dm.json" });
 
-    test("sees the pins of secret and ungranted entries, but not the archived one", async ({ page }) => {
+    test("[TC-MAP-014] sees the pins of secret and ungranted entries, but not the archived one", async ({ page }) => {
       await page.goto(`/map/${MAP_SLUG}`);
       await expect(page.locator(`[data-pin-entry="${slugOf(OPEN)}"]`)).toHaveCount(1);
       await expect(page.locator(`[data-pin-entry="${slugOf(SECRET)}"]`)).toHaveCount(1);
@@ -231,7 +231,7 @@ test.describe("what each person sees (R6)", () => {
     });
   });
 
-  test("a player sees only the pins whose entries they can read, and nothing of the others is in the HTML, the data or the API", async ({ browser }) => {
+  test("[TC-MAP-010] a player sees only the pins whose entries they can read, and nothing of the others is in the HTML, the data or the API", async ({ browser }) => {
     const { context, page } = await login(browser, await playerWith(["location"]));
     try {
       const bodies: string[] = [];
@@ -256,7 +256,7 @@ test.describe("what each person sees (R6)", () => {
     }
   });
 
-  test("a player with no grant on locations sees a map with no pins", async ({ browser }) => {
+  test("[TC-MAP-011] a player with no grant on locations sees a map with no pins", async ({ browser }) => {
     const { context, page } = await login(browser, await playerWith(["note"]));
     try {
       await page.goto(`/map/${MAP_SLUG}`);
@@ -267,7 +267,7 @@ test.describe("what each person sees (R6)", () => {
     }
   });
 
-  test("granting the ore kind to a player reveals that pin to them", async ({ browser }) => {
+  test("[TC-MAP-012] granting the ore kind to a player reveals that pin to them", async ({ browser }) => {
     const { context, page } = await login(browser, await playerWith(["location", "ore"]));
     try {
       await page.goto(`/map/${MAP_SLUG}`);
@@ -278,7 +278,7 @@ test.describe("what each person sees (R6)", () => {
     }
   });
 
-  test("an unknown map is a 404", async ({ browser }) => {
+  test("[TC-MAP-013] an unknown map is a 404", async ({ browser }) => {
     const { context, page } = await login(browser, await playerWith(["location"]));
     try {
       expect((await page.goto("/map/no-such-map"))?.status()).toBe(404);
@@ -289,7 +289,7 @@ test.describe("what each person sees (R6)", () => {
 });
 
 test.describe("cascade", () => {
-  test("deleting an entry removes its pins", async () => {
+  test("[TC-MAP-015] deleting an entry removes its pins", async () => {
     const id = await entry(`Zz Doomed ${tag}`, "location");
     await pin(id, 0.9, 0.9);
     const before = await query<{ n: string }>(`SELECT count(*)::text AS n FROM map_pins WHERE entry_id = $1`, [id]);
@@ -299,7 +299,7 @@ test.describe("cascade", () => {
     expect(after[0].n).toBe("0");
   });
 
-  test("deleting a map removes its pins and leaves the entries", async () => {
+  test("[TC-MAP-016] deleting a map removes its pins and leaves the entries", async () => {
     const m = (await query<{ id: string }>(`INSERT INTO maps (slug, name, image_path, width, height) VALUES ($1, 'Temp', '/maps/wip-map.png', 10, 10) RETURNING id`, [`zz-temp-${tag}`]))[0].id;
     await query(`INSERT INTO map_pins (map_id, entry_id, x, y) VALUES ($1, $2, 0.1, 0.1)`, [m, ids[TARGET]]);
     await query(`DELETE FROM maps WHERE id = $1`, [m]);
@@ -326,7 +326,7 @@ async function box(locator: Locator) {
 test.describe("DM placing a pin", () => {
   test.use({ storageState: "tests/.auth/dm.json" });
 
-  test("click the map, pick an entry, and the pin saves within 1% of where it was clicked", async ({ page }) => {
+  test("[TC-MAP-017] click the map, pick an entry, and the pin saves within 1% of where it was clicked", async ({ page }) => {
     await page.goto(`/map/${MAP_SLUG}`);
     await page.getByRole("button", { name: "Place a pin" }).click();
     const stage = await box(page.getByTestId("map-stage"));
@@ -348,7 +348,7 @@ test.describe("DM placing a pin", () => {
     await query(`DELETE FROM map_pins WHERE entry_id = $1`, [ids[TARGET]]);
   });
 
-  test("the position is still right after zooming in and panning (it is a fraction of the image, not the screen)", async ({ page }) => {
+  test("[TC-MAP-018] the position is still right after zooming in and panning (it is a fraction of the image, not the screen)", async ({ page }) => {
     await page.goto(`/map/${MAP_SLUG}`);
     const viewport = page.getByTestId("map-viewport");
     await viewport.focus();
@@ -376,7 +376,7 @@ test.describe("DM placing a pin", () => {
     await query(`DELETE FROM map_pins WHERE entry_id = $1`, [ids[TARGET]]);
   });
 
-  test("Save is disabled until an entry is chosen, and Cancel saves nothing", async ({ page }) => {
+  test("[TC-MAP-019] Save is disabled until an entry is chosen, and Cancel saves nothing", async ({ page }) => {
     await page.goto(`/map/${MAP_SLUG}`);
     await page.getByRole("button", { name: "Place a pin" }).click();
     const stage = await box(page.getByTestId("map-stage"));
@@ -388,7 +388,7 @@ test.describe("DM placing a pin", () => {
     expect(n[0].n).toBe("0");
   });
 
-  test("a DM can remove a pin from its preview card", async ({ page }) => {
+  test("[TC-MAP-020] a DM can remove a pin from its preview card", async ({ page }) => {
     await query(`INSERT INTO map_pins (map_id, entry_id, x, y) VALUES ($1, $2, 0.8, 0.8)`, [mapId, ids[TARGET]]);
     await page.goto(`/map/${MAP_SLUG}`);
     await openPin(page, slugOf(TARGET));
@@ -402,7 +402,7 @@ test.describe("DM placing a pin", () => {
 test.describe("pins and the preview card", () => {
   test.use({ storageState: "tests/.auth/dm.json" });
 
-  test("clicking a pin opens a preview with the name and summary, and Open page goes to the entry", async ({ page }) => {
+  test("[TC-MAP-021] clicking a pin opens a preview with the name and summary, and Open page goes to the entry", async ({ page }) => {
     await page.goto(`/map/${MAP_SLUG}`);
     await openPin(page, slugOf(OPEN));
     const card = page.getByRole("region", { name: "Pin preview" });
@@ -412,7 +412,7 @@ test.describe("pins and the preview card", () => {
     await expect(page).toHaveURL(new RegExp(`/codex/entry/${slugOf(OPEN)}$`));
   });
 
-  test("Escape and the close button dismiss the preview", async ({ page }) => {
+  test("[TC-MAP-022] Escape and the close button dismiss the preview", async ({ page }) => {
     await page.goto(`/map/${MAP_SLUG}`);
     const pinButton = page.locator(`[data-pin-entry="${slugOf(OPEN)}"]`);
     await openPin(page, slugOf(OPEN));
@@ -428,14 +428,14 @@ test.describe("pins and the preview card", () => {
     await expect(card).toHaveCount(0);
   });
 
-  test("a keyboard user can reach a pin with Tab and open it with Enter", async ({ page }) => {
+  test("[TC-MAP-023] a keyboard user can reach a pin with Tab and open it with Enter", async ({ page }) => {
     await page.goto(`/map/${MAP_SLUG}`);
     await page.locator(`[data-pin-entry="${slugOf(OPEN)}"]`).focus();
     await page.keyboard.press("Enter");
     await expect(page.getByRole("region", { name: "Pin preview" })).toContainText(OPEN);
   });
 
-  test("every pin is also in a plain list below the map", async ({ page }) => {
+  test("[TC-MAP-024] every pin is also in a plain list below the map", async ({ page }) => {
     await page.goto(`/map/${MAP_SLUG}`);
     await expect(page.getByRole("heading", { name: /On this map/ })).toBeVisible();
     await expect(page.getByRole("link", { name: OPEN })).toBeVisible();
@@ -468,7 +468,7 @@ async function pinch(page: Page, target: Locator, from: number, to: number) {
 test.describe("pan and zoom", () => {
   test.use({ storageState: "tests/.auth/dm.json" });
 
-  test("the keyboard zooms with + and -, resets with 0, and pans with the arrows without leaving the picture", async ({ page }) => {
+  test("[TC-MAP-025] the keyboard zooms with + and -, resets with 0, and pans with the arrows without leaving the picture", async ({ page }) => {
     await page.goto(`/map/${MAP_SLUG}`);
     const vp = page.getByTestId("map-viewport");
     await vp.focus();
@@ -508,7 +508,7 @@ test.describe("pan and zoom", () => {
     expect(await tx()).toBe(0);
   });
 
-  test("the zoom stays between 100% and 800%", async ({ page }) => {
+  test("[TC-MAP-026] the zoom stays between 100% and 800%", async ({ page }) => {
     await page.goto(`/map/${MAP_SLUG}`);
     const vp = page.getByTestId("map-viewport");
     await vp.focus();
@@ -518,7 +518,7 @@ test.describe("pan and zoom", () => {
     expect(Number(await vp.getAttribute("data-scale"))).toBe(1);
   });
 
-  test("the zoom buttons and reset work with the mouse, and the wheel zooms", async ({ page }) => {
+  test("[TC-MAP-027] the zoom buttons and reset work with the mouse, and the wheel zooms", async ({ page }) => {
     await page.goto(`/map/${MAP_SLUG}`);
     const vp = page.getByTestId("map-viewport");
     await page.getByRole("button", { name: "Zoom in" }).click();
@@ -531,7 +531,7 @@ test.describe("pan and zoom", () => {
     await expect.poll(async () => Number(await vp.getAttribute("data-scale"))).toBeGreaterThan(1);
   });
 
-  test("dragging pans a zoomed map, and a drag does not open anything", async ({ page }) => {
+  test("[TC-MAP-028] dragging pans a zoomed map, and a drag does not open anything", async ({ page }) => {
     await page.goto(`/map/${MAP_SLUG}`);
     const vp = page.getByTestId("map-viewport");
     await page.getByRole("button", { name: "Zoom in" }).click();
@@ -546,7 +546,7 @@ test.describe("pan and zoom", () => {
     await expect(page.getByRole("region", { name: "Pin preview" })).toHaveCount(0);
   });
 
-  test("a two-finger pinch zooms in and out (touch pointer events)", async ({ page }) => {
+  test("[TC-MAP-029] a two-finger pinch zooms in and out (touch pointer events)", async ({ page }) => {
     await page.goto(`/map/${MAP_SLUG}`);
     const vp = page.getByTestId("map-viewport");
     await pinch(page, vp, 40, 160);
@@ -556,7 +556,7 @@ test.describe("pan and zoom", () => {
     expect(Number(await vp.getAttribute("data-scale"))).toBeLessThan(zoomed);
   });
 
-  test("pins keep the same on-screen size at any zoom", async ({ page }) => {
+  test("[TC-MAP-030] pins keep the same on-screen size at any zoom", async ({ page }) => {
     await page.goto(`/map/${MAP_SLUG}`);
     const pinEl = page.locator(`[data-pin-entry="${slugOf(OPEN)}"]`);
     const w1 = (await box(pinEl)).width;
@@ -569,7 +569,7 @@ test.describe("pan and zoom", () => {
 test.describe("real touch input (browser touch events)", () => {
   test.use({ storageState: "tests/.auth/dm.json", hasTouch: true, viewport: { width: 390, height: 800 } });
 
-  test("a real two-finger spread zooms in, and a one-finger drag then pans", async ({ page }) => {
+  test("[TC-MAP-031] a real two-finger spread zooms in, and a one-finger drag then pans", async ({ page }) => {
     await page.goto(`/map/${MAP_SLUG}`);
     const vp = page.getByTestId("map-viewport");
     await vp.scrollIntoViewIfNeeded();
@@ -599,7 +599,7 @@ test.describe("real touch input (browser touch events)", () => {
 test.describe("small screens", () => {
   test.use({ storageState: "tests/.auth/dm.json", viewport: { width: 375, height: 800 } });
 
-  test("at 375px the map fits and the page does not scroll sideways", async ({ page }) => {
+  test("[TC-MAP-032] at 375px the map fits and the page does not scroll sideways", async ({ page }) => {
     await page.goto(`/map/${MAP_SLUG}`);
     await expect(page.getByTestId("map-viewport")).toBeVisible();
     const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
@@ -612,7 +612,7 @@ test.describe("small screens", () => {
 test.describe("navigation", () => {
   test.use({ storageState: "tests/.auth/dm.json" });
 
-  test("the sidebar has a Map link, and /map opens the first map", async ({ page }) => {
+  test("[TC-MAP-033] the sidebar has a Map link, and /map opens the first map", async ({ page }) => {
     await page.goto("/");
     await expect(page.getByRole("link", { name: "Map", exact: true }).first()).toBeVisible();
     await page.goto("/map");

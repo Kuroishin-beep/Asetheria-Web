@@ -5,12 +5,12 @@ import { readThemes } from "../scripts/lib/contrast";
 import { RULES, scan } from "../scripts/lib/design-gates";
 
 test.describe("design-system gates (static scan of src/, no browser needed)", () => {
-  test("the scan finds no violations of the project design rules", () => {
+  test("[TC-GATE-001] the scan finds no violations of the project design rules", () => {
     const found = scan().map((v) => `${v.file}:${v.line} [${v.rule}] ${v.text}`);
     expect(found).toEqual([]);
   });
 
-  test("every rule actually fires on a known-bad sample (the gates are not vacuous)", () => {
+  test("[TC-GATE-002] every rule actually fires on a known-bad sample (the gates are not vacuous)", () => {
     const samples: Record<string, string> = {
       "no hardcoded Tailwind colour utilities (use design tokens)": '<div className="bg-white text-gray-900 border-blue-600" />',
       "no colour literals in components (hex, rgb(), hsl())": 'const c = "#ff00aa";',
@@ -36,7 +36,7 @@ test.describe("design-system gates (static scan of src/, no browser needed)", ()
     expect(motion.pattern.test('<Loader2 className="animate-spin" />')).toBe(false);
   });
 
-  test("viewport themeColor in layout.tsx equals the token page backgrounds", () => {
+  test("[TC-GATE-003] viewport themeColor in layout.tsx equals the token page backgrounds", () => {
     const layout = fs.readFileSync(path.resolve(__dirname, "..", "src", "app", "layout.tsx"), "utf8");
     const light = /prefers-color-scheme: light\)", color: "(#[0-9a-fA-F]{6})"/.exec(layout)?.[1];
     const dark = /prefers-color-scheme: dark\)", color: "(#[0-9a-fA-F]{6})"/.exec(layout)?.[1];

@@ -1,4 +1,5 @@
 import { test, expect, type Page } from "@playwright/test";
+import { tc } from "./case-id";
 import { SECTIONS } from "../src/lib/kinds";
 import { deleteEphemeralEntry, fillEntryForm, testName } from "./helpers";
 
@@ -20,16 +21,16 @@ for (const role of ["dm", "player"] as const) {
   test.describe(`codex pages (${role})`, () => {
     test.use({ storageState: `tests/.auth/${role}.json` });
 
-    test("home renders its Browse sections", async ({ page }) => {
+    test(tc("codex-pages-smoke.spec.ts", `codex pages (${role})`, "home renders its Browse sections"), async ({ page }) => {
       await expectRenders(page, "/");
       await expect(page.getByRole("heading", { name: "Browse" })).toBeVisible();
     });
 
-    test("every section page renders", async ({ page }) => {
+    test(tc("codex-pages-smoke.spec.ts", `codex pages (${role})`, "every section page renders"), async ({ page }) => {
       for (const slug of SLUGS) await expectRenders(page, `/codex/${slug}`);
     });
 
-    test("an out-of-range or junk ?page clamps instead of erroring", async ({ page }) => {
+    test(tc("codex-pages-smoke.spec.ts", `codex pages (${role})`, "an out-of-range or junk ?page clamps instead of erroring"), async ({ page }) => {
       await expectRenders(page, "/codex/deities?page=999");
       await expectRenders(page, "/codex/deities?page=abc");
     });
@@ -39,7 +40,7 @@ for (const role of ["dm", "player"] as const) {
 test.describe("location sections (dm)", () => {
   test.use({ storageState: "tests/.auth/dm.json" });
 
-  test("there is no flat /codex/locations listing, so nothing links to it", async ({ page }) => {
+  test("[TC-SMOKE-007] there is no flat /codex/locations listing, so nothing links to it", async ({ page }) => {
     const res = await page.goto("/codex/locations");
     expect(res?.status()).toBe(404);
     // The new-location form used to cancel back to that 404.
@@ -48,7 +49,7 @@ test.describe("location sections (dm)", () => {
     await expect(cancel).not.toHaveAttribute("href", "/codex/locations");
   });
 
-  test("archiving a location lands on its tier section, not a 404", async ({ page }) => {
+  test("[TC-SMOKE-008] archiving a location lands on its tier section, not a 404", async ({ page }) => {
     const name = testName("tier-archive");
     let slug: string | undefined;
     try {

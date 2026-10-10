@@ -33,6 +33,11 @@ const LAYOUT_THEME_COLOR = {
   reason:
     "viewport.themeColor feeds browser chrome, which cannot read CSS variables; tests/design-gates.spec.ts asserts the values equal the token backgrounds",
 };
+const LANDING_MOTION = {
+  prefix: "src/components/landing/",
+  reason:
+    "scene art is driven by Motion values (scroll parallax, drifting lights), which can only be applied through the style prop; the folder holds nothing but that art and its hooks",
+};
 const SESSION_HINT = {
   prefix: "src/lib/session.ts",
   reason: "a user-facing instruction string that mentions console.log, not a call",
@@ -69,7 +74,7 @@ export const RULES: Rule[] = [
     name: "no inline style objects (use Tailwind classes)",
     pattern: /\bstyle=\{\{/,
     extensions: [".tsx"],
-    exempt: [],
+    exempt: [LANDING_MOTION],
   },
   {
     name: "no plain <button>, <select> or <textarea> (use the shadcn wrappers)",

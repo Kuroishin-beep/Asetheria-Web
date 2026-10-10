@@ -3,7 +3,7 @@ import { test, expect } from "@playwright/test";
 test.describe("Foundry VTT compendium import", () => {
   test.use({ storageState: "tests/.auth/dm.json" });
 
-  test("an imported character is browsable with race/role and readable biography text", async ({
+  test("[TC-FOUND-001] an imported character is browsable with race/role and readable biography text", async ({
     page,
   }) => {
     await page.goto("/codex/entry/thorfinn-hugrakkur");
