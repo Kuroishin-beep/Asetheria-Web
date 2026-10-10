@@ -316,3 +316,12 @@ Remaining, owner's side: create the DM account (`npm run user:add` with the prod
   - `/api/auth/logout` is public: signing out with an already-expired session used to get a 401 and fail.
 - Test corrections (justified): frame-time limits compared at measured precision (33.400000000000546 vs 33.4 is two display frames, limit unchanged); New-for-you test waits for streamed links; long axe test gets 90 s; leak checks exclude the three empire names the public pages show on purpose as constants; landing motion checks sample the elements that animate.
 - Also in this commit (Steps 2–3 groundwork): `scripts/build-test-cases.ts` + `scripts/lib/test-catalogue.ts` (catalogue from the real specs), `test-cases/{ids,actions,traceability,overrides}.json`, `tests/coverage-gaps.spec.ts` (11 coverage-floor cases), every test titled with its case id (`tests/case-id.ts` for loop-generated ones), config: screenshot on every test, video + trace on failure, retries 0, JSON results.
+
+## Steps 2–4 — Test cases, case-named specs, results, report — DONE
+- `test-cases.html`: 509 cases (one per test, each test titled with its id), Actual and Status from the final run, dashboard, filters, coverage-floor matrix (30 actions × happy / invalid / unauthorized / boundary), traceability for every PLAN.md criterion (Phases 0–11), print stylesheet, works offline.
+- Final run: 509 passed, 0 failed, 0 flaky, 0 skipped, 18.6 min, one worker, retries 0; screenshot on every test, video + trace on failure; artifacts in `./test-results/`.
+- Production: `characters.sql` applied to Neon (additive; table present, 0 rows; entries still 1,060).
+- Report: `TEST-REPORT.md` (totals, bugs with root cause and fix, test corrections, remaining risks).
+
+## Overall status
+All phases (0–11) implemented and verified, with the Phase 0 deploy and account steps left to the owner (create the DM account, Vercel env, deploy, `/api/health`, rotate the Neon password).

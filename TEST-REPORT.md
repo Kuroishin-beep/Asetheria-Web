@@ -1,114 +1,96 @@
 # TEST-REPORT.md
 
-Covers implementation of `PLAN.md` (ENH-01 through ENH-09), phases 0-4. All
-runs below are against the local disposable Postgres (`asetheria-test-pg`,
-rebuilt on `pgvector/pgvector:pg16` during Phase 4 — see
-`IMPLEMENTATION_TRACKER.md`), never the Neon production database.
-
-## Scope note on this report
-
-The implementation playbook this session was working from also specifies a
-standalone `test-cases.html` QA matrix (dashboard, filters, manual+automated
-status columns) as a Step 2/3 deliverable. That template is written for a
-formal handoff to a separate QA function. This is a personal GM tool with one
-developer and one real automated suite already in place before this session
-started — a parallel manual-test artifact would duplicate the Playwright
-suite's coverage without adding independent verification. **Deliberately not
-produced.** Flagging the omission rather than silently skipping it, per the
-"don't silently reinterpret requirements" instruction — say if you want it
-built anyway.
+Covers `PLAN.md` v2.1, Phases 0 to 11, and the Step 2 to 4 test deliverables.
+Every automated run is against the local, disposable Postgres container
+(`asetheria-test-pg`) and `next dev` on localhost:3000. The suite never reads
+`.env.neon` and never touches the Neon production database.
 
 ## Final run
 
-```
-60 passed (3.3m)
-```
+| | |
+|---|---|
+| Date | 2026-10-10, started 04:39 UTC |
+| Command | `npx playwright test` (one worker, `retries: 0`) |
+| Result | **509 passed, 0 failed, 0 flaky, 0 skipped** |
+| Duration | 18.6 minutes |
+| Artifacts | `./test-results/`: a screenshot for every test; video and trace kept for any failure (none); `results.json` |
+| Machine | Windows 10, run with nothing else working (concurrent work skews the frame-time checks; see risks) |
 
-Full command: `npx playwright test --grep-invert "search snippets"`. Every
-test that exists before and after this session's work is included; nothing
-was skipped, weakened, or deleted to get to green.
+Also green at the time of the final commit: `tsc --noEmit` clean, `npm run build`
+OK, `npm audit --omit=dev` 0 vulnerabilities, design gates 12 rules 0 violations.
 
-## The one excluded test
+Measured numbers recorded by the suite:
+- World graph, 1,044 nodes, pointer sweep under a 4x CPU throttle: p90 frame 16.7 ms, 56 to 59 fps (limit p90 33.4 ms).
+- Landing page, full scroll under a 4x CPU throttle: p90 frame 16.8 ms (limit 33.4 ms); layout shift under 0.05.
+- Landing page JavaScript over `/login`, production build: 12.9 KB gzipped (limit 60 KB).
 
-`tests/search-safety.spec.ts` → "HTML in an entry body is escaped, highlighting
-survives" fails on both the pre-session baseline and the current branch,
-confirmed by direct comparison of the code path it exercises (the DM-only
-full-text search snippet/highlight pipeline, which this session never
-touched — its `secretClause = sql\`true\`` branch is byte-identical to
-before). Root cause not diagnosed further — likely `ts_headline`'s
-`MaxWords`/`MinWords` window excluding the literal `<img>` tag text from the
-generated snippet for this specific test payload, but not confirmed. Logged
-here as a pre-existing bug (ENH-09 bug-scan territory), not fixed in this
-session because it predates and is unrelated to every finding in PLAN.md.
+## The test-case document
 
-## Bugs found and fixed during this session (by real test failures, not by inspection)
+`test-cases.html` is one self-contained file that opens offline. It has 509 cases,
+one per automated test, and each test's title starts with its id (`[TC-<MODULE>-<NNN>]`).
+Steps, test data and expected results are read from the real test bodies by
+`scripts/build-test-cases.ts`. Actual and Status come from this run's `results.json`.
+The page has a summary dashboard, filters and search, a coverage-floor matrix, a
+traceability table from every PLAN.md acceptance criterion to its cases, and a print
+stylesheet. Status and Notes can be changed in the page and are remembered in that browser.
 
-| # | Found by | Root cause | Fix |
+| Category | Cases | | Priority | Cases |
+|---|---|---|---|---|
+| Happy | 229 | | P0 | 162 |
+| Accessibility | 63 | | P1 | 91 |
+| Validation | 53 | | P2 | 256 |
+| Permission & Auth | 43 | | | |
+| Security | 35 | | | |
+| Boundary | 26 | | | |
+| Data Integrity | 24 | | | |
+| Responsive | 16 | | | |
+| Error & Recovery | 9 | | | |
+| Concurrency | 6 | | | |
+| Edge | 5 | | | |
+
+Coverage floor: 30 user actions, each with a happy, an invalid-input, an unauthorized
+and a boundary case. Eleven slots that nothing covered got new tests in
+`tests/coverage-gaps.spec.ts` (TC-COV-001 to 012; 010 was retired when its test was rewritten). Where a slot cannot exist (for
+example invalid input to "sign out", which takes none), the matrix says why.
+`npx tsx scripts/build-test-cases.ts --strict` fails if any slot is empty without a reason.
+
+Categories come from a keyword classifier over each title, with hand corrections in
+`test-cases/overrides.json`. They are a sound guide, not a hand-audited taxonomy.
+
+To regenerate after a run: `npx playwright test` then
+`npx tsx scripts/build-test-cases.ts --results test-results/results.json`.
+
+## Bugs found and fixed (Phases 8d to 11)
+
+Earlier phases' bugs are recorded per phase in `IMPLEMENTATION_TRACKER.md`.
+
+| # | Symptom | Root cause | Fix |
 |---|---|---|---|
-| 1 | Manual reasoning before writing any RBAC code | Making players default-deny would have silently stripped existing player accounts (the seeded `party` account) of all access the moment Phase 0 shipped | `scripts/migrate-legacy-players.ts` — grandfathers any pre-existing player account with full access; run once, documented as a required production step |
-| 2 | `tests/rbac.spec.ts` "secret visibility always overrides a grant" — first version | Test bug, not app bug: a brand-new test player had never completed onboarding, so `(app)/layout.tsx`'s own (correct) redirect to `/welcome` was masking the actual check | Fixed the test to complete onboarding before asserting; app behavior was already correct, confirmed independently via a raw-SQL diagnostic that reproduced the exact query and returned 0 rows |
-| 3 | `tests/graph-and-table-view.spec.ts` "clicking a node navigates" | Isolated (no-edge) nodes had no attraction force, so pure repulsion could push several to the same clamped viewport corner — one node's SVG element silently blocked clicks on another stacked beneath it | Isolated nodes now get a fixed, evenly-spaced outer ring instead of participating in the physics simulation |
-| 4 | Same test, recurred after fix #3 once the corpus grew (Phase 4's re-seed) | Two *connected* nodes with near-identical neighbor sets could still converge to almost the same point — pairwise repulsion alone wasn't enough to separate them | Added a post-simulation minimum-separation pass; also made the test itself click "any node" rather than one specific one, since the acceptance criterion never required a specific node |
-| 5 | `tests/search-safety.spec.ts` "a player cannot find a public entry by words only in its DM notes" (an *existing* test, not one written this session) | The first version of semantic search had no relevance floor — a query with zero genuine match still returned the K nearest entries regardless of true relevance, so the results page's "N matches for '{query}'" message started echoing the query text back once irrelevant padding pushed the hit count above zero | Added a similarity floor; recalibrated once from 0.3 to 0.5 after directly measuring that this corpus's own invented fantasy names let a random string score up to ~0.45 by coincidental subword pattern, not meaning |
+| 1 | No toast ever appeared anywhere (palette, map, planner, creator) | `<Toaster />` was never mounted | Mounted once in the root layout via `AppToaster` |
+| 2 | Mounting the toaster made the graph pointer-sweep p90 jump from 16.8 to 50 ms | The fixed toast layer added compositing work over the busy graph SVG | `AppToaster` skips `/graph` (see risks) |
+| 3 | Graph frame-time test intermittently at 50 ms | Every hover re-rendered the whole graph component, including filter lists with hundreds of options | Hover lives in a small external store read only by the overlay; 56 to 59 fps |
+| 4 | Landing scroll p90 50 ms; scenes "animated" off screen and under reduced motion | A looping transition (`repeat: Infinity`) kept tweening toward the resting value | `still()` gives a zero-length transition when a scene is off screen or motion is reduced; fewer animated elements; p90 16.7 ms |
+| 5 | Landing had no `contentinfo` landmark | Footer was inside `<main>` | Footer moved outside `<main>` |
+| 6 | Sign out failed with a 401 when the session had already expired | `/api/auth/logout` was behind the auth gate | Added to the public paths (it only clears the cookie) |
+| 7 | The wizard lost its last change on a quick reload | The draft is saved 250 ms after a change | Also saved on `pagehide` |
 
-None of these were caught by static review — all five surfaced because a real
-test was run against a real database and a real browser, which is the entire
-point of not skipping that step.
+## Tests corrected (each one justified, none weakened)
 
-## Security-relevant checks specifically re-verified after Phase 0's auth changes
+- Frame-time checks: a p90 of exactly two display frames measured 33.400000000000546 against a 33.4 limit. Compared at the measured precision; the limit is unchanged.
+- Point-buy floor: the test clicked five times where 8 to 6 is two steps.
+- "Back" locator also matched the "4. Background" step button; made exact.
+- "New for you": read the links before the streamed section arrived; now waits for them.
+- A long accessibility test (three full axe audits) got 90 s instead of 30 s; same assertions.
+- Public-page leak checks sampled entry names at random and sometimes picked one of the three empire names the pages show on purpose (constants). Those three are excluded from the sample.
+- The 300/301-character name test assumed the browser would send 301 characters; the field caps at 300. It now checks the cap and that the server refuses 301 when the cap is bypassed.
 
-- A `secret` entry is unreachable by a player through every path tested: direct
-  URL, list view, full-text search, semantic search, and the RBAC API —
-  including with an explicit "granted" override row inserted directly into
-  `entry_grants` for that exact entry (`tests/rbac.spec.ts`,
-  `tests/semantic-search.spec.ts`).
-- A non-DM cannot reach `/admin/rbac` (redirected) or call `POST /api/rbac`
-  directly (403), independent of the UI (`tests/rbac-panel.spec.ts`).
-- `src/lib/rate-limit.ts` (login throttling) was read in full; untouched by
-  this session and has no interaction with the new grant model.
-- The session JWT payload was confirmed to never include `displayName` —
-  `verifySessionToken`'s Edge-safe fallback and the DB-backed
-  `getCurrentUser` are the only two places that field is populated, and only
-  the latter (Node runtime, revocable) is used for anything RBAC-sensitive.
+## Remaining risks
 
-## Dependency security
-
-- `classic-level` (Foundry LevelDB reading, Phase 1): introduced zero new
-  `npm audit` findings.
-- `@huggingface/transformers` (Phase 4): the originally-planned
-  `@xenova/transformers` was rejected after `npm audit` showed a **critical**,
-  unpatched RCE in its `protobufjs` dependency with no non-breaking fix
-  available. Swapped to the actively-maintained `@huggingface/transformers`
-  (same model weights, same API) — verified zero new findings.
-- Ran `npm audit fix` (non-breaking) once, fixing 2 pre-existing findings
-  unrelated to any change this session made (`nanoid`, `sharp`).
-- **Remaining, not fixed:** 7 pre-existing findings, including a **critical**
-  Next.js unauthenticated RCE on Windows-hosted servers whose only available
-  fix is a Next 15→16 major-version upgrade. Not attempted — a framework
-  major-version bump needs its own dedicated regression pass, not a
-  side-effect of an unrelated feature session. Flagged for your explicit
-  decision; `npm audit` in the repo shows the full list.
-
-## What's verified vs. what still needs a human pass
-
-**Verified by automated test, this session:** everything in the "Bugs found
-and fixed" and "Security-relevant checks" sections above, plus every
-acceptance criterion PLAN.md listed per phase — see `IMPLEMENTATION_TRACKER.md`
-for the itemized checklist with evidence per item.
-
-**Not verified — needs you:**
-- Visual/design review. No design-system pass was run (this project doesn't
-  use one — see CLAUDE.md's own note that design enforcement is
-  stack-adaptive, and this is a hand-styled app, not shadcn/Tailwind-token
-  based). The graph view, table view, and RBAC panel were checked for
-  function, not for visual polish.
-- The production Neon database has not been touched. Everything above ran
-  against the local test Postgres. Before this ships: `npm run db:setup`,
-  `npm run migrate:legacy-players`, `npm run import:homebrew`,
-  `npm run import:foundry` (Foundry closed), `npm run embeddings:generate` —
-  in that order, against production `DATABASE_URL`.
-- Real multi-player load. Every RBAC/onboarding test used exactly one
-  concurrent player session at a time; no test exercises two players with
-  different grants browsing simultaneously, though nothing in the design
-  (per-user SQL predicates, no shared mutable state) suggests that would
-  behave differently.
+1. **Frame-time tests depend on the machine.** They pass on an idle machine. When I ran CPU-heavy work at the same time they failed (p90 50 ms). Run the suite on an idle machine or in CI with a fixed profile.
+2. **Memory on this machine.** Two full runs were stopped by Claude Code for low memory. Recording video for every test (needed for video on failure) and a screenshot per test add load.
+3. **A toast fired while on `/graph` is not shown** (bug 2). Nothing on the graph page itself uses toasts. A command-palette error raised from that page would be silent.
+4. **Production steps that are yours:** create the DM account; set the Vercel environment (`DATABASE_URL`, `AUTH_SECRET`, `PLAYER_PASSWORD`, optional `SIGNUP_CODE`, `EMBEDDINGS_CACHE_DIR`); deploy; check `/api/health`; **rotate the Neon password** (it was pasted in chat).
+5. **Phase 0 is verified by scripts and SQL, not Playwright,** by design. Evidence is in the tracker. The `characters` table was added to Neon on 2026-10-10 (additive; 0 rows; 1,060 entries unchanged).
+6. **Case ids are keyed by file, describe path and title.** Renaming a test gives it a new id on the next build. `test-cases/ids.json` is the record.
+7. **Generated steps are mechanical.** They are faithful to the code ("Click button "Save changes"") but not polished prose.
+8. **Not built (proposals only):** LegendKeeper or World Anvil style features, and load balancing. The app is stateless, so it can scale horizontally on Vercel as it is.

@@ -156,7 +156,8 @@ h1{font-size:22px;margin:0 0 4px}h2{font-size:17px;margin:24px 0 8px}
 .dash{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin:12px 0}
 .tile{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
 .tile b{display:block;font-size:22px}
-.bars{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}
+.bars{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;align-items:start}
+.bar.wide{grid-column:1/-1}.bar.wide .rows{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));column-gap:24px}
 .bar{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
 .bar h3{margin:0 0 6px;font-size:13px}
 .row{display:grid;grid-template-columns:150px 1fr 56px;gap:8px;align-items:center;font-size:12px;margin:3px 0}
@@ -165,9 +166,11 @@ h1{font-size:22px;margin:0 0 4px}h2{font-size:17px;margin:24px 0 8px}
 input,select,textarea,button{font:inherit;color:var(--fg);background:var(--card);border:1px solid var(--line);border-radius:6px;padding:5px 8px}
 button{cursor:pointer}
 input[type=search]{min-width:240px}
-table{width:100%;border-collapse:collapse;background:var(--card);margin-top:10px}
+.tablewrap{overflow-x:auto;margin-top:10px;border:1px solid var(--line);border-radius:8px}
+table{width:100%;border-collapse:collapse;background:var(--card)}
+#t{min-width:1400px}
 th,td{border:1px solid var(--line);padding:6px 8px;vertical-align:top;text-align:left}
-th{background:var(--chip);position:sticky;top:46px;z-index:2;font-size:12px}
+th{background:var(--chip);font-size:12px}
 td.id{white-space:nowrap;font-weight:600}
 ol,ul{margin:0;padding-left:18px}
 .chip{display:inline-block;background:var(--chip);border-radius:10px;padding:1px 8px;font-size:12px;white-space:nowrap}
@@ -180,7 +183,7 @@ details summary{cursor:pointer;color:var(--accent)}
 @media print{
   body{background:#fff;color:#000;font-size:10px}.filters,.noprint,select,textarea{display:none!important}
   header,main{max-width:none;padding:0}th{position:static}
-  tr{break-inside:avoid}table{font-size:9px}
+  tr{break-inside:avoid}table{font-size:9px}.tablewrap{overflow:visible;border:0}#t{min-width:0}
   .st-Pass,.st-Fail,.st-Blocked,.st-Not\\ Run{color:#000}
   td.statuscell::after{content:attr(data-status)}
 }
@@ -189,7 +192,7 @@ details summary{cursor:pointer;color:var(--accent)}
 <body>
 <header>
 <h1>Asetheria: test cases</h1>
-<div class="muted">Generated ${esc(generated)} from the Playwright specs in <code>tests/</code>. One case per automated test; each test's title starts with its case id. Steps, data and expected results are read from the test bodies.</div>
+<div class="muted">Generated ${esc(generated)} from the Playwright specs in <code>tests/</code>. One case per automated test; each test's title starts with its case id. Steps, data and expected results are read from the test bodies.<br>Every case runs against the app served by <code>next dev</code> on localhost:3000 with the local Postgres test database (the codex content loaded), never the production database. Test rows carry a <code>zz</code> prefix and are removed afterwards.</div>
 <div class="dash" id="tiles" aria-label="Summary"></div>
 <div class="bars" id="bars"></div>
 </header>
@@ -204,10 +207,10 @@ details summary{cursor:pointer;color:var(--accent)}
 <button id="reset" type="button">Reset</button>
 <span class="muted" id="count" role="status"></span>
 </div>
-<table id="t">
+<div class="tablewrap"><table id="t">
 <thead><tr><th>ID</th><th>Module</th><th>Category</th><th>Priority</th><th>Preconditions</th><th>Steps</th><th>Test data</th><th>Expected</th><th>Actual</th><th>Status</th><th>Notes</th></tr></thead>
 <tbody id="tb"></tbody>
-</table>
+</table></div>
 <h2 id="coverage">Coverage floor: every user action</h2>
 <div class="muted">Each user action has a happy case, an invalid-input case, an unauthorized case and a boundary case, or a stated reason one cannot exist.</div>
 <table class="trace" id="cov"><thead><tr><th>User action</th><th>Happy</th><th>Invalid input</th><th>Unauthorized</th><th>Boundary</th></tr></thead><tbody id="covb"></tbody></table>
@@ -268,9 +271,9 @@ function apply(){
 [q,fm,fc,fp,fs].forEach(function(e){e.addEventListener('input',apply)});
 document.getElementById('reset').addEventListener('click',function(){q.value='';fm.value='';fc.value='';fp.value='';fs.value='';apply()});
 function tally(key){var m={};rows.forEach(function(r){var k=key(r);m[k]=(m[k]||0)+1});return m}
-function bars(title,m,order){
- var box=el('div',{class:'bar'},[el('h3',null,[title])]);var max=Math.max.apply(null,Object.keys(m).map(function(k){return m[k]}).concat([1]));
- (order||Object.keys(m).sort()).forEach(function(k){if(!m[k])return;var row=el('div',{class:'row'},[el('span',null,[k]),el('div',{class:'track'},[el('div',{class:'fill',style:'width:'+Math.round(100*m[k]/max)+'%'})]),el('span',null,[String(m[k])])]);box.appendChild(row)});
+function bars(title,m,order,wide){
+ var rowsBox=el('div',{class:'rows'});var box=el('div',{class:wide?'bar wide':'bar'},[el('h3',null,[title]),rowsBox]);var max=Math.max.apply(null,Object.keys(m).map(function(k){return m[k]}).concat([1]));
+ (order||Object.keys(m).sort()).forEach(function(k){if(!m[k])return;var row=el('div',{class:'row'},[el('span',null,[k]),el('div',{class:'track'},[el('div',{class:'fill',style:'width:'+Math.round(100*m[k]/max)+'%'})]),el('span',null,[String(m[k])])]);rowsBox.appendChild(row)});
  return box}
 function dash(){
  var st=tally(statusOf),tiles=document.getElementById('tiles');tiles.textContent='';
@@ -281,7 +284,7 @@ function dash(){
  b.appendChild(bars('By category',tally(function(r){return r.category}),D.categories));
  b.appendChild(bars('By priority',tally(function(r){return r.priority}),['P0','P1','P2','P3']));
  b.appendChild(bars('By status',st,['Pass','Fail','Blocked','Not Run']));
- b.appendChild(bars('By module',tally(function(r){return r.module})));
+ b.appendChild(bars('By module',tally(function(r){return r.module}),null,true));
 }
 var tr=document.getElementById('tr');
 (D.traceability||[]).forEach(function(t){

@@ -10,7 +10,7 @@
   "describe": "",
   "title": "a11y: login (signed out) in dark theme has no serious or critical violations",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)",
    "Browser storage is prepared before the page loads"
   ],
@@ -36,7 +36,7 @@
   "describe": "",
   "title": "a11y: welcome (signed out) in dark theme has no serious or critical violations",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)",
    "Browser storage is prepared before the page loads"
   ],
@@ -62,7 +62,7 @@
   "describe": "",
   "title": "a11y: front page (dm) in dark theme has no serious or critical violations",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)",
    "Browser storage is prepared before the page loads"
   ],
@@ -88,7 +88,7 @@
   "describe": "",
   "title": "a11y: section list (dm) in dark theme has no serious or critical violations",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)",
    "Browser storage is prepared before the page loads"
   ],
@@ -114,7 +114,7 @@
   "describe": "",
   "title": "a11y: entry page (dm) in dark theme has no serious or critical violations",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)",
    "Browser storage is prepared before the page loads"
   ],
@@ -140,7 +140,7 @@
   "describe": "",
   "title": "a11y: NPC page (hero card, local graph) (dm) in dark theme has no serious or critical violations",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)",
    "Browser storage is prepared before the page loads"
   ],
@@ -166,7 +166,7 @@
   "describe": "",
   "title": "a11y: new entry form (dm) in dark theme has no serious or critical violations",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)",
    "Browser storage is prepared before the page loads"
   ],
@@ -192,7 +192,7 @@
   "describe": "",
   "title": "a11y: search results (dm) in dark theme has no serious or critical violations",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)",
    "Browser storage is prepared before the page loads"
   ],
@@ -218,7 +218,7 @@
   "describe": "",
   "title": "a11y: graph (dm) in dark theme has no serious or critical violations",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)",
    "Browser storage is prepared before the page loads"
   ],
@@ -244,7 +244,7 @@
   "describe": "",
   "title": "a11y: map (dm) in dark theme has no serious or critical violations",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)",
    "Browser storage is prepared before the page loads"
   ],
@@ -270,7 +270,7 @@
   "describe": "",
   "title": "a11y: planner (dm) in dark theme has no serious or critical violations",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)",
    "Browser storage is prepared before the page loads"
   ],
@@ -296,7 +296,7 @@
   "describe": "",
   "title": "a11y: graph (filtered, grouped) (dm) in dark theme has no serious or critical violations",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)",
    "Browser storage is prepared before the page loads"
   ],
@@ -322,7 +322,7 @@
   "describe": "",
   "title": "a11y: map (player) (player) in dark theme has no serious or critical violations",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)",
    "Browser storage is prepared before the page loads"
   ],
@@ -348,7 +348,7 @@
   "describe": "",
   "title": "a11y: dice (dm) in dark theme has no serious or critical violations",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)",
    "Browser storage is prepared before the page loads"
   ],
@@ -374,7 +374,7 @@
   "describe": "",
   "title": "a11y: random table (rollable) (dm) in dark theme has no serious or critical violations",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)",
    "Browser storage is prepared before the page loads"
   ],
@@ -400,7 +400,7 @@
   "describe": "",
   "title": "a11y: new table form (dm) in dark theme has no serious or critical violations",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)",
    "Browser storage is prepared before the page loads"
   ],
@@ -426,7 +426,7 @@
   "describe": "",
   "title": "a11y: fauna section (dm) in dark theme has no serious or critical violations",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)",
    "Browser storage is prepared before the page loads"
   ],
@@ -452,7 +452,7 @@
   "describe": "",
   "title": "a11y: database view (ores, sorted) (dm) in dark theme has no serious or critical violations",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)",
    "Browser storage is prepared before the page loads"
   ],
@@ -478,7 +478,7 @@
   "describe": "",
   "title": "a11y: backup and import (dm) in dark theme has no serious or critical violations",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)",
    "Browser storage is prepared before the page loads"
   ],
@@ -504,7 +504,7 @@
   "describe": "",
   "title": "a11y: players and access (dm) in dark theme has no serious or critical violations",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)",
    "Browser storage is prepared before the page loads"
   ],
@@ -530,7 +530,7 @@
   "describe": "",
   "title": "a11y: player front page (player) in dark theme has no serious or critical violations",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)",
    "Browser storage is prepared before the page loads"
   ],
@@ -556,7 +556,7 @@
   "describe": "",
   "title": "a11y: login (signed out) in light theme has no serious or critical violations",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)",
    "Browser storage is prepared before the page loads"
   ],
@@ -582,7 +582,7 @@
   "describe": "",
   "title": "a11y: welcome (signed out) in light theme has no serious or critical violations",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)",
    "Browser storage is prepared before the page loads"
   ],
@@ -608,7 +608,7 @@
   "describe": "",
   "title": "a11y: front page (dm) in light theme has no serious or critical violations",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)",
    "Browser storage is prepared before the page loads"
   ],
@@ -634,7 +634,7 @@
   "describe": "",
   "title": "a11y: section list (dm) in light theme has no serious or critical violations",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)",
    "Browser storage is prepared before the page loads"
   ],
@@ -660,7 +660,7 @@
   "describe": "",
   "title": "a11y: entry page (dm) in light theme has no serious or critical violations",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)",
    "Browser storage is prepared before the page loads"
   ],
@@ -686,7 +686,7 @@
   "describe": "",
   "title": "a11y: NPC page (hero card, local graph) (dm) in light theme has no serious or critical violations",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)",
    "Browser storage is prepared before the page loads"
   ],
@@ -712,7 +712,7 @@
   "describe": "",
   "title": "a11y: new entry form (dm) in light theme has no serious or critical violations",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)",
    "Browser storage is prepared before the page loads"
   ],
@@ -738,7 +738,7 @@
   "describe": "",
   "title": "a11y: search results (dm) in light theme has no serious or critical violations",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)",
    "Browser storage is prepared before the page loads"
   ],
@@ -764,7 +764,7 @@
   "describe": "",
   "title": "a11y: graph (dm) in light theme has no serious or critical violations",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)",
    "Browser storage is prepared before the page loads"
   ],
@@ -790,7 +790,7 @@
   "describe": "",
   "title": "a11y: map (dm) in light theme has no serious or critical violations",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)",
    "Browser storage is prepared before the page loads"
   ],
@@ -816,7 +816,7 @@
   "describe": "",
   "title": "a11y: planner (dm) in light theme has no serious or critical violations",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)",
    "Browser storage is prepared before the page loads"
   ],
@@ -842,7 +842,7 @@
   "describe": "",
   "title": "a11y: graph (filtered, grouped) (dm) in light theme has no serious or critical violations",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)",
    "Browser storage is prepared before the page loads"
   ],
@@ -868,7 +868,7 @@
   "describe": "",
   "title": "a11y: map (player) (player) in light theme has no serious or critical violations",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)",
    "Browser storage is prepared before the page loads"
   ],
@@ -894,7 +894,7 @@
   "describe": "",
   "title": "a11y: dice (dm) in light theme has no serious or critical violations",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)",
    "Browser storage is prepared before the page loads"
   ],
@@ -920,7 +920,7 @@
   "describe": "",
   "title": "a11y: random table (rollable) (dm) in light theme has no serious or critical violations",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)",
    "Browser storage is prepared before the page loads"
   ],
@@ -946,7 +946,7 @@
   "describe": "",
   "title": "a11y: new table form (dm) in light theme has no serious or critical violations",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)",
    "Browser storage is prepared before the page loads"
   ],
@@ -972,7 +972,7 @@
   "describe": "",
   "title": "a11y: fauna section (dm) in light theme has no serious or critical violations",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)",
    "Browser storage is prepared before the page loads"
   ],
@@ -998,7 +998,7 @@
   "describe": "",
   "title": "a11y: database view (ores, sorted) (dm) in light theme has no serious or critical violations",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)",
    "Browser storage is prepared before the page loads"
   ],
@@ -1024,7 +1024,7 @@
   "describe": "",
   "title": "a11y: backup and import (dm) in light theme has no serious or critical violations",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)",
    "Browser storage is prepared before the page loads"
   ],
@@ -1050,7 +1050,7 @@
   "describe": "",
   "title": "a11y: players and access (dm) in light theme has no serious or critical violations",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)",
    "Browser storage is prepared before the page loads"
   ],
@@ -1076,7 +1076,7 @@
   "describe": "",
   "title": "a11y: player front page (player) in light theme has no serious or critical violations",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)",
    "Browser storage is prepared before the page loads"
   ],
@@ -1102,7 +1102,7 @@
   "describe": "",
   "title": "a11y: the mobile drawer and the command palette are accessible when open",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -1132,7 +1132,7 @@
   "describe": "app shell (DM)",
   "title": "desktop: sidebar lists sections with SVG icons and marks the current page",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -1164,7 +1164,7 @@
   "describe": "app shell (DM)",
   "title": "desktop: DM sees the Keeper section and the New button",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -1194,7 +1194,7 @@
   "describe": "app shell (DM)",
   "title": "mobile 375px: sidebar is hidden, the menu button opens a drawer, Escape closes it and returns focus",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -1228,7 +1228,7 @@
   "describe": "app shell (DM)",
   "title": "mobile: choosing a section navigates and closes the drawer",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -1258,7 +1258,7 @@
   "describe": "app shell (DM)",
   "title": "the skip link is the first tab stop and moves focus to the main region",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -1289,7 +1289,7 @@
   "describe": "app shell (DM)",
   "title": "no horizontal page scroll at 375, 768 and 1280px",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -1316,7 +1316,7 @@
   "describe": "app shell (DM)",
   "title": "sign out returns to the welcome page and protects the codex",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -1349,7 +1349,7 @@
   "describe": "app shell (player)",
   "title": "a player has no Keeper section and no New button",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -1380,7 +1380,7 @@
   "describe": "login form polish",
   "title": "submit is disabled until both fields have a value",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Starts signed out unless the test says otherwise"
   ],
   "steps": [
@@ -1410,7 +1410,7 @@
   "describe": "login form polish",
   "title": "the show/hide toggle reveals and re-hides the password",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Starts signed out unless the test says otherwise"
   ],
   "steps": [
@@ -1440,7 +1440,7 @@
   "describe": "login form polish",
   "title": "a failed login returns focus to the username field",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Starts signed out unless the test says otherwise"
   ],
   "steps": [
@@ -1471,7 +1471,7 @@
   "describe": "login form",
   "title": "valid DM login reaches the dashboard with full controls",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Starts signed out unless the test says otherwise"
   ],
   "steps": [
@@ -1503,7 +1503,7 @@
   "describe": "login form",
   "title": "valid player login reaches the dashboard read-only",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Starts signed out unless the test says otherwise"
   ],
   "steps": [
@@ -1535,7 +1535,7 @@
   "describe": "login form",
   "title": "wrong password shows a generic error and stays on /login",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Starts signed out unless the test says otherwise"
   ],
   "steps": [
@@ -1566,7 +1566,7 @@
   "describe": "login form",
   "title": "unknown username shows the same generic error (no user enumeration)",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Starts signed out unless the test says otherwise"
   ],
   "steps": [
@@ -1596,7 +1596,7 @@
   "describe": "login form",
   "title": "unauthenticated visit to a protected page redirects to /welcome with ?next=",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Starts signed out unless the test says otherwise"
   ],
   "steps": [
@@ -1621,7 +1621,7 @@
   "describe": "login form",
   "title": "open-redirect guard: a cross-site next param is not honored",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Starts signed out unless the test says otherwise"
   ],
   "steps": [
@@ -1653,7 +1653,7 @@
   "describe": "login form",
   "title": "logging in then visiting /login again bounces back to /",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Starts signed out unless the test says otherwise"
   ],
   "steps": [
@@ -1684,7 +1684,7 @@
   "describe": "login form",
   "title": "logout clears the session and protected pages redirect again",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Starts signed out unless the test says otherwise"
   ],
   "steps": [
@@ -1719,7 +1719,7 @@
   "describe": "login throttle",
   "title": "repeated failed attempts eventually 429s",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Starts signed out unless the test says otherwise"
   ],
   "steps": [
@@ -1746,7 +1746,7 @@
   "describe": "login throttle",
   "title": "throttled state renders with a distinct, calmer tone than a wrong password",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Starts signed out unless the test says otherwise"
   ],
   "steps": [
@@ -1778,7 +1778,7 @@
   "describe": "the public wizard (signed out)",
   "title": "opens without signing in, and reads nothing from the codex: no API calls, no entry names",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -1810,7 +1810,7 @@
   "describe": "the public wizard (signed out)",
   "title": "the worship step is free text with no god list, and the citizenship step shows only the three empires",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -1838,7 +1838,7 @@
   "describe": "the public wizard (signed out)",
   "title": "a full run with the standard array ends on a sheet whose numbers follow the rules",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -1870,7 +1870,7 @@
   "describe": "the public wizard (signed out)",
   "title": "point buy: the bonus die is rolled once, the budget follows it, and the limits hold",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -1907,7 +1907,7 @@
   "describe": "the public wizard (signed out)",
   "title": "rolling: under 72 forces a reroll, 72 is accepted, the one extra reroll is binding even when lower",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -1944,7 +1944,7 @@
   "describe": "the public wizard (signed out)",
   "title": "rolling: declining the optional reroll keeps the 72, and the six scores can be given to any ability",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -1980,7 +1980,7 @@
   "describe": "the public wizard (signed out)",
   "title": "hit points: levels 1 to 3 are maxed, level 4 is rolled, and a 1 may be rerolled once and the reroll stands",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -2009,7 +2009,7 @@
   "describe": "the public wizard (signed out)",
   "title": "every step refuses to go on without what it needs, in plain words, and keeps you where you are",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -2049,7 +2049,7 @@
   "describe": "the public wizard (signed out)",
   "title": "skills: the count is enforced, a class skill cannot be repeated as a background skill, and extra boxes disable",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -2080,7 +2080,7 @@
   "describe": "the public wizard (signed out)",
   "title": "hit points can be entered by hand within the class's ceiling, and a bad number is refused",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -2109,7 +2109,7 @@
   "describe": "the public wizard (signed out)",
   "title": "every step has a Learn more link to Wikidot that opens in a new tab and says so",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -2146,7 +2146,7 @@
   "describe": "the public wizard (signed out)",
   "title": "progress is kept: reload restores the answers and the step; corrupt storage starts clean; Start over clears it",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)",
    "Browser storage is prepared before the page loads"
   ],
@@ -2178,7 +2178,7 @@
   "describe": "the public wizard (signed out)",
   "title": "steps ahead of the first incomplete one are locked, Back works, and the progress bar follows",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -2205,7 +2205,7 @@
   "describe": "the public wizard (signed out)",
   "title": "the finished sheet downloads as JSON, and that file loads back into the wizard",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -2233,7 +2233,7 @@
   "describe": "the public wizard (signed out)",
   "title": "printing hides the controls and keeps the sheet",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -2258,7 +2258,7 @@
   "describe": "the public wizard (signed out)",
   "title": "a heritage of 'Other' takes small bonuses and refuses wild ones",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -2295,7 +2295,7 @@
   "describe": "the public wizard (signed out)",
   "title": "a signed-in visitor is sent to the member creator instead",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "A fresh test player account (removed afterwards)",
    "Test rows use a `Zz`/`zz-` prefix and are deleted afterwards"
   ],
@@ -2321,7 +2321,7 @@
   "describe": "accessibility and small screens",
   "title": "no serious axe violations on the first step, the scores step and the review sheet (dark)",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)",
    "Browser storage is prepared before the page loads"
   ],
@@ -2348,7 +2348,7 @@
   "describe": "accessibility and small screens",
   "title": "no serious axe violations on a finished sheet (dark)",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)",
    "Browser storage is prepared before the page loads"
   ],
@@ -2372,7 +2372,7 @@
   "describe": "accessibility and small screens",
   "title": "no serious axe violations on the first step, the scores step and the review sheet (light)",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)",
    "Browser storage is prepared before the page loads"
   ],
@@ -2399,7 +2399,7 @@
   "describe": "accessibility and small screens",
   "title": "no serious axe violations on a finished sheet (light)",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)",
    "Browser storage is prepared before the page loads"
   ],
@@ -2423,7 +2423,7 @@
   "describe": "accessibility and small screens",
   "title": "at 375px no step scrolls the page sideways, including the sheet",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -2449,7 +2449,7 @@
   "describe": "the member wizard (a signed-in player)",
   "title": "the Characters tab leads to an empty list, then the wizard: the member version offers the codex's own empires and only the gods this player may read",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "A fresh test player account (removed afterwards)",
    "Test rows use a `Zz`/`zz-` prefix and are deleted afterwards"
   ],
@@ -2489,7 +2489,7 @@
   "describe": "the member wizard (a signed-in player)",
   "title": "saving creates the character, opens its sheet and lists it; editing changes it; deleting removes it",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "A fresh test player account (removed afterwards)",
    "Test rows use a `Zz`/`zz-` prefix and are deleted afterwards"
   ],
@@ -2535,7 +2535,7 @@
   "describe": "the member wizard (a signed-in player)",
   "title": "another player's character is a 404 on the page and on edit, and the DM can read it but not change it",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "A fresh test player account (removed afterwards) and the seeded DM session",
    "Test rows use a `Zz`/`zz-` prefix and are deleted afterwards"
   ],
@@ -2575,7 +2575,7 @@
   "describe": "the member wizard (a signed-in player)",
   "title": "a rule broken behind the wizard's back is refused when saving, with the reason shown",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "A fresh test player account (removed afterwards)",
    "Test rows use a `Zz`/`zz-` prefix and are deleted afterwards"
   ],
@@ -2948,7 +2948,7 @@
   "describe": "Wikidot links (links only, one host, known page shapes)",
   "title": "every link is https on dnd5e.wikidot.com and matches an allowed page shape",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed out (no session)"
   ],
   "steps": [
@@ -2974,7 +2974,7 @@
   "describe": "Wikidot links (links only, one host, known page shapes)",
   "title": "hostile or foreign addresses are refused",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed out (no session)"
   ],
   "steps": [
@@ -2997,7 +2997,7 @@
   "describe": "Wikidot links (links only, one host, known page shapes)",
   "title": "every race, class and background resolves to a link (or none, for a custom one), and subraces use their parent's page",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed out (no session)"
   ],
   "steps": [
@@ -4164,7 +4164,7 @@
   "describe": "migration",
   "title": "the table exists with a name-length check, a cascade, and the migration is idempotent",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "A fresh test player account (removed afterwards)",
    "Test rows use a `Zz`/`zz-` prefix and are deleted afterwards"
   ],
@@ -4189,7 +4189,7 @@
   "describe": "migration",
   "title": "the rollback drops only the characters table (run inside a transaction that is rolled back)",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -4217,7 +4217,7 @@
   "describe": "a player's own characters",
   "title": "saving stores the server's own computation, not anything the browser claims",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "A fresh test player account (removed afterwards)",
    "Test rows use a `Zz`/`zz-` prefix and are deleted afterwards"
   ],
@@ -4250,7 +4250,7 @@
   "describe": "a player's own characters",
   "title": "a client-supplied sheet, owner, id or any unknown key is rejected, and nothing is stored",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "A fresh test player account (removed afterwards)",
    "Test rows use a `Zz`/`zz-` prefix and are deleted afterwards"
   ],
@@ -4277,7 +4277,7 @@
   "describe": "a player's own characters",
   "title": "every house rule is enforced on the server: each tampered character is refused with its reasons",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "A fresh test player account (removed afterwards)",
    "Test rows use a `Zz`/`zz-` prefix and are deleted afterwards"
   ],
@@ -4308,7 +4308,7 @@
   "describe": "a player's own characters",
   "title": "a rolled character with a binding lower reroll is accepted; going back to the discarded set is not",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "A fresh test player account (removed afterwards)",
    "Test rows use a `Zz`/`zz-` prefix and are deleted afterwards"
   ],
@@ -4336,7 +4336,7 @@
   "describe": "a player's own characters",
   "title": "a player lists, opens, updates and deletes their own character",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "A fresh test player account (removed afterwards)",
    "Test rows use a `Zz`/`zz-` prefix and are deleted afterwards"
   ],
@@ -4378,7 +4378,7 @@
   "describe": "a player's own characters",
   "title": "two saves of the same character at once leave one whole result, never a mix",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "A fresh test player account (removed afterwards)",
    "Test rows use a `Zz`/`zz-` prefix and are deleted afterwards"
   ],
@@ -4410,7 +4410,7 @@
   "describe": "a player's own characters",
   "title": "the 21st character is refused, and deleting one frees a slot",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "A fresh test player account (removed afterwards)",
    "Test rows use a `Zz`/`zz-` prefix and are deleted afterwards"
   ],
@@ -4441,7 +4441,7 @@
   "describe": "who can see what",
   "title": "another player's character is 'not found' in every way, and a malformed id is too",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "A fresh test player account (removed afterwards)",
    "Test rows use a `Zz`/`zz-` prefix and are deleted afterwards"
   ],
@@ -4479,7 +4479,7 @@
   "describe": "who can see what",
   "title": "signed-out callers get 401",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -4512,7 +4512,7 @@
   "describe": "who can see what",
   "title": "a player cannot ask for everyone's characters",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "A fresh test player account (removed afterwards)",
    "Test rows use a `Zz`/`zz-` prefix and are deleted afterwards"
   ],
@@ -4538,7 +4538,7 @@
   "describe": "who can see what › the DM",
   "title": "reads every player's characters with their owner, and can open any one, but writes nothing",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "A fresh test player account (removed afterwards)",
    "Test rows use a `Zz`/`zz-` prefix and are deleted afterwards"
   ],
@@ -4580,7 +4580,7 @@
   "describe": "places within cities",
   "title": "a Hellenorian city lists its shared institutions and its own landmarks",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -4607,7 +4607,7 @@
   "describe": "places within cities",
   "title": "a common institution explains the type, then the city's own version, and points back to the city",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -4634,7 +4634,7 @@
   "describe": "places within cities",
   "title": "Duneforged's existing districts and temples are filed under it",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -4663,7 +4663,7 @@
   "describe": "places within cities",
   "title": "Romulo has no garrison page, because its write-up says it keeps none",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -4688,7 +4688,7 @@
   "describe": "codex pages (‹role›)",
   "title": "home renders its Browse sections",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -4711,7 +4711,7 @@
   "describe": "codex pages (‹role›)",
   "title": "every section page renders",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -4733,7 +4733,7 @@
   "describe": "codex pages (‹role›)",
   "title": "an out-of-range or junk ?page clamps instead of erroring",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -4755,7 +4755,7 @@
   "describe": "codex pages (‹role›)",
   "title": "home renders its Browse sections",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -4778,7 +4778,7 @@
   "describe": "codex pages (‹role›)",
   "title": "every section page renders",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -4800,7 +4800,7 @@
   "describe": "codex pages (‹role›)",
   "title": "an out-of-range or junk ?page clamps instead of erroring",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -4822,7 +4822,7 @@
   "describe": "location sections (dm)",
   "title": "there is no flat /codex/locations listing, so nothing links to it",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -4850,7 +4850,7 @@
   "describe": "location sections (dm)",
   "title": "archiving a location lands on its tier section, not a 404",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -4882,7 +4882,7 @@
   "describe": "",
   "title": "an empty section shows an icon, a title and a hint to a player; no create button",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "A fresh test player account (removed afterwards)",
    "Test rows use a `Zz`/`zz-` prefix and are deleted afterwards"
   ],
@@ -4913,7 +4913,7 @@
   "describe": "codex browsing (DM)",
   "title": "a section shows cards with SVG icons, a count, and a New button for the DM",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -4943,7 +4943,7 @@
   "describe": "codex browsing (DM)",
   "title": "the text filter narrows the list and says how many remain; clearing restores it",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -4978,7 +4978,7 @@
   "describe": "codex browsing (DM)",
   "title": "tag chips filter and report their pressed state",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -5005,7 +5005,7 @@
   "describe": "codex browsing (DM)",
   "title": "an unknown section and an unknown entry are real 404s with a friendly page and a way back",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -5032,7 +5032,7 @@
   "describe": "codex browsing (DM)",
   "title": "an entry page has a breadcrumb ending in the current page, and no stack-trace text",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -5059,7 +5059,7 @@
   "describe": "codex browsing (DM)",
   "title": "Archive asks first; Cancel and Escape leave the entry alone",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -5093,7 +5093,7 @@
   "describe": "codex browsing (DM)",
   "title": "the front page renders its strips and the Browse tiles",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -5120,7 +5120,7 @@
   "describe": "search page",
   "title": "no results shows a friendly empty state, not bare text",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -5146,7 +5146,7 @@
   "describe": "search page",
   "title": "an unknown tag shows an empty state with a way to search",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -5172,7 +5172,7 @@
   "describe": "party door and registration: input limits",
   "title": "the party door refuses a 201-character password as bad input (400), and a 200-character wrong one as wrong (401)",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "A fresh test player account (removed afterwards)"
   ],
   "steps": [
@@ -5200,7 +5200,7 @@
   "describe": "party door and registration: input limits",
   "title": "registration names: 2 characters refused, 3 and 32 accepted, 33 refused (the edges of the 3 to 32 rule)",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "A fresh test player account (removed afterwards)"
   ],
   "steps": [
@@ -5229,7 +5229,7 @@
   "describe": "party door and registration: input limits",
   "title": "a bad character in a registration name is refused with the reason, and nothing is created",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "A fresh test player account (removed afterwards)"
   ],
   "steps": [
@@ -5257,8 +5257,8 @@
   "describe": "signing out",
   "title": "signing out twice is harmless, and the protected pages stay protected",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
-   "Signed in as the seeded DM account (storage state saved by the global setup)"
+   "App running with the local test database (see the note at the top)",
+   "A fresh test player account (removed afterwards)"
   ],
   "steps": [
    "Send POST /api/auth/logout",
@@ -5285,7 +5285,7 @@
   "describe": "signed-out visitors and non-DMs on the data routes",
   "title": "a signed-out visitor to the dice tool is sent to the door and keeps the way back",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -5310,8 +5310,8 @@
   "describe": "signed-out visitors and non-DMs on the data routes",
   "title": "palette search is 401 signed out, and refuses to search for fewer than 2 characters",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
-   "Signed in as the seeded DM account (storage state saved by the global setup)"
+   "App running with the local test database (see the note at the top)",
+   "A fresh test player account (removed afterwards)"
   ],
   "steps": [
    "Send GET /api/find?q=ab",
@@ -5340,8 +5340,8 @@
   "describe": "signed-out visitors and non-DMs on the data routes",
   "title": "restoring a backup is 401 signed out and 403 for a player, and a valid-looking file changes nothing for them",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
-   "Signed in as the seeded DM account (storage state saved by the global setup)"
+   "App running with the local test database (see the note at the top)",
+   "A fresh test player account (removed afterwards)"
   ],
   "steps": [
    "Send POST /api/import with { data: body }",
@@ -5369,7 +5369,7 @@
   "describe": "searching with extreme input",
   "title": "a 5,000-character query and a query of symbols give a normal page, never a server error",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -5397,7 +5397,7 @@
   "describe": "managing player access: bad requests",
   "title": "the access API refuses an unknown action, an unknown kind, a bad id and an empty entry list, and changes nothing",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -5423,7 +5423,7 @@
   "describe": "entry names: the 300-character boundary and editing to blank",
   "title": "a 300-character name is accepted; the field holds no more than 300, and the server refuses 301 even when that limit is bypassed",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -5456,7 +5456,7 @@
   "describe": "entry names: the 300-character boundary and editing to blank",
   "title": "saving an existing entry with a blank name is refused, and the stored name is unchanged",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -5635,7 +5635,7 @@
   "describe": "the view (DM)",
   "title": "sorting by cost orders 5 sp, 5 gp, 50 gp, 5,000 gp and puts the blank last",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -5661,7 +5661,7 @@
   "describe": "the view (DM)",
   "title": "descending reverses the numbers and still puts the blank last",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -5690,7 +5690,7 @@
   "describe": "the view (DM)",
   "title": "the first row of a descending cost sort is the dearest ore in the whole section",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -5717,7 +5717,7 @@
   "describe": "the view (DM)",
   "title": "clicking a header writes the sort to the URL and flips direction on a second click",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -5745,7 +5745,7 @@
   "describe": "the view (DM)",
   "title": "the Table button puts the view in the URL, and a reload keeps it",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -5773,7 +5773,7 @@
   "describe": "the view (DM)",
   "title": "an unknown sort key, direction or column is ignored: 200, default order, no error",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -5800,7 +5800,7 @@
   "describe": "the view (DM)",
   "title": "the column picker hides and shows columns through the URL, and a reload keeps them",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -5832,7 +5832,7 @@
   "describe": "the view (DM)",
   "title": "the pager keeps the view, sort and columns",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -5858,7 +5858,7 @@
   "describe": "what a player gets",
   "title": "never a secret row, never a DM note, in the page or its data",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "A fresh test player account (removed afterwards)"
   ],
   "steps": [
@@ -5889,7 +5889,7 @@
   "describe": "what a player gets",
   "title": "a player with no grant on the kind gets the empty section, not data",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "A fresh test player account (removed afterwards)"
   ],
   "steps": [
@@ -5915,7 +5915,7 @@
   "describe": "small screens",
   "title": "at 375px the table scrolls inside its container and the page does not scroll sideways",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -5989,7 +5989,7 @@
   "describe": "design-system gates (static scan of src/, no browser needed)",
   "title": "viewport themeColor in layout.tsx equals the token page backgrounds",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed out (no session)"
   ],
   "steps": [
@@ -6083,7 +6083,7 @@
   "describe": "design tokens (pure logic, no browser needed)",
   "title": "dark and light really differ: page background luminance flips",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed out (no session)"
   ],
   "steps": [
@@ -6272,7 +6272,7 @@
   "describe": "entry form",
   "title": "every control has a visible label bound to it, and the type switches the details section",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -6303,7 +6303,7 @@
   "describe": "entry form",
   "title": "a blank name is refused by the server with a friendly message, and nothing is created",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -6332,7 +6332,7 @@
   "describe": "entry form",
   "title": "Ctrl+S saves, and the visibility radio group works by keyboard",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -6365,7 +6365,7 @@
   "describe": "entry form",
   "title": "Discard throws away a recovered draft and clears it from storage",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -6397,7 +6397,7 @@
   "describe": "entry form",
   "title": "the form fits a 375px screen with no horizontal scroll",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -6424,7 +6424,7 @@
   "describe": "command palette and shortcut sheet",
   "title": "opening from the button focuses the search box, and Escape returns focus to the button",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -6456,7 +6456,7 @@
   "describe": "command palette and shortcut sheet",
   "title": "arrow keys move the highlighted row and Enter opens it; no results offers a full-text search",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -6489,7 +6489,7 @@
   "describe": "command palette and shortcut sheet",
   "title": "the shortcut sheet is a labelled dialog with a Close button and lists the chords",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -6519,7 +6519,7 @@
   "describe": "graph",
   "title": "loads with no console errors (including hydration warnings), a legend, and focusable nodes",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -6551,7 +6551,7 @@
   "describe": "graph",
   "title": "a player with nothing revealed sees an empty state, not a blank canvas",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -6576,7 +6576,7 @@
   "describe": "entry CRUD (DM)",
   "title": "create, edit, tag, and read back a note entry",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -6615,7 +6615,7 @@
   "describe": "entry CRUD (DM)",
   "title": "archive then restore round-trips an entry",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -6649,7 +6649,7 @@
   "describe": "entry CRUD (DM)",
   "title": "reverting to an earlier revision restores its content",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -6683,7 +6683,7 @@
   "describe": "entry CRUD (DM)",
   "title": "wiki-link in body creates a working backlink on the target page",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -6709,7 +6709,7 @@
   "describe": "entry CRUD (DM)",
   "title": "purge is refused while the entry still has content",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -6737,7 +6737,7 @@
   "describe": "player role is strictly read-only",
   "title": "no write affordances appear anywhere in the shell",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -6764,7 +6764,7 @@
   "describe": "player role is strictly read-only",
   "title": "/codex/new redirects a player away",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -6789,7 +6789,7 @@
   "describe": "player role is strictly read-only",
   "title": "/admin redirects a player away",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -6814,7 +6814,7 @@
   "describe": "player role is strictly read-only",
   "title": "/archive redirects a player away",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -6839,7 +6839,7 @@
   "describe": "player role is strictly read-only",
   "title": "/api/export is forbidden for a player",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -6864,7 +6864,7 @@
   "describe": "player role is strictly read-only",
   "title": "a secret entry is invisible in list, search, and by direct URL",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -6895,7 +6895,7 @@
   "describe": "welcome doors",
   "title": "/welcome offers both the party door and the DM sign-in",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Starts signed out unless the test says otherwise"
   ],
   "steps": [
@@ -6921,7 +6921,7 @@
   "describe": "welcome doors",
   "title": "the party door signs in as a player, honors next, and hides DM controls",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Starts signed out unless the test says otherwise"
   ],
   "steps": [
@@ -6953,7 +6953,7 @@
   "describe": "welcome doors",
   "title": "the party door refuses a wrong or missing password",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Starts signed out unless the test says otherwise"
   ],
   "steps": [
@@ -6986,7 +6986,7 @@
   "describe": "welcome doors",
   "title": "the party door ignores a cross-site next",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Starts signed out unless the test says otherwise"
   ],
   "steps": [
@@ -7015,7 +7015,7 @@
   "describe": "registration",
   "title": "a wrong invite code is refused",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Starts signed out unless the test says otherwise"
   ],
   "steps": [
@@ -7040,7 +7040,7 @@
   "describe": "registration",
   "title": "registering via the form creates a named player with default grants",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Starts signed out unless the test says otherwise"
   ],
   "steps": [
@@ -7079,7 +7079,7 @@
   "describe": "registration",
   "title": "the request body cannot choose the DM role",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Starts signed out unless the test says otherwise"
   ],
   "steps": [
@@ -7184,7 +7184,7 @@
   "describe": "hero card and templates (DM)",
   "title": "an NPC page opens with a hero card: a portrait slot and an infobox from its fields",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -7216,7 +7216,7 @@
   "describe": "hero card and templates (DM)",
   "title": "with no portrait the slot shows initials; a site-path or https portrait renders as an image",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -7244,7 +7244,7 @@
   "describe": "hero card and templates (DM)",
   "title": "an unsafe portrait value (javascript:) is never put in the page",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -7270,7 +7270,7 @@
   "describe": "hero card and templates (DM)",
   "title": "a kind without a hero (a note) has none",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -7295,7 +7295,7 @@
   "describe": "hero card and templates (DM)",
   "title": "New NPC prefills Appearance and Motivation in the description and Secrets in the DM notes",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -7322,7 +7322,7 @@
   "describe": "hero card and templates (DM)",
   "title": "New Note stays blank, and New Location has its own headings",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -7350,7 +7350,7 @@
   "describe": "hero card and templates (DM)",
   "title": "the local graph shows the hub's neighbours to the DM, including the secret one",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -7377,7 +7377,7 @@
   "describe": "hero card and templates (DM)",
   "title": "clicking a graph node opens that page; the diagram is hidden from assistive tech and adds no duplicate links",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -7404,7 +7404,7 @@
   "describe": "what a player sees",
   "title": "the local graph holds only entries the player may read: the secret spoke is nowhere in the page",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "A fresh test player account (removed afterwards)"
   ],
   "steps": [
@@ -7432,7 +7432,7 @@
   "describe": "what a player sees",
   "title": "a player sees the hero but never the DM-only Secrets",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "A fresh test player account (removed afterwards)"
   ],
   "steps": [
@@ -7458,7 +7458,7 @@
   "describe": "recently viewed",
   "title": "the palette's empty box lists the last 8 pages viewed, newest first, and drops the 9th",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -7487,7 +7487,7 @@
   "describe": "recently viewed",
   "title": "typing replaces the recent list with search results",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -7515,7 +7515,7 @@
   "describe": "recently viewed",
   "title": "an entry that later becomes secret disappears from a player's recent list, and its name is never sent",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "A fresh test player account (removed afterwards)"
   ],
   "steps": [
@@ -7547,7 +7547,7 @@
   "describe": "recently viewed",
   "title": "two people on one browser never see each other's trail: the list is keyed by user",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "A fresh test player account (removed afterwards)"
   ],
   "steps": [
@@ -7573,7 +7573,7 @@
   "describe": "recently viewed",
   "title": "a garbage or hostile stored value is ignored, never crashes the palette",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -7600,7 +7600,7 @@
   "describe": "/api/recent",
   "title": "is not available to someone who is signed out",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -7625,7 +7625,7 @@
   "describe": "/api/recent",
   "title": "returns only what the caller may read, in the order given, and ignores junk slugs",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "A fresh test player account (removed afterwards)"
   ],
   "steps": [
@@ -7651,7 +7651,7 @@
   "describe": "",
   "title": "a failing data layer shows a friendly error with Try again, never raw error text, and Try again recovers",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -7680,7 +7680,7 @@
   "describe": "",
   "title": "a DM creates an animal with every field and sees it on its page and in the Fauna section",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -7719,7 +7719,7 @@
   "describe": "",
   "title": "'Found in' makes a real connection: plain names and [[links]] both reach the place, unknown names are ignored",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -7754,7 +7754,7 @@
   "describe": "",
   "title": "ore, flora and fauna forms all offer Found in, Biome and Rarity",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -7779,7 +7779,7 @@
   "describe": "",
   "title": "the Flora and Fauna sections are separate, and the old combined address still opens",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -7811,7 +7811,7 @@
   "describe": "Foundry VTT compendium import",
   "title": "an imported character is browsable with race/role and readable biography text",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -7840,7 +7840,7 @@
   "describe": "table view",
   "title": "ores section offers a table view showing structured fields as columns",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -7868,7 +7868,7 @@
   "describe": "graph view",
   "title": "renders as an SVG with nodes, and clicking a node navigates to its page",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -7896,7 +7896,7 @@
   "describe": "graph view",
   "title": "a player's graph never includes a node they cannot see",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "A fresh test player account (removed afterwards) and the seeded DM session",
    "Test rows use a `Zz`/`zz-` prefix and are deleted afterwards"
   ],
@@ -8007,7 +8007,7 @@
   "describe": "filter rules (pure)",
   "title": "a filter with no matches shows nothing, and a page with no links shows only when it matches",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -8196,7 +8196,7 @@
   "describe": "filters in the browser (DM)",
   "title": "kind=ore shows exactly the ores and their direct neighbours (checked against the database)",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -8225,7 +8225,7 @@
   "describe": "filters in the browser (DM)",
   "title": "choosing a kind, region and tag in the controls updates the URL and the picture",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -8268,7 +8268,7 @@
   "describe": "filters in the browser (DM)",
   "title": "a combination with no matches says so and offers a way back",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -8295,7 +8295,7 @@
   "describe": "filters in the browser (DM)",
   "title": "unknown or hostile parameters are ignored: 200 and the whole graph",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -8323,7 +8323,7 @@
   "describe": "filters in the browser (DM)",
   "title": "the DM's controls include the secret page's tag and region",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -8352,7 +8352,7 @@
   "describe": "filters for a player",
   "title": "a secret page's tag and region are not in the controls, and asking for them changes nothing (existence is not confirmed)",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "A fresh test player account (removed afterwards)"
   ],
   "steps": [
@@ -8385,7 +8385,7 @@
   "describe": "filters for a player",
   "title": "the node ids in a player's graph are all pages that player may read",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "A fresh test player account (removed afterwards)"
   ],
   "steps": [
@@ -8411,7 +8411,7 @@
   "describe": "parent clustering",
   "title": "the switch is in the URL, and children sit measurably closer to their parent than without it",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -8439,7 +8439,7 @@
   "describe": "parent clustering",
   "title": "the Group by parent switch toggles the URL and draws dashed parent links",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -8467,7 +8467,7 @@
   "describe": "keyboard",
   "title": "the graph is one tab stop; arrows move to the nearest page in that direction; Enter opens it",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -8498,7 +8498,7 @@
   "describe": "keyboard",
   "title": "an arrow with no page in that direction stays put, and Escape leaves the graph",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -8527,7 +8527,7 @@
   "describe": "performance",
   "title": "600+ nodes keep 90% of frames within 33 ms (30 fps) while the pointer sweeps the graph, on a 4x-throttled (mid laptop) CPU",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -8555,7 +8555,7 @@
   "describe": "small screens",
   "title": "at 375px the filters wrap and the page does not scroll sideways",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -8581,7 +8581,7 @@
   "describe": "/api/health",
   "title": "is public and reports the database as up",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -8607,7 +8607,7 @@
   "describe": "homebrew content import (metals + flora)",
   "title": "new metals are browsable with their cost/AC stats, and existing ore lore is untouched",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -8637,7 +8637,7 @@
   "describe": "homebrew content import (metals + flora)",
   "title": "herb entries and the d20 field guide roll table are present",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -8666,7 +8666,7 @@
   "describe": "homebrew content import (metals + flora)",
   "title": "planar metals from the external GM Binder scan are present, and the officially-sourced plants page was not imported",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -8698,7 +8698,7 @@
   "describe": "export access control",
   "title": "DM gets a well-formed JSON backup",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -8727,7 +8727,7 @@
   "describe": "export access control",
   "title": "DM gets a readable Markdown export",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -8753,7 +8753,7 @@
   "describe": "export is DM-only",
   "title": "player export request is forbidden",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -8778,7 +8778,7 @@
   "describe": "import",
   "title": "import is additive: existing entry count never decreases",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -8811,7 +8811,7 @@
   "describe": "import",
   "title": "BUG REGRESSION: importing an entry with a [[wiki link]] should build a backlink",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -8841,7 +8841,7 @@
   "describe": "",
   "title": "an ungranted player sees no fauna or tables: empty sections, 404 entries, nothing in the palette feed",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -8876,7 +8876,7 @@
   "describe": "",
   "title": "a fauna kind grant shows public fauna and never secret fauna",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)",
    "Test rows use a `Zz`/`zz-` prefix and are deleted afterwards"
   ],
@@ -8930,7 +8930,7 @@
   "describe": "fauna and table kinds: migration",
   "title": "all eight original animals are fauna, and none remain in flora",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -9026,7 +9026,7 @@
   "describe": "fauna and table kinds: access",
   "title": "the DM can open the fauna and table sections",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -9054,7 +9054,7 @@
   "describe": "fauna and table kinds: access",
   "title": "the old Flora & Fauna address still resolves",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -9079,7 +9079,7 @@
   "describe": "command palette & shortcuts (DM)",
   "title": "an empty palette lists commands, and typing one runs it",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -9111,7 +9111,7 @@
   "describe": "command palette & shortcuts (DM)",
   "title": "g-chords navigate, ? opens the shortcut sheet, e edits the open entry",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -9142,7 +9142,7 @@
   "describe": "command palette & shortcuts (DM)",
   "title": "shortcuts never fire while typing in a field",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -9171,7 +9171,7 @@
   "describe": "shortcuts respect the player role",
   "title": "a player has no create shortcut or command",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -9198,7 +9198,7 @@
   "describe": "editor",
   "title": "[[ suggests entries and Enter inserts a resolvable link",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -9228,7 +9228,7 @@
   "describe": "editor",
   "title": "Preview renders the markdown, links included",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -9258,7 +9258,7 @@
   "describe": "editor",
   "title": "an unsaved draft survives a reload and can be restored",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -9287,7 +9287,7 @@
   "describe": "aliases, outlines and mentions",
   "title": "a link to an alias resolves, with a hover preview, and an outline appears on long pages",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -9312,7 +9312,7 @@
   "describe": "aliases, outlines and mentions",
   "title": "an entry that names a page without linking it shows up as an unlinked mention",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -9337,7 +9337,7 @@
   "describe": "wiki links are scoped to what the reader may open",
   "title": "a player sees no link to a secret entry, the DM does",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -9365,7 +9365,7 @@
   "describe": "imported content",
   "title": "Foundry quests link their giver and keep hidden objectives in DM notes",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -9392,7 +9392,7 @@
   "describe": "imported content",
   "title": "deities carry a namesake, their pantheon and who serves them",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -9419,7 +9419,7 @@
   "describe": "what a stranger sees",
   "title": "/welcome and / (signed out) are the landing: one h1, five scenes, and both calls to action",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -9450,7 +9450,7 @@
   "describe": "what a stranger sees",
   "title": "it reads nothing from the codex: no API calls, and none of the codex's own entry names in the page",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -9474,7 +9474,7 @@
   "describe": "what a stranger sees",
   "title": "a signed-in visitor is sent on to the codex, not shown the landing",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -9499,7 +9499,7 @@
   "describe": "calls to action",
   "title": "Forge a hero opens the public creator without signing in",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -9523,7 +9523,7 @@
   "describe": "calls to action",
   "title": "Enter the codex goes to the door, where both ways in are still offered",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -9549,7 +9549,7 @@
   "describe": "calls to action",
   "title": "the door keeps the next path through the landing",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -9572,7 +9572,7 @@
   "describe": "calls to action",
   "title": "keyboard only: the skip link and both calls to action are reachable in order",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -9600,7 +9600,7 @@
   "describe": "calls to action",
   "title": "the skip link lands on the door",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -9624,7 +9624,7 @@
   "describe": "motion",
   "title": "by default the scenes move once on screen: the fireflies drift",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -9647,7 +9647,7 @@
   "describe": "motion",
   "title": "a scene that is off screen is not animating (nothing runs where nobody is looking)",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -9670,7 +9670,7 @@
   "describe": "motion",
   "title": "with reduced motion nothing animates, no parallax follows the scroll, and every word and button is still there",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -9698,7 +9698,7 @@
   "describe": "motion",
   "title": "the parallax follows the scroll when motion is allowed",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -9721,7 +9721,7 @@
   "describe": "performance budget",
   "title": "layout does not jump: cumulative layout shift stays under 0.05 while the whole page is scrolled",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)",
    "Browser storage is prepared before the page loads"
   ],
@@ -9745,7 +9745,7 @@
   "describe": "performance budget",
   "title": "scrolling the whole page under a 4x CPU throttle keeps 90% of frames within 33 ms and never freezes",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -9815,7 +9815,7 @@
   "describe": "licence guard: borrowed from no one",
   "title": "no protected title or name appears in the rendered text, the alt text, the page title or the art's source",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -9861,7 +9861,7 @@
   "describe": "licence guard: borrowed from no one",
   "title": "the licence ledger records the landing art as original",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -9885,7 +9885,7 @@
   "describe": "accessibility and small screens",
   "title": "every scene is decoration: its art is hidden from assistive technology, and the page has the right landmarks",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -9912,7 +9912,7 @@
   "describe": "accessibility and small screens",
   "title": "no sideways scroll at phone width (375px)",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -9935,7 +9935,7 @@
   "describe": "accessibility and small screens",
   "title": "no sideways scroll at tablet width (768px)",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -9958,7 +9958,7 @@
   "describe": "accessibility and small screens",
   "title": "no sideways scroll at desktop width (1280px)",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -9981,7 +9981,7 @@
   "describe": "schema and rollback",
   "title": "both tables exist, coordinates are range-checked by the database, and a pin cannot outlive its map",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)",
    "Test rows use a `Zz`/`zz-` prefix and are deleted afterwards"
   ],
@@ -10005,7 +10005,7 @@
   "describe": "schema and rollback",
   "title": "the rollback script drops both tables and nothing else (run inside a transaction that is rolled back)",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -10031,7 +10031,7 @@
   "describe": "schema and rollback",
   "title": "the migration is idempotent",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -10053,7 +10053,7 @@
   "describe": "schema and rollback",
   "title": "the first map is registered at the size of its image file, and the file is served only to signed-in users",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -10084,7 +10084,7 @@
   "describe": "pins API",
   "title": "signed-out callers get 401 on every method",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -10113,7 +10113,7 @@
   "describe": "pins API",
   "title": "a player may read pins but cannot create or delete them",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "A fresh test player account (removed afterwards)"
   ],
   "steps": [
@@ -10144,7 +10144,7 @@
   "describe": "pins API › DM",
   "title": "creates a pin at exact coordinates, including the edges 0 and 1, and lists it back",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -10174,7 +10174,7 @@
   "describe": "pins API › DM",
   "title": "rejects bad coordinates, bad ids, an unknown map and an unknown entry",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -10203,7 +10203,7 @@
   "describe": "pins API › DM",
   "title": "deletes a pin, only on its own map, and not twice",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -10236,7 +10236,7 @@
   "describe": "what each person sees (R6)",
   "title": "a player sees only the pins whose entries they can read, and nothing of the others is in the HTML, the data or the API",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "A fresh test player account (removed afterwards)"
   ],
   "steps": [
@@ -10266,7 +10266,7 @@
   "describe": "what each person sees (R6)",
   "title": "a player with no grant on locations sees a map with no pins",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "A fresh test player account (removed afterwards)"
   ],
   "steps": [
@@ -10292,7 +10292,7 @@
   "describe": "what each person sees (R6)",
   "title": "granting the ore kind to a player reveals that pin to them",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "A fresh test player account (removed afterwards)"
   ],
   "steps": [
@@ -10318,7 +10318,7 @@
   "describe": "what each person sees (R6)",
   "title": "an unknown map is a 404",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "A fresh test player account (removed afterwards)"
   ],
   "steps": [
@@ -10343,7 +10343,7 @@
   "describe": "what each person sees (R6) › DM",
   "title": "sees the pins of secret and ungranted entries, but not the archived one",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -10371,7 +10371,7 @@
   "describe": "cascade",
   "title": "deleting an entry removes its pins",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -10395,7 +10395,7 @@
   "describe": "cascade",
   "title": "deleting a map removes its pins and leaves the entries",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)",
    "Test rows use a `Zz`/`zz-` prefix and are deleted afterwards"
   ],
@@ -10420,7 +10420,7 @@
   "describe": "DM placing a pin",
   "title": "click the map, pick an entry, and the pin saves within 1% of where it was clicked",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -10456,7 +10456,7 @@
   "describe": "DM placing a pin",
   "title": "the position is still right after zooming in and panning (it is a fraction of the image, not the screen)",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -10493,7 +10493,7 @@
   "describe": "DM placing a pin",
   "title": "Save is disabled until an entry is chosen, and Cancel saves nothing",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -10523,7 +10523,7 @@
   "describe": "DM placing a pin",
   "title": "a DM can remove a pin from its preview card",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)",
    "Test rows use a `Zz`/`zz-` prefix and are deleted afterwards"
   ],
@@ -10551,7 +10551,7 @@
   "describe": "pins and the preview card",
   "title": "clicking a pin opens a preview with the name and summary, and Open page goes to the entry",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -10579,7 +10579,7 @@
   "describe": "pins and the preview card",
   "title": "Escape and the close button dismiss the preview",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -10608,7 +10608,7 @@
   "describe": "pins and the preview card",
   "title": "a keyboard user can reach a pin with Tab and open it with Enter",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -10634,7 +10634,7 @@
   "describe": "pins and the preview card",
   "title": "every pin is also in a plain list below the map",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -10660,7 +10660,7 @@
   "describe": "pan and zoom",
   "title": "the keyboard zooms with + and -, resets with 0, and pans with the arrows without leaving the picture",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -10702,7 +10702,7 @@
   "describe": "pan and zoom",
   "title": "the zoom stays between 100% and 800%",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -10730,7 +10730,7 @@
   "describe": "pan and zoom",
   "title": "the zoom buttons and reset work with the mouse, and the wheel zooms",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -10758,7 +10758,7 @@
   "describe": "pan and zoom",
   "title": "dragging pans a zoomed map, and a drag does not open anything",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -10785,7 +10785,7 @@
   "describe": "pan and zoom",
   "title": "a two-finger pinch zooms in and out (touch pointer events)",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -10811,7 +10811,7 @@
   "describe": "pan and zoom",
   "title": "pins keep the same on-screen size at any zoom",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -10837,7 +10837,7 @@
   "describe": "real touch input (browser touch events)",
   "title": "a real two-finger spread zooms in, and a one-finger drag then pans",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -10863,7 +10863,7 @@
   "describe": "small screens",
   "title": "at 375px the map fits and the page does not scroll sideways",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -10890,7 +10890,7 @@
   "describe": "navigation",
   "title": "the sidebar has a Map link, and /map opens the first map",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -10919,7 +10919,7 @@
   "describe": "",
   "title": "with prefers-reduced-motion the page content is never visible while offset, and ends fully visible",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -10945,7 +10945,7 @@
   "describe": "",
   "title": "with normal motion the page content settles at full opacity, in place",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -10969,7 +10969,7 @@
   "describe": "",
   "title": "cards in a list finish their staggered entrance (none is left invisible)",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -10994,7 +10994,7 @@
   "describe": "",
   "title": "a player with the kind granted sees the entry but never its DM-only Basis note",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "A fresh test player account (removed afterwards)",
    "Test rows use a `Zz`/`zz-` prefix and are deleted afterwards"
   ],
@@ -11071,7 +11071,7 @@
   "describe": "the data files (pure)",
   "title": "the denylist check really rejects scraped-source and third-party game text",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -11139,7 +11139,7 @@
   "describe": "once imported",
   "title": "every place named in a Found in property or a [[link]] is a real, active page",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -11189,7 +11189,7 @@
   "describe": "on the site (DM)",
   "title": "an imported ore reads as a finished page: summary, sections, properties, place links and the DM's Basis note",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -11219,7 +11219,7 @@
   "describe": "on the site (DM)",
   "title": "a place now lists the things found there, as linked mentions",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -11245,7 +11245,7 @@
   "describe": "on the site (DM)",
   "title": "full-text search finds an imported entry by a word that is only in its body",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -11270,7 +11270,7 @@
   "describe": "on the site (DM)",
   "title": "the sections list the new entries",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -11298,7 +11298,7 @@
   "describe": "batch archive tool",
   "title": "archives and restores exactly one batch by its source, and refuses a too-short prefix",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)",
    "Test rows use a `Zz`/`zz-` prefix and are deleted afterwards"
   ],
@@ -11326,7 +11326,7 @@
   "describe": "Found in links, by role (R5)",
   "title": "a player who may read locations gets a link to the open place, and plain text for the secret and the unknown",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "A fresh test player account (removed afterwards)"
   ],
   "steps": [
@@ -11355,7 +11355,7 @@
   "describe": "Found in links, by role (R5)",
   "title": "a player with no grant on locations gets no links at all, and no tooltip",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "A fresh test player account (removed afterwards)"
   ],
   "steps": [
@@ -11382,7 +11382,7 @@
   "describe": "Found in links, by role (R5)",
   "title": "a player cannot open the secret place by guessing its address",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "A fresh test player account (removed afterwards)"
   ],
   "steps": [
@@ -11407,7 +11407,7 @@
   "describe": "Found in links, by role (R5)",
   "title": "the open place lists the ore in its linked mentions; the ore never appears on the secret place for a player",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "A fresh test player account (removed afterwards)"
   ],
   "steps": [
@@ -11433,7 +11433,7 @@
   "describe": "Found in links, by role (R5) › DM",
   "title": "sees every named place as a link, including the secret one",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -11526,7 +11526,7 @@
   "describe": "the places and the specimen linkage (data)",
   "title": "every place a Found in names is a live page, and each is a found-in edge in the graph",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -11629,7 +11629,7 @@
   "describe": "the places on the site",
   "title": "a player who may read locations sees the place and the link from the ore, and never the DM hook",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "A fresh test player account (removed afterwards)"
   ],
   "steps": [
@@ -11659,7 +11659,7 @@
   "describe": "the places on the site",
   "title": "a player without the location grant gets the names as plain text and a 404 on the place",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "A fresh test player account (removed afterwards)"
   ],
   "steps": [
@@ -11688,7 +11688,7 @@
   "describe": "the places on the site › DM",
   "title": "a place's page lists the specimens found there as linked mentions, and shows the DM hook",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -11717,7 +11717,7 @@
   "describe": "the places on the site › DM",
   "title": "a specimen's Found in links to the new places",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -11816,7 +11816,7 @@
   "describe": "the tables (data)",
   "title": "re-importing creates no duplicates, and linking tables to places again changes nothing",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -11842,7 +11842,7 @@
   "describe": "the tables on the site",
   "title": "a player with the table grant sees a table and the roller but never the DM note",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "A fresh test player account (removed afterwards)"
   ],
   "steps": [
@@ -11871,7 +11871,7 @@
   "describe": "the tables on the site",
   "title": "a secret table never reaches a player: 404 on the page, absent from the list and from search",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "A fresh test player account (removed afterwards)",
    "Test rows use a `Zz`/`zz-` prefix and are deleted afterwards"
   ],
@@ -11903,7 +11903,7 @@
   "describe": "the tables on the site",
   "title": "a player with no table grant sees an empty section and a 404 on a table",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "A fresh test player account (removed afterwards)"
   ],
   "steps": [
@@ -11928,7 +11928,7 @@
   "describe": "the tables on the site › DM",
   "title": "a table page rolls, shows its places as links and its DM usage note",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -11957,7 +11957,7 @@
   "describe": "the tables on the site › DM",
   "title": "a place that uses the table is listed in the table's linked mentions",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -11983,7 +11983,7 @@
   "describe": "the tables on the site › DM",
   "title": "the section lists all of the tables",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -12009,7 +12009,7 @@
   "describe": "start a session",
   "title": "creates the next numbered session, secret, with today's date and the prep checklist",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -12041,7 +12041,7 @@
   "describe": "start a session",
   "title": "six simultaneous starts all succeed with six different, consecutive numbers (no duplicates)",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -12069,7 +12069,7 @@
   "describe": "start a session",
   "title": "an archived session's number is never reused",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -12092,7 +12092,7 @@
   "describe": "start a session",
   "title": "the planner page's button starts a session and opens it",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -12121,7 +12121,7 @@
   "describe": "start a session",
   "title": "the command palette has a Start a new session command that creates it and navigates there",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -12151,7 +12151,7 @@
   "describe": "who may use the planner",
   "title": "signed-out callers get 401 on every planner endpoint",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -12180,7 +12180,7 @@
   "describe": "who may use the planner",
   "title": "a player gets 403 on every planner endpoint and cannot open the page",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "A fresh test player account (removed afterwards)",
    "Test rows use a `Zz`/`zz-` prefix and are deleted afterwards"
   ],
@@ -12214,7 +12214,7 @@
   "describe": "encounter builder",
   "title": "only creatures the DM can read are ever returned: archived ones never, secret ones yes",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -12240,7 +12240,7 @@
   "describe": "encounter builder",
   "title": "a single pick is random over the pool and never repeats within one roll",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -12265,7 +12265,7 @@
   "describe": "encounter builder",
   "title": "the highest-CR filter understands fractions and excludes tougher creatures",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -12291,7 +12291,7 @@
   "describe": "encounter builder",
   "title": "habitat and type filters narrow the pool, and nothing matching gives an empty, friendly result",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -12315,7 +12315,7 @@
   "describe": "encounter builder",
   "title": "rolling a table returns a roll inside its dice span and exactly that row's text",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -12342,7 +12342,7 @@
   "describe": "encounter builder",
   "title": "bad requests are refused: count out of range, bad CR, junk slug, a page that is not a table, a table that does not exist",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -12368,7 +12368,7 @@
   "describe": "encounter builder",
   "title": "the builder page rolls and shows linked creatures and the table result",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -12400,7 +12400,7 @@
   "describe": "reveal after the session",
   "title": "creates grants for exactly the chosen player and entry pairs and nothing else (database assertion)",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "A fresh test player account (removed afterwards)",
    "Test rows use a `Zz`/`zz-` prefix and are deleted afterwards"
   ],
@@ -12433,7 +12433,7 @@
   "describe": "reveal after the session",
   "title": "a previous denial is turned into a grant, and duplicates in the request make no duplicate rows",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "A fresh test player account (removed afterwards)",
    "Test rows use a `Zz`/`zz-` prefix and are deleted afterwards"
   ],
@@ -12458,7 +12458,7 @@
   "describe": "reveal after the session",
   "title": "a DM id, an unknown player and an unknown or archived entry are reported, never granted",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "A fresh test player account (removed afterwards)",
    "Test rows use a `Zz`/`zz-` prefix and are deleted afterwards"
   ],
@@ -12484,7 +12484,7 @@
   "describe": "reveal after the session",
   "title": "invalid requests are refused and write nothing",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "A fresh test player account (removed afterwards)",
    "Test rows use a `Zz`/`zz-` prefix and are deleted afterwards"
   ],
@@ -12509,7 +12509,7 @@
   "describe": "reveal after the session",
   "title": "the reveal form chooses players and entries, sends exactly those, and says what it skipped",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "A fresh test player account (removed afterwards)",
    "Test rows use a `Zz`/`zz-` prefix and are deleted afterwards"
   ],
@@ -12545,7 +12545,7 @@
   "describe": "what a player sees after a reveal",
   "title": "the entry opens at once (404 before, 200 after) and the front page lists it under New for you, newest first",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "A fresh test player account (removed afterwards)",
    "Test rows use a `Zz`/`zz-` prefix and are deleted afterwards"
   ],
@@ -12578,7 +12578,7 @@
   "describe": "what a player sees after a reveal",
   "title": "a revealed page that is later hidden again or archived drops off the list",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "A fresh test player account (removed afterwards)",
    "Test rows use a `Zz`/`zz-` prefix and are deleted afterwards"
   ],
@@ -12606,7 +12606,7 @@
   "describe": "what a player sees after a reveal",
   "title": "only the player who was chosen sees it, and the list is capped at 8",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "A fresh test player account (removed afterwards)",
    "Test rows use a `Zz`/`zz-` prefix and are deleted afterwards"
   ],
@@ -12636,7 +12636,7 @@
   "describe": "what a player sees after a reveal",
   "title": "the DM never gets a New for you list",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -12661,7 +12661,7 @@
   "describe": "small screens",
   "title": "at 375px the planner has no horizontal page scroll",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -12687,7 +12687,7 @@
   "describe": "",
   "title": "granting a city shows its places; an explicit denial on a place still hides it",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed out (no session)"
   ],
   "steps": [
@@ -12718,7 +12718,7 @@
   "describe": "",
   "title": "inheritance passes through levels, and the nearest explicit row decides",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed out (no session)"
   ],
   "steps": [
@@ -12746,7 +12746,7 @@
   "describe": "RBAC control panel (GM)",
   "title": "a non-GM cannot reach /admin/rbac or call its API directly",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -12774,7 +12774,7 @@
   "describe": "RBAC control panel (GM)",
   "title": "toggling a kind off hides it immediately, and per-entry approve/reject overrides the kind toggle",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "A fresh test player account (removed afterwards)",
    "Test rows use a `Zz`/`zz-` prefix and are deleted afterwards"
   ],
@@ -12819,7 +12819,7 @@
   "describe": "player onboarding + default RBAC grants",
   "title": "a brand-new player is asked to name themselves, then sees only empires + major cities by default",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "A fresh test player account (removed afterwards) and the seeded DM session",
    "Test rows use a `Zz`/`zz-` prefix and are deleted afterwards"
   ],
@@ -12861,7 +12861,7 @@
   "describe": "secret visibility always overrides a grant",
   "title": "explicitly granting a secret entry to a player still hides it",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "A fresh test player account (removed afterwards) and the seeded DM session",
    "Test rows use a `Zz`/`zz-` prefix and are deleted afterwards"
   ],
@@ -12896,7 +12896,7 @@
   "describe": "login page responsiveness + theming",
   "title": "renders without horizontal overflow at mobile-375",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed out (no session)"
   ],
   "steps": [
@@ -12924,7 +12924,7 @@
   "describe": "login page responsiveness + theming",
   "title": "renders without horizontal overflow at tablet-768",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed out (no session)"
   ],
   "steps": [
@@ -12952,7 +12952,7 @@
   "describe": "login page responsiveness + theming",
   "title": "renders without horizontal overflow at desktop-1280",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed out (no session)"
   ],
   "steps": [
@@ -12980,7 +12980,7 @@
   "describe": "login page responsiveness + theming",
   "title": "dark theme is the default and persists across reload",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed out (no session)"
   ],
   "steps": [
@@ -13006,7 +13006,7 @@
   "describe": "login page responsiveness + theming",
   "title": "keyboard-only pass reaches username, password, show/hide, and submit in order",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed out (no session)"
   ],
   "steps": [
@@ -13378,7 +13378,7 @@
   "describe": "",
   "title": "the old /tools/tables address permanently redirects to the tables section",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -13404,7 +13404,7 @@
   "describe": "",
   "title": "a player with no grant on the table kind cannot find a table by search or open it",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "A fresh test player account (removed afterwards)",
    "Test rows use a `Zz`/`zz-` prefix and are deleted afterwards"
   ],
@@ -13439,7 +13439,7 @@
   "describe": "authoring and rolling a table (DM)",
   "title": "create a d4 table with starter rows, roll it 100 times, and every result is one of its rows",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -13483,7 +13483,7 @@
   "describe": "authoring and rolling a table (DM)",
   "title": "overlapping rows, a gap and an out-of-range row are each named in the editor and block saving",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -13525,7 +13525,7 @@
   "describe": "authoring and rolling a table (DM)",
   "title": "the server refuses a broken table even when the disabled button is bypassed, and nothing is created",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -13560,7 +13560,7 @@
   "describe": "authoring and rolling a table (DM)",
   "title": "a table with a bad dice expression says so and cannot be saved",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -13592,7 +13592,7 @@
   "describe": "authoring and rolling a table (DM)",
   "title": "a table is found by the palette (by name) and by full-text search (by content)",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -13621,7 +13621,7 @@
   "describe": "command palette",
   "title": "Ctrl+K opens it, typing filters, Enter navigates",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -13652,7 +13652,7 @@
   "describe": "command palette",
   "title": "Escape closes the palette",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -13680,7 +13680,7 @@
   "describe": "full-text search",
   "title": "finds entries via /search and via /api/find",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -13708,7 +13708,7 @@
   "describe": "search safety",
   "title": "a player cannot find a public entry by words only in its DM notes",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -13735,7 +13735,7 @@
   "describe": "search snippets",
   "title": "HTML in an entry body is escaped, highlighting survives",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -13764,7 +13764,7 @@
   "describe": "semantic search",
   "title": "a natural-language query surfaces a semantically related deity even without an exact keyword match",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -13789,7 +13789,7 @@
   "describe": "semantic search",
   "title": "semantic search never surfaces a secret entry to a player, even one it would otherwise match well",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -13817,7 +13817,7 @@
   "describe": "",
   "title": "defaults to dark for a first-time visitor",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -13841,7 +13841,7 @@
   "describe": "",
   "title": "a saved light theme is applied at DOMContentLoaded, before hydration (no flash)",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)",
    "Browser storage is prepared before the page loads"
   ],
@@ -13866,7 +13866,7 @@
   "describe": "",
   "title": "the toggle switches theme, persists it under the old storage key, and survives a hard reload",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -13898,7 +13898,7 @@
   "describe": "",
   "title": "a garbage stored value falls back to dark instead of breaking the page",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)",
    "Browser storage is prepared before the page loads"
   ],
@@ -13923,7 +13923,7 @@
   "describe": "",
   "title": "reduced motion: the page honours prefers-reduced-motion with no console errors",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -13949,7 +13949,7 @@
   "describe": "dice roller",
   "title": "a typed expression rolls, shows the expression and a total in range, and is logged",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -13981,7 +13981,7 @@
   "describe": "dice roller",
   "title": "a preset rolls immediately and puts its expression in the box",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -14008,7 +14008,7 @@
   "describe": "dice roller",
   "title": "an unreadable expression shows a friendly message and logs nothing",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -14037,7 +14037,7 @@
   "describe": "dice roller",
   "title": "boundary: the biggest legal pool rolls and an oversized one is refused",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -14068,7 +14068,7 @@
   "describe": "dice roller",
   "title": "the log survives a reload and Clear empties it",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -14097,7 +14097,7 @@
   "describe": "dice roller",
   "title": "the notation reference opens and lists the keep-highest form",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -14123,7 +14123,7 @@
   "describe": "backup and import page",
   "title": "shows the live counts and both download links",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -14151,7 +14151,7 @@
   "describe": "backup and import page",
   "title": "restoring with no file chosen says so",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -14177,7 +14177,7 @@
   "describe": "backup and import page",
   "title": "a file that is not JSON, and JSON that is not a backup, are each refused with a clear message",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [
@@ -14205,7 +14205,7 @@
   "describe": "backup and import page",
   "title": "a valid backup is restored additively and reports what changed",
   "preconditions": [
-   "App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded",
+   "App running with the local test database (see the note at the top)",
    "Signed in as the seeded DM account (storage state saved by the global setup)"
   ],
   "steps": [

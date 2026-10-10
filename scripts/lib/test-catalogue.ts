@@ -396,8 +396,8 @@ function priorityFor(category: Category, module: string): Priority {
 function preconditionsFor(sourceText: string, body: string, module: string): string[] {
   const usesApp = /\b(page|request|browser|context)\b|\bquery\(|\bfetch\(/.test(body);
   if (!usesApp) return ["None: a unit-level check of pure logic, run without the app"];
-  const out = ["App served by `next dev` on http://localhost:3000, backed by the local Postgres test database with the codex content loaded"];
-  const makesPlayer = /createTestPlayer|newPlayer|\blogin\(|\/api\/auth\/player|\/api\/auth\/register/.test(body);
+  const out = ["App running with the local test database (see the note at the top)"];
+  const makesPlayer = /createTestPlayer|newPlayer|playerRequest|\blogin\(|\/api\/auth\/player|\/api\/auth\/register/.test(body);
   const asDm = /dm\.json|storageState/.test(body) || (!makesPlayer && /storageState/.test(sourceText));
   if (module === "AUTH" || module === "DOOR") out.push("Starts signed out unless the test says otherwise");
   else if (makesPlayer && asDm) out.push("A fresh test player account (removed afterwards) and the seeded DM session");
