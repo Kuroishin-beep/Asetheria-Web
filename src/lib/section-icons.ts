@@ -11,6 +11,7 @@ import {
   Home,
   UserRound,
   KeyRound,
+  LayoutTemplate,
   LayoutGrid,
   Leaf,
   type LucideIcon,
@@ -92,4 +93,5 @@ export const KEEPER_ICONS = {
   backup: DatabaseBackup,
   access: ShieldCheck,
   planner: NotebookPen,
+  templates: LayoutTemplate,
 } as const;

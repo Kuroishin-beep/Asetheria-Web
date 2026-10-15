@@ -811,5 +811,76 @@
     ]
    }
   ]
+ },
+ {
+  "phase": "13 Page templates",
+  "criterion": "Editing the NPC template changes what New NPC starts with, nothing else; reset restores the default",
+  "match": [
+   {
+    "module": "TMPL",
+    "any": [
+     "saving the NPC template",
+     "Reset to default",
+     "starts from the built-in",
+     "switching kind",
+     "empty on purpose"
+    ]
+   }
+  ]
+ },
+ {
+  "phase": "13 Page templates",
+  "criterion": "Existing pages are never changed by a template edit",
+  "match": [
+   {
+    "module": "TMPL",
+    "any": [
+     "written before the change"
+    ]
+   }
+  ]
+ },
+ {
+  "phase": "13 Page templates",
+  "criterion": "Players cannot reach the screen or the API (401/403); unknown kind refused",
+  "match": [
+   {
+    "module": "TMPL",
+    "any": [
+     "signed out: 401",
+     "API refuses a bad body",
+     "DM finds Templates"
+    ]
+   }
+  ]
+ },
+ {
+  "phase": "13 Page templates",
+  "criterion": "Size caps at the boundary; a template may hold secret blocks and each new page gets its own",
+  "match": [
+   {
+    "module": "TMPL",
+    "any": [
+     "size limit holds",
+     "secret block",
+     "malformed secret"
+    ]
+   }
+  ]
+ },
+ {
+  "phase": "13 Page templates",
+  "criterion": "Migration idempotent with rollback; axe clean both themes; 375px",
+  "match": [
+   {
+    "module": "TMPL",
+    "any": [
+     "table has its length checks",
+     "rollback",
+     "axe",
+     "375px"
+    ]
+   }
+  ]
  }
 ]

@@ -1,4 +1,5 @@
 import fs from "node:fs";
+import { tc } from "./case-id";
 import path from "node:path";
 import { randomUUID } from "node:crypto";
 import AxeBuilder from "@axe-core/playwright";
@@ -593,7 +594,7 @@ test.describe("backup and restore", () => {
 
 test.describe("accessibility and small screens", () => {
   for (const theme of ["dark", "light"] as const) {
-    test(`a page with a secret block, with the reveal panel open, has no serious axe violations (${theme})`, async ({ page }) => {
+    test(tc("secrets.spec.ts", "accessibility and small screens", `a page with a secret block, with the reveal panel open, has no serious axe violations (${theme})`), async ({ page }) => {
       test.slow();
       await page.addInitScript((t) => localStorage.setItem("asetheria-theme", t), theme);
       await newPlayer(`ax${theme[0]}`);

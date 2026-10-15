@@ -602,5 +602,40 @@
     ]
    }
   ]
+ },
+ {
+  "action": "Edit the starting text for a kind of page",
+  "happy": [
+   {
+    "module": "TMPL",
+    "any": [
+     "saving the NPC template"
+    ]
+   }
+  ],
+  "invalid": [
+   {
+    "module": "TMPL",
+    "any": [
+     "malformed secret block"
+    ]
+   }
+  ],
+  "unauthorized": [
+   {
+    "module": "TMPL",
+    "any": [
+     "signed out: 401"
+    ]
+   }
+  ],
+  "boundary": [
+   {
+    "module": "TMPL",
+    "any": [
+     "size limit holds"
+    ]
+   }
+  ]
  }
 ]

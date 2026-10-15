@@ -460,6 +460,22 @@ export const secretReveals = pgTable(
   (t) => [primaryKey({ columns: [t.secretId, t.userId] }), index("secret_reveals_user_idx").on(t.userId)],
 );
 
+/** The DM's own starting text for a kind of page, overriding the built-in default in `entry-templates.ts`. */
+export const pageTemplates = pgTable(
+  "page_templates",
+  {
+    kind: entryKind("kind").primaryKey(),
+    body: text("body").notNull().default(""),
+    dmNotes: text("dm_notes").notNull().default(""),
+    updatedBy: uuid("updated_by").references(() => users.id, { onDelete: "set null" }),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [
+    check("page_templates_body_length", sql`char_length(${t.body}) <= 20000`),
+    check("page_templates_notes_length", sql`char_length(${t.dmNotes}) <= 20000`),
+  ],
+);
+
 // ---------------------------------------------------------------------------
 // Inferred types
 // ---------------------------------------------------------------------------
@@ -474,6 +490,7 @@ export type MapRow = typeof maps.$inferSelect;
 export type MapPinRow = typeof mapPins.$inferSelect;
 export type CharacterRow = typeof characters.$inferSelect;
 export type EntrySecret = typeof entrySecrets.$inferSelect;
+export type PageTemplate = typeof pageTemplates.$inferSelect;
 export type EntryGrant = typeof entryGrants.$inferSelect;
 export type EntryKind = (typeof entryKind.enumValues)[number];
 export type Visibility = (typeof visibility.enumValues)[number];

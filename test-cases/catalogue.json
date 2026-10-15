@@ -15091,6 +15091,484 @@
   ]
  },
  {
+  "id": "TC-TMPL-001",
+  "module": "TMPL",
+  "moduleName": "Editable page templates",
+  "category": "Data Integrity",
+  "priority": "P0",
+  "file": "templates.spec.ts",
+  "line": 61,
+  "describe": "migration",
+  "title": "the table has its length checks, takes one row per kind, and the migration is idempotent",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)",
+   "Test rows use a `Zz`/`zz-` prefix and are deleted afterwards"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "the table has its length checks, takes one row per kind, and the migration is idempotent",
+   "(await query<{ t: string }>(`SELECT to_regclass('page_templates')::te… equals page_templates"
+  ]
+ },
+ {
+  "id": "TC-TMPL-002",
+  "module": "TMPL",
+  "moduleName": "Editable page templates",
+  "category": "Data Integrity",
+  "priority": "P0",
+  "file": "templates.spec.ts",
+  "line": 78,
+  "describe": "migration",
+  "title": "the rollback drops only the templates table (run inside a transaction that is rolled back)",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "the rollback drops only the templates table (run inside a transaction that is rolled back)",
+   "process.env.DATABASE_URL ?? \"\" does not: matches /neon\\.tech|neon\\.build/",
+   "(await client.query(`SELECT to_regclass('page_templates')::text AS t`… is empty",
+   "Number((await client.query(`SELECT count(*)::int AS n FROM entries`))… equals entries",
+   "(await client.query(`SELECT to_regclass('entry_secrets')::text AS t`)… equals entry_secrets",
+   "(await query<{ t: string }>(`SELECT to_regclass('page_templates')::te… equals page_templates"
+  ]
+ },
+ {
+  "id": "TC-TMPL-003",
+  "module": "TMPL",
+  "moduleName": "Editable page templates",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "templates.spec.ts",
+  "line": 98,
+  "describe": "editing a template (DM)",
+  "title": "the screen starts from the built-in default, with Save and Reset off until there is something to do",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "the screen starts from the built-in default, with Save and Reset off until there is something to do",
+   "heading \"Page templates\" is visible",
+   "`#template-body` value is DEFAULT_NPC_BODY",
+   "[template-state] text is Built-in default",
+   "[template-save] is disabled",
+   "[template-reset] is disabled"
+  ]
+ },
+ {
+  "id": "TC-TMPL-004",
+  "module": "TMPL",
+  "moduleName": "Editable page templates",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "templates.spec.ts",
+  "line": 107,
+  "describe": "editing a template (DM)",
+  "title": "saving the NPC template changes what New NPC starts with, and nothing else",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Open /codex/new?kind=npc",
+   "Open /codex/new?kind=location",
+   "Open /codex/new?kind=note"
+  ],
+  "testData": [
+   "URL /codex/new?kind=npc",
+   "URL /codex/new?kind=location",
+   "URL /codex/new?kind=note"
+  ],
+  "expected": [
+   "saving the NPC template changes what New NPC starts with, and nothing else",
+   "[template-state] text is Your version",
+   "`#body` value is ## Voice ‹tag›\\n\\n## Wants\\n\\n",
+   "`#dmNotes` value is ## Secret plans ‹tag›\\n\\n",
+   "`#body` value is /## At a glance/",
+   "`#body` value is"
+  ]
+ },
+ {
+  "id": "TC-TMPL-005",
+  "module": "TMPL",
+  "moduleName": "Editable page templates",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "templates.spec.ts",
+  "line": 123,
+  "describe": "editing a template (DM)",
+  "title": "a page written before the change is never altered by saving or resetting a template",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)",
+   "Test rows use a `Zz`/`zz-` prefix and are deleted afterwards"
+  ],
+  "steps": [
+   "Click [template-reset]"
+  ],
+  "testData": [],
+  "expected": [
+   "a page written before the change is never altered by saving or resetting a template",
+   "[template-state] text is Your version",
+   "[template-state] text is Built-in default",
+   "await query(`SELECT body, dm_notes, updated_at FROM entries WHERE id … equals before"
+  ]
+ },
+ {
+  "id": "TC-TMPL-006",
+  "module": "TMPL",
+  "moduleName": "Editable page templates",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "templates.spec.ts",
+  "line": 136,
+  "describe": "editing a template (DM)",
+  "title": "Reset to default brings the built-in text back, for the screen and for New NPC",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Click [template-reset]",
+   "Open /codex/new?kind=npc"
+  ],
+  "testData": [
+   "URL /codex/new?kind=npc"
+  ],
+  "expected": [
+   "Reset to default brings the built-in text back, for the screen and for New NPC",
+   "[template-reset] is enabled",
+   "[template-state] text is Built-in default",
+   "`#template-body` value is DEFAULT_NPC_BODY",
+   "await query(`SELECT 1 FROM page_templates WHERE kind = 'npc'`) length is 0",
+   "`#body` value is DEFAULT_NPC_BODY"
+  ]
+ },
+ {
+  "id": "TC-TMPL-007",
+  "module": "TMPL",
+  "moduleName": "Editable page templates",
+  "category": "Validation",
+  "priority": "P1",
+  "file": "templates.spec.ts",
+  "line": 149,
+  "describe": "editing a template (DM)",
+  "title": "a template can be empty on purpose: new pages of that kind then start blank",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Open /codex/new?kind=npc"
+  ],
+  "testData": [
+   "URL /codex/new?kind=npc"
+  ],
+  "expected": [
+   "a template can be empty on purpose: new pages of that kind then start blank",
+   "[template-state] text is Your version",
+   "`#body` value is",
+   "button \"Add private notes\" is visible"
+  ]
+ },
+ {
+  "id": "TC-TMPL-008",
+  "module": "TMPL",
+  "moduleName": "Editable page templates",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "templates.spec.ts",
+  "line": 160,
+  "describe": "editing a template (DM)",
+  "title": "switching kind shows that kind's own text and state; unsaved edits are not carried over",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Type an unsaved change into `#template-body`",
+   "Choose location in `#template-kind`",
+   "Choose npc in `#template-kind`"
+  ],
+  "testData": [
+   "Input an unsaved change",
+   "Choice location",
+   "Choice npc"
+  ],
+  "expected": [
+   "switching kind shows that kind's own text and state; unsaved edits are not carried over",
+   "`#template-body` value is /## At a glance/",
+   "[template-state] text is Built-in default",
+   "`#template-body` value is DEFAULT_NPC_BODY"
+  ]
+ },
+ {
+  "id": "TC-TMPL-009",
+  "module": "TMPL",
+  "moduleName": "Editable page templates",
+  "category": "Security",
+  "priority": "P0",
+  "file": "templates.spec.ts",
+  "line": 170,
+  "describe": "editing a template (DM)",
+  "title": "a template may hold a secret block: every new page made from it gets its own block",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Open /codex/new?kind=npc",
+   "Type name into `#name`",
+   "Click button \"Create entry\"",
+   "Wait for the URL /\\/codex\\/entry\\/[^/]+$/"
+  ],
+  "testData": [
+   "URL /codex/new?kind=npc",
+   "Input name"
+  ],
+  "expected": [
+   "a template may hold a secret block: every new page made from it gets its own block",
+   "[template-state] text is Your version",
+   "`#body` value is /:::secret/",
+   "rows length is 1",
+   "rows[0].body contains tag",
+   "new Set(ids).size equals 2"
+  ]
+ },
+ {
+  "id": "TC-TMPL-010",
+  "module": "TMPL",
+  "moduleName": "Editable page templates",
+  "category": "Security",
+  "priority": "P0",
+  "file": "templates.spec.ts",
+  "line": 194,
+  "describe": "what is refused",
+  "title": "a malformed secret block is refused with the reason, and the saved template is unchanged",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "a malformed secret block is refused with the reason, and the saved template is unchanged",
+   "[template-state] text is Your version",
+   "[template-error] contains text /never ends/",
+   "(await query<{ body: string }>(`SELECT body FROM page_templates WHERE… equals Good text"
+  ]
+ },
+ {
+  "id": "TC-TMPL-011",
+  "module": "TMPL",
+  "moduleName": "Editable page templates",
+  "category": "Boundary",
+  "priority": "P1",
+  "file": "templates.spec.ts",
+  "line": 203,
+  "describe": "what is refused",
+  "title": "the size limit holds at the boundary: 20,000 characters save, 20,001 are refused for the description and for the notes",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Send PUT /api/templates/npc with { data: { body, dmNotes } }"
+  ],
+  "testData": [
+   "PUT /api/templates/npc"
+  ],
+  "expected": [
+   "the size limit holds at the boundary: 20,000 characters save, 20,001 are refused for the description and for the notes",
+   "HTTP status equals 200",
+   "HTTP status equals 400",
+   "response body matches /limit is 20,000/",
+   "response body matches /DM notes/",
+   "(await query<{ n: number }>(`SELECT char_length(dm_notes) AS n FROM p… equals 20000"
+  ]
+ },
+ {
+  "id": "TC-TMPL-012",
+  "module": "TMPL",
+  "moduleName": "Editable page templates",
+  "category": "Data Integrity",
+  "priority": "P0",
+  "file": "templates.spec.ts",
+  "line": 216,
+  "describe": "what is refused",
+  "title": "the API refuses a bad body (missing field, wrong type, extra key), an unknown kind, and changes nothing",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Send PUT /api/templates/npc with { data }",
+   "Send PUT /api/templates/not-a-kind with { data: { body: \"\", dmNotes: \"\" } }",
+   "Send DELETE /api/templates/not-a-kind",
+   "Send PUT /api/templates/%27%3B%20DROP%20TABLE%20entries%3B-- with { data: { body: \"\", dmNotes: \"\" } }"
+  ],
+  "testData": [
+   "PUT /api/templates/npc",
+   "PUT /api/templates/not-a-kind",
+   "DELETE /api/templates/not-a-kind",
+   "PUT /api/templates/%27%3B%20DROP%20TABLE%20entries%3B--"
+  ],
+  "expected": [
+   "the API refuses a bad body (missing field, wrong type, extra key), an unknown kind, and changes nothing",
+   "HTTP status equals 400",
+   "HTTP status equals 404",
+   "await query(`SELECT 1 FROM page_templates`) length is 0"
+  ]
+ },
+ {
+  "id": "TC-TMPL-013",
+  "module": "TMPL",
+  "moduleName": "Editable page templates",
+  "category": "Permission & Auth",
+  "priority": "P0",
+  "file": "templates.spec.ts",
+  "line": 228,
+  "describe": "who can reach it",
+  "title": "signed out: 401 on the API; a player: 403 on the API, sent away from the screen, and no Templates link",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Send PUT /api/templates/npc with { data: { body: \"x\", dmNotes: \"\" } }",
+   "Send DELETE /api/templates/npc",
+   "Open /admin/templates",
+   "Open /codex/new?kind=npc"
+  ],
+  "testData": [
+   "PUT /api/templates/npc",
+   "DELETE /api/templates/npc",
+   "URL /admin/templates",
+   "URL /codex/new?kind=npc"
+  ],
+  "expected": [
+   "signed out: 401 on the API; a player: 403 on the API, sent away from the screen, and no Templates link",
+   "HTTP status equals 401",
+   "HTTP status equals 403",
+   "await query(`SELECT 1 FROM page_templates`) length is 0",
+   "page URL is (u) => u.pathname === \"/\"",
+   "link \"Templates\" count is 0"
+  ]
+ },
+ {
+  "id": "TC-TMPL-014",
+  "module": "TMPL",
+  "moduleName": "Editable page templates",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "templates.spec.ts",
+  "line": 249,
+  "describe": "who can reach it",
+  "title": "the DM finds Templates under Keeper in the sidebar",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Open /",
+   "Click link \"Templates\""
+  ],
+  "testData": [
+   "URL /"
+  ],
+  "expected": [
+   "the DM finds Templates under Keeper in the sidebar",
+   "page URL is /\\/admin\\/templates/"
+  ]
+ },
+ {
+  "id": "TC-TMPL-015",
+  "module": "TMPL",
+  "moduleName": "Editable page templates",
+  "category": "Accessibility",
+  "priority": "P2",
+  "file": "templates.spec.ts",
+  "line": 258,
+  "describe": "accessibility and small screens",
+  "title": "the templates screen has no serious axe violations (dark)",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)",
+   "Browser storage is prepared before the page loads"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "the templates screen has no serious axe violations (dark)",
+   "serious equals []"
+  ]
+ },
+ {
+  "id": "TC-TMPL-016",
+  "module": "TMPL",
+  "moduleName": "Editable page templates",
+  "category": "Accessibility",
+  "priority": "P2",
+  "file": "templates.spec.ts",
+  "line": 258,
+  "describe": "accessibility and small screens",
+  "title": "the templates screen has no serious axe violations (light)",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)",
+   "Browser storage is prepared before the page loads"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "the templates screen has no serious axe violations (light)",
+   "serious equals []"
+  ]
+ },
+ {
+  "id": "TC-TMPL-017",
+  "module": "TMPL",
+  "moduleName": "Editable page templates",
+  "category": "Responsive",
+  "priority": "P2",
+  "file": "templates.spec.ts",
+  "line": 268,
+  "describe": "accessibility and small screens",
+  "title": "at 375px the screen fits without sideways scrolling, and every control has a visible label",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "at 375px the screen fits without sideways scrolling, and every control has a visible label",
+   "await page.evaluate(() => document.documentElement.scrollWidth - docu… is at most 0",
+   "field \"label\" is visible"
+  ]
+ },
+ {
   "id": "TC-THEME-001",
   "module": "THEME",
   "moduleName": "Light and dark themes",

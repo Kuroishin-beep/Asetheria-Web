@@ -6,7 +6,7 @@ import { db } from "@/db";
 import { entries, type EntryKind } from "@/db/schema";
 import { getCurrentUser } from "@/lib/auth";
 import { createEntryAction } from "@/lib/actions";
-import { templateFor } from "@/lib/entry-templates";
+import { getTemplate } from "@/lib/page-templates";
 import { KIND_BY_KEY, sectionPath } from "@/lib/kinds";
 import { EntryForm } from "@/components/entry-form";
 import { PageHeading } from "@/components/entry-card";
@@ -30,6 +30,9 @@ export default async function NewEntryPage({
     kindParam && KIND_BY_KEY[kindParam as EntryKind]
       ? (kindParam as EntryKind)
       : "note";
+
+  // The DM's own template for this kind if they wrote one, else the built-in default.
+  const template = await getTemplate(kind);
 
   const parents = await db
     .select({ id: entries.id, name: entries.name, kind: entries.kind })
@@ -55,8 +58,8 @@ export default async function NewEntryPage({
           name: "",
           kind,
           summary: "",
-          body: templateFor(kind).body,
-          dmNotes: templateFor(kind).dmNotes,
+          body: template.body,
+          dmNotes: template.dmNotes,
           visibility: "public",
           tags: [],
           fields: {},
