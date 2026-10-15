@@ -7,6 +7,7 @@ import { entries } from "@/db/schema";
 import { getCurrentUser } from "@/lib/auth";
 import { getEntryBySlug, getRevisions } from "@/lib/entries";
 import { updateEntryAction } from "@/lib/actions";
+import { inlineForDm } from "@/lib/secrets";
 import { EntryForm } from "@/components/entry-form";
 import { PageHeading } from "@/components/entry-card";
 import { Eyebrow } from "@/components/shared/eyebrow";
@@ -70,7 +71,8 @@ export default async function EditEntryPage({
           name: entry.name,
           kind: entry.kind,
           summary: entry.summary,
-          body: entry.body,
+          // The editor shows secret passages in their inline form (:::secret ... :::).
+          body: await inlineForDm(entry.id, entry.body),
           dmNotes: entry.dmNotes,
           visibility: entry.visibility,
           tags: entry.tags,

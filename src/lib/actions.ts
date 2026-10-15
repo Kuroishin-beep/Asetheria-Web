@@ -10,6 +10,7 @@ import { sectionPath, sectionPaths } from "@/lib/kinds";
 import { slugify } from "@/lib/links";
 import { rebuildLinksForEntry } from "@/lib/link-graph";
 import { refreshEmbeddingAfterResponse } from "@/lib/embedding-sync";
+import { inlineForDm, planSecrets, pruneSecrets, writeSecrets } from "@/lib/secrets";
 import { validateTable } from "@/lib/roll-table";
 import { parseEntryForm, type EntryInput } from "@/lib/validation";
 
@@ -28,6 +29,8 @@ async function snapshot(
 ) {
   // The search vector is derived data — 384 floats per revision for nothing.
   const { embedding: _vector, ...content } = entry;
+  // Secret blocks are stored in the snapshot in their inline form, so reverting can bring them back.
+  content.body = await inlineForDm(entry.id, entry.body);
   await db.insert(revisions).values({
     entryId: entry.id,
     snapshot: content as unknown as Record<string, unknown>,
@@ -84,6 +87,8 @@ export async function createEntryAction(_prev: unknown, formData: FormData) {
   const input: EntryInput = parsed.data;
   const tableError = tableProblem(input);
   if (tableError) return { error: tableError };
+  const plan = await planSecrets(null, input.body);
+  if (!plan.ok) return { error: plan.error };
   const slug = await uniqueSlug(input.name);
 
   const [row] = await db
@@ -93,7 +98,7 @@ export async function createEntryAction(_prev: unknown, formData: FormData) {
       kind: input.kind,
       name: input.name,
       summary: input.summary,
-      body: input.body,
+      body: plan.body,
       dmNotes: input.dmNotes,
       fields: input.fields,
       tags: input.tags,
@@ -102,6 +107,7 @@ export async function createEntryAction(_prev: unknown, formData: FormData) {
     })
     .returning();
 
+  await writeSecrets(row.id, plan.blocks);
   await snapshot(row, "create", user);
   await rebuildLinksForEntry(row.id, row.body, row.fields);
   refreshEmbeddingAfterResponse(row.id);
@@ -130,7 +136,12 @@ export async function updateEntryAction(
     .limit(1);
   if (!current) return { error: "Entry not found." };
 
+  const plan = await planSecrets(current.id, input.body);
+  if (!plan.ok) return { error: plan.error };
+
   await snapshot(current, "update", user);
+  // Block rows first, then the body that points at them, then the rows it no longer points at.
+  await writeSecrets(current.id, plan.blocks);
 
   // The slug only follows a rename when the name actually changed, so existing
   // links and bookmarks keep working through ordinary edits.
@@ -146,7 +157,7 @@ export async function updateEntryAction(
       name: input.name,
       slug,
       summary: input.summary,
-      body: input.body,
+      body: plan.body,
       dmNotes: input.dmNotes,
       fields: input.fields,
       tags: input.tags,
@@ -154,7 +165,7 @@ export async function updateEntryAction(
       parentId: input.parentId,
       // Once the body has been edited by hand it is no longer generated text,
       // so the banner disappears and the revert command leaves it alone.
-      bodySource: input.body === current.body ? current.bodySource : null,
+      bodySource: plan.body === current.body ? current.bodySource : null,
       // Recomputed after the response; until then the stale vector must not match.
       embedding: null,
       updatedAt: new Date(),
@@ -162,6 +173,7 @@ export async function updateEntryAction(
     .where(eq(entries.id, entryId))
     .returning();
 
+  await pruneSecrets(row.id, row.body);
   await rebuildLinksForEntry(row.id, row.body, row.fields);
   refreshEmbeddingAfterResponse(row.id);
   revalidateEntry(row.slug, row.kind);
@@ -265,13 +277,17 @@ export async function revertToRevisionAction(revisionId: string) {
 
   await snapshot(current, "update", user);
   const snap = rev.snapshot as Partial<Entry>;
+  // The snapshot holds the inline form (older ones hold plain text); either way the blocks are written back.
+  const plan = await planSecrets(current.id, snap.body ?? (await inlineForDm(current.id, current.body)));
+  if (!plan.ok) return { error: plan.error };
+  await writeSecrets(current.id, plan.blocks);
 
   const [row] = await db
     .update(entries)
     .set({
       name: snap.name ?? current.name,
       summary: snap.summary ?? current.summary,
-      body: snap.body ?? current.body,
+      body: plan.body,
       dmNotes: snap.dmNotes ?? current.dmNotes,
       fields: (snap.fields as Record<string, string>) ?? current.fields,
       tags: snap.tags ?? current.tags,
@@ -283,6 +299,7 @@ export async function revertToRevisionAction(revisionId: string) {
     .where(eq(entries.id, rev.entryId))
     .returning();
 
+  await pruneSecrets(row.id, row.body);
   await rebuildLinksForEntry(row.id, row.body, row.fields);
   refreshEmbeddingAfterResponse(row.id);
   revalidateEntry(row.slug, row.kind);

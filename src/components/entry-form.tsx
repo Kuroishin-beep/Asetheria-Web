@@ -276,6 +276,32 @@ export function EntryForm({
             entry; suggestions appear as you type, and the link shows up on both pages. Ctrl+S saves.
           </p>
         )}
+        <div className="flex flex-wrap items-center gap-3">
+          <Button
+            type="button"
+            variant="outline"
+            size="sm"
+            data-testid="insert-secret"
+            onClick={() =>
+              setStarter((prev) => ({
+                text: `${bodyValue.trimEnd() ? `${bodyValue.trimEnd()}
+
+` : ""}:::secret
+
+:::
+`,
+                id: (prev?.id ?? 0) + 1,
+              }))
+            }
+          >
+            <EyeOff aria-hidden="true" />
+            Insert secret block
+          </Button>
+          <span className="text-[13px] text-muted-foreground">
+            A passage between <code className="rounded bg-muted px-1">:::secret</code> and <code className="rounded bg-muted px-1">:::</code> is hidden
+            from players until you reveal it to them, one passage at a time.
+          </span>
+        </div>
         {kind === "table" && !hasTable(bodyValue) && (
           <Button
             type="button"

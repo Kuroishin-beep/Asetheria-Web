@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea";
 import { renderMarkdown } from "@/lib/markdown";
+import { splitInline } from "@/lib/secret-blocks";
 import { cn } from "@/lib/utils";
 
 type Suggestion = { id: string; name: string; kind: string; summary: string };
@@ -16,6 +17,19 @@ const DRAFT_SAVE_DELAY_MS = 400;
 const SUGGESTION_DELAY_MS = 120;
 const MAX_SUGGESTIONS = 8;
 const MIN_QUERY_LENGTH = 2;
+
+/** The preview shows each secret passage as a labelled box, so the DM sees what players will not. */
+function renderPreview(value: string): string {
+  const split = splitInline(value);
+  if (!split.ok) return renderMarkdown(value);
+  return split.segments
+    .map((seg) =>
+      seg.type === "text"
+        ? renderMarkdown(seg.text)
+        : `<aside class="my-4 rounded-lg border border-dashed border-secret/50 bg-secret/5 p-3"><p class="mb-2 text-xs font-semibold uppercase tracking-[0.07em] text-secret">Secret, hidden from players</p>${renderMarkdown(seg.text)}</aside>`,
+    )
+    .join("");
+}
 
 function readDraft(key: string): string | null {
   try {
@@ -171,7 +185,7 @@ export function MarkdownEditor({
     }
   }
 
-  const previewHtml = useMemo(() => (tab === "preview" ? renderMarkdown(value) : ""), [tab, value]);
+  const previewHtml = useMemo(() => (tab === "preview" ? renderPreview(value) : ""), [tab, value]);
 
   return (
     <div className="relative grid gap-2">

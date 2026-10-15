@@ -13754,6 +13754,1290 @@
   ]
  },
  {
+  "id": "TC-SECB-001",
+  "module": "SECB",
+  "moduleName": "Secret blocks (grammar and markers)",
+  "category": "Security",
+  "priority": "P0",
+  "file": "secret-blocks.spec.ts",
+  "line": 24,
+  "describe": "reading the inline form",
+  "title": "text with no secret block is one text segment, unchanged",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "text with no secret block is one text segment, unchanged",
+   "ok(\"Hello\\n\\nWorld\") equals [{ type: \"text\", text: \"Hello\\n\\nWorld\" }]",
+   "ok(\"\") equals []"
+  ]
+ },
+ {
+  "id": "TC-SECB-002",
+  "module": "SECB",
+  "moduleName": "Secret blocks (grammar and markers)",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "secret-blocks.spec.ts",
+  "line": 29,
+  "describe": "reading the inline form",
+  "title": "a block is found with its text trimmed, and the text around it is kept in order",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "a block is found with its text trimmed, and the text around it is kept in order",
+   "segs.map((s) => s.type) equals [\"text\", \"block\", \"text\"]",
+   "segs[0] match object { text: \"Before\" }",
+   "segs[1] match object { type: \"block\", id: null, text: \"The baker is a spy.\" }",
+   "segs[2] match object { text: \"After\" }"
+  ]
+ },
+ {
+  "id": "TC-SECB-003",
+  "module": "SECB",
+  "moduleName": "Secret blocks (grammar and markers)",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "secret-blocks.spec.ts",
+  "line": 37,
+  "describe": "reading the inline form",
+  "title": "a block may carry an id, in any letter case, and keeps several lines and Markdown",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "a block may carry an id, in any letter case, and keeps several lines and Markdown",
+   "segs[0] match object { type: \"block\", id: ID_A, text: \"Line one\\n\\n- a list\\n- of things\" }"
+  ]
+ },
+ {
+  "id": "TC-SECB-004",
+  "module": "SECB",
+  "moduleName": "Secret blocks (grammar and markers)",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "secret-blocks.spec.ts",
+  "line": 42,
+  "describe": "reading the inline form",
+  "title": "two blocks and Windows line endings both work",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "two blocks and Windows line endings both work",
+   "segs.filter((s) => s.type === \"block\") length is 2"
+  ]
+ },
+ {
+  "id": "TC-SECB-005",
+  "module": "SECB",
+  "moduleName": "Secret blocks (grammar and markers)",
+  "category": "Security",
+  "priority": "P0",
+  "file": "secret-blocks.spec.ts",
+  "line": 47,
+  "describe": "reading the inline form",
+  "title": "a secret fence inside a code fence is just text",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "a secret fence inside a code fence is just text",
+   "segs.every((s) => s.type === \"text\") equals true"
+  ]
+ },
+ {
+  "id": "TC-SECB-006",
+  "module": "SECB",
+  "moduleName": "Secret blocks (grammar and markers)",
+  "category": "Security",
+  "priority": "P0",
+  "file": "secret-blocks.spec.ts",
+  "line": 52,
+  "describe": "reading the inline form",
+  "title": "the fence words must stand alone on their line: ':::secret' inside a sentence is text",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "the fence words must stand alone on their line: ':::secret' inside a sentence is text",
+   "ok(\"He said :::secret and left\").every((s) => s.type === \"text\") equals true",
+   "ok(\"a ::: b\").every((s) => s.type === \"text\") equals true"
+  ]
+ },
+ {
+  "id": "TC-SECB-007",
+  "module": "SECB",
+  "moduleName": "Secret blocks (grammar and markers)",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "secret-blocks.spec.ts",
+  "line": 59,
+  "describe": "refusals, each with a plain message and the line",
+  "title": "a nested block",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "a nested block",
+   "r.error matches /nested/",
+   "r.line equals 3"
+  ]
+ },
+ {
+  "id": "TC-SECB-008",
+  "module": "SECB",
+  "moduleName": "Secret blocks (grammar and markers)",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "secret-blocks.spec.ts",
+  "line": 65,
+  "describe": "refusals, each with a plain message and the line",
+  "title": "a block that never ends",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "a block that never ends",
+   "r.error matches /never ends/",
+   "r.line equals 2"
+  ]
+ },
+ {
+  "id": "TC-SECB-009",
+  "module": "SECB",
+  "moduleName": "Secret blocks (grammar and markers)",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "secret-blocks.spec.ts",
+  "line": 71,
+  "describe": "refusals, each with a plain message and the line",
+  "title": "an end with no start",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "an end with no start",
+   "r.error matches /none was opened/",
+   "r.line equals 2"
+  ]
+ },
+ {
+  "id": "TC-SECB-010",
+  "module": "SECB",
+  "moduleName": "Secret blocks (grammar and markers)",
+  "category": "Validation",
+  "priority": "P1",
+  "file": "secret-blocks.spec.ts",
+  "line": 77,
+  "describe": "refusals, each with a plain message and the line",
+  "title": "an empty block, even one holding only blank lines",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "an empty block, even one holding only blank lines",
+   "bad(\":::secret\\n:::\").error matches /empty/",
+   "bad(\":::secret\\n\\n \\n:::\").error matches /empty/"
+  ]
+ },
+ {
+  "id": "TC-SECB-011",
+  "module": "SECB",
+  "moduleName": "Secret blocks (grammar and markers)",
+  "category": "Security",
+  "priority": "P0",
+  "file": "secret-blocks.spec.ts",
+  "line": 82,
+  "describe": "refusals, each with a plain message and the line",
+  "title": "a malformed opening line (a word after secret, or a bad id)",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "a malformed opening line (a word after secret, or a bad id)",
+   "bad(\":::secret now\\ntext\\n:::\").error matches /line of its own/",
+   "bad(\":::secret not-a-uuid\\ntext\\n:::\").error matches /line of its own/",
+   "bad(\":::secretive\\ntext\\n:::\").error matches /line of its own/"
+  ]
+ },
+ {
+  "id": "TC-SECB-012",
+  "module": "SECB",
+  "moduleName": "Secret blocks (grammar and markers)",
+  "category": "Boundary",
+  "priority": "P1",
+  "file": "secret-blocks.spec.ts",
+  "line": 88,
+  "describe": "refusals, each with a plain message and the line",
+  "title": "the size limits hold at the boundary: 20,000 characters pass, 20,001 do not; 50 blocks pass, 51 do not",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call splitInline(`:::secret\\n${\"x\".repeat(SECRET_LIMITS.maxChars)}\\n:::`)",
+   "Call splitInline(blocks(SECRET_LIMITS.maxBlocks))"
+  ],
+  "testData": [],
+  "expected": [
+   "the size limits hold at the boundary: 20,000 characters pass, 20,001 do not; 50 blocks pass, 51 do not",
+   "splitInline(`:::secret\\n${\"x\".repeat(SECRET_LIMITS.maxChars)}\\n:::`).… equals true",
+   "bad(`:::secret\\n${\"x\".repeat(SECRET_LIMITS.maxChars + 1)}\\n:::`).error matches /limit/",
+   "splitInline(blocks(SECRET_LIMITS.maxBlocks)).ok equals true",
+   "bad(blocks(SECRET_LIMITS.maxBlocks + 1)).error matches /at most 50/"
+  ]
+ },
+ {
+  "id": "TC-SECB-013",
+  "module": "SECB",
+  "moduleName": "Secret blocks (grammar and markers)",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "secret-blocks.spec.ts",
+  "line": 98,
+  "describe": "the stored body and the way back",
+  "title": "building the body replaces each block with its marker on a line of its own and keeps the text",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call buildBody(segs, () => ID_A)",
+   "Call marker(ID_A)"
+  ],
+  "testData": [],
+  "expected": [
+   "building the body replaces each block with its marker on a line of its own and keeps the text",
+   "body equals Before\\n\\n‹marker(ID_A)›\\n\\nAfter",
+   "body does not: contains Hidden"
+  ]
+ },
+ {
+  "id": "TC-SECB-014",
+  "module": "SECB",
+  "moduleName": "Secret blocks (grammar and markers)",
+  "category": "Security",
+  "priority": "P0",
+  "file": "secret-blocks.spec.ts",
+  "line": 105,
+  "describe": "the stored body and the way back",
+  "title": "the body never contains the secret text, whatever the block holds",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call buildBody(segs, () => ID_A)"
+  ],
+  "testData": [],
+  "expected": [
+   "the body never contains the secret text, whatever the block holds",
+   "body does not: matches /zzcanary|Somebody|script/",
+   "body contains ID_A"
+  ]
+ },
+ {
+  "id": "TC-SECB-015",
+  "module": "SECB",
+  "moduleName": "Secret blocks (grammar and markers)",
+  "category": "Edge",
+  "priority": "P2",
+  "file": "secret-blocks.spec.ts",
+  "line": 112,
+  "describe": "the stored body and the way back",
+  "title": "marker ids come back in order, case-insensitively, and only for whole marker lines",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call marker(ID_A)",
+   "Call marker(ID_B.toUpperCase())",
+   "Call markerIds(body)",
+   "Call hasMarkers(\"plain\")",
+   "Call hasMarkers(marker(ID_A))"
+  ],
+  "testData": [],
+  "expected": [
+   "marker ids come back in order, case-insensitively, and only for whole marker lines",
+   "markerIds(body) equals [ID_A, ID_B]",
+   "hasMarkers(\"plain\") equals false",
+   "hasMarkers(marker(ID_A)) equals true"
+  ]
+ },
+ {
+  "id": "TC-SECB-016",
+  "module": "SECB",
+  "moduleName": "Secret blocks (grammar and markers)",
+  "category": "Validation",
+  "priority": "P1",
+  "file": "secret-blocks.spec.ts",
+  "line": 119,
+  "describe": "the stored body and the way back",
+  "title": "inlining restores the editor form from the body and the stored texts; an unknown marker is dropped",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call marker(ID_A)",
+   "Call marker(ID_B)",
+   "Call inlineBody(body, new Map([[ID_A, \"First secret\"]]))"
+  ],
+  "testData": [],
+  "expected": [
+   "inlining restores the editor form from the body and the stored texts; an unknown marker is dropped",
+   "inline contains :::secret ‹ID_A›\\nFirst secret\\n:::",
+   "inline does not: contains ID_B",
+   "inline contains Intro",
+   "inline contains Outro"
+  ]
+ },
+ {
+  "id": "TC-SECB-017",
+  "module": "SECB",
+  "moduleName": "Secret blocks (grammar and markers)",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "secret-blocks.spec.ts",
+  "line": 128,
+  "describe": "the stored body and the way back",
+  "title": "round trip: inline -> body + blocks -> inline gives the same blocks",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call buildBody(segs, (i) => ids[i])",
+   "Call inlineBody(body, texts)"
+  ],
+  "testData": [],
+  "expected": [
+   "round trip: inline -> body + blocks -> inline gives the same blocks",
+   "again.filter((s) => s.type === \"block\").map((s) => (s as { id: string… equals [\"One\", \"Two\"]",
+   "again.filter((s) => s.type === \"block\").map((s) => (s as { id: string… equals ids"
+  ]
+ },
+ {
+  "id": "TC-SECB-018",
+  "module": "SECB",
+  "moduleName": "Secret blocks (grammar and markers)",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "secret-blocks.spec.ts",
+  "line": 139,
+  "describe": "the stored body and the way back",
+  "title": "stripping removes marker lines and nothing else",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call marker(ID_A)",
+   "Call marker(ID_B)",
+   "Call stripMarkers(text)"
+  ],
+  "testData": [],
+  "expected": [
+   "stripping removes marker lines and nothing else",
+   "out equals Keep this and this and {{§not-a-marker}} stays"
+  ]
+ },
+ {
+  "id": "TC-SECB-019",
+  "module": "SECB",
+  "moduleName": "Secret blocks (grammar and markers)",
+  "category": "Security",
+  "priority": "P0",
+  "file": "secret-blocks.spec.ts",
+  "line": 145,
+  "describe": "the stored body and the way back",
+  "title": "splitting at markers gives text and secrets in page order",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed out (no session)"
+  ],
+  "steps": [
+   "Call splitAtMarkers(`One\\n\\n${marker(ID_A)}\\n\\nTwo\\n${marker(ID_B)}\\nThree`)",
+   "Call marker(ID_A)",
+   "Call marker(ID_B)"
+  ],
+  "testData": [],
+  "expected": [
+   "splitting at markers gives text and secrets in page order",
+   "parts.map((p) => p.type) equals [\"text\", \"secret\", \"text\", \"secret\", \"text\"]",
+   "parts.filter((p) => p.type === \"secret\").map((p) => (p as { id: strin… equals [ID_A, ID_B]"
+  ]
+ },
+ {
+  "id": "TC-SECB-020",
+  "module": "SECB",
+  "moduleName": "Secret blocks (grammar and markers)",
+  "category": "Permission & Auth",
+  "priority": "P0",
+  "file": "secret-blocks.spec.ts",
+  "line": 151,
+  "describe": "the stored body and the way back",
+  "title": "the marker contains no English word, so a search for 'secret' cannot find pages that have one",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call marker(ID_A)"
+  ],
+  "testData": [],
+  "expected": [
+   "the marker contains no English word, so a search for 'secret' cannot find pages that have one",
+   "marker(ID_A) does not: matches /secret/i",
+   "/^[^a-z]*[a-f0-9-]*[^a-z]*$/i.test(marker(ID_A).replace(/[{}§]/g, \"\")) equals true"
+  ]
+ },
+ {
+  "id": "TC-SECB-021",
+  "module": "SECB",
+  "moduleName": "Secret blocks (grammar and markers)",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "secret-blocks.spec.ts",
+  "line": 156,
+  "describe": "the stored body and the way back",
+  "title": "ids are recognised in canonical form only",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call isSecretId(ID_A)",
+   "Call isSecretId(ID_A.toUpperCase())",
+   "Call isSecretId(bad)"
+  ],
+  "testData": [],
+  "expected": [
+   "ids are recognised in canonical form only",
+   "isSecretId(ID_A) equals true",
+   "isSecretId(ID_A.toUpperCase()) equals true",
+   "isSecretId(bad) equals false"
+  ]
+ },
+ {
+  "id": "TC-SECR-001",
+  "module": "SECR",
+  "moduleName": "Secret blocks (saving, reveal, search, backup)",
+  "category": "Data Integrity",
+  "priority": "P0",
+  "file": "secrets.spec.ts",
+  "line": 86,
+  "describe": "migration",
+  "title": "both tables exist with their checks and cascades, and the migration is idempotent",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "A fresh test player account (removed afterwards)",
+   "Test rows use a `Zz`/`zz-` prefix and are deleted afterwards"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "both tables exist with their checks and cascades, and the migration is idempotent",
+   "(await query<{ t: string }>(`SELECT to_regclass('entry_secrets')::tex… equals entry_secrets",
+   "(await query<{ t: string }>(`SELECT to_regclass('secret_reveals')::te… equals secret_reveals",
+   "await query(`SELECT 1 FROM secret_reveals WHERE secret_id = $1`, [s.i… length is 0",
+   "await query(`SELECT 1 FROM entry_secrets WHERE id = $1`, [s.id]) length is 0"
+  ]
+ },
+ {
+  "id": "TC-SECR-002",
+  "module": "SECR",
+  "moduleName": "Secret blocks (saving, reveal, search, backup)",
+  "category": "Security",
+  "priority": "P0",
+  "file": "secrets.spec.ts",
+  "line": 115,
+  "describe": "migration",
+  "title": "the rollback drops only the two secret tables (run inside a transaction that is rolled back)",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "the rollback drops only the two secret tables (run inside a transaction that is rolled back)",
+   "process.env.DATABASE_URL ?? \"\" does not: matches /neon\\.tech|neon\\.build/",
+   "(await client.query(`SELECT to_regclass('entry_secrets')::text AS t`)… is empty",
+   "(await client.query(`SELECT to_regclass('secret_reveals')::text AS t`… is empty",
+   "Number((await client.query(`SELECT count(*)::int AS n FROM entries`))… equals entries",
+   "(await client.query(`SELECT to_regclass('characters')::text AS t`)).r… equals characters",
+   "(await query<{ t: string }>(`SELECT to_regclass('entry_secrets')::tex… equals entry_secrets"
+  ]
+ },
+ {
+  "id": "TC-SECR-003",
+  "module": "SECR",
+  "moduleName": "Secret blocks (saving, reveal, search, backup)",
+  "category": "Security",
+  "priority": "P0",
+  "file": "secrets.spec.ts",
+  "line": 136,
+  "describe": "saving and editing (DM)",
+  "title": "saving moves the block into its own table: the page body keeps a marker, and the secret is in no column of the page row or either search vector",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "saving moves the block into its own table: the page body keeps a marker, and the secret is in no column of the page row or either search vector",
+   "row.body contains Public intro.",
+   "row.body contains Public outro.",
+   "row.body matches /\\{\\{§[0-9a-f-]{36}\\}\\}/",
+   "text.toLowerCase().includes(CANARY.toLowerCase()) equals false",
+   "text.toLowerCase().includes(\"baker\") equals false",
+   "rows length is 1",
+   "rows[0].body equals SECRET_TEXT",
+   "row.body contains rows[0].id"
+  ]
+ },
+ {
+  "id": "TC-SECR-004",
+  "module": "SECR",
+  "moduleName": "Secret blocks (saving, reveal, search, backup)",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "secrets.spec.ts",
+  "line": 156,
+  "describe": "saving and editing (DM)",
+  "title": "the DM sees the passage in a labelled box with a reveal control, between the text around it",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Open /codex/entry/‹p.slug›"
+  ],
+  "testData": [
+   "URL /codex/entry/‹p.slug›"
+  ],
+  "expected": [
+   "the DM sees the passage in a labelled box with a reveal control, between the text around it",
+   "box count is 1",
+   "box contains text SECRET_TEXT",
+   "heading \"Secret, hidden from players\" is visible",
+   "[reveal-status] text is Not revealed to anyone",
+   "html.indexOf(\"Public intro.\") is less than html.indexOf(CANARY)",
+   "html.indexOf(CANARY) is less than html.indexOf(\"Public outro.\")"
+  ]
+ },
+ {
+  "id": "TC-SECR-005",
+  "module": "SECR",
+  "moduleName": "Secret blocks (saving, reveal, search, backup)",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "secrets.spec.ts",
+  "line": 170,
+  "describe": "saving and editing (DM)",
+  "title": "the editor shows the inline form again, and an edit keeps the block's id and text",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Type value.replace(\"Public intro.\", \"A new intro.\") into `#body`"
+  ],
+  "testData": [
+   "Input value.replace(\"Public intro.\", \"A new intro.\")"
+  ],
+  "expected": [
+   "the editor shows the inline form again, and an edit keeps the block's id and text",
+   "value contains :::secret ‹before.id›",
+   "value contains SECRET_TEXT",
+   "after length is 1",
+   "after[0].id equals before.id",
+   "after[0].body equals SECRET_TEXT",
+   "`article` contains text A new intro."
+  ]
+ },
+ {
+  "id": "TC-SECR-006",
+  "module": "SECR",
+  "moduleName": "Secret blocks (saving, reveal, search, backup)",
+  "category": "Permission & Auth",
+  "priority": "P0",
+  "file": "secrets.spec.ts",
+  "line": 187,
+  "describe": "saving and editing (DM)",
+  "title": "the Insert secret block button adds an empty fence for the DM to fill in, and the preview shows it as hidden from players",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Open /codex/new?kind=note",
+   "Type Some text into `#body`",
+   "Click [insert-secret]",
+   "Type Some text\n\n:::secret\nHidden bit\n:::\n into `#body`",
+   "Click tab \"Preview\""
+  ],
+  "testData": [
+   "URL /codex/new?kind=note",
+   "Input Some text",
+   "Input Some text\n\n:::secret\nHidden bit\n:::\n"
+  ],
+  "expected": [
+   "the Insert secret block button adds an empty fence for the DM to fill in, and the preview shows it as hidden from players",
+   "`#body` value is /Some text\\n\\n:::secret\\n\\n:::\\n/",
+   "text \"Secret, hidden from players\" is visible",
+   "`aside` › text \"Hidden bit\" is visible"
+  ]
+ },
+ {
+  "id": "TC-SECR-007",
+  "module": "SECR",
+  "moduleName": "Secret blocks (saving, reveal, search, backup)",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "secrets.spec.ts",
+  "line": 198,
+  "describe": "saving and editing (DM)",
+  "title": "removing a block in the editor deletes it and the reveals it had",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "A fresh test player account (removed afterwards)",
+   "Test rows use a `Zz`/`zz-` prefix and are deleted afterwards"
+  ],
+  "steps": [
+   "Type Just the public text now. into `#body`",
+   "Open /codex/entry/‹p.slug›"
+  ],
+  "testData": [
+   "Input Just the public text now.",
+   "URL /codex/entry/‹p.slug›"
+  ],
+  "expected": [
+   "removing a block in the editor deletes it and the reveals it had",
+   "response ok equals true",
+   "await query(`SELECT 1 FROM secret_reveals WHERE secret_id = $1`, [s.i… length is 1",
+   "await secretRows(p.id) length is 0",
+   "await query(`SELECT 1 FROM secret_reveals WHERE secret_id = $1`, [s.i… length is 0",
+   "row.body does not: matches /\\{\\{§/",
+   "HTTP status equals 200",
+   "page HTML does not: contains CANARY"
+  ]
+ },
+ {
+  "id": "TC-SECR-008",
+  "module": "SECR",
+  "moduleName": "Secret blocks (saving, reveal, search, backup)",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "secrets.spec.ts",
+  "line": 223,
+  "describe": "saving and editing (DM)",
+  "title": "restoring an earlier version brings a removed block back",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Type The block is gone. into `#body`",
+   "Click button \"Restore this version\"",
+   "Open /codex/entry/‹p.slug›"
+  ],
+  "testData": [
+   "Input The block is gone.",
+   "URL /codex/entry/‹p.slug›"
+  ],
+  "expected": [
+   "restoring an earlier version brings a removed block back",
+   "await secretRows(p.id) length is 0",
+   "(await secretRows(p.id))[0].body equals SECRET_TEXT",
+   "`[data-secret-block]` contains text CANARY"
+  ]
+ },
+ {
+  "id": "TC-SECR-009",
+  "module": "SECR",
+  "moduleName": "Secret blocks (saving, reveal, search, backup)",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "secrets.spec.ts",
+  "line": 240,
+  "describe": "saving and editing (DM)",
+  "title": "a block id copied from another page cannot take over that page's reveals: it is given a new id",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "A fresh test player account (removed afterwards)",
+   "Test rows use a `Zz`/`zz-` prefix and are deleted afterwards"
+  ],
+  "steps": [
+   "Type Page B\\n\\n:::secret ‹sa.id›\\nB's own passage zzbonly‹tag›\\n… into `#body`",
+   "Open /codex/entry/‹b.slug›"
+  ],
+  "testData": [
+   "Input Page B\\n\\n:::secret ‹sa.id›\\nB's own passage zzbonly‹tag›\\n…",
+   "URL /codex/entry/‹b.slug›"
+  ],
+  "expected": [
+   "a block id copied from another page cannot take over that page's reveals: it is given a new id",
+   "response ok equals true",
+   "sb.id does not: equals sa.id",
+   "(await secretRows(a.id))[0] match object { id: sa.id, body: SECRET_TEXT }",
+   "await query(`SELECT 1 FROM secret_reveals WHERE secret_id = $1`, [sb.… length is 0",
+   "page HTML does not: contains zzbonly‹tag›"
+  ]
+ },
+ {
+  "id": "TC-SECR-010",
+  "module": "SECR",
+  "moduleName": "Secret blocks (saving, reveal, search, backup)",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "secrets.spec.ts",
+  "line": 266,
+  "describe": "saving and editing (DM)",
+  "title": "a marker whose block does not exist renders as nothing, for the DM and for a player",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "A fresh test player account (removed afterwards)",
+   "Test rows use a `Zz`/`zz-` prefix and are deleted afterwards"
+  ],
+  "steps": [
+   "Open /codex/entry/‹name›"
+  ],
+  "testData": [
+   "URL /codex/entry/‹name›"
+  ],
+  "expected": [
+   "a marker whose block does not exist renders as nothing, for the DM and for a player",
+   "`[data-secret-block]` count is 0",
+   "`article` contains text Before",
+   "page HTML does not: contains ghost",
+   "`article` contains text After"
+  ]
+ },
+ {
+  "id": "TC-SECR-011",
+  "module": "SECR",
+  "moduleName": "Secret blocks (saving, reveal, search, backup)",
+  "category": "Security",
+  "priority": "P0",
+  "file": "secrets.spec.ts",
+  "line": 286,
+  "describe": "saving and editing (DM)",
+  "title": "a link written inside a secret block is not indexed: no link row, no backlink for anyone",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Open /codex/entry/‹target.slug›"
+  ],
+  "testData": [
+   "URL /codex/entry/‹target.slug›"
+  ],
+  "expected": [
+   "a link written inside a secret block is not indexed: no link row, no backlink for anyone",
+   "await query(`SELECT 1 FROM links WHERE source_id = $1`, [p.id]) length is 0",
+   "`aside, article` count is 0"
+  ]
+ },
+ {
+  "id": "TC-SECR-012",
+  "module": "SECR",
+  "moduleName": "Secret blocks (saving, reveal, search, backup)",
+  "category": "Data Integrity",
+  "priority": "P0",
+  "file": "secrets.spec.ts",
+  "line": 308,
+  "describe": "what is refused",
+  "title": "an unterminated block, a nested block, an empty block, a stray end and a malformed opening line are each refused with the reason, and nothing is saved",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "an unterminated block, a nested block, an empty block, a stray end and a malformed opening line are each refused with the reason, and nothing is saved"
+  ]
+ },
+ {
+  "id": "TC-SECR-013",
+  "module": "SECR",
+  "moduleName": "Secret blocks (saving, reveal, search, backup)",
+  "category": "Error & Recovery",
+  "priority": "P1",
+  "file": "secrets.spec.ts",
+  "line": 317,
+  "describe": "what is refused",
+  "title": "a failed save does not change the stored page or its blocks",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Type Changed\n:::secret\nnever closed into `#body`",
+   "Click button \"Save changes\""
+  ],
+  "testData": [
+   "Input Changed\n:::secret\nnever closed"
+  ],
+  "expected": [
+   "a failed save does not change the stored page or its blocks",
+   "`p[role=\"alert\"]` contains text /never ends/",
+   "(await secretRows(p.id))[0] match object { id: before.id, body: SECRET_TEXT }",
+   "row.body contains Public intro."
+  ]
+ },
+ {
+  "id": "TC-SECR-014",
+  "module": "SECR",
+  "moduleName": "Secret blocks (saving, reveal, search, backup)",
+  "category": "Boundary",
+  "priority": "P1",
+  "file": "secrets.spec.ts",
+  "line": 330,
+  "describe": "what is refused",
+  "title": "the size limits hold at the boundary: a 20,000-character block saves, 20,001 is refused; 50 blocks save, 51 are refused",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "the size limits hold at the boundary: a 20,000-character block saves, 20,001 is refused; 50 blocks save, 51 are refused",
+   "(await secretRows(p.id))[0].body length is 20000",
+   "await secretRows(q.id) length is 50"
+  ]
+ },
+ {
+  "id": "TC-SECR-015",
+  "module": "SECR",
+  "moduleName": "Secret blocks (saving, reveal, search, backup)",
+  "category": "Security",
+  "priority": "P0",
+  "file": "secrets.spec.ts",
+  "line": 344,
+  "describe": "what a player can and cannot reach",
+  "title": "the secret and its marker appear in no page, search or data route a player can reach",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "A fresh test player account (removed afterwards)",
+   "Test rows use a `Zz`/`zz-` prefix and are deleted afterwards"
+  ],
+  "steps": [
+   "Send GET url"
+  ],
+  "testData": [
+   "GET url"
+  ],
+  "expected": [
+   "the secret and its marker appear in no page, search or data route a player can reach",
+   "r.text.includes(SECRET_TEXT) equals false",
+   "r.text.includes(CANARY) equals false",
+   "r.text.includes(s.id) equals false",
+   "results[0].status equals 200",
+   "results[0].text contains Public intro.",
+   "results[0].text contains Public outro.",
+   "results[i].text.includes(p.name) equals false",
+   "results[10].status equals 403",
+   "results[11].status equals 403"
+  ]
+ },
+ {
+  "id": "TC-SECR-016",
+  "module": "SECR",
+  "moduleName": "Secret blocks (saving, reveal, search, backup)",
+  "category": "Security",
+  "priority": "P0",
+  "file": "secrets.spec.ts",
+  "line": 388,
+  "describe": "what a player can and cannot reach",
+  "title": "the DM's search finds the page by its secret text; a player's search does not",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "A fresh test player account (removed afterwards)",
+   "Test rows use a `Zz`/`zz-` prefix and are deleted afterwards"
+  ],
+  "steps": [
+   "Open /search?q=‹CANARY›"
+  ],
+  "testData": [
+   "URL /search?q=‹CANARY›"
+  ],
+  "expected": [
+   "the DM's search finds the page by its secret text; a player's search does not",
+   "main contains text p.name",
+   "main does not: contains text p.name"
+  ]
+ },
+ {
+  "id": "TC-SECR-017",
+  "module": "SECR",
+  "moduleName": "Secret blocks (saving, reveal, search, backup)",
+  "category": "Security",
+  "priority": "P0",
+  "file": "secrets.spec.ts",
+  "line": 403,
+  "describe": "what a player can and cannot reach",
+  "title": "a grant on the page does not reveal its blocks, and revealing a block never opens a secret page",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "A fresh test player account (removed afterwards)",
+   "Test rows use a `Zz`/`zz-` prefix and are deleted afterwards"
+  ],
+  "steps": [
+   "Open /codex/entry/‹p.slug›",
+   "Send GET /api/find?q=‹CANARY›"
+  ],
+  "testData": [
+   "URL /codex/entry/‹p.slug›",
+   "GET /api/find?q=‹CANARY›"
+  ],
+  "expected": [
+   "a grant on the page does not reveal its blocks, and revealing a block never opens a secret page",
+   "page HTML does not: contains CANARY",
+   "response ok equals true",
+   "HTTP status equals 404",
+   "await (await pp.request.get(`/api/find?q=${CANARY}`)).text() does not: contains CANARY"
+  ]
+ },
+ {
+  "id": "TC-SECR-018",
+  "module": "SECR",
+  "moduleName": "Secret blocks (saving, reveal, search, backup)",
+  "category": "Concurrency",
+  "priority": "P1",
+  "file": "secrets.spec.ts",
+  "line": 428,
+  "describe": "revealing",
+  "title": "a block revealed to one player shows for that player at once and for no one else; choosing nobody hides it again",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "A fresh test player account (removed afterwards)",
+   "Test rows use a `Zz`/`zz-` prefix and are deleted afterwards"
+  ],
+  "steps": [
+   "Open /codex/entry/‹p.slug›"
+  ],
+  "testData": [
+   "URL /codex/entry/‹p.slug›"
+  ],
+  "expected": [
+   "a block revealed to one player shows for that player at once and for no one else; choosing nobody hides it again",
+   "await sees(A) equals false",
+   "HTTP status equals 200",
+   "response body match object { revealedTo: [{ id: a.id, name: a.display }], ignored: [] }",
+   "await sees(A) equals true",
+   "`[data-secret-block]` contains text CANARY",
+   "heading \"Revealed to you\" is visible",
+   "await sees(B) equals false",
+   "[reveal-status] count is 0",
+   "[reveal-status] text is Revealed to ‹a.display›",
+   "…and 2 more"
+  ]
+ },
+ {
+  "id": "TC-SECR-019",
+  "module": "SECR",
+  "moduleName": "Secret blocks (saving, reveal, search, backup)",
+  "category": "Accessibility",
+  "priority": "P2",
+  "file": "secrets.spec.ts",
+  "line": 472,
+  "describe": "revealing",
+  "title": "the reveal control works with the mouse and the keyboard, and says who it is revealed to",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "A fresh test player account (removed afterwards)",
+   "Test rows use a `Zz`/`zz-` prefix and are deleted afterwards"
+  ],
+  "steps": [
+   "Open /codex/entry/‹p.slug›",
+   "Press Enter",
+   "Tick field \"a.display\"",
+   "Click [reveal-save]",
+   "Click button \"Choose who sees this\"",
+   "Click button \"No one\""
+  ],
+  "testData": [
+   "URL /codex/entry/‹p.slug›"
+  ],
+  "expected": [
+   "the reveal control works with the mouse and the keyboard, and says who it is revealed to",
+   "toggle has attribute aria-expanded",
+   "group is visible",
+   "[reveal-status] text is Revealed to ‹a.display›",
+   "await query<{ user_id: string }>(`SELECT user_id FROM secret_reveals … equals [{ user_id: a.id }]",
+   "[reveal-status] text is Not revealed to anyone",
+   "await query(`SELECT 1 FROM secret_reveals WHERE secret_id = $1`, [s.i… length is 0"
+  ]
+ },
+ {
+  "id": "TC-SECR-020",
+  "module": "SECR",
+  "moduleName": "Secret blocks (saving, reveal, search, backup)",
+  "category": "Permission & Auth",
+  "priority": "P0",
+  "file": "secrets.spec.ts",
+  "line": 497,
+  "describe": "revealing",
+  "title": "the reveal API: 401 signed out, 403 for a player, 404 for an unknown or malformed id, 400 for a bad body; the DM and unknown players are ignored and reported",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "A fresh test player account (removed afterwards) and the seeded DM session",
+   "Test rows use a `Zz`/`zz-` prefix and are deleted afterwards"
+  ],
+  "steps": [
+   "Send POST /api/secrets/‹s.id›/reveal with { data: { playerIds: [] } }",
+   "Send POST /api/secrets/‹s.id›/reveal with { data: { playerIds: [player.id] } }",
+   "Send POST /api/secrets/‹s.id›/reveal with { data }"
+  ],
+  "testData": [
+   "POST /api/secrets/‹s.id›/reveal"
+  ],
+  "expected": [
+   "the reveal API: 401 signed out, 403 for a player, 404 for an unknown or malformed id, 400 for a bad body; the DM and unknown players are ignored and reported",
+   "HTTP status equals 401",
+   "HTTP status equals 403",
+   "await query(`SELECT 1 FROM secret_reveals WHERE secret_id = $1`, [s.i… length is 0",
+   "HTTP status equals 404",
+   "HTTP status equals 400",
+   "HTTP status equals 200",
+   "body.revealedTo equals [{ id: player.id, name: player.display }]",
+   "body.ignored.sort() equals [dm.id, ghost].sort()",
+   "await query(`SELECT 1 FROM secret_reveals WHERE secret_id = $1`, [s.i… length is 1"
+  ]
+ },
+ {
+  "id": "TC-SECR-021",
+  "module": "SECR",
+  "moduleName": "Secret blocks (saving, reveal, search, backup)",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "secrets.spec.ts",
+  "line": 533,
+  "describe": "backup and restore",
+  "title": "the DM's export holds the block in its inline form (with its id), and importing it brings the block back without reveals",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "A fresh test player account (removed afterwards)",
+   "Test rows use a `Zz`/`zz-` prefix and are deleted afterwards"
+  ],
+  "steps": [
+   "Send GET /api/export",
+   "Send POST /api/import with { data: { format: \"asetheria-codex\", entries: [full] } }",
+   "Open /codex/entry/‹p.slug›"
+  ],
+  "testData": [
+   "GET /api/export",
+   "POST /api/import",
+   "URL /codex/entry/‹p.slug›"
+  ],
+  "expected": [
+   "the DM's export holds the block in its inline form (with its id), and importing it brings the block back without reveals",
+   "response ok equals true",
+   "HTTP status equals 200",
+   "mine?.body contains :::secret ‹s.id›",
+   "mine?.body contains SECRET_TEXT",
+   "mine?.body does not: matches /\\{\\{§/",
+   "response body match object { ok: true, created: 1, skipped: 0, rejected: [] }",
+   "rows length is 1",
+   "rows[0] match object { id: s.id, body: SECRET_TEXT }",
+   "await query(`SELECT 1 FROM secret_reveals WHERE secret_id = $1`, [s.i… length is 0",
+   "…and 1 more"
+  ]
+ },
+ {
+  "id": "TC-SECR-022",
+  "module": "SECR",
+  "moduleName": "Secret blocks (saving, reveal, search, backup)",
+  "category": "Validation",
+  "priority": "P1",
+  "file": "secrets.spec.ts",
+  "line": 570,
+  "describe": "backup and restore",
+  "title": "the markdown export holds the passage for the DM, and a player is refused",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Send GET /api/export?format=markdown"
+  ],
+  "testData": [
+   "GET /api/export?format=markdown"
+  ],
+  "expected": [
+   "the markdown export holds the passage for the DM, and a player is refused",
+   "text contains CANARY",
+   "text contains p.name"
+  ]
+ },
+ {
+  "id": "TC-SECR-023",
+  "module": "SECR",
+  "moduleName": "Secret blocks (saving, reveal, search, backup)",
+  "category": "Validation",
+  "priority": "P1",
+  "file": "secrets.spec.ts",
+  "line": 578,
+  "describe": "backup and restore",
+  "title": "importing a page with a malformed block skips it with the reason and still imports the others",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Send POST /api/import with { data: { format: \"asetheria-codex\", entries: [{ name: bad, body: \"Intro\\n:::secret\\nneve…"
+  ],
+  "testData": [
+   "POST /api/import"
+  ],
+  "expected": [
+   "importing a page with a malformed block skips it with the reason and still imports the others",
+   "HTTP status equals 200",
+   "body match object { ok: true, created: 1, skipped: 1 }",
+   "body.rejected[0] match object { name: bad }",
+   "body.rejected[0].error matches /never ends/",
+   "await query(`SELECT 1 FROM entries WHERE name = $1`, [bad]) length is 0",
+   "await query(`SELECT 1 FROM entries WHERE name = $1`, [good]) length is 1"
+  ]
+ },
+ {
+  "id": "TC-SECR-024",
+  "module": "SECR",
+  "moduleName": "Secret blocks (saving, reveal, search, backup)",
+  "category": "Accessibility",
+  "priority": "P2",
+  "file": "secrets.spec.ts",
+  "line": 596,
+  "describe": "accessibility and small screens",
+  "title": "a page with a secret block, with the reveal panel open, has no serious axe violations (dark)",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "A fresh test player account (removed afterwards)",
+   "Browser storage is prepared before the page loads",
+   "Test rows use a `Zz`/`zz-` prefix and are deleted afterwards"
+  ],
+  "steps": [
+   "Open /codex/entry/‹p.slug›",
+   "Click button \"Choose who sees this\""
+  ],
+  "testData": [
+   "URL /codex/entry/‹p.slug›"
+  ],
+  "expected": [
+   "a page with a secret block, with the reveal panel open, has no serious axe violations (dark)",
+   "serious equals []"
+  ]
+ },
+ {
+  "id": "TC-SECR-025",
+  "module": "SECR",
+  "moduleName": "Secret blocks (saving, reveal, search, backup)",
+  "category": "Accessibility",
+  "priority": "P2",
+  "file": "secrets.spec.ts",
+  "line": 596,
+  "describe": "accessibility and small screens",
+  "title": "a page with a secret block, with the reveal panel open, has no serious axe violations (light)",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "A fresh test player account (removed afterwards)",
+   "Browser storage is prepared before the page loads",
+   "Test rows use a `Zz`/`zz-` prefix and are deleted afterwards"
+  ],
+  "steps": [
+   "Open /codex/entry/‹p.slug›",
+   "Click button \"Choose who sees this\""
+  ],
+  "testData": [
+   "URL /codex/entry/‹p.slug›"
+  ],
+  "expected": [
+   "a page with a secret block, with the reveal panel open, has no serious axe violations (light)",
+   "serious equals []"
+  ]
+ },
+ {
+  "id": "TC-SECR-026",
+  "module": "SECR",
+  "moduleName": "Secret blocks (saving, reveal, search, backup)",
+  "category": "Responsive",
+  "priority": "P2",
+  "file": "secrets.spec.ts",
+  "line": 610,
+  "describe": "accessibility and small screens",
+  "title": "at 375px the secret block and its control fit without sideways scrolling",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "A fresh test player account (removed afterwards) and the seeded DM session",
+   "Test rows use a `Zz`/`zz-` prefix and are deleted afterwards"
+  ],
+  "steps": [
+   "Open /codex/entry/‹p.slug›",
+   "Click button \"Choose who sees this\""
+  ],
+  "testData": [
+   "URL /codex/entry/‹p.slug›"
+  ],
+  "expected": [
+   "at 375px the secret block and its control fit without sideways scrolling",
+   "overflow is at most 0"
+  ]
+ },
+ {
   "id": "TC-SEM-001",
   "module": "SEM",
   "moduleName": "Semantic search",

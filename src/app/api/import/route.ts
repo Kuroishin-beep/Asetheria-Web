@@ -8,6 +8,7 @@ import { entryInputSchema } from "@/lib/validation";
 import { slugify } from "@/lib/links";
 import { rebuildLinksForEntry } from "@/lib/link-graph";
 import { refreshEmbeddingsAfterResponse } from "@/lib/embedding-sync";
+import { inlineForDm, planSecrets, pruneSecrets, writeSecrets } from "@/lib/secrets";
 
 export const runtime = "nodejs";
 export const maxDuration = 60;
@@ -63,6 +64,8 @@ export async function POST(request: Request) {
   let updated = 0;
   const toEmbed: string[] = [];
   let skipped = 0;
+  // A page whose secret blocks are malformed is skipped with its reason; the rest of the file still imports.
+  const rejected: { name: string; error: string }[] = [];
 
   for (const item of parsed.data.entries) {
     const name = item.name?.trim();
@@ -89,9 +92,20 @@ export async function POST(request: Request) {
         continue;
       }
 
+      let plan: Awaited<ReturnType<typeof planSecrets>> | null = null;
+      if (item.body !== undefined) {
+        plan = await planSecrets(current.id, item.body);
+        if (!plan.ok) {
+          rejected.push({ name: current.name, error: plan.error });
+          skipped++;
+          continue;
+        }
+        await writeSecrets(current.id, plan.blocks);
+      }
+
       await db.insert(revisions).values({
         entryId: current.id,
-        snapshot: current as unknown as Record<string, unknown>,
+        snapshot: { ...current, body: await inlineForDm(current.id, current.body) } as unknown as Record<string, unknown>,
         action: "import",
         authorId: user.id,
         authorName: user.username,
@@ -103,7 +117,7 @@ export async function POST(request: Request) {
           name: name ?? current.name,
           kind: item.kind ?? current.kind,
           summary: item.summary ?? current.summary,
-          body: item.body ?? current.body,
+          body: plan?.ok ? plan.body : current.body,
           dmNotes: item.dmNotes ?? current.dmNotes,
           fields: item.fields ?? current.fields,
           tags: item.tags ?? current.tags,
@@ -113,10 +127,17 @@ export async function POST(request: Request) {
         })
         .where(eq(entries.id, foundId))
         .returning();
+      if (plan?.ok) await pruneSecrets(row.id, row.body);
       await rebuildLinksForEntry(row.id, row.body, row.fields);
       toEmbed.push(row.id);
       updated++;
     } else {
+      const plan = await planSecrets(null, item.body ?? "");
+      if (!plan.ok) {
+        rejected.push({ name: name ?? slug, error: plan.error });
+        skipped++;
+        continue;
+      }
       const [row] = await db
         .insert(entries)
         .values({
@@ -124,7 +145,7 @@ export async function POST(request: Request) {
           name: name!,
           kind: item.kind ?? "note",
           summary: item.summary ?? "",
-          body: item.body ?? "",
+          body: plan.body,
           dmNotes: item.dmNotes ?? "",
           fields: item.fields ?? {},
           tags: item.tags ?? [],
@@ -133,6 +154,7 @@ export async function POST(request: Request) {
         })
         .returning();
       bySlug.set(row.slug, row.id);
+      await writeSecrets(row.id, plan.blocks);
       await rebuildLinksForEntry(row.id, row.body, row.fields);
       toEmbed.push(row.id);
       created++;
@@ -140,5 +162,5 @@ export async function POST(request: Request) {
   }
 
   refreshEmbeddingsAfterResponse(toEmbed);
-  return NextResponse.json({ ok: true, created, updated, skipped });
+  return NextResponse.json({ ok: true, created, updated, skipped, rejected: rejected.slice(0, 20) });
 }

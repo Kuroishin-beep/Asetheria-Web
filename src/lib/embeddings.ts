@@ -10,6 +10,7 @@
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { env, pipeline, type FeatureExtractionPipeline } from "@huggingface/transformers";
+import { stripMarkers } from "./secret-blocks";
 
 // Serverless functions (Vercel, Lambda) only have a writable /tmp — the default
 // cache under node_modules is read-only there, so a cold start could never
@@ -51,7 +52,7 @@ export function entryEmbeddingText(input: {
   fields?: Record<string, string>;
 }): string {
   const fieldText = Object.values(input.fields ?? {}).join(" ");
-  return [input.name, input.summary, fieldText, input.body.slice(0, 2000)]
+  return [input.name, input.summary, fieldText, stripMarkers(input.body).slice(0, 2000)]
     .filter(Boolean)
     .join("\n");
 }

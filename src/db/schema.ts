@@ -10,6 +10,7 @@ import {
   boolean,
   index,
   uniqueIndex,
+  primaryKey,
   pgEnum,
   check,
   vector,
@@ -421,6 +422,44 @@ export const characters = pgTable(
   ],
 );
 
+/**
+ * The text of an inline secret block. It lives here, never in `entries.body`, so
+ * nothing a player can read (search, embeddings, links, snippets) ever holds it.
+ * `search_vector` (generated, DM-only search) is created by `scripts/sql/secrets.sql`.
+ */
+export const entrySecrets = pgTable(
+  "entry_secrets",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    entryId: uuid("entry_id")
+      .notNull()
+      .references(() => entries.id, { onDelete: "cascade" }),
+    body: text("body").notNull(),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [
+    index("entry_secrets_entry_idx").on(t.entryId),
+    check("entry_secrets_body_length", sql`char_length(${t.body}) BETWEEN 1 AND 20000`),
+  ],
+);
+
+/** Which players a secret block has been revealed to. A grant on the page does not reveal blocks. */
+export const secretReveals = pgTable(
+  "secret_reveals",
+  {
+    secretId: uuid("secret_id")
+      .notNull()
+      .references(() => entrySecrets.id, { onDelete: "cascade" }),
+    userId: uuid("user_id")
+      .notNull()
+      .references(() => users.id, { onDelete: "cascade" }),
+    revealedBy: uuid("revealed_by").references(() => users.id, { onDelete: "set null" }),
+    revealedAt: timestamp("revealed_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [primaryKey({ columns: [t.secretId, t.userId] }), index("secret_reveals_user_idx").on(t.userId)],
+);
+
 // ---------------------------------------------------------------------------
 // Inferred types
 // ---------------------------------------------------------------------------
@@ -434,6 +473,7 @@ export type RollTable = typeof rollTables.$inferSelect;
 export type MapRow = typeof maps.$inferSelect;
 export type MapPinRow = typeof mapPins.$inferSelect;
 export type CharacterRow = typeof characters.$inferSelect;
+export type EntrySecret = typeof entrySecrets.$inferSelect;
 export type EntryGrant = typeof entryGrants.$inferSelect;
 export type EntryKind = (typeof entryKind.enumValues)[number];
 export type Visibility = (typeof visibility.enumValues)[number];

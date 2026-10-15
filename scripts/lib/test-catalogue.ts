@@ -89,6 +89,8 @@ export const MODULES: Record<string, [string, string]> = {
   "responsive-visual": ["RESP", "Responsive layout"],
   "roll-table": ["ROLL", "Roll tables (engine)"],
   "roll-tables": ["ROLLT", "Roll tables (authoring and rolling)"],
+  "secret-blocks": ["SECB", "Secret blocks (grammar and markers)"],
+  secrets: ["SECR", "Secret blocks (saving, reveal, search, backup)"],
   "search-palette": ["SRCH", "Search and command palette"],
   "search-safety": ["SRCHS", "Search safety"],
   "semantic-search": ["SEM", "Semantic search"],

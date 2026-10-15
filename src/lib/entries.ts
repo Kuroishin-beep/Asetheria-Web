@@ -9,6 +9,7 @@ import type { SessionUser } from "@/lib/session";
 import { grantCondition, grantConditionRaw } from "@/lib/rbac";
 import type { LocationTier } from "@/lib/locations";
 import { sortRows, type SortSpec } from "@/lib/field-sort";
+import { stripMarkers } from "@/lib/secret-blocks";
 
 /**
  * Every read goes through here so that a player can never receive a secret
@@ -394,13 +395,16 @@ export type SearchHit = {
  * StartSel/StopSel inserted. So highlight with private-use sentinels, escape
  * the whole snippet, then swap the sentinels for <mark> tags.
  */
+/** The text of an entry's secret blocks, for the DM's search snippet only. */
+const DM_SECRET_TEXT = sql`coalesce((SELECT string_agg(s.body, ' ') FROM entry_secrets s WHERE s.entry_id = e.id), '')`;
+
 const HL_START = "";
 const HL_STOP = "";
 const HEADLINE_OPTIONS = `MaxWords=28, MinWords=12, ShortWord=3, MaxFragments=1, StartSel=${HL_START}, StopSel=${HL_STOP}`;
 
 function toSafeSnippet(raw: string | null): string {
   if (!raw) return "";
-  return escapeHtml(raw)
+  return escapeHtml(stripMarkers(raw))
     .replaceAll(HL_START, "<mark>")
     .replaceAll(HL_STOP, "</mark>");
 }
@@ -426,8 +430,12 @@ export async function searchEntries(
   const vector = isDM ? sql`e.search_vector` : sql`e.player_search_vector`;
   // Players must not have DM notes surface inside a search snippet either.
   const snippetSource = isDM
-    ? sql`coalesce(e.body, '') || ' ' || coalesce(e.dm_notes, '')`
+    ? sql`coalesce(e.body, '') || ' ' || coalesce(e.dm_notes, '') || ' ' || ${DM_SECRET_TEXT}`
     : sql`coalesce(e.body, '')`;
+  // Only the DM's search reaches secret block text, and only through this separate table.
+  const secretMatch = isDM
+    ? sql`OR EXISTS (SELECT 1 FROM entry_secrets s WHERE s.entry_id = e.id AND s.search_vector @@ q.tsq)`
+    : sql``;
 
   const rows = await db.execute<SearchHit>(sql`
     WITH q AS (SELECT websearch_to_tsquery('english', ${q}) AS tsq)
@@ -448,6 +456,7 @@ export async function searchEntries(
       AND ${secretClause}
       AND (
         ${vector} @@ q.tsq
+        ${secretMatch}
         OR e.name % ${q}
         OR e.name ILIKE ${"%" + q + "%"}
       )

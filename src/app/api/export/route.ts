@@ -3,6 +3,7 @@ import { asc } from "drizzle-orm";
 import { db } from "@/db";
 import { entries, links, rollTables } from "@/db/schema";
 import { getCurrentUser } from "@/lib/auth";
+import { inlineManyForDm } from "@/lib/secrets";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -28,7 +29,8 @@ export async function GET(request: Request) {
   const format = new URL(request.url).searchParams.get("format") ?? "json";
   const stamp = new Date().toISOString().slice(0, 10);
 
-  const allEntries = await db.select().from(entries).orderBy(asc(entries.name));
+  // The backup holds secret passages in their inline form (:::secret ... :::), so a restore brings them back.
+  const allEntries = await inlineManyForDm(await db.select().from(entries).orderBy(asc(entries.name)));
 
   if (format === "markdown") {
     const parts: string[] = [

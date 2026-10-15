@@ -9,6 +9,7 @@ import { Eyebrow } from "@/components/shared/eyebrow";
 import { EntryHero } from "@/components/entry-hero";
 import { LocalGraph, type LocalNode } from "@/components/local-graph";
 import { RecordView } from "@/components/record-view";
+import { SecretBlockCard } from "@/components/secret-block";
 import { LinkedNames } from "@/components/shared/linked-names";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Badge, badgeVariants } from "@/components/ui/badge";
@@ -31,6 +32,9 @@ import { extractHeadings, renderMarkdown } from "@/lib/markdown";
 import { LINKED_FIELD_KEYS, parseAliases } from "@/lib/links";
 import { parseRollTable, stripTable, validateTable } from "@/lib/roll-table";
 import { KIND_ICONS } from "@/lib/section-icons";
+import { hasMarkers, splitAtMarkers } from "@/lib/secret-blocks";
+import { secretsForViewer } from "@/lib/secrets";
+import { listPlayers } from "@/lib/rbac";
 import { ArchiveButton } from "./archive-button";
 
 type Params = { slug: string };
@@ -88,7 +92,20 @@ export default async function EntryPage({
   const tableDice = entry.fields?.dice ?? "";
   const tableProblems = isTable ? validateTable(tableDice, entry.body) : [];
   const tableRows = isTable ? parseRollTable(entry.body).rows : [];
-  const bodyHtml = renderMarkdown(isTable ? stripTable(entry.body) : entry.body, resolve);
+  // The body holds only markers where secret blocks are; each is shown to the DM, or to a player it was
+  // revealed to, and is simply absent for everyone else.
+  const bodySource = isTable ? stripTable(entry.body) : entry.body;
+  const secrets = hasMarkers(bodySource) ? await secretsForViewer(user, entry.id) : new Map();
+  const players = isDM && secrets.size > 0 ? (await listPlayers()).map((p) => ({ id: p.id, name: p.displayName || p.username })) : [];
+  const bodyParts = splitAtMarkers(bodySource).flatMap((part) => {
+    if (part.type === "text") {
+      const html = renderMarkdown(part.text, resolve);
+      return html ? [{ key: `t${part.text.length}`, html, secret: null }] : [];
+    }
+    const secret = secrets.get(part.id);
+    return secret ? [{ key: part.id, html: renderMarkdown(secret.text, resolve), secret }] : [];
+  });
+  const bodyHtml = bodyParts.length > 0 ? "shown" : "";
   const dmHtml = isDM && entry.dmNotes ? renderMarkdown(entry.dmNotes, resolve) : "";
 
   const fieldDefs = def?.fields ?? [];
@@ -297,7 +314,13 @@ export default async function EntryPage({
             ))}
 
           {bodyHtml ? (
-            <div className="prose-codex" dangerouslySetInnerHTML={{ __html: bodyHtml }} />
+            bodyParts.map((part, i) =>
+              part.secret ? (
+                <SecretBlockCard key={`${part.key}-${i}`} id={part.secret.id} html={part.html} forDm={isDM} revealedTo={part.secret.revealedTo} players={players} />
+              ) : (
+                <div key={`${part.key}-${i}`} className="prose-codex" dangerouslySetInnerHTML={{ __html: part.html }} />
+              ),
+            )
           ) : isTable ? null : (
             <p className="py-4 italic text-faint-foreground">
               {backlinks.length > 0
