@@ -882,5 +882,100 @@
     ]
    }
   ]
+ },
+ {
+  "phase": "14 Statblocks",
+  "criterion": "The card renders from the written stat block with correct modifiers and proficiency bonus; the raw text is not shown twice",
+  "match": [
+   {
+    "module": "SBPG",
+    "any": [
+     "laid-out card",
+     "correct ones even when",
+     "blank stat block fills"
+    ]
+   },
+   {
+    "module": "SBLK",
+    "any": [
+     "arithmetic",
+     "every part is read",
+     "skeleton"
+    ]
+   }
+  ]
+ },
+ {
+  "phase": "14 Statblocks",
+  "criterion": "Ability scores outside 1 to 30, a bad CR, armour and hit-point limits are refused on save, naming each problem; nothing is saved",
+  "match": [
+   {
+    "module": "SBPG",
+    "any": [
+     "badly formed",
+     "limits hold",
+     "editing a saved page"
+    ]
+   },
+   {
+    "module": "SBLK",
+    "any": [
+     "refused",
+     "boundary",
+     "challenge rating that does not exist",
+     "ability scores 1 and 30"
+    ]
+   }
+  ]
+ },
+ {
+  "phase": "14 Statblocks",
+  "criterion": "A page without a stat block, or with free text, shows no card and is left as written; existing stat blocks still save",
+  "match": [
+   {
+    "module": "SBPG",
+    "any": [
+     "not a stat block",
+     "no stat block",
+     "already in the codex"
+    ]
+   },
+   {
+    "module": "SBLK",
+    "any": [
+     "left alone as free text"
+    ]
+   }
+  ]
+ },
+ {
+  "phase": "14 Statblocks",
+  "criterion": "Players see the card only for pages they can read; DM-only notes never reach them",
+  "match": [
+   {
+    "module": "SBPG",
+    "any": [
+     "only for a page they can read",
+     "DM only",
+     "disagrees with the stat block",
+     "correct ones even when"
+    ]
+   }
+  ]
+ },
+ {
+  "phase": "14 Statblocks",
+  "criterion": "Rules are linked to dnd5e.wikidot.com, never copied; print layout; 375px; axe clean in both themes",
+  "match": [
+   {
+    "module": "SBPG",
+    "any": [
+     "rules links",
+     "printing keeps",
+     "375px",
+     "axe"
+    ]
+   }
+  ]
  }
 ]

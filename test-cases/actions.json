@@ -637,5 +637,40 @@
     ]
    }
   ]
+ },
+ {
+  "action": "Write a stat block for a creature or NPC",
+  "happy": [
+   {
+    "module": "SBPG",
+    "any": [
+     "laid-out card"
+    ]
+   }
+  ],
+  "invalid": [
+   {
+    "module": "SBPG",
+    "any": [
+     "badly formed"
+    ]
+   }
+  ],
+  "unauthorized": [
+   {
+    "module": "SBPG",
+    "any": [
+     "only for a page they can read"
+    ]
+   }
+  ],
+  "boundary": [
+   {
+    "module": "SBPG",
+    "any": [
+     "limits hold"
+    ]
+   }
+  ]
  }
 ]

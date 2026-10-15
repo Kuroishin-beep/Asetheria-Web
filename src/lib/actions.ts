@@ -12,6 +12,7 @@ import { rebuildLinksForEntry } from "@/lib/link-graph";
 import { refreshEmbeddingAfterResponse } from "@/lib/embedding-sync";
 import { inlineForDm, planSecrets, pruneSecrets, writeSecrets } from "@/lib/secrets";
 import { validateTable } from "@/lib/roll-table";
+import { statblockProblem } from "@/lib/statblock";
 import { parseEntryForm, type EntryInput } from "@/lib/validation";
 
 // ---------------------------------------------------------------------------
@@ -85,7 +86,8 @@ export async function createEntryAction(_prev: unknown, formData: FormData) {
     return { error: parsed.error.issues[0]?.message ?? "Invalid input." };
   }
   const input: EntryInput = parsed.data;
-  const tableError = tableProblem(input);
+  // A table must be rollable and a stat block must be well formed before the page is saved.
+  const tableError = tableProblem(input) ?? statblockProblem(input.fields.statblock ?? "");
   if (tableError) return { error: tableError };
   const plan = await planSecrets(null, input.body);
   if (!plan.ok) return { error: plan.error };
@@ -126,7 +128,8 @@ export async function updateEntryAction(
     return { error: parsed.error.issues[0]?.message ?? "Invalid input." };
   }
   const input = parsed.data;
-  const tableError = tableProblem(input);
+  // A table must be rollable and a stat block must be well formed before the page is saved.
+  const tableError = tableProblem(input) ?? statblockProblem(input.fields.statblock ?? "");
   if (tableError) return { error: tableError };
 
   const [current] = await db

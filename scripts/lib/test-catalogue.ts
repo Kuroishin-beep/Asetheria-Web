@@ -94,6 +94,8 @@ export const MODULES: Record<string, [string, string]> = {
   "search-palette": ["SRCH", "Search and command palette"],
   "search-safety": ["SRCHS", "Search safety"],
   "semantic-search": ["SEM", "Semantic search"],
+  statblock: ["SBLK", "Statblock reading and arithmetic"],
+  statblocks: ["SBPG", "Statblocks on pages"],
   templates: ["TMPL", "Editable page templates"],
   theme: ["THEME", "Light and dark themes"],
   "tools-admin": ["TOOLS", "Tools and admin pages"],

@@ -14264,7 +14264,7 @@
   "category": "Data Integrity",
   "priority": "P0",
   "file": "secrets.spec.ts",
-  "line": 86,
+  "line": 87,
   "describe": "migration",
   "title": "both tables exist with their checks and cascades, and the migration is idempotent",
   "preconditions": [
@@ -14291,7 +14291,7 @@
   "category": "Security",
   "priority": "P0",
   "file": "secrets.spec.ts",
-  "line": 115,
+  "line": 116,
   "describe": "migration",
   "title": "the rollback drops only the two secret tables (run inside a transaction that is rolled back)",
   "preconditions": [
@@ -14319,7 +14319,7 @@
   "category": "Security",
   "priority": "P0",
   "file": "secrets.spec.ts",
-  "line": 136,
+  "line": 137,
   "describe": "saving and editing (DM)",
   "title": "saving moves the block into its own table: the page body keeps a marker, and the secret is in no column of the page row or either search vector",
   "preconditions": [
@@ -14349,7 +14349,7 @@
   "category": "Happy",
   "priority": "P2",
   "file": "secrets.spec.ts",
-  "line": 156,
+  "line": 157,
   "describe": "saving and editing (DM)",
   "title": "the DM sees the passage in a labelled box with a reveal control, between the text around it",
   "preconditions": [
@@ -14379,7 +14379,7 @@
   "category": "Happy",
   "priority": "P2",
   "file": "secrets.spec.ts",
-  "line": 170,
+  "line": 171,
   "describe": "saving and editing (DM)",
   "title": "the editor shows the inline form again, and an edit keeps the block's id and text",
   "preconditions": [
@@ -14409,7 +14409,7 @@
   "category": "Permission & Auth",
   "priority": "P0",
   "file": "secrets.spec.ts",
-  "line": 187,
+  "line": 188,
   "describe": "saving and editing (DM)",
   "title": "the Insert secret block button adds an empty fence for the DM to fill in, and the preview shows it as hidden from players",
   "preconditions": [
@@ -14442,7 +14442,7 @@
   "category": "Happy",
   "priority": "P2",
   "file": "secrets.spec.ts",
-  "line": 198,
+  "line": 199,
   "describe": "saving and editing (DM)",
   "title": "removing a block in the editor deletes it and the reveals it had",
   "preconditions": [
@@ -14476,7 +14476,7 @@
   "category": "Happy",
   "priority": "P2",
   "file": "secrets.spec.ts",
-  "line": 223,
+  "line": 224,
   "describe": "saving and editing (DM)",
   "title": "restoring an earlier version brings a removed block back",
   "preconditions": [
@@ -14506,7 +14506,7 @@
   "category": "Happy",
   "priority": "P2",
   "file": "secrets.spec.ts",
-  "line": 240,
+  "line": 241,
   "describe": "saving and editing (DM)",
   "title": "a block id copied from another page cannot take over that page's reveals: it is given a new id",
   "preconditions": [
@@ -14538,7 +14538,7 @@
   "category": "Happy",
   "priority": "P2",
   "file": "secrets.spec.ts",
-  "line": 266,
+  "line": 267,
   "describe": "saving and editing (DM)",
   "title": "a marker whose block does not exist renders as nothing, for the DM and for a player",
   "preconditions": [
@@ -14567,7 +14567,7 @@
   "category": "Security",
   "priority": "P0",
   "file": "secrets.spec.ts",
-  "line": 286,
+  "line": 287,
   "describe": "saving and editing (DM)",
   "title": "a link written inside a secret block is not indexed: no link row, no backlink for anyone",
   "preconditions": [
@@ -14593,7 +14593,7 @@
   "category": "Data Integrity",
   "priority": "P0",
   "file": "secrets.spec.ts",
-  "line": 308,
+  "line": 309,
   "describe": "what is refused",
   "title": "an unterminated block, a nested block, an empty block, a stray end and a malformed opening line are each refused with the reason, and nothing is saved",
   "preconditions": [
@@ -14615,7 +14615,7 @@
   "category": "Error & Recovery",
   "priority": "P1",
   "file": "secrets.spec.ts",
-  "line": 317,
+  "line": 318,
   "describe": "what is refused",
   "title": "a failed save does not change the stored page or its blocks",
   "preconditions": [
@@ -14643,7 +14643,7 @@
   "category": "Boundary",
   "priority": "P1",
   "file": "secrets.spec.ts",
-  "line": 330,
+  "line": 331,
   "describe": "what is refused",
   "title": "the size limits hold at the boundary: a 20,000-character block saves, 20,001 is refused; 50 blocks save, 51 are refused",
   "preconditions": [
@@ -14667,7 +14667,7 @@
   "category": "Security",
   "priority": "P0",
   "file": "secrets.spec.ts",
-  "line": 344,
+  "line": 345,
   "describe": "what a player can and cannot reach",
   "title": "the secret and its marker appear in no page, search or data route a player can reach",
   "preconditions": [
@@ -14701,7 +14701,7 @@
   "category": "Security",
   "priority": "P0",
   "file": "secrets.spec.ts",
-  "line": 388,
+  "line": 389,
   "describe": "what a player can and cannot reach",
   "title": "the DM's search finds the page by its secret text; a player's search does not",
   "preconditions": [
@@ -14728,7 +14728,7 @@
   "category": "Security",
   "priority": "P0",
   "file": "secrets.spec.ts",
-  "line": 403,
+  "line": 404,
   "describe": "what a player can and cannot reach",
   "title": "a grant on the page does not reveal its blocks, and revealing a block never opens a secret page",
   "preconditions": [
@@ -14759,7 +14759,7 @@
   "category": "Concurrency",
   "priority": "P1",
   "file": "secrets.spec.ts",
-  "line": 428,
+  "line": 429,
   "describe": "revealing",
   "title": "a block revealed to one player shows for that player at once and for no one else; choosing nobody hides it again",
   "preconditions": [
@@ -14794,7 +14794,7 @@
   "category": "Accessibility",
   "priority": "P2",
   "file": "secrets.spec.ts",
-  "line": 472,
+  "line": 473,
   "describe": "revealing",
   "title": "the reveal control works with the mouse and the keyboard, and says who it is revealed to",
   "preconditions": [
@@ -14830,7 +14830,7 @@
   "category": "Permission & Auth",
   "priority": "P0",
   "file": "secrets.spec.ts",
-  "line": 497,
+  "line": 498,
   "describe": "revealing",
   "title": "the reveal API: 401 signed out, 403 for a player, 404 for an unknown or malformed id, 400 for a bad body; the DM and unknown players are ignored and reported",
   "preconditions": [
@@ -14866,7 +14866,7 @@
   "category": "Happy",
   "priority": "P2",
   "file": "secrets.spec.ts",
-  "line": 533,
+  "line": 534,
   "describe": "backup and restore",
   "title": "the DM's export holds the block in its inline form (with its id), and importing it brings the block back without reveals",
   "preconditions": [
@@ -14905,7 +14905,7 @@
   "category": "Validation",
   "priority": "P1",
   "file": "secrets.spec.ts",
-  "line": 570,
+  "line": 571,
   "describe": "backup and restore",
   "title": "the markdown export holds the passage for the DM, and a player is refused",
   "preconditions": [
@@ -14931,7 +14931,7 @@
   "category": "Validation",
   "priority": "P1",
   "file": "secrets.spec.ts",
-  "line": 578,
+  "line": 579,
   "describe": "backup and restore",
   "title": "importing a page with a malformed block skips it with the reason and still imports the others",
   "preconditions": [
@@ -14961,7 +14961,7 @@
   "category": "Accessibility",
   "priority": "P2",
   "file": "secrets.spec.ts",
-  "line": 596,
+  "line": 597,
   "describe": "accessibility and small screens",
   "title": "a page with a secret block, with the reveal panel open, has no serious axe violations (dark)",
   "preconditions": [
@@ -14989,7 +14989,7 @@
   "category": "Accessibility",
   "priority": "P2",
   "file": "secrets.spec.ts",
-  "line": 596,
+  "line": 597,
   "describe": "accessibility and small screens",
   "title": "a page with a secret block, with the reveal panel open, has no serious axe violations (light)",
   "preconditions": [
@@ -15017,7 +15017,7 @@
   "category": "Responsive",
   "priority": "P2",
   "file": "secrets.spec.ts",
-  "line": 610,
+  "line": 611,
   "describe": "accessibility and small screens",
   "title": "at 375px the secret block and its control fit without sideways scrolling",
   "preconditions": [
@@ -15091,13 +15091,911 @@
   ]
  },
  {
+  "id": "TC-SBLK-001",
+  "module": "SBLK",
+  "moduleName": "Statblock reading and arithmetic",
+  "category": "Boundary",
+  "priority": "P1",
+  "file": "statblock.spec.ts",
+  "line": 33,
+  "describe": "the arithmetic",
+  "title": "ability modifiers for every score from 1 to 30 follow floor((score - 10) / 2)",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call abilityModifier(Number(score))",
+   "Call abilityModifier(s)"
+  ],
+  "testData": [],
+  "expected": [
+   "ability modifiers for every score from 1 to 30 follow floor((score - 10) / 2)",
+   "abilityModifier(Number(score)) equals mod",
+   "abilityModifier(s) equals Math.floor((s - 10) / 2)"
+  ]
+ },
+ {
+  "id": "TC-SBLK-002",
+  "module": "SBLK",
+  "moduleName": "Statblock reading and arithmetic",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "statblock.spec.ts",
+  "line": 39,
+  "describe": "the arithmetic",
+  "title": "modifiers print with a plus sign, or a true minus sign",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call formatModifier(0)",
+   "Call formatModifier(6)",
+   "Call formatModifier(-1)",
+   "Call formatModifier(-5)"
+  ],
+  "testData": [],
+  "expected": [
+   "modifiers print with a plus sign, or a true minus sign",
+   "formatModifier(0) equals +0",
+   "formatModifier(6) equals +6",
+   "formatModifier(-1) equals −1",
+   "formatModifier(-5) equals −5"
+  ]
+ },
+ {
+  "id": "TC-SBLK-003",
+  "module": "SBLK",
+  "moduleName": "Statblock reading and arithmetic",
+  "category": "Edge",
+  "priority": "P2",
+  "file": "statblock.spec.ts",
+  "line": 46,
+  "describe": "the arithmetic",
+  "title": "proficiency bonus by challenge rating, at each edge of every band",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call proficiencyForCr(cr)",
+   "Call proficiencyForCr(bad)"
+  ],
+  "testData": [],
+  "expected": [
+   "proficiency bonus by challenge rating, at each edge of every band",
+   "proficiencyForCr(cr) equals bonus",
+   "proficiencyForCr(bad) is empty",
+   "VALID_CR length is 34"
+  ]
+ },
+ {
+  "id": "TC-SBLK-004",
+  "module": "SBLK",
+  "moduleName": "Statblock reading and arithmetic",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "statblock.spec.ts",
+  "line": 64,
+  "describe": "what is and is not a stat block",
+  "title": "a few notes, a one-line summary, prose and nothing are left alone as free text",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call parseStatblock(text)",
+   "Call statblockProblem(text)"
+  ],
+  "testData": [],
+  "expected": [
+   "a few notes, a one-line summary, prose and nothing are left alone as free text",
+   "parseStatblock(text) equals { kind: \"free\" }",
+   "statblockProblem(text) is empty"
+  ]
+ },
+ {
+  "id": "TC-SBLK-005",
+  "module": "SBLK",
+  "moduleName": "Statblock reading and arithmetic",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "statblock.spec.ts",
+  "line": 71,
+  "describe": "what is and is not a stat block",
+  "title": "an Armor Class line or an ability line makes it a stat block",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call looksLikeStatblock(\"**Armor Class** 12\")",
+   "Call looksLikeStatblock(\"STR 10 (+0) DEX 10 (+0)\")",
+   "Call looksLikeStatblock(\"Strength is a virtue\")"
+  ],
+  "testData": [],
+  "expected": [
+   "an Armor Class line or an ability line makes it a stat block",
+   "looksLikeStatblock(\"**Armor Class** 12\") equals true",
+   "looksLikeStatblock(\"STR 10 (+0) DEX 10 (+0)\") equals true",
+   "looksLikeStatblock(\"Strength is a virtue\") equals false"
+  ]
+ },
+ {
+  "id": "TC-SBLK-006",
+  "module": "SBLK",
+  "moduleName": "Statblock reading and arithmetic",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "statblock.spec.ts",
+  "line": 79,
+  "describe": "reading a complete stat block",
+  "title": "every part is read: armour, hit points, speed, six abilities, properties, challenge, the rest as the body",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "every part is read: armour, hit points, speed, six abilities, properties, challenge, the rest as the body",
+   "r.errors equals []",
+   "b.ac equals { value: 16, note: \"(natural)\" }",
+   "b.hp equals { value: 152, formula: \"(16d10 + 64)\" }",
+   "b.speed equals 40 ft.",
+   "b.abilities equals { str: { score: 22, written: 6 }, dex: { score: 12, written: 1 }, con: { score:…",
+   "b.properties.map((p) => p.label) equals [\"Saving Throws\", \"Damage Resistances\", \"Senses\", \"Languages\"]",
+   "b.challenge equals { cr: \"8\", xp: \"3,900\" }",
+   "b.proficiency equals 3",
+   "b.body.startsWith(\"### Traits\") equals true",
+   "…and 2 more"
+  ]
+ },
+ {
+  "id": "TC-SBLK-007",
+  "module": "SBLK",
+  "moduleName": "Statblock reading and arithmetic",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "statblock.spec.ts",
+  "line": 95,
+  "describe": "reading a complete stat block",
+  "title": "Windows line endings, a true minus sign and an en dash in a modifier are all understood",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "Windows line endings, a true minus sign and an en dash in a modifier are all understood",
+   "r.errors equals []",
+   "r.block.abilities?.int.written equals -1",
+   "r.block.abilities?.wis.written equals -2"
+  ]
+ },
+ {
+  "id": "TC-SBLK-008",
+  "module": "SBLK",
+  "moduleName": "Statblock reading and arithmetic",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "statblock.spec.ts",
+  "line": 103,
+  "describe": "reading a complete stat block",
+  "title": "a trait written straight after the header, with no heading, starts the body and is not read as a property",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "a trait written straight after the header, with no heading, starts the body and is not read as a property",
+   "r.errors equals []",
+   "r.block.body equals **Pack Tactics.** Advantage when an ally is adjacent.",
+   "r.block.properties equals []"
+  ]
+ },
+ {
+  "id": "TC-SBLK-009",
+  "module": "SBLK",
+  "moduleName": "Statblock reading and arithmetic",
+  "category": "Validation",
+  "priority": "P1",
+  "file": "statblock.spec.ts",
+  "line": 114,
+  "describe": "reading a complete stat block",
+  "title": "a modifier that does not match its score is a warning, never a refusal, and the correct one is available",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call statblockProblem(DIV.replace(\"STR 22 (+6)\", \"STR 22 (+5)\"))"
+  ],
+  "testData": [],
+  "expected": [
+   "a modifier that does not match its score is a warning, never a refusal, and the correct one is available",
+   "r.errors equals []",
+   "r.block.warnings length is 1",
+   "r.block.warnings[0] matches /STR 22 should be \\+6, not \\+5/",
+   "statblockProblem(DIV.replace(\"STR 22 (+6)\", \"STR 22 (+5)\")) is empty"
+  ]
+ },
+ {
+  "id": "TC-SBLK-010",
+  "module": "SBLK",
+  "moduleName": "Statblock reading and arithmetic",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "statblock.spec.ts",
+  "line": 122,
+  "describe": "reading a complete stat block",
+  "title": "a second ability line is ignored with a warning",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "a second ability line is ignored with a warning",
+   "r.errors equals []",
+   "r.block.abilities?.str.score equals 22",
+   "r.block.warnings.join(\" \") matches /twice/"
+  ]
+ },
+ {
+  "id": "TC-SBLK-011",
+  "module": "SBLK",
+  "moduleName": "Statblock reading and arithmetic",
+  "category": "Validation",
+  "priority": "P1",
+  "file": "statblock.spec.ts",
+  "line": 129,
+  "describe": "reading a complete stat block",
+  "title": "the blank skeleton the editor offers is itself a valid stat block with no warnings",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call statblockProblem(STATBLOCK_SKELETON)"
+  ],
+  "testData": [],
+  "expected": [
+   "the blank skeleton the editor offers is itself a valid stat block with no warnings",
+   "r.errors equals []",
+   "r.block.warnings equals []",
+   "r.block.proficiency equals 2",
+   "statblockProblem(STATBLOCK_SKELETON) is empty"
+  ]
+ },
+ {
+  "id": "TC-SBLK-012",
+  "module": "SBLK",
+  "moduleName": "Statblock reading and arithmetic",
+  "category": "Validation",
+  "priority": "P1",
+  "file": "statblock.spec.ts",
+  "line": 141,
+  "describe": "what is refused, each with the fix",
+  "title": "a missing Armor Class, Hit Points, ability line or Challenge",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "a missing Armor Class, Hit Points, ability line or Challenge",
+   "errorsOf(without(/Armor Class/).replace(\"STR 22\", \"STR 22\")) equals [expect.stringMatching(/Add an Armor Class line/)]",
+   "errorsOf(without(/Hit Points/)) equals [expect.stringMatching(/Add a Hit Points line/)]",
+   "errorsOf(without(/^STR /)) equals [expect.stringMatching(/six ability scores/)]",
+   "errorsOf(without(/Challenge/)) equals [expect.stringMatching(/Add a Challenge line/)]"
+  ]
+ },
+ {
+  "id": "TC-SBLK-013",
+  "module": "SBLK",
+  "moduleName": "Statblock reading and arithmetic",
+  "category": "Validation",
+  "priority": "P1",
+  "file": "statblock.spec.ts",
+  "line": 148,
+  "describe": "what is refused, each with the fix",
+  "title": "an ability line with fewer than six abilities names the missing ones",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "an ability line with fewer than six abilities names the missing ones",
+   "e.join(\" \") matches /missing CHA/"
+  ]
+ },
+ {
+  "id": "TC-SBLK-014",
+  "module": "SBLK",
+  "moduleName": "Statblock reading and arithmetic",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "statblock.spec.ts",
+  "line": 153,
+  "describe": "what is refused, each with the fix",
+  "title": "armour class and hit points that are not numbers",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "armour class and hit points that are not numbers",
+   "errorsOf(DIV.replace(\"16 (natural)\", \"heavy\")) equals [expect.stringMatching(/Armor Class must start with a number/)]",
+   "errorsOf(DIV.replace(\"152 (16d10 + 64)\", \"lots\")) equals [expect.stringMatching(/Hit Points must start with a number/)]"
+  ]
+ },
+ {
+  "id": "TC-SBLK-015",
+  "module": "SBLK",
+  "moduleName": "Statblock reading and arithmetic",
+  "category": "Boundary",
+  "priority": "P1",
+  "file": "statblock.spec.ts",
+  "line": 158,
+  "describe": "what is refused, each with the fix",
+  "title": "the limits hold at the boundary: armour 0 and 40 pass, 41 does not; hit points 1 and 10,000 pass, 0 and 10,001 do not",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "the limits hold at the boundary: armour 0 and 40 pass, 41 does not; hit points 1 and 10,000 pass, 0 and 10,001 do not",
+   "errorsOf(DIV.replace(\"16 (natural)\", String(ac))) equals []",
+   "errorsOf(DIV.replace(\"16 (natural)\", \"41\")) equals [expect.stringMatching(/Armor Class must be from 0 to 40/)]",
+   "errorsOf(DIV.replace(\"152 (16d10 + 64)\", String(hp))) equals []",
+   "errorsOf(DIV.replace(\"152 (16d10 + 64)\", String(hp))) equals [expect.stringMatching(/Hit Points must be from 1 to 10,000/)]"
+  ]
+ },
+ {
+  "id": "TC-SBLK-016",
+  "module": "SBLK",
+  "moduleName": "Statblock reading and arithmetic",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "statblock.spec.ts",
+  "line": 165,
+  "describe": "what is refused, each with the fix",
+  "title": "ability scores 1 and 30 pass; 0 and 31 do not, and the message names the ability",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "ability scores 1 and 30 pass; 0 and 31 do not, and the message names the ability",
+   "errorsOf(DIV.replace(\"STR 22 (+6)\", `STR ${s}`)) equals []",
+   "errorsOf(DIV.replace(\"STR 22 (+6)\", \"STR 31 (+10)\")) equals [expect.stringMatching(/STR must be from 1 to 30 \\(it says 31\\)/)]",
+   "errorsOf(DIV.replace(\"DEX 12 (+1)\", \"DEX 0 (-5)\")) equals [expect.stringMatching(/DEX must be from 1 to 30 \\(it says 0\\)/)]"
+  ]
+ },
+ {
+  "id": "TC-SBLK-017",
+  "module": "SBLK",
+  "moduleName": "Statblock reading and arithmetic",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "statblock.spec.ts",
+  "line": 171,
+  "describe": "what is refused, each with the fix",
+  "title": "a challenge rating that does not exist: 1/3, 31, 0.5, or none at all; 0, 1/8, 1/2 and 30 are fine",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "a challenge rating that does not exist: 1/3, 31, 0.5, or none at all; 0, 1/8, 1/2 and 30 are fine",
+   "errorsOf(DIV.replace(\"8 (3,900 XP)\", cr)) equals []",
+   "errorsOf(DIV.replace(\"8 (3,900 XP)\", cr)) equals [expect.stringMatching(/valid rating/)]"
+  ]
+ },
+ {
+  "id": "TC-SBLK-018",
+  "module": "SBLK",
+  "moduleName": "Statblock reading and arithmetic",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "statblock.spec.ts",
+  "line": 176,
+  "describe": "what is refused, each with the fix",
+  "title": "several problems are all reported together, in plain words, by the save-time check",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call statblockProblem(text)"
+  ],
+  "testData": [],
+  "expected": [
+   "several problems are all reported together, in plain words, by the save-time check",
+   "e length is 3",
+   "problem matches /^The stat block can't be saved yet\\./",
+   "problem contains part"
+  ]
+ },
+ {
+  "id": "TC-SBPG-001",
+  "module": "SBPG",
+  "moduleName": "Statblocks on pages",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "statblocks.spec.ts",
+  "line": 78,
+  "describe": "existing content",
+  "title": "every stat block already in the codex still saves: the 12 creature stat blocks are well formed, and the NPC notes are left as free text",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call statblockProblem(r.sb)",
+   "Call parseStatblock(r.sb)"
+  ],
+  "testData": [],
+  "expected": [
+   "every stat block already in the codex still saves: the 12 creature stat blocks are well formed, and the NPC notes are left as free text",
+   "rows.length is at least 30",
+   "statblockProblem(r.sb) is empty",
+   "parsed.errors equals []",
+   "parsed.block.warnings equals []",
+   "blocks is at least 12"
+  ]
+ },
+ {
+  "id": "TC-SBPG-002",
+  "module": "SBPG",
+  "moduleName": "Statblocks on pages",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "statblocks.spec.ts",
+  "line": 96,
+  "describe": "the card",
+  "title": "a stat block is shown as a laid-out card with every number, and the raw text is not shown a second time",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "a stat block is shown as a laid-out card with every number, and the raw text is not shown a second time",
+   "card is visible",
+   "heading \"made.name\" is visible",
+   "card contains text Fiend · Challenge 8",
+   "[statblock-ac] text is 16 (natural)",
+   "[statblock-hp] text is 152 (16d10 + 64)",
+   "card contains text 40 ft.",
+   "[statblock-str] contains text 22",
+   "[statblock-str] contains text (+6)",
+   "[statblock-int] contains text (−1)",
+   "…and 6 more"
+  ]
+ },
+ {
+  "id": "TC-SBPG-003",
+  "module": "SBPG",
+  "moduleName": "Statblocks on pages",
+  "category": "Permission & Auth",
+  "priority": "P0",
+  "file": "statblocks.spec.ts",
+  "line": 118,
+  "describe": "the card",
+  "title": "the modifiers shown are the correct ones even when the written ones are wrong, and only the DM is told",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Open /codex/entry/‹made.slug›"
+  ],
+  "testData": [
+   "URL /codex/entry/‹made.slug›"
+  ],
+  "expected": [
+   "the modifiers shown are the correct ones even when the written ones are wrong, and only the DM is told",
+   "[statblock-str] contains text (+6)",
+   "[statblock-notes] contains text STR 22 should be +6, not +5",
+   "[statblock] is visible",
+   "[statblock-notes] count is 0",
+   "page HTML does not: contains should be +6"
+  ]
+ },
+ {
+  "id": "TC-SBPG-004",
+  "module": "SBPG",
+  "moduleName": "Statblocks on pages",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "statblocks.spec.ts",
+  "line": 135,
+  "describe": "the card",
+  "title": "a Challenge Rating property that disagrees with the stat block is flagged for the DM only",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Open /codex/entry/‹made.slug›"
+  ],
+  "testData": [
+   "URL /codex/entry/‹made.slug›"
+  ],
+  "expected": [
+   "a Challenge Rating property that disagrees with the stat block is flagged for the DM only",
+   "[statblock-notes] contains text Challenge Rating property says 3, but the stat block says 8",
+   "page HTML does not: contains property says 3"
+  ]
+ },
+ {
+  "id": "TC-SBPG-005",
+  "module": "SBPG",
+  "moduleName": "Statblocks on pages",
+  "category": "Validation",
+  "priority": "P1",
+  "file": "statblocks.spec.ts",
+  "line": 148,
+  "describe": "the card",
+  "title": "text that is not a stat block is shown as written, with no card",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "text that is not a stat block is shown as written, with no card",
+   "[statblock] count is 0",
+   "`dd` is visible"
+  ]
+ },
+ {
+  "id": "TC-SBPG-006",
+  "module": "SBPG",
+  "moduleName": "Statblocks on pages",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "statblocks.spec.ts",
+  "line": 155,
+  "describe": "the card",
+  "title": "a page with no stat block shows no card",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "a page with no stat block shows no card",
+   "[statblock] count is 0"
+  ]
+ },
+ {
+  "id": "TC-SBPG-007",
+  "module": "SBPG",
+  "moduleName": "Statblocks on pages",
+  "category": "Security",
+  "priority": "P0",
+  "file": "statblocks.spec.ts",
+  "line": 161,
+  "describe": "the card",
+  "title": "a player sees the card only for a page they can read: a secret page is a 404 with nothing of the stat block in it",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Open /codex/entry/‹made.slug›",
+   "Send GET /api/find?q=‹encodeURIComponent(made.name)›"
+  ],
+  "testData": [
+   "URL /codex/entry/‹made.slug›",
+   "GET /api/find?q=‹encodeURIComponent(made.name)›"
+  ],
+  "expected": [
+   "a player sees the card only for a page they can read: a secret page is a 404 with nothing of the stat block in it",
+   "HTTP status equals 404",
+   "html does not: contains Water-Hater ‹tag›",
+   "find does not: contains made.name"
+  ]
+ },
+ {
+  "id": "TC-SBPG-008",
+  "module": "SBPG",
+  "moduleName": "Statblocks on pages",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "statblocks.spec.ts",
+  "line": 178,
+  "describe": "the card",
+  "title": "the rules links open in a new tab, on the one allowed host, and say so",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Call isAllowedWikidotUrl(href)"
+  ],
+  "testData": [],
+  "expected": [
+   "the rules links open in a new tab, on the one allowed host, and say so",
+   "links count is 3",
+   "isAllowedWikidotUrl(href) equals true",
+   "await a.getAttribute(\"target\") equals _blank",
+   "await a.getAttribute(\"rel\") contains noopener",
+   "await a.getAttribute(\"rel\") contains noreferrer",
+   "a contains text opens in a new tab"
+  ]
+ },
+ {
+  "id": "TC-SBPG-009",
+  "module": "SBPG",
+  "moduleName": "Statblocks on pages",
+  "category": "Data Integrity",
+  "priority": "P0",
+  "file": "statblocks.spec.ts",
+  "line": 196,
+  "describe": "saving",
+  "title": "a badly formed stat block is refused with every problem named, and nothing is created",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Click button \"Create entry\""
+  ],
+  "testData": [],
+  "expected": [
+   "a badly formed stat block is refused with every problem named, and nothing is created",
+   "alert contains text The stat block can't be saved yet.",
+   "alert contains text part",
+   "page URL is /\\/codex\\/new/",
+   "await query(`SELECT 1 FROM entries WHERE name = $1`, [name]) length is 0"
+  ]
+ },
+ {
+  "id": "TC-SBPG-010",
+  "module": "SBPG",
+  "moduleName": "Statblocks on pages",
+  "category": "Data Integrity",
+  "priority": "P0",
+  "file": "statblocks.spec.ts",
+  "line": 209,
+  "describe": "saving",
+  "title": "editing a saved page into a bad stat block is refused and leaves the stored one unchanged",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Open /codex/entry/‹made.slug›/edit",
+   "Type DIV.replace(\"152 (16d10 + 64)\", \"0\") into `#field-statblock`",
+   "Click button \"Save changes\""
+  ],
+  "testData": [
+   "URL /codex/entry/‹made.slug›/edit",
+   "Input DIV.replace(\"152 (16d10 + 64)\", \"0\")"
+  ],
+  "expected": [
+   "editing a saved page into a bad stat block is refused and leaves the stored one unchanged",
+   "`p[role=\"alert\"]` contains text Hit Points must be from 1 to 10,000",
+   "row.sb.split(\"\\r\\n\").join(\"\\n\") equals DIV"
+  ]
+ },
+ {
+  "id": "TC-SBPG-011",
+  "module": "SBPG",
+  "moduleName": "Statblocks on pages",
+  "category": "Boundary",
+  "priority": "P1",
+  "file": "statblocks.spec.ts",
+  "line": 222,
+  "describe": "saving",
+  "title": "the limits hold at the boundary: armour 40, 10,000 hit points, scores 1 and 30 and CR 1/8 save; 41, 10,001, 31 and CR 31 are refused",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Click button \"Create entry\""
+  ],
+  "testData": [],
+  "expected": [
+   "the limits hold at the boundary: armour 40, 10,000 hit points, scores 1 and 30 and CR 1/8 save; 41, 10,001, 31 and CR 31 are refused",
+   "[statblock-ac] text is 40",
+   "[statblock-hp] text is 10000",
+   "[statblock-str] contains text (+10)",
+   "[statblock-dex] contains text (−5)",
+   "[statblock-prof] text is +2",
+   "alert contains text part",
+   "await query(`SELECT 1 FROM entries WHERE name = $1`, [name]) length is 0"
+  ]
+ },
+ {
+  "id": "TC-SBPG-012",
+  "module": "SBPG",
+  "moduleName": "Statblocks on pages",
+  "category": "Validation",
+  "priority": "P1",
+  "file": "statblocks.spec.ts",
+  "line": 241,
+  "describe": "saving",
+  "title": "Insert a blank stat block fills the field with a valid one that saves and shows as a card",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Click [insert-statblock]",
+   "Click button \"Create entry\"",
+   "Wait for the URL /\\/codex\\/entry\\/[^/]+$/"
+  ],
+  "testData": [],
+  "expected": [
+   "Insert a blank stat block fills the field with a valid one that saves and shows as a card",
+   "`#field-statblock` value is STATBLOCK_SKELETON",
+   "[statblock-ac] text is 12",
+   "[statblock-cr] text is 1/4 (50 XP)",
+   "[statblock-prof] text is +2",
+   "[statblock-notes] count is 0"
+  ]
+ },
+ {
+  "id": "TC-SBPG-013",
+  "module": "SBPG",
+  "moduleName": "Statblocks on pages",
+  "category": "Validation",
+  "priority": "P1",
+  "file": "statblocks.spec.ts",
+  "line": 255,
+  "describe": "saving",
+  "title": "Insert a blank stat block asks before replacing text that is already there, and Cancel keeps it",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Click [insert-statblock]"
+  ],
+  "testData": [],
+  "expected": [
+   "Insert a blank stat block asks before replacing text that is already there, and Cancel keeps it",
+   "asked equals true",
+   "`#field-statblock` value is my own notes"
+  ]
+ },
+ {
+  "id": "TC-SBPG-014",
+  "module": "SBPG",
+  "moduleName": "Statblocks on pages",
+  "category": "Accessibility",
+  "priority": "P2",
+  "file": "statblocks.spec.ts",
+  "line": 270,
+  "describe": "accessibility and small screens",
+  "title": "a page with a stat block has no serious axe violations (dark)",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)",
+   "Browser storage is prepared before the page loads"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "a page with a stat block has no serious axe violations (dark)",
+   "serious equals []"
+  ]
+ },
+ {
+  "id": "TC-SBPG-015",
+  "module": "SBPG",
+  "moduleName": "Statblocks on pages",
+  "category": "Accessibility",
+  "priority": "P2",
+  "file": "statblocks.spec.ts",
+  "line": 270,
+  "describe": "accessibility and small screens",
+  "title": "a page with a stat block has no serious axe violations (light)",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)",
+   "Browser storage is prepared before the page loads"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "a page with a stat block has no serious axe violations (light)",
+   "serious equals []"
+  ]
+ },
+ {
+  "id": "TC-SBPG-016",
+  "module": "SBPG",
+  "moduleName": "Statblocks on pages",
+  "category": "Responsive",
+  "priority": "P2",
+  "file": "statblocks.spec.ts",
+  "line": 281,
+  "describe": "accessibility and small screens",
+  "title": "at 375px the card fits without sideways scrolling and the six abilities wrap onto two rows",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "at 375px the card fits without sideways scrolling and the six abilities wrap onto two rows",
+   "await page.evaluate(() => document.documentElement.scrollWidth - docu… is at most 0",
+   "new Set(tops).size equals 2"
+  ]
+ },
+ {
+  "id": "TC-SBPG-017",
+  "module": "SBPG",
+  "moduleName": "Statblocks on pages",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "statblocks.spec.ts",
+  "line": 295,
+  "describe": "accessibility and small screens",
+  "title": "printing keeps the card and hides the DM notes and the rules links",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Emulate media { media: \"print\" }"
+  ],
+  "testData": [],
+  "expected": [
+   "printing keeps the card and hides the DM notes and the rules links",
+   "[statblock] is visible",
+   "[statblock-notes] is hidden",
+   "text \"Look up the rules\" is hidden"
+  ]
+ },
+ {
   "id": "TC-TMPL-001",
   "module": "TMPL",
   "moduleName": "Editable page templates",
   "category": "Data Integrity",
   "priority": "P0",
   "file": "templates.spec.ts",
-  "line": 61,
+  "line": 62,
   "describe": "migration",
   "title": "the table has its length checks, takes one row per kind, and the migration is idempotent",
   "preconditions": [
@@ -15121,7 +16019,7 @@
   "category": "Data Integrity",
   "priority": "P0",
   "file": "templates.spec.ts",
-  "line": 78,
+  "line": 79,
   "describe": "migration",
   "title": "the rollback drops only the templates table (run inside a transaction that is rolled back)",
   "preconditions": [
@@ -15148,7 +16046,7 @@
   "category": "Happy",
   "priority": "P2",
   "file": "templates.spec.ts",
-  "line": 98,
+  "line": 99,
   "describe": "editing a template (DM)",
   "title": "the screen starts from the built-in default, with Save and Reset off until there is something to do",
   "preconditions": [
@@ -15175,7 +16073,7 @@
   "category": "Happy",
   "priority": "P2",
   "file": "templates.spec.ts",
-  "line": 107,
+  "line": 108,
   "describe": "editing a template (DM)",
   "title": "saving the NPC template changes what New NPC starts with, and nothing else",
   "preconditions": [
@@ -15208,7 +16106,7 @@
   "category": "Happy",
   "priority": "P2",
   "file": "templates.spec.ts",
-  "line": 123,
+  "line": 124,
   "describe": "editing a template (DM)",
   "title": "a page written before the change is never altered by saving or resetting a template",
   "preconditions": [
@@ -15234,7 +16132,7 @@
   "category": "Happy",
   "priority": "P2",
   "file": "templates.spec.ts",
-  "line": 136,
+  "line": 137,
   "describe": "editing a template (DM)",
   "title": "Reset to default brings the built-in text back, for the screen and for New NPC",
   "preconditions": [
@@ -15264,7 +16162,7 @@
   "category": "Validation",
   "priority": "P1",
   "file": "templates.spec.ts",
-  "line": 149,
+  "line": 150,
   "describe": "editing a template (DM)",
   "title": "a template can be empty on purpose: new pages of that kind then start blank",
   "preconditions": [
@@ -15291,7 +16189,7 @@
   "category": "Happy",
   "priority": "P2",
   "file": "templates.spec.ts",
-  "line": 160,
+  "line": 161,
   "describe": "editing a template (DM)",
   "title": "switching kind shows that kind's own text and state; unsaved edits are not carried over",
   "preconditions": [
@@ -15322,7 +16220,7 @@
   "category": "Security",
   "priority": "P0",
   "file": "templates.spec.ts",
-  "line": 170,
+  "line": 171,
   "describe": "editing a template (DM)",
   "title": "a template may hold a secret block: every new page made from it gets its own block",
   "preconditions": [
@@ -15355,7 +16253,7 @@
   "category": "Security",
   "priority": "P0",
   "file": "templates.spec.ts",
-  "line": 194,
+  "line": 195,
   "describe": "what is refused",
   "title": "a malformed secret block is refused with the reason, and the saved template is unchanged",
   "preconditions": [
@@ -15380,7 +16278,7 @@
   "category": "Boundary",
   "priority": "P1",
   "file": "templates.spec.ts",
-  "line": 203,
+  "line": 204,
   "describe": "what is refused",
   "title": "the size limit holds at the boundary: 20,000 characters save, 20,001 are refused for the description and for the notes",
   "preconditions": [
@@ -15409,7 +16307,7 @@
   "category": "Data Integrity",
   "priority": "P0",
   "file": "templates.spec.ts",
-  "line": 216,
+  "line": 217,
   "describe": "what is refused",
   "title": "the API refuses a bad body (missing field, wrong type, extra key), an unknown kind, and changes nothing",
   "preconditions": [
@@ -15442,7 +16340,7 @@
   "category": "Permission & Auth",
   "priority": "P0",
   "file": "templates.spec.ts",
-  "line": 228,
+  "line": 229,
   "describe": "who can reach it",
   "title": "signed out: 401 on the API; a player: 403 on the API, sent away from the screen, and no Templates link",
   "preconditions": [
@@ -15477,7 +16375,7 @@
   "category": "Happy",
   "priority": "P2",
   "file": "templates.spec.ts",
-  "line": 249,
+  "line": 250,
   "describe": "who can reach it",
   "title": "the DM finds Templates under Keeper in the sidebar",
   "preconditions": [
@@ -15503,7 +16401,7 @@
   "category": "Accessibility",
   "priority": "P2",
   "file": "templates.spec.ts",
-  "line": 258,
+  "line": 259,
   "describe": "accessibility and small screens",
   "title": "the templates screen has no serious axe violations (dark)",
   "preconditions": [
@@ -15527,7 +16425,7 @@
   "category": "Accessibility",
   "priority": "P2",
   "file": "templates.spec.ts",
-  "line": 258,
+  "line": 259,
   "describe": "accessibility and small screens",
   "title": "the templates screen has no serious axe violations (light)",
   "preconditions": [
@@ -15551,7 +16449,7 @@
   "category": "Responsive",
   "priority": "P2",
   "file": "templates.spec.ts",
-  "line": 268,
+  "line": 269,
   "describe": "accessibility and small screens",
   "title": "at 375px the screen fits without sideways scrolling, and every control has a visible label",
   "preconditions": [

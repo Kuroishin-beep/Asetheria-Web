@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { STATBLOCK_SKELETON } from "@/lib/statblock";
 import { useActionState, useEffect, useMemo, useRef, useState } from "react";
 import { useFormStatus } from "react-dom";
 import { EyeOff, Loader2, Plus } from "lucide-react";
@@ -228,6 +229,7 @@ export function EntryForm({
                       className="min-h-20"
                       defaultValue={initial.fields[f.key] ?? ""}
                       placeholder={f.placeholder}
+                      rows={f.key === "statblock" ? 10 : undefined}
                     />
                   ) : kind === "table" && f.key === "dice" ? (
                     <Input
@@ -247,6 +249,7 @@ export function EntryForm({
                     />
                   )}
                 </Field>
+                {f.key === "statblock" && <StatblockHelper />}
               </div>
             ))}
 
@@ -392,5 +395,29 @@ function SubmitButton({ label, blocked }: { label: string; blocked: boolean }) {
       {pending && <Loader2 aria-hidden="true" className="animate-spin" />}
       {pending ? "Saving…" : label}
     </Button>
+  );
+}
+
+/** Offers a blank stat block in the standard layout, and says what a stat block needs. */
+function StatblockHelper() {
+  function insert() {
+    const el = document.getElementById("field-statblock") as HTMLTextAreaElement | null;
+    if (!el) return;
+    if (el.value.trim() && !window.confirm("Replace what is in the stat block with a blank one?")) return;
+    el.value = STATBLOCK_SKELETON;
+    el.dispatchEvent(new Event("input", { bubbles: true }));
+    el.focus();
+  }
+  return (
+    <div className="mt-2 flex flex-wrap items-center gap-3">
+      <Button type="button" variant="outline" size="sm" onClick={insert} data-testid="insert-statblock">
+        <Plus aria-hidden="true" />
+        Insert a blank stat block
+      </Button>
+      <span className="text-[13px] text-muted-foreground">
+        Armor Class, Hit Points, the six ability scores and a Challenge line make it a stat block; the page then shows it laid out, with the modifiers worked out.
+        Anything less is shown as written.
+      </span>
+    </div>
   );
 }

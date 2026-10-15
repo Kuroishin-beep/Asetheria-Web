@@ -10,6 +10,7 @@ import { EntryHero } from "@/components/entry-hero";
 import { LocalGraph, type LocalNode } from "@/components/local-graph";
 import { RecordView } from "@/components/record-view";
 import { SecretBlockCard } from "@/components/secret-block";
+import { StatblockCard } from "@/components/statblock-card";
 import { LinkedNames } from "@/components/shared/linked-names";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Badge, badgeVariants } from "@/components/ui/badge";
@@ -33,6 +34,7 @@ import { LINKED_FIELD_KEYS, parseAliases } from "@/lib/links";
 import { parseRollTable, stripTable, validateTable } from "@/lib/roll-table";
 import { KIND_ICONS } from "@/lib/section-icons";
 import { hasMarkers, splitAtMarkers } from "@/lib/secret-blocks";
+import { parseStatblock } from "@/lib/statblock";
 import { secretsForViewer } from "@/lib/secrets";
 import { listPlayers } from "@/lib/rbac";
 import { ArchiveButton } from "./archive-button";
@@ -108,6 +110,19 @@ export default async function EntryPage({
   const bodyHtml = bodyParts.length > 0 ? "shown" : "";
   const dmHtml = isDM && entry.dmNotes ? renderMarkdown(entry.dmNotes, resolve) : "";
 
+  // A well-formed stat block in the `statblock` property is shown as a proper card; anything else stays as written.
+  const statblock = entry.fields?.statblock ? parseStatblock(entry.fields.statblock) : ({ kind: "free" } as const);
+  const statblockNotes: string[] = [];
+  if (isDM && statblock.kind === "block") {
+    statblockNotes.push(...statblock.block.warnings);
+    const written = (entry.fields?.cr ?? "").trim();
+    if (written && statblock.block.challenge && written !== statblock.block.challenge.cr) {
+      statblockNotes.push(`The Challenge Rating property says ${written}, but the stat block says ${statblock.block.challenge.cr}.`);
+    }
+  }
+  const statblockSubtitle = [entry.fields?.type, statblock.kind === "block" && statblock.block.challenge ? `Challenge ${statblock.block.challenge.cr}` : ""].filter(Boolean).join(" · ");
+  const statblockBodyHtml = statblock.kind === "block" ? renderMarkdown(statblock.block.body, resolve) : "";
+
   const fieldDefs = def?.fields ?? [];
   // A hero kind moves its key facts into the hero card, so they are not shown twice.
   const heroKeys = HERO_INFOBOX[entry.kind];
@@ -118,7 +133,7 @@ export default async function EntryPage({
     : [];
   const shownFields = fieldDefs
     .map((f) => ({ ...f, value: entry.fields?.[f.key] }))
-    .filter((f) => f.value && !(heroKeys && (heroKeys.includes(f.key) || f.key === PORTRAIT_FIELD)));
+    .filter((f) => f.value && !(heroKeys && (heroKeys.includes(f.key) || f.key === PORTRAIT_FIELD)) && !(statblock.kind === "block" && f.key === "statblock"));
   // Anything imported that the kind doesn't define a field for is still shown,
   // so no property from Notion silently disappears.
   const knownKeys = new Set(fieldDefs.map((f) => f.key));
@@ -250,6 +265,10 @@ export default async function EntryPage({
                 </dl>
               </CardContent>
             </Card>
+          )}
+
+          {statblock.kind === "block" && (
+            <StatblockCard name={entry.name} subtitle={statblockSubtitle} block={statblock.block} bodyHtml={statblockBodyHtml} notes={statblockNotes} />
           )}
 
           {/* ---- Body ---- */}
