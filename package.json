@@ -35,6 +35,8 @@
     "db:calendar": "tsx scripts/apply-sql.ts scripts/sql/calendar.sql",
     "db:calendar:rollback": "tsx scripts/apply-sql.ts scripts/sql/calendar-rollback.sql",
     "db:events": "tsx scripts/apply-sql.ts scripts/sql/events.sql",
+    "db:relations": "tsx scripts/apply-sql.ts scripts/sql/relations.sql",
+    "db:relations:rollback": "tsx scripts/apply-sql.ts scripts/sql/relations-rollback.sql",
     "codex:archive-batch": "tsx scripts/archive-batch.ts",
     "check:contrast": "tsx scripts/check-contrast.ts",
     "migrate:fauna-tables": "tsx scripts/migrate-fauna-and-tables.ts",

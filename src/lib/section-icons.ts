@@ -25,6 +25,7 @@ import {
   Pickaxe,
   Scale,
   ScrollText,
+  Share2,
   Shield,
   ShieldCheck,
   Skull,
@@ -91,6 +92,7 @@ export const TOOL_ICONS = {
   characters: UserRound,
   calendar: CalendarDays,
   timeline: Hourglass,
+  relations: Share2,
 } as const;
 
 export const KEEPER_ICONS = {

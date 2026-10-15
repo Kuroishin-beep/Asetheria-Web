@@ -89,6 +89,8 @@ export const MODULES: Record<string, [string, string]> = {
   "rbac-inheritance": ["RBACI", "Access control: inheritance"],
   "rbac-panel": ["RBACP", "Access control panel"],
   rbac: ["RBAC", "Access control"],
+  "relations-core": ["RELC", "Relations rules, loops and layouts"],
+  relations: ["RELP", "Relations, family trees and webs (pages, API)"],
   "responsive-visual": ["RESP", "Responsive layout"],
   "roll-table": ["ROLL", "Roll tables (engine)"],
   "roll-tables": ["ROLLT", "Roll tables (authoring and rolling)"],

@@ -847,5 +847,146 @@
     ]
    }
   ]
+ },
+ {
+  "action": "Add a relation (family tie, alliance, rivalry, overlord, membership) from a page",
+  "happy": [
+   {
+    "module": "RELP",
+    "any": [
+     "adds a relation from the page"
+    ]
+   }
+  ],
+  "invalid": [
+   {
+    "module": "RELP",
+    "any": [
+     "rule broken in the form"
+    ]
+   }
+  ],
+  "unauthorized": [
+   {
+    "module": "RELP",
+    "any": [
+     "signed out: 401"
+    ]
+   }
+  ],
+  "boundary": [
+   {
+    "module": "RELP",
+    "any": [
+     "four parents"
+    ]
+   }
+  ]
+ },
+ {
+  "action": "Remove a relation",
+  "happy": [
+   {
+    "module": "RELP",
+    "any": [
+     "removes a relation with its button"
+    ]
+   }
+  ],
+  "invalid": [
+   {
+    "module": "RELP",
+    "any": [
+     "removing: the DM can"
+    ]
+   }
+  ],
+  "unauthorized": [
+   {
+    "module": "RELP",
+    "any": [
+     "signed out: 401"
+    ]
+   }
+  ],
+  "boundary": [
+   {
+    "module": "RELP",
+    "any": [
+     "removing: the DM can"
+    ]
+   }
+  ]
+ },
+ {
+  "action": "View a family tree",
+  "happy": [
+   {
+    "module": "RELP",
+    "any": [
+     "each generation is a row"
+    ]
+   }
+  ],
+  "invalid": [
+   {
+    "module": "RELP",
+    "any": [
+     "no family ties"
+    ]
+   }
+  ],
+  "unauthorized": [
+   {
+    "module": "RELP",
+    "any": [
+     "not drawn, not named"
+    ]
+   }
+  ],
+  "boundary": [
+   {
+    "module": "RELP",
+    "any": [
+     "long line of descent"
+    ]
+   }
+  ]
+ },
+ {
+  "action": "View and filter the relationship web",
+  "happy": [
+   {
+    "module": "RELP",
+    "any": [
+     "every tie among readable"
+    ]
+   }
+  ],
+  "invalid": [
+   {
+    "module": "RELP",
+    "any": [
+     "filters narrow"
+    ]
+   }
+  ],
+  "unauthorized": [
+   {
+    "module": "RELP",
+    "any": [
+     "only ties between pages they may read"
+    ]
+   }
+  ],
+  "boundary": [
+   {
+    "module": "RELC",
+    "any": [
+     "sit evenly on a circle",
+     "one page sits in the middle"
+    ]
+   }
+  ]
  }
 ]

@@ -1189,5 +1189,132 @@
     ]
    }
   ]
+ },
+ {
+  "phase": "17 Relations",
+  "criterion": "A family tree lays out a known family deterministically (generations, spouses side by side, children below parents) and is the same from any member's page",
+  "match": [
+   {
+    "module": "RELC",
+    "any": [
+     "family tree layout",
+     "generations run down",
+     "spouses sit side by side",
+     "same whatever order",
+     "long line of descent",
+     "family of a page",
+     "loop of ties"
+    ]
+   },
+   {
+    "module": "RELP",
+    "any": [
+     "each generation is a row",
+     "opens from a page",
+     "tree is the same every time"
+    ]
+   }
+  ]
+ },
+ {
+  "phase": "17 Relations",
+  "criterion": "A parent loop, a self relation and a duplicate are refused; loops of overlords and memberships too; random accepted relations never loop",
+  "match": [
+   {
+    "module": "RELC",
+    "any": [
+     "loops",
+     "nobody can be their own parent",
+     "overlords and group",
+     "random relations",
+     "may be added",
+     "repeat is refused",
+     "cannot be related to itself"
+    ]
+   },
+   {
+    "module": "RELP",
+    "any": [
+     "own ancestor",
+     "repeat is refused",
+     "at once leave one row",
+     "cannot be related to itself"
+    ]
+   }
+  ]
+ },
+ {
+  "phase": "17 Relations",
+  "criterion": "Players never see a relation or a person they cannot read (HTML, JSON, labels); a hidden middle person cuts off the branch",
+  "match": [
+   {
+    "module": "RELP",
+    "any": [
+     "only relations whose other end",
+     "not drawn, not named",
+     "only ties between pages they may read",
+     "no ties the DM is told",
+     "archived page"
+    ]
+   }
+  ]
+ },
+ {
+  "phase": "17 Relations",
+  "criterion": "The web filters by type and kind of page; every diagram has a text alternative (list or table) and is keyboard operable",
+  "match": [
+   {
+    "module": "RELP",
+    "any": [
+     "every tie among readable",
+     "filters narrow",
+     "filter form works by keyboard",
+     "tree opens from"
+    ]
+   }
+  ]
+ },
+ {
+  "phase": "17 Relations",
+  "criterion": "The DM adds and removes relations from a page; API authorization and validation",
+  "match": [
+   {
+    "module": "RELP",
+    "any": [
+     "adds a relation from the page",
+     "rule broken in the form",
+     "removes a relation",
+     "adding and removing",
+     "signed out: 401",
+     "bad request",
+     "removing: the DM",
+     "good relation of each kind",
+     "deleting a page deletes"
+    ]
+   }
+  ]
+ },
+ {
+  "phase": "17 Relations",
+  "criterion": "Boundaries: note 300, four parents, 200 relations a page; migration idempotent with rollback; axe both themes; 375px",
+  "match": [
+   {
+    "module": "RELP",
+    "any": [
+     "note limit holds",
+     "four parents",
+     "table's checks hold",
+     "rollback",
+     "axe",
+     "375px"
+    ]
+   },
+   {
+    "module": "RELC",
+    "any": [
+     "limits"
+    ]
+   }
+  ]
  }
 ]

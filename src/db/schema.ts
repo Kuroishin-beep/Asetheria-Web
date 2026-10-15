@@ -496,6 +496,31 @@ export const calendarConfig = pgTable(
   (t) => [check("calendar_config_single_row", sql`${t.id} = 1`)],
 );
 
+/** A typed tie between two pages: a family tie or a tie in the wider world. A symmetric type is stored with from_id < to_id. */
+export const pageRelations = pgTable(
+  "relations",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    fromId: uuid("from_id")
+      .notNull()
+      .references(() => entries.id, { onDelete: "cascade" }),
+    toId: uuid("to_id")
+      .notNull()
+      .references(() => entries.id, { onDelete: "cascade" }),
+    type: text("type").notNull(),
+    note: text("note").notNull().default(""),
+    createdBy: uuid("created_by").references(() => users.id, { onDelete: "set null" }),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [
+    uniqueIndex("relations_unique_idx").on(t.fromId, t.toId, t.type),
+    index("relations_from_idx").on(t.fromId),
+    index("relations_to_idx").on(t.toId),
+    check("relations_not_self", sql`${t.fromId} <> ${t.toId}`),
+    check("relations_note_length", sql`char_length(${t.note}) <= 300`),
+  ],
+);
+
 // ---------------------------------------------------------------------------
 // Inferred types
 // ---------------------------------------------------------------------------
@@ -512,6 +537,7 @@ export type CharacterRow = typeof characters.$inferSelect;
 export type EntrySecret = typeof entrySecrets.$inferSelect;
 export type PageTemplate = typeof pageTemplates.$inferSelect;
 export type CalendarRow = typeof calendarConfig.$inferSelect;
+export type RelationRow = typeof pageRelations.$inferSelect;
 export type EntryGrant = typeof entryGrants.$inferSelect;
 export type EntryKind = (typeof entryKind.enumValues)[number];
 export type Visibility = (typeof visibility.enumValues)[number];

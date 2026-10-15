@@ -14768,6 +14768,1495 @@
   ]
  },
  {
+  "id": "TC-RELC-001",
+  "module": "RELC",
+  "moduleName": "Relations rules, loops and layouts",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "relations-core.spec.ts",
+  "line": 34,
+  "describe": "the kinds of relation",
+  "title": "there are seven; spouse, sibling, ally and rival are the same from both ends, the rest have a direction and a reverse reading",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "there are seven; spouse, sibling, ally and rival are the same from both ends, the rest have a direction and a reverse reading",
+   "RELATION_TYPE_KEYS.sort() equals [\"ally\", \"member\", \"parent\", \"rival\", \"sibling\", \"spouse\", \"vassal\"]",
+   "SYMMETRIC_TYPES.sort() equals [\"ally\", \"rival\", \"sibling\", \"spouse\"]",
+   "d.label.length is greater than 3",
+   "d.reverse is true",
+   "RELATION_TYPE_KEYS.filter((t) => RELATION_TYPES[t].group === \"family\"… equals [\"parent\", \"sibling\", \"spouse\"]"
+  ]
+ },
+ {
+  "id": "TC-RELC-002",
+  "module": "RELC",
+  "moduleName": "Relations rules, loops and layouts",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "relations-core.spec.ts",
+  "line": 45,
+  "describe": "the kinds of relation",
+  "title": "a symmetric relation is stored with its ends in a fixed order whichever way it was written; a directed one is left alone",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call canonical(e(\"b\", \"a\", \"ally\"))",
+   "Call canonical(e(\"a\", \"b\", \"ally\"))",
+   "Call canonical(e(\"z\", \"a\", \"spouse\"))",
+   "Call canonical(e(\"b\", \"a\", \"parent\"))",
+   "Call canonical(e(\"b\", \"a\", \"vassal\"))"
+  ],
+  "testData": [],
+  "expected": [
+   "a symmetric relation is stored with its ends in a fixed order whichever way it was written; a directed one is left alone",
+   "canonical(e(\"b\", \"a\", \"ally\")) match object { from: \"a\", to: \"b\" }",
+   "canonical(e(\"a\", \"b\", \"ally\")) match object { from: \"a\", to: \"b\" }",
+   "canonical(e(\"z\", \"a\", \"spouse\")) match object { from: \"a\", to: \"z\" }",
+   "canonical(e(\"b\", \"a\", \"parent\")) match object { from: \"b\", to: \"a\" }",
+   "canonical(e(\"b\", \"a\", \"vassal\")) match object { from: \"b\", to: \"a\" }"
+  ]
+ },
+ {
+  "id": "TC-RELC-003",
+  "module": "RELC",
+  "moduleName": "Relations rules, loops and layouts",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "relations-core.spec.ts",
+  "line": 53,
+  "describe": "the kinds of relation",
+  "title": "a relation reads correctly from either end",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call describeFrom(e(\"p\", \"c\", \"parent\"), \"p\", \"Cael\")",
+   "Call describeFrom(e(\"p\", \"c\", \"parent\"), \"c\", \"Pria\")",
+   "Call describeFrom(e(\"a\", \"b\", \"spouse\"), \"b\", \"Ann\")",
+   "Call describeFrom(e(\"a\", \"b\", \"member\"), \"b\", \"Ann\")",
+   "Call describeFrom(e(\"a\", \"b\", \"vassal\"), \"b\", \"Ann\")"
+  ],
+  "testData": [],
+  "expected": [
+   "a relation reads correctly from either end",
+   "describeFrom(e(\"p\", \"c\", \"parent\"), \"p\", \"Cael\") equals Parent of Cael",
+   "describeFrom(e(\"p\", \"c\", \"parent\"), \"c\", \"Pria\") equals Child of Pria",
+   "describeFrom(e(\"a\", \"b\", \"spouse\"), \"b\", \"Ann\") equals Spouse of Ann",
+   "describeFrom(e(\"a\", \"b\", \"member\"), \"b\", \"Ann\") equals Has member Ann",
+   "describeFrom(e(\"a\", \"b\", \"vassal\"), \"b\", \"Ann\") equals Overlord of Ann"
+  ]
+ },
+ {
+  "id": "TC-RELC-004",
+  "module": "RELC",
+  "moduleName": "Relations rules, loops and layouts",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "relations-core.spec.ts",
+  "line": 63,
+  "describe": "what may be added",
+  "title": "a good relation of each kind passes",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "a good relation of each kind passes",
+   "refusals(e(\"a\", \"b\", \"parent\"), NPCS) equals []",
+   "refusals(e(\"a\", \"b\", \"spouse\"), NPCS) equals []",
+   "refusals(e(\"a\", \"b\", \"sibling\"), NPCS) equals []",
+   "refusals(e(\"a\", \"b\", \"ally\"), { a: \"empire\", b: \"organization\" }) equals []",
+   "refusals(e(\"a\", \"b\", \"rival\"), { a: \"faction\", b: \"location\" }) equals []",
+   "refusals(e(\"a\", \"b\", \"vassal\"), { a: \"location\", b: \"empire\" }) equals []",
+   "refusals(e(\"a\", \"b\", \"member\"), { a: \"npc\", b: \"organization\" }) equals []"
+  ]
+ },
+ {
+  "id": "TC-RELC-005",
+  "module": "RELC",
+  "moduleName": "Relations rules, loops and layouts",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "relations-core.spec.ts",
+  "line": 73,
+  "describe": "what may be added",
+  "title": "a page cannot be related to itself",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed out (no session)"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "a page cannot be related to itself",
+   "refusals(e(\"a\", \"a\", \"ally\"), NPCS) equals [\"A page cannot be related to itself.\"]"
+  ]
+ },
+ {
+  "id": "TC-RELC-006",
+  "module": "RELC",
+  "moduleName": "Relations rules, loops and layouts",
+  "category": "Validation",
+  "priority": "P1",
+  "file": "relations-core.spec.ts",
+  "line": 77,
+  "describe": "what may be added",
+  "title": "a page that cannot be found, and pages of the wrong kind, are refused naming the page",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed out (no session)"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "a page that cannot be found, and pages of the wrong kind, are refused naming the page",
+   "refusals(e(\"a\", \"ghost\", \"parent\"), NPCS) equals [\"One of the pages could not be found.\"]",
+   "refusals(e(\"a\", \"b\", \"parent\"), { a: \"location\", b: \"npc\" })[0] matches /^a is a location, which cannot have a parent relation/",
+   "refusals(e(\"a\", \"b\", \"spouse\"), { a: \"npc\", b: \"organization\" })[0] matches /b is a organization/",
+   "refusals(e(\"a\", \"b\", \"ally\"), { a: \"ore\", b: \"npc\" })[0] matches /a is a ore/"
+  ]
+ },
+ {
+  "id": "TC-RELC-007",
+  "module": "RELC",
+  "moduleName": "Relations rules, loops and layouts",
+  "category": "Validation",
+  "priority": "P1",
+  "file": "relations-core.spec.ts",
+  "line": 84,
+  "describe": "what may be added",
+  "title": "a membership must point at a group, not at a person or a place",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "a membership must point at a group, not at a person or a place",
+   "refusals(e(\"a\", \"b\", \"member\"), { a: \"npc\", b: \"npc\" }) equals [expect.stringMatching(/membership must point at one of/)]",
+   "refusals(e(\"a\", \"b\", \"member\"), { a: \"npc\", b: \"location\" }) equals [expect.stringMatching(/membership must point at one of/)]",
+   "refusals(e(\"a\", \"b\", \"member\"), { a: \"organization\", b: \"empire\" }) equals []"
+  ]
+ },
+ {
+  "id": "TC-RELC-008",
+  "module": "RELC",
+  "moduleName": "Relations rules, loops and layouts",
+  "category": "Boundary",
+  "priority": "P1",
+  "file": "relations-core.spec.ts",
+  "line": 90,
+  "describe": "what may be added",
+  "title": "the note limit holds at the boundary: 300 characters pass, 301 do not; whitespace is not counted",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "the note limit holds at the boundary: 300 characters pass, 301 do not; whitespace is not counted",
+   "refusals(e(\"a\", \"b\", \"ally\", \"n\".repeat(RELATION_LIMITS.noteLength)),… equals []",
+   "refusals(e(\"a\", \"b\", \"ally\", ` ${\"n\".repeat(300)} `), NPCS) equals []",
+   "refusals(e(\"a\", \"b\", \"ally\", \"n\".repeat(301)), NPCS) equals [expect.stringMatching(/301 characters; the limit is 300/)]"
+  ]
+ },
+ {
+  "id": "TC-RELC-009",
+  "module": "RELC",
+  "moduleName": "Relations rules, loops and layouts",
+  "category": "Validation",
+  "priority": "P1",
+  "file": "relations-core.spec.ts",
+  "line": 96,
+  "describe": "what may be added",
+  "title": "a repeat is refused, and for a symmetric relation the other way round is a repeat too; the other way round of a directed one is not a repeat",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "a repeat is refused, and for a symmetric relation the other way round is a repeat too; the other way round of a directed one is not a repeat",
+   "refusals(e(\"a\", \"b\", \"ally\"), NPCS, [e(\"a\", \"b\", \"ally\")]) equals [\"That relation already exists.\"]",
+   "refusals(e(\"b\", \"a\", \"ally\"), NPCS, [e(\"a\", \"b\", \"ally\")]) equals [\"That relation already exists.\"]",
+   "refusals(e(\"b\", \"a\", \"spouse\"), NPCS, [e(\"a\", \"b\", \"spouse\")]) equals [\"That relation already exists.\"]",
+   "refusals(e(\"a\", \"b\", \"parent\"), NPCS, [e(\"a\", \"b\", \"parent\")]) equals [\"That relation already exists.\"]",
+   "refusals(e(\"a\", \"c\", \"ally\"), NPCS, [e(\"a\", \"b\", \"ally\")]) equals []",
+   "refusals(e(\"a\", \"b\", \"rival\"), NPCS, [e(\"a\", \"b\", \"ally\")].filter((x)… equals []"
+  ]
+ },
+ {
+  "id": "TC-RELC-010",
+  "module": "RELC",
+  "moduleName": "Relations rules, loops and layouts",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "relations-core.spec.ts",
+  "line": 107,
+  "describe": "loops",
+  "title": "nobody can be their own parent, directly, through a child, or through a long line of descent",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "nobody can be their own parent, directly, through a child, or through a long line of descent",
+   "refusals(e(\"b\", \"a\", \"parent\"), NPCS, [e(\"a\", \"b\", \"parent\")])[0] matches /already a descendant of/",
+   "refusals(e(\"c\", \"a\", \"parent\"), NPCS, [e(\"a\", \"b\", \"parent\"), e(\"b\", … matches /c is already a descendant of a/",
+   "refusals(e(\"n60\", \"n0\", \"parent\"), kinds, chain, {})[0] matches /descendant/",
+   "refusals(e(\"n0\", \"n60\", \"parent\"), kinds, chain.slice(0, 3), {}) equals []"
+  ]
+ },
+ {
+  "id": "TC-RELC-011",
+  "module": "RELC",
+  "moduleName": "Relations rules, loops and layouts",
+  "category": "Validation",
+  "priority": "P1",
+  "file": "relations-core.spec.ts",
+  "line": 116,
+  "describe": "loops",
+  "title": "two people can share a child and a descendant two ways (a diamond is not a loop)",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "two people can share a child and a descendant two ways (a diamond is not a loop)",
+   "refusals(e(\"p2\", \"c\", \"parent\"), { g1: \"npc\", p1: \"npc\", p2: \"npc\", c… equals []"
+  ]
+ },
+ {
+  "id": "TC-RELC-012",
+  "module": "RELC",
+  "moduleName": "Relations rules, loops and layouts",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "relations-core.spec.ts",
+  "line": 121,
+  "describe": "loops",
+  "title": "overlords and group memberships cannot loop either, but allies and rivals can be mutual",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "overlords and group memberships cannot loop either, but allies and rivals can be mutual",
+   "refusals(e(\"b\", \"a\", \"vassal\"), { a: \"empire\", b: \"empire\" }, [e(\"a\",… matches /each ranked above the other/",
+   "refusals(e(\"b\", \"a\", \"member\"), { a: \"organization\", b: \"organization… matches /each ranked above the other/",
+   "refusals(e(\"c\", \"a\", \"vassal\"), { a: \"empire\", b: \"empire\", c: \"empir… matches /ranked/",
+   "refusals(e(\"b\", \"a\", \"rival\"), { a: \"faction\", b: \"faction\" }, []) equals []"
+  ]
+ },
+ {
+  "id": "TC-RELC-013",
+  "module": "RELC",
+  "moduleName": "Relations rules, loops and layouts",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "relations-core.spec.ts",
+  "line": 128,
+  "describe": "loops",
+  "title": "random relations accepted by the rules never make a loop: 3,000 attempts over 25 pages",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed out (no session)"
+  ],
+  "steps": [
+   "Call reaches(accepted, n, id)"
+  ],
+  "testData": [],
+  "expected": [
+   "random relations accepted by the rules never make a loop: 3,000 attempts over 25 pages",
+   "accepted.length is greater than 20",
+   "reaches(accepted, n, id) equals false"
+  ]
+ },
+ {
+  "id": "TC-RELC-014",
+  "module": "RELC",
+  "moduleName": "Relations rules, loops and layouts",
+  "category": "Validation",
+  "priority": "P1",
+  "file": "relations-core.spec.ts",
+  "line": 149,
+  "describe": "limits",
+  "title": "a child can have up to four parents; a fifth is refused",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "a child can have up to four parents; a fifth is refused",
+   "refusals(e(\"p4\", \"kid\", \"parent\"), kinds, existing) equals []",
+   "refusals(e(\"p5\", \"kid\", \"parent\"), kinds, [...existing, e(\"p4\", \"kid\"… equals [expect.stringMatching(/already has 4 parents/)]"
+  ]
+ },
+ {
+  "id": "TC-RELC-015",
+  "module": "RELC",
+  "moduleName": "Relations rules, loops and layouts",
+  "category": "Validation",
+  "priority": "P1",
+  "file": "relations-core.spec.ts",
+  "line": 156,
+  "describe": "limits",
+  "title": "a page can have up to 200 relations; the 201st is refused on whichever end it lands",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed out (no session)"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "a page can have up to 200 relations; the 201st is refused on whichever end it lands",
+   "refusals(e(\"a\", \"b\", \"ally\"), NPCS, [], { a: 199 }) equals []",
+   "refusals(e(\"a\", \"b\", \"ally\"), NPCS, [], { a: 200 }) equals [expect.stringMatching(/a already has 200 relations/)]",
+   "refusals(e(\"a\", \"b\", \"ally\"), NPCS, [], { b: 200 }) equals [expect.stringMatching(/b already has 200 relations/)]"
+  ]
+ },
+ {
+  "id": "TC-RELC-016",
+  "module": "RELC",
+  "moduleName": "Relations rules, loops and layouts",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "relations-core.spec.ts",
+  "line": 162,
+  "describe": "limits",
+  "title": "several problems are all reported together",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "several problems are all reported together",
+   "problems.length is at least 3"
+  ]
+ },
+ {
+  "id": "TC-RELC-017",
+  "module": "RELC",
+  "moduleName": "Relations rules, loops and layouts",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "relations-core.spec.ts",
+  "line": 180,
+  "describe": "the family tree layout",
+  "title": "generations run down the page: grandparents, then parents (the spouse who married in is level with their partner), then children",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed out (no session)"
+  ],
+  "steps": [
+   "Call layoutFamily(people, edges)"
+  ],
+  "testData": [],
+  "expected": [
+   "generations run down the page: grandparents, then parents (the spouse who married in is level with their partner), then children",
+   "at(l, \"g1\").generation equals 0",
+   "at(l, \"g2\").generation equals 0",
+   "at(l, \"p1\").generation equals 1",
+   "at(l, \"p2\").generation equals 1",
+   "at(l, \"c1\").generation equals 2",
+   "at(l, \"c2\").generation equals 2",
+   "at(l, \"p1\").y is greater than at(l, \"g1\").y",
+   "at(l, \"c1\").y is greater than at(l, \"p1\").y",
+   "at(l, \"p1\").y equals at(l, \"p2\").y"
+  ]
+ },
+ {
+  "id": "TC-RELC-018",
+  "module": "RELC",
+  "moduleName": "Relations rules, loops and layouts",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "relations-core.spec.ts",
+  "line": 193,
+  "describe": "the family tree layout",
+  "title": "spouses sit side by side, siblings on one row, and no two people share a spot",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call layoutFamily(people, edges)"
+  ],
+  "testData": [],
+  "expected": [
+   "spouses sit side by side, siblings on one row, and no two people share a spot",
+   "Math.abs(at(l, \"g1\").x - at(l, \"g2\").x) equals TREE.columnWidth",
+   "Math.abs(at(l, \"p1\").x - at(l, \"p2\").x) equals TREE.columnWidth",
+   "at(l, \"c1\").y equals at(l, \"c2\").y",
+   "new Set(l.nodes.map((n) => `${n.x},${n.y}`)).size equals l.nodes.length"
+  ]
+ },
+ {
+  "id": "TC-RELC-019",
+  "module": "RELC",
+  "moduleName": "Relations rules, loops and layouts",
+  "category": "Edge",
+  "priority": "P2",
+  "file": "relations-core.spec.ts",
+  "line": 201,
+  "describe": "the family tree layout",
+  "title": "the picture is big enough for everyone and is the same whatever order the people and ties are given in",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call layoutFamily(people, edges)",
+   "Call layoutFamily([...people].reverse(), [...edges].reverse())",
+   "Call layoutFamily(a, b)"
+  ],
+  "testData": [],
+  "expected": [
+   "the picture is big enough for everyone and is the same whatever order the people and ties are given in",
+   "n.x is at least 0",
+   "n.x + TREE.columnWidth is at most l.width + 1",
+   "n.y + TREE.rowHeight is at most l.height + 1",
+   "shuffled equals l",
+   "layoutFamily(a, b) equals l"
+  ]
+ },
+ {
+  "id": "TC-RELC-020",
+  "module": "RELC",
+  "moduleName": "Relations rules, loops and layouts",
+  "category": "Edge",
+  "priority": "P2",
+  "file": "relations-core.spec.ts",
+  "line": 218,
+  "describe": "the family tree layout",
+  "title": "a long line of descent, one person alone, nobody at all, and ties to people not in the list are all handled",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call layoutFamily(chain, chain.slice(1).map((n, i) => e(`n${i}`, n.id, \"parent\")))",
+   "Call layoutFamily([{ id: \"solo\", name: \"Solo\" }], [])",
+   "Call layoutFamily([], [])",
+   "Call layoutFamily([{ id: \"a\", name: \"A\" }], [e(\"a\", \"ghost\", \"parent\")])"
+  ],
+  "testData": [],
+  "expected": [
+   "a long line of descent, one person alone, nobody at all, and ties to people not in the list are all handled",
+   "l.nodes.map((n) => n.generation).sort((a, b) => a - b) equals Array.from({ length: 12 }, (_, i) => i)",
+   "layoutFamily([{ id: \"solo\", name: \"Solo\" }], []).nodes length is 1",
+   "layoutFamily([], []) match object { nodes: [] }",
+   "layoutFamily([{ id: \"a\", name: \"A\" }], [e(\"a\", \"ghost\", \"parent\")]).n… length is 1"
+  ]
+ },
+ {
+  "id": "TC-RELC-021",
+  "module": "RELC",
+  "moduleName": "Relations rules, loops and layouts",
+  "category": "Validation",
+  "priority": "P1",
+  "file": "relations-core.spec.ts",
+  "line": 227,
+  "describe": "the family tree layout",
+  "title": "a loop of ties given anyway (bad data) still gives a finite layout",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call layoutFamily([{ id: \"a\", name: \"A\" }, { id: \"b\", name: \"B\" }], [e(\"a\", \"b\", \"parent\"), e(\"b\"…)"
+  ],
+  "testData": [],
+  "expected": [
+   "a loop of ties given anyway (bad data) still gives a finite layout",
+   "bad.nodes length is 2",
+   "Number.isFinite(bad.height) equals true"
+  ]
+ },
+ {
+  "id": "TC-RELC-022",
+  "module": "RELC",
+  "moduleName": "Relations rules, loops and layouts",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "relations-core.spec.ts",
+  "line": 233,
+  "describe": "the family tree layout",
+  "title": "the family of a page is everyone joined to it by a family tie, in either direction, and no one reached only through the wider world",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed out (no session)"
+  ],
+  "steps": [
+   "Call familyComponent(all, \"a\")",
+   "Call familyComponent(all, \"y\")",
+   "Call familyComponent(all, \"nobody\")"
+  ],
+  "testData": [],
+  "expected": [
+   "the family of a page is everyone joined to it by a family tie, in either direction, and no one reached only through the wider world",
+   "[...familyComponent(all, \"a\")].sort() equals [\"a\", \"b\", \"c\", \"d\"]",
+   "[...familyComponent(all, \"y\")].sort() equals [\"x\", \"y\"]",
+   "[...familyComponent(all, \"nobody\")] equals [\"nobody\"]"
+  ]
+ },
+ {
+  "id": "TC-RELC-023",
+  "module": "RELC",
+  "moduleName": "Relations rules, loops and layouts",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "relations-core.spec.ts",
+  "line": 244,
+  "describe": "the web layout",
+  "title": "pages sit evenly on a circle, ordered by kind then name, and the same every time",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call layoutWeb(nodes)",
+   "Call layoutWeb([...nodes].reverse())"
+  ],
+  "testData": [],
+  "expected": [
+   "pages sit evenly on a circle, ordered by kind then name, and the same every time",
+   "l.map((n) => n.name) equals [\"Bea\", \"Zed\", \"Ann\", \"Cat\"]",
+   "Math.hypot(n.x - c, n.y - c) is about WEB.radius",
+   "layoutWeb([...nodes].reverse()) equals l",
+   "new Set(l.map((n) => `${n.x},${n.y}`)).size equals 4"
+  ]
+ },
+ {
+  "id": "TC-RELC-024",
+  "module": "RELC",
+  "moduleName": "Relations rules, loops and layouts",
+  "category": "Validation",
+  "priority": "P1",
+  "file": "relations-core.spec.ts",
+  "line": 253,
+  "describe": "the web layout",
+  "title": "one page sits in the middle, and no pages is an empty picture",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed out (no session)"
+  ],
+  "steps": [
+   "Call layoutWeb([nodes[0]])",
+   "Call layoutWeb([])"
+  ],
+  "testData": [],
+  "expected": [
+   "one page sits in the middle, and no pages is an empty picture",
+   "layoutWeb([nodes[0]]) equals [{ ...nodes[0], x: WEB.size / 2, y: WEB.size / 2 }]",
+   "layoutWeb([]) equals []"
+  ]
+ },
+ {
+  "id": "TC-RELP-001",
+  "module": "RELP",
+  "moduleName": "Relations, family trees and webs (pages, API)",
+  "category": "Edge",
+  "priority": "P2",
+  "file": "relations.spec.ts",
+  "line": 83,
+  "describe": "migration",
+  "title": "the table's checks hold: no tie to itself, only the seven kinds, a 300-character note, symmetric ends in order, no repeats, and deleting a page deletes its ties",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)",
+   "Test rows use a `Zz`/`zz-` prefix and are deleted afterwards"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "the table's checks hold: no tie to itself, only the seven kinds, a 300-character note, symmetric ends in order, no repeats, and deleting a page deletes its ties",
+   "(await query<{ t: string }>(`SELECT to_regclass('relations')::text AS… equals relations",
+   "await query(`SELECT 1 FROM relations WHERE from_id = $1 OR to_id = $1… length is 0"
+  ]
+ },
+ {
+  "id": "TC-RELP-002",
+  "module": "RELP",
+  "moduleName": "Relations, family trees and webs (pages, API)",
+  "category": "Data Integrity",
+  "priority": "P0",
+  "file": "relations.spec.ts",
+  "line": 110,
+  "describe": "migration",
+  "title": "the rollback drops only the relations table (run inside a transaction that is rolled back)",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "the rollback drops only the relations table (run inside a transaction that is rolled back)",
+   "process.env.DATABASE_URL ?? \"\" does not: matches /neon\\.tech|neon\\.build/",
+   "(await client.query(`SELECT to_regclass('relations')::text AS t`)).ro… is empty",
+   "Number((await client.query(`SELECT count(*)::int AS n FROM entries`))… equals entries",
+   "(await client.query(`SELECT to_regclass('calendar_config')::text AS t… equals calendar_config",
+   "(await query<{ t: string }>(`SELECT to_regclass('relations')::text AS… equals relations"
+  ]
+ },
+ {
+  "id": "TC-RELP-003",
+  "module": "RELP",
+  "moduleName": "Relations, family trees and webs (pages, API)",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "relations.spec.ts",
+  "line": 130,
+  "describe": "adding and removing (the API)",
+  "title": "a good relation of each kind is added; a symmetric one is stored with its ends in order whichever way it was sent",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "a good relation of each kind is added; a symmetric one is stored with its ends in order whichever way it was sent",
+   "HTTP status equals 201",
+   "rows length is 7",
+   "r.from_id < r.to_id equals true",
+   "rows.find((r) => r.type === \"parent\") match object { from_id: a.id, to_id: b.id, note: \"adopted\" }"
+  ]
+ },
+ {
+  "id": "TC-RELP-004",
+  "module": "RELP",
+  "moduleName": "Relations, family trees and webs (pages, API)",
+  "category": "Validation",
+  "priority": "P1",
+  "file": "relations.spec.ts",
+  "line": 148,
+  "describe": "adding and removing (the API)",
+  "title": "a repeat is refused, and for a symmetric tie the other way round is a repeat too",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "a repeat is refused, and for a symmetric tie the other way round is a repeat too",
+   "HTTP status equals 201",
+   "HTTP status equals 400",
+   "response body equals That relation already exists.",
+   "await query(`SELECT 1 FROM relations`) length is 1"
+  ]
+ },
+ {
+  "id": "TC-RELP-005",
+  "module": "RELP",
+  "moduleName": "Relations, family trees and webs (pages, API)",
+  "category": "Concurrency",
+  "priority": "P1",
+  "file": "relations.spec.ts",
+  "line": 160,
+  "describe": "adding and removing (the API)",
+  "title": "two requests adding the same relation at once leave one row, one accepted and one told it exists",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "two requests adding the same relation at once leave one row, one accepted and one told it exists",
+   "codes.filter((c) => c === 201) length is 1",
+   "codes.filter((c) => c === 400) length is 2",
+   "await query(`SELECT 1 FROM relations`) length is 1"
+  ]
+ },
+ {
+  "id": "TC-RELP-006",
+  "module": "RELP",
+  "moduleName": "Relations, family trees and webs (pages, API)",
+  "category": "Validation",
+  "priority": "P1",
+  "file": "relations.spec.ts",
+  "line": 170,
+  "describe": "adding and removing (the API)",
+  "title": "nobody can be their own ancestor: a direct loop, a loop through two generations, and an overlord loop are refused with the reason",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "nobody can be their own ancestor: a direct loop, a loop through two generations, and an overlord loop are refused with the reason",
+   "HTTP status equals 201",
+   "HTTP status equals 400",
+   "response body matches /already a descendant of/",
+   "response body matches /each ranked above the other/",
+   "await query(`SELECT 1 FROM relations WHERE type = 'parent'`) length is 2"
+  ]
+ },
+ {
+  "id": "TC-RELP-007",
+  "module": "RELP",
+  "moduleName": "Relations, family trees and webs (pages, API)",
+  "category": "Validation",
+  "priority": "P1",
+  "file": "relations.spec.ts",
+  "line": 188,
+  "describe": "adding and removing (the API)",
+  "title": "a page cannot be related to itself, and pages of the wrong kind, a missing page and an archived page are refused",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "a page cannot be related to itself, and pages of the wrong kind, a missing page and an archived page are refused",
+   "response body equals A page cannot be related to itself.",
+   "response body matches /is a location, which cannot have a parent relation/",
+   "response body matches /is a organization/",
+   "response body matches /membership must point at one of/",
+   "response body matches /could not be found/",
+   "await query(`SELECT 1 FROM relations`) length is 0"
+  ]
+ },
+ {
+  "id": "TC-RELP-008",
+  "module": "RELP",
+  "moduleName": "Relations, family trees and webs (pages, API)",
+  "category": "Boundary",
+  "priority": "P1",
+  "file": "relations.spec.ts",
+  "line": 203,
+  "describe": "adding and removing (the API)",
+  "title": "the note limit holds at the boundary: 300 characters are saved, 301 are refused",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "the note limit holds at the boundary: 300 characters are saved, 301 are refused",
+   "HTTP status equals 201",
+   "HTTP status equals 400",
+   "response body matches /301 characters; the limit is 300/"
+  ]
+ },
+ {
+  "id": "TC-RELP-009",
+  "module": "RELP",
+  "moduleName": "Relations, family trees and webs (pages, API)",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "relations.spec.ts",
+  "line": 213,
+  "describe": "adding and removing (the API)",
+  "title": "a child can have four parents and no more; a page can have 200 relations and no more",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)",
+   "Test rows use a `Zz`/`zz-` prefix and are deleted afterwards"
+  ],
+  "steps": [
+   "Send POST /api/relations with { data: { fromId: extra[0].id, toId: hub.id, type: \"member\" } }",
+   "Send POST /api/relations with { data: { fromId: extra[1].id, toId: hub.id, type: \"member\" } }"
+  ],
+  "testData": [
+   "POST /api/relations"
+  ],
+  "expected": [
+   "a child can have four parents and no more; a page can have 200 relations and no more",
+   "HTTP status equals 201",
+   "HTTP status equals 400",
+   "response body matches /already has 4 parents/",
+   "extra.length is at least 2",
+   "response body matches /already has 200 relations/"
+  ]
+ },
+ {
+  "id": "TC-RELP-010",
+  "module": "RELP",
+  "moduleName": "Relations, family trees and webs (pages, API)",
+  "category": "Validation",
+  "priority": "P1",
+  "file": "relations.spec.ts",
+  "line": 237,
+  "describe": "adding and removing (the API)",
+  "title": "a bad request is a 400: missing fields, a bad id, an unknown kind of relation, extra keys, wrong types",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Send POST /api/relations with { data }"
+  ],
+  "testData": [
+   "POST /api/relations"
+  ],
+  "expected": [
+   "a bad request is a 400: missing fields, a bad id, an unknown kind of relation, extra keys, wrong types",
+   "HTTP status equals 400",
+   "await query(`SELECT 1 FROM relations`) length is 0"
+  ]
+ },
+ {
+  "id": "TC-RELP-011",
+  "module": "RELP",
+  "moduleName": "Relations, family trees and webs (pages, API)",
+  "category": "Validation",
+  "priority": "P1",
+  "file": "relations.spec.ts",
+  "line": 246,
+  "describe": "adding and removing (the API)",
+  "title": "removing: the DM can; an unknown, malformed or odd id is a 404; the relation is gone and the pages stay",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Send DELETE /api/relations/‹bad›",
+   "Send DELETE /api/relations/‹id›"
+  ],
+  "testData": [
+   "DELETE /api/relations/‹bad›",
+   "DELETE /api/relations/‹id›"
+  ],
+  "expected": [
+   "removing: the DM can; an unknown, malformed or odd id is a 404; the relation is gone and the pages stay",
+   "HTTP status equals 404",
+   "HTTP status equals 200",
+   "await query(`SELECT 1 FROM relations`) length is 0",
+   "await query(`SELECT 1 FROM entries WHERE id = ANY($1::uuid[])`, [[a.i… length is 2"
+  ]
+ },
+ {
+  "id": "TC-RELP-012",
+  "module": "RELP",
+  "moduleName": "Relations, family trees and webs (pages, API)",
+  "category": "Permission & Auth",
+  "priority": "P0",
+  "file": "relations.spec.ts",
+  "line": 258,
+  "describe": "adding and removing (the API)",
+  "title": "signed out: 401; a player: 403 for both adding and removing, and nothing changes",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Send POST /api/relations with { data: { fromId: a.id, toId: b.id, type: \"rival\" } }",
+   "Send DELETE /api/relations/‹id›"
+  ],
+  "testData": [
+   "POST /api/relations",
+   "DELETE /api/relations/‹id›"
+  ],
+  "expected": [
+   "signed out: 401; a player: 403 for both adding and removing, and nothing changes",
+   "HTTP status equals 401",
+   "HTTP status equals 403",
+   "await query(`SELECT 1 FROM relations`) length is 1"
+  ]
+ },
+ {
+  "id": "TC-RELP-013",
+  "module": "RELP",
+  "moduleName": "Relations, family trees and webs (pages, API)",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "relations.spec.ts",
+  "line": 279,
+  "describe": "on a page",
+  "title": "each page lists its relations as they read from that page, with the other page linked and any note",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Click [relation-item] › link \"f.p1.name\""
+  ],
+  "testData": [],
+  "expected": [
+   "each page lists its relations as they read from that page, with the other page linked and any note",
+   "items.filter({ hasText: `Child of ${f.g1.name}` }) count is 1",
+   "items.filter({ hasText: `Child of ${f.g2.name}` }) count is 1",
+   "items.filter({ hasText: `Spouse of ${f.p2.name}` }) count is 1",
+   "items.filter({ hasText: `Parent of ${f.c1.name}` }) count is 1",
+   "items count is 5",
+   "[relation-item] count is 1",
+   "page URL is new RegExp(`/codex/entry/${f.p1.name}$`)"
+  ]
+ },
+ {
+  "id": "TC-RELP-014",
+  "module": "RELP",
+  "moduleName": "Relations, family trees and webs (pages, API)",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "relations.spec.ts",
+  "line": 295,
+  "describe": "on a page",
+  "title": "the DM adds a relation from the page: pick a phrase, find the other page, add; reading it the other way round stores the same tie",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Choose parent:rev in `#relation-phrase`",
+   "Type parent.name.slice(0, 22) into `#relation-find`",
+   "Click [relation-result]",
+   "Type by blood into `#relation-note`",
+   "Click [relation-add]"
+  ],
+  "testData": [
+   "Choice parent:rev",
+   "Input parent.name.slice(0, 22)",
+   "Input by blood"
+  ],
+  "expected": [
+   "the DM adds a relation from the page: pick a phrase, find the other page, add; reading it the other way round stores the same tie",
+   "[relation-chosen] contains text parent.name",
+   "[relation-item] is visible",
+   "[relation-item] contains text (by blood)",
+   "await query(`SELECT from_id, to_id, type FROM relations`) equals [{ from_id: parent.id, to_id: child.id, type: \"parent\" }]"
+  ]
+ },
+ {
+  "id": "TC-RELP-015",
+  "module": "RELP",
+  "moduleName": "Relations, family trees and webs (pages, API)",
+  "category": "Validation",
+  "priority": "P1",
+  "file": "relations.spec.ts",
+  "line": 313,
+  "describe": "on a page",
+  "title": "a rule broken in the form is shown in plain words and nothing is added; adding with no page chosen is refused",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Click [relation-add]",
+   "Choose parent:rev in `#relation-phrase`",
+   "Type b.name.slice(0, 22) into `#relation-find`",
+   "Click [relation-result]"
+  ],
+  "testData": [
+   "Choice parent:rev",
+   "Input b.name.slice(0, 22)"
+  ],
+  "expected": [
+   "a rule broken in the form is shown in plain words and nothing is added; adding with no page chosen is refused",
+   "[relation-errors] contains text Choose the other page first",
+   "[relation-errors] contains text /already a descendant of|already exists/",
+   "await query(`SELECT 1 FROM relations`) length is 1"
+  ]
+ },
+ {
+  "id": "TC-RELP-016",
+  "module": "RELP",
+  "moduleName": "Relations, family trees and webs (pages, API)",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "relations.spec.ts",
+  "line": 329,
+  "describe": "on a page",
+  "title": "the DM removes a relation with its button, and a page with none says so and offers the form",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Click button \"Remove: Ally of ‹b.name›\""
+  ],
+  "testData": [],
+  "expected": [
+   "the DM removes a relation with its button, and a page with none says so and offers the form",
+   "text \"No relations yet.\" is visible",
+   "`#relation-phrase` is visible",
+   "await query(`SELECT 1 FROM relations`) length is 0"
+  ]
+ },
+ {
+  "id": "TC-RELP-017",
+  "module": "RELP",
+  "moduleName": "Relations, family trees and webs (pages, API)",
+  "category": "Edge",
+  "priority": "P2",
+  "file": "relations.spec.ts",
+  "line": 341,
+  "describe": "on a page",
+  "title": "deleting a page deletes its ties, and the other page's list no longer shows them",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "deleting a page deletes its ties, and the other page's list no longer shows them",
+   "[relation-item] count is 0"
+  ]
+ },
+ {
+  "id": "TC-RELP-018",
+  "module": "RELP",
+  "moduleName": "Relations, family trees and webs (pages, API)",
+  "category": "Permission & Auth",
+  "priority": "P0",
+  "file": "relations.spec.ts",
+  "line": 351,
+  "describe": "on a page",
+  "title": "an archived page's ties are hidden from the other page and come back when it is restored",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "an archived page's ties are hidden from the other page and come back when it is restored",
+   "[relation-item] count is 0",
+   "[relation-item] count is 1"
+  ]
+ },
+ {
+  "id": "TC-RELP-019",
+  "module": "RELP",
+  "moduleName": "Relations, family trees and webs (pages, API)",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "relations.spec.ts",
+  "line": 364,
+  "describe": "on a page",
+  "title": "a player sees only relations whose other end they may read, with no add form or remove button, and a hidden page is never named",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "a player sees only relations whose other end they may read, with no add form or remove button, and a hidden page is never named",
+   "html does not: contains hidden.name",
+   "[relation-item] count is 1",
+   "[relation-item] contains text open1.name",
+   "`#relation-phrase` count is 0",
+   "[relation-remove] count is 0"
+  ]
+ },
+ {
+  "id": "TC-RELP-020",
+  "module": "RELP",
+  "moduleName": "Relations, family trees and webs (pages, API)",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "relations.spec.ts",
+  "line": 387,
+  "describe": "the family tree",
+  "title": "each generation is a row, children below parents, spouses side by side, and the list says who is tied to whom",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "each generation is a row, children below parents, spouses side by side, and the list says who is tied to whom",
+   "heading \"Family of ‹f.p1.name›\" is visible",
+   "`[data-person]` count is 6",
+   "p1.y is greater than g1.y",
+   "c1.y is greater than p1.y",
+   "Math.abs(g1.y - g2.y) is less than 1",
+   "Math.abs(p1.y - p2.y) is less than 1",
+   "Math.abs(c1.y - c2.y) is less than 1",
+   "Math.abs(g1.x - g2.x) is greater than g1.width",
+   "Math.abs(g1.x - g2.x) is less than g1.width * 1.6",
+   "…and 7 more"
+  ]
+ },
+ {
+  "id": "TC-RELP-021",
+  "module": "RELP",
+  "moduleName": "Relations, family trees and webs (pages, API)",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "relations.spec.ts",
+  "line": 422,
+  "describe": "the family tree",
+  "title": "the tree opens from a page's relationship list, and the people in the list are real links",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Click link \"View the family tree\"",
+   "Click [family-person] › link \"f.g1.name\""
+  ],
+  "testData": [],
+  "expected": [
+   "the tree opens from a page's relationship list, and the people in the list are real links",
+   "page URL is new RegExp(`/codex/entry/${f.c1.name}/tree$`)",
+   "page URL is new RegExp(`/codex/entry/${f.g1.name}$`)"
+  ]
+ },
+ {
+  "id": "TC-RELP-022",
+  "module": "RELP",
+  "moduleName": "Relations, family trees and webs (pages, API)",
+  "category": "Validation",
+  "priority": "P1",
+  "file": "relations.spec.ts",
+  "line": 432,
+  "describe": "the family tree",
+  "title": "a page with no family ties gets an empty state; an unreadable or missing page is a 404",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Open /codex/entry/‹nm(\"missing\")›/tree",
+   "Open /codex/entry/‹secret.name›/tree"
+  ],
+  "testData": [
+   "URL /codex/entry/‹nm(\"missing\")›/tree",
+   "URL /codex/entry/‹secret.name›/tree"
+  ],
+  "expected": [
+   "a page with no family ties gets an empty state; an unreadable or missing page is a 404",
+   "text \"No family ties yet\" is visible",
+   "link \"Back to ‹lone.name›\" is visible",
+   "HTTP status equals 404",
+   "text \"Nothing has been revealed about this family yet.\" is visible"
+  ]
+ },
+ {
+  "id": "TC-RELP-023",
+  "module": "RELP",
+  "moduleName": "Relations, family trees and webs (pages, API)",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "relations.spec.ts",
+  "line": 450,
+  "describe": "the family tree",
+  "title": "a relative a player may not read is not drawn, not named, and not hinted at; a hidden middle person cuts off the branch beyond them",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "a relative a player may not read is not drawn, not named, and not hinted at; a hidden middle person cuts off the branch beyond them",
+   "html does not: contains hidden",
+   "`[data-person]` count is 2",
+   "person(page, f.p2.name) contains text Parent of ‹f.c1.name›",
+   "person(page, f.p2.name) does not: contains text Spouse"
+  ]
+ },
+ {
+  "id": "TC-RELP-024",
+  "module": "RELP",
+  "moduleName": "Relations, family trees and webs (pages, API)",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "relations.spec.ts",
+  "line": 469,
+  "describe": "the family tree",
+  "title": "the tree is the same every time it is drawn, and a long line of descent draws every generation",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Reload the page"
+  ],
+  "testData": [],
+  "expected": [
+   "the tree is the same every time it is drawn, and a long line of descent draws every generation",
+   "[family-generation] count is 8",
+   "[...ys].sort((a, b) => a - b) equals ys",
+   "new Set(ys).size equals 8",
+   "await rows() equals ys"
+  ]
+ },
+ {
+  "id": "TC-RELP-025",
+  "module": "RELP",
+  "moduleName": "Relations, family trees and webs (pages, API)",
+  "category": "Edge",
+  "priority": "P2",
+  "file": "relations.spec.ts",
+  "line": 500,
+  "describe": "the relationship web",
+  "title": "every tie among readable pages is drawn and listed, with how each is drawn and the count",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "every tie among readable pages is drawn and listed, with how each is drawn and the count",
+   "[relation-count] contains text /6 ties between 6 pages|ties between/",
+   "mine count is 6",
+   "mine.filter({ hasText: w.e1.name }).first() is visible",
+   "`[data-edge='ally']` count is 1",
+   "`[data-edge='rival']` count is 2",
+   "`[data-edge='vassal']` count is 1",
+   "`[data-edge='member']` count is 2",
+   "`[data-page]` count is 6",
+   "legend contains text word",
+   "…and 1 more"
+  ]
+ },
+ {
+  "id": "TC-RELP-026",
+  "module": "RELP",
+  "moduleName": "Relations, family trees and webs (pages, API)",
+  "category": "Edge",
+  "priority": "P2",
+  "file": "relations.spec.ts",
+  "line": 518,
+  "describe": "the relationship web",
+  "title": "the filters narrow by kind of tie and by kind of page; clearing restores; nonsense in the address is ignored",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Click link \"Clear filters\"",
+   "Open /relations?‹q›"
+  ],
+  "testData": [
+   "URL /relations?‹q›"
+  ],
+  "expected": [
+   "the filters narrow by kind of tie and by kind of page; clearing restores; nonsense in the address is ignored",
+   "[relation-row] count is 2",
+   "[relation-row] count is 0",
+   "text \"No ties match those filters\" is visible",
+   "[relation-row] count is 6",
+   "HTTP status equals 200",
+   "heading \"Relationships\" is visible"
+  ]
+ },
+ {
+  "id": "TC-RELP-027",
+  "module": "RELP",
+  "moduleName": "Relations, family trees and webs (pages, API)",
+  "category": "Security",
+  "priority": "P0",
+  "file": "relations.spec.ts",
+  "line": 536,
+  "describe": "the relationship web",
+  "title": "a player sees only ties between pages they may read; a secret power and its ties are nowhere in the picture or the table",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "a player sees only ties between pages they may read; a secret power and its ties are nowhere in the picture or the table",
+   "html does not: contains w.e2.name",
+   "html does not: contains old treaty",
+   "[relation-row] count is 4"
+  ]
+ },
+ {
+  "id": "TC-RELP-028",
+  "module": "RELP",
+  "moduleName": "Relations, family trees and webs (pages, API)",
+  "category": "Permission & Auth",
+  "priority": "P0",
+  "file": "relations.spec.ts",
+  "line": 553,
+  "describe": "the relationship web",
+  "title": "with no ties the DM is told how to add some and a player is told nothing has been revealed; a player with no grants sees an empty page that gives nothing away",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "with no ties the DM is told how to add some and a player is told nothing has been revealed; a player with no grants sees an empty page that gives nothing away",
+   "text \"No relationships yet\" is visible",
+   "text \"/add an alliance, a rivalry/\" is visible",
+   "text \"/Nothing has been revealed/\" is visible",
+   "page HTML does not: contains w.e1.name"
+  ]
+ },
+ {
+  "id": "TC-RELP-029",
+  "module": "RELP",
+  "moduleName": "Relations, family trees and webs (pages, API)",
+  "category": "Accessibility",
+  "priority": "P2",
+  "file": "relations.spec.ts",
+  "line": 569,
+  "describe": "the relationship web",
+  "title": "the sidebar has a Relationships link for everyone, and the filter form works by keyboard alone",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Open /",
+   "Press Space",
+   "Press Tab",
+   "Press Enter"
+  ],
+  "testData": [
+   "URL /"
+  ],
+  "expected": [
+   "the sidebar has a Relationships link for everyone, and the filter form works by keyboard alone",
+   "link \"Relationships\" is visible",
+   "page URL is /type=rival/",
+   "[relation-row] count is 2"
+  ]
+ },
+ {
+  "id": "TC-RELP-030",
+  "module": "RELP",
+  "moduleName": "Relations, family trees and webs (pages, API)",
+  "category": "Accessibility",
+  "priority": "P2",
+  "file": "relations.spec.ts",
+  "line": 595,
+  "describe": "accessibility and small screens",
+  "title": "a page with relations, its family tree and the web have no serious axe violations (dark)",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)",
+   "Browser storage is prepared before the page loads"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "a page with relations, its family tree and the web have no serious axe violations (dark)",
+   "serious equals []"
+  ]
+ },
+ {
+  "id": "TC-RELP-031",
+  "module": "RELP",
+  "moduleName": "Relations, family trees and webs (pages, API)",
+  "category": "Accessibility",
+  "priority": "P2",
+  "file": "relations.spec.ts",
+  "line": 595,
+  "describe": "accessibility and small screens",
+  "title": "a page with relations, its family tree and the web have no serious axe violations (light)",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)",
+   "Browser storage is prepared before the page loads"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "a page with relations, its family tree and the web have no serious axe violations (light)",
+   "serious equals []"
+  ]
+ },
+ {
+  "id": "TC-RELP-032",
+  "module": "RELP",
+  "moduleName": "Relations, family trees and webs (pages, API)",
+  "category": "Responsive",
+  "priority": "P2",
+  "file": "relations.spec.ts",
+  "line": 611,
+  "describe": "accessibility and small screens",
+  "title": "at 375px the page, the family tree and the web do not scroll the page sideways (the pictures scroll inside their own frame)",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "at 375px the page, the family tree and the web do not scroll the page sideways (the pictures scroll inside their own frame)",
+   "await p.evaluate(() => document.documentElement.scrollWidth - documen… is at most 0"
+  ]
+ },
+ {
   "id": "TC-RESP-001",
   "module": "RESP",
   "moduleName": "Responsive layout",

@@ -10,6 +10,7 @@ import { EntryHero } from "@/components/entry-hero";
 import { LocalGraph, type LocalNode } from "@/components/local-graph";
 import { RecordView } from "@/components/record-view";
 import { SecretBlockCard } from "@/components/secret-block";
+import { RelationsPanel } from "@/components/relations-panel";
 import { StatblockCard } from "@/components/statblock-card";
 import { LinkedNames } from "@/components/shared/linked-names";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
@@ -36,6 +37,7 @@ import { KIND_ICONS } from "@/lib/section-icons";
 import { hasMarkers, splitAtMarkers } from "@/lib/secret-blocks";
 import { parseStatblock } from "@/lib/statblock";
 import { getCalendar } from "@/lib/calendar-store";
+import { relationsOf } from "@/lib/relations";
 import { EVENT_DATE_KEYS, formatEventWhen, parseEventDates } from "@/lib/events";
 import { secretsForViewer } from "@/lib/secrets";
 import { listPlayers } from "@/lib/rbac";
@@ -132,6 +134,8 @@ export default async function EntryPage({
     const parsed = parseEventDates(entry.fields ?? {}, cal);
     eventWhen = parsed.ok && cal ? formatEventWhen(cal, parsed.dates) : "Undated";
   }
+
+  const shownRelations = await relationsOf(user, entry.id);
 
   const fieldDefs = def?.fields ?? [];
   // A hero kind moves its key facts into the hero card, so they are not shown twice.
@@ -388,6 +392,7 @@ export default async function EntryPage({
 
         {/* ---- Connections ---- */}
         <aside className="min-w-0">
+          <RelationsPanel entryId={entry.id} slug={entry.slug} shown={shownRelations} forDm={isDM} />
           <LocalGraph centre={{ id: entry.id, slug: entry.slug, name: entry.name, kind: entry.kind }} neighbours={neighbours} />
 
           {children.length > 0 && (
