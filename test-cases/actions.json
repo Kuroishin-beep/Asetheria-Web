@@ -988,5 +988,145 @@
     ]
    }
   ]
+ },
+ {
+  "action": "Draw a map region",
+  "happy": [
+   {
+    "module": "MREG",
+    "any": [
+     "click the corners, Finish"
+    ]
+   }
+  ],
+  "invalid": [
+   {
+    "module": "MREG",
+    "any": [
+     "crosses itself is refused on the spot"
+    ]
+   }
+  ],
+  "unauthorized": [
+   {
+    "module": "MREG",
+    "any": [
+     "a player has no drawing controls"
+    ]
+   }
+  ],
+  "boundary": [
+   {
+    "module": "MREG",
+    "any": [
+     "200 points are accepted"
+    ]
+   }
+  ]
+ },
+ {
+  "action": "Open a region on the map",
+  "happy": [
+   {
+    "module": "MREG",
+    "any": [
+     "tapping inside a region"
+    ]
+   }
+  ],
+  "invalid": [
+   {
+    "module": "MREG",
+    "any": [
+     "concave region"
+    ]
+   }
+  ],
+  "unauthorized": [
+   {
+    "module": "MREG",
+    "any": [
+     "a player sees only regions linked"
+    ]
+   }
+  ],
+  "boundary": [
+   {
+    "module": "MREG",
+    "any": [
+     "pin on top of a region"
+    ]
+   }
+  ]
+ },
+ {
+  "action": "Show or hide a map layer",
+  "happy": [
+   {
+    "module": "MREG",
+    "any": [
+     "switching a layer off"
+    ]
+   }
+  ],
+  "invalid": [
+   {
+    "module": "MREG",
+    "any": [
+     "a layer is added, renamed"
+    ]
+   }
+  ],
+  "unauthorized": [
+   {
+    "module": "MREG",
+    "any": [
+     "a layer that holds only hidden things"
+    ]
+   }
+  ],
+  "boundary": [
+   {
+    "module": "MREG",
+    "any": [
+     "at most 20 layers"
+    ]
+   }
+  ]
+ },
+ {
+  "action": "Open a city map from a pin",
+  "happy": [
+   {
+    "module": "MREG",
+    "any": [
+     "a pin that opens another map offers"
+    ]
+   }
+  ],
+  "invalid": [
+   {
+    "module": "MREG",
+    "any": [
+     "a loop is refused"
+    ]
+   }
+  ],
+  "unauthorized": [
+   {
+    "module": "MREG",
+    "any": [
+     "a player cannot change a pin"
+    ]
+   }
+  ],
+  "boundary": [
+   {
+    "module": "MREG",
+    "any": [
+     "it may not open its own map"
+    ]
+   }
+  ]
  }
 ]

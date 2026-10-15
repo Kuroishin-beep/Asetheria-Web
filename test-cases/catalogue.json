@@ -10570,6 +10570,142 @@
   ]
  },
  {
+  "id": "TC-IMGS-001",
+  "module": "IMGS",
+  "moduleName": "Map image size and names",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "image-size.spec.ts",
+  "line": 33,
+  "describe": "reading the size",
+  "title": "a PNG's size is read from its header, for tall, wide and tiny images, and the real continent map",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call imageSize(png(64, 48))",
+   "Call imageSize(png(1, 1))",
+   "Call imageSize(png(5000, 20))",
+   "Call imageSize(png(20, 5000))",
+   "Call imageSize(real)"
+  ],
+  "testData": [],
+  "expected": [
+   "a PNG's size is read from its header, for tall, wide and tiny images, and the real continent map",
+   "imageSize(png(64, 48)) equals { width: 64, height: 48 }",
+   "imageSize(png(1, 1)) equals { width: 1, height: 1 }",
+   "imageSize(png(5000, 20)) equals { width: 5000, height: 20 }",
+   "imageSize(png(20, 5000)) equals { width: 20, height: 5000 }",
+   "imageSize(real) equals { width: 2250, height: 1200 }"
+  ]
+ },
+ {
+  "id": "TC-IMGS-002",
+  "module": "IMGS",
+  "moduleName": "Map image size and names",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "image-size.spec.ts",
+  "line": 43,
+  "describe": "reading the size",
+  "title": "a JPEG's size is read after the segments that come first, whichever kind of frame it uses",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call imageSize(jpeg(640, 480))",
+   "Call imageSize(jpeg(3000, 2000, 0xc2))",
+   "Call imageSize(jpeg(1, 65535))"
+  ],
+  "testData": [],
+  "expected": [
+   "a JPEG's size is read after the segments that come first, whichever kind of frame it uses",
+   "imageSize(jpeg(640, 480)) equals { width: 640, height: 480 }",
+   "imageSize(jpeg(3000, 2000, 0xc2)) equals { width: 3000, height: 2000 }",
+   "imageSize(jpeg(1, 65535)) equals { width: 1, height: 65535 }"
+  ]
+ },
+ {
+  "id": "TC-IMGS-003",
+  "module": "IMGS",
+  "moduleName": "Map image size and names",
+  "category": "Validation",
+  "priority": "P1",
+  "file": "image-size.spec.ts",
+  "line": 49,
+  "describe": "reading the size",
+  "title": "anything else is refused: text, an empty file, a short one, a damaged PNG or JPEG, a GIF, a zero size",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call imageSize(bad)",
+   "Call imageSize(notIhdr)"
+  ],
+  "testData": [],
+  "expected": [
+   "anything else is refused: text, an empty file, a short one, a damaged PNG or JPEG, a GIF, a zero size",
+   "imageSize(bad) is empty",
+   "imageSize(notIhdr) is empty"
+  ]
+ },
+ {
+  "id": "TC-IMGS-004",
+  "module": "IMGS",
+  "moduleName": "Map image size and names",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "image-size.spec.ts",
+  "line": 60,
+  "describe": "names from file names",
+  "title": "a title is made of the words, capitalised, whatever separates them",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call titleFromFile(\"port-city.png\")",
+   "Call titleFromFile(\"the_old_harbour_map.jpg\")",
+   "Call titleFromFile(\"Helarchon district.JPEG\")",
+   "Call titleFromFile(\".png\")"
+  ],
+  "testData": [],
+  "expected": [
+   "a title is made of the words, capitalised, whatever separates them",
+   "titleFromFile(\"port-city.png\") equals Port City",
+   "titleFromFile(\"the_old_harbour_map.jpg\") equals The Old Harbour Map",
+   "titleFromFile(\"Helarchon district.JPEG\") equals Helarchon District",
+   "titleFromFile(\".png\") equals Map"
+  ]
+ },
+ {
+  "id": "TC-IMGS-005",
+  "module": "IMGS",
+  "moduleName": "Map image size and names",
+  "category": "Validation",
+  "priority": "P1",
+  "file": "image-size.spec.ts",
+  "line": 67,
+  "describe": "names from file names",
+  "title": "a slug is lower case, with single hyphens, and never empty or starting or ending with a hyphen",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call slugFromFile(\"Port City.png\")",
+   "Call slugFromFile(\"__The Old__Harbour!!.jpg\")",
+   "Call slugFromFile(\"map (2).png\")",
+   "Call slugFromFile(\"!!!.png\")"
+  ],
+  "testData": [],
+  "expected": [
+   "a slug is lower case, with single hyphens, and never empty or starting or ending with a hyphen",
+   "slugFromFile(\"Port City.png\") equals port-city",
+   "slugFromFile(\"__The Old__Harbour!!.jpg\") equals the-old-harbour",
+   "slugFromFile(\"map (2).png\") equals map-2",
+   "slugFromFile(\"!!!.png\") equals map"
+  ]
+ },
+ {
   "id": "TC-IMEX-001",
   "module": "IMEX",
   "moduleName": "Import and export",
@@ -11850,6 +11986,1769 @@
   "expected": [
    "no sideways scroll at desktop width (1280px)",
    "overflow is at most 0"
+  ]
+ },
+ {
+  "id": "TC-MGEO-001",
+  "module": "MGEO",
+  "moduleName": "Map region geometry",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "map-geometry.spec.ts",
+  "line": 19,
+  "describe": "a good outline",
+  "title": "a triangle, a square, a concave L and a many-sided shape are all accepted",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call validatePolygon([[0.1, 0.1], [0.9, 0.1], [0.5, 0.9]])",
+   "Call validatePolygon(SQUARE)",
+   "Call validatePolygon(L_SHAPE)",
+   "Call validatePolygon(regular(37))"
+  ],
+  "testData": [],
+  "expected": [
+   "a triangle, a square, a concave L and a many-sided shape are all accepted",
+   "validatePolygon([[0.1, 0.1], [0.9, 0.1], [0.5, 0.9]]) equals []",
+   "validatePolygon(SQUARE) equals []",
+   "validatePolygon(L_SHAPE) equals []",
+   "validatePolygon(regular(37)) equals []"
+  ]
+ },
+ {
+  "id": "TC-MGEO-002",
+  "module": "MGEO",
+  "moduleName": "Map region geometry",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "map-geometry.spec.ts",
+  "line": 26,
+  "describe": "a good outline",
+  "title": "the outline may run the other way round (clockwise or anticlockwise) and start at any corner",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call validatePolygon([...SQUARE].reverse())",
+   "Call validatePolygon([...SQUARE.slice(2), ...SQUARE.slice(0, 2)])"
+  ],
+  "testData": [],
+  "expected": [
+   "the outline may run the other way round (clockwise or anticlockwise) and start at any corner",
+   "validatePolygon([...SQUARE].reverse()) equals []",
+   "validatePolygon([...SQUARE.slice(2), ...SQUARE.slice(0, 2)]) equals []"
+  ]
+ },
+ {
+  "id": "TC-MGEO-003",
+  "module": "MGEO",
+  "moduleName": "Map region geometry",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "map-geometry.spec.ts",
+  "line": 31,
+  "describe": "a good outline",
+  "title": "the corners of the map itself are allowed: the whole map can be a region",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call validatePolygon([[0, 0], [1, 0], [1, 1], [0, 1]])"
+  ],
+  "testData": [],
+  "expected": [
+   "the corners of the map itself are allowed: the whole map can be a region",
+   "validatePolygon([[0, 0], [1, 0], [1, 1], [0, 1]]) equals []"
+  ]
+ },
+ {
+  "id": "TC-MGEO-004",
+  "module": "MGEO",
+  "moduleName": "Map region geometry",
+  "category": "Boundary",
+  "priority": "P1",
+  "file": "map-geometry.spec.ts",
+  "line": 37,
+  "describe": "what is refused, in plain words",
+  "title": "not a list, or the wrong number of points: 2 is too few, 3 and 200 are fine, 201 is too many",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call validatePolygon(bad)",
+   "Call validatePolygon([[0.1, 0.1], [0.9, 0.9]])",
+   "Call validatePolygon(regular(POLYGON.maxPoints))",
+   "Call validatePolygon(regular(POLYGON.maxPoints + 1))"
+  ],
+  "testData": [],
+  "expected": [
+   "not a list, or the wrong number of points: 2 is too few, 3 and 200 are fine, 201 is too many",
+   "validatePolygon(bad) length is 1",
+   "validatePolygon([[0.1, 0.1], [0.9, 0.9]]) equals [\"A region needs at least 3 points.\"]",
+   "validatePolygon(regular(POLYGON.maxPoints)) equals []",
+   "validatePolygon(regular(POLYGON.maxPoints + 1)) equals [\"A region can have at most 200 points.\"]"
+  ]
+ },
+ {
+  "id": "TC-MGEO-005",
+  "module": "MGEO",
+  "moduleName": "Map region geometry",
+  "category": "Validation",
+  "priority": "P1",
+  "file": "map-geometry.spec.ts",
+  "line": 44,
+  "describe": "what is refused, in plain words",
+  "title": "a point that is not a pair of numbers, is NaN, is infinite, or is outside the map, each naming the point",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call validatePolygon([[0.1, 0.1], \"x\", [0.5, 0.9]])",
+   "Call validatePolygon([[0.1, 0.1], [0.9, 0.1, 0.5], [0.5, 0.9]])",
+   "Call validatePolygon([[0.1, 0.1], [Number.NaN, 0.1], [0.5, 0.9]])",
+   "Call validatePolygon([[0.1, 0.1], [Number.POSITIVE_INFINITY, 0.1], [0.5, 0.9]])",
+   "Call validatePolygon([[0.1, 0.1], [\"0.5\", 0.1], [0.5, 0.9]])",
+   "Call validatePolygon([[0.1, 0.1], [1.0000001, 0.1], [0.5, 0.9]])",
+   "Call validatePolygon([[0.1, 0.1], [0.9, -0.0000001], [0.5, 0.9]])"
+  ],
+  "testData": [],
+  "expected": [
+   "a point that is not a pair of numbers, is NaN, is infinite, or is outside the map, each naming the point",
+   "validatePolygon([[0.1, 0.1], \"x\", [0.5, 0.9]]) equals [\"Point 2 is not a pair of numbers.\"]",
+   "validatePolygon([[0.1, 0.1], [0.9, 0.1, 0.5], [0.5, 0.9]]) equals [\"Point 2 is not a pair of numbers.\"]",
+   "validatePolygon([[0.1, 0.1], [Number.NaN, 0.1], [0.5, 0.9]]) equals [\"Point 2 is not a pair of numbers.\"]",
+   "validatePolygon([[0.1, 0.1], [Number.POSITIVE_INFINITY, 0.1], [0.5, 0… equals [\"Point 2 is not a pair of numbers.\"]",
+   "validatePolygon([[0.1, 0.1], [\"0.5\", 0.1], [0.5, 0.9]]) equals [\"Point 2 is not a pair of numbers.\"]",
+   "validatePolygon([[0.1, 0.1], [1.0000001, 0.1], [0.5, 0.9]]) equals [\"Point 2 is outside the map.\"]",
+   "validatePolygon([[0.1, 0.1], [0.9, -0.0000001], [0.5, 0.9]]) equals [\"Point 2 is outside the map.\"]"
+  ]
+ },
+ {
+  "id": "TC-MGEO-006",
+  "module": "MGEO",
+  "moduleName": "Map region geometry",
+  "category": "Validation",
+  "priority": "P1",
+  "file": "map-geometry.spec.ts",
+  "line": 54,
+  "describe": "what is refused, in plain words",
+  "title": "every bad point is reported together",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call validatePolygon([[2, 2], [-1, 0.1], [0.5, 5], \"x\"])"
+  ],
+  "testData": [],
+  "expected": [
+   "every bad point is reported together",
+   "validatePolygon([[2, 2], [-1, 0.1], [0.5, 5], \"x\"]).length equals 4"
+  ]
+ },
+ {
+  "id": "TC-MGEO-007",
+  "module": "MGEO",
+  "moduleName": "Map region geometry",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "map-geometry.spec.ts",
+  "line": 58,
+  "describe": "what is refused, in plain words",
+  "title": "two neighbouring points on the same spot, including the last and the first",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call validatePolygon([[0.1, 0.1], [0.1, 0.1], [0.9, 0.5], [0.5, 0.9]])",
+   "Call validatePolygon([[0.1, 0.1], [0.9, 0.5], [0.5, 0.9], [0.1, 0.1]])"
+  ],
+  "testData": [],
+  "expected": [
+   "two neighbouring points on the same spot, including the last and the first",
+   "validatePolygon([[0.1, 0.1], [0.1, 0.1], [0.9, 0.5], [0.5, 0.9]]) equals [\"Points 1 and 2 are the same spot.\"]",
+   "validatePolygon([[0.1, 0.1], [0.9, 0.5], [0.5, 0.9], [0.1, 0.1]]) equals [\"Points 4 and 1 are the same spot.\"]"
+  ]
+ },
+ {
+  "id": "TC-MGEO-008",
+  "module": "MGEO",
+  "moduleName": "Map region geometry",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "map-geometry.spec.ts",
+  "line": 63,
+  "describe": "what is refused, in plain words",
+  "title": "points in a line have no area",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call validatePolygon([[0.1, 0.1], [0.5, 0.5], [0.9, 0.9]])",
+   "Call validatePolygon([[0.1, 0.5], [0.4, 0.5], [0.9, 0.5]])"
+  ],
+  "testData": [],
+  "expected": [
+   "points in a line have no area",
+   "validatePolygon([[0.1, 0.1], [0.5, 0.5], [0.9, 0.9]]) equals [\"The region has no area: its points lie in a line.\"]",
+   "validatePolygon([[0.1, 0.5], [0.4, 0.5], [0.9, 0.5]]) length is 1"
+  ]
+ },
+ {
+  "id": "TC-MGEO-009",
+  "module": "MGEO",
+  "moduleName": "Map region geometry",
+  "category": "Validation",
+  "priority": "P1",
+  "file": "map-geometry.spec.ts",
+  "line": 68,
+  "describe": "what is refused, in plain words",
+  "title": "an outline that crosses itself (a bow tie, a figure of eight, a spike through the body) is refused",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call validatePolygon(BOWTIE)",
+   "Call validatePolygon([[0.1, 0.1], [0.9, 0.1], [0.9, 0.5], [0.1, 0.5], [0.1, 0.9], [0.9, 0.9], [0.5, …)",
+   "Call validatePolygon([[0.1, 0.1], [0.9, 0.1], [0.9, 0.9], [0.1, 0.9], [0.5, 0.0], [0.5, 1.0]])"
+  ],
+  "testData": [],
+  "expected": [
+   "an outline that crosses itself (a bow tie, a figure of eight, a spike through the body) is refused",
+   "validatePolygon(BOWTIE) equals [message]",
+   "validatePolygon([[0.1, 0.1], [0.9, 0.1], [0.9, 0.5], [0.1, 0.5], [0.1… equals [message]",
+   "validatePolygon([[0.1, 0.1], [0.9, 0.1], [0.9, 0.9], [0.1, 0.9], [0.5… equals [message]"
+  ]
+ },
+ {
+  "id": "TC-MGEO-010",
+  "module": "MGEO",
+  "moduleName": "Map region geometry",
+  "category": "Validation",
+  "priority": "P1",
+  "file": "map-geometry.spec.ts",
+  "line": 75,
+  "describe": "what is refused, in plain words",
+  "title": "an outline whose corner touches another edge is refused too (a shared edge point counts as touching)",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call validatePolygon([[0.1, 0.1], [0.9, 0.1], [0.9, 0.9], [0.5, 0.1], [0.1, 0.9]])"
+  ],
+  "testData": [],
+  "expected": [
+   "an outline whose corner touches another edge is refused too (a shared edge point counts as touching)",
+   "validatePolygon([[0.1, 0.1], [0.9, 0.1], [0.9, 0.9], [0.5, 0.1], [0.1… length is 1"
+  ]
+ },
+ {
+  "id": "TC-MGEO-011",
+  "module": "MGEO",
+  "moduleName": "Map region geometry",
+  "category": "Concurrency",
+  "priority": "P1",
+  "file": "map-geometry.spec.ts",
+  "line": 81,
+  "describe": "segments and area",
+  "title": "segments that cross, touch at an end, overlap, are parallel or apart",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call segmentsIntersect(p(0, 0), p(1, 1), p(0, 1), p(1, 0))",
+   "Call segmentsIntersect(p(0, 0), p(1, 0), p(1, 0), p(1, 1))",
+   "Call segmentsIntersect(p(0, 0), p(2, 0), p(1, 0), p(3, 0))",
+   "Call segmentsIntersect(p(0, 0), p(1, 0), p(0, 1), p(1, 1))",
+   "Call segmentsIntersect(p(0, 0), p(1, 0), p(2, 0), p(3, 0))",
+   "Call segmentsIntersect(p(0, 0), p(1, 1), p(2, 2), p(3, 3))",
+   "Call segmentsIntersect(p(0, 0), p(0.5, 0.5), p(0.5, 0.5), p(1, 0))"
+  ],
+  "testData": [],
+  "expected": [
+   "segments that cross, touch at an end, overlap, are parallel or apart",
+   "segmentsIntersect(p(0, 0), p(1, 1), p(0, 1), p(1, 0)) equals true",
+   "segmentsIntersect(p(0, 0), p(1, 0), p(1, 0), p(1, 1)) equals true",
+   "segmentsIntersect(p(0, 0), p(2, 0), p(1, 0), p(3, 0)) equals true",
+   "segmentsIntersect(p(0, 0), p(1, 0), p(0, 1), p(1, 1)) equals false",
+   "segmentsIntersect(p(0, 0), p(1, 0), p(2, 0), p(3, 0)) equals false",
+   "segmentsIntersect(p(0, 0), p(1, 1), p(2, 2), p(3, 3)) equals false",
+   "segmentsIntersect(p(0, 0), p(0.5, 0.5), p(0.5, 0.5), p(1, 0)) equals true"
+  ]
+ },
+ {
+  "id": "TC-MGEO-012",
+  "module": "MGEO",
+  "moduleName": "Map region geometry",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "map-geometry.spec.ts",
+  "line": 92,
+  "describe": "segments and area",
+  "title": "the area of a square, a triangle and an L, in either direction",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call polygonArea(SQUARE)",
+   "Call polygonArea([...SQUARE].reverse())",
+   "Call polygonArea([[0, 0], [1, 0], [0, 1]])",
+   "Call polygonArea(L_SHAPE)"
+  ],
+  "testData": [],
+  "expected": [
+   "the area of a square, a triangle and an L, in either direction",
+   "polygonArea(SQUARE) is about 0.36",
+   "polygonArea([...SQUARE].reverse()) is about 0.36",
+   "polygonArea([[0, 0], [1, 0], [0, 1]]) is about 0.5",
+   "polygonArea(L_SHAPE) is about 0.4 * 0.4 + 0.8 * 0.4"
+  ]
+ },
+ {
+  "id": "TC-MGEO-013",
+  "module": "MGEO",
+  "moduleName": "Map region geometry",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "map-geometry.spec.ts",
+  "line": 99,
+  "describe": "segments and area",
+  "title": "a regular outline never crosses itself, whatever the number of corners",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call selfIntersects(regular(n))",
+   "Call selfIntersects(BOWTIE)"
+  ],
+  "testData": [],
+  "expected": [
+   "a regular outline never crosses itself, whatever the number of corners",
+   "selfIntersects(regular(n)) equals false",
+   "selfIntersects(BOWTIE) equals true"
+  ]
+ },
+ {
+  "id": "TC-MGEO-014",
+  "module": "MGEO",
+  "moduleName": "Map region geometry",
+  "category": "Edge",
+  "priority": "P2",
+  "file": "map-geometry.spec.ts",
+  "line": 106,
+  "describe": "which side of the outline",
+  "title": "a point inside, outside, on an edge and on a corner of a square",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call pointInPolygon([0.5, 0.5], SQUARE)",
+   "Call pointInPolygon([0.1, 0.5], SQUARE)",
+   "Call pointInPolygon([0.9, 0.9], SQUARE)",
+   "Call pointInPolygon([0.5, 0.2], SQUARE)",
+   "Call pointInPolygon([0.2, 0.2], SQUARE)",
+   "Call pointInPolygon([0.8, 0.8], SQUARE)"
+  ],
+  "testData": [],
+  "expected": [
+   "a point inside, outside, on an edge and on a corner of a square",
+   "pointInPolygon([0.5, 0.5], SQUARE) equals true",
+   "pointInPolygon([0.1, 0.5], SQUARE) equals false",
+   "pointInPolygon([0.9, 0.9], SQUARE) equals false",
+   "pointInPolygon([0.5, 0.2], SQUARE) equals true",
+   "pointInPolygon([0.2, 0.2], SQUARE) equals true",
+   "pointInPolygon([0.8, 0.8], SQUARE) equals true"
+  ]
+ },
+ {
+  "id": "TC-MGEO-015",
+  "module": "MGEO",
+  "moduleName": "Map region geometry",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "map-geometry.spec.ts",
+  "line": 115,
+  "describe": "which side of the outline",
+  "title": "a concave shape: the notch is outside, the arms are inside",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call pointInPolygon([0.3, 0.3], L_SHAPE)",
+   "Call pointInPolygon([0.7, 0.7], L_SHAPE)",
+   "Call pointInPolygon([0.7, 0.3], L_SHAPE)",
+   "Call pointInPolygon([0.5, 0.3], L_SHAPE)"
+  ],
+  "testData": [],
+  "expected": [
+   "a concave shape: the notch is outside, the arms are inside",
+   "pointInPolygon([0.3, 0.3], L_SHAPE) equals true",
+   "pointInPolygon([0.7, 0.7], L_SHAPE) equals true",
+   "pointInPolygon([0.7, 0.3], L_SHAPE) equals false",
+   "pointInPolygon([0.5, 0.3], L_SHAPE) equals true"
+  ]
+ },
+ {
+  "id": "TC-MGEO-016",
+  "module": "MGEO",
+  "moduleName": "Map region geometry",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "map-geometry.spec.ts",
+  "line": 122,
+  "describe": "which side of the outline",
+  "title": "every point in a grid agrees with the area: the share inside matches the polygon's area to within a grid step",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call pointInPolygon([(i + 0.5) / n, (j + 0.5) / n], poly)",
+   "Call polygonArea(poly)"
+  ],
+  "testData": [],
+  "expected": [
+   "every point in a grid agrees with the area: the share inside matches the polygon's area to within a grid step",
+   "Math.abs(inside / (n * n) - polygonArea(poly)) is less than 0.01"
+  ]
+ },
+ {
+  "id": "TC-MGEO-017",
+  "module": "MGEO",
+  "moduleName": "Map region geometry",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "map-geometry.spec.ts",
+  "line": 131,
+  "describe": "which side of the outline",
+  "title": "the middle of a square, and of an L, lies inside the square and on the L's body",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call centroid(SQUARE)",
+   "Call pointInPolygon(centroid(L_SHAPE), L_SHAPE)",
+   "Call centroid(L_SHAPE)"
+  ],
+  "testData": [],
+  "expected": [
+   "the middle of a square, and of an L, lies inside the square and on the L's body",
+   "c[0] is about 0.5",
+   "c[1] is about 0.5",
+   "pointInPolygon(centroid(L_SHAPE), L_SHAPE) equals true"
+  ]
+ },
+ {
+  "id": "TC-MGEO-018",
+  "module": "MGEO",
+  "moduleName": "Map region geometry",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "map-geometry.spec.ts",
+  "line": 140,
+  "describe": "city maps that open other maps",
+  "title": "a map cannot open itself, a map it was opened from, or any map further back along the chain",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call wouldLoopMaps(chain, \"city\", \"city\")",
+   "Call wouldLoopMaps(chain, \"city\", \"region\")",
+   "Call wouldLoopMaps(chain, \"city\", \"world\")",
+   "Call wouldLoopMaps(chain, \"region\", \"world\")"
+  ],
+  "testData": [],
+  "expected": [
+   "a map cannot open itself, a map it was opened from, or any map further back along the chain",
+   "wouldLoopMaps(chain, \"city\", \"city\") equals true",
+   "wouldLoopMaps(chain, \"city\", \"region\") equals true",
+   "wouldLoopMaps(chain, \"city\", \"world\") equals true",
+   "wouldLoopMaps(chain, \"region\", \"world\") equals true"
+  ]
+ },
+ {
+  "id": "TC-MGEO-019",
+  "module": "MGEO",
+  "moduleName": "Map region geometry",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "map-geometry.spec.ts",
+  "line": 148,
+  "describe": "city maps that open other maps",
+  "title": "a new map further down, a second map from the same one, and an unrelated map are all fine",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call wouldLoopMaps(chain, \"city\", \"district\")",
+   "Call wouldLoopMaps(chain, \"world\", \"other\")",
+   "Call wouldLoopMaps(chain, \"world\", \"city\")",
+   "Call wouldLoopMaps([], \"a\", \"b\")"
+  ],
+  "testData": [],
+  "expected": [
+   "a new map further down, a second map from the same one, and an unrelated map are all fine",
+   "wouldLoopMaps(chain, \"city\", \"district\") equals false",
+   "wouldLoopMaps(chain, \"world\", \"other\") equals false",
+   "wouldLoopMaps(chain, \"world\", \"city\") equals false",
+   "wouldLoopMaps([], \"a\", \"b\") equals false"
+  ]
+ },
+ {
+  "id": "TC-MGEO-020",
+  "module": "MGEO",
+  "moduleName": "Map region geometry",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "map-geometry.spec.ts",
+  "line": 156,
+  "describe": "city maps that open other maps",
+  "title": "a long chain is walked all the way, and a diamond (two roads to one map) is allowed",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call wouldLoopMaps(long, \"m200\", \"m0\")",
+   "Call wouldLoopMaps(long, \"m200\", \"elsewhere\")",
+   "Call wouldLoopMaps([{ from: \"a\", to: \"b\" }, { from: \"a\", to: \"c\" }, { from: \"b\", to: \"d\" }], \"c\", …)"
+  ],
+  "testData": [],
+  "expected": [
+   "a long chain is walked all the way, and a diamond (two roads to one map) is allowed",
+   "wouldLoopMaps(long, \"m200\", \"m0\") equals true",
+   "wouldLoopMaps(long, \"m200\", \"elsewhere\") equals false",
+   "wouldLoopMaps([{ from: \"a\", to: \"b\" }, { from: \"a\", to: \"c\" }, { from… equals false"
+  ]
+ },
+ {
+  "id": "TC-MREG-001",
+  "module": "MREG",
+  "moduleName": "Map regions, layers and city maps",
+  "category": "Data Integrity",
+  "priority": "P0",
+  "file": "map-regions.spec.ts",
+  "line": 101,
+  "describe": "migration",
+  "title": "the tables and pin columns exist and hold their checks and cascades, and the migration is idempotent",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)",
+   "Test rows use a `Zz`/`zz-` prefix and are deleted afterwards"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "the tables and pin columns exist and hold their checks and cascades, and the migration is idempotent",
+   "(await query<{ layer_id: string | null }>(`SELECT layer_id FROM map_p… is empty",
+   "(await query<{ layer_id: string | null }>(`SELECT layer_id FROM map_r… is empty",
+   "await query(`SELECT 1 FROM map_regions WHERE id = $1`, [rid]) length is 0",
+   "(await query<{ child_map_id: string | null }>(`SELECT child_map_id FR… is absent"
+  ]
+ },
+ {
+  "id": "TC-MREG-002",
+  "module": "MREG",
+  "moduleName": "Map regions, layers and city maps",
+  "category": "Data Integrity",
+  "priority": "P0",
+  "file": "map-regions.spec.ts",
+  "line": 142,
+  "describe": "migration",
+  "title": "the rollback drops the regions, layers and the two pin columns and leaves maps, pins and entries (run inside a transaction that is rolled back)",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "the rollback drops the regions, layers and the two pin columns and leaves maps, pins and entries (run inside a transaction that is rolled back)",
+   "process.env.DATABASE_URL ?? \"\" does not: matches /neon\\.tech|neon\\.build/",
+   "(await client.query(`SELECT to_regclass('map_regions')::text AS a, to… equals { a: null, b: null }",
+   "(await client.query(`SELECT count(*)::int AS n FROM information_schem… equals 0",
+   "Number((await client.query(`SELECT count(*)::int AS n FROM map_pins`)… equals pins",
+   "Number((await client.query(`SELECT count(*)::int AS n FROM entries`))… equals entries",
+   "(await client.query(`SELECT to_regclass('maps')::text AS t`)).rows[0]… equals maps",
+   "(await query<{ t: string }>(`SELECT to_regclass('map_regions')::text … equals map_regions"
+  ]
+ },
+ {
+  "id": "TC-MREG-003",
+  "module": "MREG",
+  "moduleName": "Map regions, layers and city maps",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "map-regions.spec.ts",
+  "line": 165,
+  "describe": "regions (the API)",
+  "title": "a good outline is saved as fractions of the image, and the DM reads it back",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Send GET /api/maps/‹map.slug›/regions"
+  ],
+  "testData": [
+   "GET /api/maps/‹map.slug›/regions"
+  ],
+  "expected": [
+   "a good outline is saved as fractions of the image, and the DM reads it back",
+   "HTTP status equals 201",
+   "row match object { name: \"The Heartland\", entry_id: place.id, tone: \"3\", layer_id: null }",
+   "row.points equals SQUARE",
+   "listed.regions length is 1",
+   "listed.regions[0] match object { name: \"The Heartland\", tone: \"3\", entry: { slug: place.slug } }"
+  ]
+ },
+ {
+  "id": "TC-MREG-004",
+  "module": "MREG",
+  "moduleName": "Map regions, layers and city maps",
+  "category": "Boundary",
+  "priority": "P1",
+  "file": "map-regions.spec.ts",
+  "line": 178,
+  "describe": "regions (the API)",
+  "title": "an outline that cannot be a region is refused with the reason: too few or too many points, outside the map, crossing itself, no area",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "an outline that cannot be a region is refused with the reason: too few or too many points, outside the map, crossing itself, no area",
+   "HTTP status equals 400",
+   "response body matches message",
+   "await regionsOf(map.id) length is 0"
+  ]
+ },
+ {
+  "id": "TC-MREG-005",
+  "module": "MREG",
+  "moduleName": "Map regions, layers and city maps",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "map-regions.spec.ts",
+  "line": 195,
+  "describe": "regions (the API)",
+  "title": "200 points are accepted, as are the corners of the map itself",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "200 points are accepted, as are the corners of the map itself",
+   "HTTP status equals 201"
+  ]
+ },
+ {
+  "id": "TC-MREG-006",
+  "module": "MREG",
+  "moduleName": "Map regions, layers and city maps",
+  "category": "Boundary",
+  "priority": "P1",
+  "file": "map-regions.spec.ts",
+  "line": 202,
+  "describe": "regions (the API)",
+  "title": "a blank or over-long name, an unknown colour, a missing or extra field are refused; the name limit is 120",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "a blank or over-long name, an unknown colour, a missing or extra field are refused; the name limit is 120",
+   "HTTP status equals 201",
+   "HTTP status equals 400",
+   "await regionsOf(map.id) length is 1"
+  ]
+ },
+ {
+  "id": "TC-MREG-007",
+  "module": "MREG",
+  "moduleName": "Map regions, layers and city maps",
+  "category": "Validation",
+  "priority": "P1",
+  "file": "map-regions.spec.ts",
+  "line": 211,
+  "describe": "regions (the API)",
+  "title": "a page that is gone or archived, and a layer that belongs to another map, are refused",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "a page that is gone or archived, and a layer that belongs to another map, are refused",
+   "HTTP status equals 404",
+   "HTTP status equals 400",
+   "response body matches /does not belong to this map/",
+   "await regionsOf(map.id) length is 0"
+  ]
+ },
+ {
+  "id": "TC-MREG-008",
+  "module": "MREG",
+  "moduleName": "Map regions, layers and city maps",
+  "category": "Boundary",
+  "priority": "P1",
+  "file": "map-regions.spec.ts",
+  "line": 226,
+  "describe": "regions (the API)",
+  "title": "a map holds at most 300 regions; the 300th is accepted and the 301st refused",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)",
+   "Test rows use a `Zz`/`zz-` prefix and are deleted afterwards"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "a map holds at most 300 regions; the 300th is accepted and the 301st refused",
+   "HTTP status equals 201",
+   "HTTP status equals 400",
+   "response body matches /at most 300 regions/"
+  ]
+ },
+ {
+  "id": "TC-MREG-009",
+  "module": "MREG",
+  "moduleName": "Map regions, layers and city maps",
+  "category": "Validation",
+  "priority": "P1",
+  "file": "map-regions.spec.ts",
+  "line": 236,
+  "describe": "regions (the API)",
+  "title": "a region can be renamed, recoloured, linked, unlinked and moved to a layer; bad changes are refused; deleting it leaves the page",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Send PATCH /api/maps/‹map.slug›/regions/‹rid› with { data }",
+   "Send PATCH /api/maps/‹map.slug›/regions/‹randomUUID()› with { data: { name: \"x\" } }",
+   "Send PATCH /api/maps/‹map.slug›/regions/not-a-uuid with { data: { name: \"x\" } }",
+   "Send DELETE /api/maps/‹map.slug›/regions/‹rid›"
+  ],
+  "testData": [
+   "PATCH /api/maps/‹map.slug›/regions/‹rid›",
+   "PATCH /api/maps/‹map.slug›/regions/‹randomUUID()›",
+   "PATCH /api/maps/‹map.slug›/regions/not-a-uuid",
+   "DELETE /api/maps/‹map.slug›/regions/‹rid›"
+  ],
+  "expected": [
+   "a region can be renamed, recoloured, linked, unlinked and moved to a layer; bad changes are refused; deleting it leaves the page",
+   "HTTP status equals 200",
+   "(await regionsOf(map.id))[0] match object { name: \"Second\", tone: \"4\", entry_id: place.id, layer_id: lid }",
+   "(await regionsOf(map.id))[0] match object { entry_id: null, layer_id: null }",
+   "HTTP status is at least 400",
+   "HTTP status equals 404",
+   "HTTP status equals 400",
+   "await query(`SELECT 1 FROM entries WHERE id = $1`, [place.id]) length is 1"
+  ]
+ },
+ {
+  "id": "TC-MREG-010",
+  "module": "MREG",
+  "moduleName": "Map regions, layers and city maps",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "map-regions.spec.ts",
+  "line": 256,
+  "describe": "regions (the API)",
+  "title": "a region of another map cannot be changed or deleted through this map's address",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Send PATCH /api/maps/‹b.slug›/regions/‹rid› with { data: { name: \"Hijacked\" } }",
+   "Send DELETE /api/maps/‹b.slug›/regions/‹rid›"
+  ],
+  "testData": [
+   "PATCH /api/maps/‹b.slug›/regions/‹rid›",
+   "DELETE /api/maps/‹b.slug›/regions/‹rid›"
+  ],
+  "expected": [
+   "a region of another map cannot be changed or deleted through this map's address",
+   "HTTP status equals 404",
+   "(await regionsOf(a.id))[0].name equals Mine"
+  ]
+ },
+ {
+  "id": "TC-MREG-011",
+  "module": "MREG",
+  "moduleName": "Map regions, layers and city maps",
+  "category": "Permission & Auth",
+  "priority": "P0",
+  "file": "map-regions.spec.ts",
+  "line": 266,
+  "describe": "regions (the API)",
+  "title": "signed out: 401 everywhere; a player: 403 on every write, and the lists are still theirs to read",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Send POST /api/maps/‹map.slug›/regions with { data: { name: \"x\", points: SQUARE } }",
+   "Send PATCH /api/maps/‹map.slug›/regions/‹rid› with { data: { name: \"x\" } }",
+   "Send DELETE /api/maps/‹map.slug›/regions/‹rid›",
+   "Send POST /api/maps/‹map.slug›/layers with { data: { name: \"x\" } }",
+   "Send PATCH /api/maps/‹map.slug›/layers/‹lid› with { data: { name: \"x\" } }",
+   "Send DELETE /api/maps/‹map.slug›/layers/‹lid›",
+   "Send GET /api/maps/‹map.slug›/regions"
+  ],
+  "testData": [
+   "POST /api/maps/‹map.slug›/regions",
+   "PATCH /api/maps/‹map.slug›/regions/‹rid›",
+   "DELETE /api/maps/‹map.slug›/regions/‹rid›",
+   "POST /api/maps/‹map.slug›/layers",
+   "PATCH /api/maps/‹map.slug›/layers/‹lid›",
+   "DELETE /api/maps/‹map.slug›/layers/‹lid›",
+   "GET /api/maps/‹map.slug›/regions"
+  ],
+  "expected": [
+   "signed out: 401 everywhere; a player: 403 on every write, and the lists are still theirs to read",
+   "HTTP status equals want",
+   "HTTP status equals 401",
+   "HTTP status equals 200",
+   "await regionsOf(map.id) length is 1",
+   "await query(`SELECT 1 FROM map_layers WHERE id = $1`, [lid]) length is 1"
+  ]
+ },
+ {
+  "id": "TC-MREG-012",
+  "module": "MREG",
+  "moduleName": "Map regions, layers and city maps",
+  "category": "Permission & Auth",
+  "priority": "P0",
+  "file": "map-regions.spec.ts",
+  "line": 294,
+  "describe": "who sees which region and layer",
+  "title": "a player sees only regions linked to a page they may read: nothing from a secret page, an unlinked region, an ungranted kind or an archived page is in the page, the data or the API",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Send GET /api/maps/‹map.slug›/regions"
+  ],
+  "testData": [
+   "GET /api/maps/‹map.slug›/regions"
+  ],
+  "expected": [
+   "a player sees only regions linked to a page they may read: nothing from a secret page, an unlinked region, an ungranted kind or an archived page is in the page, the data or the API",
+   "html does not: contains secret",
+   "html contains Open region",
+   "`[data-region]` count is 1",
+   "api does not: contains secret",
+   "JSON.parse(api).regions length is 1",
+   "dm equals [\"DM-only region\", \"Open region\", \"Secret region\", \"Ungranted region\"]"
+  ]
+ },
+ {
+  "id": "TC-MREG-013",
+  "module": "MREG",
+  "moduleName": "Map regions, layers and city maps",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "map-regions.spec.ts",
+  "line": 325,
+  "describe": "who sees which region and layer",
+  "title": "a layer that holds only hidden things is not named to a player; a layer with something they can see is, and only by name",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "a layer that holds only hidden things is not named to a player; a layer with something they can see is, and only by name",
+   "html does not: contains Cult hideouts ‹tag›",
+   "html contains Trade routes ‹tag›",
+   "[map-layers] › checkbox count is 1"
+  ]
+ },
+ {
+  "id": "TC-MREG-014",
+  "module": "MREG",
+  "moduleName": "Map regions, layers and city maps",
+  "category": "Validation",
+  "priority": "P1",
+  "file": "map-regions.spec.ts",
+  "line": 347,
+  "describe": "who sees which region and layer",
+  "title": "the DM sees every layer, including empty ones",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "the DM sees every layer, including empty ones",
+   "[map-layers] › checkbox count is 2"
+  ]
+ },
+ {
+  "id": "TC-MREG-015",
+  "module": "MREG",
+  "moduleName": "Map regions, layers and city maps",
+  "category": "Validation",
+  "priority": "P1",
+  "file": "map-regions.spec.ts",
+  "line": 357,
+  "describe": "layers (the API)",
+  "title": "a layer is added, renamed and switched off by default; its name is unique on a map in any letter case; blank and 61-character names are refused",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Send POST /api/maps/‹map.slug›/layers with { data: { name } }",
+   "Send POST /api/maps/‹map.slug›/layers with { data: { name: \"ok\", extra: 1 } }",
+   "Send PATCH /api/maps/‹map.slug›/layers/‹id› with { data }",
+   "Send PATCH /api/maps/‹map.slug›/layers/‹randomUUID()› with { data: { name: \"z\" } }",
+   "Send PATCH /api/maps/‹map.slug›/layers/nope with { data: { name: \"z\" } }"
+  ],
+  "testData": [
+   "POST /api/maps/‹map.slug›/layers",
+   "PATCH /api/maps/‹map.slug›/layers/‹id›",
+   "PATCH /api/maps/‹map.slug›/layers/‹randomUUID()›",
+   "PATCH /api/maps/‹map.slug›/layers/nope"
+  ],
+  "expected": [
+   "a layer is added, renamed and switched off by default; its name is unique on a map in any letter case; blank and 61-character names are refused",
+   "HTTP status equals 201",
+   "(await query<{ name: string }>(`SELECT name FROM map_layers WHERE id … equals Roads",
+   "HTTP status equals 400",
+   "HTTP status equals 200",
+   "(await query<{ name: string; default_on: boolean }>(`SELECT name, def… equals { name: \"Highways\", default_on: false }",
+   "HTTP status equals 404"
+  ]
+ },
+ {
+  "id": "TC-MREG-016",
+  "module": "MREG",
+  "moduleName": "Map regions, layers and city maps",
+  "category": "Boundary",
+  "priority": "P1",
+  "file": "map-regions.spec.ts",
+  "line": 377,
+  "describe": "layers (the API)",
+  "title": "a map holds at most 20 layers; the 20th is accepted and the 21st refused",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Send POST /api/maps/‹map.slug›/layers with { data: { name: `Layer ${i}` } }",
+   "Send POST /api/maps/‹map.slug›/layers with { data: { name: \"Layer 21\" } }"
+  ],
+  "testData": [
+   "POST /api/maps/‹map.slug›/layers"
+  ],
+  "expected": [
+   "a map holds at most 20 layers; the 20th is accepted and the 21st refused",
+   "HTTP status equals 201",
+   "HTTP status equals 400",
+   "response body matches /at most 20 layers/"
+  ]
+ },
+ {
+  "id": "TC-MREG-017",
+  "module": "MREG",
+  "moduleName": "Map regions, layers and city maps",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "map-regions.spec.ts",
+  "line": 386,
+  "describe": "layers (the API)",
+  "title": "deleting a layer leaves its pins and regions on the map with no layer",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Send DELETE /api/maps/‹map.slug›/layers/‹lid›"
+  ],
+  "testData": [
+   "DELETE /api/maps/‹map.slug›/layers/‹lid›"
+  ],
+  "expected": [
+   "deleting a layer leaves its pins and regions on the map with no layer",
+   "HTTP status equals 200",
+   "HTTP status equals 404",
+   "(await regionsOf(map.id))[0] match object { id: rid, layer_id: null }",
+   "(await query<{ layer_id: string | null }>(`SELECT layer_id FROM map_p… is empty"
+  ]
+ },
+ {
+  "id": "TC-MREG-018",
+  "module": "MREG",
+  "moduleName": "Map regions, layers and city maps",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "map-regions.spec.ts",
+  "line": 400,
+  "describe": "pins: layers and city maps (the API)",
+  "title": "a pin can be moved to a layer of its own map but not of another, and its label changed",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Send PATCH /api/maps/‹a.slug›/pins/‹pid› with { data }",
+   "Send PATCH /api/maps/‹a.slug›/pins/‹randomUUID()› with { data: { label: \"x\" } }",
+   "Send PATCH /api/maps/‹b.slug›/pins/‹pid› with { data: { label: \"x\" } }"
+  ],
+  "testData": [
+   "PATCH /api/maps/‹a.slug›/pins/‹pid›",
+   "PATCH /api/maps/‹a.slug›/pins/‹randomUUID()›",
+   "PATCH /api/maps/‹b.slug›/pins/‹pid›"
+  ],
+  "expected": [
+   "a pin can be moved to a layer of its own map but not of another, and its label changed",
+   "HTTP status equals 200",
+   "(await query<{ layer_id: string; label: string }>(`SELECT layer_id, l… equals { layer_id: own, label: \"A label\" }",
+   "HTTP status equals 400",
+   "(await query<{ layer_id: string | null; label: string | null }>(`SELE… equals { layer_id: null, label: null }",
+   "HTTP status equals 404"
+  ]
+ },
+ {
+  "id": "TC-MREG-019",
+  "module": "MREG",
+  "moduleName": "Map regions, layers and city maps",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "map-regions.spec.ts",
+  "line": 418,
+  "describe": "pins: layers and city maps (the API)",
+  "title": "a pin can open another map; it may not open its own map, and no two maps may open each other, directly or through a chain",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Send PATCH /api/maps/‹m.slug›/pins/‹pinId› with { data: { childMapId } }"
+  ],
+  "testData": [
+   "PATCH /api/maps/‹m.slug›/pins/‹pinId›"
+  ],
+  "expected": [
+   "a pin can open another map; it may not open its own map, and no two maps may open each other, directly or through a chain",
+   "HTTP status equals 200",
+   "HTTP status equals 400",
+   "response body matches /cannot open the map it is on/",
+   "response body matches /open each other/",
+   "(await query<{ child_map_id: string | null }>(`SELECT child_map_id FR… is empty"
+  ]
+ },
+ {
+  "id": "TC-MREG-020",
+  "module": "MREG",
+  "moduleName": "Map regions, layers and city maps",
+  "category": "Permission & Auth",
+  "priority": "P0",
+  "file": "map-regions.spec.ts",
+  "line": 442,
+  "describe": "pins: layers and city maps (the API)",
+  "title": "a player cannot change a pin",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Send PATCH /api/maps/‹map.slug›/pins/‹pid› with { data: { label: \"mine\" } }"
+  ],
+  "testData": [
+   "PATCH /api/maps/‹map.slug›/pins/‹pid›"
+  ],
+  "expected": [
+   "a player cannot change a pin",
+   "HTTP status equals 403",
+   "(await query<{ label: string | null }>(`SELECT label FROM map_pins WH… is empty"
+  ]
+ },
+ {
+  "id": "TC-MREG-021",
+  "module": "MREG",
+  "moduleName": "Map regions, layers and city maps",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "map-regions.spec.ts",
+  "line": 457,
+  "describe": "drawing a region (DM)",
+  "title": "click the corners, Finish, name it, link a page, pick a layer and a colour: the region is drawn, listed and saved at the places clicked",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Click [draw-region]",
+   "Click [finish-region]",
+   "Type The Drawn Lands into field \"Region name\"",
+   "Type place.name.slice(0, 24) into field \"The page it belongs to (optional)\"",
+   "Click [region-result]",
+   "Choose { label: \"Borders\" } in `#region-layer`",
+   "Choose 2 in field \"Colour\"",
+   "Click [region-save]"
+  ],
+  "testData": [
+   "Input The Drawn Lands",
+   "Input place.name.slice(0, 24)",
+   "Choice { label: \"Borders\" }",
+   "Choice 2"
+  ],
+  "expected": [
+   "click the corners, Finish, name it, link a page, pick a layer and a colour: the region is drawn, listed and saved at the places clicked",
+   "[map-viewport] has attribute data-drawing",
+   "[finish-region] is disabled",
+   "`[data-draft-point]` count is i + 1",
+   "[finish-region] contains text Finish (4 points)",
+   "[region-chosen] contains text place.name",
+   "`[data-region]` count is 1",
+   "[map-regions-list] contains text The Drawn Lands",
+   "row match object { name: \"The Drawn Lands\", entry_id: place.id, layer_id: lid, tone: \"2\" }",
+   "row.points length is 4",
+   "…and 3 more"
+  ]
+ },
+ {
+  "id": "TC-MREG-022",
+  "module": "MREG",
+  "moduleName": "Map regions, layers and city maps",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "map-regions.spec.ts",
+  "line": 494,
+  "describe": "drawing a region (DM)",
+  "title": "the corners stay right after zooming in and panning",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Click button \"Zoom in\"",
+   "Press Escape",
+   "Press ArrowRight",
+   "Press ArrowDown",
+   "Click [draw-region]",
+   "Click page.mouse",
+   "Click [finish-region]",
+   "Type Zoomed into field \"Region name\"",
+   "Click [region-save]"
+  ],
+  "testData": [
+   "Input Zoomed"
+  ],
+  "expected": [
+   "the corners stay right after zooming in and panning",
+   "`[data-region]` count is 1",
+   "Math.abs(p[0] - (spots[i][0] - stage.x) / stage.width) is less than 0.01",
+   "Math.abs(p[1] - (spots[i][1] - stage.y) / stage.height) is less than 0.01"
+  ]
+ },
+ {
+  "id": "TC-MREG-023",
+  "module": "MREG",
+  "moduleName": "Map regions, layers and city maps",
+  "category": "Security",
+  "priority": "P0",
+  "file": "map-regions.spec.ts",
+  "line": 521,
+  "describe": "drawing a region (DM)",
+  "title": "Undo and Backspace take back the last corner; Escape and Cancel throw the outline away; fewer than 3 points cannot be finished; Enter finishes",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Click [draw-region]",
+   "Click [undo-point]",
+   "Press Backspace",
+   "Press Escape",
+   "Press Enter",
+   "Click button \"Cancel\"",
+   "Click [cancel-region]"
+  ],
+  "testData": [],
+  "expected": [
+   "Undo and Backspace take back the last corner; Escape and Cancel throw the outline away; fewer than 3 points cannot be finished; Enter finishes",
+   "[finish-region] is disabled",
+   "`[data-draft-point]` count is 1",
+   "`[data-draft-point]` count is 2",
+   "`[data-draft-point]` count is 0",
+   "[map-viewport] has attribute data-drawing",
+   "field \"Region name\" is visible",
+   "await regionsOf(map.id) length is 0"
+  ]
+ },
+ {
+  "id": "TC-MREG-024",
+  "module": "MREG",
+  "moduleName": "Map regions, layers and city maps",
+  "category": "Data Integrity",
+  "priority": "P0",
+  "file": "map-regions.spec.ts",
+  "line": 550,
+  "describe": "drawing a region (DM)",
+  "title": "an outline that crosses itself is refused on the spot with the reason, and nothing is saved",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Click [draw-region]",
+   "Click [finish-region]",
+   "Click [undo-point]"
+  ],
+  "testData": [],
+  "expected": [
+   "an outline that crosses itself is refused on the spot with the reason, and nothing is saved",
+   "[draw-error] contains text crosses itself",
+   "field \"Region name\" count is 0",
+   "field \"Region name\" is visible",
+   "await regionsOf(map.id) length is 0"
+  ]
+ },
+ {
+  "id": "TC-MREG-025",
+  "module": "MREG",
+  "moduleName": "Map regions, layers and city maps",
+  "category": "Validation",
+  "priority": "P1",
+  "file": "map-regions.spec.ts",
+  "line": 565,
+  "describe": "drawing a region (DM)",
+  "title": "a region with no name cannot be saved; one with no page is kept as the DM's own and says so",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Click [draw-region]",
+   "Click [finish-region]",
+   "Type Private notes area into field \"Region name\"",
+   "Click [region-save]"
+  ],
+  "testData": [
+   "Input Private notes area"
+  ],
+  "expected": [
+   "a region with no name cannot be saved; one with no page is kept as the DM's own and says so",
+   "[region-save] is disabled",
+   "text \"With no page the region is for your eyes only.\" is visible",
+   "[map-regions-list] contains text only you can see this",
+   "(await regionsOf(map.id))[0].entry_id is empty"
+  ]
+ },
+ {
+  "id": "TC-MREG-026",
+  "module": "MREG",
+  "moduleName": "Map regions, layers and city maps",
+  "category": "Permission & Auth",
+  "priority": "P0",
+  "file": "map-regions.spec.ts",
+  "line": 580,
+  "describe": "drawing a region (DM)",
+  "title": "a player has no drawing controls",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "a player has no drawing controls",
+   "[draw-region] count is 0",
+   "button \"Place a pin\" count is 0"
+  ]
+ },
+ {
+  "id": "TC-MREG-027",
+  "module": "MREG",
+  "moduleName": "Map regions, layers and city maps",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "map-regions.spec.ts",
+  "line": 594,
+  "describe": "opening a region",
+  "title": "tapping inside a region opens its preview with its page; tapping outside closes it; the last region drawn is on top where they overlap; Open page goes to the page",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Click [open-region-page]"
+  ],
+  "testData": [],
+  "expected": [
+   "tapping inside a region opens its preview with its page; tapping outside closes it; the last region drawn is on top where they overlap; Open page goes to the page",
+   "region \"Region preview\" is visible",
+   "[region-title] text is Under",
+   "[region-title] text is Over",
+   "region \"Region preview\" count is 0",
+   "page URL is new RegExp(`/codex/entry/${b.slug}$`)"
+  ]
+ },
+ {
+  "id": "TC-MREG-028",
+  "module": "MREG",
+  "moduleName": "Map regions, layers and city maps",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "map-regions.spec.ts",
+  "line": 614,
+  "describe": "opening a region",
+  "title": "a concave region is opened from its arms but not from its notch",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "a concave region is opened from its arms but not from its notch",
+   "region \"Region preview\" count is 0",
+   "[region-title] text is The L"
+  ]
+ },
+ {
+  "id": "TC-MREG-029",
+  "module": "MREG",
+  "moduleName": "Map regions, layers and city maps",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "map-regions.spec.ts",
+  "line": 628,
+  "describe": "opening a region",
+  "title": "a pin on top of a region opens the pin, not the region",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Click `[data-pin]`"
+  ],
+  "testData": [],
+  "expected": [
+   "a pin on top of a region opens the pin, not the region",
+   "region \"Pin preview\" is visible",
+   "region \"Region preview\" count is 0"
+  ]
+ },
+ {
+  "id": "TC-MREG-030",
+  "module": "MREG",
+  "moduleName": "Map regions, layers and city maps",
+  "category": "Accessibility",
+  "priority": "P2",
+  "file": "map-regions.spec.ts",
+  "line": 641,
+  "describe": "opening a region",
+  "title": "the regions list opens a region by keyboard, Escape closes it, and each region links to its page",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Press Enter",
+   "Press Escape"
+  ],
+  "testData": [],
+  "expected": [
+   "the regions list opens a region by keyboard, Escape closes it, and each region links to its page",
+   "link \"a.name\" has attribute href",
+   "[region-title] text is Listed",
+   "region \"Region preview\" count is 0"
+  ]
+ },
+ {
+  "id": "TC-MREG-031",
+  "module": "MREG",
+  "moduleName": "Map regions, layers and city maps",
+  "category": "Permission & Auth",
+  "priority": "P0",
+  "file": "map-regions.spec.ts",
+  "line": 657,
+  "describe": "opening a region",
+  "title": "a player gets the preview with no DM controls; the DM can remove a region and move it to a layer from its preview",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Choose lid in `#region-layer-change`",
+   "Click button \"Remove region\""
+  ],
+  "testData": [
+   "Choice lid"
+  ],
+  "expected": [
+   "a player gets the preview with no DM controls; the DM can remove a region and move it to a layer from its preview",
+   "[region-title] text is Controlled",
+   "button \"Remove region\" count is 0",
+   "`#region-layer-change` count is 0"
+  ]
+ },
+ {
+  "id": "TC-MREG-032",
+  "module": "MREG",
+  "moduleName": "Map regions, layers and city maps",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "map-regions.spec.ts",
+  "line": 683,
+  "describe": "layers on the map",
+  "title": "switching a layer off hides its pins, regions, names and list entries; switching it on brings them back; a layer set off by default starts off",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Untick checkbox \"Roads\"",
+   "Tick checkbox \"Rumours\"",
+   "Tick checkbox \"Roads\""
+  ],
+  "testData": [],
+  "expected": [
+   "switching a layer off hides its pins, regions, names and list entries; switching it on brings them back; a layer set off by default starts off",
+   "checkbox \"Roads\" is checked",
+   "checkbox \"Rumours\" does not: is checked",
+   "`[data-region]` count is 2",
+   "`[data-pin]` count is 1",
+   "text \"On this map (1)\" is visible",
+   "`[data-region]` count is 1",
+   "`[data-pin]` count is 0",
+   "[map-regions-list] does not: contains text Road region",
+   "`[data-region]` count is 3",
+   "…and 2 more"
+  ]
+ },
+ {
+  "id": "TC-MREG-033",
+  "module": "MREG",
+  "moduleName": "Map regions, layers and city maps",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "map-regions.spec.ts",
+  "line": 715,
+  "describe": "layers on the map",
+  "title": "a selected pin or region closes when its layer is switched off",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Untick checkbox \"Switchable\""
+  ],
+  "testData": [],
+  "expected": [
+   "a selected pin or region closes when its layer is switched off",
+   "region \"Region preview\" is visible",
+   "region \"Region preview\" count is 0"
+  ]
+ },
+ {
+  "id": "TC-MREG-034",
+  "module": "MREG",
+  "moduleName": "Map regions, layers and city maps",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "map-regions.spec.ts",
+  "line": 728,
+  "describe": "layers on the map",
+  "title": "the DM adds a layer and is told when the name is taken; deletes one and what was on it stays; assigns a pin to a layer from its preview",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Type Roads into `#new-layer-name`",
+   "Click [add-layer]",
+   "Type roads into `#new-layer-name`",
+   "Click `[data-pin]`",
+   "Choose { label: \"Roads\" } in `#pin-layer`",
+   "Click button \"Delete the layer Roads\""
+  ],
+  "testData": [
+   "Input Roads",
+   "Input roads",
+   "Choice { label: \"Roads\" }"
+  ],
+  "expected": [
+   "the DM adds a layer and is told when the name is taken; deletes one and what was on it stays; assigns a pin to a layer from its preview",
+   "checkbox \"Roads\" is visible",
+   "[layer-error] contains text There is already a layer called \"roads\"",
+   "checkbox \"Roads\" count is 0",
+   "(await query<{ layer_id: string | null }>(`SELECT layer_id FROM map_p… is empty",
+   "`[data-pin]` count is 1"
+  ]
+ },
+ {
+  "id": "TC-MREG-035",
+  "module": "MREG",
+  "moduleName": "Map regions, layers and city maps",
+  "category": "Accessibility",
+  "priority": "P2",
+  "file": "map-regions.spec.ts",
+  "line": 749,
+  "describe": "layers on the map",
+  "title": "a player sees the layer switches but no way to add or delete layers, and the switches work by keyboard",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Press Space"
+  ],
+  "testData": [],
+  "expected": [
+   "a player sees the layer switches but no way to add or delete layers, and the switches work by keyboard",
+   "`#new-layer-name` count is 0",
+   "button \"/Delete the layer/\" count is 0",
+   "box does not: is checked",
+   "`[data-region]` count is 0",
+   "`[data-region]` count is 1"
+  ]
+ },
+ {
+  "id": "TC-MREG-036",
+  "module": "MREG",
+  "moduleName": "Map regions, layers and city maps",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "map-regions.spec.ts",
+  "line": 774,
+  "describe": "city maps",
+  "title": "a pin that opens another map offers it in its preview; the city map has a way back; a map that no pin opens has none",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Click `[data-pin]`",
+   "Click [open-child-map]",
+   "Click [back-to-parent-map]"
+  ],
+  "testData": [],
+  "expected": [
+   "a pin that opens another map offers it in its preview; the city map has a way back; a map that no pin opens has none",
+   "[back-to-parent-map] count is 0",
+   "page URL is new RegExp(`/map/${city.slug}$`)",
+   "[back-to-parent-map] contains text Back to ‹world.name›",
+   "page URL is new RegExp(`/map/${world.slug}$`)"
+  ]
+ },
+ {
+  "id": "TC-MREG-037",
+  "module": "MREG",
+  "moduleName": "Map regions, layers and city maps",
+  "category": "Permission & Auth",
+  "priority": "P0",
+  "file": "map-regions.spec.ts",
+  "line": 790,
+  "describe": "city maps",
+  "title": "a player gets the same link; the DM chooses the city map from the pin's preview, and can take it away",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Click `[data-pin]`",
+   "Choose city.id in `#pin-child`",
+   "Choose  in `#pin-child`"
+  ],
+  "testData": [
+   "Choice city.id",
+   "Choice "
+  ],
+  "expected": [
+   "a player gets the same link; the DM chooses the city map from the pin's preview, and can take it away",
+   "(await page.locator(\"#pin-child option\").allTextContents()).sort() equals [\"No other map\", ...others.map((o) => o.name)].sort()",
+   "[open-child-map] contains text city.name",
+   "`#pin-child` count is 0"
+  ]
+ },
+ {
+  "id": "TC-MREG-038",
+  "module": "MREG",
+  "moduleName": "Map regions, layers and city maps",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "map-regions.spec.ts",
+  "line": 817,
+  "describe": "city maps",
+  "title": "the DM's choice of map leaves out the map the pin is on",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Click `[data-pin]`"
+  ],
+  "testData": [],
+  "expected": [
+   "the DM's choice of map leaves out the map the pin is on",
+   "`#pin-child option` count is 0"
+  ]
+ },
+ {
+  "id": "TC-MREG-039",
+  "module": "MREG",
+  "moduleName": "Map regions, layers and city maps",
+  "category": "Validation",
+  "priority": "P1",
+  "file": "map-regions.spec.ts",
+  "line": 827,
+  "describe": "city maps",
+  "title": "a loop is refused when chosen in the preview, and the pin is left as it was",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Click `[data-pin]`",
+   "Choose a.id in `#pin-child`"
+  ],
+  "testData": [
+   "Choice a.id"
+  ],
+  "expected": [
+   "a loop is refused when chosen in the preview, and the pin is left as it was",
+   "text \"/open each other/\" is visible",
+   "(await query<{ child_map_id: string | null }>(`SELECT child_map_id FR… is empty"
+  ]
+ },
+ {
+  "id": "TC-MREG-040",
+  "module": "MREG",
+  "moduleName": "Map regions, layers and city maps",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "map-regions.spec.ts",
+  "line": 864,
+  "describe": "registering a map image",
+  "title": "the seed script registers a new image with its real size and a name from its file name, leaves registered maps alone, and skips a file it cannot read",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "the seed script registers a new image with its real size and a name from its file name, leaves registered maps alone, and skips a file it cannot read",
+   "r.status equals 0",
+   "first contains registered (64x48)",
+   "first contains skipped ‹bad›",
+   "rows length is 1",
+   "rows[0] match object { width: 64, height: 48, slug: `zz-playwright-city-${tag}` }",
+   "rows[0].name equals Zz Playwright City ‹tag.charAt(0).toUpperCase()›‹tag.slice(1)›",
+   "second contains already registered",
+   "await query(`SELECT 1 FROM maps WHERE image_path = $1`, [`/maps/${goo… length is 1",
+   "(await query<{ n: number }>(`SELECT count(*)::int AS n FROM maps WHER… equals 1"
+  ]
+ },
+ {
+  "id": "TC-MREG-041",
+  "module": "MREG",
+  "moduleName": "Map regions, layers and city maps",
+  "category": "Accessibility",
+  "priority": "P2",
+  "file": "map-regions.spec.ts",
+  "line": 900,
+  "describe": "accessibility and small screens",
+  "title": "a map with regions, layers, a preview and the drawing controls has no serious axe violations (dark)",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)",
+   "Browser storage is prepared before the page loads"
+  ],
+  "steps": [
+   "Click [draw-region]"
+  ],
+  "testData": [],
+  "expected": [
+   "a map with regions, layers, a preview and the drawing controls has no serious axe violations (dark)",
+   "results.violations.filter((v) => v.impact === \"serious\" || v.impact =… equals []"
+  ]
+ },
+ {
+  "id": "TC-MREG-042",
+  "module": "MREG",
+  "moduleName": "Map regions, layers and city maps",
+  "category": "Accessibility",
+  "priority": "P2",
+  "file": "map-regions.spec.ts",
+  "line": 900,
+  "describe": "accessibility and small screens",
+  "title": "a map with regions, layers, a preview and the drawing controls has no serious axe violations (light)",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)",
+   "Browser storage is prepared before the page loads"
+  ],
+  "steps": [
+   "Click [draw-region]"
+  ],
+  "testData": [],
+  "expected": [
+   "a map with regions, layers, a preview and the drawing controls has no serious axe violations (light)",
+   "results.violations.filter((v) => v.impact === \"serious\" || v.impact =… equals []"
+  ]
+ },
+ {
+  "id": "TC-MREG-043",
+  "module": "MREG",
+  "moduleName": "Map regions, layers and city maps",
+  "category": "Responsive",
+  "priority": "P2",
+  "file": "map-regions.spec.ts",
+  "line": 920,
+  "describe": "accessibility and small screens",
+  "title": "at 375px the map, its layers, regions list and controls do not scroll the page sideways",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Click [draw-region]"
+  ],
+  "testData": [],
+  "expected": [
+   "at 375px the map, its layers, regions list and controls do not scroll the page sideways",
+   "await page.evaluate(() => document.documentElement.scrollWidth - docu… is at most 0"
   ]
  },
  {

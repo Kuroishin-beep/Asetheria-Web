@@ -37,6 +37,8 @@
     "db:events": "tsx scripts/apply-sql.ts scripts/sql/events.sql",
     "db:relations": "tsx scripts/apply-sql.ts scripts/sql/relations.sql",
     "db:relations:rollback": "tsx scripts/apply-sql.ts scripts/sql/relations-rollback.sql",
+    "db:map-regions": "tsx scripts/apply-sql.ts scripts/sql/map-regions.sql",
+    "db:map-regions:rollback": "tsx scripts/apply-sql.ts scripts/sql/map-regions-rollback.sql",
     "codex:archive-batch": "tsx scripts/archive-batch.ts",
     "check:contrast": "tsx scripts/check-contrast.ts",
     "migrate:fauna-tables": "tsx scripts/migrate-fauna-and-tables.ts",

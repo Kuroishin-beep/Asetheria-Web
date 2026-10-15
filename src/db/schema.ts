@@ -368,6 +368,49 @@ export const maps = pgTable(
   (t) => [uniqueIndex("maps_slug_idx").on(t.slug)],
 );
 
+/** A named group of pins and regions on one map that a viewer can switch on and off. */
+export const mapLayers = pgTable(
+  "map_layers",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    mapId: uuid("map_id")
+      .notNull()
+      .references(() => maps.id, { onDelete: "cascade" }),
+    name: text("name").notNull(),
+    defaultOn: boolean("default_on").notNull().default(true),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [index("map_layers_map_idx").on(t.mapId), check("map_layers_name_length", sql`char_length(${t.name}) BETWEEN 1 AND 60`)],
+);
+
+/**
+ * A drawn region: a polygon whose corners are fractions of the image. Linked to a page, it is seen by whoever may
+ * read that page; with no page it is the DM's alone. Access is decided in the query, never in the browser.
+ */
+export const mapRegions = pgTable(
+  "map_regions",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    mapId: uuid("map_id")
+      .notNull()
+      .references(() => maps.id, { onDelete: "cascade" }),
+    layerId: uuid("layer_id").references(() => mapLayers.id, { onDelete: "set null" }),
+    entryId: uuid("entry_id").references(() => entries.id, { onDelete: "cascade" }),
+    name: text("name").notNull(),
+    points: jsonb("points").$type<[number, number][]>().notNull(),
+    tone: text("tone").notNull().default("1"),
+    createdBy: uuid("created_by").references(() => users.id, { onDelete: "set null" }),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [
+    index("map_regions_map_idx").on(t.mapId),
+    index("map_regions_entry_idx").on(t.entryId),
+    index("map_regions_layer_idx").on(t.layerId),
+    check("map_regions_name_length", sql`char_length(${t.name}) BETWEEN 1 AND 120`),
+    check("map_regions_tone", sql`${t.tone} IN ('1', '2', '3', '4', '5')`),
+  ],
+);
+
 /**
  * A pin ties one entry to a spot on a map. Coordinates are fractions of the
  * image (0 to 1), not pixels, so a pin stays put when the image is shown at
@@ -388,6 +431,9 @@ export const mapPins = pgTable(
     x: doublePrecision("x").notNull(),
     y: doublePrecision("y").notNull(),
     label: text("label"),
+    layerId: uuid("layer_id").references(() => mapLayers.id, { onDelete: "set null" }),
+    /** A pin may open another map, such as a city's own map. */
+    childMapId: uuid("child_map_id").references(() => maps.id, { onDelete: "set null" }),
     createdBy: uuid("created_by").references(() => users.id, { onDelete: "set null" }),
     createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
   },
@@ -538,6 +584,8 @@ export type EntrySecret = typeof entrySecrets.$inferSelect;
 export type PageTemplate = typeof pageTemplates.$inferSelect;
 export type CalendarRow = typeof calendarConfig.$inferSelect;
 export type RelationRow = typeof pageRelations.$inferSelect;
+export type MapLayerRow = typeof mapLayers.$inferSelect;
+export type MapRegionRow = typeof mapRegions.$inferSelect;
 export type EntryGrant = typeof entryGrants.$inferSelect;
 export type EntryKind = (typeof entryKind.enumValues)[number];
 export type Visibility = (typeof visibility.enumValues)[number];

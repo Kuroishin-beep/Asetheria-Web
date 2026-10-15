@@ -1316,5 +1316,130 @@
     ]
    }
   ]
+ },
+ {
+  "phase": "18 Map regions",
+  "criterion": "A region polygon is validated: 3 to 200 points, inside the image, not crossing itself, with an area",
+  "match": [
+   {
+    "module": "MGEO"
+   },
+   {
+    "module": "MREG",
+    "any": [
+     "outline that cannot be a region",
+     "200 points are accepted",
+     "a blank or over-long name",
+     "crosses itself is refused on the spot"
+    ]
+   }
+  ]
+ },
+ {
+  "phase": "18 Map regions",
+  "criterion": "A player sees only regions whose linked page they can read; an unlinked region is DM-only (network assertion: nothing in the HTML, data or API)",
+  "match": [
+   {
+    "module": "MREG",
+    "any": [
+     "a player sees only regions linked",
+     "a layer that holds only hidden things",
+     "the DM sees every layer",
+     "signed out: 401 everywhere"
+    ]
+   }
+  ]
+ },
+ {
+  "phase": "18 Map regions",
+  "criterion": "Layer toggles show and hide pins and regions; the DM manages layers; a layer holds at most 20 per map",
+  "match": [
+   {
+    "module": "MREG",
+    "any": [
+     "switching a layer off",
+     "selected pin or region closes",
+     "the DM adds a layer",
+     "switches work by keyboard",
+     "a layer is added, renamed",
+     "at most 20 layers",
+     "deleting a layer leaves",
+     "a pin can be moved to a layer"
+    ]
+   }
+  ]
+ },
+ {
+  "phase": "18 Map regions",
+  "criterion": "Drawing a region: click the corners, finish, name, link a page, layer and colour; undo, cancel, keyboard; right at any zoom",
+  "match": [
+   {
+    "module": "MREG",
+    "any": [
+     "click the corners, Finish",
+     "corners stay right after zooming",
+     "Undo and Backspace",
+     "with no name cannot be saved",
+     "a player has no drawing controls",
+     "at most 300 regions"
+    ]
+   }
+  ]
+ },
+ {
+  "phase": "18 Map regions",
+  "criterion": "Clicking inside a region opens its page (preview with Open page), including concave shapes, overlaps and pins on top",
+  "match": [
+   {
+    "module": "MREG",
+    "any": [
+     "tapping inside a region",
+     "concave region",
+     "pin on top of a region",
+     "regions list opens a region",
+     "a player gets the preview",
+     "a region can be renamed"
+    ]
+   }
+  ]
+ },
+ {
+  "phase": "18 Map regions",
+  "criterion": "A pin can open another map (a city), with a way back; no loops; pan, zoom and keyboard still work",
+  "match": [
+   {
+    "module": "MREG",
+    "any": [
+     "a pin that opens another map offers",
+     "a player gets the same link",
+     "choice of map leaves out",
+     "a loop is refused",
+     "it may not open its own map",
+     "a player cannot change a pin"
+    ]
+   },
+   {
+    "module": "MAP"
+   }
+  ]
+ },
+ {
+  "phase": "18 Map regions",
+  "criterion": "Migration idempotent with rollback; new map images are registered with their real size by the seed script; axe both themes; 375px",
+  "match": [
+   {
+    "module": "MREG",
+    "any": [
+     "tables and pin columns",
+     "rollback drops the regions",
+     "the seed script registers",
+     "accessibility",
+     "375px"
+    ]
+   },
+   {
+    "module": "IMGS"
+   }
+  ]
  }
 ]
