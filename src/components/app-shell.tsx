@@ -47,6 +47,7 @@ const TOOL_LINKS: { href: string; label: string; Icon: NavIcon }[] = [
   { href: "/tools/dice", label: "Dice", Icon: TOOL_ICONS.dice },
   { href: "/characters", label: "Characters", Icon: TOOL_ICONS.characters },
   { href: "/calendar", label: "Calendar", Icon: TOOL_ICONS.calendar },
+  { href: "/timeline", label: "Timeline", Icon: TOOL_ICONS.timeline },
 ];
 
 const KEEPER_LINKS: { href: string; label: string; Icon: NavIcon }[] = [

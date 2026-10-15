@@ -118,6 +118,7 @@ test.describe("entry CRUD (DM)", () => {
   });
 
   test("[TC-ENT-004] wiki-link in body creates a working backlink on the target page", async ({ page }) => {
+    test.slow(); // two pages created and cleaned up through the real editor: about 23 s of the default 30
     const targetName = testName("crud-link-target");
     const targetSlug = await track(
       page,

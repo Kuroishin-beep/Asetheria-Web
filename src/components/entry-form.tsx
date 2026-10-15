@@ -2,6 +2,9 @@
 
 import Link from "next/link";
 import { STATBLOCK_SKELETON } from "@/lib/statblock";
+import { EventWhen } from "@/components/event-when";
+import { EVENT_DATE_KEYS } from "@/lib/events";
+import type { CalendarConfig } from "@/lib/calendar";
 import { useActionState, useEffect, useMemo, useRef, useState } from "react";
 import { useFormStatus } from "react-dom";
 import { EyeOff, Loader2, Plus } from "lucide-react";
@@ -69,12 +72,15 @@ export function EntryForm({
   parents,
   cancelHref,
   submitLabel,
+  calendar = null,
 }: {
   action: (prev: ActionState, formData: FormData) => Promise<ActionState>;
   initial: EntryFormValues;
   parents: ParentOption[];
   cancelHref: string;
   submitLabel: string;
+  /** The world's calendar, for dating an event; null until the DM has set one up. */
+  calendar?: CalendarConfig | null;
 }) {
   const [state, formAction] = useActionState<ActionState, FormData>(action, undefined);
   const [kind, setKind] = useState<EntryKind>(initial.kind);
@@ -106,9 +112,9 @@ export function EntryForm({
   // they remain editable instead of being invisibly carried along. `aliases`
   // has its own input under Identity.
   const extraFieldKeys = useMemo(() => {
-    const known = new Set([...(def?.fields.map((f) => f.key) ?? []), "aliases"]);
+    const known = new Set([...(def?.fields.map((f) => f.key) ?? []), "aliases", ...(kind === "event" ? EVENT_DATE_KEYS : [])]);
     return Object.keys(initial.fields).filter((k) => !known.has(k) && initial.fields[k]);
-  }, [def, initial.fields]);
+  }, [def, initial.fields, kind]);
 
   const tableProblems = kind === "table" ? validateTable(dice, bodyValue) : [];
   const blocked = tableProblems.length > 0;
@@ -214,6 +220,12 @@ export function EntryForm({
           ))}
         </RadioGroup>
       </FormSection>
+
+      {kind === "event" && (
+        <FormSection title="When">
+          <EventWhen calendar={calendar} fields={initial.fields} />
+        </FormSection>
+      )}
 
       {/* ---- Kind-specific properties ---- */}
       {(def?.fields.length ?? 0) > 0 || extraFieldKeys.length > 0 ? (

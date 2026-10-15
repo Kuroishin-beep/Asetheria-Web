@@ -9,6 +9,8 @@ import { Button } from "@/components/ui/button";
 import { getCurrentUser } from "@/lib/auth";
 import { CALENDAR_LIMITS, formatDate, formatYear, monthGrid, shiftMonth } from "@/lib/calendar";
 import { getCalendar } from "@/lib/calendar-store";
+import { formatEventWhen, sortEvents } from "@/lib/events";
+import { eventsByDay, getTimelineItems } from "@/lib/timeline";
 
 export const metadata: Metadata = { title: "Calendar" };
 
@@ -57,6 +59,12 @@ export default async function CalendarPage({ searchParams }: { searchParams: Pro
   const href = (t: { year: number; month: number } | null) => (t ? `/calendar?y=${t.year}&m=${t.month}` : null);
   const showingCurrent = year === current.year && month === current.month;
 
+  // Dated events the viewer may read that fall in this month (a span shows on each of its days).
+  const byDay = eventsByDay(config, await getTimelineItems(user, config), year, month);
+  const dayNames: Record<number, string[]> = Object.fromEntries([...byDay.entries()].map(([d, list]) => [d, list.map((e) => e.name)]));
+  const monthEvents = [...new Map([...byDay.values()].flat().map((e) => [e.id, e])).values()];
+  const orderedEvents = sortEvents(config, monthEvents);
+
   return (
     <div className="max-w-4xl">
       <PageHeading Icon={CalendarDays} title="Calendar" blurb="The months and days of Asetheria, and where the story is now." />
@@ -80,7 +88,26 @@ export default async function CalendarPage({ searchParams }: { searchParams: Pro
         today={showingCurrent ? current.day : null}
         prevHref={href(prev)}
         nextHref={href(next)}
+        events={dayNames}
       />
+
+      {orderedEvents.length > 0 && (
+        <section aria-labelledby="month-events" className="mt-6">
+          <h2 id="month-events" className="font-display mb-2 text-lg font-bold">
+            Events this month
+          </h2>
+          <ul className="grid gap-1 text-[15px]" data-testid="month-events">
+            {orderedEvents.map((e) => (
+              <li key={e.id}>
+                <Link href={`/codex/entry/${e.slug}`} className="text-link underline-offset-4 hover:underline">
+                  {e.name}
+                </Link>
+                <span className="text-muted-foreground">: {formatEventWhen(config, e.dates)}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
 
       {!showingCurrent && (
         <p className="mt-4 text-sm">

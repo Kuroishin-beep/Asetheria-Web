@@ -7,6 +7,7 @@ import { entries, type EntryKind } from "@/db/schema";
 import { getCurrentUser } from "@/lib/auth";
 import { createEntryAction } from "@/lib/actions";
 import { getTemplate } from "@/lib/page-templates";
+import { getCalendar } from "@/lib/calendar-store";
 import { KIND_BY_KEY, sectionPath } from "@/lib/kinds";
 import { EntryForm } from "@/components/entry-form";
 import { PageHeading } from "@/components/entry-card";
@@ -33,6 +34,7 @@ export default async function NewEntryPage({
 
   // The DM's own template for this kind if they wrote one, else the built-in default.
   const template = await getTemplate(kind);
+  const calendar = (await getCalendar())?.config ?? null;
 
   const parents = await db
     .select({ id: entries.id, name: entries.name, kind: entries.kind })
@@ -54,6 +56,7 @@ export default async function NewEntryPage({
         cancelHref={sectionPath(kind)}
         submitLabel="Create entry"
         parents={parents}
+        calendar={calendar}
         initial={{
           name: "",
           kind,

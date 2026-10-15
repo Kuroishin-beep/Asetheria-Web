@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import type { Metadata } from "next";
-import { Eye, EyeOff, Pencil, Sparkles } from "lucide-react";
+import { Eye, EyeOff, Hourglass, Pencil, Sparkles } from "lucide-react";
 import { CardGrid, EntryCard } from "@/components/entry-card";
 import { RollTableView } from "@/components/roll-table-view";
 import { Eyebrow } from "@/components/shared/eyebrow";
@@ -35,6 +35,8 @@ import { parseRollTable, stripTable, validateTable } from "@/lib/roll-table";
 import { KIND_ICONS } from "@/lib/section-icons";
 import { hasMarkers, splitAtMarkers } from "@/lib/secret-blocks";
 import { parseStatblock } from "@/lib/statblock";
+import { getCalendar } from "@/lib/calendar-store";
+import { EVENT_DATE_KEYS, formatEventWhen, parseEventDates } from "@/lib/events";
 import { secretsForViewer } from "@/lib/secrets";
 import { listPlayers } from "@/lib/rbac";
 import { ArchiveButton } from "./archive-button";
@@ -123,6 +125,14 @@ export default async function EntryPage({
   const statblockSubtitle = [entry.fields?.type, statblock.kind === "block" && statblock.block.challenge ? `Challenge ${statblock.block.challenge.cr}` : ""].filter(Boolean).join(" · ");
   const statblockBodyHtml = statblock.kind === "block" ? renderMarkdown(statblock.block.body, resolve) : "";
 
+  // An event shows when it happened, in the world's own calendar.
+  let eventWhen: string | null = null;
+  if (entry.kind === "event") {
+    const cal = (await getCalendar())?.config ?? null;
+    const parsed = parseEventDates(entry.fields ?? {}, cal);
+    eventWhen = parsed.ok && cal ? formatEventWhen(cal, parsed.dates) : "Undated";
+  }
+
   const fieldDefs = def?.fields ?? [];
   // A hero kind moves its key facts into the hero card, so they are not shown twice.
   const heroKeys = HERO_INFOBOX[entry.kind];
@@ -138,7 +148,7 @@ export default async function EntryPage({
   // so no property from Notion silently disappears.
   const knownKeys = new Set(fieldDefs.map((f) => f.key));
   const extraFields = Object.entries(entry.fields ?? {}).filter(
-    ([k, v]) => v && !knownKeys.has(k) && k !== "description" && k !== "aliases",
+    ([k, v]) => v && !knownKeys.has(k) && k !== "description" && k !== "aliases" && !(entry.kind === "event" && (EVENT_DATE_KEYS as readonly string[]).includes(k)),
   );
 
   // Every list below came through the access-checked queries, so a player's
@@ -209,6 +219,14 @@ export default async function EntryPage({
             </div>
           )}
         </div>
+
+        {eventWhen && (
+          <p className="mt-3 flex items-center gap-2 text-[15px]" data-testid="event-when">
+            <Hourglass aria-hidden="true" className="size-4 text-gold" />
+            <span className="text-muted-foreground">When</span>
+            <strong>{eventWhen}</strong>
+          </p>
+        )}
 
         <div className="mt-4 flex flex-wrap items-center gap-1">
           {entry.visibility === "secret" && (

@@ -6,6 +6,14 @@ import { useRef, useState, type KeyboardEvent } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
+/** What a day cell is called for a screen reader: its number, whether it is today, and its events. */
+function cellLabel(day: number, isToday: boolean, names: string[] | undefined): string {
+  const parts = [`Day ${day}`];
+  if (isToday) parts.push("today");
+  if (names && names.length > 0) parts.push(`${names.length} ${names.length === 1 ? "event" : "events"}: ${names.join("; ")}`);
+  return parts.join(", ");
+}
+
 /**
  * One month as a keyboard-friendly grid: arrow keys move between days, Home and End go to the start and end of
  * the week, and Page Up and Page Down change the month. Only one day is a tab stop at a time (today, or the first).
@@ -18,6 +26,7 @@ export function CalendarGrid({
   today,
   prevHref,
   nextHref,
+  events = {},
 }: {
   headingId: string;
   heading: string;
@@ -27,6 +36,8 @@ export function CalendarGrid({
   today: number | null;
   prevHref: string | null;
   nextHref: string | null;
+  /** Names of the events on each day of this month (only ones the viewer may read). */
+  events?: Record<number, string[]>;
 }) {
   const router = useRouter();
   const cells = useRef(new Map<number, HTMLTableCellElement>());
@@ -126,6 +137,7 @@ export function CalendarGrid({
                       role="gridcell"
                       tabIndex={day === active ? 0 : -1}
                       aria-current={day === today ? "date" : undefined}
+                      aria-label={cellLabel(day, day === today, events[day])}
                       data-day={day}
                       onFocus={() => setActive(day)}
                       onKeyDown={(e) => onKeyDown(e, day, ci)}
@@ -136,6 +148,12 @@ export function CalendarGrid({
                     >
                       <span>{day}</span>
                       {day === today && <span className="ml-1 text-xs text-primary">Today</span>}
+                      {(events[day] ?? []).slice(0, 2).map((n) => (
+                        <span key={n} className="block truncate text-xs text-muted-foreground" data-testid="calendar-event">
+                          {n}
+                        </span>
+                      ))}
+                      {(events[day]?.length ?? 0) > 2 && <span className="block text-xs text-muted-foreground">+{events[day].length - 2} more</span>}
                     </td>
                   ),
                 )}

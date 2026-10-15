@@ -69,6 +69,7 @@ export const MODULES: Record<string, [string, string]> = {
   "entry-doors": ["DOOR", "The two doors (party password, DM)"],
   "entry-pages": ["PAGE", "Entry pages, hero and templates"],
   "error-states": ["ERR", "Error states and recovery"],
+  events: ["EVTU", "Event dates, ordering and eras"],
   "fauna-ui": ["FAUNA", "Fauna pages"],
   "foundry-import": ["FOUND", "Foundry import"],
   "graph-and-table-view": ["GTV", "Graph and table views"],
@@ -99,6 +100,7 @@ export const MODULES: Record<string, [string, string]> = {
   statblock: ["SBLK", "Statblock reading and arithmetic"],
   statblocks: ["SBPG", "Statblocks on pages"],
   templates: ["TMPL", "Editable page templates"],
+  timeline: ["TIME", "Timeline and event pages"],
   theme: ["THEME", "Light and dark themes"],
   "tools-admin": ["TOOLS", "Tools and admin pages"],
 };

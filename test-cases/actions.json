@@ -777,5 +777,75 @@
     ]
    }
   ]
+ },
+ {
+  "action": "Write a dated event for the timeline",
+  "happy": [
+   {
+    "module": "TIME",
+    "any": [
+     "dated event saves"
+    ]
+   }
+  ],
+  "invalid": [
+   {
+    "module": "TIME",
+    "any": [
+     "refused with the reason"
+    ]
+   }
+  ],
+  "unauthorized": [
+   {
+    "module": "TIME",
+    "any": [
+     "no grant on events"
+    ]
+   }
+  ],
+  "boundary": [
+   {
+    "module": "TIME",
+    "any": [
+     "limits hold at the boundary"
+    ]
+   }
+  ]
+ },
+ {
+  "action": "Browse and filter the timeline",
+  "happy": [
+   {
+    "module": "TIME",
+    "any": [
+     "date order"
+    ]
+   }
+  ],
+  "invalid": [
+   {
+    "module": "TIME",
+    "any": [
+     "filter that matches nothing"
+    ]
+   }
+  ],
+  "unauthorized": [
+   {
+    "module": "TIME",
+    "any": [
+     "sees only the events they may read"
+    ]
+   }
+  ],
+  "boundary": [
+   {
+    "module": "TIME",
+    "any": [
+     "filters narrow"
+    ]
+   }
+  ]
  }
 ]

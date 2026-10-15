@@ -1086,5 +1086,108 @@
     ]
    }
   ]
+ },
+ {
+  "phase": "16 Timeline",
+  "criterion": "The timeline lists only events the viewer may read, in date order (across years, zero and negative years), grouped by era, undated last",
+  "match": [
+   {
+    "module": "TIME",
+    "any": [
+     "date order",
+     "span shows as a range",
+     "each event links"
+    ]
+   },
+   {
+    "module": "EVTU",
+    "any": [
+     "ordering and grouping",
+     "eras are ordered",
+     "events sort by start"
+    ]
+   }
+  ]
+ },
+ {
+  "phase": "16 Timeline",
+  "criterion": "A secret event is nowhere in a player's HTML or data; an ungranted player sees an empty timeline that gives nothing away",
+  "match": [
+   {
+    "module": "TIME",
+    "any": [
+     "sees only the events they may read",
+     "no grant on events",
+     "granting events",
+     "only the events they may read"
+    ]
+   }
+  ]
+ },
+ {
+  "phase": "16 Timeline",
+  "criterion": "Dates outside the calendar's range and an end before the start are refused; part of a date refused; event kind migration idempotent",
+  "match": [
+   {
+    "module": "TIME",
+    "any": [
+     "refused with the reason",
+     "calendar is taken away",
+     "limits hold at the boundary",
+     "new kind",
+     "no calendar"
+    ]
+   },
+   {
+    "module": "EVTU",
+    "any": [
+     "refused",
+     "reading dates",
+     "showing dates"
+    ]
+   }
+  ]
+ },
+ {
+  "phase": "16 Timeline",
+  "criterion": "Filters by era, tag, kind of linked page and years; nonsense ignored; empty states",
+  "match": [
+   {
+    "module": "TIME",
+    "any": [
+     "filters narrow",
+     "filter that matches nothing",
+     "no events the DM sees"
+    ]
+   }
+  ]
+ },
+ {
+  "phase": "16 Timeline",
+  "criterion": "An event can be placed on the calendar's month grid; accessible list of the month's events",
+  "match": [
+   {
+    "module": "TIME",
+    "any": [
+     "on its day",
+     "more than two events",
+     "only the events they may read"
+    ]
+   }
+  ]
+ },
+ {
+  "phase": "16 Timeline",
+  "criterion": "Keyboard use, axe clean in both themes, 375px",
+  "match": [
+   {
+    "module": "TIME",
+    "any": [
+     "keyboard alone",
+     "axe",
+     "375px"
+    ]
+   }
+  ]
  }
 ]

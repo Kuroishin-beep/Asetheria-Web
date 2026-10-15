@@ -13,6 +13,8 @@ import { refreshEmbeddingAfterResponse } from "@/lib/embedding-sync";
 import { inlineForDm, planSecrets, pruneSecrets, writeSecrets } from "@/lib/secrets";
 import { validateTable } from "@/lib/roll-table";
 import { statblockProblem } from "@/lib/statblock";
+import { eventProblem } from "@/lib/events";
+import { getCalendar } from "@/lib/calendar-store";
 import { parseEntryForm, type EntryInput } from "@/lib/validation";
 
 // ---------------------------------------------------------------------------
@@ -69,6 +71,13 @@ function tableProblem(input: EntryInput): string | null {
   return problems.length ? `This table can't be saved yet: ${problems.join(" ")}` : null;
 }
 
+/** An event page needs dates that exist in the world's calendar (or none at all). */
+async function eventPageProblem(input: EntryInput): Promise<string | null> {
+  if (input.kind !== "event") return null;
+  const cal = await getCalendar();
+  return eventProblem(input.fields, cal?.config ?? null);
+}
+
 function revalidateEntry(slug?: string, kind?: Entry["kind"]) {
   revalidatePath("/");
   if (kind) for (const path of sectionPaths(kind)) revalidatePath(path);
@@ -87,7 +96,7 @@ export async function createEntryAction(_prev: unknown, formData: FormData) {
   }
   const input: EntryInput = parsed.data;
   // A table must be rollable and a stat block must be well formed before the page is saved.
-  const tableError = tableProblem(input) ?? statblockProblem(input.fields.statblock ?? "");
+  const tableError = tableProblem(input) ?? statblockProblem(input.fields.statblock ?? "") ?? (await eventPageProblem(input));
   if (tableError) return { error: tableError };
   const plan = await planSecrets(null, input.body);
   if (!plan.ok) return { error: plan.error };
@@ -129,7 +138,7 @@ export async function updateEntryAction(
   }
   const input = parsed.data;
   // A table must be rollable and a stat block must be well formed before the page is saved.
-  const tableError = tableProblem(input) ?? statblockProblem(input.fields.statblock ?? "");
+  const tableError = tableProblem(input) ?? statblockProblem(input.fields.statblock ?? "") ?? (await eventPageProblem(input));
   if (tableError) return { error: tableError };
 
   const [current] = await db

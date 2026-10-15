@@ -167,6 +167,14 @@ export const KINDS: KindDef[] = [
     ],
   },
   {
+    kind: "event",
+    label: "Chronicle",
+    singular: "Event",
+    slug: "chronicle",
+    blurb: "What happened, and when: the dated history of Asetheria.",
+    fields: [{ key: "era", label: "Era", placeholder: "For example the age or period it belongs to" }],
+  },
+  {
     kind: "item",
     label: "Items",
     singular: "Item",

@@ -8098,7 +8098,7 @@
   "category": "Validation",
   "priority": "P1",
   "file": "entries-crud.spec.ts",
-  "line": 142,
+  "line": 143,
   "describe": "entry CRUD (DM)",
   "title": "purge is refused while the entry still has content",
   "preconditions": [
@@ -9060,6 +9060,495 @@
    "button \"Try again\" is visible",
    "text does not: matches /relation|entries_offline|does not exist|ECONN|Error:|\\bat\\s+\\S+\\s+\\(/i",
    "heading \"NPCs\" is visible"
+  ]
+ },
+ {
+  "id": "TC-EVTU-001",
+  "module": "EVTU",
+  "moduleName": "Event dates, ordering and eras",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "events.spec.ts",
+  "line": 30,
+  "describe": "reading dates",
+  "title": "no date at all is an undated event, with or without an era, and needs no calendar",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "no date at all is an undated event, with or without an era, and needs no calendar",
+   "dates(f({}), null) equals { start: null, end: null }",
+   "dates(f({ era: \"The Long Dusk\" }), null) equals { start: null, end: null }",
+   "dates(f({ year: \" \", month: \"\", day: \"\" })) equals { start: null, end: null }"
+  ]
+ },
+ {
+  "id": "TC-EVTU-002",
+  "module": "EVTU",
+  "moduleName": "Event dates, ordering and eras",
+  "category": "Edge",
+  "priority": "P2",
+  "file": "events.spec.ts",
+  "line": 36,
+  "describe": "reading dates",
+  "title": "a full date is read, with spaces around the numbers and negative years",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "a full date is read, with spaces around the numbers and negative years",
+   "dates(f({ year: \" 1042 \", month: \"2\", day: \" 9\" })).start equals { year: 1042, month: 2, day: 9 }",
+   "dates(f({ year: \"-300\", month: \"1\", day: \"1\" })).start equals { year: -300, month: 1, day: 1 }",
+   "dates(f({ year: \"0\", month: \"3\", day: \"31\" })).start equals { year: 0, month: 3, day: 31 }"
+  ]
+ },
+ {
+  "id": "TC-EVTU-003",
+  "module": "EVTU",
+  "moduleName": "Event dates, ordering and eras",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "events.spec.ts",
+  "line": 42,
+  "describe": "reading dates",
+  "title": "an end date is optional; it may equal the start, and may span months and years",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "an end date is optional; it may equal the start, and may span months and years",
+   "dates(f({ year: \"5\", month: \"1\", day: \"1\" })).end is empty",
+   "dates(f({ year: \"5\", month: \"1\", day: \"1\", endYear: \"5\", endMonth: \"1… equals { year: 5, month: 1, day: 1 }",
+   "dates(f({ year: \"5\", month: \"3\", day: \"30\", endYear: \"6\", endMonth: \"… equals { year: 6, month: 1, day: 2 }"
+  ]
+ },
+ {
+  "id": "TC-EVTU-004",
+  "module": "EVTU",
+  "moduleName": "Event dates, ordering and eras",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "events.spec.ts",
+  "line": 50,
+  "describe": "what is refused, in plain words",
+  "title": "part of a date, in either place",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "part of a date, in either place",
+   "errors(f(part)) equals [expect.stringMatching(/needs a year, a month and a day/)]",
+   "errors(f({ year: \"5\", month: \"1\", day: \"1\", endYear: \"6\" })) equals [expect.stringMatching(/end date needs a year, a month and a day/)]"
+  ]
+ },
+ {
+  "id": "TC-EVTU-005",
+  "module": "EVTU",
+  "moduleName": "Event dates, ordering and eras",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "events.spec.ts",
+  "line": 58,
+  "describe": "what is refused, in plain words",
+  "title": "an end with no start",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "an end with no start",
+   "errors(f({ endYear: \"5\", endMonth: \"1\", endDay: \"1\" })) equals [\"Give the start date before the end date.\"]"
+  ]
+ },
+ {
+  "id": "TC-EVTU-006",
+  "module": "EVTU",
+  "moduleName": "Event dates, ordering and eras",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "events.spec.ts",
+  "line": 62,
+  "describe": "what is refused, in plain words",
+  "title": "a date with no calendar to check it against",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "a date with no calendar to check it against",
+   "errors(f({ year: \"5\", month: \"1\", day: \"1\" }), null) equals [expect.stringMatching(/Set up the calendar/)]"
+  ]
+ },
+ {
+  "id": "TC-EVTU-007",
+  "module": "EVTU",
+  "moduleName": "Event dates, ordering and eras",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "events.spec.ts",
+  "line": 66,
+  "describe": "what is refused, in plain words",
+  "title": "a month that does not exist, in both directions",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "a month that does not exist, in both directions",
+   "errors(f({ year: \"5\", month: \"0\", day: \"1\" })) equals [\"The month must be a number from 1 to 3.\"]",
+   "errors(f({ year: \"5\", month: \"4\", day: \"1\" })) equals [\"The month must be a number from 1 to 3.\"]",
+   "errors(f({ year: \"5\", month: \"1\", day: \"1\", endYear: \"5\", endMonth: \"… equals [\"The end month must be a number from 1 to 3.\"]"
+  ]
+ },
+ {
+  "id": "TC-EVTU-008",
+  "module": "EVTU",
+  "moduleName": "Event dates, ordering and eras",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "events.spec.ts",
+  "line": 72,
+  "describe": "what is refused, in plain words",
+  "title": "a day past the end of its month names the month and its length; the last day is fine",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "a day past the end of its month names the month and its length; the last day is fine",
+   "errors(f({ year: \"5\", month: \"2\", day: \"29\" })) equals [\"Beta has 28 days, so the day must be from 1 to 28.\"]",
+   "errors(f({ year: \"5\", month: \"2\", day: \"0\" })) equals [\"Beta has 28 days, so the day must be from 1 to 28.\"]",
+   "dates(f({ year: \"5\", month: \"2\", day: \"28\" })).start equals { year: 5, month: 2, day: 28 }",
+   "errors(f({ year: \"5\", month: \"1\", day: \"2\" }), one) equals [\"Solo has 1 day, so the day must be from 1 to 1.\"]"
+  ]
+ },
+ {
+  "id": "TC-EVTU-009",
+  "module": "EVTU",
+  "moduleName": "Event dates, ordering and eras",
+  "category": "Edge",
+  "priority": "P2",
+  "file": "events.spec.ts",
+  "line": 80,
+  "describe": "what is refused, in plain words",
+  "title": "numbers that are not whole numbers: fractions, exponents, hex, words, and very long digits",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "numbers that are not whole numbers: fractions, exponents, hex, words, and very long digits",
+   "errors(f({ year: bad, month: \"1\", day: \"1\" })) equals [\"The year must be a whole number.\"]",
+   "errors(f({ year: \"5\", month: \"1\", day: \"1e1\" })).join(\" \") matches /Alpha has 30 days/"
+  ]
+ },
+ {
+  "id": "TC-EVTU-010",
+  "module": "EVTU",
+  "moduleName": "Event dates, ordering and eras",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "events.spec.ts",
+  "line": 87,
+  "describe": "what is refused, in plain words",
+  "title": "a year outside the supported years",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "a year outside the supported years",
+   "dates(f({ year: \"100000\", month: \"1\", day: \"1\" })).start?.year equals 100000",
+   "errors(f({ year: \"100001\", month: \"1\", day: \"1\" })) equals [expect.stringMatching(/outside the years/)]",
+   "errors(f({ year: \"-100001\", month: \"1\", day: \"1\" })) equals [expect.stringMatching(/outside the years/)]"
+  ]
+ },
+ {
+  "id": "TC-EVTU-011",
+  "module": "EVTU",
+  "moduleName": "Event dates, ordering and eras",
+  "category": "Validation",
+  "priority": "P1",
+  "file": "events.spec.ts",
+  "line": 93,
+  "describe": "what is refused, in plain words",
+  "title": "an end before the start is refused, even by one day; the same day and the next day are fine",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "an end before the start is refused, even by one day; the same day and the next day are fine",
+   "errors(f({ ...base, endYear: \"5\", endMonth: \"2\", endDay: \"9\" })) equals [\"The end is before the start.\"]",
+   "errors(f({ ...base, endYear: \"4\", endMonth: \"3\", endDay: \"31\" })) equals [\"The end is before the start.\"]",
+   "dates(f({ ...base, endYear: \"5\", endMonth: \"2\", endDay: \"10\" })).end does not: is empty",
+   "dates(f({ ...base, endYear: \"5\", endMonth: \"2\", endDay: \"11\" })).end does not: is empty"
+  ]
+ },
+ {
+  "id": "TC-EVTU-012",
+  "module": "EVTU",
+  "moduleName": "Event dates, ordering and eras",
+  "category": "Boundary",
+  "priority": "P1",
+  "file": "events.spec.ts",
+  "line": 101,
+  "describe": "what is refused, in plain words",
+  "title": "an era name at the limit is fine, one more character is refused",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call parseEventDates(f({ era: \"e\".repeat(ERA_MAX_LENGTH) }), CFG)"
+  ],
+  "testData": [],
+  "expected": [
+   "an era name at the limit is fine, one more character is refused",
+   "parseEventDates(f({ era: \"e\".repeat(ERA_MAX_LENGTH) }), CFG).ok equals true",
+   "errors(f({ era: \"e\".repeat(ERA_MAX_LENGTH + 1) })) equals [expect.stringMatching(/era name is longer than 80/)]"
+  ]
+ },
+ {
+  "id": "TC-EVTU-013",
+  "module": "EVTU",
+  "moduleName": "Event dates, ordering and eras",
+  "category": "Concurrency",
+  "priority": "P1",
+  "file": "events.spec.ts",
+  "line": 106,
+  "describe": "what is refused, in plain words",
+  "title": "several problems at once are all reported, and the save-time message joins them",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call eventProblem(fields, CFG)",
+   "Call eventProblem(f({ year: \"5\", month: \"1\", day: \"1\" }), CFG)",
+   "Call eventProblem(f({}), null)"
+  ],
+  "testData": [],
+  "expected": [
+   "several problems at once are all reported, and the save-time message joins them",
+   "errors(fields).length is at least 2",
+   "msg matches /^This event can't be saved yet\\./",
+   "eventProblem(f({ year: \"5\", month: \"1\", day: \"1\" }), CFG) is empty",
+   "eventProblem(f({}), null) is empty"
+  ]
+ },
+ {
+  "id": "TC-EVTU-014",
+  "module": "EVTU",
+  "moduleName": "Event dates, ordering and eras",
+  "category": "Edge",
+  "priority": "P2",
+  "file": "events.spec.ts",
+  "line": 124,
+  "describe": "ordering and grouping",
+  "title": "events sort by start date across months and years, ties by name, undated last",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call sortEvents(CFG, list)"
+  ],
+  "testData": [],
+  "expected": [
+   "events sort by start date across months and years, ties by name, undated last",
+   "sortEvents(CFG, list).map((e) => e.id) equals [\"neg\", \"b1\", \"b2\", \"c\", \"u\"]"
+  ]
+ },
+ {
+  "id": "TC-EVTU-015",
+  "module": "EVTU",
+  "moduleName": "Event dates, ordering and eras",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "events.spec.ts",
+  "line": 129,
+  "describe": "ordering and grouping",
+  "title": "sorting does not change the list it was given",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call sortEvents(CFG, list)"
+  ],
+  "testData": [],
+  "expected": [
+   "sorting does not change the list it was given",
+   "list equals copy"
+  ]
+ },
+ {
+  "id": "TC-EVTU-016",
+  "module": "EVTU",
+  "moduleName": "Event dates, ordering and eras",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "events.spec.ts",
+  "line": 136,
+  "describe": "ordering and grouping",
+  "title": "eras are ordered by their earliest event; no-era events and undated events come last, in that order",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call groupByEra(CFG, [ ev(\"1\", \"Late war\", \"Age of Ash\", { y: 300, m: 1, d: 1 }), ev(\"2\", \"Foun…)"
+  ],
+  "testData": [],
+  "expected": [
+   "eras are ordered by their earliest event; no-era events and undated events come last, in that order",
+   "groups.map((g) => g.era) equals [\"Age of Dawn\", \"Age of Ash\", \"No era\", \"Undated\"]",
+   "groups[0].events.map((e) => e.id) equals [\"2\"]",
+   "groups[1].events.map((e) => e.id) equals [\"4\", \"1\"]",
+   "groups[3].events.map((e) => e.id) equals [\"5\", \"6\"]"
+  ]
+ },
+ {
+  "id": "TC-EVTU-017",
+  "module": "EVTU",
+  "moduleName": "Event dates, ordering and eras",
+  "category": "Validation",
+  "priority": "P1",
+  "file": "events.spec.ts",
+  "line": 151,
+  "describe": "ordering and grouping",
+  "title": "an empty list gives no groups",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call groupByEra(CFG, [])"
+  ],
+  "testData": [],
+  "expected": [
+   "an empty list gives no groups",
+   "groupByEra(CFG, []) equals []"
+  ]
+ },
+ {
+  "id": "TC-EVTU-018",
+  "module": "EVTU",
+  "moduleName": "Event dates, ordering and eras",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "events.spec.ts",
+  "line": 155,
+  "describe": "ordering and grouping",
+  "title": "era names are matched after trimming",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call groupByEra(CFG, [ev(\"1\", \"A\", \" Dawn \", { y: 1, m: 1, d: 1 }), ev(\"2\", \"B\", \"Dawn\", { y: 2…)"
+  ],
+  "testData": [],
+  "expected": [
+   "era names are matched after trimming",
+   "groups length is 1"
+  ]
+ },
+ {
+  "id": "TC-EVTU-019",
+  "module": "EVTU",
+  "moduleName": "Event dates, ordering and eras",
+  "category": "Edge",
+  "priority": "P2",
+  "file": "events.spec.ts",
+  "line": 162,
+  "describe": "showing dates",
+  "title": "a single date, a span, a one-day span and an undated event read correctly",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call formatEventWhen(CFG, { start: d(1042, 2, 9), end: null })",
+   "Call formatEventWhen(CFG, { start: d(1042, 2, 9), end: d(1042, 3, 3) })",
+   "Call formatEventWhen(CFG, { start: d(1042, 2, 9), end: d(1042, 2, 9) })",
+   "Call formatEventWhen(CFG, { start: null, end: null })"
+  ],
+  "testData": [],
+  "expected": [
+   "a single date, a span, a one-day span and an undated event read correctly",
+   "formatEventWhen(CFG, { start: d(1042, 2, 9), end: null }) equals Beta 9, 1042 TT",
+   "formatEventWhen(CFG, { start: d(1042, 2, 9), end: d(1042, 3, 3) }) equals Beta 9, 1042 TT to Gamma 3, 1042 TT",
+   "formatEventWhen(CFG, { start: d(1042, 2, 9), end: d(1042, 2, 9) }) equals Beta 9, 1042 TT",
+   "formatEventWhen(CFG, { start: null, end: null }) equals Undated"
+  ]
+ },
+ {
+  "id": "TC-EVTU-020",
+  "module": "EVTU",
+  "moduleName": "Event dates, ordering and eras",
+  "category": "Edge",
+  "priority": "P2",
+  "file": "events.spec.ts",
+  "line": 170,
+  "describe": "showing dates",
+  "title": "the days of a month an event covers: a single day, a span inside, a span running in from before and out after, and none",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call daysInMonth(CFG, { start: d(5, 2, 10), end: null }, 5, 2)",
+   "Call daysInMonth(CFG, { start: d(5, 2, 10), end: d(5, 2, 12) }, 5, 2)",
+   "Call daysInMonth(CFG, { start: d(5, 1, 25), end: d(5, 3, 5) }, 5, 2)",
+   "Call daysInMonth(CFG, { start: d(5, 1, 25), end: d(5, 2, 3) }, 5, 2)",
+   "Call daysInMonth(CFG, { start: d(5, 2, 26), end: d(5, 3, 4) }, 5, 2)",
+   "Call daysInMonth(CFG, { start: d(5, 2, 10), end: null }, 5, 3)",
+   "Call daysInMonth(CFG, { start: d(5, 2, 10), end: null }, 6, 2)",
+   "Call daysInMonth(CFG, { start: null, end: null }, 5, 2)",
+   "Call daysInMonth(CFG, { start: d(5, 3, 31), end: d(6, 1, 2) }, 6, 1)"
+  ],
+  "testData": [],
+  "expected": [
+   "the days of a month an event covers: a single day, a span inside, a span running in from before and out after, and none",
+   "daysInMonth(CFG, { start: d(5, 2, 10), end: null }, 5, 2) equals [10]",
+   "daysInMonth(CFG, { start: d(5, 2, 10), end: d(5, 2, 12) }, 5, 2) equals [10, 11, 12]",
+   "daysInMonth(CFG, { start: d(5, 1, 25), end: d(5, 3, 5) }, 5, 2) length is 28",
+   "daysInMonth(CFG, { start: d(5, 1, 25), end: d(5, 2, 3) }, 5, 2) equals [1, 2, 3]",
+   "daysInMonth(CFG, { start: d(5, 2, 26), end: d(5, 3, 4) }, 5, 2) equals [26, 27, 28]",
+   "daysInMonth(CFG, { start: d(5, 2, 10), end: null }, 5, 3) equals []",
+   "daysInMonth(CFG, { start: d(5, 2, 10), end: null }, 6, 2) equals []",
+   "daysInMonth(CFG, { start: null, end: null }, 5, 2) equals []",
+   "daysInMonth(CFG, { start: d(5, 3, 31), end: d(6, 1, 2) }, 6, 1) equals [1, 2]"
   ]
  },
  {
@@ -17989,6 +18478,651 @@
    "reduced motion: the page honours prefers-reduced-motion with no console errors",
    "await page.evaluate(() => matchMedia(\"(prefers-reduced-motion: reduce… equals true",
    "errors equals []"
+  ]
+ },
+ {
+  "id": "TC-TIME-001",
+  "module": "TIME",
+  "moduleName": "Timeline and event pages",
+  "category": "Data Integrity",
+  "priority": "P0",
+  "file": "timeline.spec.ts",
+  "line": 104,
+  "describe": "the new kind",
+  "title": "the event kind exists, the migration is idempotent and removes nothing, and the section appears for the DM",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Open /codex/chronicle",
+   "Open /"
+  ],
+  "testData": [
+   "URL /codex/chronicle",
+   "URL /"
+  ],
+  "expected": [
+   "the event kind exists, the migration is idempotent and removes nothing, and the section appears for the DM",
+   "kinds contains event",
+   "kinds length is 21",
+   "Number((await client.query(`SELECT count(*)::int AS n FROM entries`))… equals entries",
+   "(await client.query(`SELECT unnest(enum_range(NULL::entry_kind))::tex… contains event",
+   "heading \"Chronicle\" is visible",
+   "link \"/^Chronicle/\" is visible"
+  ]
+ },
+ {
+  "id": "TC-TIME-002",
+  "module": "TIME",
+  "moduleName": "Timeline and event pages",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "timeline.spec.ts",
+  "line": 126,
+  "describe": "writing an event (DM)",
+  "title": "with no calendar the When section says so and the event is saved undated",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Type name(\"nocal\") into `#name`",
+   "Wait for the URL /\\/codex\\/entry\\/[^/]+$/"
+  ],
+  "testData": [
+   "Input name(\"nocal\")"
+  ],
+  "expected": [
+   "with no calendar the When section says so and the event is saved undated",
+   "[event-no-calendar] contains text only be dated once the calendar is set up",
+   "link \"Set up the calendar\" has attribute href",
+   "`#event-year` count is 0",
+   "[event-when] contains text Undated"
+  ]
+ },
+ {
+  "id": "TC-TIME-003",
+  "module": "TIME",
+  "moduleName": "Timeline and event pages",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "timeline.spec.ts",
+  "line": 138,
+  "describe": "writing an event (DM)",
+  "title": "a dated event saves, shows its date in the world's calendar on its page, and stores the parts as text",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Wait for the URL /\\/codex\\/entry\\/[^/]+$/"
+  ],
+  "testData": [],
+  "expected": [
+   "a dated event saves, shows its date in the world's calendar on its page, and stores the parts as text",
+   "[event-when] contains text Beta 9, 1042 TT",
+   "text \"The Long Dusk\" is visible",
+   "row.fields match object { year: \"1042\", month: \"2\", day: \"9\", era: \"The Long Dusk\" }",
+   "`dt` count is 0"
+  ]
+ },
+ {
+  "id": "TC-TIME-004",
+  "module": "TIME",
+  "moduleName": "Timeline and event pages",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "timeline.spec.ts",
+  "line": 152,
+  "describe": "writing an event (DM)",
+  "title": "an event with an end date shows its span, and the editor opens with the dates and the month filled in",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Wait for the URL /\\/codex\\/entry\\/[^/]+$/"
+  ],
+  "testData": [],
+  "expected": [
+   "an event with an end date shows its span, and the editor opens with the dates and the month filled in",
+   "[event-when] contains text Beta 9, 1042 TT to Gamma 3, 1042 TT",
+   "`#event-year` value is 1042",
+   "`#event-month` value is 2",
+   "`#event-day` value is 9",
+   "`#event-end-month` value is 3"
+  ]
+ },
+ {
+  "id": "TC-TIME-005",
+  "module": "TIME",
+  "moduleName": "Timeline and event pages",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "timeline.spec.ts",
+  "line": 167,
+  "describe": "writing an event (DM)",
+  "title": "clearing the date in the editor makes the event undated again",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Wait for the URL /\\/codex\\/entry\\/[^/]+$/",
+   "Type  into `#event-year`",
+   "Choose  in `#event-month`",
+   "Type  into `#event-day`",
+   "Click button \"Save changes\"",
+   "Wait for the URL (u) => /^\\/codex\\/entry\\/[^/]+$/.test(u.pathname)"
+  ],
+  "testData": [
+   "Input ",
+   "Choice "
+  ],
+  "expected": [
+   "clearing the date in the editor makes the event undated again",
+   "[event-when] contains text Undated"
+  ]
+ },
+ {
+  "id": "TC-TIME-006",
+  "module": "TIME",
+  "moduleName": "Timeline and event pages",
+  "category": "Data Integrity",
+  "priority": "P0",
+  "file": "timeline.spec.ts",
+  "line": 183,
+  "describe": "writing an event (DM)",
+  "title": "a part of a date, a day that does not exist, an end before the start and an over-long era are each refused with the reason, and nothing is created",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "a part of a date, a day that does not exist, an end before the start and an over-long era are each refused with the reason, and nothing is created",
+   "`p[role=\"alert\"]` contains text message",
+   "page URL is /\\/codex\\/new/",
+   "await query(`SELECT 1 FROM entries WHERE name = $1`, [name(label)]) length is 0"
+  ]
+ },
+ {
+  "id": "TC-TIME-007",
+  "module": "TIME",
+  "moduleName": "Timeline and event pages",
+  "category": "Boundary",
+  "priority": "P1",
+  "file": "timeline.spec.ts",
+  "line": 199,
+  "describe": "writing an event (DM)",
+  "title": "the limits hold at the boundary: the first and last day of a month, year zero and a negative year, and an 80-character era all save",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Wait for the URL /\\/codex\\/entry\\/[^/]+$/"
+  ],
+  "testData": [],
+  "expected": [
+   "the limits hold at the boundary: the first and last day of a month, year zero and a negative year, and an 80-character era all save",
+   "[event-when] contains text when"
+  ]
+ },
+ {
+  "id": "TC-TIME-008",
+  "module": "TIME",
+  "moduleName": "Timeline and event pages",
+  "category": "Validation",
+  "priority": "P1",
+  "file": "timeline.spec.ts",
+  "line": 216,
+  "describe": "writing an event (DM)",
+  "title": "if the calendar is taken away after the form is open, a dated event is refused rather than saved unchecked",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "if the calendar is taken away after the form is open, a dated event is refused rather than saved unchecked",
+   "`p[role=\"alert\"]` contains text /Set up the calendar/",
+   "await query(`SELECT 1 FROM entries WHERE name = $1`, [name(\"late\")]) length is 0"
+  ]
+ },
+ {
+  "id": "TC-TIME-009",
+  "module": "TIME",
+  "moduleName": "Timeline and event pages",
+  "category": "Edge",
+  "priority": "P2",
+  "file": "timeline.spec.ts",
+  "line": 228,
+  "describe": "the timeline (DM)",
+  "title": "events are in date order across years including zero and negative years, grouped by era, with undated last",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "events are in date order across years including zero and negative years, grouped by era, with undated last",
+   "eras equals [\"Age of Dawn\", \"Age of Ash\", \"No era\", \"Undated\"]",
+   "order equals [name(\"b-before\"), name(\"a-founding\"), name(\"d-early-ash\"), name(\"c-late\"), nam…",
+   "await whens(page) equals expect.arrayContaining([\"Beta 3, −40 TT\", \"Alpha 1, 1 TT\", \"Gamma 31, 250 TT\", …",
+   "[timeline-count] contains text 6 of 6 events"
+  ]
+ },
+ {
+  "id": "TC-TIME-010",
+  "module": "TIME",
+  "moduleName": "Timeline and event pages",
+  "category": "Edge",
+  "priority": "P2",
+  "file": "timeline.spec.ts",
+  "line": 246,
+  "describe": "the timeline (DM)",
+  "title": "a span shows as a range, and a one-day span as a single date",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "a span shows as a range, and a one-day span as a single date",
+   "await whens(page) equals [\"Alpha 28, 10 TT to Beta 3, 10 TT\", \"Alpha 1, 11 TT\"]"
+  ]
+ },
+ {
+  "id": "TC-TIME-011",
+  "module": "TIME",
+  "moduleName": "Timeline and event pages",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "timeline.spec.ts",
+  "line": 255,
+  "describe": "the timeline (DM)",
+  "title": "each event links to its own page and names the pages it links to",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Click [timeline-event] › link \"ev.name\""
+  ],
+  "testData": [],
+  "expected": [
+   "each event links to its own page and names the pages it links to",
+   "[timeline-linked] text is [place.name]",
+   "page URL is new RegExp(`/codex/entry/${ev.name}$`)"
+  ]
+ },
+ {
+  "id": "TC-TIME-012",
+  "module": "TIME",
+  "moduleName": "Timeline and event pages",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "timeline.spec.ts",
+  "line": 267,
+  "describe": "the timeline (DM)",
+  "title": "the filters narrow by era, tag, kind of linked page and years, and combine; counts say how many remain",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "the filters narrow by era, tag, kind of linked page and years, and combine; counts say how many remain",
+   "await run(\"era=Dawn\") equals [a.name, b.name]",
+   "await run(`tag=war-${tag}`) equals [a.name, c.name]",
+   "await run(\"kind=location\") equals [b.name]",
+   "await run(\"from=15&to=25\") equals [b.name]",
+   "await run(\"from=34\") equals [c.name]",
+   "await run(\"to=9\") equals []",
+   "await run(`era=Ash&tag=war-${tag}`) equals [c.name]",
+   "[timeline-count] contains text 2 of 4 events",
+   "await run(\"from=-100000&to=100000\") does not: contains name(\"f4\")"
+  ]
+ },
+ {
+  "id": "TC-TIME-013",
+  "module": "TIME",
+  "moduleName": "Timeline and event pages",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "timeline.spec.ts",
+  "line": 294,
+  "describe": "the timeline (DM)",
+  "title": "a filter that matches nothing says so and offers the way back; nonsense in the address is ignored",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Click link \"Clear filters\"",
+   "Open /timeline?‹q›"
+  ],
+  "testData": [
+   "URL /timeline?‹q›"
+  ],
+  "expected": [
+   "a filter that matches nothing says so and offers the way back; nonsense in the address is ignored",
+   "text \"No events match those filters\" is visible",
+   "[timeline-event] count is 1",
+   "HTTP status equals 200",
+   "heading \"Timeline\" is visible"
+  ]
+ },
+ {
+  "id": "TC-TIME-014",
+  "module": "TIME",
+  "moduleName": "Timeline and event pages",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "timeline.spec.ts",
+  "line": 309,
+  "describe": "the timeline (DM)",
+  "title": "with no events the DM sees a way to add the first, and with events but no calendar is told to set one up",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "with no events the DM sees a way to add the first, and with events but no calendar is told to set one up",
+   "text \"No events yet\" is visible",
+   "link \"New event\" has attribute href",
+   "text \"Events can only be put in order once the calendar is set up\" is visible"
+  ]
+ },
+ {
+  "id": "TC-TIME-015",
+  "module": "TIME",
+  "moduleName": "Timeline and event pages",
+  "category": "Security",
+  "priority": "P0",
+  "file": "timeline.spec.ts",
+  "line": 320,
+  "describe": "who sees which event",
+  "title": "a player sees only the events they may read, never a secret one or its name, and no page a linked event points to that they cannot read",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Send GET /api/find?q=‹encodeURIComponent(secret.name)›",
+   "Open /codex/entry/‹secret.name›"
+  ],
+  "testData": [
+   "GET /api/find?q=‹encodeURIComponent(secret.name)›",
+   "URL /codex/entry/‹secret.name›"
+  ],
+  "expected": [
+   "a player sees only the events they may read, never a secret one or its name, and no page a linked event points to that they cannot read",
+   "html does not: contains secret.name",
+   "html does not: contains canary-‹tag›",
+   "html does not: contains secretPlace.name",
+   "names(pp).filter({ hasText: open1.name }) count is 1",
+   "[timeline-linked] text is [visiblePlace.name]",
+   "[timeline-count] does not: contains text of 2",
+   "link \"New event\" count is 0",
+   "await (await pp.request.get(`/api/find?q=${encodeURIComponent(secret.… does not: contains secret.name",
+   "HTTP status equals 404",
+   "…and 2 more"
+  ]
+ },
+ {
+  "id": "TC-TIME-016",
+  "module": "TIME",
+  "moduleName": "Timeline and event pages",
+  "category": "Permission & Auth",
+  "priority": "P0",
+  "file": "timeline.spec.ts",
+  "line": 351,
+  "describe": "who sees which event",
+  "title": "a player with no grant on events sees an empty timeline that gives away nothing: no names, no counts",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "a player with no grant on events sees an empty timeline that gives away nothing: no names, no counts",
+   "text \"No events yet\" is visible",
+   "text \"Nothing has been revealed to you on the timeline yet.\" is visible",
+   "html does not: contains ev.name",
+   "html does not: contains canary2-‹tag›",
+   "[timeline-count] count is 0"
+  ]
+ },
+ {
+  "id": "TC-TIME-017",
+  "module": "TIME",
+  "moduleName": "Timeline and event pages",
+  "category": "Concurrency",
+  "priority": "P1",
+  "file": "timeline.spec.ts",
+  "line": 369,
+  "describe": "who sees which event",
+  "title": "granting events to a player reveals public ones at once",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)",
+   "Test rows use a `Zz`/`zz-` prefix and are deleted afterwards"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "granting events to a player reveals public ones at once",
+   "[timeline-event] count is 0",
+   "names(page) text is [ev.name]"
+  ]
+ },
+ {
+  "id": "TC-TIME-018",
+  "module": "TIME",
+  "moduleName": "Timeline and event pages",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "timeline.spec.ts",
+  "line": 388,
+  "describe": "on the calendar",
+  "title": "an event shows on its day, a span on every day it covers, and the month lists each event once with its date",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Click [month-events] › link \"name(\"cal-one\")\""
+  ],
+  "testData": [],
+  "expected": [
+   "an event shows on its day, a span on every day it covers, and the month lists each event once with its date",
+   "`td[data-day='9']` contains text name(\"cal-one\")",
+   "`td[data-day='‹d›']` contains text name(\"cal-span\")",
+   "`td[data-day='3']` does not: contains text name(\"cal-span\")",
+   "`td[data-day='9']` has attribute aria-label",
+   "list count is 2",
+   "list.filter({ hasText: name(\"cal-span\") }) contains text Alpha 29, 1042 TT to Beta 2, 1042 TT",
+   "page URL is new RegExp(`/codex/entry/${name(\"cal-one\")}$`)"
+  ]
+ },
+ {
+  "id": "TC-TIME-019",
+  "module": "TIME",
+  "moduleName": "Timeline and event pages",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "timeline.spec.ts",
+  "line": 405,
+  "describe": "on the calendar",
+  "title": "more than two events on one day shows two and a count; a month with none shows no list",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "more than two events on one day shows two and a count; a month with none shows no list",
+   "`td[data-day='20'] [data-testid=calendar-event]` count is 2",
+   "`td[data-day='20']` contains text +2 more",
+   "`td[data-day='20']` has attribute aria-label",
+   "[month-events] count is 0"
+  ]
+ },
+ {
+  "id": "TC-TIME-020",
+  "module": "TIME",
+  "moduleName": "Timeline and event pages",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "timeline.spec.ts",
+  "line": 417,
+  "describe": "on the calendar",
+  "title": "a player sees on the calendar only the events they may read",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "a player sees on the calendar only the events they may read",
+   "html contains open1.name",
+   "html does not: contains secret.name",
+   "`td[data-day='9']` has attribute aria-label"
+  ]
+ },
+ {
+  "id": "TC-TIME-021",
+  "module": "TIME",
+  "moduleName": "Timeline and event pages",
+  "category": "Accessibility",
+  "priority": "P2",
+  "file": "timeline.spec.ts",
+  "line": 439,
+  "describe": "accessibility and small screens",
+  "title": "the timeline, an event and the event editor have no serious axe violations (dark)",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)",
+   "Browser storage is prepared before the page loads"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "the timeline, an event and the event editor have no serious axe violations (dark)",
+   "serious equals []"
+  ]
+ },
+ {
+  "id": "TC-TIME-022",
+  "module": "TIME",
+  "moduleName": "Timeline and event pages",
+  "category": "Accessibility",
+  "priority": "P2",
+  "file": "timeline.spec.ts",
+  "line": 439,
+  "describe": "accessibility and small screens",
+  "title": "the timeline, an event and the event editor have no serious axe violations (light)",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)",
+   "Browser storage is prepared before the page loads"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "the timeline, an event and the event editor have no serious axe violations (light)",
+   "serious equals []"
+  ]
+ },
+ {
+  "id": "TC-TIME-023",
+  "module": "TIME",
+  "moduleName": "Timeline and event pages",
+  "category": "Responsive",
+  "priority": "P2",
+  "file": "timeline.spec.ts",
+  "line": 456,
+  "describe": "accessibility and small screens",
+  "title": "at 375px the timeline, the event editor and the calendar do not scroll the page sideways",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "at 375px the timeline, the event editor and the calendar do not scroll the page sideways",
+   "await page.evaluate(() => document.documentElement.scrollWidth - docu… is at most 0"
+  ]
+ },
+ {
+  "id": "TC-TIME-024",
+  "module": "TIME",
+  "moduleName": "Timeline and event pages",
+  "category": "Accessibility",
+  "priority": "P2",
+  "file": "timeline.spec.ts",
+  "line": 472,
+  "describe": "accessibility and small screens",
+  "title": "every filter on the timeline has a visible label and the form can be used by keyboard alone",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Type 1 into page.keyboard",
+   "Press Tab",
+   "Type 10 into page.keyboard",
+   "Press Enter"
+  ],
+  "testData": [
+   "Input 1",
+   "Input 10"
+  ],
+  "expected": [
+   "every filter on the timeline has a visible label and the form can be used by keyboard alone",
+   "field \"label\" is visible",
+   "page URL is /from=1&to=10/",
+   "[timeline-event] count is 1"
   ]
  },
  {

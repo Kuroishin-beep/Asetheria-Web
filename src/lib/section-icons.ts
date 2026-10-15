@@ -10,6 +10,7 @@ import {
   Dices,
   FlaskConical,
   Home,
+  Hourglass,
   UserRound,
   KeyRound,
   LayoutTemplate,
@@ -64,6 +65,7 @@ export const KIND_ICONS: Record<EntryKind, LucideIcon> = {
   rule: Scale,
   system: Cog,
   table: Dices,
+  event: Hourglass,
   note: StickyNote,
 };
 
@@ -88,6 +90,7 @@ export const TOOL_ICONS = {
   dice: Dices,
   characters: UserRound,
   calendar: CalendarDays,
+  timeline: Hourglass,
 } as const;
 
 export const KEEPER_ICONS = {

@@ -53,6 +53,7 @@ export const entryKind = pgEnum("entry_kind", [
   // Added after the original enum; appended so the order matches `ALTER TYPE ... ADD VALUE`.
   "fauna",
   "table",
+  "event",
 ]);
 
 export const userRole = pgEnum("user_role", ["dm", "player"]);

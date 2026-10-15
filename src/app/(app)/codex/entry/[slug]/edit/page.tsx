@@ -8,6 +8,7 @@ import { getCurrentUser } from "@/lib/auth";
 import { getEntryBySlug, getRevisions } from "@/lib/entries";
 import { updateEntryAction } from "@/lib/actions";
 import { inlineForDm } from "@/lib/secrets";
+import { getCalendar } from "@/lib/calendar-store";
 import { EntryForm } from "@/components/entry-form";
 import { PageHeading } from "@/components/entry-card";
 import { Eyebrow } from "@/components/shared/eyebrow";
@@ -66,6 +67,7 @@ export default async function EditEntryPage({
         cancelHref={`/codex/entry/${entry.slug}`}
         submitLabel="Save changes"
         parents={parents}
+        calendar={(await getCalendar())?.config ?? null}
         initial={{
           id: entry.id,
           name: entry.name,
