@@ -1128,5 +1128,145 @@
     ]
    }
   ]
+ },
+ {
+  "action": "Share a character with the party",
+  "happy": [
+   {
+    "module": "CWLD",
+    "any": [
+     "the owner shares a character and takes it back"
+    ]
+   }
+  ],
+  "invalid": [
+   {
+    "module": "CWLD",
+    "any": [
+     "a bad change is refused"
+    ]
+   }
+  ],
+  "unauthorized": [
+   {
+    "module": "CWLD",
+    "any": [
+     "a character that is not yours is not found"
+    ]
+   }
+  ],
+  "boundary": [
+   {
+    "module": "CWLD",
+    "any": [
+     "the roster holds at most 100"
+    ]
+   }
+  ]
+ },
+ {
+  "action": "Read the party roster",
+  "happy": [
+   {
+    "module": "CWLD",
+    "any": [
+     "it shows only shared characters"
+    ]
+   }
+  ],
+  "invalid": [
+   {
+    "module": "CWLD",
+    "any": [
+     "a deleted character leaves the roster"
+    ]
+   }
+  ],
+  "unauthorized": [
+   {
+    "module": "CWLD",
+    "any": [
+     "signed out the roster is 401"
+    ]
+   }
+  ],
+  "boundary": [
+   {
+    "module": "CWLD",
+    "any": [
+     "the roster holds at most 100"
+    ]
+   }
+  ]
+ },
+ {
+  "action": "Set a character's home",
+  "happy": [
+   {
+    "module": "CWLD",
+    "any": [
+     "picks a home from a search"
+    ]
+   }
+  ],
+  "invalid": [
+   {
+    "module": "CWLD",
+    "any": [
+     "a home must be a location page"
+    ]
+   }
+  ],
+  "unauthorized": [
+   {
+    "module": "CWLD",
+    "any": [
+     "a character that is not yours is not found"
+    ]
+   }
+  ],
+  "boundary": [
+   {
+    "module": "CWLD",
+    "any": [
+     "editing the character in the creator keeps"
+    ]
+   }
+  ]
+ },
+ {
+  "action": "Write in a character's journal",
+  "happy": [
+   {
+    "module": "CWLD",
+    "any": [
+     "the owner adds, lists"
+    ]
+   }
+  ],
+  "invalid": [
+   {
+    "module": "CWLD",
+    "any": [
+     "an entry that cannot be saved"
+    ]
+   }
+  ],
+  "unauthorized": [
+   {
+    "module": "CWLD",
+    "any": [
+     "only the player writes"
+    ]
+   }
+  ],
+  "boundary": [
+   {
+    "module": "CWLD",
+    "any": [
+     "a journal holds at most 200"
+    ]
+   }
+  ]
  }
 ]

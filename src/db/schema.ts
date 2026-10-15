@@ -463,12 +463,37 @@ export const characters = pgTable(
     archivedAt: timestamp("archived_at", { withTimezone: true }),
     createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
     updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+    /** Shared with the party roster by its owner. */
+    shared: boolean("shared").notNull().default(false),
+    /** The place (a location page) the character calls home. */
+    homeEntryId: uuid("home_entry_id").references(() => entries.id, { onDelete: "set null" }),
   },
   (t) => [
     index("characters_user_idx").on(t.userId, t.archivedAt),
     check("characters_name_length", sql`char_length(${t.name}) BETWEEN 1 AND 80`),
   ],
 );
+
+/** A character's private journal: its player writes, its player and the DM read. */
+export const characterJournal = pgTable(
+  "character_journal",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    characterId: uuid("character_id")
+      .notNull()
+      .references(() => characters.id, { onDelete: "cascade" }),
+    title: text("title").notNull().default(""),
+    body: text("body").notNull(),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [
+    index("character_journal_character_idx").on(t.characterId, t.createdAt),
+    check("character_journal_title_length", sql`char_length(${t.title}) <= 120`),
+    check("character_journal_body_length", sql`char_length(${t.body}) BETWEEN 1 AND 4000`),
+  ],
+);
+export type CharacterJournalRow = typeof characterJournal.$inferSelect;
 
 /**
  * The text of an inline secret block. It lives here, never in `entries.body`, so

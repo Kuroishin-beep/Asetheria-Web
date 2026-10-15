@@ -34,6 +34,10 @@ export type SavedCharacter = {
   sheet: Sheet;
   createdAt: Date;
   updatedAt: Date;
+  /** Shared with the party roster by its owner. */
+  shared: boolean;
+  /** The place the character calls home (read only through `resolveWorlds`, which checks the viewer may see it). */
+  homeEntryId: string | null;
   /** Present only in the DM's list. */
   owner?: { id: string; username: string; displayName: string | null };
 };
@@ -46,6 +50,8 @@ const shape = (r: Row): SavedCharacter => ({
   sheet: r.sheet as Sheet,
   createdAt: r.createdAt,
   updatedAt: r.updatedAt,
+  shared: r.shared,
+  homeEntryId: r.homeEntryId,
 });
 
 /** Parses, size-checks, validates and derives; throws a 400 with the reasons on any failure. */

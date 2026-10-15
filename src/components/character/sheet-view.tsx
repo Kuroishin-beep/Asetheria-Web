@@ -1,4 +1,6 @@
+import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
+import type { CharacterWorld } from "@/lib/character-world";
 import type { CharacterInput, Sheet } from "@/lib/character/engine";
 import { ABILITIES, ABILITY_NAMES, COMBAT_HOUSE_RULES, CITIZENSHIPS } from "@/lib/character/house-rules";
 import { cn } from "@/lib/utils";
@@ -29,9 +31,10 @@ function Stat({ label, value, hint }: { label: string; value: React.ReactNode; h
  * A character laid out like the 5e sheet: name block, the six abilities, saves,
  * the eighteen skills, combat numbers, spellcasting, equipment and the
  * personality boxes. It is a plain read-only view of what the engine computed,
- * and it prints cleanly (the app's print styles hide the chrome).
+ * and it prints cleanly (the app's print styles hide the chrome). When `world` is given, citizenship, worship and
+ * home link to the codex pages the viewer may read; without it they are plain text.
  */
-export function CharacterSheetView({ sheet, input }: { sheet: Sheet; input: CharacterInput }) {
+export function CharacterSheetView({ sheet, input, world }: { sheet: Sheet; input: CharacterInput; world?: CharacterWorld }) {
   const citizenship = CITIZENSHIPS.find((c) => c.id === input.citizenship)?.name ?? "None";
   return (
     <article aria-label={`Character sheet for ${sheet.name}`} className="grid gap-4" data-testid="character-sheet">
@@ -47,8 +50,12 @@ export function CharacterSheetView({ sheet, input }: { sheet: Sheet; input: Char
             {sheet.playerName && <p className="text-xs text-faint-foreground">Player: {sheet.playerName}</p>}
           </div>
           <Info label="Background" value={sheet.background || "None"} />
-          <Info label="Citizenship" value={citizenship} />
-          <Info label="Worship" value={input.worship.trim() || "Unaffiliated"} />
+          <Info label="Citizenship" value={world ? <WorldLinkText text={world.citizenship.text} href={world.citizenship.href} /> : citizenship} />
+          <Info
+            label="Worship"
+            value={world ? world.worship.map((p, i) => <WorldLinkText key={i} text={p.text} href={p.href} />) : input.worship.trim() || "Unaffiliated"}
+          />
+          {world?.home && <Info label="Home" value={<WorldLinkText text={world.home.text} href={world.home.href} />} />}
         </CardContent>
       </Card>
 
@@ -160,7 +167,18 @@ export function CharacterSheetView({ sheet, input }: { sheet: Sheet; input: Char
   );
 }
 
-function Info({ label, value }: { label: string; value: string }) {
+/** Some text that links to a codex page when it has an address, and is plain text when it has none. */
+function WorldLinkText({ text, href }: { text: string; href: string | null }) {
+  return href ? (
+    <Link href={href} className="text-link underline-offset-4 hover:underline">
+      {text}
+    </Link>
+  ) : (
+    <>{text}</>
+  );
+}
+
+function Info({ label, value }: { label: string; value: React.ReactNode }) {
   return (
     <div>
       <div className="text-[11px] font-semibold uppercase tracking-[0.06em] text-muted-foreground">{label}</div>

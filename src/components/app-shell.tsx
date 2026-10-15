@@ -46,6 +46,7 @@ const TOOL_LINKS: { href: string; label: string; Icon: NavIcon }[] = [
   { href: "/graph", label: "Graph", Icon: TOOL_ICONS.graph },
   { href: "/tools/dice", label: "Dice", Icon: TOOL_ICONS.dice },
   { href: "/characters", label: "Characters", Icon: TOOL_ICONS.characters },
+  { href: "/characters/party", label: "Party", Icon: TOOL_ICONS.party },
   { href: "/calendar", label: "Calendar", Icon: TOOL_ICONS.calendar },
   { href: "/timeline", label: "Timeline", Icon: TOOL_ICONS.timeline },
   { href: "/relations", label: "Relationships", Icon: TOOL_ICONS.relations },
@@ -58,6 +59,12 @@ const KEEPER_LINKS: { href: string; label: string; Icon: NavIcon }[] = [
   { href: "/admin", label: "Backup & Import", Icon: KEEPER_ICONS.backup },
   { href: "/admin/rbac", label: "Players & Access", Icon: KEEPER_ICONS.access },
 ];
+
+/** A tool link is active on its own page and below it, unless a more specific tool link (Party under Characters) owns the page. */
+function toolActive(pathname: string, href: string): boolean {
+  const within = (h: string) => pathname === h || pathname.startsWith(`${h}/`);
+  return within(href) && !TOOL_LINKS.some((other) => other.href.length > href.length && other.href.startsWith(`${href}/`) && within(other.href));
+}
 
 export function AppShell({
   user,
@@ -101,7 +108,7 @@ export function AppShell({
 
       <NavGroup label="Tools">
         {TOOL_LINKS.map(({ href, label, Icon }) => (
-          <NavItem key={href} href={href} active={pathname.startsWith(href)} Icon={Icon} label={label} />
+          <NavItem key={href} href={href} active={toolActive(pathname, href)} Icon={Icon} label={label} />
         ))}
       </NavGroup>
 

@@ -35,6 +35,8 @@
     "db:calendar": "tsx scripts/apply-sql.ts scripts/sql/calendar.sql",
     "db:calendar:rollback": "tsx scripts/apply-sql.ts scripts/sql/calendar-rollback.sql",
     "db:events": "tsx scripts/apply-sql.ts scripts/sql/events.sql",
+    "db:character-world": "tsx scripts/apply-sql.ts scripts/sql/character-world.sql",
+    "db:character-world:rollback": "tsx scripts/apply-sql.ts scripts/sql/character-world-rollback.sql",
     "db:relations": "tsx scripts/apply-sql.ts scripts/sql/relations.sql",
     "db:relations:rollback": "tsx scripts/apply-sql.ts scripts/sql/relations-rollback.sql",
     "db:map-regions": "tsx scripts/apply-sql.ts scripts/sql/map-regions.sql",

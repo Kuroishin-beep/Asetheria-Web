@@ -85,6 +85,8 @@ export const MODULES: Record<string, [string, string]> = {
   "map-geometry": ["MGEO", "Map region geometry"],
   "map-regions": ["MREG", "Map regions, layers and city maps"],
   "image-size": ["IMGS", "Map image size and names"],
+  "character-world-core": ["CWCO", "Character world rules (worship links, journal, sharing)"],
+  "character-world": ["CWLD", "Characters in the world: party, journal, home"],
   "natural-world-import": ["NATW", "Natural-world import"],
   "natural-world-links": ["NATL", "Natural-world links"],
   "natural-world-tables": ["NATT", "Natural-world roll tables"],

@@ -547,9 +547,10 @@ async function semanticSearch(
 }
 
 /** Lightweight name-only lookup that powers the command palette. */
-export async function quickFind(user: SessionUser, query: string, limit = 12) {
+export async function quickFind(user: SessionUser, query: string, limit = 12, kind?: EntryKind) {
   const q = query.trim();
   if (!q) return [];
+  const kindClause = kind ? sql`AND kind = ${kind}::entry_kind` : sql``;
   const secretClause =
     user.role === "dm"
       ? sql`true`
@@ -565,6 +566,7 @@ export async function quickFind(user: SessionUser, query: string, limit = 12) {
     FROM entries
     WHERE archived_at IS NULL
       AND ${secretClause}
+      ${kindClause}
       AND (name ILIKE ${"%" + q + "%"} OR name % ${q})
     ORDER BY
       CASE WHEN name ILIKE ${q + "%"} THEN 0 ELSE 1 END,

@@ -1441,5 +1441,150 @@
     "module": "IMGS"
    }
   ]
+ },
+ {
+  "phase": "19 Characters in the world",
+  "criterion": "The roster shows only shared characters; unshared ones stay private (404 for others, as before)",
+  "match": [
+   {
+    "module": "CWLD",
+    "any": [
+     "it shows only shared characters",
+     "shared character's sheet is still",
+     "another player gets a not-found page",
+     "a deleted character leaves the roster",
+     "signed out the roster is 401",
+     "the owner shares a character and takes it back"
+    ]
+   }
+  ]
+ },
+ {
+  "phase": "19 Characters in the world",
+  "criterion": "Journal entries are the owner's to write and the DM's to read; no one else can read them",
+  "match": [
+   {
+    "module": "CWLD",
+    "any": [
+     "the owner adds, lists",
+     "only the player writes",
+     "an entry cannot be reached",
+     "a deleted character's journal",
+     "the DM sees the journal and the links",
+     "text is shown as typed",
+     "the journal can be written, edited"
+    ]
+   },
+   {
+    "module": "CWCO",
+    "any": [
+     "a good entry is trimmed",
+     "an empty or blank body",
+     "markup is kept as typed"
+    ]
+   }
+  ]
+ },
+ {
+  "phase": "19 Characters in the world",
+  "criterion": "Citizenship, worship and home link only to pages the viewer can read; otherwise plain text",
+  "match": [
+   {
+    "module": "CWLD",
+    "any": [
+     "citizenship and worship link to the pages",
+     "no worship says Unaffiliated",
+     "home shows on the sheet"
+    ]
+   },
+   {
+    "module": "CWCO",
+    "any": [
+     "a god named in the line",
+     "a god whose name has a comma",
+     "a name inside a longer word",
+     "the pieces always join",
+     "an empty name in the table"
+    ]
+   }
+  ]
+ },
+ {
+  "phase": "19 Characters in the world",
+  "criterion": "A home must be a place its owner can read when saved (server check)",
+  "match": [
+   {
+    "module": "CWLD",
+    "any": [
+     "a home must be a location page",
+     "editing the character in the creator keeps",
+     "picks a home from a search",
+     "a bad change is refused"
+    ]
+   },
+   {
+    "module": "CWCO",
+    "any": [
+     "shared and homeSlug are the only things",
+     "anything else is refused: other keys"
+    ]
+   }
+  ]
+ },
+ {
+  "phase": "19 Characters in the world",
+  "criterion": "Journal and roster caps hold at the boundary",
+  "match": [
+   {
+    "module": "CWLD",
+    "any": [
+     "the roster holds at most 100",
+     "a journal holds at most 200",
+     "an entry that cannot be saved",
+     "new columns and the journal table"
+    ]
+   },
+   {
+    "module": "CWCO",
+    "any": [
+     "the limits hold at the boundary",
+     "characters are counted",
+     "the numbers the plan names",
+     "a line of 200 characters"
+    ]
+   }
+  ]
+ },
+ {
+  "phase": "19 Characters in the world",
+  "criterion": "The DM sees all characters with links (and can read, not write, journals)",
+  "match": [
+   {
+    "module": "CWLD",
+    "any": [
+     "the DM sees the journal and the links",
+     "citizenship and worship link to the pages",
+     "only the player writes",
+     "a character that is not yours is not found"
+    ]
+   }
+  ]
+ },
+ {
+  "phase": "19 Characters in the world",
+  "criterion": "Migration idempotent with rollback; axe both themes; 375px; print",
+  "match": [
+   {
+    "module": "CWLD",
+    "any": [
+     "new columns and the journal table",
+     "rollback drops the journal",
+     "axe violations",
+     "375px",
+     "printing leaves out",
+     "sidebar has a Party link"
+    ]
+   }
+  ]
  }
 ]

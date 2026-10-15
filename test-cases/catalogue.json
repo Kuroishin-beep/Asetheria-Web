@@ -5547,6 +5547,1357 @@
   ]
  },
  {
+  "id": "TC-CWCO-001",
+  "module": "CWCO",
+  "moduleName": "Character world rules (worship links, journal, sharing)",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "character-world-core.spec.ts",
+  "line": 17,
+  "describe": "worship line",
+  "title": "a god named in the line becomes a link; the words around it stay plain",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call linkWorship(\"Zeus\", GODS)",
+   "Call linkWorship(\"Zeus and Hera\", GODS)",
+   "Call linkWorship(\"I follow zeus, mostly\", GODS)"
+  ],
+  "testData": [],
+  "expected": [
+   "a god named in the line becomes a link; the words around it stay plain",
+   "linkWorship(\"Zeus\", GODS) equals [{ text: \"Zeus\", href: \"/codex/entry/zeus\" }]",
+   "linkWorship(\"Zeus and Hera\", GODS) equals [ { text: \"Zeus\", href: \"/codex/entry/zeus\" }, { text: \" and \", href: null }, {…",
+   "linkWorship(\"I follow zeus, mostly\", GODS) equals [ { text: \"I follow \", href: null }, { text: \"zeus\", href: \"/codex/entry/zeus\" …"
+  ]
+ },
+ {
+  "id": "TC-CWCO-002",
+  "module": "CWCO",
+  "moduleName": "Character world rules (worship links, journal, sharing)",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "character-world-core.spec.ts",
+  "line": 31,
+  "describe": "worship line",
+  "title": "a god whose name has a comma is one god, and the longest name wins over a shorter one it starts with",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call linkWorship(\"Adamus, The Earth Keeper\", GODS)",
+   "Call linkWorship(\"Adamus\", GODS)",
+   "Call linkWorship(\"adamus, THE EARTH KEEPER; Hera\", GODS)"
+  ],
+  "testData": [],
+  "expected": [
+   "a god whose name has a comma is one god, and the longest name wins over a shorter one it starts with",
+   "linkWorship(\"Adamus, The Earth Keeper\", GODS) equals [{ text: \"Adamus, The Earth Keeper\", href: \"/codex/entry/adamus-the-earth-keepe…",
+   "linkWorship(\"Adamus\", GODS) equals [{ text: \"Adamus\", href: \"/codex/entry/adamus\" }]",
+   "linkWorship(\"adamus, THE EARTH KEEPER; Hera\", GODS) equals [ { text: \"adamus, THE EARTH KEEPER\", href: \"/codex/entry/adamus-the-earth-keep…"
+  ]
+ },
+ {
+  "id": "TC-CWCO-003",
+  "module": "CWCO",
+  "moduleName": "Character world rules (worship links, journal, sharing)",
+  "category": "Validation",
+  "priority": "P1",
+  "file": "character-world-core.spec.ts",
+  "line": 41,
+  "describe": "worship line",
+  "title": "a name inside a longer word is not a god, and a god the viewer cannot read is plain text",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call linkWorship(\"Zeusian\", GODS)",
+   "Call linkWorship(\"antiZeus\", GODS)",
+   "Call linkWorship(\"Hecate\", GODS)",
+   "Call linkWorship(\"Zeus\", new Map())"
+  ],
+  "testData": [],
+  "expected": [
+   "a name inside a longer word is not a god, and a god the viewer cannot read is plain text",
+   "linkWorship(\"Zeusian\", GODS) equals [{ text: \"Zeusian\", href: null }]",
+   "linkWorship(\"antiZeus\", GODS) equals [{ text: \"antiZeus\", href: null }]",
+   "linkWorship(\"Hecate\", GODS) equals [{ text: \"Hecate\", href: null }]",
+   "linkWorship(\"Zeus\", new Map()) equals [{ text: \"Zeus\", href: null }]"
+  ]
+ },
+ {
+  "id": "TC-CWCO-004",
+  "module": "CWCO",
+  "moduleName": "Character world rules (worship links, journal, sharing)",
+  "category": "Boundary",
+  "priority": "P1",
+  "file": "character-world-core.spec.ts",
+  "line": 48,
+  "describe": "worship line",
+  "title": "the pieces always join back into exactly the line, for blank lines, odd spacing and unicode too",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call linkWorship(line, GODS)",
+   "Call linkWorship(\"\", GODS)"
+  ],
+  "testData": [],
+  "expected": [
+   "the pieces always join back into exactly the line, for blank lines, odd spacing and unicode too",
+   "joined(linkWorship(line, GODS)) equals line",
+   "linkWorship(\"\", GODS) equals []"
+  ]
+ },
+ {
+  "id": "TC-CWCO-005",
+  "module": "CWCO",
+  "moduleName": "Character world rules (worship links, journal, sharing)",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "character-world-core.spec.ts",
+  "line": 55,
+  "describe": "worship line",
+  "title": "a line of 200 characters made only of god names links every one",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call linkWorship(line, GODS)"
+  ],
+  "testData": [],
+  "expected": [
+   "a line of 200 characters made only of god names links every one",
+   "line.length is at most 200",
+   "parts.filter((p) => p.href).length equals 33"
+  ]
+ },
+ {
+  "id": "TC-CWCO-006",
+  "module": "CWCO",
+  "moduleName": "Character world rules (worship links, journal, sharing)",
+  "category": "Validation",
+  "priority": "P1",
+  "file": "character-world-core.spec.ts",
+  "line": 62,
+  "describe": "worship line",
+  "title": "an empty name in the table never matches (and cannot loop)",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call linkWorship(\"Zeus\", new Map([[\"\", \"/x\"], [\"zeus\", \"/z\"]]))"
+  ],
+  "testData": [],
+  "expected": [
+   "an empty name in the table never matches (and cannot loop)",
+   "linkWorship(\"Zeus\", new Map([[\"\", \"/x\"], [\"zeus\", \"/z\"]])) equals [{ text: \"Zeus\", href: \"/z\" }]"
+  ]
+ },
+ {
+  "id": "TC-CWCO-007",
+  "module": "CWCO",
+  "moduleName": "Character world rules (worship links, journal, sharing)",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "character-world-core.spec.ts",
+  "line": 68,
+  "describe": "journal entries",
+  "title": "a good entry is trimmed and kept; the title is optional",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call checkJournalEntry({ title: \" Day one \", body: \" We left the port. \" })",
+   "Call checkJournalEntry({ body: \"No title.\" })"
+  ],
+  "testData": [],
+  "expected": [
+   "a good entry is trimmed and kept; the title is optional",
+   "checkJournalEntry({ title: \" Day one \", body: \" We left the port. \" }) equals { ok: true, value: { title: \"Day one\", body: \"We left the port.\" } }",
+   "checkJournalEntry({ body: \"No title.\" }) equals { ok: true, value: { title: \"\", body: \"No title.\" } }"
+  ]
+ },
+ {
+  "id": "TC-CWCO-008",
+  "module": "CWCO",
+  "moduleName": "Character world rules (worship links, journal, sharing)",
+  "category": "Boundary",
+  "priority": "P1",
+  "file": "character-world-core.spec.ts",
+  "line": 73,
+  "describe": "journal entries",
+  "title": "the limits hold at the boundary: 4000 characters of body and 120 of title are fine, one more is not",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call checkJournalEntry({ body: \"x\".repeat(WORLD_LIMITS.journalBody) })",
+   "Call checkJournalEntry({ body: \"x\".repeat(WORLD_LIMITS.journalBody + 1) })",
+   "Call checkJournalEntry({ title: \"t\".repeat(WORLD_LIMITS.journalTitle), body: \"ok\" })",
+   "Call checkJournalEntry({ title: \"t\".repeat(WORLD_LIMITS.journalTitle + 1), body: \"ok\" })"
+  ],
+  "testData": [],
+  "expected": [
+   "the limits hold at the boundary: 4000 characters of body and 120 of title are fine, one more is not",
+   "checkJournalEntry({ body: \"x\".repeat(WORLD_LIMITS.journalBody) }).ok equals true",
+   "over.ok equals false",
+   "over.problems.join(\" \") matches /at most 4000 characters/",
+   "checkJournalEntry({ title: \"t\".repeat(WORLD_LIMITS.journalTitle), bod… equals true",
+   "longTitle.ok equals false",
+   "longTitle.problems.join(\" \") matches /at most 120 characters/"
+  ]
+ },
+ {
+  "id": "TC-CWCO-009",
+  "module": "CWCO",
+  "moduleName": "Character world rules (worship links, journal, sharing)",
+  "category": "Edge",
+  "priority": "P2",
+  "file": "character-world-core.spec.ts",
+  "line": 84,
+  "describe": "journal entries",
+  "title": "characters are counted as people see them: 4000 emoji are fine, 4001 are not",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call checkJournalEntry({ body: \"😀\".repeat(4000) })",
+   "Call checkJournalEntry({ body: \"😀\".repeat(4001) })"
+  ],
+  "testData": [],
+  "expected": [
+   "characters are counted as people see them: 4000 emoji are fine, 4001 are not",
+   "checkJournalEntry({ body: \"😀\".repeat(4000) }).ok equals true",
+   "checkJournalEntry({ body: \"😀\".repeat(4001) }).ok equals false"
+  ]
+ },
+ {
+  "id": "TC-CWCO-010",
+  "module": "CWCO",
+  "moduleName": "Character world rules (worship links, journal, sharing)",
+  "category": "Validation",
+  "priority": "P1",
+  "file": "character-world-core.spec.ts",
+  "line": 89,
+  "describe": "journal entries",
+  "title": "an empty or blank body, the wrong types, extra keys and non-objects are refused with the reason",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call checkJournalEntry(bad)"
+  ],
+  "testData": [],
+  "expected": [
+   "an empty or blank body, the wrong types, extra keys and non-objects are refused with the reason",
+   "r.ok equals false",
+   "r.problems.length is greater than 0"
+  ]
+ },
+ {
+  "id": "TC-CWCO-011",
+  "module": "CWCO",
+  "moduleName": "Character world rules (worship links, journal, sharing)",
+  "category": "Security",
+  "priority": "P0",
+  "file": "character-world-core.spec.ts",
+  "line": 97,
+  "describe": "journal entries",
+  "title": "markup is kept as typed, not rewritten (it is escaped where it is shown)",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call checkJournalEntry({ body: \"<script>alert(1)</script> & more\" })"
+  ],
+  "testData": [],
+  "expected": [
+   "markup is kept as typed, not rewritten (it is escaped where it is shown)",
+   "checkJournalEntry({ body: \"<script>alert(1)</script> & more\" }) equals { ok: true, value: { title: \"\", body: \"<script>alert(1)</script> & more\" } }"
+  ]
+ },
+ {
+  "id": "TC-CWCO-012",
+  "module": "CWCO",
+  "moduleName": "Character world rules (worship links, journal, sharing)",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "character-world-core.spec.ts",
+  "line": 103,
+  "describe": "sharing and home changes",
+  "title": "shared and homeSlug are the only things that can change, alone or together",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call checkWorldPatch({ shared: true })",
+   "Call checkWorldPatch({ shared: false })",
+   "Call checkWorldPatch({ homeSlug: \"helarchon\" })",
+   "Call checkWorldPatch({ homeSlug: null })",
+   "Call checkWorldPatch({ shared: true, homeSlug: \"helarchon\" })"
+  ],
+  "testData": [],
+  "expected": [
+   "shared and homeSlug are the only things that can change, alone or together",
+   "checkWorldPatch({ shared: true }) equals { ok: true, value: { shared: true } }",
+   "checkWorldPatch({ shared: false }) equals { ok: true, value: { shared: false } }",
+   "checkWorldPatch({ homeSlug: \"helarchon\" }) equals { ok: true, value: { homeSlug: \"helarchon\" } }",
+   "checkWorldPatch({ homeSlug: null }) equals { ok: true, value: { homeSlug: null } }",
+   "checkWorldPatch({ shared: true, homeSlug: \"helarchon\" }) equals { ok: true, value: { shared: true, homeSlug: \"helarchon\" } }"
+  ]
+ },
+ {
+  "id": "TC-CWCO-013",
+  "module": "CWCO",
+  "moduleName": "Character world rules (worship links, journal, sharing)",
+  "category": "Validation",
+  "priority": "P1",
+  "file": "character-world-core.spec.ts",
+  "line": 111,
+  "describe": "sharing and home changes",
+  "title": "anything else is refused: other keys, wrong types, an empty or over-long address, an empty change, non-objects",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call checkWorldPatch(bad)",
+   "Call checkWorldPatch({ homeSlug: \"x\".repeat(200) })"
+  ],
+  "testData": [],
+  "expected": [
+   "anything else is refused: other keys, wrong types, an empty or over-long address, an empty change, non-objects",
+   "checkWorldPatch(bad).ok equals false",
+   "checkWorldPatch({ homeSlug: \"x\".repeat(200) }).ok equals true"
+  ]
+ },
+ {
+  "id": "TC-CWCO-014",
+  "module": "CWCO",
+  "moduleName": "Character world rules (worship links, journal, sharing)",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "character-world-core.spec.ts",
+  "line": 120,
+  "describe": "limits",
+  "title": "the numbers the plan names",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "the numbers the plan names",
+   "WORLD_LIMITS equals { journalEntries: 200, journalTitle: 120, journalBody: 4000, roster: 100 }"
+  ]
+ },
+ {
+  "id": "TC-CWLD-001",
+  "module": "CWLD",
+  "moduleName": "Characters in the world: party, journal, home",
+  "category": "Data Integrity",
+  "priority": "P0",
+  "file": "character-world.spec.ts",
+  "line": 98,
+  "describe": "migration",
+  "title": "the new columns and the journal table hold their checks and cascades, and the migration is idempotent",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)",
+   "Test rows use a `Zz`/`zz-` prefix and are deleted afterwards"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "the new columns and the journal table hold their checks and cascades, and the migration is idempotent",
+   "await dbChar(p.characterId) match object { shared: false, home_entry_id: null }",
+   "(await dbChar(p.characterId)).home_entry_id is empty",
+   "await journalOf(p.characterId) length is 0"
+  ]
+ },
+ {
+  "id": "TC-CWLD-002",
+  "module": "CWLD",
+  "moduleName": "Characters in the world: party, journal, home",
+  "category": "Data Integrity",
+  "priority": "P0",
+  "file": "character-world.spec.ts",
+  "line": 127,
+  "describe": "migration",
+  "title": "the rollback drops the journal and the two columns and leaves characters, entries and users (run inside a transaction that is rolled back)",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "the rollback drops the journal and the two columns and leaves characters, entries and users (run inside a transaction that is rolled back)",
+   "process.env.DATABASE_URL ?? \"\" does not: matches /neon\\.tech|neon\\.build/",
+   "(await client.query(`SELECT to_regclass('character_journal')::text AS… is empty",
+   "(await client.query(`SELECT count(*)::int AS n FROM information_schem… equals 0",
+   "[await count(\"characters\"), await count(\"entries\"), await count(\"user… equals [chars, ents, usrs]",
+   "(await query<{ t: string }>(`SELECT to_regclass('character_journal'):… equals character_journal"
+  ]
+ },
+ {
+  "id": "TC-CWLD-003",
+  "module": "CWLD",
+  "moduleName": "Characters in the world: party, journal, home",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "character-world.spec.ts",
+  "line": 148,
+  "describe": "sharing and home (the API)",
+  "title": "the owner shares a character and takes it back; the roster follows",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Send GET /api/characters?scope=party",
+   "Send PATCH /api/characters/‹p.characterId› with { data: { shared: true } }",
+   "Send PATCH /api/characters/‹p.characterId› with { data: { shared: false } }"
+  ],
+  "testData": [
+   "GET /api/characters?scope=party",
+   "PATCH /api/characters/‹p.characterId›"
+  ],
+  "expected": [
+   "the owner shares a character and takes it back; the roster follows",
+   "await roster() does not: contains p.name",
+   "HTTP status equals 200",
+   "(await dbChar(p.characterId)).shared equals true",
+   "await roster() contains p.name"
+  ]
+ },
+ {
+  "id": "TC-CWLD-004",
+  "module": "CWLD",
+  "moduleName": "Characters in the world: party, journal, home",
+  "category": "Validation",
+  "priority": "P1",
+  "file": "character-world.spec.ts",
+  "line": 163,
+  "describe": "sharing and home (the API)",
+  "title": "a bad change is refused with the reason: other keys, wrong types, an empty change, and nothing is changed",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Send PATCH /api/characters/‹p.characterId› with { data: bad }",
+   "Send PATCH /api/characters/‹p.characterId› with { data: \"not json\", headers: { \"content-type\": \"text/plain\" } }"
+  ],
+  "testData": [
+   "PATCH /api/characters/‹p.characterId›"
+  ],
+  "expected": [
+   "a bad change is refused with the reason: other keys, wrong types, an empty change, and nothing is changed",
+   "HTTP status equals 400",
+   "response body is greater than 0",
+   "await dbChar(p.characterId) match object { shared: false, home_entry_id: null }"
+  ]
+ },
+ {
+  "id": "TC-CWLD-005",
+  "module": "CWLD",
+  "moduleName": "Characters in the world: party, journal, home",
+  "category": "Permission & Auth",
+  "priority": "P0",
+  "file": "character-world.spec.ts",
+  "line": 179,
+  "describe": "sharing and home (the API)",
+  "title": "a character that is not yours is not found; so is a malformed id; signed out is 401; the DM may not change it (403)",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Send PATCH /api/characters/‹owner.characterId› with { data: { shared: true } }",
+   "Send PATCH /api/characters/not-a-uuid with { data: { shared: true } }",
+   "Send PATCH /api/characters/‹randomUUID()› with { data: { shared: true } }"
+  ],
+  "testData": [
+   "PATCH /api/characters/‹owner.characterId›",
+   "PATCH /api/characters/not-a-uuid",
+   "PATCH /api/characters/‹randomUUID()›"
+  ],
+  "expected": [
+   "a character that is not yours is not found; so is a malformed id; signed out is 401; the DM may not change it (403)",
+   "HTTP status equals 404",
+   "HTTP status equals 401",
+   "HTTP status equals 403",
+   "(await dbChar(owner.characterId)).shared equals false"
+  ]
+ },
+ {
+  "id": "TC-CWLD-006",
+  "module": "CWLD",
+  "moduleName": "Characters in the world: party, journal, home",
+  "category": "Security",
+  "priority": "P0",
+  "file": "character-world.spec.ts",
+  "line": 197,
+  "describe": "sharing and home (the API)",
+  "title": "a home must be a location page the owner can read: another kind, a secret place, a place the owner is denied, an archived or missing page are refused",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)",
+   "Test rows use a `Zz`/`zz-` prefix and are deleted afterwards"
+  ],
+  "steps": [
+   "Send PATCH /api/characters/‹p.characterId› with { data: { homeSlug: slug } }"
+  ],
+  "testData": [
+   "PATCH /api/characters/‹p.characterId›"
+  ],
+  "expected": [
+   "a home must be a location page the owner can read: another kind, a secret place, a place the owner is denied, an archived or missing page are refused",
+   "HTTP status equals 400",
+   "response body matches /must be a place you can read/",
+   "(await dbChar(p.characterId)).home_entry_id is empty",
+   "HTTP status equals 200",
+   "(await dbChar(p.characterId)).home_entry_id equals home.id"
+  ]
+ },
+ {
+  "id": "TC-CWLD-007",
+  "module": "CWLD",
+  "moduleName": "Characters in the world: party, journal, home",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "character-world.spec.ts",
+  "line": 223,
+  "describe": "sharing and home (the API)",
+  "title": "editing the character in the creator keeps its sharing and home",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Send PATCH /api/characters/‹p.characterId› with { data: { shared: true, homeSlug: home.slug } }",
+   "Send PUT /api/characters/‹p.characterId› with { data: { ...VALID, name: \"Zz Cw Renamed\", concept: \"Changed\" } }"
+  ],
+  "testData": [
+   "PATCH /api/characters/‹p.characterId›",
+   "PUT /api/characters/‹p.characterId›"
+  ],
+  "expected": [
+   "editing the character in the creator keeps its sharing and home",
+   "HTTP status equals 200",
+   "await dbChar(p.characterId) match object { shared: true, home_entry_id: home.id }"
+  ]
+ },
+ {
+  "id": "TC-CWLD-008",
+  "module": "CWLD",
+  "moduleName": "Characters in the world: party, journal, home",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "character-world.spec.ts",
+  "line": 238,
+  "describe": "the party roster",
+  "title": "it shows only shared characters, and only name, heritage, class, level, citizenship and worship: no id, owner, scores, story or journal reaches the page or the API",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Send PATCH /api/characters/‹shared.characterId› with { data: { shared: true } }",
+   "Send POST /api/characters/‹shared.characterId›/journal with { data: { body: \"ZZJOURNALTEXT\" } }",
+   "Open /characters/party",
+   "Send GET /api/characters?scope=party"
+  ],
+  "testData": [
+   "PATCH /api/characters/‹shared.characterId›",
+   "POST /api/characters/‹shared.characterId›/journal",
+   "URL /characters/party",
+   "GET /api/characters?scope=party"
+  ],
+  "expected": [
+   "it shows only shared characters, and only name, heritage, class, level, citizenship and worship: no id, owner, scores, story or journal reaches the page or the API",
+   "html contains shared.name",
+   "html does not: contains secret",
+   "api does not: contains secret",
+   "Object.keys(member).sort() equals [\"citizenship\", \"className\", \"heritage\", \"level\", \"name\", \"worship\"]",
+   "member match object { heritage: \"Human\", className: \"Fighter\", level: 1 }"
+  ]
+ },
+ {
+  "id": "TC-CWLD-009",
+  "module": "CWLD",
+  "moduleName": "Characters in the world: party, journal, home",
+  "category": "Error & Recovery",
+  "priority": "P1",
+  "file": "character-world.spec.ts",
+  "line": 262,
+  "describe": "the party roster",
+  "title": "a shared character's sheet is still the owner's and the DM's alone: others get 404 from the page and the API",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Send PATCH /api/characters/‹owner.characterId› with { data: { shared: true } }",
+   "Send GET /api/characters/‹owner.characterId›",
+   "Open /characters/‹owner.characterId›"
+  ],
+  "testData": [
+   "PATCH /api/characters/‹owner.characterId›",
+   "GET /api/characters/‹owner.characterId›",
+   "URL /characters/‹owner.characterId›"
+  ],
+  "expected": [
+   "a shared character's sheet is still the owner's and the DM's alone: others get 404 from the page and the API",
+   "HTTP status equals 404",
+   "HTTP status equals 200"
+  ]
+ },
+ {
+  "id": "TC-CWLD-010",
+  "module": "CWLD",
+  "moduleName": "Characters in the world: party, journal, home",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "character-world.spec.ts",
+  "line": 276,
+  "describe": "the party roster",
+  "title": "a deleted character leaves the roster; the newest change comes first",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Send PATCH /api/characters/‹c.characterId› with { data: { shared: true } }",
+   "Send GET /api/characters?scope=party",
+   "Send DELETE /api/characters/‹a.characterId›"
+  ],
+  "testData": [
+   "PATCH /api/characters/‹c.characterId›",
+   "GET /api/characters?scope=party",
+   "DELETE /api/characters/‹a.characterId›"
+  ],
+  "expected": [
+   "a deleted character leaves the roster; the newest change comes first",
+   "await names() equals [a.name, b.name]",
+   "HTTP status equals 200",
+   "await names() equals [b.name]"
+  ]
+ },
+ {
+  "id": "TC-CWLD-011",
+  "module": "CWLD",
+  "moduleName": "Characters in the world: party, journal, home",
+  "category": "Permission & Auth",
+  "priority": "P0",
+  "file": "character-world.spec.ts",
+  "line": 292,
+  "describe": "the party roster",
+  "title": "signed out the roster is 401 and the page sends you to sign in; the DM can read it, with an empty state that says what to do",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Send GET /api/characters?scope=party",
+   "Open /characters/party"
+  ],
+  "testData": [
+   "GET /api/characters?scope=party",
+   "URL /characters/party"
+  ],
+  "expected": [
+   "signed out the roster is 401 and the page sends you to sign in; the DM can read it, with an empty state that says what to do",
+   "HTTP status equals 401",
+   "gate URL is /\\/welcome/",
+   "HTTP status equals 200",
+   "heading \"The party\" is visible",
+   "text \"No one has shared a character yet\" is visible"
+  ]
+ },
+ {
+  "id": "TC-CWLD-012",
+  "module": "CWLD",
+  "moduleName": "Characters in the world: party, journal, home",
+  "category": "Boundary",
+  "priority": "P1",
+  "file": "character-world.spec.ts",
+  "line": 309,
+  "describe": "the party roster",
+  "title": "the roster holds at most 100 characters: exactly 100 are all shown, the 101st is counted and said so",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)",
+   "Test rows use a `Zz`/`zz-` prefix and are deleted afterwards"
+  ],
+  "steps": [
+   "Send PATCH /api/characters/‹p.characterId› with { data: { shared: true } }",
+   "Send GET /api/characters?scope=party",
+   "Open /characters/party",
+   "Reload the page"
+  ],
+  "testData": [
+   "PATCH /api/characters/‹p.characterId›",
+   "GET /api/characters?scope=party",
+   "URL /characters/party"
+  ],
+  "expected": [
+   "the roster holds at most 100 characters: exactly 100 are all shown, the 101st is counted and said so",
+   "data match object { total: 100, truncated: false }",
+   "data.members length is 100",
+   "[party-list] › listitem count is 100",
+   "[party-truncated] count is 0",
+   "data match object { total: 101, truncated: true }",
+   "[party-truncated] text is Showing the 100 most recently changed of 101 shared characters."
+  ]
+ },
+ {
+  "id": "TC-CWLD-013",
+  "module": "CWLD",
+  "moduleName": "Characters in the world: party, journal, home",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "character-world.spec.ts",
+  "line": 339,
+  "describe": "links to codex pages",
+  "title": "citizenship and worship link to the pages a viewer may read and are plain text otherwise, on the roster and on the sheet",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Send PATCH /api/characters/‹owner.characterId› with { data: { shared: true } }",
+   "Open /characters/party",
+   "Open /characters/‹owner.characterId›"
+  ],
+  "testData": [
+   "PATCH /api/characters/‹owner.characterId›",
+   "URL /characters/party",
+   "URL /characters/‹owner.characterId›"
+  ],
+  "expected": [
+   "citizenship and worship link to the pages a viewer may read and are plain text otherwise, on the roster and on the sheet",
+   "link \"zeus.name\" has attribute href",
+   "link \"Hellenoria\" has attribute href",
+   "link \"hera.name\" count is 0",
+   "card contains text ‹zeus.name› and ‹hera.name›",
+   "link count is 0",
+   "plain contains text Hellenoria",
+   "plain contains text zeus.name",
+   "link \"hera.name\" has attribute href",
+   "link \"Hellenoria\" is visible",
+   "…and 2 more"
+  ]
+ },
+ {
+  "id": "TC-CWLD-014",
+  "module": "CWLD",
+  "moduleName": "Characters in the world: party, journal, home",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "character-world.spec.ts",
+  "line": 377,
+  "describe": "links to codex pages",
+  "title": "a character with no worship says Unaffiliated and one with no citizenship says None, neither a link",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Send PATCH /api/characters/‹p.characterId› with { data: { shared: true } }",
+   "Open /characters/party"
+  ],
+  "testData": [
+   "PATCH /api/characters/‹p.characterId›",
+   "URL /characters/party"
+  ],
+  "expected": [
+   "a character with no worship says Unaffiliated and one with no citizenship says None, neither a link",
+   "card contains text None",
+   "card contains text Unaffiliated",
+   "link count is 0"
+  ]
+ },
+ {
+  "id": "TC-CWLD-015",
+  "module": "CWLD",
+  "moduleName": "Characters in the world: party, journal, home",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "character-world.spec.ts",
+  "line": 391,
+  "describe": "links to codex pages",
+  "title": "home shows on the sheet as a link for its owner and the DM, and a place that later stops being readable shows nothing, not even its name",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Send PATCH /api/characters/‹p.characterId› with { data: { homeSlug: place.slug } }",
+   "Open /characters/‹p.characterId›"
+  ],
+  "testData": [
+   "PATCH /api/characters/‹p.characterId›",
+   "URL /characters/‹p.characterId›"
+  ],
+  "expected": [
+   "home shows on the sheet as a link for its owner and the DM, and a place that later stops being readable shows nothing, not even its name",
+   "HTTP status equals 200",
+   "[character-sheet] › link \"place.name\" has attribute href",
+   "[character-sheet] › link \"place.name\" is visible",
+   "page HTML does not: contains place.name",
+   "[character-sheet] › text \"Home\" count is 0"
+  ]
+ },
+ {
+  "id": "TC-CWLD-016",
+  "module": "CWLD",
+  "moduleName": "Characters in the world: party, journal, home",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "character-world.spec.ts",
+  "line": 415,
+  "describe": "the journal (the API)",
+  "title": "the owner adds, lists (newest first), edits and deletes entries; title and body are trimmed",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Send POST /api/characters/‹p.characterId›/journal with { data }",
+   "Send GET /api/characters/‹p.characterId›/journal",
+   "Send PATCH /api/characters/‹p.characterId›/journal/‹a.id› with { data: { title: \"\", body: \"We left the port at dawn.\" } }",
+   "Send DELETE /api/characters/‹p.characterId›/journal/‹a.id›"
+  ],
+  "testData": [
+   "POST /api/characters/‹p.characterId›/journal",
+   "GET /api/characters/‹p.characterId›/journal",
+   "PATCH /api/characters/‹p.characterId›/journal/‹a.id›",
+   "DELETE /api/characters/‹p.characterId›/journal/‹a.id›"
+  ],
+  "expected": [
+   "the owner adds, lists (newest first), edits and deletes entries; title and body are trimmed",
+   "HTTP status equals 201",
+   "a match object { title: \"Day one\", body: \"We left the port.\" }",
+   "list.map((e) => e.id) equals [second.id, a.id]",
+   "HTTP status equals 200",
+   "(await journalOf(p.characterId)).find((e) => e.id === a.id) match object { title: \"\", body: \"We left the port at dawn.\" }",
+   "HTTP status equals 404",
+   "await journalOf(p.characterId) length is 1"
+  ]
+ },
+ {
+  "id": "TC-CWLD-017",
+  "module": "CWLD",
+  "moduleName": "Characters in the world: party, journal, home",
+  "category": "Validation",
+  "priority": "P1",
+  "file": "character-world.spec.ts",
+  "line": 438,
+  "describe": "the journal (the API)",
+  "title": "an entry that cannot be saved is refused with the reason: empty, blank, over 4,000 characters, a title over 120, wrong types, extra keys",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Send POST /api/characters/‹p.characterId›/journal with { data }",
+   "Send PATCH /api/characters/‹p.characterId›/journal/‹id› with { data: { body: \"x\".repeat(4001) } }",
+   "Send PATCH /api/characters/‹p.characterId›/journal/‹id› with { data: { body: \"\" } }"
+  ],
+  "testData": [
+   "POST /api/characters/‹p.characterId›/journal",
+   "PATCH /api/characters/‹p.characterId›/journal/‹id›"
+  ],
+  "expected": [
+   "an entry that cannot be saved is refused with the reason: empty, blank, over 4,000 characters, a title over 120, wrong types, extra keys",
+   "HTTP status equals 201",
+   "HTTP status equals 400",
+   "response body is greater than 0",
+   "await journalOf(p.characterId) length is 2"
+  ]
+ },
+ {
+  "id": "TC-CWLD-018",
+  "module": "CWLD",
+  "moduleName": "Characters in the world: party, journal, home",
+  "category": "Boundary",
+  "priority": "P1",
+  "file": "character-world.spec.ts",
+  "line": 460,
+  "describe": "the journal (the API)",
+  "title": "a journal holds at most 200 entries: the 200th is accepted and the 201st refused; deleting one makes room",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)",
+   "Test rows use a `Zz`/`zz-` prefix and are deleted afterwards"
+  ],
+  "steps": [
+   "Send POST /api/characters/‹p.characterId›/journal with { data: { body } }",
+   "Send DELETE /api/characters/‹p.characterId›/journal/‹id›"
+  ],
+  "testData": [
+   "POST /api/characters/‹p.characterId›/journal",
+   "DELETE /api/characters/‹p.characterId›/journal/‹id›"
+  ],
+  "expected": [
+   "a journal holds at most 200 entries: the 200th is accepted and the 201st refused; deleting one makes room",
+   "HTTP status equals 201",
+   "HTTP status equals 409",
+   "response body matches /at most 200 entries/",
+   "await journalOf(p.characterId) length is 200",
+   "HTTP status equals 200"
+  ]
+ },
+ {
+  "id": "TC-CWLD-019",
+  "module": "CWLD",
+  "moduleName": "Characters in the world: party, journal, home",
+  "category": "Permission & Auth",
+  "priority": "P0",
+  "file": "character-world.spec.ts",
+  "line": 479,
+  "describe": "the journal (the API)",
+  "title": "only the player writes and only the player and the DM read: others get 404, signed out 401, the DM reads but writes nothing (403)",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Send POST /api/characters/‹owner.characterId›/journal with { data: { body: \"ZZPRIVATEJOURNAL\" } }",
+   "Send GET base",
+   "Send POST base with { data: { body: \"intruder\" } }",
+   "Send PATCH ‹base›/‹made.id› with { data: { body: \"intruder\" } }",
+   "Send DELETE ‹base›/‹made.id›",
+   "Send POST base with { data: { body: \"x\" } }",
+   "Send POST base with { data: { body: \"dm writes\" } }",
+   "Send PATCH ‹base›/‹made.id› with { data: { body: \"dm edits\" } }"
+  ],
+  "testData": [
+   "POST /api/characters/‹owner.characterId›/journal",
+   "GET base",
+   "POST base",
+   "PATCH ‹base›/‹made.id›",
+   "DELETE ‹base›/‹made.id›"
+  ],
+  "expected": [
+   "only the player writes and only the player and the DM read: others get 404, signed out 401, the DM reads but writes nothing (403)",
+   "HTTP status equals 404",
+   "HTTP status equals 401",
+   "HTTP status equals 200",
+   "await dm.text() contains ZZPRIVATEJOURNAL",
+   "HTTP status equals 403",
+   "await journalOf(owner.characterId) equals [expect.objectContaining({ body: \"ZZPRIVATEJOURNAL\" })]"
+  ]
+ },
+ {
+  "id": "TC-CWLD-020",
+  "module": "CWLD",
+  "moduleName": "Characters in the world: party, journal, home",
+  "category": "Validation",
+  "priority": "P1",
+  "file": "character-world.spec.ts",
+  "line": 506,
+  "describe": "the journal (the API)",
+  "title": "an entry cannot be reached through another character's address, and malformed or unknown ids are not found",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Send POST /api/characters/‹a.characterId›/journal with { data: { body: \"mine\" } }",
+   "Send POST /api/characters/‹b.characterId›/journal with { data: { body: \"theirs\" } }",
+   "Send PATCH /api/characters/‹b.characterId›/journal/‹made.id› with { data: { body: \"swapped\" } }",
+   "Send DELETE /api/characters/‹b.characterId›/journal/‹made.id›",
+   "Send GET url",
+   "Send PATCH /api/characters/‹a.characterId›/journal/not-a-uuid with { data: { body: \"x\" } }",
+   "Send DELETE /api/characters/‹a.characterId›/journal/not-a-uuid",
+   "Send PATCH /api/characters/‹a.characterId›/journal/‹randomUUID()› with { data: { body: \"x\" } }"
+  ],
+  "testData": [
+   "POST /api/characters/‹a.characterId›/journal",
+   "POST /api/characters/‹b.characterId›/journal",
+   "PATCH /api/characters/‹b.characterId›/journal/‹made.id›",
+   "DELETE /api/characters/‹b.characterId›/journal/‹made.id›",
+   "GET url",
+   "PATCH /api/characters/‹a.characterId›/journal/not-a-uuid",
+   "DELETE /api/characters/‹a.characterId›/journal/not-a-uuid",
+   "PATCH /api/characters/‹a.characterId›/journal/‹randomUUID()›"
+  ],
+  "expected": [
+   "an entry cannot be reached through another character's address, and malformed or unknown ids are not found",
+   "HTTP status equals 404",
+   "(await journalOf(a.characterId))[0].body equals mine"
+  ]
+ },
+ {
+  "id": "TC-CWLD-021",
+  "module": "CWLD",
+  "moduleName": "Characters in the world: party, journal, home",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "character-world.spec.ts",
+  "line": 527,
+  "describe": "the journal (the API)",
+  "title": "a deleted character's journal is no longer reachable",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Send POST /api/characters/‹p.characterId›/journal with { data: { body: \"gone soon\" } }",
+   "Send DELETE /api/characters/‹p.characterId›",
+   "Send GET /api/characters/‹p.characterId›/journal",
+   "Send POST /api/characters/‹p.characterId›/journal with { data: { body: \"x\" } }"
+  ],
+  "testData": [
+   "POST /api/characters/‹p.characterId›/journal",
+   "DELETE /api/characters/‹p.characterId›",
+   "GET /api/characters/‹p.characterId›/journal"
+  ],
+  "expected": [
+   "a deleted character's journal is no longer reachable",
+   "HTTP status equals 200",
+   "HTTP status equals 404"
+  ]
+ },
+ {
+  "id": "TC-CWLD-022",
+  "module": "CWLD",
+  "moduleName": "Characters in the world: party, journal, home",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "character-world.spec.ts",
+  "line": 541,
+  "describe": "on the character page",
+  "title": "the owner shares with a switch, picks a home from a search of places and clears it, and the sheet follows",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Open /characters/‹p.characterId›",
+   "Click share",
+   "Type Zz Cw Pickable into field \"Home\"",
+   "Click button \"place.name\"",
+   "Click button \"Clear home\""
+  ],
+  "testData": [
+   "URL /characters/‹p.characterId›",
+   "Input Zz Cw Pickable"
+  ],
+  "expected": [
+   "the owner shares with a switch, picks a home from a search of places and clears it, and the sheet follows",
+   "share does not: is checked",
+   "share is checked",
+   "button \"place.name\" is visible",
+   "button \"Zz Cw Pickable God ‹tag›\" count is 0",
+   "[home-current] contains text place.name",
+   "[character-sheet] › link \"place.name\" is visible",
+   "[home-current] count is 0",
+   "(await dbChar(p.characterId)).home_entry_id is empty"
+  ]
+ },
+ {
+  "id": "TC-CWLD-023",
+  "module": "CWLD",
+  "moduleName": "Characters in the world: party, journal, home",
+  "category": "Validation",
+  "priority": "P1",
+  "file": "character-world.spec.ts",
+  "line": 572,
+  "describe": "on the character page",
+  "title": "the journal can be written, edited and deleted from the page, with a confirmation before deleting; an empty journal says what to do",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Open /characters/‹p.characterId›",
+   "Type The crossing into field \"Title (optional)\"",
+   "Type We crossed the river at night. into field \"What happened\"",
+   "Click [journal-add]",
+   "Click button \"/^Edit the entry/\"",
+   "Type We crossed the river at dusk. into field \"What happened\"",
+   "Click [journal-save]",
+   "Click button \"/^Delete the entry/\"",
+   "Click button \"Keep it\"",
+   "Click alertdialog › button \"Delete\""
+  ],
+  "testData": [
+   "URL /characters/‹p.characterId›",
+   "Input The crossing",
+   "Input We crossed the river at night.",
+   "Input We crossed the river at dusk."
+  ],
+  "expected": [
+   "the journal can be written, edited and deleted from the page, with a confirmation before deleting; an empty journal says what to do",
+   "[journal-empty] contains text Your journal is empty",
+   "[journal-add] is disabled",
+   "text \"30 / 4000\" is visible",
+   "entry contains text We crossed the river at night.",
+   "heading \"The crossing\" is visible",
+   "(await journalOf(p.characterId))[0] match object { title: \"The crossing\", body: \"We crossed the river at night.\" }",
+   "[journal-save] count is 0",
+   "entry contains text at dusk",
+   "(await journalOf(p.characterId))[0].body equals We crossed the river at dusk.",
+   "…and 3 more"
+  ]
+ },
+ {
+  "id": "TC-CWLD-024",
+  "module": "CWLD",
+  "moduleName": "Characters in the world: party, journal, home",
+  "category": "Validation",
+  "priority": "P1",
+  "file": "character-world.spec.ts",
+  "line": 607,
+  "describe": "on the character page",
+  "title": "text is shown as typed, never as markup, and a refused entry shows its reason",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Send POST /api/characters/‹p.characterId›/journal with { data: { title: \"<b>bold</b>\", body: \"<script>window.__cw = 1</script> & <img src=x oner…",
+   "Open /characters/‹p.characterId›",
+   "Type \"x\".repeat(4000) into [journal] › field \"What happened\""
+  ],
+  "testData": [
+   "POST /api/characters/‹p.characterId›/journal",
+   "URL /characters/‹p.characterId›",
+   "Input \"x\".repeat(4000)"
+  ],
+  "expected": [
+   "text is shown as typed, never as markup, and a refused entry shows its reason",
+   "entry contains text <script>window.__cw = 1</script> &",
+   "entry contains text <b>bold</b>",
+   "await p.page.evaluate(() => (window as unknown as { __cw?: number }).… is absent",
+   "[journal] › text \"4000 / 4000\" is visible"
+  ]
+ },
+ {
+  "id": "TC-CWLD-025",
+  "module": "CWLD",
+  "moduleName": "Characters in the world: party, journal, home",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "character-world.spec.ts",
+  "line": 625,
+  "describe": "on the character page",
+  "title": "the DM sees the journal and the links but no form, no sharing switch and no way to change anything",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Send POST /api/characters/‹p.characterId›/journal with { data: { title: \"For the DM\", body: \"Read by the keeper.\" } }",
+   "Open /characters/‹p.characterId›"
+  ],
+  "testData": [
+   "POST /api/characters/‹p.characterId›/journal",
+   "URL /characters/‹p.characterId›"
+  ],
+  "expected": [
+   "the DM sees the journal and the links but no form, no sharing switch and no way to change anything",
+   "journal contains text Read by the keeper.",
+   "journal contains text Private to this character's player and you.",
+   "button \"/Add entry|Edit the entry|Delete the entry/\" count is 0",
+   "field \"What happened\" count is 0",
+   "[world-panel] count is 0",
+   "[character-sheet] › link \"Imperium Invicta\" is visible"
+  ]
+ },
+ {
+  "id": "TC-CWLD-026",
+  "module": "CWLD",
+  "moduleName": "Characters in the world: party, journal, home",
+  "category": "Permission & Auth",
+  "priority": "P0",
+  "file": "character-world.spec.ts",
+  "line": 643,
+  "describe": "on the character page",
+  "title": "another player gets a not-found page for the sheet, whether or not it is shared",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Open /characters/‹owner.characterId›"
+  ],
+  "testData": [
+   "URL /characters/‹owner.characterId›"
+  ],
+  "expected": [
+   "another player gets a not-found page for the sheet, whether or not it is shared",
+   "HTTP status equals 404",
+   "page HTML does not: contains owner.name"
+  ]
+ },
+ {
+  "id": "TC-CWLD-027",
+  "module": "CWLD",
+  "moduleName": "Characters in the world: party, journal, home",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "character-world.spec.ts",
+  "line": 656,
+  "describe": "on the character page",
+  "title": "printing leaves out the sharing panel and the journal and keeps the sheet",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Send POST /api/characters/‹p.characterId›/journal with { data: { body: \"Not for the paper.\" } }",
+   "Open /characters/‹p.characterId›",
+   "Emulate media { media: \"print\" }"
+  ],
+  "testData": [
+   "POST /api/characters/‹p.characterId›/journal",
+   "URL /characters/‹p.characterId›"
+  ],
+  "expected": [
+   "printing leaves out the sharing panel and the journal and keeps the sheet",
+   "[journal] is visible",
+   "[character-sheet] is visible",
+   "[journal] is hidden",
+   "[world-panel] is hidden"
+  ]
+ },
+ {
+  "id": "TC-CWLD-028",
+  "module": "CWLD",
+  "moduleName": "Characters in the world: party, journal, home",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "character-world.spec.ts",
+  "line": 671,
+  "describe": "on the character page",
+  "title": "the sidebar has a Party link for everyone that is current on the party page, while Characters is not",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Open /characters/party",
+   "Open /characters"
+  ],
+  "testData": [
+   "URL /characters/party",
+   "URL /characters"
+  ],
+  "expected": [
+   "the sidebar has a Party link for everyone that is current on the party page, while Characters is not",
+   "link \"Party\" has attribute aria-current",
+   "link \"Characters\" does not: has attribute aria-current",
+   "link \"Characters\" has attribute aria-current"
+  ]
+ },
+ {
+  "id": "TC-CWLD-029",
+  "module": "CWLD",
+  "moduleName": "Characters in the world: party, journal, home",
+  "category": "Accessibility",
+  "priority": "P2",
+  "file": "character-world.spec.ts",
+  "line": 689,
+  "describe": "accessibility and small screens",
+  "title": "the character page (with sharing panel and journal) and the party page have no serious axe violations (dark)",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)",
+   "Browser storage is prepared before the page loads"
+  ],
+  "steps": [
+   "Send PATCH /api/characters/‹p.characterId› with { data: { shared: true } }",
+   "Send POST /api/characters/‹p.characterId›/journal with { data: { title: \"An entry\", body: \"Something happened.\" } }",
+   "Open url"
+  ],
+  "testData": [
+   "PATCH /api/characters/‹p.characterId›",
+   "POST /api/characters/‹p.characterId›/journal",
+   "URL url"
+  ],
+  "expected": [
+   "the character page (with sharing panel and journal) and the party page have no serious axe violations (dark)",
+   "results.violations.filter((v) => v.impact === \"serious\" || v.impact =… equals []"
+  ]
+ },
+ {
+  "id": "TC-CWLD-030",
+  "module": "CWLD",
+  "moduleName": "Characters in the world: party, journal, home",
+  "category": "Accessibility",
+  "priority": "P2",
+  "file": "character-world.spec.ts",
+  "line": 689,
+  "describe": "accessibility and small screens",
+  "title": "the character page (with sharing panel and journal) and the party page have no serious axe violations (light)",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)",
+   "Browser storage is prepared before the page loads"
+  ],
+  "steps": [
+   "Send PATCH /api/characters/‹p.characterId› with { data: { shared: true } }",
+   "Send POST /api/characters/‹p.characterId›/journal with { data: { title: \"An entry\", body: \"Something happened.\" } }",
+   "Open url"
+  ],
+  "testData": [
+   "PATCH /api/characters/‹p.characterId›",
+   "POST /api/characters/‹p.characterId›/journal",
+   "URL url"
+  ],
+  "expected": [
+   "the character page (with sharing panel and journal) and the party page have no serious axe violations (light)",
+   "results.violations.filter((v) => v.impact === \"serious\" || v.impact =… equals []"
+  ]
+ },
+ {
+  "id": "TC-CWLD-031",
+  "module": "CWLD",
+  "moduleName": "Characters in the world: party, journal, home",
+  "category": "Responsive",
+  "priority": "P2",
+  "file": "character-world.spec.ts",
+  "line": 709,
+  "describe": "accessibility and small screens",
+  "title": "at 375px the character page and the party page do not scroll the page sideways",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "A fresh test player account (removed afterwards)",
+   "Test rows use a `Zz`/`zz-` prefix and are deleted afterwards"
+  ],
+  "steps": [
+   "Send POST /api/auth/login with { data: { username: p.username, password: PASSWORD }, headers: { \"x-forwarded-for\": \"10.9…",
+   "Send POST /api/characters with { data: { ...VALID, name: \"Zz Cw A Rather Long Character Name To Wrap On A Small Screen\",…",
+   "Send PATCH /api/characters/‹id› with { data: { shared: true } }",
+   "Send POST /api/characters/‹id›/journal with { data: { title: \"A fairly long title for a journal entry that must wrap\", body: \"A\".repe…",
+   "Open url"
+  ],
+  "testData": [
+   "POST /api/auth/login",
+   "POST /api/characters",
+   "PATCH /api/characters/‹id›",
+   "POST /api/characters/‹id›/journal",
+   "URL url"
+  ],
+  "expected": [
+   "at 375px the character page and the party page do not scroll the page sideways",
+   "response ok equals true",
+   "await page.evaluate(() => document.documentElement.scrollWidth - docu… is at most 0"
+  ]
+ },
+ {
   "id": "TC-CHRA-001",
   "module": "CHRA",
   "moduleName": "Saved characters API",

@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { getCurrentUser } from "@/lib/auth";
+import { listParty } from "@/lib/character-world";
 import { CharacterError, createCharacter, listAll, listMine } from "@/lib/characters";
 
 export const runtime = "nodejs";
@@ -10,13 +11,17 @@ function fail(e: unknown) {
   throw e;
 }
 
-/** A player's own characters; the DM gets everyone's (with the owner) from `?scope=all`. */
+/**
+ * A player's own characters; the DM gets everyone's (with the owner) from `?scope=all`; anyone signed in can read
+ * the party roster from `?scope=party` (only characters their players shared, and only a few facts about each).
+ */
 export async function GET(request: Request) {
   const user = await getCurrentUser();
   if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   try {
-    const all = new URL(request.url).searchParams.get("scope") === "all";
-    return NextResponse.json({ characters: all ? await listAll(user) : await listMine(user) });
+    const scope = new URL(request.url).searchParams.get("scope");
+    if (scope === "party") return NextResponse.json(await listParty(user));
+    return NextResponse.json({ characters: scope === "all" ? await listAll(user) : await listMine(user) });
   } catch (e) {
     return fail(e);
   }

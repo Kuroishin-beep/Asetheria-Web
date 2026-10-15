@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { getCurrentUser } from "@/lib/auth";
+import { updateWorld } from "@/lib/character-world";
 import { CharacterError, deleteCharacter, getCharacter, updateCharacter } from "@/lib/characters";
 
 export const runtime = "nodejs";
@@ -39,6 +40,18 @@ export async function PUT(request: Request, ctx: Ctx) {
   try {
     const updated = await updateCharacter(r.user, r.id, raw);
     return updated ? NextResponse.json({ character: updated }) : notFound();
+  } catch (e) {
+    return fail(e);
+  }
+}
+
+/** Shares the character with the party or takes it back, and sets or clears its home. Its player only. */
+export async function PATCH(request: Request, ctx: Ctx) {
+  const r = await resolve(ctx);
+  if ("error" in r) return r.error;
+  const raw = await request.json().catch(() => null);
+  try {
+    return (await updateWorld(r.user, r.id, raw)) ? NextResponse.json({ ok: true }) : notFound();
   } catch (e) {
     return fail(e);
   }
