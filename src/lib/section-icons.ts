@@ -2,6 +2,7 @@ import {
   Archive,
   BookOpen,
   Building2,
+  CalendarDays,
   Cog,
   Columns3,
   Crown,
@@ -86,6 +87,7 @@ export const TOOL_ICONS = {
   graph: Network,
   dice: Dices,
   characters: UserRound,
+  calendar: CalendarDays,
 } as const;
 
 export const KEEPER_ICONS = {

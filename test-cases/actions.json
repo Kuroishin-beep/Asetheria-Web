@@ -672,5 +672,110 @@
     ]
    }
   ]
+ },
+ {
+  "action": "Set up the world's calendar",
+  "happy": [
+   {
+    "module": "CALP",
+    "any": [
+     "names the months"
+    ]
+   }
+  ],
+  "invalid": [
+   {
+    "module": "CALP",
+    "any": [
+     "blank or repeated names"
+    ]
+   }
+  ],
+  "unauthorized": [
+   {
+    "module": "CALP",
+    "any": [
+     "a player reads the calendar"
+    ]
+   }
+  ],
+  "boundary": [
+   {
+    "module": "CALP",
+    "any": [
+     "60 months"
+    ]
+   }
+  ]
+ },
+ {
+  "action": "Move the current date",
+  "happy": [
+   {
+    "module": "CALP",
+    "any": [
+     "a day on"
+    ]
+   }
+  ],
+  "invalid": [
+   {
+    "module": "CALP",
+    "any": [
+     "typed number that is empty"
+    ]
+   }
+  ],
+  "unauthorized": [
+   {
+    "module": "CALP",
+    "any": [
+     "a player reads the calendar"
+    ]
+   }
+  ],
+  "boundary": [
+   {
+    "module": "CALP",
+    "any": [
+     "advance API"
+    ]
+   }
+  ]
+ },
+ {
+  "action": "Read the calendar month by month",
+  "happy": [
+   {
+    "module": "CALP",
+    "any": [
+     "month grid shows"
+    ]
+   }
+  ],
+  "invalid": [
+   {
+    "module": "CALP",
+    "any": [
+     "nonsense year"
+    ]
+   }
+  ],
+  "unauthorized": [
+   {
+    "module": "CALP",
+    "any": [
+     "signed out: every calendar route"
+    ]
+   }
+  ],
+  "boundary": [
+   {
+    "module": "CALD",
+    "any": [
+     "moving by months"
+    ]
+   }
+  ]
  }
 ]

@@ -6,6 +6,7 @@ import {
   uuid,
   jsonb,
   integer,
+  smallint,
   doublePrecision,
   boolean,
   index,
@@ -476,6 +477,24 @@ export const pageTemplates = pgTable(
   ],
 );
 
+/** The world's calendar: one row, defined by the DM (no names are built in), plus the current date in it. */
+export const calendarConfig = pgTable(
+  "calendar_config",
+  {
+    id: smallint("id").primaryKey().default(1),
+    months: jsonb("months").$type<{ name: string; days: number }[]>().notNull(),
+    weekdays: jsonb("weekdays").$type<string[]>().notNull(),
+    yearLabel: text("year_label").notNull().default(""),
+    firstWeekday: integer("first_weekday").notNull().default(0),
+    currentYear: integer("current_year").notNull(),
+    currentMonth: integer("current_month").notNull(),
+    currentDay: integer("current_day").notNull(),
+    updatedBy: uuid("updated_by").references(() => users.id, { onDelete: "set null" }),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [check("calendar_config_single_row", sql`${t.id} = 1`)],
+);
+
 // ---------------------------------------------------------------------------
 // Inferred types
 // ---------------------------------------------------------------------------
@@ -491,6 +510,7 @@ export type MapPinRow = typeof mapPins.$inferSelect;
 export type CharacterRow = typeof characters.$inferSelect;
 export type EntrySecret = typeof entrySecrets.$inferSelect;
 export type PageTemplate = typeof pageTemplates.$inferSelect;
+export type CalendarRow = typeof calendarConfig.$inferSelect;
 export type EntryGrant = typeof entryGrants.$inferSelect;
 export type EntryKind = (typeof entryKind.enumValues)[number];
 export type Visibility = (typeof visibility.enumValues)[number];

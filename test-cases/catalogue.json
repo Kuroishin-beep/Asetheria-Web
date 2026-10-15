@@ -1768,6 +1768,1399 @@
   ]
  },
  {
+  "id": "TC-CALP-001",
+  "module": "CALP",
+  "moduleName": "Asetheria calendar (pages, setup, API)",
+  "category": "Data Integrity",
+  "priority": "P0",
+  "file": "calendar-app.spec.ts",
+  "line": 62,
+  "describe": "migration",
+  "title": "the table holds one row with its checks, and the migration is idempotent",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)",
+   "Test rows use a `Zz`/`zz-` prefix and are deleted afterwards"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "the table holds one row with its checks, and the migration is idempotent",
+   "(await query<{ t: string }>(`SELECT to_regclass('calendar_config')::t… equals calendar_config"
+  ]
+ },
+ {
+  "id": "TC-CALP-002",
+  "module": "CALP",
+  "moduleName": "Asetheria calendar (pages, setup, API)",
+  "category": "Data Integrity",
+  "priority": "P0",
+  "file": "calendar-app.spec.ts",
+  "line": 84,
+  "describe": "migration",
+  "title": "the rollback drops only the calendar table (run inside a transaction that is rolled back)",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "the rollback drops only the calendar table (run inside a transaction that is rolled back)",
+   "process.env.DATABASE_URL ?? \"\" does not: matches /neon\\.tech|neon\\.build/",
+   "(await client.query(`SELECT to_regclass('calendar_config')::text AS t… is empty",
+   "Number((await client.query(`SELECT count(*)::int AS n FROM entries`))… equals entries",
+   "(await client.query(`SELECT to_regclass('page_templates')::text AS t`… equals page_templates",
+   "(await query<{ t: string }>(`SELECT to_regclass('calendar_config')::t… equals calendar_config"
+  ]
+ },
+ {
+  "id": "TC-CALP-003",
+  "module": "CALP",
+  "moduleName": "Asetheria calendar (pages, setup, API)",
+  "category": "Validation",
+  "priority": "P1",
+  "file": "calendar-app.spec.ts",
+  "line": 104,
+  "describe": "before the calendar is set up",
+  "title": "the DM sees an empty state with a way to set it up, and a player sees that the DM has not; no names are invented",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Send GET /api/calendar"
+  ],
+  "testData": [
+   "GET /api/calendar"
+  ],
+  "expected": [
+   "the DM sees an empty state with a way to set it up, and a player sees that the DM has not; no names are invented",
+   "text \"The calendar has not been set up yet\" is visible",
+   "link \"Set up the calendar\" has attribute href",
+   "[calendar-grid] count is 0",
+   "await query(`SELECT 1 FROM calendar_config`) length is 0",
+   "text \"/The DM has not set up the calendar yet/\" is visible",
+   "link \"Set up the calendar\" count is 0",
+   "response body equals { calendar: null }"
+  ]
+ },
+ {
+  "id": "TC-CALP-004",
+  "module": "CALP",
+  "moduleName": "Asetheria calendar (pages, setup, API)",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "calendar-app.spec.ts",
+  "line": 123,
+  "describe": "before the calendar is set up",
+  "title": "the sidebar has a Calendar link for everyone",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Open /"
+  ],
+  "testData": [
+   "URL /"
+  ],
+  "expected": [
+   "the sidebar has a Calendar link for everyone",
+   "link \"Calendar\" is visible"
+  ]
+ },
+ {
+  "id": "TC-CALP-005",
+  "module": "CALP",
+  "moduleName": "Asetheria calendar (pages, setup, API)",
+  "category": "Boundary",
+  "priority": "P1",
+  "file": "calendar-app.spec.ts",
+  "line": 137,
+  "describe": "setting it up (DM)",
+  "title": "the DM names the months and weekdays, picks the first weekday and today, and the calendar shows exactly that",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Type Alpha into `#month-name-0`",
+   "Type 30 into `#month-days-0`",
+   "Click [add-month]",
+   "Type name into `#month-name-‹i + 1›`",
+   "Type days into `#month-days-‹i + 1›`",
+   "Type One into `#weekday-0`",
+   "Click [add-weekday]",
+   "Type name into `#weekday-‹i + 1›`",
+   "Type TT into `#year-label`",
+   "Choose 2 in `#first-weekday`",
+   "Type 1042 into `#current-year`",
+   "Choose 2 in `#current-month`",
+   "Type 9 into `#current-day`",
+   "Click [setup-save]",
+   "…and 2 more"
+  ],
+  "testData": [
+   "Input Alpha",
+   "Input 30",
+   "Input name",
+   "Input days",
+   "Input One",
+   "Input TT",
+   "Choice 2",
+   "Input 1042",
+   "…and 1 more"
+  ],
+  "expected": [
+   "the DM names the months and weekdays, picks the first weekday and today, and the calendar shows exactly that",
+   "text \"89 days so far\" is visible",
+   "[calendar-today] contains text formatDate(CFG, START, { weekday: true })",
+   "[calendar-heading] text is Beta, 1042 TT",
+   "row.months equals CFG.months",
+   "row.weekdays equals CFG.weekdays",
+   "[row.year_label, row.first_weekday, row.current_year, row.current_mon… equals [\"TT\", 2, 1042, 2, 9]"
+  ]
+ },
+ {
+  "id": "TC-CALP-006",
+  "module": "CALP",
+  "moduleName": "Asetheria calendar (pages, setup, API)",
+  "category": "Data Integrity",
+  "priority": "P0",
+  "file": "calendar-app.spec.ts",
+  "line": 169,
+  "describe": "setting it up (DM)",
+  "title": "a setup with blank or repeated names, no days, or a date that does not exist is refused with every reason, and nothing is saved",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Type 0 into `#month-days-0`",
+   "Click [add-month]",
+   "Type Same into `#month-name-1`",
+   "Type 10 into `#month-days-1`",
+   "Type same into `#month-name-2`",
+   "Type 10 into `#month-days-2`",
+   "Click [setup-save]"
+  ],
+  "testData": [
+   "Input 0",
+   "Input Same",
+   "Input 10",
+   "Input same"
+  ],
+  "expected": [
+   "a setup with blank or repeated names, no days, or a date that does not exist is refused with every reason, and nothing is saved",
+   "errors contains text Month 1 needs a name",
+   "errors contains text Month 1 must have from 1 to 400 days",
+   "errors contains text Two months are called \"same\"",
+   "errors contains text Weekday 1 needs a name",
+   "await query(`SELECT 1 FROM calendar_config`) length is 0"
+  ]
+ },
+ {
+  "id": "TC-CALP-007",
+  "module": "CALP",
+  "moduleName": "Asetheria calendar (pages, setup, API)",
+  "category": "Validation",
+  "priority": "P1",
+  "file": "calendar-app.spec.ts",
+  "line": 187,
+  "describe": "setting it up (DM)",
+  "title": "changing the setup so that today no longer exists is refused and the old setup stays",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Type 5 into `#month-days-1`",
+   "Click [setup-save]"
+  ],
+  "testData": [
+   "Input 5"
+  ],
+  "expected": [
+   "changing the setup so that today no longer exists is refused and the old setup stays",
+   "`#month-name-1` value is Beta",
+   "[setup-errors] contains text not a real date",
+   "row.months[1].days equals 28"
+  ]
+ },
+ {
+  "id": "TC-CALP-008",
+  "module": "CALP",
+  "moduleName": "Asetheria calendar (pages, setup, API)",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "calendar-app.spec.ts",
+  "line": 199,
+  "describe": "setting it up (DM)",
+  "title": "the setup form starts from the saved calendar, and months and weekdays can be removed but never the last one",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Click button \"Remove month 3\"",
+   "Click button \"Remove month 2\""
+  ],
+  "testData": [],
+  "expected": [
+   "the setup form starts from the saved calendar, and months and weekdays can be removed but never the last one",
+   "`#month-name-0` value is Alpha",
+   "`#weekday-4` value is Five",
+   "`#month-name-2` count is 0",
+   "button \"Remove month 1\" is disabled",
+   "text \"30 days so far\" is visible"
+  ]
+ },
+ {
+  "id": "TC-CALP-009",
+  "module": "CALP",
+  "moduleName": "Asetheria calendar (pages, setup, API)",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "calendar-app.spec.ts",
+  "line": 214,
+  "describe": "reading it",
+  "title": "the month grid shows the month under the right weekdays, with today marked",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Call monthGrid(CFG, 1042, 2)",
+   "Call weekdayIndex(CFG, { year: 1042, month: 2, day: 1 })"
+  ],
+  "testData": [],
+  "expected": [
+   "the month grid shows the month under the right weekdays, with today marked",
+   "[calendar-heading] text is Beta, 1042 TT",
+   "`thead th` text is CFG.weekdays",
+   "cells count is 28",
+   "firstRow.nth(i) has attribute aria-hidden",
+   "firstRow.nth(i) has attribute data-day",
+   "grid.leadingBlanks equals weekdayIndex(CFG, { year: 1042, month: 2, day: 1 })",
+   "`td[aria-current=\"date\"]` count is 1",
+   "`td[aria-current=\"date\"]` has attribute data-day",
+   "`td[aria-current=\"date\"]` contains text Today"
+  ]
+ },
+ {
+  "id": "TC-CALP-010",
+  "module": "CALP",
+  "moduleName": "Asetheria calendar (pages, setup, API)",
+  "category": "Edge",
+  "priority": "P2",
+  "file": "calendar-app.spec.ts",
+  "line": 235,
+  "describe": "reading it",
+  "title": "next and previous month cross the year edge both ways, and a way back to today's month appears",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Click link \"Previous month\"",
+   "Click link \"Next month\"",
+   "Click link \"/Back to Alpha, 7 TT/\""
+  ],
+  "testData": [],
+  "expected": [
+   "next and previous month cross the year edge both ways, and a way back to today's month appears",
+   "[calendar-heading] text is Gamma, 6 TT",
+   "`td[aria-current=\"date\"]` count is 0",
+   "page URL is /y=6&m=3/",
+   "[calendar-heading] text is Alpha, 7 TT",
+   "[calendar-heading] text is Beta, 7 TT",
+   "page URL is (u) => u.pathname === \"/calendar\" && u.search === \"\"",
+   "`td[aria-current=\"date\"]` count is 1"
+  ]
+ },
+ {
+  "id": "TC-CALP-011",
+  "module": "CALP",
+  "moduleName": "Asetheria calendar (pages, setup, API)",
+  "category": "Error & Recovery",
+  "priority": "P1",
+  "file": "calendar-app.spec.ts",
+  "line": 252,
+  "describe": "reading it",
+  "title": "an address with a nonsense year or month falls back to the current month instead of failing",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Open /calendar?‹q›"
+  ],
+  "testData": [
+   "URL /calendar?‹q›"
+  ],
+  "expected": [
+   "an address with a nonsense year or month falls back to the current month instead of failing",
+   "HTTP status equals 200",
+   "[calendar-heading] text is Beta, 1042 TT"
+  ]
+ },
+ {
+  "id": "TC-CALP-012",
+  "module": "CALP",
+  "moduleName": "Asetheria calendar (pages, setup, API)",
+  "category": "Edge",
+  "priority": "P2",
+  "file": "calendar-app.spec.ts",
+  "line": 261,
+  "describe": "reading it",
+  "title": "negative and zero years read correctly, with a true minus sign",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "negative and zero years read correctly, with a true minus sign",
+   "[calendar-today] contains text Gamma 31, −12 TT",
+   "[calendar-heading] text is Gamma, −12 TT"
+  ]
+ },
+ {
+  "id": "TC-CALP-013",
+  "module": "CALP",
+  "moduleName": "Asetheria calendar (pages, setup, API)",
+  "category": "Accessibility",
+  "priority": "P2",
+  "file": "calendar-app.spec.ts",
+  "line": 268,
+  "describe": "reading it",
+  "title": "the keyboard moves around the month: arrows, Home and End, one tab stop, and Page Up and Page Down change the month",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Press ArrowRight",
+   "Press ArrowDown",
+   "Press ArrowLeft",
+   "Press ArrowUp",
+   "Press Home",
+   "Press End",
+   "Press PageDown",
+   "Press PageUp"
+  ],
+  "testData": [],
+  "expected": [
+   "the keyboard moves around the month: arrows, Home and End, one tab stop, and Page Up and Page Down change the month",
+   "`td[data-day][tabindex='0']` count is 1",
+   "`td[data-day='9']` has attribute tabindex",
+   "await focused() equals 10",
+   "await focused() equals 15",
+   "await focused() equals 14",
+   "await focused() equals 9",
+   "await focused() equals String(9 - column)",
+   "await focused() equals String(9 - column + (CFG.weekdays.length - 1))",
+   "await focused() equals 1",
+   "…and 4 more"
+  ]
+ },
+ {
+  "id": "TC-CALP-014",
+  "module": "CALP",
+  "moduleName": "Asetheria calendar (pages, setup, API)",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "calendar-app.spec.ts",
+  "line": 314,
+  "describe": "moving the date (DM)",
+  "title": "a day on, a day back, and a week on change today, across the end of a month",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Click [day-next]",
+   "Click [day-back]",
+   "Click [week-next]"
+  ],
+  "testData": [],
+  "expected": [
+   "a day on, a day back, and a week on change today, across the end of a month",
+   "[calendar-today] contains text today({ year: 1042, month: 2, day: 1 })",
+   "[calendar-today] contains text today({ year: 1042, month: 1, day: 30 })",
+   "[calendar-today] contains text today({ year: 1042, month: 2, day: 5 })",
+   "(await query<{ current_month: number; current_day: number }>(`SELECT … equals { current_month: 2, current_day: 5 }"
+  ]
+ },
+ {
+  "id": "TC-CALP-015",
+  "module": "CALP",
+  "moduleName": "Asetheria calendar (pages, setup, API)",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "calendar-app.spec.ts",
+  "line": 327,
+  "describe": "moving the date (DM)",
+  "title": "moving by a typed number of days works forwards and back, across a year",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Type 1 into `#advance-days`",
+   "Click [advance-go]",
+   "Type -89 into `#advance-days`"
+  ],
+  "testData": [
+   "Input 1",
+   "Input -89"
+  ],
+  "expected": [
+   "moving by a typed number of days works forwards and back, across a year",
+   "[calendar-today] contains text today({ year: 1043, month: 1, day: 1 })",
+   "[calendar-today] contains text today({ year: 1042, month: 1, day: 1 })"
+  ]
+ },
+ {
+  "id": "TC-CALP-016",
+  "module": "CALP",
+  "moduleName": "Asetheria calendar (pages, setup, API)",
+  "category": "Validation",
+  "priority": "P1",
+  "file": "calendar-app.spec.ts",
+  "line": 339,
+  "describe": "moving the date (DM)",
+  "title": "a typed number that is empty, zero, fractional or not a number is refused in plain words and moves nothing",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Type v into `#advance-days`",
+   "Click [advance-go]"
+  ],
+  "testData": [
+   "Input v"
+  ],
+  "expected": [
+   "a typed number that is empty, zero, fractional or not a number is refused in plain words and moves nothing",
+   "[calendar-error] contains text whole number of days",
+   "(await query<{ current_day: number }>(`SELECT current_day FROM calend… equals 9"
+  ]
+ },
+ {
+  "id": "TC-CALP-017",
+  "module": "CALP",
+  "moduleName": "Asetheria calendar (pages, setup, API)",
+  "category": "Validation",
+  "priority": "P1",
+  "file": "calendar-app.spec.ts",
+  "line": 350,
+  "describe": "moving the date (DM)",
+  "title": "the advance API: 3,650 days either way is allowed, 3,651 and zero and fractions are refused, and a bad body is a 400",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Send POST /api/calendar/advance with { data: { days } }",
+   "Send POST /api/calendar/advance with { data: { days: 1, extra: 1 } }",
+   "Send POST /api/calendar/advance with { data: {} }"
+  ],
+  "testData": [
+   "POST /api/calendar/advance"
+  ],
+  "expected": [
+   "the advance API: 3,650 days either way is allowed, 3,651 and zero and fractions are refused, and a bad body is a 400",
+   "HTTP status equals 200",
+   "HTTP status equals 400",
+   "(await query<{ current_year: number; current_month: number; current_d… equals { current_year: 100, current_month: 1, current_day: 1 }"
+  ]
+ },
+ {
+  "id": "TC-CALP-018",
+  "module": "CALP",
+  "moduleName": "Asetheria calendar (pages, setup, API)",
+  "category": "Validation",
+  "priority": "P1",
+  "file": "calendar-app.spec.ts",
+  "line": 362,
+  "describe": "moving the date (DM)",
+  "title": "advancing before the calendar exists, or past the last supported year, is refused",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Send POST /api/calendar/advance with { data: { days: 1 } }",
+   "Send PUT /api/calendar/date with { data: { year: 1, month: 1, day: 1 } }"
+  ],
+  "testData": [
+   "POST /api/calendar/advance",
+   "PUT /api/calendar/date"
+  ],
+  "expected": [
+   "advancing before the calendar exists, or past the last supported year, is refused",
+   "HTTP status equals 400",
+   "response body matches /past the years/"
+  ]
+ },
+ {
+  "id": "TC-CALP-019",
+  "module": "CALP",
+  "moduleName": "Asetheria calendar (pages, setup, API)",
+  "category": "Validation",
+  "priority": "P1",
+  "file": "calendar-app.spec.ts",
+  "line": 371,
+  "describe": "moving the date (DM)",
+  "title": "setting the date directly checks it: the last day of a month is fine, one past it, day zero and a missing month are not",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Send PUT /api/calendar/date with { data: d }"
+  ],
+  "testData": [
+   "PUT /api/calendar/date"
+  ],
+  "expected": [
+   "setting the date directly checks it: the last day of a month is fine, one past it, day zero and a missing month are not",
+   "HTTP status equals 200",
+   "HTTP status equals 400",
+   "(await query<{ current_year: number; current_month: number; current_d… equals { current_year: 5, current_month: 2, current_day: 28 }"
+  ]
+ },
+ {
+  "id": "TC-CALP-020",
+  "module": "CALP",
+  "moduleName": "Asetheria calendar (pages, setup, API)",
+  "category": "Validation",
+  "priority": "P1",
+  "file": "calendar-app.spec.ts",
+  "line": 386,
+  "describe": "the setup API: what is refused, and the boundaries",
+  "title": "60 months, 400 days a month, 30 weekdays and 40-character names are accepted; one more of each is refused with the reason",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "60 months, 400 days a month, 30 weekdays and 40-character names are accepted; one more of each is refused with the reason",
+   "HTTP status equals 200",
+   "HTTP status equals 400",
+   "response body matches /at most 60 months/",
+   "response body matches /from 1 to 400 days/",
+   "response body matches /at most 30 days/",
+   "response body matches /longer than 40/"
+  ]
+ },
+ {
+  "id": "TC-CALP-021",
+  "module": "CALP",
+  "moduleName": "Asetheria calendar (pages, setup, API)",
+  "category": "Validation",
+  "priority": "P1",
+  "file": "calendar-app.spec.ts",
+  "line": 401,
+  "describe": "the setup API: what is refused, and the boundaries",
+  "title": "a date that does not exist, a bad first weekday, a wrong shape and extra keys are refused, and the saved calendar is untouched",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "a date that does not exist, a bad first weekday, a wrong shape and extra keys are refused, and the saved calendar is untouched",
+   "HTTP status equals 400",
+   "JSON.stringify(await query(`SELECT * FROM calendar_config`)) equals before"
+  ]
+ },
+ {
+  "id": "TC-CALP-022",
+  "module": "CALP",
+  "moduleName": "Asetheria calendar (pages, setup, API)",
+  "category": "Edge",
+  "priority": "P2",
+  "file": "calendar-app.spec.ts",
+  "line": 419,
+  "describe": "the setup API: what is refused, and the boundaries",
+  "title": "saving twice keeps a single row, and the second save replaces the first",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "saving twice keeps a single row, and the second save replaces the first",
+   "rows equals [{ year_label: \"ZZ\" }]"
+  ]
+ },
+ {
+  "id": "TC-CALP-023",
+  "module": "CALP",
+  "moduleName": "Asetheria calendar (pages, setup, API)",
+  "category": "Edge",
+  "priority": "P2",
+  "file": "calendar-app.spec.ts",
+  "line": 426,
+  "describe": "the setup API: what is refused, and the boundaries",
+  "title": "whitespace around names is trimmed when saved",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "whitespace around names is trimmed when saved",
+   "HTTP status equals 200",
+   "(await query<{ months: { name: string }[] }>(`SELECT months FROM cale… equals [\"Alpha\", \"Beta\", \"Gamma\"]"
+  ]
+ },
+ {
+  "id": "TC-CALP-024",
+  "module": "CALP",
+  "moduleName": "Asetheria calendar (pages, setup, API)",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "calendar-app.spec.ts",
+  "line": 435,
+  "describe": "who can read and who can change",
+  "title": "a player reads the calendar and the page, with no controls, no setup link, and no way in to the setup screen or the write API",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Call formatDate(CFG, START, { weekday: true })",
+   "Send GET /api/calendar",
+   "Open /calendar/setup",
+   "Send PUT /api/calendar with { data: body() }",
+   "Send POST /api/calendar/advance with { data: { days: 1 } }",
+   "Send PUT /api/calendar/date with { data: START }"
+  ],
+  "testData": [
+   "GET /api/calendar",
+   "URL /calendar/setup",
+   "PUT /api/calendar",
+   "POST /api/calendar/advance",
+   "PUT /api/calendar/date"
+  ],
+  "expected": [
+   "a player reads the calendar and the page, with no controls, no setup link, and no way in to the setup screen or the write API",
+   "[calendar-today] contains text formatDate(CFG, START, { weekday: true })",
+   "[calendar-grid] is visible",
+   "[day-next] count is 0",
+   "link \"Calendar setup\" count is 0",
+   "response body equals START",
+   "page URL is (u) => u.pathname === \"/calendar\"",
+   "HTTP status equals 403",
+   "(await query<{ current_day: number }>(`SELECT current_day FROM calend… equals 9"
+  ]
+ },
+ {
+  "id": "TC-CALP-025",
+  "module": "CALP",
+  "moduleName": "Asetheria calendar (pages, setup, API)",
+  "category": "Permission & Auth",
+  "priority": "P0",
+  "file": "calendar-app.spec.ts",
+  "line": 459,
+  "describe": "who can read and who can change",
+  "title": "signed out: every calendar route is 401",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Send GET /api/calendar",
+   "Send PUT /api/calendar with { data: body() }",
+   "Send POST /api/calendar/advance with { data: { days: 1 } }",
+   "Send PUT /api/calendar/date with { data: START }"
+  ],
+  "testData": [
+   "GET /api/calendar",
+   "PUT /api/calendar",
+   "POST /api/calendar/advance",
+   "PUT /api/calendar/date"
+  ],
+  "expected": [
+   "signed out: every calendar route is 401",
+   "HTTP status equals 401",
+   "await query(`SELECT 1 FROM calendar_config`) length is 0"
+  ]
+ },
+ {
+  "id": "TC-CALP-026",
+  "module": "CALP",
+  "moduleName": "Asetheria calendar (pages, setup, API)",
+  "category": "Accessibility",
+  "priority": "P2",
+  "file": "calendar-app.spec.ts",
+  "line": 475,
+  "describe": "accessibility and small screens",
+  "title": "the calendar and its setup have no serious axe violations (dark)",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)",
+   "Browser storage is prepared before the page loads"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "the calendar and its setup have no serious axe violations (dark)",
+   "serious equals []"
+  ]
+ },
+ {
+  "id": "TC-CALP-027",
+  "module": "CALP",
+  "moduleName": "Asetheria calendar (pages, setup, API)",
+  "category": "Accessibility",
+  "priority": "P2",
+  "file": "calendar-app.spec.ts",
+  "line": 475,
+  "describe": "accessibility and small screens",
+  "title": "the calendar and its setup have no serious axe violations (light)",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)",
+   "Browser storage is prepared before the page loads"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "the calendar and its setup have no serious axe violations (light)",
+   "serious equals []"
+  ]
+ },
+ {
+  "id": "TC-CALP-028",
+  "module": "CALP",
+  "moduleName": "Asetheria calendar (pages, setup, API)",
+  "category": "Responsive",
+  "priority": "P2",
+  "file": "calendar-app.spec.ts",
+  "line": 489,
+  "describe": "accessibility and small screens",
+  "title": "at 375px neither the calendar nor the setup scrolls the page sideways, even with a 12-day week",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "at 375px neither the calendar nor the setup scrolls the page sideways, even with a 12-day week",
+   "await page.evaluate(() => document.documentElement.scrollWidth - docu… is at most 0"
+  ]
+ },
+ {
+  "id": "TC-CALP-029",
+  "module": "CALP",
+  "moduleName": "Asetheria calendar (pages, setup, API)",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "calendar-app.spec.ts",
+  "line": 505,
+  "describe": "accessibility and small screens",
+  "title": "a one-day week and a one-day month still draw a grid",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed in as the seeded DM account (storage state saved by the global setup)"
+  ],
+  "steps": [
+   "Run the checks in the spec body (no browser actions: a unit-level test)"
+  ],
+  "testData": [],
+  "expected": [
+   "a one-day week and a one-day month still draw a grid",
+   "`td[data-day]` count is 1",
+   "[calendar-today] contains text Only, Solo 1, 3"
+  ]
+ },
+ {
+  "id": "TC-CALD-001",
+  "module": "CALD",
+  "moduleName": "Calendar arithmetic",
+  "category": "Boundary",
+  "priority": "P1",
+  "file": "calendar.spec.ts",
+  "line": 40,
+  "describe": "the configuration",
+  "title": "a good configuration passes, and the limits hold at the boundary",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call validateConfig(SIMPLE)",
+   "Call validateConfig({ ...SIMPLE, months: many(L.maxMonths) })",
+   "Call validateConfig({ ...SIMPLE, months: many(L.maxMonths + 1) })",
+   "Call validateConfig({ ...SIMPLE, months: [{ name: \"A\", days: L.maxDaysPerMonth }] })",
+   "Call validateConfig({ ...SIMPLE, months: [{ name: \"A\", days: L.maxDaysPerMonth + 1 }] })",
+   "Call validateConfig({ ...SIMPLE, months: [{ name: \"A\", days: 0 }] })",
+   "Call validateConfig({ ...SIMPLE, weekdays: days(L.maxWeekdays), firstWeekday: 0 })",
+   "Call validateConfig({ ...SIMPLE, weekdays: days(L.maxWeekdays + 1), firstWeekday: 0 })",
+   "Call validateConfig({ ...SIMPLE, months: [{ name: \"x\".repeat(40), days: 5 }] })",
+   "Call validateConfig({ ...SIMPLE, months: [{ name: \"x\".repeat(41), days: 5 }] })",
+   "Call validateConfig({ ...SIMPLE, yearLabel: \"y\".repeat(20) })",
+   "Call validateConfig({ ...SIMPLE, yearLabel: \"y\".repeat(21) })"
+  ],
+  "testData": [],
+  "expected": [
+   "a good configuration passes, and the limits hold at the boundary",
+   "validateConfig(SIMPLE) equals []",
+   "validateConfig({ ...SIMPLE, months: many(L.maxMonths) }) equals []",
+   "validateConfig({ ...SIMPLE, months: many(L.maxMonths + 1) }) equals [expect.stringMatching(/at most 60 months/)]",
+   "validateConfig({ ...SIMPLE, months: [{ name: \"A\", days: L.maxDaysPerM… equals []",
+   "validateConfig({ ...SIMPLE, months: [{ name: \"A\", days: L.maxDaysPerM… equals [expect.stringMatching(/from 1 to 400 days/)]",
+   "validateConfig({ ...SIMPLE, months: [{ name: \"A\", days: 0 }] }) equals [expect.stringMatching(/from 1 to 400 days/)]",
+   "validateConfig({ ...SIMPLE, weekdays: days(L.maxWeekdays), firstWeekd… equals []",
+   "validateConfig({ ...SIMPLE, weekdays: days(L.maxWeekdays + 1), firstW… equals [expect.stringMatching(/at most 30 days/)]",
+   "validateConfig({ ...SIMPLE, months: [{ name: \"x\".repeat(40), days: 5 … equals []",
+   "…and 3 more"
+  ]
+ },
+ {
+  "id": "TC-CALD-002",
+  "module": "CALD",
+  "moduleName": "Calendar arithmetic",
+  "category": "Validation",
+  "priority": "P1",
+  "file": "calendar.spec.ts",
+  "line": 58,
+  "describe": "the configuration",
+  "title": "no months, no weekdays, blank or repeated names (in any letter case), fractional days and a bad first weekday are each refused",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call validateConfig({ ...SIMPLE, months: [] })",
+   "Call validateConfig({ ...SIMPLE, weekdays: [], firstWeekday: 0 })",
+   "Call validateConfig({ ...SIMPLE, months: [{ name: \" \", days: 5 }] })",
+   "Call validateConfig({ ...SIMPLE, months: [{ name: \"Alpha\", days: 5 }, { name: \"ALPHA\", days: 5 }] })",
+   "Call validateConfig({ ...SIMPLE, weekdays: [\"One\", \"one\"], firstWeekday: 0 })",
+   "Call validateConfig({ ...SIMPLE, weekdays: [\"One\", \"\"], firstWeekday: 0 })",
+   "Call validateConfig({ ...SIMPLE, months: [{ name: \"A\", days: 2.5 }] })",
+   "Call validateConfig({ ...SIMPLE, firstWeekday: 5 })",
+   "Call validateConfig({ ...SIMPLE, firstWeekday: -1 })",
+   "Call validateConfig({ ...SIMPLE, firstWeekday: 1.5 })"
+  ],
+  "testData": [],
+  "expected": [
+   "no months, no weekdays, blank or repeated names (in any letter case), fractional days and a bad first weekday are each refused",
+   "validateConfig({ ...SIMPLE, months: [] }) equals [expect.stringMatching(/at least one month/)]",
+   "validateConfig({ ...SIMPLE, weekdays: [], firstWeekday: 0 }).join(\" \") matches /at least one weekday/",
+   "validateConfig({ ...SIMPLE, months: [{ name: \" \", days: 5 }] }) equals [expect.stringMatching(/needs a name/)]",
+   "validateConfig({ ...SIMPLE, months: [{ name: \"Alpha\", days: 5 }, { na… equals [expect.stringMatching(/Two months are called/)]",
+   "validateConfig({ ...SIMPLE, weekdays: [\"One\", \"one\"], firstWeekday: 0… equals [expect.stringMatching(/Two weekdays are called/)]",
+   "validateConfig({ ...SIMPLE, weekdays: [\"One\", \"\"], firstWeekday: 0 }) equals [expect.stringMatching(/Weekday 2 needs a name/)]",
+   "validateConfig({ ...SIMPLE, months: [{ name: \"A\", days: 2.5 }] }) equals [expect.stringMatching(/from 1 to 400 days/)]",
+   "validateConfig({ ...SIMPLE, firstWeekday: 5 }) equals [expect.stringMatching(/first day of year 1/)]",
+   "validateConfig({ ...SIMPLE, firstWeekday: -1 }) equals [expect.stringMatching(/first day of year 1/)]",
+   "…and 1 more"
+  ]
+ },
+ {
+  "id": "TC-CALD-003",
+  "module": "CALD",
+  "moduleName": "Calendar arithmetic",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "calendar.spec.ts",
+  "line": 71,
+  "describe": "the configuration",
+  "title": "several problems are all reported together",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call validateConfig({ months: [{ name: \"\", days: 0 }, { name: \"B\", days: 999 }], weekdays: [], year…)"
+  ],
+  "testData": [],
+  "expected": [
+   "several problems are all reported together",
+   "errors.length is at least 5"
+  ]
+ },
+ {
+  "id": "TC-CALD-004",
+  "module": "CALD",
+  "moduleName": "Calendar arithmetic",
+  "category": "Boundary",
+  "priority": "P1",
+  "file": "calendar.spec.ts",
+  "line": 78,
+  "describe": "dates",
+  "title": "the first and last day of every month are valid; one outside either end, a zero, a fraction and NaN are not",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call isValidDate(SIMPLE, { year: 10, month: i + 1, day: 1 })",
+   "Call isValidDate(SIMPLE, { year: 10, month: i + 1, day: m.days })",
+   "Call isValidDate(SIMPLE, { year: 10, month: i + 1, day: m.days + 1 })",
+   "Call isValidDate(SIMPLE, { year: 10, month: i + 1, day: 0 })",
+   "Call isValidDate(SIMPLE, bad)",
+   "Call isValidDate(SIMPLE, { year: CALENDAR_LIMITS.maxYear, month: 1, day: 1 })",
+   "Call isValidDate(SIMPLE, { year: CALENDAR_LIMITS.minYear, month: 3, day: 31 })",
+   "Call isValidDate(SIMPLE, { year: 0, month: 1, day: 1 })"
+  ],
+  "testData": [],
+  "expected": [
+   "the first and last day of every month are valid; one outside either end, a zero, a fraction and NaN are not",
+   "isValidDate(SIMPLE, { year: 10, month: i + 1, day: 1 }) equals true",
+   "isValidDate(SIMPLE, { year: 10, month: i + 1, day: m.days }) equals true",
+   "isValidDate(SIMPLE, { year: 10, month: i + 1, day: m.days + 1 }) equals false",
+   "isValidDate(SIMPLE, { year: 10, month: i + 1, day: 0 }) equals false",
+   "isValidDate(SIMPLE, bad) equals false",
+   "isValidDate(SIMPLE, { year: CALENDAR_LIMITS.maxYear, month: 1, day: 1… equals true",
+   "isValidDate(SIMPLE, { year: CALENDAR_LIMITS.minYear, month: 3, day: 3… equals true",
+   "isValidDate(SIMPLE, { year: 0, month: 1, day: 1 }) equals true"
+  ]
+ },
+ {
+  "id": "TC-CALD-005",
+  "module": "CALD",
+  "moduleName": "Calendar arithmetic",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "calendar.spec.ts",
+  "line": 93,
+  "describe": "dates",
+  "title": "the year is the sum of its months, and the first day of year 1 is day 0",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call yearLength(SIMPLE)",
+   "Call toDayNumber(SIMPLE, { year: 1, month: 1, day: 1 })",
+   "Call toDayNumber(SIMPLE, { year: 1, month: 2, day: 1 })",
+   "Call toDayNumber(SIMPLE, { year: 2, month: 1, day: 1 })",
+   "Call toDayNumber(SIMPLE, { year: 0, month: 3, day: 31 })",
+   "Call toDayNumber(SIMPLE, { year: 0, month: 1, day: 1 })"
+  ],
+  "testData": [],
+  "expected": [
+   "the year is the sum of its months, and the first day of year 1 is day 0",
+   "yearLength(SIMPLE) equals 89",
+   "toDayNumber(SIMPLE, { year: 1, month: 1, day: 1 }) equals 0",
+   "toDayNumber(SIMPLE, { year: 1, month: 2, day: 1 }) equals 30",
+   "toDayNumber(SIMPLE, { year: 2, month: 1, day: 1 }) equals 89",
+   "toDayNumber(SIMPLE, { year: 0, month: 3, day: 31 }) equals -1",
+   "toDayNumber(SIMPLE, { year: 0, month: 1, day: 1 }) equals -89"
+  ]
+ },
+ {
+  "id": "TC-CALD-006",
+  "module": "CALD",
+  "moduleName": "Calendar arithmetic",
+  "category": "Edge",
+  "priority": "P2",
+  "file": "calendar.spec.ts",
+  "line": 102,
+  "describe": "dates",
+  "title": "day numbers and dates are exact inverses: 30 random calendars, 400 random dates each (12,000 round trips, negative years included)",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call toDayNumber(cfg, d)",
+   "Call fromDayNumber(cfg, n)",
+   "Call isValidDate(cfg, fromDayNumber(cfg, n))"
+  ],
+  "testData": [],
+  "expected": [
+   "day numbers and dates are exact inverses: 30 random calendars, 400 random dates each (12,000 round trips, negative years included)",
+   "fromDayNumber(cfg, n) equals d",
+   "isValidDate(cfg, fromDayNumber(cfg, n)) equals true",
+   "checks equals 12000"
+  ]
+ },
+ {
+  "id": "TC-CALD-007",
+  "module": "CALD",
+  "moduleName": "Calendar arithmetic",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "calendar.spec.ts",
+  "line": 118,
+  "describe": "dates",
+  "title": "successive day numbers are successive dates: the day after the last day of a month is the first of the next, and of the year the first of the next year",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call toDayNumber(cfg, { year: pick(r, -50, 50), month: 1, day: 1 })",
+   "Call fromDayNumber(cfg, start)",
+   "Call yearLength(cfg)",
+   "Call fromDayNumber(cfg, n)"
+  ],
+  "testData": [],
+  "expected": [
+   "successive day numbers are successive dates: the day after the last day of a month is the first of the next, and of the year the first of the next year",
+   "next equals { year: prev.year, month: prev.month, day: prev.day + 1 }",
+   "next equals { year: prev.year, month: prev.month + 1, day: 1 }",
+   "next equals { year: prev.year + 1, month: 1, day: 1 }"
+  ]
+ },
+ {
+  "id": "TC-CALD-008",
+  "module": "CALD",
+  "moduleName": "Calendar arithmetic",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "calendar.spec.ts",
+  "line": 137,
+  "describe": "adding days",
+  "title": "adding n then -n comes back to the start, and adding n equals the difference in day numbers: 15,000 random steps over 30 calendars",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call yearLength(cfg)",
+   "Call addDays(cfg, d, n)",
+   "Call diffDays(cfg, d, there)",
+   "Call addDays(cfg, there, -n)",
+   "Call compareDates(cfg, d, there)"
+  ],
+  "testData": [],
+  "expected": [
+   "adding n then -n comes back to the start, and adding n equals the difference in day numbers: 15,000 random steps over 30 calendars",
+   "there does not: is empty",
+   "diffDays(cfg, d, there) equals n",
+   "addDays(cfg, there, -n) equals d",
+   "compareDates(cfg, d, there) equals n === 0 ? 0 : Math.sign(-n)"
+  ]
+ },
+ {
+  "id": "TC-CALD-009",
+  "module": "CALD",
+  "moduleName": "Calendar arithmetic",
+  "category": "Boundary",
+  "priority": "P1",
+  "file": "calendar.spec.ts",
+  "line": 153,
+  "describe": "adding days",
+  "title": "known steps across the edges: end of month, end of year, a whole number of years, zero, and backwards over year 1",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call addDays(SIMPLE, d(5, 1, 30), 1)",
+   "Call addDays(SIMPLE, d(5, 3, 31), 1)",
+   "Call addDays(SIMPLE, d(5, 2, 10), 89)",
+   "Call addDays(SIMPLE, d(5, 2, 10), 89 * 10)",
+   "Call addDays(SIMPLE, d(5, 2, 10), 0)",
+   "Call addDays(SIMPLE, d(1, 1, 1), -1)",
+   "Call addDays(SIMPLE, d(0, 3, 31), 1)",
+   "Call addDays(SIMPLE, d(1, 1, 1), -89)"
+  ],
+  "testData": [],
+  "expected": [
+   "known steps across the edges: end of month, end of year, a whole number of years, zero, and backwards over year 1",
+   "addDays(SIMPLE, d(5, 1, 30), 1) equals d(5, 2, 1)",
+   "addDays(SIMPLE, d(5, 3, 31), 1) equals d(6, 1, 1)",
+   "addDays(SIMPLE, d(5, 2, 10), 89) equals d(6, 2, 10)",
+   "addDays(SIMPLE, d(5, 2, 10), 89 * 10) equals d(15, 2, 10)",
+   "addDays(SIMPLE, d(5, 2, 10), 0) equals d(5, 2, 10)",
+   "addDays(SIMPLE, d(1, 1, 1), -1) equals d(0, 3, 31)",
+   "addDays(SIMPLE, d(0, 3, 31), 1) equals d(1, 1, 1)",
+   "addDays(SIMPLE, d(1, 1, 1), -89) equals d(0, 1, 1)"
+  ]
+ },
+ {
+  "id": "TC-CALD-010",
+  "module": "CALD",
+  "moduleName": "Calendar arithmetic",
+  "category": "Edge",
+  "priority": "P2",
+  "file": "calendar.spec.ts",
+  "line": 165,
+  "describe": "adding days",
+  "title": "a step that would leave the supported years gives null, and the edge year itself is fine",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call addDays(SIMPLE, last, 1)",
+   "Call addDays(SIMPLE, last, 0)",
+   "Call addDays(SIMPLE, first, -1)",
+   "Call addDays(SIMPLE, first, 1)"
+  ],
+  "testData": [],
+  "expected": [
+   "a step that would leave the supported years gives null, and the edge year itself is fine",
+   "addDays(SIMPLE, last, 1) is empty",
+   "addDays(SIMPLE, last, 0) equals last",
+   "addDays(SIMPLE, first, -1) is empty",
+   "addDays(SIMPLE, first, 1) equals { year: CALENDAR_LIMITS.minYear, month: 1, day: 2 }"
+  ]
+ },
+ {
+  "id": "TC-CALD-011",
+  "module": "CALD",
+  "moduleName": "Calendar arithmetic",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "calendar.spec.ts",
+  "line": 174,
+  "describe": "adding days",
+  "title": "ordering: earlier, equal and later dates compare as such across years",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call compareDates(SIMPLE, a, a)",
+   "Call compareDates(SIMPLE, a, { year: 3, month: 2, day: 6 })",
+   "Call compareDates(SIMPLE, { year: 4, month: 1, day: 1 }, a)",
+   "Call compareDates(SIMPLE, { year: -1, month: 3, day: 31 }, { year: 0, month: 1, day: 1 })"
+  ],
+  "testData": [],
+  "expected": [
+   "ordering: earlier, equal and later dates compare as such across years",
+   "compareDates(SIMPLE, a, a) equals 0",
+   "compareDates(SIMPLE, a, { year: 3, month: 2, day: 6 }) equals -1",
+   "compareDates(SIMPLE, { year: 4, month: 1, day: 1 }, a) equals 1",
+   "compareDates(SIMPLE, { year: -1, month: 3, day: 31 }, { year: 0, mont… equals -1"
+  ]
+ },
+ {
+  "id": "TC-CALD-012",
+  "module": "CALD",
+  "moduleName": "Calendar arithmetic",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "calendar.spec.ts",
+  "line": 184,
+  "describe": "weekdays",
+  "title": "the weekday advances by one each day and wraps after the last, in every calendar",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call weekdayIndex(cfg, d)",
+   "Call addDays(cfg, d, 1)",
+   "Call weekdayIndex(cfg, addDays(cfg, start, w * 7)!)",
+   "Call addDays(cfg, start, w * 7)",
+   "Call weekdayIndex(cfg, start)"
+  ],
+  "testData": [],
+  "expected": [
+   "the weekday advances by one each day and wraps after the last, in every calendar",
+   "next equals (idx + 1) % w",
+   "weekdayIndex(cfg, addDays(cfg, start, w * 7)!) equals weekdayIndex(cfg, start)"
+  ]
+ },
+ {
+  "id": "TC-CALD-013",
+  "module": "CALD",
+  "moduleName": "Calendar arithmetic",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "calendar.spec.ts",
+  "line": 202,
+  "describe": "weekdays",
+  "title": "the first day of year 1 falls on the chosen weekday, and the days before it count back from there",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call weekdayIndex(cfg, { year: 1, month: 1, day: 1 })",
+   "Call weekdayIndex(cfg, { year: 0, month: 3, day: 31 })"
+  ],
+  "testData": [],
+  "expected": [
+   "the first day of year 1 falls on the chosen weekday, and the days before it count back from there",
+   "weekdayIndex(cfg, { year: 1, month: 1, day: 1 }) equals first",
+   "weekdayIndex(cfg, { year: 0, month: 3, day: 31 }) equals (first + SIMPLE.weekdays.length - 1) % SIMPLE.weekdays.length"
+  ]
+ },
+ {
+  "id": "TC-CALD-014",
+  "module": "CALD",
+  "moduleName": "Calendar arithmetic",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "calendar.spec.ts",
+  "line": 210,
+  "describe": "weekdays",
+  "title": "a one-day week is allowed: every date is that weekday",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call validateConfig(cfg)",
+   "Call weekdayIndex(cfg, { year: -3, month: 3, day })"
+  ],
+  "testData": [],
+  "expected": [
+   "a one-day week is allowed: every date is that weekday",
+   "validateConfig(cfg) equals []",
+   "weekdayIndex(cfg, { year: -3, month: 3, day }) equals 0"
+  ]
+ },
+ {
+  "id": "TC-CALD-015",
+  "module": "CALD",
+  "moduleName": "Calendar arithmetic",
+  "category": "Boundary",
+  "priority": "P1",
+  "file": "calendar.spec.ts",
+  "line": 218,
+  "describe": "the month grid",
+  "title": "every row is a full week, the days run 1 to the last in order exactly once, and day 1 sits under its weekday",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call monthGrid(cfg, date.year, date.month)",
+   "Call weekdayIndex(cfg, { year: date.year, month: date.month, day: 1 })"
+  ],
+  "testData": [],
+  "expected": [
+   "every row is a full week, the days run 1 to the last in order exactly once, and day 1 sits under its weekday",
+   "row length is w",
+   "days equals Array.from({ length: cfg.months[date.month - 1].days }, (_, i) => i + 1)",
+   "flat.indexOf(1) equals weekdayIndex(cfg, { year: date.year, month: date.month, day: 1 })",
+   "grid.leadingBlanks equals flat.indexOf(1)",
+   "grid.weeks[grid.weeks.length - 1].some((x) => x !== null) equals true"
+  ]
+ },
+ {
+  "id": "TC-CALD-016",
+  "module": "CALD",
+  "moduleName": "Calendar arithmetic",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "calendar.spec.ts",
+  "line": 236,
+  "describe": "the month grid",
+  "title": "a known month lays out as expected",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call monthGrid(cfg, 1, 1)"
+  ],
+  "testData": [],
+  "expected": [
+   "a known month lays out as expected",
+   "monthGrid(cfg, 1, 1).weeks equals [[null, 1, 2], [3, 4, 5], [6, 7, null]]"
+  ]
+ },
+ {
+  "id": "TC-CALD-017",
+  "module": "CALD",
+  "moduleName": "Calendar arithmetic",
+  "category": "Boundary",
+  "priority": "P1",
+  "file": "calendar.spec.ts",
+  "line": 241,
+  "describe": "the month grid",
+  "title": "moving by months crosses year edges both ways and refuses to leave the supported years",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call shiftMonth(SIMPLE, 5, 3, 1)",
+   "Call shiftMonth(SIMPLE, 5, 1, -1)",
+   "Call shiftMonth(SIMPLE, 5, 2, 7)",
+   "Call shiftMonth(SIMPLE, 1, 1, -1)",
+   "Call shiftMonth(SIMPLE, CALENDAR_LIMITS.maxYear, 3, 1)",
+   "Call shiftMonth(SIMPLE, CALENDAR_LIMITS.minYear, 1, -1)"
+  ],
+  "testData": [],
+  "expected": [
+   "moving by months crosses year edges both ways and refuses to leave the supported years",
+   "shiftMonth(SIMPLE, 5, 3, 1) equals { year: 6, month: 1 }",
+   "shiftMonth(SIMPLE, 5, 1, -1) equals { year: 4, month: 3 }",
+   "shiftMonth(SIMPLE, 5, 2, 7) equals { year: 7, month: 3 }",
+   "shiftMonth(SIMPLE, 1, 1, -1) equals { year: 0, month: 3 }",
+   "shiftMonth(SIMPLE, CALENDAR_LIMITS.maxYear, 3, 1) is empty",
+   "shiftMonth(SIMPLE, CALENDAR_LIMITS.minYear, 1, -1) is empty"
+  ]
+ },
+ {
+  "id": "TC-CALD-018",
+  "module": "CALD",
+  "moduleName": "Calendar arithmetic",
+  "category": "Happy",
+  "priority": "P2",
+  "file": "calendar.spec.ts",
+  "line": 252,
+  "describe": "writing dates",
+  "title": "a date reads month, day, year and the label; a weekday goes in front on request",
+  "preconditions": [
+   "App running with the local test database (see the note at the top)",
+   "Signed out (no session)"
+  ],
+  "steps": [
+   "Call formatDate(SIMPLE, { year: 1042, month: 2, day: 9 })",
+   "Call formatDate(SIMPLE, { year: 1, month: 1, day: 1 }, { weekday: true })",
+   "Call formatDate({ ...SIMPLE, yearLabel: \"\" }, { year: 7, month: 3, day: 31 })"
+  ],
+  "testData": [],
+  "expected": [
+   "a date reads month, day, year and the label; a weekday goes in front on request",
+   "formatDate(SIMPLE, { year: 1042, month: 2, day: 9 }) equals Beta 9, 1042 TT",
+   "formatDate(SIMPLE, { year: 1, month: 1, day: 1 }, { weekday: true }) equals Three, Alpha 1, 1 TT",
+   "formatDate({ ...SIMPLE, yearLabel: \"\" }, { year: 7, month: 3, day: 31… equals Gamma 31, 7"
+  ]
+ },
+ {
+  "id": "TC-CALD-019",
+  "module": "CALD",
+  "moduleName": "Calendar arithmetic",
+  "category": "Edge",
+  "priority": "P2",
+  "file": "calendar.spec.ts",
+  "line": 258,
+  "describe": "writing dates",
+  "title": "years at and before zero are written with a true minus sign",
+  "preconditions": [
+   "None: a unit-level check of pure logic, run without the app"
+  ],
+  "steps": [
+   "Call formatYear(SIMPLE, 0)",
+   "Call formatYear(SIMPLE, -12)"
+  ],
+  "testData": [],
+  "expected": [
+   "years at and before zero are written with a true minus sign",
+   "formatYear(SIMPLE, 0) equals 0 TT",
+   "formatYear(SIMPLE, -12) equals −12 TT"
+  ]
+ },
+ {
   "id": "TC-CHRC-001",
   "module": "CHRC",
   "moduleName": "Character creator wizard (public and member)",

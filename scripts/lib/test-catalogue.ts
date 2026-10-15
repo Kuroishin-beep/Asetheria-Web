@@ -49,6 +49,8 @@ export const MODULES: Record<string, [string, string]> = {
   a11y: ["A11Y", "Accessibility sweep (axe, both themes)"],
   "app-shell": ["SHELL", "App shell, navigation and drawer"],
   auth: ["AUTH", "Sign-in, sign-up, sessions and throttling"],
+  calendar: ["CALD", "Calendar arithmetic"],
+  "calendar-app": ["CALP", "Asetheria calendar (pages, setup, API)"],
   "character-creator": ["CHRC", "Character creator wizard (public and member)"],
   "character-draft": ["CHRD", "Character wizard rules, draft and Wikidot links"],
   "character-engine": ["CHRE", "Character engine and house rules"],

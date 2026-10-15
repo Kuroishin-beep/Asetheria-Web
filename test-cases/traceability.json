@@ -977,5 +977,114 @@
     ]
    }
   ]
+ },
+ {
+  "phase": "15 Calendar",
+  "criterion": "Setup validates: at least one month and weekday, 1 to 400 days a month, unique names, limits at the boundary; no names are invented before the DM sets it up",
+  "match": [
+   {
+    "module": "CALD",
+    "any": [
+     "configuration",
+     "several problems"
+    ]
+   },
+   {
+    "module": "CALP",
+    "any": [
+     "setup API: what is refused",
+     "60 months",
+     "blank or repeated names",
+     "before the calendar is set up",
+     "names the months"
+    ]
+   }
+  ]
+ },
+ {
+  "phase": "15 Calendar",
+  "criterion": "Date arithmetic is exact across month and year edges, negative years and any month lengths (thousands of random steps)",
+  "match": [
+   {
+    "module": "CALD",
+    "any": [
+     "exact inverses",
+     "successive day numbers",
+     "adding n then",
+     "known steps",
+     "supported years",
+     "ordering",
+     "weekday",
+     "month grid",
+     "moving by months",
+     "writing dates",
+     "years at and before"
+    ]
+   }
+  ]
+ },
+ {
+  "phase": "15 Calendar",
+  "criterion": "Players read the calendar and cannot change it (403); signed out is 401",
+  "match": [
+   {
+    "module": "CALP",
+    "any": [
+     "a player reads the calendar",
+     "signed out: every calendar route"
+    ]
+   }
+  ]
+ },
+ {
+  "phase": "15 Calendar",
+  "criterion": "An invalid date is refused; the DM can advance the current date (day, week, any number of days, direct set)",
+  "match": [
+   {
+    "module": "CALP",
+    "any": [
+     "moving the date",
+     "advance API",
+     "setting the date directly",
+     "typed number",
+     "a day on",
+     "advancing before",
+     "changing the setup so that today"
+    ]
+   }
+  ]
+ },
+ {
+  "phase": "15 Calendar",
+  "criterion": "Empty state for the DM and players before setup; the month grid shows the current date",
+  "match": [
+   {
+    "module": "CALP",
+    "any": [
+     "empty state",
+     "month grid shows",
+     "sidebar has a Calendar",
+     "negative and zero years",
+     "nonsense year",
+     "one-day week"
+    ]
+   }
+  ]
+ },
+ {
+  "phase": "15 Calendar",
+  "criterion": "Keyboard navigation of the month grid; axe clean both themes; 375px; migration idempotent with rollback",
+  "match": [
+   {
+    "module": "CALP",
+    "any": [
+     "keyboard moves",
+     "axe",
+     "375px",
+     "table holds one row",
+     "rollback"
+    ]
+   }
+  ]
  }
 ]
