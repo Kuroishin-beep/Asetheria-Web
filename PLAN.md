@@ -309,6 +309,114 @@ Your words, kept as the contract: *a character-creation feature, on the landing 
 
 ---
 
+## 3b. World tools: Phases 12 to 19 (added 2026-10-10, v2.2)
+
+**Source.** The owner chose these from a LegendKeeper / World Anvil gap analysis: inline secret blocks, editable page
+templates, map regions and layers, a timeline, an Asetheria calendar, family trees and relationship webs, statblocks on
+pages, and characters linked to the world. Not chosen, so **not built**: boards (freeform canvas) and a level-up flow.
+Nothing here copies text or art from either product; the features are standard worldbuilding tools.
+
+**Rules that hold for every phase.** Players never receive, in HTML, JSON, search, the palette, the graph, embeddings
+or exports, anything they may not read (canary tests assert it). Production SQL is additive and idempotent, with a
+rollback script verified inside a rolled-back transaction. Full suite green on an idle machine before each commit.
+New tests carry case ids; `test-cases.html` is regenerated at the end.
+
+**Order and why.** 12 first (the other phases reuse its reveal pattern); 13 and 14 are small and independent; 15 before 16
+(the timeline uses the calendar's dates); 17 and 18 are the largest; 19 last (it links to everything).
+
+### Phase 12: Inline secret blocks (ENH-10)
+- A DM writes `:::secret` ... `:::` inside any page body. On save the server moves each block into `entry_secrets` and
+  leaves an inert marker in `body`. **Secrets never live in `body`**, so search vectors, embeddings, summaries, hover
+  previews, the link graph, backlinks and every player read path are safe by construction. The editor shows the DM the
+  inline form; a block keeps its id across edits so reveals persist.
+- Reveal: per block, to chosen players (`secret_reveals`); hide again; a revealed block renders in the page for exactly
+  those players. A grant on the page does not reveal blocks, and a block never reveals a secret page.
+- DM-only search over secret text (own tsvector on `entry_secrets`); links written inside a secret block are not indexed
+  (documented: no backlinks from secrets). Export inlines the blocks for the DM and import re-extracts them; revisions
+  snapshot the inline form so a revert restores them.
+- Acceptance: 1. canary text inside a block appears nowhere in any player response (entry page, `/api/find`, `/api/recent`,
+  search page, semantic search, graph data, local graph, map, planner, characters, export 403); 2. a revealed block shows
+  for the chosen player only, immediately, and disappears when hidden again; 3. the marker alone renders nothing for anyone
+  not entitled; 4. block ids survive an edit, a deleted block takes its reveals with it; 5. DM search finds secret text,
+  player search never does; 6. export then import round-trips blocks and reveals are not imported as grants; 7. malformed
+  or nested or unterminated blocks are refused with a clear message and nothing is saved; size caps (blocks per page,
+  characters per block) hold at the boundary; 8. keyboard-operable reveal control, axe clean both themes, 375px.
+
+### Phase 13: Editable page templates (ENH-11)
+- Today the per-kind starting text is fixed in `src/lib/entry-templates.ts`. A `page_templates` table overrides it per kind;
+  the code defaults stay as the fallback and "Reset to default". DM-only screen at `/admin/templates` with a live preview.
+- Acceptance: 1. editing the NPC template changes what New NPC prefills, nothing else; 2. reset restores the default;
+  3. players cannot reach the screen or the API (401/403); 4. size caps at the boundary, unknown kind refused; 5. a template
+  may contain secret blocks (Phase 12) and each new page gets its own; 6. existing pages are never changed by a template edit.
+
+### Phase 14: Statblocks on pages (ENH-12)
+- Creatures and NPCs gain structured combat fields (AC, HP, speed, six abilities, saves, skills, senses, languages, CR,
+  traits, actions). Pages render a 5e-layout statblock card; modifiers and proficiency bonus are computed (shared with the
+  character engine). Rules text is linked to `dnd5e.wikidot.com`, never copied.
+- Acceptance: 1. the card renders from fields with correct modifiers and CR proficiency; 2. ability scores outside 1 to 30
+  and a bad CR are refused on save (server and form); 3. a page without combat fields shows no card; 4. players see the card
+  only for pages they can read, and hidden traits live in secret blocks; 5. the encounter builder still reads CR; 6. print
+  stylesheet and 375px; axe clean.
+
+### Phase 15: Asetheria calendar (ENH-13)
+- A single calendar configuration (months with day counts, weekday names, year label, current date) stored in the database.
+  **No month or weekday names are invented**: until the DM defines them the page shows an empty state with a setup form.
+  Helpers add and subtract days across month and year edges; the DM can advance the current date; a month grid shows the
+  current date and any dated events (Phase 16) and sessions.
+- Acceptance: 1. setup validates (at least one month, 1 to 400 days per month, at least one weekday, unique names);
+  2. date arithmetic is exact across month, year and leap-length boundaries (unit tests over thousands of random steps);
+  3. players read the calendar and cannot change it (403); 4. an invalid date is refused; 5. empty state for the DM and
+  players before setup; 6. keyboard navigation of the month grid; axe clean; 375px.
+
+### Phase 16: Timeline and chronicle (ENH-14)
+- New entry kind `event` (enum migration) with a date (year, month, day, optional end) and an era. Because events are
+  entries, visibility, grants, search, links and backlinks already apply. A timeline view orders events by date, groups by
+  era, filters by region/tag/kind of linked page, and each event links to its pages.
+- Acceptance: 1. the timeline lists only events the viewer may read, in date order; 2. a secret event is nowhere in a
+  player's HTML or data; 3. events outside the calendar's range are refused; 4. end before start refused; 5. an ungranted
+  player sees an empty section like other kinds; 6. keyboard navigation, axe, 375px; 7. migration idempotent; 8. an event
+  can be placed on the calendar month grid.
+
+### Phase 17: Family trees and relationship webs (ENH-15)
+- A `relations` table: typed, directed edges between entries (parent, spouse, sibling, ally, rival, vassal, member, ...).
+  A tree view for a family (generations laid out in layers) and a web view for empires and organizations (typed, coloured
+  edges). A relation is visible to a viewer only when both ends are readable.
+- Acceptance: 1. the tree lays out a known family deterministically; 2. a parent cycle, a self relation and a duplicate are
+  refused; 3. players never see a relation or a person they cannot read (HTML, JSON, labels); 4. the web filters by type;
+  5. every diagram has a text alternative (a list) and is keyboard operable; 6. DM adds and removes relations from the page;
+  7. boundary: relation caps per page; 8. axe clean, 375px.
+
+### Phase 18: Map regions, layers and city drill-down (ENH-16)
+- Extends the map: `map_regions` (drawn polygons, optionally linked to a page), `map_layers` (named groups with toggles),
+  and `parent_map_id` / `child_map_id` so a city pin can open that city's own map. The DM draws a region by clicking points.
+  A map image is chosen from the files in `public/maps/` (no upload; the owner places images).
+- Acceptance: 1. a region polygon is validated (3 to 200 points, inside the image, not self-intersecting); 2. a player sees
+  only regions whose linked page they can read, and unlinked regions are DM-only (network assertion, nothing in HTML or
+  JSON); 3. layer toggles show and hide pins and regions; 4. clicking inside a region opens its page; 5. a pin with a child
+  map opens it and offers a way back; 6. pan/zoom/keyboard still work; 7. migration idempotent with rollback; 8. axe, 375px.
+
+### Phase 19: Characters linked to the world (ENH-17)
+- A saved character can be shared with the party: a read-only party roster for signed-in players (name, heritage, class,
+  level, citizenship, worship). Each character has a private journal (owner and DM read; the owner writes). Citizenship,
+  worship and a new optional `home` (a place the player may read) link to codex pages the viewer may read.
+- Acceptance: 1. the roster shows only shared characters; unshared ones stay private (404 for others, as before);
+  2. journal entries are the owner's to write and the DM's to read; no one else can read them; 3. links appear only for
+  pages the viewer can read, otherwise plain text; 4. `home` must be readable by its owner when saved (server check);
+  5. journal and roster caps at the boundary; 6. the DM sees all characters with links; 7. axe, 375px, print.
+
+| Phase | Slice | Depends on |
+|---|---|---|
+| **12** | Inline secret blocks (ENH-10) | none |
+| **13** | Editable page templates (ENH-11) | 12 (templates may hold secret blocks) |
+| **14** | Statblocks on pages (ENH-12) | 12 |
+| **15** | Asetheria calendar (ENH-13) | none |
+| **16** | Timeline and chronicle (ENH-14) | 15 |
+| **17** | Family trees and relationship webs (ENH-15) | none |
+| **18** | Map regions, layers, drill-down (ENH-16) | none |
+| **19** | Characters linked to the world (ENH-17) | 10, 11 |
+
+---
+
 ## 4. Risk Register
 
 | # | Risk | Blast radius | Mitigation |
