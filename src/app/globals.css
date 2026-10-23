@@ -2,9 +2,10 @@
 @import "tw-animate-css";
 @import "../styles/design-tokens.css";
 @import "../styles/shadcn.css";
+@import "../styles/chrome.css";
 
 /* Manual theme switching: next-themes stamps `data-theme` on <html>. */
-@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *, .chrome-scope, .chrome-scope *));
 
 /* Map the semantic tokens (src/styles/design-tokens.css) to Tailwind utilities:
    bg-background, text-foreground, bg-primary, text-muted-foreground, ... */
@@ -47,6 +48,14 @@
   --color-link: var(--link);
   --color-secret: var(--secret);
   --color-success: var(--success);
+  --color-signal: var(--signal);
+  --color-signal-foreground: var(--signal-foreground);
+  --color-brass: var(--amber);
+  --color-plate: var(--plate);
+  --color-plate-foreground: var(--plate-foreground);
+  --color-plate-edge: var(--plate-edge);
+  --color-carbon: var(--carbon);
+  --color-carbon-foreground: var(--carbon-foreground);
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);

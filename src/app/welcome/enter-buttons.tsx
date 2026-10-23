@@ -7,6 +7,7 @@ import { Crown, Loader2, Swords } from "lucide-react";
 import { FormMessage } from "@/components/shared/form-message";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader } from "@/components/ui/card";
+import { PlateHeader } from "@/components/shared/plate-header";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
@@ -47,8 +48,9 @@ export function EnterButtons() {
 
   return (
     <div className="grid gap-4 sm:grid-cols-2">
-      <Card className="text-center">
-        <form onSubmit={enterAsPlayer} className="flex h-full flex-col gap-(--card-spacing)">
+      <Card className="gap-0 overflow-hidden pt-0 text-center">
+        <PlateHeader label="Party door" aside="Players" />
+        <form onSubmit={enterAsPlayer} className="flex h-full flex-col gap-(--card-spacing) pt-6">
           <CardHeader className="justify-items-center">
             <Swords aria-hidden="true" className="mb-2 size-7 text-gold" />
             <h2 className="font-display text-lg font-bold tracking-tight">The Party</h2>
@@ -80,8 +82,9 @@ export function EnterButtons() {
         </form>
       </Card>
 
-      <Card className="text-center">
-        <CardHeader className="justify-items-center">
+      <Card className="gap-(--card-spacing) overflow-hidden pt-0 text-center">
+        <PlateHeader label="DM door" aside="Keeper" />
+        <CardHeader className="justify-items-center pt-2">
           <Crown aria-hidden="true" className="mb-2 size-7 text-gold" />
           <h2 className="font-display text-lg font-bold tracking-tight">The Dungeon Master</h2>
           <CardDescription className="text-[13px]">

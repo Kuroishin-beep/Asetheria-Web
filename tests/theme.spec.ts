@@ -6,8 +6,8 @@ import { test, expect } from "@playwright/test";
  * the storage key the previous hand-rolled script used.
  */
 
-const DARK_BG = "rgb(11, 10, 9)";
-const LIGHT_BG = "rgb(247, 241, 228)";
+const DARK_BG = "rgb(19, 21, 29)";
+const LIGHT_BG = "rgb(242, 234, 214)";
 
 test.use({ storageState: "tests/.auth/dm.json" });
 

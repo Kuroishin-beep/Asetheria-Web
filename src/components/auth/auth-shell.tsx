@@ -22,10 +22,10 @@ export function AuthShell({ title, description, size = "sm", children }: AuthShe
     <main className="grid min-h-dvh place-items-center px-4 py-8">
       <SlideUp className={cn("w-full", size === "sm" ? "max-w-sm" : "max-w-xl")}>
         <header className="mb-6 text-center">
-          <span className="mx-auto mb-3 flex size-12 items-center justify-center rounded-full border border-border bg-card text-gold shadow-sm">
+          <span className="bevel bevel-amber mx-auto mb-4 flex size-12 items-center justify-center rounded-md border-2 border-(--amber-edge) bg-brass text-signal-foreground">
             <Compass aria-hidden="true" className="size-6" />
           </span>
-          <h1 className="font-display text-2xl font-bold tracking-tight text-foreground">{title}</h1>
+          <h1 className="wordmark text-[clamp(1.5rem,1.1rem+1.6vw,2.25rem)] leading-tight text-balance">{title}</h1>
           {description && <p className="mt-2 text-sm text-muted-foreground">{description}</p>}
         </header>
 

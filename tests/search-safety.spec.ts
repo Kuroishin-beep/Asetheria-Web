@@ -44,7 +44,10 @@ test.describe("search safety", () => {
       // ...but the player gets no hit at all, not just a redacted snippet.
       await playerPage.goto(`/search?q=${secretWord}`);
       await expect(playerPage.getByRole("link", { name })).toHaveCount(0);
-      await expect(playerPage.getByText(secretWord)).toHaveCount(0);
+      // No result card (name, summary or snippet) carries the word. The page's own
+      // "N matches for “…”" line echoes the player's query back, and semantic search can
+      // match an unrelated entry to a random word, so the whole page is the wrong place to look.
+      await expect(playerPage.locator('a[href^="/codex/entry/"]').filter({ hasText: secretWord })).toHaveCount(0);
     } finally {
       await deleteEphemeralEntry(dmPage, slug ?? name).catch(() => {});
       await playerContext.close();

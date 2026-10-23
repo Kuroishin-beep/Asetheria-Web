@@ -3,6 +3,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { AuthShell } from "@/components/auth/auth-shell";
 import { Card, CardContent } from "@/components/ui/card";
+import { PlateHeader } from "@/components/shared/plate-header";
 import { LoginForm } from "./login-form";
 
 export const metadata: Metadata = { title: "Sign in" };
@@ -24,8 +25,9 @@ export default function LoginPage() {
         </>
       }
     >
-      <Card>
-        <CardContent>
+      <Card className="gap-0 overflow-hidden pt-0">
+        <PlateHeader label="The DM's door" aside="Keeper" />
+        <CardContent className="pt-6">
           <Suspense fallback={null}>
             <LoginForm />
           </Suspense>

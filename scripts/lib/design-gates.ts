@@ -114,7 +114,7 @@ export const RULES: Rule[] = [
   },
   {
     name: "palette primitives are only referenced from the token file",
-    pattern: /var\(--color-(?:ink|vellum|gold-\d|patina|tyrian|blood)/,
+    pattern: /var\(--color-(?:carbon|parchment|periwinkle|signal|amber|seal)-\d/,
     extensions: [".tsx", ".ts", ".css"],
     exempt: [TOKENS],
   },

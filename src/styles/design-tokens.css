@@ -2,50 +2,51 @@
    Asetheria design tokens: the single source of truth for colour, radius,
    elevation and motion. Imported by src/app/globals.css.
 
-   Identity (kept): obsidian-and-ash dark, warm-vellum light, imperial gold.
-   Refresh: deeper layering (background, card, popover), calmer borders,
-   higher-contrast muted text, a 12px radius, softer elevation and one gold
-   focus ring used everywhere. Contrast of every text pair is asserted by
-   tests/design-tokens.spec.ts, and the measured ratios are recorded in
-   docs/design-tokens.md.
+   Identity: "a Notion page in a Nintendo shell, set in Asetheria" (approved
+   style board, 2026-10-23).
+   - Pages read like Notion: a quiet sidebar, calm surfaces, long prose.
+   - The frame plays like Nintendo.com in 2001: a carbon command bar, bevelled
+     periwinkle plates, buttons that press down, outlined box-art lettering.
+   - The world shows through parchment (day) and a carbon keep (night), with
+     amber for tools and marks and seal red only for DM secrets.
+   Rules: signal orange only moves you forward (the default button); amber
+   marks tools and the current place; depth is a hard bevel, never a blur.
 
-   Theme switching: next-themes stamps data-theme="light" | "dark" on <html>.
+   Contrast of every text pair is asserted by tests/design-tokens.spec.ts
+   (pairs in scripts/lib/contrast.ts). next-themes stamps
+   data-theme="light" | "dark" on <html>; `.chrome-scope` gives the command bar
+   the night palette in both themes.
    --------------------------------------------------------------------------- */
 
 @theme {
-  --font-display: var(--font-cinzel), Georgia, serif;
-  --font-prose: var(--font-garamond), Georgia, serif;
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-cinzel), "Trajan Pro", Georgia, serif;
+  --font-prose: var(--font-garamond), Garamond, Georgia, serif;
+  --font-sans: var(--font-figtree), "Segoe UI", ui-sans-serif, system-ui, sans-serif;
+  --font-pixel: var(--font-silkscreen), "Courier New", ui-monospace, monospace;
 
   /* Palette primitives. Components use the semantic tokens below, never these. */
-  --color-ink-950: #0a0908;
-  --color-ink-900: #12100e;
-  --color-ink-850: #1a1715;
-  --color-ink-800: #221e1a;
-  --color-ink-700: #322b25;
-  --color-ink-600: #4a4038;
+  --color-carbon-950: #0b0d13;
+  --color-carbon-900: #13151d;
+  --color-carbon-850: #1b1e29;
+  --color-carbon-800: #21242e;
+  --color-carbon-700: #2d3245;
 
-  --color-vellum-50: #faf6ee;
-  --color-vellum-100: #f3ecdd;
-  --color-vellum-200: #e8dcc4;
-  --color-vellum-300: #d8c7a5;
+  --color-parchment-50: #fffdf7;
+  --color-parchment-100: #fcf8ee;
+  --color-parchment-200: #f2ead6;
+  --color-parchment-300: #e8e0ca;
 
-  --color-gold-200: #f0dda8;
-  --color-gold-300: #e2c47c;
-  --color-gold-400: #d4a94e;
-  --color-gold-500: #b98c34;
-  --color-gold-600: #8f6a24;
+  --color-periwinkle-200: #c9d4ef;
+  --color-periwinkle-300: #aebcf0;
+  --color-periwinkle-400: #8ba1d4;
+  --color-periwinkle-600: #3d4f97;
+  --color-periwinkle-800: #3a4780;
 
-  --color-patina-300: #8fc4b4;
-  --color-patina-400: #5fa38f;
-  --color-patina-500: #3f7d6b;
-
-  --color-tyrian-300: #c99bd4;
-  --color-tyrian-400: #a06bb0;
-  --color-tyrian-500: #7a4a8a;
-
-  --color-blood-400: #c05a4a;
-  --color-blood-500: #9c3f31;
+  --color-signal-500: #f68d1f;
+  --color-signal-700: #b85a06;
+  --color-amber-400: #ecab37;
+  --color-amber-700: #7f560a;
+  --color-seal-500: #9e1420;
 
   /* Motion. Durations and easings consumed by src/lib/motion.ts and utilities. */
   --duration-fast: 150ms;
@@ -54,106 +55,139 @@
   --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* ---- Light: warm vellum ------------------------------------------------- */
+/* ---- Day: parchment ------------------------------------------------------ */
 :root,
 [data-theme="light"] {
-  --radius: 0.75rem;
+  --radius: 0.5rem;
 
-  --background: #f7f1e4;
-  --foreground: #241d14;
-  --card: #fffcf5;
-  --card-foreground: #241d14;
-  --popover: #fffdf8;
-  --popover-foreground: #241d14;
-  --primary: #85601d;
-  --primary-foreground: #fffdf8;
-  --secondary: #ece2cb;
-  --secondary-foreground: #3a2f20;
-  --muted: #efe6d3;
-  --muted-foreground: #5f4f3a;
-  --accent: #ebdfc3;
-  --accent-foreground: #241d14;
-  --destructive: #9c3f31;
-  --destructive-foreground: #fffdf8;
-  --border: #ddd0b4;
-  --input: #8c7a58;
-  --ring: #85601d;
+  --background: #f2ead6;
+  --foreground: #23212d;
+  --card: #fcf8ee;
+  --card-foreground: #23212d;
+  --popover: #fffdf7;
+  --popover-foreground: #23212d;
+  --primary: #3d4f97;
+  --primary-foreground: #fffdf7;
+  --secondary: #e3dcc8;
+  --secondary-foreground: #2c2a38;
+  --muted: #ebe3cd;
+  --muted-foreground: #55505e;
+  --accent: #dfe4f3;
+  --accent-foreground: #23212d;
+  --destructive: #a61b1b;
+  --destructive-foreground: #fffdf7;
+  --border: #d5cab0;
+  --input: #6a74a3;
+  --ring: #b85a06;
 
-  --chart-1: #85601d;
-  --chart-2: #34695a;
-  --chart-3: #7a4a8a;
-  --chart-4: #9c3f31;
-  --chart-5: #5f4f3a;
+  --chart-1: #3d4f97;
+  --chart-2: #2b6a3d;
+  --chart-3: #b85a06;
+  --chart-4: #9e1420;
+  --chart-5: #7f560a;
 
-  --sidebar: #f2ead8;
-  --sidebar-foreground: #241d14;
-  --sidebar-primary: #85601d;
-  --sidebar-primary-foreground: #fffdf8;
-  --sidebar-accent: #e8dcc0;
-  --sidebar-accent-foreground: #241d14;
-  --sidebar-border: #ddd0b4;
-  --sidebar-ring: #85601d;
+  --sidebar: #e8e0ca;
+  --sidebar-foreground: #23212d;
+  --sidebar-primary: #3d4f97;
+  --sidebar-primary-foreground: #fffdf7;
+  --sidebar-accent: #c9d4ef;
+  --sidebar-accent-foreground: #1b2040;
+  --sidebar-border: #d5cab0;
+  --sidebar-ring: #b85a06;
 
-  /* Named roles used across the app beyond shadcn's set. */
-  --faint-foreground: #6f5f48;
-  --gold: #85601d;
-  --gold-soft: #b98c34;
-  --link: #7a5a1d;
-  --secret: #7a4a8a;
-  --success: #34695a;
+  /* Named roles beyond shadcn's set. */
+  --faint-foreground: #5d5766;
+  --gold: #7f560a;
+  --gold-soft: #a87412;
+  --link: #34458c;
+  --secret: #9e1420;
+  --success: #2b6a3d;
 
-  --shadow-1: 0 1px 2px rgb(36 29 20 / 0.06), 0 2px 8px -2px rgb(36 29 20 / 0.08);
-  --shadow-2: 0 2px 4px rgb(36 29 20 / 0.06), 0 12px 28px -12px rgb(36 29 20 / 0.22);
-  --shadow-3: 0 4px 8px rgb(36 29 20 / 0.08), 0 24px 48px -16px rgb(36 29 20 / 0.32);
-  --glow: color-mix(in srgb, var(--gold) 7%, transparent);
+  /* The Nintendo chrome. */
+  --signal: #f68d1f;
+  --signal-foreground: #21242e;
+  --signal-edge: #9c4f06;
+  --amber: #ecab37;
+  --amber-edge: #8f6312;
+  --plate: #8ba1d4;
+  --plate-foreground: #151a36;
+  --plate-edge: #3d4f97;
+  --carbon: #21242e;
+  --carbon-foreground: #f3ecd9;
+  --wordmark-fill: #3d4f97;
+  --wordmark-drop: #ecab37;
+  --bevel-hi: rgb(255 255 255 / 0.5);
+  --bevel-lo: rgb(0 0 0 / 0.16);
+
+  /* Depth is a hard offset, never a blur. */
+  --shadow-1: 0 2px 0 color-mix(in srgb, var(--plate-edge) 22%, transparent);
+  --shadow-2: 0 3px 0 color-mix(in srgb, var(--plate-edge) 30%, transparent);
+  --shadow-3: 0 4px 0 color-mix(in srgb, var(--plate-edge) 45%, transparent), 0 18px 40px -20px rgb(21 26 54 / 0.35);
+  --glow: transparent;
 }
 
-/* ---- Dark: obsidian and ash --------------------------------------------- */
-[data-theme="dark"] {
-  --background: #0b0a09;
-  --foreground: #efe6d6;
-  --card: #151210;
-  --card-foreground: #efe6d6;
-  --popover: #1c1814;
-  --popover-foreground: #efe6d6;
-  --primary: #d4a94e;
-  --primary-foreground: #14100a;
-  --secondary: #231f1a;
-  --secondary-foreground: #efe6d6;
-  --muted: #1a1715;
-  --muted-foreground: #b5a48d;
-  --accent: #2b251e;
-  --accent-foreground: #f5ecdc;
-  --destructive: #e07a6a;
-  --destructive-foreground: #14100a;
-  --border: #2a241d;
-  --input: #776a57;
-  --ring: #d4a94e;
+/* ---- Night: the carbon keep (also the command bar's palette) ------------- */
+[data-theme="dark"],
+.chrome-scope {
+  --background: #13151d;
+  --foreground: #efe6cf;
+  --card: #1b1e29;
+  --card-foreground: #efe6cf;
+  --popover: #232736;
+  --popover-foreground: #efe6cf;
+  --primary: #aebcf0;
+  --primary-foreground: #13151d;
+  --secondary: #262a3a;
+  --secondary-foreground: #efe6cf;
+  --muted: #1e212d;
+  --muted-foreground: #b6ae9b;
+  --accent: #29304d;
+  --accent-foreground: #f5eedb;
+  --destructive: #ff8a80;
+  --destructive-foreground: #13151d;
+  --border: #2d3245;
+  --input: #7480b3;
+  --ring: #f68d1f;
 
-  --chart-1: #d4a94e;
-  --chart-2: #5fa38f;
-  --chart-3: #c99bd4;
-  --chart-4: #e07a6a;
-  --chart-5: #b5a48d;
+  --chart-1: #aebcf0;
+  --chart-2: #86d39a;
+  --chart-3: #f68d1f;
+  --chart-4: #ff8a95;
+  --chart-5: #ecab37;
 
-  --sidebar: #100e0c;
-  --sidebar-foreground: #efe6d6;
-  --sidebar-primary: #d4a94e;
-  --sidebar-primary-foreground: #14100a;
-  --sidebar-accent: #231f1a;
-  --sidebar-accent-foreground: #f5ecdc;
-  --sidebar-border: #2a241d;
-  --sidebar-ring: #d4a94e;
+  --sidebar: #0f1118;
+  --sidebar-foreground: #efe6cf;
+  --sidebar-primary: #aebcf0;
+  --sidebar-primary-foreground: #13151d;
+  --sidebar-accent: #2f3a6b;
+  --sidebar-accent-foreground: #f5eedb;
+  --sidebar-border: #2d3245;
+  --sidebar-ring: #f68d1f;
 
-  --faint-foreground: #9c8b76;
-  --gold: #d4a94e;
-  --gold-soft: #e2c47c;
-  --link: #e2c47c;
-  --secret: #c99bd4;
-  --success: #8fc4b4;
+  --faint-foreground: #a39c8e;
+  --gold: #ecab37;
+  --gold-soft: #f3c96f;
+  --link: #b3c1f5;
+  --secret: #ff8a95;
+  --success: #86d39a;
 
-  --shadow-1: 0 1px 2px rgb(0 0 0 / 0.45), 0 2px 8px -2px rgb(0 0 0 / 0.5);
-  --shadow-2: 0 2px 4px rgb(0 0 0 / 0.4), 0 14px 32px -14px rgb(0 0 0 / 0.75);
-  --shadow-3: 0 4px 8px rgb(0 0 0 / 0.45), 0 28px 56px -18px rgb(0 0 0 / 0.85);
-  --glow: color-mix(in srgb, var(--gold) 9%, transparent);
+  --signal: #f68d1f;
+  --signal-foreground: #21242e;
+  --signal-edge: #8a4405;
+  --amber: #ecab37;
+  --amber-edge: #7a540f;
+  --plate: #3a4780;
+  --plate-foreground: #eef1ff;
+  --plate-edge: #161b3d;
+  --carbon: #0b0d13;
+  --carbon-foreground: #f3ecd9;
+  --wordmark-fill: #f3ecd9;
+  --wordmark-drop: #3d4f97;
+  --bevel-hi: rgb(255 255 255 / 0.16);
+  --bevel-lo: rgb(0 0 0 / 0.35);
+
+  --shadow-1: 0 2px 0 rgb(0 0 0 / 0.45);
+  --shadow-2: 0 3px 0 rgb(0 0 0 / 0.5);
+  --shadow-3: 0 4px 0 rgb(0 0 0 / 0.6), 0 22px 44px -20px rgb(0 0 0 / 0.8);
+  --glow: transparent;
 }

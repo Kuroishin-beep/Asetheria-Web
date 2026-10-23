@@ -393,3 +393,14 @@ All phases (0–11) implemented and verified, with the Phase 0 deploy and accoun
 - Found: the first worship matcher split on commas and so could not link gods whose names contain one (186 deities); replaced by a whole-name matcher with a round-trip property test.
 - Not yet applied to Neon: `scripts/sql/character-world.sql` (applied once, additive, together with the other new SQL).
 
+
+## Foundry players import (2026-10-23) — DONE (committed 5dd4f39)
+- `scripts/import-foundry-players.ts --target local|neon`: reads the Foundry world's LevelDB (users with the PLAYER role and an assigned character; `--exclude Test` by default), creates the DM and player accounts, applies the onboarding default grants, and writes each character with method `imported` (Foundry's final scores, skills, size, AC from equipped armour or an item effect such as Unarmored Defense, max HP from Foundry's record, bio, traits, feats, languages, spells, gear). Matched by Foundry actor id; existing passwords kept unless `--reset-passwords`.
+- Engine: `imported` method range-checks scores (1-30), skills, size and HP (1-999) instead of the creator's build rules. Players get 400 on creating one and 409 on overwriting one; the sheet shows "Synced from Foundry" and no Edit; share, home, journal and delete still work.
+- Found: the downloaded actor exports (2026-05-30) had every score at 10 and no skills; the live world (2026-08-21) holds the real data. dnd5e stores `advancement` as an array, and Foundry v14 keeps effect changes under `system.changes`.
+- Evidence: `foundry-characters.spec.ts` 11 passed; full suite in 8 shards 879/880 (statblocks 375px flaked once, passes alone). Applied to Neon (5 players and the DM account).
+
+## Restyle: a Notion page in a Nintendo shell (2026-10-23) — DONE
+- Approved style board → new tokens (parchment day, carbon night, periwinkle plates, signal orange, brass, seal red), `src/styles/chrome.css` utilities (`bevel`, `inset-field`, `chrome-bar`, `wordmark`, `pixel-label`), fonts Figtree + Silkscreen (Inter dropped), bevelled buttons, inset fields, hard-offset shadows, carbon command bar with box-art wordmark, pixel sidebar groups and pressed-chip current page, brass page icons, `PlateHeader` on the sign-in doors and character sheet blocks. See `docs/design-tokens.md`.
+- Found: the wider face made the family tree and relation web overflow, so axe flagged an unfocusable scroll box - both are now focusable named regions. `search-safety` matched the page's own "N matches for “query”" echo when semantic search returned an unrelated entry; it now checks the result cards only (the secret entry never appeared).
+- Evidence: `tsc` clean; design gates 0; all token pairs pass; full suite in 8 shards 877/880, then the 3 failing specs fixed and green (relations + search-safety 34 passed).

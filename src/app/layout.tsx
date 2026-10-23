@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Cinzel, EB_Garamond, Inter } from "next/font/google";
+import { Cinzel, EB_Garamond, Figtree, Silkscreen } from "next/font/google";
 import { MotionProvider } from "@/components/motion/motion-provider";
 import { ThemeProvider } from "@/components/theme-provider";
 import { AppToaster } from "@/components/app-toaster";
@@ -7,7 +7,7 @@ import "./globals.css";
 
 const cinzel = Cinzel({
   subsets: ["latin"],
-  weight: ["400", "600", "700"],
+  weight: ["400", "600", "700", "800", "900"],
   variable: "--font-cinzel",
   display: "swap",
 });
@@ -18,9 +18,18 @@ const garamond = EB_Garamond({
   display: "swap",
 });
 
-const inter = Inter({
+// Interface text. Notion-calm, rounder than a grotesk.
+const figtree = Figtree({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-figtree",
+  display: "swap",
+});
+
+// Small chrome labels only (the Nintendo-era pixel legends).
+const silkscreen = Silkscreen({
+  subsets: ["latin"],
+  weight: ["400"],
+  variable: "--font-silkscreen",
   display: "swap",
 });
 
@@ -35,8 +44,8 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f7f1e4" },
-    { media: "(prefers-color-scheme: dark)", color: "#0b0a09" },
+    { media: "(prefers-color-scheme: light)", color: "#f2ead6" },
+    { media: "(prefers-color-scheme: dark)", color: "#13151d" },
   ],
   width: "device-width",
   initialScale: 1,
@@ -65,7 +74,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${cinzel.variable} ${garamond.variable} ${inter.variable}`}
+      className={`${cinzel.variable} ${garamond.variable} ${figtree.variable} ${silkscreen.variable}`}
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: sanitizeThemeScript }} />

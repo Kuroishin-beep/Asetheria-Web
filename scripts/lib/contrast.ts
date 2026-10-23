@@ -33,7 +33,8 @@ function parseBlock(css: string, selector: RegExp): TokenMap {
 export function readThemes(): Record<ThemeName, TokenMap> {
   const css = fs.readFileSync(TOKENS_PATH, "utf8");
   const light = parseBlock(css, /:root,\s*\[data-theme="light"\]\s*\{/);
-  const darkOnly = parseBlock(css, /\n\[data-theme="dark"\]\s*\{/);
+  // The night block also styles the command bar (`.chrome-scope`), so its selector may name both.
+  const darkOnly = parseBlock(css, /\n\[data-theme="dark"\](?:,\s*\.chrome-scope)?\s*\{/);
   return { light, dark: { ...light, ...darkOnly } };
 }
 

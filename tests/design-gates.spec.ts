@@ -23,7 +23,7 @@ test.describe("design-system gates (static scan of src/, no browser needed)", ()
       "no arbitrary spacing values (use the 4/8/12/16/24/32/48/64 scale)": '<div className="p-[13px]" />',
       "no console.log in production code": "console.log(x)",
       "no `any` types or @ts-ignore": "const a: any = 1;",
-      "palette primitives are only referenced from the token file": "color: var(--color-gold-400)",
+      "palette primitives are only referenced from the token file": "color: var(--color-amber-400)",
     };
     for (const rule of RULES) {
       expect(samples[rule.name], `missing sample for "${rule.name}"`).toBeTruthy();

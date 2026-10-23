@@ -105,15 +105,20 @@ export function PageHeading({
     <div className="mb-6">
       <div className="flex flex-wrap items-start gap-4">
         <div className="min-w-[min(16rem,100%)] flex-1">
-          <h1 className="font-display flex items-center gap-3 text-[clamp(1.5rem,1.1rem+1.2vw,2rem)] font-bold leading-tight tracking-tight">
-            {Icon && <Icon aria-hidden="true" className="size-7 shrink-0 text-gold" />}
+          <h1 className="font-display flex items-center gap-3 text-[clamp(1.625rem,1.1rem+1.6vw,2.375rem)] font-extrabold leading-tight tracking-tight text-balance">
+            {Icon && (
+              // A Notion-style page icon, cut as an amber console key.
+              <span aria-hidden="true" className="bevel bevel-amber grid size-11 shrink-0 place-items-center rounded-md border-2 border-(--amber-edge) bg-brass">
+                <Icon className="size-6 text-signal-foreground" />
+              </span>
+            )}
             {title}
           </h1>
           {blurb && <p className="mt-2 text-[15px] text-muted-foreground">{blurb}</p>}
         </div>
         {action && <div className="no-print">{action}</div>}
       </div>
-      <div className="mt-4 h-px bg-linear-to-r from-transparent via-border to-transparent" />
+      <div className="mt-4 h-0.5 bg-border" />
     </div>
   );
 }

@@ -133,8 +133,9 @@ export function AppShell({
         </a>
 
         {/* ---- Top bar ---- */}
-        <header className="no-print sticky top-0 z-40 border-b border-border bg-background/85 backdrop-blur-md">
-          <div className="mx-auto flex h-12 max-w-[100rem] items-center gap-2 px-4 sm:gap-3">
+        {/* The command bar always wears the night palette (chrome-scope): carbon, halftone, an amber sill. */}
+        <header className="no-print chrome-scope chrome-bar sticky top-0 z-40 text-foreground">
+          <div className="mx-auto flex h-14 max-w-[100rem] items-center gap-2 px-4 sm:gap-3">
             <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
               <SheetTrigger asChild>
                 <Button
@@ -149,7 +150,7 @@ export function AppShell({
               </SheetTrigger>
               <SheetContent side="left" className="w-[17rem] gap-0 p-0 sm:max-w-[17rem]">
                 <SheetHeader className="border-b border-border p-4">
-                  <SheetTitle className="font-display text-base text-gold">Asetheria</SheetTitle>
+                  <SheetTitle className="wordmark text-lg">Asetheria</SheetTitle>
                   <SheetDescription className="sr-only">Browse the codex sections and tools.</SheetDescription>
                 </SheetHeader>
                 <ScrollArea className="min-h-0 flex-1">{sidebar}</ScrollArea>
@@ -158,7 +159,7 @@ export function AppShell({
 
             <Link
               href="/"
-              className="font-display truncate text-base font-bold tracking-tight text-gold hover:text-gold-soft"
+              className="wordmark truncate text-lg sm:text-xl"
             >
               <span className="hidden sm:inline">The Continent of </span>Asetheria
             </Link>
@@ -182,7 +183,7 @@ export function AppShell({
             <div className="flex items-center gap-2 border-l border-border pl-2 sm:pl-3">
               <Badge
                 variant="outline"
-                className="hidden gap-1 md:inline-flex"
+                className="pixel-label hidden gap-1 border-brass text-brass md:inline-flex"
                 title={isDM ? "Full edit access" : "Read-only access"}
               >
                 {isDM ? (
@@ -208,11 +209,11 @@ export function AppShell({
 
         <div className="mx-auto flex w-full max-w-[100rem] flex-1">
           {/* ---- Desktop sidebar ---- */}
-          <aside className="no-print sticky top-12 hidden h-[calc(100dvh-3rem)] w-60 shrink-0 self-start border-r border-border lg:block">
+          <aside className="no-print sticky top-14 hidden h-[calc(100dvh-3.5rem)] w-60 shrink-0 self-start border-r border-sidebar-border bg-sidebar lg:block">
             <ScrollArea className="h-full">{sidebar}</ScrollArea>
           </aside>
 
-          <main id="main" tabIndex={-1} className="min-w-0 flex-1 px-4 pb-16 pt-6 outline-none">
+          <main id="main" tabIndex={-1} className="min-w-0 flex-1 px-4 pb-16 pt-8 outline-none sm:px-8">
             <motion.div key={pathname} variants={pageTransition} initial="hidden" animate="visible">
               {children}
             </motion.div>
@@ -226,7 +227,7 @@ export function AppShell({
 function NavGroup({ label, children }: { label: string; children: ReactNode }) {
   return (
     <div>
-      <p className="mb-2 px-3 text-[11px] font-bold uppercase tracking-[0.09em] text-faint-foreground">{label}</p>
+      <p className="pixel-label mb-2 px-3 text-faint-foreground">{label}</p>
       <ul className="grid gap-1">{children}</ul>
     </div>
   );
@@ -251,12 +252,12 @@ function NavItem({
         href={href}
         aria-current={active ? "page" : undefined}
         className={cn(
-          "group relative flex items-center gap-3 rounded-md px-3 py-2 text-sm transition-colors duration-150",
-          "text-muted-foreground hover:bg-accent hover:text-accent-foreground",
-          active && "bg-accent font-semibold text-foreground",
+          "group relative flex items-center gap-3 rounded-sm px-3 py-1.5 text-sm transition-colors duration-150",
+          "text-muted-foreground hover:bg-sidebar-accent/60 hover:text-sidebar-accent-foreground",
+          // The current page is a pressed-in periwinkle chip, like a selected console tab.
+          active && "bg-sidebar-accent font-semibold text-sidebar-accent-foreground shadow-[inset_0_-2px_0_var(--plate-edge)]",
         )}
       >
-        {active && <span aria-hidden="true" className="absolute inset-y-2 left-0 w-1 rounded-full bg-primary" />}
         <Icon
           aria-hidden="true"
           className={cn("size-4 shrink-0", active ? "text-gold" : "text-faint-foreground group-hover:text-accent-foreground")}

@@ -30,7 +30,8 @@ export function FamilyTreeView({ layout, people, edges, rootId }: { layout: Tree
 
   return (
     <div>
-      <div className="overflow-x-auto rounded-xl border border-border bg-card p-2" data-testid="family-tree">
+      {/* Wider than narrow screens, so the box scrolls; keyboard users reach it with Tab and scroll with the arrow keys. */}
+      <div className="overflow-x-auto rounded-lg border border-border bg-card p-2 outline-none focus-visible:ring-3 focus-visible:ring-ring/50" data-testid="family-tree" tabIndex={0} role="region" aria-label="Family tree, scrolls sideways">
         <svg viewBox={`0 0 ${layout.width} ${layout.height}`} width={layout.width} height={layout.height} className="mx-auto block max-w-none" aria-hidden="true" focusable="false">
           {edges.map((e) => {
             if (!pos.has(e.from) || !pos.has(e.to)) return null;

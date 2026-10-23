@@ -52,7 +52,7 @@ export function Landing({ door }: { door: ReactNode }) {
           <span className="mx-auto mb-4 flex size-12 items-center justify-center rounded-full border border-border bg-card text-gold shadow-sm">
             <Compass aria-hidden="true" className="size-6" />
           </span>
-          <h1 className="font-display text-4xl font-bold tracking-tight sm:text-5xl">The Continent of Asetheria</h1>
+          <h1 className="wordmark text-4xl text-balance sm:text-6xl">The Continent of Asetheria</h1>
           <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
             Three empires, a thousand old gods, and a road that does not end where the map does. Step into the codex, or forge a hero and walk it.
           </p>

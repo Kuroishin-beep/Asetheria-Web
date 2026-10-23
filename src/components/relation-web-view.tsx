@@ -36,7 +36,8 @@ export function RelationWebView({ pages, edges }: { pages: Page[]; edges: (Edge 
 
   return (
     <div>
-      <div className="overflow-x-auto rounded-xl border border-border bg-card p-2" data-testid="relation-web">
+      {/* Wider than narrow screens, so the box scrolls; keyboard users reach it with Tab and scroll with the arrow keys. */}
+      <div className="overflow-x-auto rounded-lg border border-border bg-card p-2 outline-none focus-visible:ring-3 focus-visible:ring-ring/50" data-testid="relation-web" tabIndex={0} role="region" aria-label="Relationship web, scrolls sideways">
         <svg viewBox={`-170 -20 ${WEB.size + 340} ${WEB.size + 40}`} width={WEB.size + 340} height={WEB.size + 40} className="mx-auto block max-w-none" aria-hidden="true" focusable="false">
           {edges.map((e) => {
             const a = at.get(e.from);
