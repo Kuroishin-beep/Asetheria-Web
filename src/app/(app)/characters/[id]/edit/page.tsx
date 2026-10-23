@@ -6,6 +6,7 @@ import { CharacterCreator } from "@/components/character/creator";
 import { getCurrentUser } from "@/lib/auth";
 import { memberCreatorOptions } from "@/lib/character/member-options";
 import { getCharacter } from "@/lib/characters";
+import { isImported } from "@/lib/character/engine";
 
 export const metadata: Metadata = { title: "Edit character" };
 
@@ -16,6 +17,8 @@ export default async function EditCharacterPage({ params }: { params: Promise<{ 
   if (user.role !== "player" || !/^[0-9a-f-]{36}$/i.test(id)) notFound();
   const character = await getCharacter(user, id);
   if (!character) notFound();
+  // Imported characters are read-only here (see IMPORTED_READ_ONLY); the sheet explains why.
+  if (isImported(character.input)) redirect(`/characters/${character.id}`);
 
   const { empires, deities } = await memberCreatorOptions(user);
   return (

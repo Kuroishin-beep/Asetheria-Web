@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import type { Metadata } from "next";
-import { Pencil, ScrollText } from "lucide-react";
+import { Pencil, RefreshCw, ScrollText } from "lucide-react";
+import { isImported } from "@/lib/character/engine";
 import { PageHeading } from "@/components/entry-card";
 import { CharacterJournal } from "@/components/character/journal";
 import { CharacterSheetView } from "@/components/character/sheet-view";
@@ -23,6 +24,8 @@ export default async function CharacterPage({ params }: { params: Promise<{ id: 
   const character = /^[0-9a-f-]{36}$/i.test(id) ? await getCharacter(user, id) : null;
   if (!character) notFound();
   const mine = user.role === "player";
+  // Foundry stays the source of an imported character's numbers, so it has no Edit; its player still deletes it.
+  const imported = isImported(character.input);
   // Links only to pages this viewer may read; the journal only for the player and the DM (this page is already theirs alone).
   const [[world], journal] = await Promise.all([resolveWorlds(user, [{ input: character.input, homeEntryId: character.homeEntryId }]), listJournal(user, character.id)]);
 
@@ -37,18 +40,26 @@ export default async function CharacterPage({ params }: { params: Promise<{ id: 
             <PrintButton />
             {mine && (
               <>
-                <Button asChild variant="outline">
-                  <Link href={`/characters/${character.id}/edit`}>
-                    <Pencil aria-hidden="true" />
-                    Edit
-                  </Link>
-                </Button>
+                {!imported && (
+                  <Button asChild variant="outline">
+                    <Link href={`/characters/${character.id}/edit`}>
+                      <Pencil aria-hidden="true" />
+                      Edit
+                    </Link>
+                  </Button>
+                )}
                 <DeleteCharacterButton id={character.id} name={character.name} />
               </>
             )}
           </div>
         }
       />
+      {imported && character.sheet.importedFrom && (
+        <p className="mb-4 flex items-center gap-2 text-sm text-muted-foreground" data-testid="imported-note">
+          <RefreshCw aria-hidden="true" className="size-4 text-gold" />
+          Synced from Foundry on {new Date(character.sheet.importedFrom.syncedAt).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })}. The DM keeps these numbers in step with the table.
+        </p>
+      )}
       <CharacterSheetView sheet={character.sheet} input={character.input} world={world} />
       <div className="mt-6 grid gap-4">
         {mine && <CharacterWorldPanel id={character.id} shared={character.shared} home={world.home?.text ?? null} />}

@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { ABILITIES, ABILITY_SCORE_METHODS, CHARACTER_LIMITS } from "@/lib/character/house-rules";
 import { SKILL_IDS } from "@/lib/character/srd";
-import type { CharacterInput } from "@/lib/character/engine";
+import { CREATURE_SIZES, IMPORTED_METHOD, IMPORT_SOURCES, type CharacterInput } from "@/lib/character/engine";
 
 /**
  * The shape of a character as it is sent to the server. This only checks that
@@ -54,7 +54,18 @@ export const characterInputSchema = z
     backgroundName: text(80),
     backgroundSkills: z.array(skill).max(6),
     classSkills: z.array(skill).max(8),
-    method: z.enum(ABILITY_SCORE_METHODS),
+    method: z.union([z.enum(ABILITY_SCORE_METHODS), z.literal(IMPORTED_METHOD)]),
+    imported: z
+      .object({
+        source: z.enum(IMPORT_SOURCES),
+        sourceId: text(64),
+        scores,
+        skills: z.array(skill).max(SKILL_IDS.length),
+        size: z.enum(CREATURE_SIZES),
+        syncedAt: text(40),
+      })
+      .strict()
+      .optional(),
     pointBuy: z.object({ extraRoll: z.number(), scores }).strict().optional(),
     roll: z.object({ sets: z.array(rolledSet).max(60), assignment: scores }).strict().optional(),
     array: z.object({ index: z.number(), assignment: scores }).strict().optional(),

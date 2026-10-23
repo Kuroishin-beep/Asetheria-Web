@@ -55,6 +55,7 @@ export const MODULES: Record<string, [string, string]> = {
   "character-draft": ["CHRD", "Character wizard rules, draft and Wikidot links"],
   "character-engine": ["CHRE", "Character engine and house rules"],
   "characters-api": ["CHRA", "Saved characters API"],
+  "foundry-characters": ["FCHR", "Foundry player characters (import mapping, imported sheets)"],
   "city-locations": ["CITY", "City locations content"],
   "codex-pages-smoke": ["SMOKE", "Codex pages smoke"],
   "coverage-gaps": ["COV", "Coverage-floor additions"],
@@ -403,7 +404,7 @@ export function classify(title: string, file: string): Category {
 
 function priorityFor(category: Category, module: string): Priority {
   if (["Security", "Permission & Auth", "Data Integrity"].includes(category)) return "P0";
-  if (["AUTH", "DOOR", "RBAC", "RBACI", "RBACP", "CHRA", "CHRE"].includes(module)) return "P0";
+  if (["AUTH", "DOOR", "RBAC", "RBACI", "RBACP", "CHRA", "CHRE", "FCHR"].includes(module)) return "P0";
   if (["Validation", "Concurrency", "Error & Recovery", "Boundary"].includes(category)) return "P1";
   if (["Accessibility", "Responsive", "Edge"].includes(category)) return "P2";
   return module === "HEALTH" || module === "SHELL" || module === "PAGE" || module === "ENT" ? "P1" : "P2";

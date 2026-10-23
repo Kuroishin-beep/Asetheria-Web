@@ -31,3 +31,5 @@ backups/
 
 # Database backups taken before production changes (contain user data and password hashes)
 backups/
+
+.taste-skill/

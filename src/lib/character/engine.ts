@@ -268,6 +268,33 @@ export function computeHitPoints(input: { hitDie: number; level: number; conMod:
 // The character, validated and turned into a sheet
 // ---------------------------------------------------------------------------
 
+/**
+ * A character the DM brought over from another tool (today: Foundry VTT). Its
+ * scores and skills are the source tool's final numbers, kept as they are: it
+ * was not made in the creator, so the creator's rules for *building* a
+ * character (point buy, background picks) do not apply to it. Only the DM's
+ * import script may write one; `src/lib/characters.ts` refuses it from players.
+ */
+export const IMPORTED_METHOD = "imported" as const;
+export const IMPORT_SOURCES = ["foundry"] as const;
+export const CREATURE_SIZES = ["Tiny", "Small", "Medium", "Large"] as const;
+export const IMPORTED_LIMITS = { maxScore: 30, maxHitPoints: 999 } as const;
+
+export type ImportedStats = {
+  source: (typeof IMPORT_SOURCES)[number];
+  /** The record's id in the source tool, so a re-import updates instead of duplicating. */
+  sourceId: string;
+  /** Final scores, every heritage bonus and improvement already included. */
+  scores: Scores;
+  /** Every skill the character is proficient in, whatever granted it. */
+  skills: SkillId[];
+  size: (typeof CREATURE_SIZES)[number];
+  /** ISO time of the import. */
+  syncedAt: string;
+};
+
+export const isImported = (c: Pick<CharacterInput, "method">) => c.method === IMPORTED_METHOD;
+
 export type CharacterInput = {
   schemaVersion: 1;
   name: string;
@@ -279,7 +306,9 @@ export type CharacterInput = {
   backgroundName: string;
   backgroundSkills: SkillId[];
   classSkills: SkillId[];
-  method: AbilityScoreMethod;
+  method: AbilityScoreMethod | typeof IMPORTED_METHOD;
+  /** Imported: the source tool's numbers (see `ImportedStats`). */
+  imported?: ImportedStats;
   /** Point buy: the bonus d4 and the base scores. */
   pointBuy?: { extraRoll: number; scores: Scores };
   /** Rolling: every set rolled in order, and how the final set was assigned. */
@@ -321,6 +350,8 @@ export type Sheet = {
   hitPoints: number;
   hitDice: string;
   spellcasting: null | { ability: Ability; saveDc: number; attackBonus: number; slots: number[]; pact?: { slots: number; slotLevel: number } };
+  /** Present when the numbers came from another tool rather than the creator. */
+  importedFrom?: { source: ImportedStats["source"]; syncedAt: string };
 };
 
 const signed = (n: number) => n;
@@ -329,6 +360,12 @@ const TEXT_FIELDS = ["concept", "equipment", "traits", "ideals", "bonds", "flaws
 /** Finds the base scores a character's chosen method produced, or the reasons it is not allowed. */
 export function resolveBaseScores(c: CharacterInput): { problems: string[]; scores: Scores } {
   const none = { problems: [] as string[], scores: emptyScores() };
+  if (c.method === IMPORTED_METHOD) {
+    const s = c.imported?.scores;
+    if (!s) return { ...none, problems: ["An imported character carries its scores."] };
+    const bad = ABILITIES.some((a) => !isInt(s[a]) || s[a] < 1 || s[a] > IMPORTED_LIMITS.maxScore);
+    return bad ? { ...none, problems: [`Imported scores are whole numbers from 1 to ${IMPORTED_LIMITS.maxScore}.`] } : { problems: [], scores: { ...s } };
+  }
   if (!ABILITY_SCORE_METHODS.includes(c.method)) return { ...none, problems: ["Choose how to set your ability scores."] };
   if (c.method === "point-buy") {
     if (!c.pointBuy) return { ...none, problems: ["Spend your points."] };
@@ -371,23 +408,16 @@ export function validateAndDerive(c: CharacterInput): { ok: boolean; problems: s
   const base = resolveBaseScores(c);
   add(base.problems);
 
-  // Skills: class picks, then two background picks, none repeated.
-  if (klass) {
-    const options = klass.skillOptions === "any" ? SKILLS.map((s) => s.id as SkillId) : klass.skillOptions;
-    if (!Array.isArray(c.classSkills) || c.classSkills.length !== klass.skillChoices || new Set(c.classSkills).size !== c.classSkills.length) add(`Choose ${klass.skillChoices} different class skills.`);
-    else if (c.classSkills.some((s) => !options.includes(s))) add("A class skill is not on your class list.");
-  }
-  if (!Array.isArray(c.backgroundSkills) || c.backgroundSkills.length !== BACKGROUND_SKILL_COUNT || new Set(c.backgroundSkills).size !== BACKGROUND_SKILL_COUNT || c.backgroundSkills.some((s) => !SKILLS.some((k) => k.id === s))) {
-    add(`Choose ${BACKGROUND_SKILL_COUNT} different background skills.`);
-  } else if (Array.isArray(c.classSkills) && c.backgroundSkills.some((s) => c.classSkills.includes(s))) {
-    add("A background skill repeats a class skill; pick a different one.");
-  }
+  const skillCheck = isImported(c) ? checkImportedSkills(c) : checkChosenSkills(c, klass);
+  add(skillCheck.problems);
 
   if (!["none", ...CITIZENSHIPS.map((x) => x.id)].includes(c.citizenship)) add("Choose a citizenship from the three empires, or none.");
+  if (isImported(c) && !CREATURE_SIZES.includes(c.imported?.size as (typeof CREATURE_SIZES)[number])) add("An imported character has a size.");
 
   if (problems.length > 0 || !klass) return { ok: false, problems, sheet: null };
 
-  const scores = applyBonuses(base.scores, race.bonuses);
+  // Imported scores already hold every bonus; the creator's are base scores plus the heritage's.
+  const scores = isImported(c) ? { ...base.scores } : applyBonuses(base.scores, race.bonuses);
   const modifiers = emptyScores();
   for (const a of ABILITIES) modifiers[a] = abilityModifier(scores[a]);
   const prof = proficiencyBonus(c.level);
@@ -398,7 +428,8 @@ export function validateAndDerive(c: CharacterInput): { ok: boolean; problems: s
     if (!hp.ok) return { ok: false, problems: hp.problems, sheet: null };
     hitPoints = hp.total;
   } else {
-    const ceiling = c.level * (klass.hitDie + Math.max(0, modifiers.con));
+    // An imported total may include feats and items the creator does not model, so only its range is checked.
+    const ceiling = isImported(c) ? IMPORTED_LIMITS.maxHitPoints : c.level * (klass.hitDie + Math.max(0, modifiers.con));
     if (!isInt(c.hp.total) || c.hp.total < 1 || c.hp.total > ceiling) return { ok: false, problems: [`Hit points are 1 to ${ceiling} for this class and level.`], sheet: null };
     hitPoints = c.hp.total;
   }
@@ -406,7 +437,7 @@ export function validateAndDerive(c: CharacterInput): { ok: boolean; problems: s
   const ac = c.armorClass ?? 10 + modifiers.dex;
   if (!isInt(ac) || ac < 1 || ac > 30) return { ok: false, problems: ["Armor Class is 1 to 30."], sheet: null };
 
-  const proficient = new Set<SkillId>([...c.classSkills, ...c.backgroundSkills]);
+  const proficient = skillCheck.proficient;
   const skills: SkillLine[] = SKILLS.map((s) => ({
     id: s.id,
     name: s.name,
@@ -445,10 +476,36 @@ export function validateAndDerive(c: CharacterInput): { ok: boolean; problems: s
     armorClass: ac,
     initiative: modifiers.dex,
     speed: race.speed,
-    size: race.size,
+    size: c.imported?.size ?? race.size,
     hitPoints,
     hitDice: `${c.level}d${klass.hitDie}`,
     spellcasting,
+    ...(c.imported ? { importedFrom: { source: c.imported.source, syncedAt: c.imported.syncedAt } } : {}),
   };
   return { ok: true, problems: [], sheet };
+}
+
+type SkillCheck = { problems: string[]; proficient: Set<SkillId> };
+
+/** Creator rules: the class's number of picks from its list, then two background picks, none repeated. */
+function checkChosenSkills(c: CharacterInput, klass: ReturnType<typeof findClass>): SkillCheck {
+  const problems: string[] = [];
+  if (klass) {
+    const options = klass.skillOptions === "any" ? SKILLS.map((s) => s.id as SkillId) : klass.skillOptions;
+    if (!Array.isArray(c.classSkills) || c.classSkills.length !== klass.skillChoices || new Set(c.classSkills).size !== c.classSkills.length) problems.push(`Choose ${klass.skillChoices} different class skills.`);
+    else if (c.classSkills.some((s) => !options.includes(s))) problems.push("A class skill is not on your class list.");
+  }
+  if (!Array.isArray(c.backgroundSkills) || c.backgroundSkills.length !== BACKGROUND_SKILL_COUNT || new Set(c.backgroundSkills).size !== BACKGROUND_SKILL_COUNT || c.backgroundSkills.some((s) => !SKILLS.some((k) => k.id === s))) {
+    problems.push(`Choose ${BACKGROUND_SKILL_COUNT} different background skills.`);
+  } else if (Array.isArray(c.classSkills) && c.backgroundSkills.some((s) => c.classSkills.includes(s))) {
+    problems.push("A background skill repeats a class skill; pick a different one.");
+  }
+  return { problems, proficient: new Set<SkillId>([...(c.classSkills ?? []), ...(c.backgroundSkills ?? [])]) };
+}
+
+/** Imported: whatever skills the source tool lists, as long as each is a real skill and none repeats. */
+function checkImportedSkills(c: CharacterInput): SkillCheck {
+  const skills = c.imported?.skills;
+  const valid = Array.isArray(skills) && new Set(skills).size === skills.length && skills.every((s) => SKILLS.some((k) => k.id === s));
+  return valid ? { problems: [], proficient: new Set(skills) } : { problems: ["An imported character's skills must be real skills, each listed once."], proficient: new Set() };
 }

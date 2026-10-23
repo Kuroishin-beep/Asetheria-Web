@@ -177,7 +177,8 @@ export function fromInput(c: CharacterInput): Draft {
   d.backgroundName = c.backgroundName;
   d.backgroundSkills = c.backgroundSkills;
   d.classSkills = c.classSkills;
-  d.method = c.method;
+  // Imported characters never reach the creator (their edit page redirects); if one did, the method starts unchosen.
+  d.method = c.method === "imported" ? "" : c.method;
   if (c.pointBuy) {
     d.pbExtraRoll = c.pointBuy.extraRoll;
     d.pbScores = c.pointBuy.scores;

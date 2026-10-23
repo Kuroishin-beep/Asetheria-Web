@@ -1,8 +1,8 @@
 import "server-only";
-import { and, count, desc, eq, isNull } from "drizzle-orm";
+import { and, count, desc, eq, isNull, sql } from "drizzle-orm";
 import { db } from "@/db";
 import { characters, users } from "@/db/schema";
-import { validateAndDerive, type CharacterInput, type Sheet } from "@/lib/character/engine";
+import { IMPORTED_METHOD, isImported, validateAndDerive, type CharacterInput, type Sheet } from "@/lib/character/engine";
 import { CHARACTER_LIMITS } from "@/lib/character/house-rules";
 import { parseCharacterInput } from "@/lib/character/schema";
 import type { SessionUser } from "@/lib/session";
@@ -54,12 +54,18 @@ const shape = (r: Row): SavedCharacter => ({
   homeEntryId: r.homeEntryId,
 });
 
-/** Parses, size-checks, validates and derives; throws a 400 with the reasons on any failure. */
-export function checkCharacter(raw: unknown): { input: CharacterInput; sheet: Sheet } {
+export const IMPORTED_READ_ONLY = "This character is kept in sync from Foundry by the DM, so its sheet cannot be changed here. Its journal is yours to write in.";
+
+/**
+ * Parses, size-checks, validates and derives; throws a 400 with the reasons on any failure.
+ * Imported characters are refused unless the caller is the DM's import script (`allowImported`).
+ */
+export function checkCharacter(raw: unknown, { allowImported = false }: { allowImported?: boolean } = {}): { input: CharacterInput; sheet: Sheet } {
   const size = Buffer.byteLength(JSON.stringify(raw ?? null), "utf8");
   if (size > CHARACTER_LIMITS.maxDataBytes) throw new CharacterError("That character is too large to save.", 413);
   const parsed = parseCharacterInput(raw);
   if (!parsed.ok) throw new CharacterError("That is not a character the creator can read.", 400, parsed.problems);
+  if (isImported(parsed.value) && !allowImported) throw new CharacterError("Only the DM imports characters from Foundry.", 400, ["method: imported characters cannot be made in the creator"]);
   const result = validateAndDerive(parsed.value);
   if (!result.ok || !result.sheet) throw new CharacterError("That character breaks a rule.", 400, result.problems);
   return { input: parsed.value, sheet: result.sheet };
@@ -121,12 +127,18 @@ export async function createCharacter(user: SessionUser, raw: unknown): Promise<
 export async function updateCharacter(user: SessionUser, id: string, raw: unknown): Promise<SavedCharacter | null> {
   playerOnly(user);
   const { input, sheet } = checkCharacter(raw);
+  const mine = and(eq(characters.id, id), eq(characters.userId, user.id), isNull(characters.archivedAt));
+  const [current] = await db.select({ input: characters.input }).from(characters).where(mine).limit(1);
+  if (!current) return null;
+  if (isImported(current.input as CharacterInput)) throw new CharacterError(IMPORTED_READ_ONLY, 409);
+  // The method is in the WHERE too, so an import landing between the read and this write is never overwritten.
   const [row] = await db
     .update(characters)
     .set({ name: sheet.name, input, sheet, schemaVersion: input.schemaVersion, updatedAt: new Date() })
-    .where(and(eq(characters.id, id), eq(characters.userId, user.id), isNull(characters.archivedAt)))
+    .where(and(mine, sql`${characters.input}->>'method' IS DISTINCT FROM ${IMPORTED_METHOD}`))
     .returning();
-  return row ? shape(row) : null;
+  if (!row) throw new CharacterError(IMPORTED_READ_ONLY, 409);
+  return shape(row);
 }
 
 /** Soft delete: the row is kept, so nothing is lost for good. */
