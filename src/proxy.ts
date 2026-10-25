@@ -16,6 +16,8 @@ const PUBLIC_PATHS = [
   "/api/auth/player",
   "/api/auth/register",
   "/api/health",
+  // The landing page's own art (the DM's map of the continent), shown to strangers.
+  "/landing",
 ];
 
 export async function proxy(request: NextRequest) {

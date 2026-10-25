@@ -51,6 +51,11 @@ written for this project (`src/components/landing/`). They evoke a mood only: no
 from any published work is used. `tests/landing.spec.ts` scans the rendered page and the art's source for a list of
 protected titles and names and fails if any appear.
 
+The landing's one photograph-style picture, `public/landing/continent.webp`, is the Dungeon Master's own map of the
+continent (`Aetheria.jpg`, re-encoded to WebP), used with the owner's approval (2026-10-26) as the hero and the
+empire card crops. It is the only image file the landing ships; the third-party city map of Helarchon in the repo
+root (signed by another artist) is deliberately not used anywhere public.
+
 ## Not built, on purpose
 An Open5e importer (OGL/CC documents) was listed as optional in PLAN.md Phase 4. It was not needed to reach the
 promised counts and would add OGL Section 15 obligations. It can be added on request.

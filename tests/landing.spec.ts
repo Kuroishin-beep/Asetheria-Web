@@ -170,6 +170,8 @@ test.describe("motion", () => {
 
   test("[TC-LAND-012] the parallax follows the scroll when motion is allowed", async ({ page }) => {
     await seeLanding(page);
+    // The road scene is a story card below the hero now; bring it on screen first.
+    await page.locator('[data-scene="road"]').scrollIntoViewIfNeeded();
     await page.waitForTimeout(800);
     const a = await pose(page, '[data-scene="road"] g', 4);
     await page.mouse.wheel(0, 260);
@@ -243,12 +245,18 @@ test.describe("performance budget", () => {
     expect(bytes).toBeLessThan(150 * 1024);
   });
 
-  test("[TC-LAND-016] it ships no image, video or font files of its own: the art is inline vector", () => {
+  test("[TC-LAND-016] it ships no video or font files of its own, and exactly one image: the DM's own map", () => {
+    // Revamp (2026-10-26): the owner approved their continent map as the hero
+    // picture, so one owned image is allowed; everything else stays vector.
+    const ALLOWED_IMAGE = "/landing/continent.webp";
     const dir = path.join(ROOT, "src", "components", "landing");
     for (const f of fs.readdirSync(dir)) expect(f, f).toMatch(/\.(tsx|ts)$/);
     const source = fs.readdirSync(dir).map((f) => fs.readFileSync(path.join(dir, f), "utf8")).join("\n");
-    expect(source).not.toMatch(/\.(png|jpe?g|gif|webp|avif|mp4|webm|woff2?)["'`]/i);
-    expect(source).not.toMatch(/<(video|audio|iframe|img)\b/i);
+    expect(source.split(ALLOWED_IMAGE).join("")).not.toMatch(/\.(png|jpe?g|gif|webp|avif|mp4|webm|woff2?)["'`]/i);
+    expect(source).not.toMatch(/<(video|audio|iframe|img)/i);
+    const image = path.join(ROOT, "public", ALLOWED_IMAGE);
+    expect(fs.existsSync(image)).toBe(true);
+    expect(fs.statSync(image).size).toBeLessThan(400 * 1024);
   });
 });
 
@@ -271,6 +279,7 @@ test.describe("licence guard: borrowed from no one", () => {
     const ledger = fs.readFileSync(path.join(ROOT, "docs", "content-licences.md"), "utf8");
     expect(ledger).toMatch(/landing page/i);
     expect(ledger).toMatch(/original/i);
+    expect(ledger).toMatch(/continent\.webp/);
   });
 });
 

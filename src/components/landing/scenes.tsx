@@ -45,14 +45,14 @@ function Twinkle({ stars, on, low, high }: { stars: Star[]; on: boolean; low: nu
 // 1. The road at dawn: layered peaks, a rising sun, drifting mist, a long road
 // ---------------------------------------------------------------------------
 
-export function RoadAtDawn() {
+export function RoadAtDawn({ className }: { className?: string } = {}) {
   const { ref, reduced, motionOn, inView, progress } = useScene();
   const sunStyle = { y: useParallax(progress, 46, reduced) };
   const farStyle = { y: useParallax(progress, 16, reduced) };
   const midStyle = { y: useParallax(progress, 30, reduced) };
   const nearStyle = { y: useParallax(progress, 52, reduced) };
   return (
-    <div ref={ref} className={frame} data-scene="road">
+    <div ref={ref} className={cn(frame, className)} data-scene="road">
       <svg viewBox="0 0 1200 560" className="block h-auto w-full" aria-hidden="true" focusable="false">
         <defs>
           <linearGradient id="sky-road" x1="0" y1="0" x2="0" y2="1">
@@ -108,12 +108,12 @@ export function RoadAtDawn() {
 // 2. The hearth hills: a round door in a green hill, a warm window, smoke, fireflies
 // ---------------------------------------------------------------------------
 
-export function HearthHills() {
+export function HearthHills({ className }: { className?: string } = {}) {
   const { ref, reduced, motionOn, progress } = useScene();
   const backStyle = { y: useParallax(progress, 20, reduced) };
   const hillStyle = { y: useParallax(progress, 38, reduced) };
   return (
-    <div ref={ref} className={frame} data-scene="hearth">
+    <div ref={ref} className={cn(frame, className)} data-scene="hearth">
       <svg viewBox="0 0 1200 560" className="block h-auto w-full" aria-hidden="true" focusable="false">
         <defs>
           <linearGradient id="sky-hearth" x1="0" y1="0" x2="0" y2="1">
@@ -171,12 +171,12 @@ const TRIDENT = [
   [880, 170, 880, 200],
 ];
 
-export function SeaGate() {
+export function SeaGate({ className }: { className?: string } = {}) {
   const { ref, reduced, motionOn, progress } = useScene();
   const columnsStyle = { y: useParallax(progress, 24, reduced) };
   const seaStyle = { y: useParallax(progress, 40, reduced) };
   return (
-    <div ref={ref} className={frame} data-scene="seagate">
+    <div ref={ref} className={cn(frame, className)} data-scene="seagate">
       <svg viewBox="0 0 1200 560" className="block h-auto w-full" aria-hidden="true" focusable="false">
         <defs>
           <linearGradient id="sky-sea" x1="0" y1="0" x2="0" y2="1">
@@ -241,11 +241,11 @@ export function SeaGate() {
 // 5. The map unrolls: parchment, an invented coast, a dotted route to an X
 // ---------------------------------------------------------------------------
 
-export function MapUnrolls() {
+export function MapUnrolls({ className }: { className?: string } = {}) {
   const { ref, reduced, inView } = useScene();
   const open = reduced || inView;
   return (
-    <div ref={ref} className={cn(frame, "bg-muted")} data-scene="map">
+    <div ref={ref} className={cn(frame, "bg-muted", className)} data-scene="map">
       <svg viewBox="0 0 1200 520" className="block h-auto w-full" aria-hidden="true" focusable="false">
         <motion.g initial={reduced ? false : { scaleY: 0.15, opacity: 0 }} animate={open ? { scaleY: 1, opacity: 1 } : { scaleY: 0.15, opacity: 0 }} transition={{ duration: 1.1, ease: "easeOut" }} style={{ originX: 0.5, originY: 0.5 }}>
           <path d="M60 60 L1140 50 L1150 470 L50 462 Z" className="fill-card" />
@@ -274,13 +274,13 @@ export function MapUnrolls() {
 // 4. The empires' banners: a cloth on a pole that stirs in a breeze
 // ---------------------------------------------------------------------------
 
-type Emblem = "imperium-invicta" | "hellenoria" | "acheaoria";
+export type Emblem = "imperium-invicta" | "hellenoria" | "acheaoria";
 const BANNER_FILL: Record<Emblem, string> = { "imperium-invicta": "fill-chart-4", hellenoria: "fill-chart-2", acheaoria: "fill-chart-1" };
 
-export function EmpireBanner({ emblem }: { emblem: Emblem }) {
+export function EmpireBanner({ emblem, className }: { emblem: Emblem; className?: string }) {
   const { ref, motionOn } = useScene();
   return (
-    <div ref={ref} className="mx-auto w-28" data-banner={emblem}>
+    <div ref={ref} className={cn("mx-auto w-28", className)} data-banner={emblem}>
       <svg viewBox="0 0 120 150" className="block h-auto w-full" aria-hidden="true" focusable="false">
         <rect x="14" y="8" width="5" height="138" rx="2" className="fill-chart-5" />
         <circle cx="16.5" cy="8" r="6" className="fill-primary" />
