@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
-import { landingDisplay, landingSerif } from "@/components/landing/fonts";
+import { landingSerif } from "@/components/landing/fonts";
 import { Landing } from "@/components/landing/landing";
 import { getSession } from "@/lib/session-cookie";
 import { EnterButtons } from "./enter-buttons";
@@ -17,7 +17,7 @@ export default async function WelcomePage() {
   if (session) redirect("/");
 
   return (
-    <div className={`${landingDisplay.variable} ${landingSerif.variable}`}>
+    <div className={landingSerif.variable}>
       <Landing
         door={
           <Suspense fallback={null}>

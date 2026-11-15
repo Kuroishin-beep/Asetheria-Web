@@ -7,7 +7,8 @@ import { motion } from "motion/react";
 import { ChevronRight, Hammer } from "lucide-react";
 import { LandingHero } from "@/components/landing/hero";
 import { Ribbons } from "@/components/landing/ribbons";
-import { EmpireBanner, HearthHills, MapUnrolls, RoadAtDawn, SeaGate, type Emblem } from "@/components/landing/scenes";
+import { PaintedScene } from "@/components/landing/painted";
+import { EmpireBanner, type Emblem } from "@/components/landing/scenes";
 import { Button } from "@/components/ui/button";
 import { PUBLIC_EMPIRES } from "@/lib/character/public-options";
 import { cn } from "@/lib/utils";
@@ -20,7 +21,7 @@ const rise = {
 } as const;
 const riseAt = (i: number) => ({ ...rise, transition: { duration: 0.6, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] } }) as const;
 
-const display = "font-[family-name:var(--font-landing-display)] font-black uppercase [font-stretch:125%]";
+const display = "font-display font-semibold uppercase tracking-[0.03em]";
 
 /** A section's heading: wide, heavy, uppercase, with the cinematic tracking. */
 function SectionTitle({ id, children, note }: { id: string; children: ReactNode; note: ReactNode }) {
@@ -87,9 +88,9 @@ function Dispatch({
 
 /** Where on the DM's map each empire sits: the card zooms in around that point. */
 const EMPIRE_CROP: Record<Emblem, { focus: string; direction: string }> = {
-  "imperium-invicta": { focus: "origin-[18%_78%]", direction: "The west" },
-  hellenoria: { focus: "origin-[24%_22%]", direction: "The north" },
-  acheaoria: { focus: "origin-[88%_55%]", direction: "The east" },
+  "imperium-invicta": { focus: "origin-[7%_88%]", direction: "The west" },
+  hellenoria: { focus: "origin-[2%_14%]", direction: "The north" },
+  acheaoria: { focus: "origin-[100%_39%]", direction: "The east" },
 };
 
 /** The three emblems side by side, as the byline's "avatars". */
@@ -139,7 +140,7 @@ export function Landing({ door }: { door: ReactNode }) {
               index={0}
               category="The roads | Travel"
               title="Every road starts somewhere"
-              art={<RoadAtDawn className="rounded-none ring-0" />}
+              art={<PaintedScene scene="road" />}
               byline={<><Emblems /><span>Chapter one</span></>}
             >
               Mist on the high passes, a caravan on the plateau, a lamp in a window. Asetheria has quarrelled with itself for a thousand years, and the roads are what is left of peace.
@@ -149,7 +150,7 @@ export function Landing({ door }: { door: ReactNode }) {
               index={1}
               category="The hills | Hearth and home"
               title="Somewhere warm to come back to"
-              art={<HearthHills className="rounded-none ring-0" />}
+              art={<PaintedScene scene="hearth" />}
               byline={<><Emblems /><span>Chapter two</span></>}
             >
               Not every story is a quest. Some begin with a round green door in a hillside and a kettle on the fire, until somebody knocks.
@@ -159,7 +160,7 @@ export function Landing({ door }: { door: ReactNode }) {
               index={2}
               category="The harbours | Sea and storm"
               title="The sea has opinions"
-              art={<SeaGate className="rounded-none ring-0" />}
+              art={<PaintedScene scene="seagate" />}
               byline={<><Emblems /><span>Chapter three</span></>}
             >
               The harbour cities of Hellenoria face the water, and the water answers back: storms that keep a timetable, fog that knows your name, and lighthouses that guide you or do not.
@@ -179,10 +180,10 @@ export function Landing({ door }: { door: ReactNode }) {
                 <motion.li key={e.id} {...riseAt(i)} whileHover={{ y: -6 }} className="group flex flex-col overflow-hidden rounded-3xl bg-card ring-1 ring-foreground/10 transition-colors hover:ring-gold/40">
                   <div className="relative aspect-[4/3] overflow-hidden">
                     <Image
-                      src="/landing/continent.webp"
+                      src="/landing/parchment-atlas.webp"
                       alt=""
                       fill
-                      sizes="(min-width: 768px) 33vw, 100vw"
+                      sizes="(min-width: 768px) 120vw, 300vw"
                       className={cn("scale-[2.6] object-cover transition-transform duration-700 group-hover:scale-[2.8]", crop.focus)}
                     />
                     <div className="absolute inset-x-0 bottom-0 h-1/2 bg-linear-to-t from-card to-transparent" />
@@ -204,7 +205,7 @@ export function Landing({ door }: { door: ReactNode }) {
 
         <section aria-labelledby="chapter-map" className="grid items-center gap-10 overflow-hidden rounded-3xl bg-card p-6 ring-1 ring-foreground/10 sm:p-10 lg:grid-cols-2">
           <motion.div {...riseAt(0)}>
-            <MapUnrolls className="ring-0" />
+            <PaintedScene scene="map" aspect="aspect-[4/3]" sizes="(min-width: 1024px) 50vw, 100vw" className="rounded-lg" />
           </motion.div>
           <motion.div {...riseAt(1)}>
             <h2 id="chapter-map" className={cn(display, "text-3xl leading-[0.95] tracking-[-0.02em] text-balance sm:text-5xl")}>

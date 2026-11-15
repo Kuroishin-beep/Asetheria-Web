@@ -2,12 +2,12 @@
 
 import { useState, type FormEvent } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import Image from "next/image";
 import Link from "next/link";
 import { Crown, Loader2, Swords } from "lucide-react";
 import { FormMessage } from "@/components/shared/form-message";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader } from "@/components/ui/card";
-import { PlateHeader } from "@/components/shared/plate-header";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
@@ -49,12 +49,12 @@ export function EnterButtons() {
   return (
     <div className="grid gap-4 sm:grid-cols-2">
       <Card className="gap-0 overflow-hidden pt-0 text-center">
-        <PlateHeader label="Party door" aside="Players" />
+        <DoorArt src="/landing/road.webp" label="Party door" aside="Players" focus="object-[50%_65%]" />
         <form onSubmit={enterAsPlayer} className="flex h-full flex-col gap-(--card-spacing) pt-6">
           <CardHeader className="justify-items-center">
             <Swords aria-hidden="true" className="mb-2 size-7 text-gold" />
             <h2 className="font-display text-lg font-bold tracking-tight">The Party</h2>
-            <CardDescription className="text-[13px]">
+            <CardDescription className="text-sm">
               Read everything the party has uncovered with the password your DM shared. The DM&rsquo;s
               secrets stay sealed.
             </CardDescription>
@@ -74,7 +74,7 @@ export function EnterButtons() {
               aria-invalid={error ? true : undefined}
               aria-describedby={error ? "door-error" : undefined}
             />
-            <Button type="submit" disabled={busy || password.length === 0}>
+            <Button type="submit" disabled={busy || password.length === 0} className="bg-veil-accent text-veil shadow-none hover:bg-veil-ink hover:text-veil">
               {busy && <Loader2 aria-hidden="true" className="animate-spin" />}
               {busy ? "Opening the codex…" : "Enter as a player"}
             </Button>
@@ -83,11 +83,11 @@ export function EnterButtons() {
       </Card>
 
       <Card className="gap-(--card-spacing) overflow-hidden pt-0 text-center">
-        <PlateHeader label="DM door" aside="Keeper" />
+        <DoorArt src="/landing/sierra.webp" label="DM door" aside="Keeper" focus="object-[70%_40%]" />
         <CardHeader className="justify-items-center pt-2">
           <Crown aria-hidden="true" className="mb-2 size-7 text-gold" />
           <h2 className="font-display text-lg font-bold tracking-tight">The Dungeon Master</h2>
-          <CardDescription className="text-[13px]">
+          <CardDescription className="text-sm">
             The full codex: secrets, DM notes, and the pen itself. This door takes a password.
           </CardDescription>
         </CardHeader>
@@ -105,6 +105,23 @@ export function EnterButtons() {
           {error}
         </FormMessage>
       )}
+    </div>
+  );
+}
+
+/**
+ * A painted strip over each door, in the landing's palette: a crop of one of
+ * the public-domain paintings with the door's name set over it.
+ */
+function DoorArt({ src, label, aside, focus }: { src: string; label: string; aside: string; focus: string }) {
+  return (
+    <div className="relative h-24 shrink-0 overflow-hidden bg-veil text-veil-ink">
+      <Image src={src} alt="" fill sizes="(min-width: 640px) 25vw, 100vw" className={`object-cover opacity-80 ${focus}`} />
+      <div className="absolute inset-0 bg-linear-to-t from-veil/90 via-veil/30 to-transparent" aria-hidden="true" />
+      <div className="absolute inset-x-0 bottom-0 flex items-center justify-between gap-3 px-4 py-2 text-xs font-semibold tracking-[0.18em] uppercase">
+        <span>{label}</span>
+        <span className="text-veil-ink/75">{aside}</span>
+      </div>
     </div>
   );
 }

@@ -58,6 +58,11 @@
 /* ---- Day: parchment ------------------------------------------------------ */
 :root,
 [data-theme="light"] {
+  /* Hero painting veil: the landing art is a dark scene in both themes, so its scrim and ink do not flip. */
+  --veil: #17140e;
+  --veil-ink: #f3ead6;
+  --veil-accent: #e2bd72;
+
   --radius: 0.5rem;
 
   --background: #f2ead6;
@@ -126,26 +131,26 @@
   --glow: transparent;
 }
 
-/* ---- Night: the carbon keep (also the command bar's palette) ------------- */
+/* ---- Night: the carbon keep, warmed to umber to sit with the hero painting ---- */
 [data-theme="dark"],
 .chrome-scope {
-  --background: #13151d;
+  --background: #15130f;
   --foreground: #efe6cf;
-  --card: #1b1e29;
+  --card: #1e1b15;
   --card-foreground: #efe6cf;
-  --popover: #232736;
+  --popover: #262219;
   --popover-foreground: #efe6cf;
   --primary: #aebcf0;
-  --primary-foreground: #13151d;
-  --secondary: #262a3a;
+  --primary-foreground: #15130f;
+  --secondary: #2a261d;
   --secondary-foreground: #efe6cf;
-  --muted: #1e212d;
+  --muted: #201d17;
   --muted-foreground: #b6ae9b;
-  --accent: #29304d;
+  --accent: #3a3322;
   --accent-foreground: #f5eedb;
   --destructive: #ff8a80;
-  --destructive-foreground: #13151d;
-  --border: #2d3245;
+  --destructive-foreground: #15130f;
+  --border: #3a3428;
   --input: #7480b3;
   --ring: #f68d1f;
 
@@ -155,13 +160,13 @@
   --chart-4: #ff8a95;
   --chart-5: #ecab37;
 
-  --sidebar: #0f1118;
+  --sidebar: #100f0b;
   --sidebar-foreground: #efe6cf;
   --sidebar-primary: #aebcf0;
-  --sidebar-primary-foreground: #13151d;
-  --sidebar-accent: #2f3a6b;
+  --sidebar-primary-foreground: #15130f;
+  --sidebar-accent: #4a4026;
   --sidebar-accent-foreground: #f5eedb;
-  --sidebar-border: #2d3245;
+  --sidebar-border: #3a3428;
   --sidebar-ring: #f68d1f;
 
   --faint-foreground: #a39c8e;
@@ -179,7 +184,7 @@
   --plate: #3a4780;
   --plate-foreground: #eef1ff;
   --plate-edge: #161b3d;
-  --carbon: #0b0d13;
+  --carbon: #0d0c09;
   --carbon-foreground: #f3ecd9;
   --wordmark-fill: #f3ecd9;
   --wordmark-drop: #3d4f97;

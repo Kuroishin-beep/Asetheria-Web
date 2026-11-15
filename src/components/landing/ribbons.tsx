@@ -23,7 +23,7 @@ function Band({ words, reverse, className, run }: { words: string[]; reverse?: b
           <span key={copy} className="flex shrink-0 items-center" aria-hidden={copy === 1 ? true : undefined}>
             {row.map((w, i) => (
               <span key={`${w}-${i}`} className="flex items-center gap-6 px-6">
-                <span className="font-[family-name:var(--font-landing-display)] text-2xl font-black uppercase tracking-tight [font-stretch:120%] sm:text-3xl">
+                <span className="font-display text-2xl font-semibold uppercase tracking-[0.04em] sm:text-3xl">
                   {w}
                 </span>
                 <Dices aria-hidden="true" className="size-6 shrink-0" />

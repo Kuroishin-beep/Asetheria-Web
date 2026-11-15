@@ -44,16 +44,31 @@ the DM notes say so.
 4. A whole batch can be taken out again without deleting anything:
    `npm run codex:archive-batch -- "original: natural-world/ores-1" --apply` (and `--restore --apply` to bring it back).
 
-## Landing page art (original)
-The public landing page (`/welcome`) and its five motion scenes (misty road at dawn, round-door hillside, sea-gate
-with columns and lighthouse, the three empires' banners, the unrolling map) are original vector drawings and text
-written for this project (`src/components/landing/`). They evoke a mood only: no name, place, character, image or line
-from any published work is used. `tests/landing.spec.ts` scans the rendered page and the art's source for a list of
-protected titles and names and fails if any appear.
+## Landing page art (original text, public-domain paintings)
+The public landing page (`/welcome`) is original text and layout written for this project
+(`src/components/landing/`). Its remaining vector art (the ribbons, the three empires' banners) is original. The
+text evokes a mood only: no name, place, character, image or line from any published work is used.
+`tests/landing.spec.ts` scans the rendered page and the art's source for a list of protected titles and names and
+fails if any appear.
 
-The landing's one photograph-style picture, `public/landing/continent.webp`, is the Dungeon Master's own map of the
-continent (`Aetheria.jpg`, re-encoded to WebP), used with the owner's approval (2026-10-26) as the hero and the
-empire card crops. It is the only image file the landing ships; the third-party city map of Helarchon in the repo
+Since the redesign of 2026-11-16 (chosen by the owner) the hero and the chapter cards use landscape paintings that
+are in the **public domain** (their painters died well over a century ago; each file is tagged public domain on
+Wikimedia Commons). They were downloaded from Commons, resized and re-encoded to WebP. Each is credited on the page
+where it appears.
+
+| File | Painting | Source |
+|---|---|---|
+| `public/landing/sierra.webp` | Albert Bierstadt, *Among the Sierra Nevada, California*, 1868 | Smithsonian American Art Museum, via Wikimedia Commons (Google Art Project scan), public domain |
+| `public/landing/road.webp` | Thomas Moran, *Cliffs of the Upper Colorado River, Wyoming Territory*, 1882 | Smithsonian American Art Museum, via Wikimedia Commons, public domain |
+| `public/landing/hearth.webp` | Thomas Cole, *Home in the Woods*, 1847 | Reynolda House Museum of American Art, via Wikimedia Commons, public domain |
+| `public/landing/harbour.webp` | Claude Lorrain, *Seaport with the Embarkation of the Queen of Sheba*, 1648 | National Gallery, London, via Wikimedia Commons (Web Gallery of Art scan), public domain |
+
+The landing's map, `public/landing/parchment-atlas.webp`, is the Dungeon Master's own parchment map of the continent
+(`WIP Map.png`), finished on 2026-11-16 at the owner's request: every name, settlement and landmark from the owner's
+colour map (`Aetheria.jpg`) was carried onto the parchment's geography, and forests, plains, hills, desert, sea
+ripples, icons, frame, compass rose and legend were added in ink. All additions are original drawings made for this
+project (no third-party map assets; the style references the owner shared were used for manner only). It is used for
+the empire card crops and the "Your road is not drawn yet" chapter. The third-party city map of Helarchon in the repo
 root (signed by another artist) is deliberately not used anywhere public.
 
 ## Not built, on purpose

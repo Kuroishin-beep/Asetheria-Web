@@ -45,6 +45,9 @@
   --color-faint-foreground: var(--faint-foreground);
   --color-gold: var(--gold);
   --color-gold-soft: var(--gold-soft);
+  --color-veil: var(--veil);
+  --color-veil-ink: var(--veil-ink);
+  --color-veil-accent: var(--veil-accent);
   --color-link: var(--link);
   --color-secret: var(--secret);
   --color-success: var(--success);

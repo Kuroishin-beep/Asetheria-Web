@@ -123,22 +123,22 @@ async function pose(page: Page, selector: string, count = 6) {
 }
 
 test.describe("motion", () => {
-  test("[TC-LAND-009] by default the scenes move once on screen: the fireflies drift", async ({ page }) => {
+  test("[TC-LAND-009] by default the scenes move once on screen: the painting drifts", async ({ page }) => {
     await seeLanding(page);
     await page.locator('[data-scene="hearth"]').scrollIntoViewIfNeeded();
     await page.waitForTimeout(1200);
-    const a = await pose(page, '[data-scene="hearth"] g, [data-scene="hearth"] circle.fill-primary', 30);
+    const a = await pose(page, '[data-scene="hearth"] [data-drift]', 1);
     await page.waitForTimeout(1800);
-    const b = await pose(page, '[data-scene="hearth"] g, [data-scene="hearth"] circle.fill-primary', 30);
+    const b = await pose(page, '[data-scene="hearth"] [data-drift]', 1);
     expect(a).not.toBe(b);
   });
 
   test("[TC-LAND-010] a scene that is off screen is not animating (nothing runs where nobody is looking)", async ({ page }) => {
     await seeLanding(page);
     await page.waitForTimeout(1200);
-    const before = await pose(page, '[data-scene="seagate"] g', 30);
+    const before = await pose(page, '[data-scene="seagate"] [data-drift]', 1);
     await page.waitForTimeout(2000);
-    const after = await pose(page, '[data-scene="seagate"] g', 30);
+    const after = await pose(page, '[data-scene="seagate"] [data-drift]', 1);
     expect(after).toBe(before);
   });
 
@@ -147,16 +147,16 @@ test.describe("motion", () => {
     await seeLanding(page);
     await page.locator('[data-scene="hearth"]').scrollIntoViewIfNeeded();
     await page.waitForTimeout(1200);
-    const a = await pose(page, '[data-scene="hearth"] g, [data-scene="hearth"] circle.fill-primary', 40);
-    const layersA = await pose(page, '[data-scene="road"] g', 4);
+    const a = await pose(page, '[data-scene="hearth"] [data-drift]', 1);
+    const layersA = await pose(page, '[data-scene="road"] [data-parallax]', 1);
     await page.waitForTimeout(2000);
-    expect(await pose(page, '[data-scene="hearth"] g, [data-scene="hearth"] circle.fill-primary', 40)).toBe(a);
+    expect(await pose(page, '[data-scene="hearth"] [data-drift]', 1)).toBe(a);
 
     await page.evaluate(() => window.scrollTo(0, 0));
-    const top = await pose(page, '[data-scene="road"] g', 4);
+    const top = await pose(page, '[data-scene="road"] [data-parallax]', 1);
     await page.mouse.wheel(0, 500);
     await page.waitForTimeout(500);
-    expect(await pose(page, '[data-scene="road"] g', 4)).toBe(top);
+    expect(await pose(page, '[data-scene="road"] [data-parallax]', 1)).toBe(top);
     void layersA;
 
     const running = await page.evaluate(() => document.getAnimations().filter((x) => x.playState === "running" && (x.effect?.getTiming().iterations ?? 1) === Infinity).length);
@@ -173,10 +173,10 @@ test.describe("motion", () => {
     // The road scene is a story card below the hero now; bring it on screen first.
     await page.locator('[data-scene="road"]').scrollIntoViewIfNeeded();
     await page.waitForTimeout(800);
-    const a = await pose(page, '[data-scene="road"] g', 4);
+    const a = await pose(page, '[data-scene="road"] [data-parallax]', 1);
     await page.mouse.wheel(0, 260);
     await page.waitForTimeout(600);
-    expect(await pose(page, '[data-scene="road"] g', 4)).not.toBe(a);
+    expect(await pose(page, '[data-scene="road"] [data-parallax]', 1)).not.toBe(a);
   });
 });
 
@@ -245,18 +245,22 @@ test.describe("performance budget", () => {
     expect(bytes).toBeLessThan(150 * 1024);
   });
 
-  test("[TC-LAND-016] it ships no video or font files of its own, and exactly one image: the DM's own map", () => {
-    // Revamp (2026-10-26): the owner approved their continent map as the hero
-    // picture, so one owned image is allowed; everything else stays vector.
-    const ALLOWED_IMAGE = "/landing/continent.webp";
+  test("[TC-LAND-016] it ships no video or font files of its own, and only its own images: the DM's map and the public-domain paintings", () => {
+    // Revamp (2026-10-26): the owner approved their continent map as a picture.
+    // Redesign (2026-11-16): the owner chose Bierstadt's "Among the Sierra Nevada"
+    // (1868, public domain) as the hero. Everything else stays vector.
+    const ALLOWED_IMAGES = ["/landing/parchment-atlas.webp", "/landing/sierra.webp", "/landing/road.webp", "/landing/hearth.webp", "/landing/harbour.webp"];
     const dir = path.join(ROOT, "src", "components", "landing");
     for (const f of fs.readdirSync(dir)) expect(f, f).toMatch(/\.(tsx|ts)$/);
-    const source = fs.readdirSync(dir).map((f) => fs.readFileSync(path.join(dir, f), "utf8")).join("\n");
-    expect(source.split(ALLOWED_IMAGE).join("")).not.toMatch(/\.(png|jpe?g|gif|webp|avif|mp4|webm|woff2?)["'`]/i);
-    expect(source).not.toMatch(/<(video|audio|iframe|img)/i);
-    const image = path.join(ROOT, "public", ALLOWED_IMAGE);
-    expect(fs.existsSync(image)).toBe(true);
-    expect(fs.statSync(image).size).toBeLessThan(400 * 1024);
+    let source = fs.readdirSync(dir).map((f) => fs.readFileSync(path.join(dir, f), "utf8")).join("\n");
+    for (const allowed of ALLOWED_IMAGES) source = source.split(allowed).join("");
+    expect(source).not.toMatch(/\.(png|jpe?g|gif|webp|avif|mp4|webm|woff2?)["'`]/i);
+    expect(source).not.toMatch(/<(video|audio|iframe|img)/i);
+    for (const allowed of ALLOWED_IMAGES) {
+      const image = path.join(ROOT, "public", allowed);
+      expect(fs.existsSync(image), allowed).toBe(true);
+      expect(fs.statSync(image).size, allowed).toBeLessThan(400 * 1024);
+    }
   });
 });
 
@@ -279,17 +283,21 @@ test.describe("licence guard: borrowed from no one", () => {
     const ledger = fs.readFileSync(path.join(ROOT, "docs", "content-licences.md"), "utf8");
     expect(ledger).toMatch(/landing page/i);
     expect(ledger).toMatch(/original/i);
-    expect(ledger).toMatch(/continent\.webp/);
+    expect(ledger).toMatch(/parchment-atlas\.webp/);
   });
 });
 
 test.describe("accessibility and small screens", () => {
   test("[TC-LAND-020] every scene is decoration: its art is hidden from assistive technology, and the page has the right landmarks", async ({ page }) => {
     await seeLanding(page);
-    const scenes = page.locator("[data-scene] svg");
-    const n = await scenes.count();
-    expect(n).toBeGreaterThanOrEqual(5);
-    for (let i = 0; i < n; i++) expect(await scenes.nth(i).getAttribute("aria-hidden"), `svg ${i}`).toBe("true");
+    // Scenes are paintings now (plus the empires' vector banners): every image is decorative (empty alt) and every
+    // drawing is hidden; the credit under each painting is real text and stays readable.
+    expect(await page.locator("[data-scene]").count()).toBeGreaterThanOrEqual(5);
+    const images = page.locator("[data-scene] img");
+    expect(await images.count()).toBeGreaterThanOrEqual(4);
+    for (let i = 0; i < (await images.count()); i++) expect(await images.nth(i).getAttribute("alt"), `img ${i}`).toBe("");
+    const drawings = page.locator("[data-scene] svg");
+    for (let i = 0; i < (await drawings.count()); i++) expect(await drawings.nth(i).getAttribute("aria-hidden"), `svg ${i}`).toBe("true");
     await expect(page.getByRole("main")).toHaveCount(1);
     await expect(page.getByRole("contentinfo")).toHaveCount(1);
     // Each section is named by its own heading.

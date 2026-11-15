@@ -5,9 +5,9 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { AppToaster } from "@/components/app-toaster";
 import "./globals.css";
 
+// Variable font (wght 400-900): one file covers every weight we use.
 const cinzel = Cinzel({
   subsets: ["latin"],
-  weight: ["400", "600", "700", "800", "900"],
   variable: "--font-cinzel",
   display: "swap",
 });
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#f2ead6" },
-    { media: "(prefers-color-scheme: dark)", color: "#13151d" },
+    { media: "(prefers-color-scheme: dark)", color: "#15130f" },
   ],
   width: "device-width",
   initialScale: 1,
