@@ -180,7 +180,7 @@ export function Landing({ door }: { door: ReactNode }) {
                 <motion.li key={e.id} {...riseAt(i)} whileHover={{ y: -6 }} className="group flex flex-col overflow-hidden rounded-3xl bg-card ring-1 ring-foreground/10 transition-colors hover:ring-gold/40">
                   <div className="relative aspect-[4/3] overflow-hidden">
                     <Image
-                      src="/landing/parchment-atlas.webp"
+                      src="/landing/asetheria-atlas.webp"
                       alt=""
                       fill
                       sizes="(min-width: 768px) 120vw, 300vw"
