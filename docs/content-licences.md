@@ -63,7 +63,7 @@ where it appears.
 | `public/landing/hearth.webp` | Thomas Cole, *Home in the Woods*, 1847 | Reynolda House Museum of American Art, via Wikimedia Commons, public domain |
 | `public/landing/harbour.webp` | Claude Lorrain, *Seaport with the Embarkation of the Queen of Sheba*, 1648 | National Gallery, London, via Wikimedia Commons (Web Gallery of Art scan), public domain |
 
-The landing's map, `public/landing/asetheria-map.webp`, is the Dungeon Master's own parchment map of the continent
+The landing's map, `public/landing/asetheria-map-2.webp`, is the Dungeon Master's own parchment map of the continent
 (`WIP Map.png`), finished on 2026-11-16 at the owner's request: every name, settlement and landmark from the owner's
 colour map (`Aetheria.jpg`) was carried onto the parchment's geography, and forests, plains, hills, desert, sea
 ripples, frame, compass rose and legend were added in ink. New settlements are copies of the parchment's own

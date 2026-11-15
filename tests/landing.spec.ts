@@ -249,7 +249,7 @@ test.describe("performance budget", () => {
     // Revamp (2026-10-26): the owner approved their continent map as a picture.
     // Redesign (2026-11-16): the owner chose Bierstadt's "Among the Sierra Nevada"
     // (1868, public domain) as the hero. Everything else stays vector.
-    const ALLOWED_IMAGES = ["/landing/asetheria-map.webp", "/landing/sierra.webp", "/landing/road.webp", "/landing/hearth.webp", "/landing/harbour.webp"];
+    const ALLOWED_IMAGES = ["/landing/asetheria-map-2.webp", "/landing/sierra.webp", "/landing/road.webp", "/landing/hearth.webp", "/landing/harbour.webp"];
     const dir = path.join(ROOT, "src", "components", "landing");
     for (const f of fs.readdirSync(dir)) expect(f, f).toMatch(/\.(tsx|ts)$/);
     let source = fs.readdirSync(dir).map((f) => fs.readFileSync(path.join(dir, f), "utf8")).join("\n");
@@ -283,7 +283,7 @@ test.describe("licence guard: borrowed from no one", () => {
     const ledger = fs.readFileSync(path.join(ROOT, "docs", "content-licences.md"), "utf8");
     expect(ledger).toMatch(/landing page/i);
     expect(ledger).toMatch(/original/i);
-    expect(ledger).toMatch(/asetheria-map\.webp/);
+    expect(ledger).toMatch(/asetheria-map-2\.webp/);
   });
 });
 
