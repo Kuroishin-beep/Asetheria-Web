@@ -21,16 +21,18 @@ export async function setDisplayName(formData: FormData) {
     redirect("/onboarding");
   }
 
+  // First-time onboarding only: a later name change (not built yet) must not
+  // re-grant defaults a GM may have since revoked. Grants go first: the name is
+  // what marks onboarding done, so if granting fails the player is sent back
+  // here and it is retried, instead of being left with no access at all.
+  if (user.role === "player" && !user.displayName) {
+    await applyDefaultGrants(user.id);
+  }
+
   await db
     .update(users)
     .set({ displayName: parsed.data })
     .where(eq(users.id, user.id));
-
-  // First-time onboarding only: a later name change (not built yet) must not
-  // re-grant defaults a GM may have since revoked.
-  if (user.role === "player" && !user.displayName) {
-    await applyDefaultGrants(user.id);
-  }
 
   redirect("/");
 }

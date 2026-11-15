@@ -18,4 +18,18 @@ export function loadEnv() {
       }
     }
   }
+  assertNotProduction();
+}
+
+/**
+ * The suite creates and deletes users, entries and secrets. It must only ever
+ * run against the disposable local Postgres, never the Neon production
+ * database, so a Neon URL stops the run before anything connects.
+ * Set ALLOW_NEON=1 only if you truly mean it (you almost certainly do not).
+ */
+export function assertNotProduction() {
+  const url = process.env.DATABASE_URL ?? "";
+  if (/neon\.(tech|build)/i.test(url) && process.env.ALLOW_NEON !== "1") {
+    throw new Error("Refusing to run tests: DATABASE_URL points at Neon (production). Point it at the local test Postgres instead.");
+  }
 }

@@ -11,7 +11,7 @@ concurrency:
 
 jobs:
   check:
-    name: Typecheck, build, audit
+    name: Typecheck, gates, build, tests
     runs-on: ubuntu-latest
     timeout-minutes: 15
     env:
@@ -34,7 +34,25 @@ jobs:
         run: npm audit --omit=dev --audit-level=high
       - name: Build
         run: npx next build
-      - name: Dice engine unit tests (no browser, no DB)
-        run: npx playwright test tests/dice.spec.ts --reporter=line
+      - name: Design-system gates and colour contrast (static, no DB)
+        run: |
+          npm run check:design
+          npm run check:contrast
+      - name: Pure-logic specs (no server, no DB)
+        # Every spec that needs neither a running app nor a database. Add new
+        # pure-logic specs here so they gate every pull request.
+        run: >-
+          npx playwright test
+          tests/dice.spec.ts
+          tests/design-gates.spec.ts
+          tests/design-tokens.spec.ts
+          tests/map-geometry.spec.ts
+          tests/statblock.spec.ts
+          tests/roll-table.spec.ts
+          tests/relations-core.spec.ts
+          tests/character-engine.spec.ts
+          tests/character-world-core.spec.ts
+          tests/image-size.spec.ts
+          --reporter=line
         env:
           PLAYWRIGHT_SKIP_WEBSERVER: "1"

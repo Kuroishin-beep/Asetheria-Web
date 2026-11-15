@@ -1,3 +1,4 @@
+import { cache } from "react";
 import "server-only";
 import { and, asc, desc, eq, inArray, isNull, isNotNull, ne, or, sql, count } from "drizzle-orm";
 import { db } from "@/db";
@@ -133,7 +134,7 @@ export async function listLocationsByTier(
 }
 
 /** Live count per location tier, keyed by tier. */
-export async function countLocationsByTier(
+async function countLocationsByTierQuery(
   user: SessionUser,
 ): Promise<Record<string, number>> {
   const conditions = [
@@ -212,7 +213,7 @@ export async function countEntries(
   return row?.total ?? 0;
 }
 
-export async function countByKind(user: SessionUser) {
+async function countByKindQuery(user: SessionUser) {
   const conditions = [liveOnly(), readable(user)].filter(Boolean);
   const rows = await db
     .select({ kind: entries.kind, total: count() })
@@ -232,7 +233,7 @@ export async function countByKind(user: SessionUser) {
  * players. Pass `includeArchived: true` only from a future flow that
  * explicitly needs to preview an archived entry (none does today).
  */
-export async function getEntryBySlug(
+async function getEntryBySlugQuery(
   user: SessionUser,
   slug: string,
   opts: { includeArchived?: boolean } = {},
@@ -740,3 +741,13 @@ export async function getUnlinkedMentions(
     .orderBy(asc(entries.name))
     .limit(limit);
 }
+
+/*
+ * Per-request memos (React cache): the (app) layout and the home dashboard both
+ * count sections, and an entry page and its generateMetadata both read the same
+ * entry. Each now costs one query per request. Outside a React render (scripts,
+ * route handlers) cache() simply calls through.
+ */
+export const countLocationsByTier = cache(countLocationsByTierQuery);
+export const countByKind = cache(countByKindQuery);
+export const getEntryBySlug = cache(getEntryBySlugQuery);

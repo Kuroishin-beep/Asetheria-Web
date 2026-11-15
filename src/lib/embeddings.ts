@@ -27,9 +27,12 @@ let loading: Promise<FeatureExtractionPipeline> | null = null;
 async function getExtractor(): Promise<FeatureExtractionPipeline> {
   if (extractor) return extractor;
   if (!loading) {
-    loading = pipeline("feature-extraction", "Xenova/all-MiniLM-L6-v2") as Promise<
-      FeatureExtractionPipeline
-    >;
+    loading = (pipeline("feature-extraction", "Xenova/all-MiniLM-L6-v2") as Promise<FeatureExtractionPipeline>).catch((error: unknown) => {
+      // Forget the failure so the next search tries again: a network blip at
+      // cold start should not disable semantic search until the next deploy.
+      loading = null;
+      throw error;
+    });
   }
   extractor = await loading;
   return extractor;

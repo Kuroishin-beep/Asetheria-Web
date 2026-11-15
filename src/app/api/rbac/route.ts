@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 import { requireDM, AuthError } from "@/lib/auth";
 import { entryKind } from "@/db/schema";
-import { setGrant, bulkSetGrant, removeGrant } from "@/lib/rbac";
+import { setGrant, bulkSetGrant, removeGrant, removeEntryGrants } from "@/lib/rbac";
 
 export const runtime = "nodejs";
 
@@ -67,9 +67,7 @@ export async function POST(request: Request) {
       await removeGrant(body.playerId, { kind: body.kind });
       break;
     case "clearEntries":
-      for (const entryId of body.entryIds) {
-        await removeGrant(body.playerId, { entryId });
-      }
+      await removeEntryGrants(body.playerId, body.entryIds);
       break;
   }
 

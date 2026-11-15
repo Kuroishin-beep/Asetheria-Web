@@ -1,5 +1,5 @@
 import "server-only";
-import { and, eq, isNull, sql } from "drizzle-orm";
+import { and, eq, inArray, isNull, sql } from "drizzle-orm";
 import { db } from "@/db";
 import { entries, entryGrants, users, type EntryKind } from "@/db/schema";
 import type { SessionUser } from "@/lib/session";
@@ -125,29 +125,34 @@ export async function setGrant(
     });
 }
 
-/** Bulk grant/deny — one transaction, so a "select all → reject" acts atomically. */
+/**
+ * Bulk grant/deny. Each target type is written with one multi-row upsert, and a
+ * single statement is atomic on its own, so a "select all → reject" never lands
+ * half-done. No `db.transaction()` here on purpose: production talks to Neon
+ * over its HTTP driver, which refuses interactive transactions outright.
+ */
 export async function bulkSetGrant(
   granterId: string,
   targetUserId: string,
   targets: GrantTarget[],
   granted: boolean,
 ) {
-  await db.transaction(async (tx) => {
-    for (const target of targets) {
-      const kind = "kind" in target ? target.kind : null;
-      const entryId = "entryId" in target ? target.entryId : null;
-      await tx
-        .insert(entryGrants)
-        .values({ userId: targetUserId, kind, entryId, granted, grantedBy: granterId })
-        .onConflictDoUpdate({
-          target:
-            kind !== null
-              ? [entryGrants.userId, entryGrants.kind]
-              : [entryGrants.userId, entryGrants.entryId],
-          set: { granted, grantedBy: granterId, grantedAt: new Date() },
-        });
-    }
-  });
+  const kinds = [...new Set(targets.flatMap((t) => ("kind" in t ? [t.kind] : [])))];
+  const entryIds = [...new Set(targets.flatMap((t) => ("entryId" in t ? [t.entryId] : [])))];
+  const set = { granted, grantedBy: granterId, grantedAt: new Date() };
+
+  if (kinds.length > 0) {
+    await db
+      .insert(entryGrants)
+      .values(kinds.map((kind) => ({ userId: targetUserId, kind, entryId: null, granted, grantedBy: granterId })))
+      .onConflictDoUpdate({ target: [entryGrants.userId, entryGrants.kind], set });
+  }
+  if (entryIds.length > 0) {
+    await db
+      .insert(entryGrants)
+      .values(entryIds.map((entryId) => ({ userId: targetUserId, kind: null, entryId, granted, grantedBy: granterId })))
+      .onConflictDoUpdate({ target: [entryGrants.userId, entryGrants.entryId], set });
+  }
 }
 
 export async function removeGrant(targetUserId: string, target: GrantTarget) {
@@ -162,6 +167,14 @@ export async function removeGrant(targetUserId: string, target: GrantTarget) {
         entryId !== null ? eq(entryGrants.entryId, entryId) : isNull(entryGrants.entryId),
       ),
     );
+}
+
+/** Removes this player's entry-level rows for many pages in one statement. */
+export async function removeEntryGrants(targetUserId: string, entryIds: string[]) {
+  if (entryIds.length === 0) return;
+  await db
+    .delete(entryGrants)
+    .where(and(eq(entryGrants.userId, targetUserId), inArray(entryGrants.entryId, entryIds)));
 }
 
 export async function listGrantsForUser(userId: string) {
@@ -185,21 +198,15 @@ export async function listPlayers() {
  * explicit grant from the RBAC panel, same as any other visibility change.
  */
 export async function applyDefaultGrants(newPlayerId: string) {
-  const majorCities = await db
-    .select({ id: entries.id })
-    .from(entries)
-    .where(sql`'major-city' = ANY(${entries.tags}) AND ${entries.archivedAt} IS NULL`);
-
-  await db.transaction(async (tx) => {
-    await tx
-      .insert(entryGrants)
-      .values({ userId: newPlayerId, kind: "empire", granted: true })
-      .onConflictDoNothing();
-    for (const city of majorCities) {
-      await tx
-        .insert(entryGrants)
-        .values({ userId: newPlayerId, entryId: city.id, granted: true })
-        .onConflictDoNothing();
-    }
-  });
+  // One INSERT ... SELECT: atomic without a transaction (see bulkSetGrant), and
+  // one round trip however many major cities there are.
+  await db.execute(sql`
+    INSERT INTO entry_grants (user_id, kind, entry_id, granted)
+    SELECT ${newPlayerId}::uuid, 'empire'::entry_kind, NULL::uuid, true
+    UNION ALL
+    SELECT ${newPlayerId}::uuid, NULL::entry_kind, e.id, true
+    FROM entries e
+    WHERE 'major-city' = ANY(e.tags) AND e.archived_at IS NULL
+    ON CONFLICT DO NOTHING
+  `);
 }

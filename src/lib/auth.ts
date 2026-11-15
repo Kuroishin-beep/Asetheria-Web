@@ -1,3 +1,4 @@
+import { cache } from "react";
 import { eq } from "drizzle-orm";
 import { db } from "@/db";
 import { users, type Entry, type UserRole } from "@/db/schema";
@@ -7,8 +8,11 @@ import type { SessionUser } from "@/lib/session";
 /**
  * Resolves the session against the database so a revoked or deleted account
  * stops working immediately rather than at token expiry.
+ *
+ * Wrapped in React's cache(), so the layout, the page and generateMetadata share
+ * one lookup per request instead of each making its own round-trip.
  */
-export async function getCurrentUser(): Promise<SessionUser | null> {
+export const getCurrentUser = cache(async function getCurrentUser(): Promise<SessionUser | null> {
   const session = await getSession();
   if (!session) return null;
 
@@ -34,7 +38,7 @@ export async function getCurrentUser(): Promise<SessionUser | null> {
     epoch: row.sessionEpoch,
     displayName: row.displayName,
   };
-}
+});
 
 export async function requireUser(): Promise<SessionUser> {
   const user = await getCurrentUser();

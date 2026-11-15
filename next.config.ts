@@ -19,7 +19,8 @@ const securityHeaders = [
       "default-src 'self'",
       // Next.js injects inline bootstrap scripts; 'unsafe-inline' is required
       // for the framework runtime in the absence of per-request nonces.
-      "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
+      // 'unsafe-eval' is only needed by React's development tooling, never in production.
+      `script-src 'self' 'unsafe-inline'${process.env.NODE_ENV === "production" ? "" : " 'unsafe-eval'"}`,
       "style-src 'self' 'unsafe-inline'",
       "img-src 'self' data: blob: https:",
       "font-src 'self' data:",
