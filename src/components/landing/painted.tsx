@@ -28,7 +28,7 @@ export const PAINTINGS = {
     focus: "object-[55%_55%]",
   },
   map: {
-    src: "/landing/asetheria-atlas.webp",
+    src: "/landing/asetheria-map.webp",
     credit: "The continent, drawn by the Dungeon Master",
     focus: "object-[55%_50%]",
   },
