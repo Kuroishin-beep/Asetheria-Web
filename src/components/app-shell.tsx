@@ -50,6 +50,7 @@ const TOOL_LINKS: { href: string; label: string; Icon: NavIcon }[] = [
   { href: "/calendar", label: "Calendar", Icon: TOOL_ICONS.calendar },
   { href: "/timeline", label: "Timeline", Icon: TOOL_ICONS.timeline },
   { href: "/relations", label: "Relationships", Icon: TOOL_ICONS.relations },
+  { href: "/books/players-guide.html", label: "Players' Guide", Icon: TOOL_ICONS.book },
 ];
 
 const KEEPER_LINKS: { href: string; label: string; Icon: NavIcon }[] = [
@@ -58,6 +59,7 @@ const KEEPER_LINKS: { href: string; label: string; Icon: NavIcon }[] = [
   { href: "/admin/templates", label: "Templates", Icon: KEEPER_ICONS.templates },
   { href: "/admin", label: "Backup & Import", Icon: KEEPER_ICONS.backup },
   { href: "/admin/rbac", label: "Players & Access", Icon: KEEPER_ICONS.access },
+  { href: "/books/dm-codex.html", label: "DM Codex", Icon: KEEPER_ICONS.codex },
 ];
 
 /** A tool link is active on its own page and below it, unless a more specific tool link (Party under Characters) owns the page. */
@@ -248,7 +250,7 @@ function NavItem({
 }) {
   return (
     <li>
-      <Link
+      <NavAnchor
         href={href}
         aria-current={active ? "page" : undefined}
         className={cn(
@@ -273,7 +275,13 @@ function NavItem({
             {trailing}
           </span>
         )}
-      </Link>
+      </NavAnchor>
     </li>
   );
+}
+
+/** App routes use client navigation; the static codex books (.html) load as whole pages. */
+function NavAnchor({ href, ...rest }: React.ComponentProps<typeof Link> & { href: string }) {
+  if (href.endsWith(".html")) return <a href={href} {...(rest as React.AnchorHTMLAttributes<HTMLAnchorElement>)} />;
+  return <Link href={href} {...rest} />;
 }

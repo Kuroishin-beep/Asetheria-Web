@@ -56,8 +56,16 @@ export async function proxy(request: NextRequest) {
     return NextResponse.redirect(welcomeUrl);
   }
 
+  // The codex books are static pages: the players' guide is for anyone signed in, the DM codex
+  // (secrets, DM notes, the bestiary) for the DM alone. Others get a plain 404, so it is not even confirmed.
+  if (pathname.startsWith(DM_BOOK_PREFIX) && session.role !== "dm") {
+    return new NextResponse("Not found", { status: 404, headers: { "cache-control": "no-store" } });
+  }
+
   return NextResponse.next();
 }
+
+const DM_BOOK_PREFIX = "/books/dm-";
 
 export const config = {
   matcher: [

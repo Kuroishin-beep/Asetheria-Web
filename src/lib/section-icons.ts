@@ -95,6 +95,7 @@ export const TOOL_ICONS = {
   calendar: CalendarDays,
   timeline: Hourglass,
   relations: Share2,
+  book: BookOpen,
 } as const;
 
 export const KEEPER_ICONS = {
@@ -103,4 +104,5 @@ export const KEEPER_ICONS = {
   access: ShieldCheck,
   planner: NotebookPen,
   templates: LayoutTemplate,
+  codex: ScrollText,
 } as const;

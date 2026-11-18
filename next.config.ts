@@ -39,7 +39,30 @@ const nextConfig: NextConfig = {
   // rather than trying to bundle them.
   serverExternalPackages: ["@huggingface/transformers", "onnxruntime-node"],
   async headers() {
-    return [{ source: "/:path*", headers: securityHeaders }];
+    return [
+      { source: "/:path*", headers: securityHeaders },
+      // The offline codex books (public/books) set their type with Google Fonts; a later rule wins for the same key.
+      {
+        source: "/books/:path*",
+        headers: [
+          {
+            key: "Content-Security-Policy",
+            value: [
+              "default-src 'self'",
+              "script-src 'self' 'unsafe-inline'",
+              "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+              "img-src 'self' data: blob: https:",
+              "font-src 'self' data: https://fonts.gstatic.com",
+              "connect-src 'self'",
+              "frame-ancestors 'none'",
+              "base-uri 'self'",
+              "form-action 'self'",
+            ].join("; "),
+          },
+          { key: "Cache-Control", value: "private, no-store" },
+        ],
+      },
+    ];
   },
 };
 
