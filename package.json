@@ -42,6 +42,8 @@
     "db:relations:rollback": "tsx scripts/apply-sql.ts scripts/sql/relations-rollback.sql",
     "db:map-regions": "tsx scripts/apply-sql.ts scripts/sql/map-regions.sql",
     "db:map-regions:rollback": "tsx scripts/apply-sql.ts scripts/sql/map-regions-rollback.sql",
+    "db:password-resets": "tsx scripts/apply-sql.ts scripts/sql/password-resets.sql",
+    "db:password-resets:rollback": "tsx scripts/apply-sql.ts scripts/sql/password-resets-rollback.sql",
     "codex:archive-batch": "tsx scripts/archive-batch.ts",
     "check:contrast": "tsx scripts/check-contrast.ts",
     "migrate:fauna-tables": "tsx scripts/migrate-fauna-and-tables.ts",

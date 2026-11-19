@@ -308,6 +308,19 @@ export const loginAttempts = pgTable(
   (t) => [index("login_attempts_idx").on(t.identifier, t.attemptedAt)],
 );
 
+/** A player's "forgot password" request, waiting for the DM to set a new one. One open request per player. */
+export const passwordResetRequests = pgTable(
+  "password_reset_requests",
+  {
+    userId: uuid("user_id")
+      .primaryKey()
+      .references(() => users.id, { onDelete: "cascade" }),
+    note: text("note").notNull().default(""),
+    requestedAt: timestamp("requested_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  () => [check("password_reset_requests_note_length", sql`char_length(note) <= 280`)],
+);
+
 // ---------------------------------------------------------------------------
 // Relations
 // ---------------------------------------------------------------------------

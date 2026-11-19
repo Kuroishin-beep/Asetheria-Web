@@ -18,6 +18,9 @@ const MAX_SIGNUPS = 10;
  * this bucket from colliding with a real username.
  */
 const SIGNUP_BUCKET = "\u0000signup";
+/** Forgot-password requests, per address: enough for a table of players, too few to spam the DM. */
+const RESET_BUCKET = "\u0000reset";
+const MAX_RESETS = 6;
 
 /**
  * Identifiers are hashed with the server secret so the table never holds raw
@@ -41,6 +44,8 @@ export function clientIp(headers: Headers): string {
   const forwarded = headers.get("x-forwarded-for")?.split(",");
   return (
     headers.get("x-vercel-forwarded-for")?.split(",")[0].trim() ||
+    // Netlify sets this itself; only trusted when running there, where a client cannot supply it.
+    (process.env.NETLIFY ? headers.get("x-nf-client-connection-ip")?.trim() : undefined) ||
     headers.get("x-real-ip")?.trim() ||
     forwarded?.[forwarded.length - 1]?.trim() ||
     "unknown"
@@ -110,6 +115,23 @@ export async function recordSignupAttempt(ip: string) {
   await db.insert(loginAttempts).values({ identifier: identify(ip, SIGNUP_BUCKET) });
 }
 
+/** Throttles "forgot password" requests from one address, counted on every attempt. */
+export async function checkResetThrottle(ip: string): Promise<ThrottleResult> {
+  const identifier = identify(ip, RESET_BUCKET);
+  const since = new Date(Date.now() - WINDOW_MINUTES * 60_000);
+  const [row] = await db
+    .select({ count: sql<number>`count(*)::int` })
+    .from(loginAttempts)
+    .where(and(eq(loginAttempts.identifier, identifier), gte(loginAttempts.attemptedAt, since)));
+  const used = row?.count ?? 0;
+  return { allowed: used < MAX_RESETS, remaining: Math.max(0, MAX_RESETS - used) };
+}
+
+export async function recordResetAttempt(ip: string) {
+  await db.insert(loginAttempts).values({ identifier: identify(ip, RESET_BUCKET) });
+}
+
+export const RESET_WINDOW_MINUTES = WINDOW_MINUTES;
 export const LOGIN_WINDOW_MINUTES = WINDOW_MINUTES;
 export const SIGNUP_WINDOW_MINUTES = WINDOW_MINUTES;
 export const MAX_SIGNUPS_PER_WINDOW = MAX_SIGNUPS;

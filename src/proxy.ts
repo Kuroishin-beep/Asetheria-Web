@@ -11,10 +11,12 @@ const PUBLIC_PATHS = [
   "/create-character",
   "/login",
   "/register",
+  "/forgot-password",
   "/api/auth/login",
   "/api/auth/logout",
   "/api/auth/player",
   "/api/auth/register",
+  "/api/auth/forgot",
   "/api/health",
   // The landing page's own art (the DM's map of the continent), shown to strangers.
   "/landing",
@@ -34,7 +36,7 @@ export async function proxy(request: NextRequest) {
   // registration pages.
   if (
     session &&
-    (pathname === "/welcome" || pathname === "/login" || pathname === "/register")
+    (pathname === "/welcome" || pathname === "/login" || pathname === "/register" || pathname === "/forgot-password")
   ) {
     return NextResponse.redirect(new URL("/", request.url));
   }

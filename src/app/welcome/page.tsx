@@ -21,7 +21,7 @@ export default async function WelcomePage() {
       <Landing
         door={
           <Suspense fallback={null}>
-            <EnterButtons />
+            <EnterButtons signupOpen={Boolean(process.env.SIGNUP_CODE?.trim())} />
           </Suspense>
         }
       />

@@ -15,7 +15,7 @@ import { Label } from "@/components/ui/label";
 /** Where a player lands after the party door when no page asked for them. */
 const PLAYER_HOME = "/characters";
 
-export function EnterButtons() {
+export function EnterButtons({ signupOpen = false }: { signupOpen?: boolean }) {
   const router = useRouter();
   const params = useSearchParams();
   const rawNext = params.get("next") || "/";
@@ -101,6 +101,19 @@ export function EnterButtons() {
               {busy && <Loader2 aria-hidden="true" className="animate-spin" />}
               {busy ? "Opening the codex…" : "Enter as a player"}
             </Button>
+            <p className="flex flex-wrap justify-center gap-x-3 gap-y-1 text-[13px] text-muted-foreground">
+              <Link href="/forgot-password" className="text-link underline-offset-4 hover:underline">
+                Forgot password?
+              </Link>
+              {signupOpen && (
+                <>
+                  <span aria-hidden="true">·</span>
+                  <Link href="/register" className="text-link underline-offset-4 hover:underline">
+                    New here? Sign up
+                  </Link>
+                </>
+              )}
+            </p>
           </CardContent>
         </form>
       </Card>

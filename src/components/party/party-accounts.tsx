@@ -47,6 +47,7 @@ export function PartyAccounts({ accounts, choices }: { accounts: PartyAccount[];
           Give each player a name and password. They sign in at the party door and land on their own characters.
         </p>
       </div>
+      <ResetSummary accounts={accounts} />
       <NewPlayer />
       {accounts.length === 0 ? (
         <Card size="sm">
@@ -65,6 +66,23 @@ export function PartyAccounts({ accounts, choices }: { accounts: PartyAccount[];
         </ul>
       )}
     </section>
+  );
+}
+
+/** A banner when players are waiting on a new password, so the DM sees it without scanning every card. */
+function ResetSummary({ accounts }: { accounts: PartyAccount[] }) {
+  const waiting = accounts.filter((a) => a.resetRequest);
+  if (waiting.length === 0) return null;
+  return (
+    <Card size="sm" className="border-gold/50" data-testid="reset-summary">
+      <CardContent className="flex items-start gap-3 text-sm">
+        <KeyRound aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-gold" />
+        <p>
+          <span className="font-semibold">{waiting.map((a) => a.username).join(", ")}</span>{" "}
+          {waiting.length === 1 ? "has" : "have"} asked for a new password. Set one on their card below, then tell them.
+        </p>
+      </CardContent>
+    </Card>
   );
 }
 
@@ -154,6 +172,12 @@ function AccountCard({ account, choices }: { account: PartyAccount; choices: Cha
     <Card size="sm" className="h-full" data-testid="party-account">
       <CardHeader>
         <CardTitle className="font-display text-lg tracking-tight">{account.username}</CardTitle>
+        {account.resetRequest && (
+          <div className="grid gap-1" data-testid="reset-request">
+            <Badge className="w-fit">Forgot password</Badge>
+            {account.resetRequest.note && <p className="text-sm text-muted-foreground">&ldquo;{account.resetRequest.note}&rdquo;</p>}
+          </div>
+        )}
         <CardDescription>
           {account.lastLoginAt ? `Last signed in ${new Date(account.lastLoginAt).toLocaleDateString()}` : "Has not signed in yet"}
         </CardDescription>
@@ -220,6 +244,7 @@ function GiveCharacter({ playerId, username, choices }: { playerId: string; user
 }
 
 function ResetPassword({ playerId, username }: { playerId: string; username: string }) {
+  const router = useRouter();
   const fieldId = useId();
   const [password, setPassword] = useState("");
   const [busy, setBusy] = useState(false);
@@ -239,6 +264,7 @@ function ResetPassword({ playerId, username }: { playerId: string; username: str
     }
     toast.success(`New password set for ${username}`);
     setPassword("");
+    router.refresh();
   }
 
   return (

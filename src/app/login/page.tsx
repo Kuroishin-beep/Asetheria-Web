@@ -34,14 +34,22 @@ export default function LoginPage() {
         </CardContent>
       </Card>
 
-      {signupOpen && (
-        <p className="mt-4 text-center text-[13px] text-muted-foreground">
-          Given an invite code?{" "}
-          <Link href="/register" className="text-link underline-offset-4 hover:underline">
-            Join the party
-          </Link>
-        </p>
-      )}
+      <p className="mt-4 flex flex-wrap justify-center gap-x-3 gap-y-1 text-center text-[13px] text-muted-foreground">
+        <Link href="/forgot-password" className="text-link underline-offset-4 hover:underline">
+          Forgot password?
+        </Link>
+        {signupOpen && (
+          <>
+            <span aria-hidden="true">·</span>
+            <span>
+              Given an invite code?{" "}
+              <Link href="/register" className="text-link underline-offset-4 hover:underline">
+                Sign up
+              </Link>
+            </span>
+          </>
+        )}
+      </p>
     </AuthShell>
   );
 }

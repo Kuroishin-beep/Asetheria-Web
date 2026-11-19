@@ -5,6 +5,7 @@ import { db } from "@/db";
 import { characters, users } from "@/db/schema";
 import { hashPassword, passwordProblem } from "@/lib/password";
 import { applyDefaultGrants } from "@/lib/rbac";
+import { clearResetRequest, listResetRequests, type ResetRequest } from "@/lib/password-resets";
 
 /**
  * The DM's party roster of logins: one player account per person, each with its own name and password,
@@ -35,6 +36,8 @@ export interface PartyAccount {
   displayName: string | null;
   lastLoginAt: string | null;
   characters: { id: string; name: string }[];
+  /** Set when the player used "Forgot password" and is waiting for a new one. */
+  resetRequest: ResetRequest | null;
 }
 
 export interface CharacterChoice {
@@ -46,7 +49,7 @@ export interface CharacterChoice {
 
 /** Every player account, oldest first, with the characters each one owns. */
 export async function listPartyAccounts(): Promise<{ accounts: PartyAccount[]; choices: CharacterChoice[] }> {
-  const [players, chars] = await Promise.all([
+  const [players, chars, requests] = await Promise.all([
     db
       .select({ id: users.id, username: users.username, displayName: users.displayName, lastLoginAt: users.lastLoginAt })
       .from(users)
@@ -58,11 +61,13 @@ export async function listPartyAccounts(): Promise<{ accounts: PartyAccount[]; c
       .innerJoin(users, eq(users.id, characters.userId))
       .where(and(isNull(characters.archivedAt), eq(users.role, "player")))
       .orderBy(asc(characters.name)),
+    listResetRequests(),
   ]);
   const accounts = players.map((p) => ({
     ...p,
     lastLoginAt: p.lastLoginAt ? p.lastLoginAt.toISOString() : null,
     characters: chars.filter((c) => c.ownerId === p.id).map(({ id, name }) => ({ id, name })),
+    resetRequest: requests.get(p.id) ?? null,
   }));
   return { accounts, choices: chars };
 }
@@ -105,6 +110,7 @@ export async function resetPlayerPassword(playerId: string, password: string): P
     .where(and(eq(users.id, playerId), eq(users.role, "player")))
     .returning({ id: users.id });
   if (updated.length === 0) throw new PartyAccountError("No such player.", 404);
+  await clearResetRequest(playerId);
 }
 
 /** Hands a character to a player account, so it shows under their characters when they sign in. */
