@@ -6,10 +6,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { Crown, Loader2, Swords } from "lucide-react";
 import { FormMessage } from "@/components/shared/form-message";
+import { PasswordInput } from "@/components/shared/password-input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+
+/** Where a player lands after the party door when no page asked for them. */
+const PLAYER_HOME = "/characters";
 
 export function EnterButtons() {
   const router = useRouter();
@@ -20,6 +24,7 @@ export function EnterButtons() {
 
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   async function enterAsPlayer(event: FormEvent<HTMLFormElement>) {
@@ -27,10 +32,11 @@ export function EnterButtons() {
     setBusy(true);
     setError(null);
     try {
-      const res = await fetch("/api/auth/player", {
+      // Each player has their own account, so the party door is an ordinary sign-in.
+      const res = await fetch("/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ password }),
+        body: JSON.stringify({ username: username.trim(), password }),
       });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) {
@@ -38,7 +44,12 @@ export function EnterButtons() {
         setBusy(false);
         return;
       }
-      router.push(next);
+      if (data.needsName) {
+        router.push("/onboarding");
+      } else {
+        // A player with nowhere particular to go lands on their own characters.
+        router.push(next === "/" && data.user?.role === "player" ? PLAYER_HOME : next);
+      }
       router.refresh();
     } catch {
       setError("Could not reach the server. Check your connection.");
@@ -55,26 +66,38 @@ export function EnterButtons() {
             <Swords aria-hidden="true" className="mb-2 size-7 text-gold" />
             <h2 className="font-display text-lg font-bold tracking-tight">The Party</h2>
             <CardDescription className="text-sm">
-              Read everything the party has uncovered with the password your DM shared. The DM&rsquo;s
-              secrets stay sealed.
+              Sign in with the name and password your DM gave you to reach your characters and everything
+              the party has uncovered. The DM&rsquo;s secrets stay sealed.
             </CardDescription>
           </CardHeader>
           <CardContent className="mt-auto grid gap-3">
-            <Label htmlFor="party-password" className="sr-only">
-              Party password
+            <Label htmlFor="party-username" className="sr-only">
+              Your name
             </Label>
             <Input
+              id="party-username"
+              autoComplete="username"
+              placeholder="Your name"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+              aria-invalid={error ? true : undefined}
+              aria-describedby={error ? "door-error" : undefined}
+            />
+            <Label htmlFor="party-password" className="sr-only">
+              Password
+            </Label>
+            <PasswordInput
               id="party-password"
-              type="password"
               autoComplete="current-password"
-              placeholder="Party password"
+              placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
               aria-invalid={error ? true : undefined}
               aria-describedby={error ? "door-error" : undefined}
             />
-            <Button type="submit" disabled={busy || password.length === 0} className="bg-veil-accent text-veil shadow-none hover:bg-veil-ink hover:text-veil">
+            <Button type="submit" disabled={busy || username.trim().length === 0 || password.length === 0} className="bg-veil-accent text-veil shadow-none hover:bg-veil-ink hover:text-veil">
               {busy && <Loader2 aria-hidden="true" className="animate-spin" />}
               {busy ? "Opening the codex…" : "Enter as a player"}
             </Button>

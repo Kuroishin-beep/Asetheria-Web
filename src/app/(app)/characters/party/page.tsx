@@ -7,6 +7,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { getCurrentUser } from "@/lib/auth";
 import { listParty, type PartyMember } from "@/lib/character-world";
+import { listPartyAccounts } from "@/lib/party-accounts";
+import { PartyAccounts } from "@/components/party/party-accounts";
 import { WORLD_LIMITS } from "@/lib/character/world-core";
 
 export const metadata: Metadata = { title: "The party" };
@@ -50,15 +52,22 @@ function Member({ m }: { m: PartyMember }) {
   );
 }
 
-/** The characters their players chose to share: a few facts about each, read-only, for every signed-in player and the DM. */
+/**
+ * The characters their players chose to share: a few facts about each, read-only, for every signed-in player and the DM.
+ * The DM also sees the player logins here: a name and password per player, and which characters each one plays.
+ */
 export default async function PartyPage() {
   const user = await getCurrentUser();
   if (!user) redirect("/welcome");
-  const { members, total, truncated } = await listParty(user);
+  const [{ members, total, truncated }, logins] = await Promise.all([
+    listParty(user),
+    user.role === "dm" ? listPartyAccounts() : Promise.resolve(null),
+  ]);
 
   return (
     <>
       <PageHeading Icon={UsersRound} title="The party" blurb="Characters their players have shared. Share one from its own page; your sheet, story and journal stay private." />
+      {logins && <PartyAccounts accounts={logins.accounts} choices={logins.choices} />}
       {members.length === 0 ? (
         <EmptyState
           Icon={UsersRound}

@@ -84,7 +84,8 @@ test.describe("calls to action", () => {
     await page.getByTestId("cta-enter").click();
     await expect(page).toHaveURL(/#door$/);
     await expect(page.getByRole("button", { name: "Enter as a player" })).toBeVisible();
-    await expect(page.getByLabel("Party password")).toBeVisible();
+    await expect(page.getByLabel("Your name")).toBeVisible();
+    await expect(page.getByLabel("Password", { exact: true })).toBeVisible();
     await expect(page.getByRole("link", { name: /sign in/i }).first()).toHaveAttribute("href", "/login");
   });
 

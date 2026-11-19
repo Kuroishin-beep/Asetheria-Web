@@ -14,7 +14,8 @@ import {
  * need SIGNUP_CODE in .env.local (the dev server must see it too).
  */
 const SIGNUP_CODE = process.env.SIGNUP_CODE?.trim();
-// The party door opens the shared player account with that account's password.
+// The party door is a per-player sign-in: the seeded player account's name and password.
+const PARTY_USERNAME = process.env.PLAYER_USERNAME ?? "";
 const PARTY_PASSWORD = process.env.PLAYER_PASSWORD ?? "";
 
 async function userIdByName(username: string) {
@@ -39,7 +40,8 @@ test.describe("welcome doors", () => {
 
   test("[TC-DOOR-002] the party door signs in as a player, honors next, and hides DM controls", async ({ page }) => {
     await page.goto("/welcome?next=%2Fsearch");
-    await page.getByLabel("Party password").fill(PARTY_PASSWORD);
+    await page.getByLabel("Your name").fill(PARTY_USERNAME);
+    await page.getByLabel("Password", { exact: true }).fill(PARTY_PASSWORD);
     await page.getByRole("button", { name: "Enter as a player" }).click();
     await page.waitForURL((url) => url.pathname !== "/welcome");
     // A shared player account without a name is sent to /onboarding first.
@@ -53,15 +55,28 @@ test.describe("welcome doors", () => {
     expect(missing.status()).toBe(400);
     await page.goto("/welcome");
     await expect(page.getByRole("button", { name: "Enter as a player" })).toBeDisabled();
-    await page.getByLabel("Party password").fill(`wrong-${randomUUID()}`);
+    await page.getByLabel("Your name").fill(PARTY_USERNAME);
+    await page.getByLabel("Password", { exact: true }).fill(`wrong-${randomUUID()}`);
     await page.getByRole("button", { name: "Enter as a player" }).click();
-    await expect(page.locator("#door-error")).toContainText("party password");
+    await expect(page.locator("#door-error")).toContainText("Incorrect username or password");
     await expect(page).toHaveURL(/\/welcome/);
+  });
+
+  test("[TC-DOOR-007] the password eye shows and hides the typed password", async ({ page }) => {
+    await page.goto("/welcome");
+    const field = page.getByLabel("Password", { exact: true });
+    await field.fill("open sesame");
+    await expect(field).toHaveAttribute("type", "password");
+    await page.getByRole("button", { name: "Show password" }).click();
+    await expect(field).toHaveAttribute("type", "text");
+    await page.getByRole("button", { name: "Hide password" }).click();
+    await expect(field).toHaveAttribute("type", "password");
   });
 
   test("[TC-DOOR-004] the party door ignores a cross-site next", async ({ page }) => {
     await page.goto("/welcome?next=//evil.example.com");
-    await page.getByLabel("Party password").fill(PARTY_PASSWORD);
+    await page.getByLabel("Your name").fill(PARTY_USERNAME);
+    await page.getByLabel("Password", { exact: true }).fill(PARTY_PASSWORD);
     await page.getByRole("button", { name: "Enter as a player" }).click();
     await page.waitForURL((url) => url.pathname !== "/welcome");
     expect(page.url()).not.toContain("evil.example.com");
