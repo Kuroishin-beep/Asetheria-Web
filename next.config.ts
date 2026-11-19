@@ -38,6 +38,14 @@ const nextConfig: NextConfig = {
   // Native ONNX runtime + model files: load from node_modules at runtime
   // rather than trying to bundle them.
   serverExternalPackages: ["@huggingface/transformers", "onnxruntime-node"],
+  // Serverless hosts run linux x64 only: drop the other platforms' ONNX binaries (~245MB) so the function fits.
+  outputFileTracingExcludes: {
+    "*": [
+      "node_modules/onnxruntime-node/bin/napi-v6/darwin/**",
+      "node_modules/onnxruntime-node/bin/napi-v6/win32/**",
+      "node_modules/onnxruntime-node/bin/napi-v6/linux/arm64/**",
+    ],
+  },
   async headers() {
     return [
       { source: "/:path*", headers: securityHeaders },

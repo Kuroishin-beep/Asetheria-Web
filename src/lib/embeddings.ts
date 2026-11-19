@@ -17,7 +17,7 @@ import { stripMarkers } from "./secret-blocks";
 // cache the model. EMBEDDINGS_CACHE_DIR overrides both.
 if (process.env.EMBEDDINGS_CACHE_DIR) {
   env.cacheDir = process.env.EMBEDDINGS_CACHE_DIR;
-} else if (process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME) {
+} else if (process.env.VERCEL || process.env.NETLIFY || process.env.AWS_LAMBDA_FUNCTION_NAME) {
   env.cacheDir = join(tmpdir(), "asetheria-models");
 }
 
