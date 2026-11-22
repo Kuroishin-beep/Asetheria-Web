@@ -4,6 +4,9 @@ A private codex and campaign manager for the world of Asetheria — built to add
 edit, search, and cross-reference everything in the setting, from a phone at the
 table or a laptop while prepping.
 
+**7,563 live entries · 104,000 cross-references · 2,431 creatures · 1,499 spells ·
+three empires, one inland sea.** See [ABOUT.md](ABOUT.md) for the short version.
+
 ---
 
 ## Why I built this
@@ -19,26 +22,27 @@ them are the one. Half the pages are database roll-ups that exist twice. Nothing
 tells me that eleven organizations are dedicated to the same deity unless I
 maintain that list myself, by hand, forever.
 
-Fifteen hundred years of continental history, 186 gods, three empires built on
-Rome, Greece, and Achaemenid Persia — and the thing I actually needed at the
-table was to type six letters and get the right page in under a second.
+Fifteen hundred years of continental history, two hundred gods, three empires
+built on Rome, Greece, and Achaemenid Persia — and the thing I actually needed at
+the table was to type six letters and get the right page in under a second.
 
 So this is that. The whole world in one Postgres database, full-text search with
-a fuzzy fallback, and `[[wiki links]]` that build the cross-reference graph for
-me. Opening a god shows every organization sworn to them, because the links go
-both ways and I never had to write that list.
+a fuzzy fallback and semantic search on top, and `[[wiki links]]` that build the
+cross-reference graph for me. Opening a god shows every organization sworn to
+them, because the links go both ways and I never had to write that list.
 
 Two other things mattered enough to build around:
 
-**My players can read it too.** There is a player account that sees the world
-minus anything I have marked secret, and separately a *DM notes* field on every
-entry that a player never receives under any circumstances — that is where "the
-innkeeper is a doppelganger" goes. The filtering happens in SQL, in the data
+**My players can read it too.** Every player has their own login and sees the
+world minus anything I have marked secret, and separately a *DM notes* field on
+every entry that a player never receives under any circumstances — that is where
+"the innkeeper is a doppelganger" goes. The filtering happens in SQL, in the data
 layer, not in the UI, so a mistake in a component cannot leak the ending.
 
 **Nothing is ever deleted.** I have lost campaign notes before. Archive is a
-timestamp, every edit keeps a full snapshot of what came before, and the one code
-path that truly removes a row refuses to run on anything that has content.
+timestamp, every edit in the app keeps a full snapshot of what came before, and
+the one code path that truly removes a row refuses to run on anything that has
+content.
 
 The original Notion export lives in [`data/notion-export/`](data/notion-export)
 and is never modified. It is the permanent fallback copy of the world.
@@ -47,81 +51,87 @@ and is never modified. It is the permanent fallback copy of the world.
 
 ## What's in here
 
-The Notion import is the core of the world, and the Bestiary has grown well
-beyond it — **836 live entries** and 1,084 cross-references:
+The world grew in layers: the Notion import, original additions, the Foundry VTT
+world, and finally the **Codex Expansion** — a book-length polish and extension
+of the whole setting.
 
-| Section | Count |  | Section | Count |
+| Section | Count | | Section | Count |
 | --- | --- | --- | --- | --- |
-| Bestiary | 346 | | Systems | 8 |
-| Deities | 186 | | Empires | 6 |
-| Organizations | 110 | | House Rules | 6 |
-| Locations | 87 | | Pantheons | 6 |
-| Flora & Fauna | 19 | | Factions | 4 |
-| Ores & Materials | 16 | | Items | 2 |
-| Families | 14 | | Session Logs | 1 |
-| Lore | 12 | | NPCs | 1 |
-| Quests | 8 | | Notes | 4 |
+| Bestiary | 2,431 | | Items | 147 |
+| Rules (incl. 1,499 spells) | 1,658 | | Organizations | 126 |
+| Locations | 1,309 | | Ores & Materials | 96 |
+| Lore | 622 | | Flora & Fauna | 158 |
+| Deities | 207 | | Systems | 86 |
+| Families & Houses | 191 | | Tables | 81 |
+| NPCs | 169 | | Factions | 60 |
+| Quests | 163 | | Notes, Events, Pantheons, Empires | 59 |
 
-Locations are not one list. The Notion database already classified every
-settlement through its tags — "Invictian City", "Hellenorian Town", "Island
-Village" — so each tier gets its own section:
+4,066 of those entries are DM-only.
 
-| Tier | Count | | Tier | Count |
-| --- | --- | --- | --- | --- |
-| Capitals | 3 | | City Districts | 8 |
-| Major Cities | 16 | | Sites | 14 |
-| Towns | 17 | | The Wilds | 21 |
-| Villages | 9 | | | |
+### The Codex Expansion
 
-25 further entries are archived rather than deleted — empty Notion index pages
-and duplicate roll-up rows. They are all restorable from `/archive`.
+The biggest layer. A long, canon-checked extension of the codex, written to a
+shared brief so every city, house and champion agrees with every other:
 
-Nothing else was thrown away. The Godatabase is a Notion roll-up that re-exports
-every god already present in its pantheon folder, so those were merged rather
-than imported twice. The importer ends with an integrity check that fails the
-run if any source page containing prose is missing from the output.
+- every city, town and village rewritten and extended — districts, rulers,
+  noble houses, temples, trouble — with the empires' own titles (Dux, Archon,
+  Satrap) and the named roads that tie them together;
+- the twenty champions and the rulers, with full stat blocks;
+- systems of the empires (grain, water, coin, law, faith, the military),
+  campaign arcs, ready-to-run dungeons, artefacts and heirlooms, festivals,
+  calendars, myths, folklore, handouts, travel rules and player options;
+- the **Bestiary of Asetheria** — 2,364 creatures, each re-homed in Asetherian
+  regions with local names, lore, every stat block version, and an adventure
+  hook in the DM notes;
+- the **Spellbook of Asetheria** — 1,499 spells, 180 of them Asetheria homebrew.
 
-### The Bestiary
+It lives in two forms:
 
-346 of those entries are not from Notion, and they're two different layers.
+1. **As codex entries.** Each section and card became its own entry, filed under
+   its parent (a district under its city, a house under its seat, a creature
+   under the Bestiary), linked to everything it names. Anything that is not in
+   the Players' Guide is DM-only, and the book's DM boxes went into DM notes.
+   Existing pages were never overwritten wholesale: blank fields were filled and
+   only one-line stubs were replaced by the fuller text.
+2. **As two books** at `/books/`: the **Players' Guide**, open to anyone signed
+   in, and the **DM Codex**, which only the DM can open (everyone else gets a
+   404). Both are linked from the sidebar.
 
-**334 are the full monster list** from the D&D 5th Edition **System Reference
-Document** (SRD 5.1) — the specific subset of official content Wizards of the
-Coast releases under a Creative Commons license for exactly this kind of
-reuse. It's mechanics, not flavour: full stat blocks, no narrative text, and
-none of the named creatures WotC holds as brand-specific Product Identity
-(beholders, mind flayers, displacer beasts). Every one of these links to the
-**System Reference Document (SRD 5.1)** note in the codex, which carries the
-full attribution and license text.
+The converter is [`scripts/codex-expansion/convert.py`](scripts/codex-expansion/convert.py):
+it turns the expansion's DM book into an `asetheria-codex` JSON file, which
+`scripts/import-codex-file.ts --fill-empty` loads.
 
-**The other 12 are named and unique to Asetheria** — the Simurgh of
-Vael'Tharan, Talos of Duneforged, Charybdis of the Reach, and others — written
-from real, ancient, public-domain mythology (Persian, Greek, Roman) rather
-than from any modern book. A specific creator's homebrew is still that
-creator's copyrighted work no matter how freely it's shared for reading, so
-none of it — official sourcebook or fan homebrew alike — was used as source
-material here. Only these carry real narrative bodies; the SRD layer is
-deliberately mechanics-only.
+### Licences
 
-Everything else added past the original Notion import — the fauna, the extra
-flora, the extra ores, and the imperial-institution entries under Systems and
-Organizations — follows the same rule: original, grounded in real history or
-mythology, never copied from another book.
+The Notion world, the expansion's prose and the 180 homebrew spells are the DM's
+own work. The Bestiary and most of the Spellbook come from open-licence books —
+SRD 5.1 and 5.2 (CC BY 4.0, Wizards of the Coast), the Black Flag SRD (CC BY 4.0,
+Kobold Press), Level Up A5E (EN Publishing) and Kobold Press's OGL 1.0a books —
+used with the DM's permission. **Every stat block and spell names its source
+book**, and the books' credits are kept on the Bestiary and Spellbook pages.
+Content from licensed Foundry VTT modules and commercial sourcebooks is never
+imported.
 
-### Since the original import
+---
 
-Later passes added player accounts with per-player access control (see
-"Two kinds of account" below), a backlink graph at `/graph`, table views on
-codex sections, semantic search, and 68 new entries from the metals/flora
-reference material, the Foundry VTT world, and three scanned GM Binder pages
-— bringing the total to **587**. See `PLAN.md` and `IMPLEMENTATION_TRACKER.md`
-for exactly what changed, why, and what's still pending a production deploy.
+## Features
 
-```bash
-npm run import:homebrew   # metals, planar metals, flora, one roll table
-npm run import:foundry    # the custom asetheira-compendium (5 characters)
-npm run embeddings:generate  # required once for semantic search to return anything
-```
+- **Search.** `Ctrl/⌘ K` or `/` from anywhere. Forgiving spelling ("aeterna cty"
+  finds Aeterna City), full-text search on Enter, and semantic search
+  (all-MiniLM-L6-v2 vectors in pgvector) for "that city with the salt trade".
+- **Links and the graph.** `[[Aeterna City]]` links anywhere; every page shows
+  its *Linked mentions*, and `/graph` draws the whole web.
+- **Secrets.** Each entry is Everyone / DM only / Revealed, plus secret blocks
+  inside an entry that you can reveal to the table one at a time.
+- **Players & access.** Per-player logins managed from the Party page, with
+  category- and entry-level grants at `/admin/rbac`.
+- **Characters.** A character creator, drafts, and imported Foundry characters.
+- **Maps.** Interactive maps with layers, regions and pins.
+- **Calendar and timeline.** The campaign calendar, events and a timeline.
+- **Planner.** Session prep that pulls straight from the codex.
+- **Tools.** Dice (`4d6kh3`, `1d20adv`, `3d6!`, `6x4d6kh3`) and roll tables.
+- **Backups.** `/admin` downloads a complete JSON copy — every entry, secret,
+  note, link and table.
 
 ---
 
@@ -129,10 +139,9 @@ npm run embeddings:generate  # required once for semantic search to return anyth
 
 ### 1. Create the database
 
-In your Vercel dashboard: **Storage → Create Database → Neon**. Vercel injects
-`DATABASE_URL` into the project automatically.
-
-For local work, copy the pooled connection string from the Neon dashboard.
+Create a Postgres database on [Neon](https://neon.com) (the free plan is enough)
+and copy its pooled connection string. For local work you can use any Postgres
+with the `pgvector` extension instead.
 
 ### 2. Configure
 
@@ -142,7 +151,7 @@ cp .env.example .env.local
 
 Fill in `.env.local`:
 
-- `DATABASE_URL` — from Neon
+- `DATABASE_URL` — your Postgres connection string
 - `AUTH_SECRET` — generate one:
 
 ```bash
@@ -153,6 +162,8 @@ node -e "console.log(require('crypto').randomBytes(48).toString('base64url'))"
 - `SIGNUP_CODE` — optional; leave blank unless you want players to be able to
   create their own accounts (see [below](#letting-players-create-their-own-account))
 
+Never commit `.env.local` or any file holding the production connection string.
+
 ### 3. Create the schema and load the world
 
 ```bash
@@ -160,7 +171,17 @@ npm run db:setup
 ```
 
 That pushes the schema, installs the search extensions, creates the accounts,
-loads every entry, and builds the link graph.
+loads every entry, and builds the link graph. Then load the later layers:
+
+```bash
+npx tsx scripts/import-codex-file.ts data/foundry-world.json
+npx tsx scripts/import-codex-file.ts <codex-expansion.json> --fill-empty
+npm run embeddings:generate   # required once for semantic search
+```
+
+`import-codex-file.ts` never deletes anything, leaves existing entries alone
+unless you pass `--fill-empty` (which only fills blanks and replaces marked
+stubs), and accepts `--dry-run` to report without writing.
 
 > Watch the account lines in the output. If a password is missing from the env
 > the seed prints `skipped <role> account (no password in env)` and carries on —
@@ -177,21 +198,17 @@ Open http://localhost:3000 and sign in with your DM username and password.
 
 ---
 
-## Deploying to Vercel
+## Deploying to Netlify
 
-```bash
-vercel
-```
+The site deploys to Netlify from `main`; `netlify.toml` holds the build settings
+and the Next.js runtime is applied automatically.
 
-Then in **Project → Settings → Environment Variables**, add `AUTH_SECRET`
-(`DATABASE_URL` is already there from the Neon integration) and redeploy. The
-app reads exactly those two variables at runtime.
+In **Site configuration → Environment variables**, set `DATABASE_URL` and
+`AUTH_SECRET` (plus `SIGNUP_CODE` if you use it). Use the same `AUTH_SECRET` as
+your local `.env.local`, or every existing session is invalidated.
 
-Use the same `AUTH_SECRET` as the local `.env.local`, or every existing session
-is invalidated.
-
-If the Neon database was already seeded from your machine, production points at
-that same database and there is nothing further to load.
+If the database was already seeded from your machine, production points at that
+same database and there is nothing further to load. Deploy only committed code.
 
 ---
 
@@ -199,59 +216,46 @@ that same database and there is nothing further to load.
 
 | | DM | Player |
 | --- | --- | --- |
-| Read public entries | ✅ | ✅ |
+| Read public entries | ✅ | ✅ (as granted) |
 | Read secret entries | ✅ | ❌ |
 | See DM notes | ✅ | ❌ *(never, on any entry)* |
+| Open the DM Codex book | ✅ | ❌ |
 | Create / edit / archive | ✅ | ❌ |
 | Archive, backup, import | ✅ | ❌ |
 
 Redaction happens in the data layer (`src/lib/entries.ts`), not in the UI, so a
 missed check in a component can't leak a secret. Every query a player makes is
 filtered in SQL before rows leave the database, and list views never select the
-`dmNotes` column at all. This is a hard ceiling: a `secret` entry is never
-shown to a player, no matter what the per-player access controls below say.
+`dmNotes` column at all. This is a hard ceiling: a `secret` entry is never shown
+to a player, no matter what the per-player access controls say.
 
-**Per-player access.** Grants are per account. Players reach the codex either
-through the passwordless "Party" door on `/welcome` (one shared party account,
-so everyone who enters that way shares its grants) or with their own account
-via `/register` (needs `SIGNUP_CODE`) or `npm run user:add`. A new player
-account is asked its name once at `/onboarding` and starts with only the
-continent's empires and any location the GM has tagged `major-city` —
-everything else needs an explicit grant. As the GM, `/admin/rbac` (linked from
-the sidebar as "Players & Access") lets you toggle whole categories on or off
-per player, or drill into one category to approve/reject specific entries,
-with select-all and bulk actions.
-
-Add more accounts:
+**Per-player access.** Each player signs in with their own login, created from
+the Party page or with `npm run user:add`. A forgotten password goes to the DM,
+who resets it from the Party page. A new player account is asked its name once at
+`/onboarding` and starts with the continent's empires and any location tagged
+`major-city` — everything else needs an explicit grant. At `/admin/rbac`
+("Players & Access" in the sidebar) the DM toggles whole categories per player,
+or drills into one category to approve or reject specific entries.
 
 ```bash
 npm run user:add -- --username alice --password "a long passphrase" --role player
 ```
 
 Re-running it for an existing name resets the password and signs that account
-out everywhere. A pre-existing player account (created before this feature)
-needs `npm run migrate:legacy-players` run once, or it will have lost access
-to everything it could previously see — see `IMPLEMENTATION_TRACKER.md`.
+out everywhere.
 
 ### Letting players create their own account
 
-Set `SIGNUP_CODE` in `.env.local` (and in Vercel, for production) to open
-`/register`:
+Set `SIGNUP_CODE` (locally and on Netlify) to open `/register`:
 
 ```bash
 SIGNUP_CODE="a phrase you'd say out loud at the table"
 ```
 
-Leave it unset and `/register` stays closed — that is the default, so a
-deployment nobody has configured for this stays sealed. Whoever knows the
-phrase can create their own account, and the account it creates is **always a
-player**: the role is written by the server, not read from the form, so there
-is no field to tamper with and no path from this form to a DM account. Change
-the phrase if it gets passed around further than you meant it to.
-
-Registration is throttled per address — 10 accounts per 15 minutes — looser
-than login's limit because a whole table registering from one house shares an
-address and every attempt counts, including a mistyped code.
+Leave it unset and `/register` stays closed — that is the default. The account
+it creates is **always a player**: the role is written by the server, not read
+from the form. Registration is throttled per address — 10 accounts per
+15 minutes.
 
 ---
 
@@ -261,53 +265,31 @@ This was a hard requirement, so it is enforced in three places:
 
 1. **Archive, not delete.** The Archive button sets a timestamp. The row stays
    in the table and can be restored from `/archive` at any time.
-2. **Full revision history.** Every edit writes a complete snapshot of the
-   previous version first. Any of them can be restored from the entry's edit
+2. **Full revision history.** Every edit in the app writes a complete snapshot of
+   the previous version first. Any of them can be restored from the entry's edit
    page.
-3. **Permanent deletion is gated.** The one code path that actually removes a
-   row (`purgeBlankEntryAction`) checks the entry first and refuses if it has a
-   body, summary, DM notes, tags, or any property. Only genuinely empty entries
-   can be purged, and only from the archive.
+3. **Permanent deletion is gated.** The one code path that actually removes a row
+   (`purgeBlankEntryAction`) refuses if the entry has a body, summary, DM notes,
+   tags, or any property.
 
-Importing a backup never deletes either — entries in the file are updated or
-added, and anything not in the file is left untouched.
-
----
-
-## Using it
-
-**Finding things.** `Ctrl/⌘ K` or `/` opens search from anywhere. Arrow keys and
-Enter to jump. Enter on no result runs a full-text search across every entry.
-Spelling is forgiving: "aeterna cty" finds Aeterna City.
-
-**Linking.** Type `[[Aeterna City]]` in any description to link another entry.
-The link appears on that entry's page too, under *Linked mentions* — so opening
-a god shows every organization dedicated to them without you maintaining a list.
-
-**Secrets.** Each entry is Everyone / DM only / Revealed. Separately, the
-**DM notes** field on any entry is never sent to a player, even when the entry
-itself is public.
-
-**Dice.** `/tools/dice` takes full notation: `4d6kh3`, `1d20adv`, `3d6!`,
-`6x4d6kh3`, `1d8+2d6-1`.
-
-**Backups.** `/admin` downloads a complete JSON copy — every entry, secret, note,
-link, and table. Worth doing before a big session.
+Imports never delete either. Bulk imports run outside the revision history, so
+take a backup from `/admin` before a large one.
 
 ---
 
 ## Tech
 
-Next.js 15 (App Router) · TypeScript · Neon Postgres · Drizzle ORM ·
-Tailwind CSS v4 · `jose` sessions
+Next.js 16 (App Router) · React 19 · TypeScript · Neon Postgres + pgvector ·
+Drizzle ORM · Tailwind CSS v4 · shadcn/ui · Motion · `jose` sessions ·
+Playwright · deployed on Netlify
 
 **Security:** scrypt password hashing, httpOnly `SameSite=Lax` JWT cookies,
 DB-backed session revocation, rate-limited login and registration (hashed
-identifiers so no raw IPs are stored), constant-time comparison for both
-passwords and the invite code, self-registration closed by default and role
-always written server-side, Zod validation on every write, CSP and security
-headers, and a Markdown renderer that escapes input before parsing so stored
-HTML cannot execute.
+identifiers so no raw IPs are stored), constant-time comparison for passwords and
+the invite code, self-registration closed by default with the role always written
+server-side, Zod validation on every write, CSP and security headers, and a
+Markdown renderer that escapes input before parsing so stored HTML cannot
+execute.
 
 ### Commands
 
@@ -315,55 +297,37 @@ HTML cannot execute.
 | --- | --- |
 | `npm run dev` | Development server |
 | `npm run build` | Production build |
+| `npm run typecheck` | Type check |
 | `npm run db:setup` | Push schema + extensions + seed (first-time setup) |
 | `npm run db:seed` | Re-seed; updates existing entries, never deletes |
 | `npm run db:studio` | Browse the database in Drizzle Studio |
+| `npm run embeddings:generate` | Embed new or changed entries for semantic search |
 | `npm run import:notion` | Re-run the Notion import into `data/world-seed.json` |
+| `npm run import:foundry` | Import the custom Foundry compendium |
 | `npm run user:add` | Add or update an account |
-| `npm run typecheck` | Type check |
+| `npx tsx scripts/import-codex-file.ts <file> [--fill-empty] [--dry-run]` | Load an `asetheria-codex` JSON file |
+| `python scripts/codex-expansion/convert.py <zip-root> <out.json>` | Convert the Codex Expansion book to codex JSON |
 
-Maintenance scripts, all dry-run by default — pass `--apply` to write:
-
-| | |
-| --- | --- |
-| `npx tsx scripts/reclassify-locations.ts` | Re-derive location tiers from tags; archive empty Notion index and duplicate pages |
-| `npx tsx scripts/populate-tags.ts` | Fill in tags for entries that have none, derived from each entry's own properties |
-| `npx tsx scripts/enrich-from-html.ts` | Recover page bodies from a Notion **HTML** export where the Markdown export dropped them |
-| `npx tsx scripts/add-srd-attribution-note.ts` | Create the public attribution note the Bestiary's SRD entries link to. Run once, before the import below |
-| `npx tsx scripts/import-srd-monsters.ts` | Import the D&D 5e SRD 5.1 monster list (CC BY 4.0) as the Bestiary base layer |
-| `npx tsx scripts/add-flora-fauna-ores.ts` | Add original fauna, flora, and minerals grounded in real biology and history |
-| `npx tsx scripts/add-named-creatures.ts` | Add named creatures unique to Asetheria, grounded in real mythology rather than any book |
+Schema changes for features added after the first release ship as idempotent SQL
+with a matching rollback, applied with `npm run db:<feature>` (for example
+`npm run db:maps` / `npm run db:maps:rollback`).
 
 ### Re-importing from Notion
 
-If you keep editing in Notion and want to pull changes across, replace
-`data/notion-export/` with a fresh export and run:
+Replace `data/notion-export/` with a fresh export and run:
 
 ```bash
 npm run import:notion && npm run db:seed
 ```
 
-The seed matches on slug and **will not overwrite work done in the app**. A
-description you have written, a summary, a property you have set, tags you have
-curated, and the section an entry was re-filed into are all left alone —
-imported values only ever fill a gap.
-
-That last one matters because the importer classifies from the export's folder
-tree, which cannot know that a page was deliberately moved. "The 3 Empires" is
-empire history filed under a location folder in Notion and belongs in Lore here,
-so the seed keeps it there and says so:
-
-```
-· kept 1 kind set in the app (pass --reclassify to take the export's)
-```
-
-If you reorganise in Notion and *do* want the export's classification to win:
+The seed matches on slug and **will not overwrite work done in the app** —
+imported values only ever fill a gap. If you reorganise in Notion and want the
+export's classification to win, pass `--reclassify`:
 
 ```bash
 npm run db:seed -- --reclassify
 ```
 
-One caveat worth knowing: Notion's Markdown export silently drops the contents
-of column layouts and some toggle blocks. Its HTML export does not. If a page
-looks emptier here than it does in Notion, export as HTML and run
-`scripts/enrich-from-html.ts` against it.
+Notion's Markdown export silently drops the contents of column layouts and some
+toggle blocks. If a page looks emptier here than in Notion, export as HTML and
+run `scripts/enrich-from-html.ts` against it.
